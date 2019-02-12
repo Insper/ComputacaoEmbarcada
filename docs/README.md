@@ -1,17 +1,20 @@
-- Objetivos de Aprendizagem: Objetivos-de-Aprendizagem
-- Critérios de Avaliação: Criterios-de-Avaliacao
+-  `Objetivos de Aprendizagem <Objetivos-de-Aprendizagem>`__
+-  `Critérios de Avaliação <Criterios-de-Avaliacao>`__
 
-- Útil
-    - Infraestrutura: Softwares
-    - SAME70-xpld](Kit-de-desenvolvimento)
-    - [Exemplos](https://github.com/Insper/SAME70-examples)
+-  Útil
 
-- APS
-      - [APS 1](IOs-APS)
+   -  `Infraestrutura <Softwares>`__
+   -  `SAME70-xpld <Kit-de-desenvolvimento>`__
+   -  `Exemplos <https://github.com/Insper/SAME70-examples>`__
 
-- Labs
-    - [Introdução](Introducao)
-    - [Digital IO](IOs)
-      - Lab: github.com/$project/docs/IOs-Lab
-      - [Perguntas](IOs-Perguntas) 
-      - [Dicas](IOs-Dicas)
+-  APS
+
+   -  `APS 1 <IOs-APS>`__
+
+-  Labs
+
+   -  `Introdução <Introducao>`__
+   -  `Digital IO <IOs>`__
+   -  `Lab <IOs-Lab>`__
+   -  `Perguntas <IOs-Perguntas>`__
+   -  `Dicas <IOs-Dicas>`__
