@@ -12,6 +12,6 @@
 - Labs
     - [Introdução](Introducao)
     - [Digital IO](IOs)
-      - Lab: IOs-Lab
+      - Lab: github.com/$project/docs/IOs-Lab
       - [Perguntas](IOs-Perguntas) 
       - [Dicas](IOs-Dicas)
