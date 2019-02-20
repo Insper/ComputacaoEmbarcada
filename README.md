@@ -4,4 +4,6 @@ Laboratórios e Materiais de aula (wiki)
 
 Repositório de exemplos:
 
+(clone esse repositório)
+
  - https://github.com/Insper/SAME70-examples 
