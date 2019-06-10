@@ -9,7 +9,7 @@ struct ciclo{
   int  enxagueQnt;         // quantidade de enxagues
   int  centrifugacaoRPM;   // velocidade da centrifugacao
   int  centrifugacaoTempo; // tempo que centrifuga
-  char heavy;              // modo pesado de lavagem
+  char heavy;              // modo pesado de lavagem (adiciona 20% nos tempos)
   char bubblesOn;          // smart bubbles on (???)
   t_ciclo *previous;
   t_ciclo *next;
@@ -64,4 +64,3 @@ t_ciclo c_centrifuga = {.nome = "Centrifuga",
 t_ciclo *initMenuOrder();
 
 #endif
-main.c~
