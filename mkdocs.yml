@@ -1,0 +1,45 @@
+site_name: Embarcados Avançados
+theme: material
+docs_dir: docs-src
+site_dir: docs
+nav:
+- Home: index.md
+- Sobre: Sobre.md
+- Projetos:
+    - 'Projeto 1 - Descrição': 'Projeto-1-Descrição.md'
+    - 'Projeto 1 - Vending Machine': 'Projeto-1-Vending-Machine.md'
+    - 'Projeto 1 - Controle': 'Projeto-1-Controle.md'
+- APS:
+    - 'APS 1 - Musical': 'APS-1-Musical.md'
+- Labs:
+    - 'Lab 1 - IOs':
+        - 'Teoria': 'Lab-1-IOs-Teoria.md'
+        - 'Lab': 'Lab-1-IOs-Lab.md'
+        - 'Dicas': 'Lab-1-IOs-Dicas.md'
+        - 'Perguntas': 'Lab-1-IOs-Perguntas.md'
+    - 'Lab 2 - PIO driver':
+        - 'Teoria': 'Lab-2-PIO-Driver-Teoria.md'
+        - 'Lab': 'Lab-2-PIO-Driver-Teoria.md'
+    - 'Lab 3 - PIO IRQ':
+        - 'Teoria': 'Lab-3-PIO-IRQ-Teoria.md'
+        - 'Lab': 'Lab-3-PIO-IRQ-Lab.md'
+        - 'Perguntas': 'Lab-3-PIO-IRQ-Perguntas.md'
+repo_name: 'Insper/ComputacaoEmbarcada'
+repo_url: 'https://github.com/insper/ComputacaoEmbarcada'
+markdown_extensions:
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
+    - pymdownx.smartsymbols
+    - pymdownx.mark
+    - pymdownx.emoji
+    - pymdownx.keys
+    - pymdownx.magiclink
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - toc:
+        permalink: True
+plugins:
+    - search
+    - pdf-export
+
