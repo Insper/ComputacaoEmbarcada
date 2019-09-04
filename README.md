@@ -1,6 +1,6 @@
-Laboratórios e Materiais de aula (wiki)
+Laboratórios e Materiais de aula (io)
 
-- https://github.com/Insper/ComputacaoEmbarcada/wiki
+- https://insper.github.io/ComputacaoEmbarcada/
 
 Repositório de exemplos:
 
