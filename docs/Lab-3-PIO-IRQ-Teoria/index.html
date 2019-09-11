@@ -279,6 +279,11 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Lab-4-TickTack-Lab/" title="Lab 4 - TC e RTC">
+      Lab 4 - TC e RTC
+    </a>
+</li>
 </ul>
 </nav>
 </li>
@@ -305,7 +310,7 @@ dos núcleos de um processador multicore ou a detecção de um overflow de
 memória são exemplos eventos interno ao CORE (processador). Já a
 notificação de um novo pacote oriundo da comunicação Ethernet é um
 exemplo de um evento externo ao CORE.</p>
-<p>A estruturação de um programa orientada a eventos<a href="https://en.wikipedia.org/wiki/Event-driven_programming">^1</a> dá uma série de
+<p>A estruturação de um programa orientada a eventos[^1] dá uma série de
 vantagens ao programador :</p>
 <ol>
 <li>
@@ -424,16 +429,16 @@ conectado.</p>
 <span class="p">}</span>
 </pre></div>
 <h1 id="excecoes">Exceções<a class="headerlink" href="#excecoes" title="Permanent link">¶</a></h1>
-<p>Exceções <a href="https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf">^2</a> são eventos que causam uma mudança no fluxo de execução do
+<p>Exceções [^2] são eventos que causam uma mudança no fluxo de execução do
 programa, quando ocorridas levam a unidade de processamento a
-executar uma parte específica do código chamada de : <strong>exception
+executar uma parte específica do código chamada de: <strong>exception
 handler</strong>. Depois do término da execução da exceção o programa principal
 volta a ser executado normalmente.</p>
 <p><img alt="Fontes de exceções" src="../imgs/PIO-IRQ/nvic_core.png"/></p>
 <p>O hardware responsável por gerenciar as exceções no ARM é chamado de
 <strong>Nested vectored interrupt controller</strong> (NVIC). O NVIC pode suportar de 1
 à 240 diferentes exceções, sendo elas classificadas basicamente em
-quatro grupos :</p>
+quatro grupos:</p>
 <ul>
 <li>
 <p>System Exceptions</p>
@@ -470,7 +475,7 @@ consideradas interrupções. No CortexM não existe exceção 0 (quem executa ne
 <p>No ARM interrupções são um tipo de exceção, normalmente geradas pelos
 periféricos do microcontrolador.</p>
 <p>Quando um periférico impõem um sinal de interrupção ao NVIC, o seguinte
-acontece :</p>
+acontece:</p>
 <ol>
 <li>
 <p>uma interrupção é acionada (IRQ);</p>
@@ -527,15 +532,15 @@ mantém em alto a requisição até receberem um mensagem dizendo que podem
 baixar o sinal da interrupção. Isso é feito via acesso do CORE a um
 registrador do periférico, todos os periféricos que geram interrupções
 possuem um registrador específico para isso.</p>
-<p>Podemos tomar por exemplo o PIO :</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Podemos tomar por exemplo o PIO:</p>
 <p><strong>31.5.10 Input Edge/Level Interrupt</strong></p>
 <p>When the software reads PIO_ISR, all the interrupts are automatically
 cleared. This signifies that all the interrupts that are pending when
 PIO_ISR is read must be handled. When an Interrupt is enabled on a
 "level", the interrupt is generated as long as the interrupt source is
 not cleared, even if some read accesses in PIO_ISR are performed.</p>
-</blockquote>
+</div>
 <h2 id="interrupt-service-routine-isr">Interrupt Service Routine - ISR<a class="headerlink" href="#interrupt-service-routine-isr" title="Permanent link">¶</a></h2>
 <p>Após uma interrupção ser detectada pelo NVIC, o CORE salva os contextos
 e aponta a execução do código para uma região específica. Uma função
@@ -573,7 +578,7 @@ não seja chamada novamente quando a interrupção acabar de ser executada.</p>
 </ul>
 <h1 id="software-cmsis">Software - CMSIS<a class="headerlink" href="#software-cmsis" title="Permanent link">¶</a></h1>
 <p>Utilizaremos as funções definidas no <strong>Cortex Microcontroller Software
-Interface Standard</strong> (CMSIS) <a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">^3</a> para configurar o NVIC e o CORE, essas
+Interface Standard</strong> (CMSIS) [^3] para configurar o NVIC e o CORE, essas
 funções são de uso geral do ARM Cortex e são independentes do fabricante
 (Atmel, Texas, ...).</p>
 <p>As funções utilizadas serão :</p>
@@ -595,31 +600,21 @@ o periférico que será responsável por gerar a interrupção.</p>
 periférico em questão (o mesmo utilizado no PMC).</p>
 <h1 id="pio-interrupcao">PIO - Interrupção<a class="headerlink" href="#pio-interrupcao" title="Permanent link">¶</a></h1>
 <p>A interrupção no PIO é gerenciada por meio de registradores e pode ser
-configurada para detectar :</p>
+configurada para detectar:</p>
 <ul>
-<li>
-<p>Rising edge detection</p>
-</li>
-<li>
-<p>Falling edge detection</p>
-</li>
-<li>
-<p>Low-level detection</p>
-</li>
-<li>
-<p>High-level detection</p>
-</li>
+<li>Rising edge detection</li>
+<li>Falling edge detection</li>
+<li>Low-level detection</li>
+<li>High-level detection</li>
 </ul>
-<p>PIO - Interrupção Botão Qual deve ser a configuração para operarmos com
-interrupção no botão do kit SAME70-EK2 ?</p>
 <p>Uma visão geral do hardware responsável por gerenciar as interrupções é
 demonstrado a seguir:</p>
 <p><img alt="PIO interrupção SAME70 Datasheet" src="../imgs/PIO-IRQ/PIO.png"/></p>
 <p>O texto a seguir foi extraído do datasheet do SAME70 e descreve a
-operação dessa parte do PIO :</p>
-<blockquote>
-<p><strong>31.5.10 Input Edge/Level Interrupt</strong></p>
-<p>. is controlled by writing the Interrupt Enable Register () and the
+operação dessa parte do PIO:</p>
+<div class="admonition note">
+<p class="admonition-title">31.5.10 Input Edge/Level Interrupt</p>
+<p>... is controlled by writing the Interrupt Enable Register () and the
 Interrupt Disable Register (), which enable and disable the input change
 interrupt respectively by setting and clearing the corresponding bit in
 the Interrupt Mask Register (PIO_IMR). , the peripheral clock must be
@@ -662,8 +657,14 @@ corresponding bit in , the PIO Controller interrupt line is asserted.</p>
 is read must be handled. When an Interrupt is enabled on a "level", the
 interrupt is generated as long as the interrupt source is not cleared,
 even if some read accesses in PIO_ISR are performed.</p>
-</blockquote>
 <p><img alt="Detecção de eventos *SAME70 Datasheet*" src="../imgs/PIO-IRQ/eventDetector.png"/></p>
+</div>
+<h2 id="referencias">Referências<a class="headerlink" href="#referencias" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Event-driven_programming">https://en.wikipedia.org/wiki/Event-driven_programming</a></li>
+<li><a href="https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf">https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf</a></li>
+<li><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php</a></li>
+</ul>
 </article>
 </div>
 </div>

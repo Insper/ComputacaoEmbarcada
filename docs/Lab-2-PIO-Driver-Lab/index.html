@@ -278,6 +278,11 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Lab-4-TickTack-Lab/" title="Lab 4 - TC e RTC">
+      Lab 4 - TC e RTC
+    </a>
+</li>
 </ul>
 </nav>
 </li>
@@ -340,21 +345,23 @@
 <span class="p">}</span>
 </pre></div>
 <p>Na primeira etapa iremos substituir a função que a Atmel/Microchip já nos disponibiliza por uma criada por nós, em todo lugar no código que você faz o uso da função <code>pio_set(...)</code> substitua a chamada por essa recém criada  <code>_pio_set(...)</code>.</p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Lembre que essa funcão serve para acionarmos um pino digital (se ele for saída)</p>
-</blockquote>
+</div>
 <p>Agora será necessário entender como o PIO controla os pinos e o que deve ser feito para que ele atue sobre o pino como desejamos. A parte da secção do manual que fala sobre o PIO e suas saídas/entradas  é a secção 32 do (<code>manual SAME70</code>), vamos analisar:</p>
-<p><strong>32.5.4 Output Control</strong></p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">SAME70-Manual: 32.5.4 Output Control</p>
 <p>...</p>
 <p>The level driven on an I/O line can be determined by writing in the Set Output Data Register (PIO_SODR) and the Clear Output Data Register (PIO_CODR). These write operations, respectively, set and clear the Output Data Status Register (PIO_ODSR), which represents the data driven on the I/O lines**. Writing in PIO_OER and PIO_ODR manages PIO_OSR whether the pin is configured to be controlled by the PIO Controller or assigned to a peripheral function. This enables configuration of the I/O line prior to setting it to be managed by the PIO Controller.</p>
-</blockquote>
+</div>
 <p>Agora sabemos que para termos 1 no pino devemos escrever no registrador <strong>PIO_SODR</strong>, no manual tem mais detalhes sobre todos os registradores do PIO. Vamos analisar a documentação desse registrador (<code>SODR</code>):</p>
 <p><img alt="PIO_SODR" src="../imgs/PIO-Driver/pio-sodr.png"/></p>
 <p>Repare que esse registrador é do tipo <strong>write-only</strong> ou seja ele não pode ser lido, somente escrito. Cada bit desse registrador representa um pino, se pegarmos por exemplo o bit 30 desse registrador (pensando no PIOA) estaríamos nos referindo ao PA30, qualquer alteração <strong>ESCRITA</strong> nesse bit influenciará esse <strong>SOMENTE</strong> pino. </p>
-<blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Todos os registradores estão listados e explicados no datasheet, de uma olhada na página <strong>362</strong>, a descrição começa ai.</p>
-</blockquote>
+</div>
 <p>Agora que já sabemos o que deve ser feito para colocarmos acionarmos um pino (ativar) e considerando que ele já foi configurado como saída podemos escrever a implementação da função:</p>
 <div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">_pio_set</span><span class="p">(</span><span class="n">Pio</span> <span class="o">*</span><span class="n">p_pio</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint32_t</span> <span class="n">ul_mask</span><span class="p">)</span>
 <span class="p">{</span>
@@ -366,12 +373,13 @@
 <li><code>ul_mask</code> : é a máscara na qual iremos aplicar ao registrador que controla os pinos para colocarmos 1 na saída.</li>
 </ul>
 <p>O que isso significa? Significa que estamos acessando o periférico passado como referência a função (um dos 5 PIOs: PIOA, PIOB, PIOC, ...) e estamos aplicando a máscara <code>ul_mask</code> no seu registrador <code>PIO_SODR</code>.</p>
-<blockquote>
+<div class="admonition example">
+<p class="admonition-title">Modifique e teste</p>
 <p>A função está pronta, agora precisamos testar. Com a modificação no código faça a gravação do uC e nada deve mudar na execução do código. Já que a função implementada possui a mesma funcionalidade daquela fornecida pelo Atmel.</p>
-</blockquote>
-<div class="highlight"><pre><span></span><span class="gi">+ Embarque o código e o mesmo deve funcionar normalmente caso</span>
-<span class="gi">+ a função implementada esteja correta.</span>
-</pre></div>
+<ul>
+<li>Embarque o código e o mesmo deve funcionar normalmente caso a função implementada esteja correta.</li>
+</ul>
+</div>
 <h2 id="_pio_clear">_pio_clear(..)<a class="headerlink" href="#_pio_clear" title="Permanent link">¶</a></h2>
 <p>Faça o mesmo para a função clear:</p>
 <div class="highlight"><pre><span></span><span class="cm">/**</span>
@@ -388,12 +396,11 @@
 <span class="p">}</span>
 </pre></div>
 <p>Vocês deverão descobrir pelo manual qual o periférico que deve ser acessado. Releia a secção 32.5.4</p>
-<blockquote>
-<p>Teste a função implementada substituindo a função <strong>pio_clear()</strong> pela função <strong>_pio_clear()</strong> e embarque o código. Ele deve se comportar igual.</p>
-</blockquote>
-<div class="highlight"><pre><span></span><span class="gi">+ Embarque o código e o mesmo deve funcionar normalmente caso</span>
-<span class="gi">+ a função implementada esteja correta.</span>
-</pre></div>
+<div class="admonition example">
+<p class="admonition-title">Modifique e teste</p>
+<p>Teste a função implementada substituindo a função <strong>pio_clear()</strong> pela função <strong>_pio_clear()</strong> e embarque o código. Ele deve se comportar igual.
+- Embarque o código e o mesmo deve funcionar normalmente caso a função implementada esteja correta.</p>
+</div>
 <h2 id="_pio_pull_up">_pio_pull_up(...)<a class="headerlink" href="#_pio_pull_up" title="Permanent link">¶</a></h2>
 <p>Vamos implementar uma função que faz a configuração do <code>pullup</code> nos pinos do PIO, esse pullup é utilizado no botão da placa. Para isso declare a função a seguir:</p>
 <div class="highlight"><pre><span></span><span class="cm">/**</span>

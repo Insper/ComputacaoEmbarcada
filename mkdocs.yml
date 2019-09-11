@@ -24,6 +24,8 @@ nav:
         - 'Teoria': 'Lab-3-PIO-IRQ-Teoria.md'
         - 'Lab': 'Lab-3-PIO-IRQ-Lab.md'
         - 'Perguntas': 'Lab-3-PIO-IRQ-Perguntas.md'
+    - 'Lab 4 - TC e RTC': 'Lab-4-TickTack-Lab.md'
+
 repo_name: 'Insper/ComputacaoEmbarcada'
 repo_url: 'https://github.com/insper/ComputacaoEmbarcada'
 markdown_extensions:
