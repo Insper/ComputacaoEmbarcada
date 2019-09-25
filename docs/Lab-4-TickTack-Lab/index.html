@@ -1,309 +1,635 @@
 
-<!DOCTYPE doctype html>
 
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="ie=edge" http-equiv="x-ua-compatible"/>
-<meta content="Copy to clipboard" name="lang:clipboard.copy"/>
-<meta content="Copied to clipboard" name="lang:clipboard.copied"/>
-<meta content="en" name="lang:search.language"/>
-<meta content="True" name="lang:search.pipeline.stopwords"/>
-<meta content="True" name="lang:search.pipeline.trimmer"/>
-<meta content="No matching documents" name="lang:search.result.none"/>
-<meta content="1 matching document" name="lang:search.result.one"/>
-<meta content="# matching documents" name="lang:search.result.other"/>
-<meta content="[\s\-]+" name="lang:search.tokenizer"/>
-<link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.0.4, mkdocs-material-4.4.1" name="generator"/>
-<title>Lab 4 - TC e RTC - Embarcados Avançados</title>
-<link href="../assets/stylesheets/application.30686662.css" rel="stylesheet"/>
-<script src="../assets/javascripts/modernizr.74668098.js"></script>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
-<link href="../assets/fonts/material-icons.css" rel="stylesheet"/>
-</head>
-<body dir="ltr">
-<svg class="md-svg">
-<defs>
-<svg height="448" id="__github" viewbox="0 0 416 448" width="416" xmlns="http://www.w3.org/2000/svg"><path d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z" fill="currentColor"></path></svg>
-</defs>
-</svg>
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-<a class="md-skip" href="#entrega" tabindex="1">
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.1">
+    
+    
+      
+        <title>Lab 4 - TC e RTC - Embarcados Avançados</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#7e57c2">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-purple" data-md-color-accent="pink">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#entrega" tabindex="1" class="md-skip">
         Skip to content
       </a>
-<header class="md-header" data-md-component="header">
-<nav class="md-header-nav md-grid">
-<div class="md-flex">
-<div class="md-flex__cell md-flex__cell--shrink">
-<a class="md-header-nav__button md-logo" href=".." title="Embarcados Avançados">
-<i class="md-icon"></i>
-</a>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch">
-<div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-<span class="md-header-nav__topic">
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="Embarcados Avançados" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
               Embarcados Avançados
             </span>
-<span class="md-header-nav__topic">
+            <span class="md-header-nav__topic">
               
                 Lab 4 - TC e RTC
               
             </span>
-</div>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="query" data-md-state="active" name="query" placeholder="Search" spellcheck="false" type="text"/>
-<label class="md-icon md-search__icon" for="__search"></label>
-<button class="md-icon md-search__icon" data-md-component="reset" tabindex="-1" type="reset">
-        
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
       </button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="result">
-<div class="md-search-result__meta">
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
             Type to start searching
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<div class="md-header-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository">
-<div class="md-source__icon">
-<svg height="24" viewbox="0 0 24 24" width="24">
-<use height="24" width="24" xlink:href="#__github"></use>
-</svg>
-</div>
-<div class="md-source__repository">
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
     Insper/ComputacaoEmbarcada
   </div>
 </a>
-</div>
-</div>
-</div>
-</nav>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
 </header>
-<div class="md-container">
-<main class="md-main">
-<div class="md-main__inner md-grid" data-md-component="container">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title md-nav__title--site" for="__drawer">
-<a class="md-nav__button md-logo" href=".." title="Embarcados Avançados">
-<i class="md-icon"></i>
-</a>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="Embarcados Avançados" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
     Embarcados Avançados
   </label>
-<div class="md-nav__source">
-<a class="md-source" data-md-source="github" href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository">
-<div class="md-source__icon">
-<svg height="24" viewbox="0 0 24 24" width="24">
-<use height="24" width="24" xlink:href="#__github"></use>
-</svg>
-</div>
-<div class="md-source__repository">
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
     Insper/ComputacaoEmbarcada
   </div>
 </a>
-</div>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href=".." title="Home">
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Home" class="md-nav__link">
       Home
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Sobre/" title="Sobre">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Sobre/" title="Sobre" class="md-nav__link">
       Sobre
     </a>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" id="nav-3" type="checkbox"/>
-<label class="md-nav__link" for="nav-3">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
       Projetos
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-3">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
         Projetos
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Projeto-1-Descrição/" title="Projeto 1 - Descrição">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Projeto-1-Descrição/" title="Projeto 1 - Descrição" class="md-nav__link">
       Projeto 1 - Descrição
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Projeto-1-Vending-Machine/" title="Projeto 1 - Vending Machine">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Projeto-1-Vending-Machine/" title="Projeto 1 - Vending Machine" class="md-nav__link">
       Projeto 1 - Vending Machine
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Projeto-1-Controle/" title="Projeto 1 - Controle">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Projeto-1-Controle/" title="Projeto 1 - Controle" class="md-nav__link">
       Projeto 1 - Controle
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" id="nav-4" type="checkbox"/>
-<label class="md-nav__link" for="nav-4">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
       APS
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-4">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
         APS
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../APS-1-Musical/" title="APS 1 - Musical">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../APS-1-Musical/" title="APS 1 - Musical" class="md-nav__link">
       APS 1 - Musical
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-toggle md-nav__toggle" data-md-toggle="nav-5" id="nav-5" type="checkbox"/>
-<label class="md-nav__link" for="nav-5">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Avaliações
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Avaliações
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../AV-0-Simulado/" title="AV0 Simulado" class="md-nav__link">
+      AV0 Simulado
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
       Labs
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-<label class="md-nav__title" for="nav-5">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
         Labs
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" id="nav-5-1" type="checkbox"/>
-<label class="md-nav__link" for="nav-5-1">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1">
+    
+    <label class="md-nav__link" for="nav-6-1">
       Lab 1 - IOs
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-<label class="md-nav__title" for="nav-5-1">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-1">
         Lab 1 - IOs
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Lab-1-IOs-Teoria/" title="Teoria">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-1-IOs-Teoria/" title="Teoria" class="md-nav__link">
       Teoria
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Lab-1-IOs-Lab/" title="Lab">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-1-IOs-Lab/" title="Lab" class="md-nav__link">
       Lab
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Lab-1-IOs-Dicas/" title="Dicas">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-1-IOs-Dicas/" title="Dicas" class="md-nav__link">
       Dicas
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Lab-1-IOs-Perguntas/" title="Perguntas">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-1-IOs-Perguntas/" title="Perguntas" class="md-nav__link">
       Perguntas
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" id="nav-5-2" type="checkbox"/>
-<label class="md-nav__link" for="nav-5-2">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
       Lab 2 - PIO driver
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-<label class="md-nav__title" for="nav-5-2">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
         Lab 2 - PIO driver
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Lab-2-PIO-Driver-Teoria/" title="Teoria">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-2-PIO-Driver-Teoria/" title="Teoria" class="md-nav__link">
       Teoria
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Lab-2-PIO-Driver-Teoria/" title="Lab">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-2-PIO-Driver-Teoria/" title="Lab" class="md-nav__link">
       Lab
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" id="nav-5-3" type="checkbox"/>
-<label class="md-nav__link" for="nav-5-3">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
+    
+    <label class="md-nav__link" for="nav-6-3">
       Lab 3 - PIO IRQ
     </label>
-<nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-<label class="md-nav__title" for="nav-5-3">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
         Lab 3 - PIO IRQ
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Lab-3-PIO-IRQ-Teoria/" title="Teoria">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-3-PIO-IRQ-Teoria/" title="Teoria" class="md-nav__link">
       Teoria
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Lab-3-PIO-IRQ-Lab/" title="Lab">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-3-PIO-IRQ-Lab/" title="Lab" class="md-nav__link">
       Lab
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../Lab-3-PIO-IRQ-Perguntas/" title="Perguntas">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-3-PIO-IRQ-Perguntas/" title="Perguntas" class="md-nav__link">
       Perguntas
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<a class="md-nav__link md-nav__link--active" href="./" title="Lab 4 - TC e RTC">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Lab 4 - TC e RTC" class="md-nav__link md-nav__link--active">
       Lab 4 - TC e RTC
     </a>
-</li>
-</ul>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
 </nav>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
 <nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset"><a class="md-icon md-content__icon" download href="Lab-4-TickTack-Lab.pdf" title="PDF Export"></a>
-<a class="md-icon md-content__icon" href="https://github.com/insper/ComputacaoEmbarcada/edit/master/docs/Lab-4-TickTack-Lab.md" title="Edit this page"></a>
-<h2 id="entrega">Entrega<a class="headerlink" href="#entrega" title="Permanent link">¶</a></h2>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/Lab-4-TickTack-Lab.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h2 id="entrega">Entrega<a class="headerlink" href="#entrega" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -318,24 +644,24 @@
 </table>
 <ul>
 <li>Parte 1: <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Entra em sleep mode</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Led pisca mais rápido</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Pisca Pisca </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Entra em sleep mode</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Led pisca mais rápido</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Pisca Pisca </li>
 </ul>
 </li>
 <li>Parte 2:<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Corrigido uso de flag para parar o pisca pisca</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Usar placa OLED</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Para cada LED um TC diferente</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Cada LED é controlado por um botão</li>
-<li class="task-list-item"><label class="task-list-control"><input disabled="" type="checkbox"><span class="task-list-indicator"></span></input></label> Exibir hora atual no OLED1 </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Corrigido uso de flag para parar o pisca pisca</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Usar placa OLED</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Para cada LED um TC diferente</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cada LED é controlado por um botão</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Exibir hora atual no OLED1 </li>
 </ul>
 </li>
 </ul>
-<h1 id="entenda-o-codigo">Entenda o código<a class="headerlink" href="#entenda-o-codigo" title="Permanent link">¶</a></h1>
+<h1 id="entenda-o-codigo">Entenda o código<a class="headerlink" href="#entenda-o-codigo" title="Permanent link">&para;</a></h1>
 <p>O firmware disponível no repositório de exemplos chamado de <a href="https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/TC-RTC-IRQ"><code>TC-RTC-IRQ</code></a> configura o TimerCounter (TC) e o RTC do mircontrolador. O TC0 canal 1 é configurado para gerar uma interrupção (<strong>TC1_Handler</strong>) a cada 250ms (f=1/T -&gt; de 4Hz) já o RTC é configurado para operar em modo de alarme, gerando uma interrupção (<strong>RTC_Handler</strong>) em um determinado momento. Inicialmente o RTC está configurado para gerar uma interrupção um minuto após o início do microcontrolador.</p>
 <p>O TimerCounter faz com o o led pisque na frequência de 4Hz enquanto não ocorrer o alarme do RTC, após o acontecimento do alarme (interrupção do RTC) o piscar do led é desligado.</p>
-<p><img alt="" src="../imgs/TC/overview.png"/></p>
+<p><img alt="" src="../imgs/TC/overview.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Entenda e execute</p>
 <ol>
@@ -350,18 +676,18 @@
 </li>
 </ol>
 </div>
-<h1 id="programando">Programando...<a class="headerlink" href="#programando" title="Permanent link">¶</a></h1>
+<h1 id="programando">Programando...<a class="headerlink" href="#programando" title="Permanent link">&para;</a></h1>
 <p>Vamos agora trabalhar com o código exemplo, modificando e incorporando novas funcionalidades. </p>
 <div class="admonition warning">
 <p>Nesse laboratório, não é permitido utilizar funções de delay por software:  <code>delay_s()</code> / <code>delay_ms()</code> / ...</p>
 </div>
-<h4 id="1-sleep">1. Sleep<a class="headerlink" href="#1-sleep" title="Permanent link">¶</a></h4>
+<h4 id="1-sleep">1. Sleep<a class="headerlink" href="#1-sleep" title="Permanent link">&para;</a></h4>
 <div class="admonition example">
 <p class="admonition-title">Modifique e teste</p>
 <p>Faça o exemplo fazendo com o que o uC entre em modo sleep enquanto estiver ocioso.</p>
 </div>
 <p>Para isso utilize a função <code>pmc_sleep(..)</code>: </p>
-<div class="highlight"><pre><span></span><span class="c1">// trecho de codigo a ser executado antes de dormir</span>
+<div class="codehilite"><pre><span></span><span class="c1">// trecho de codigo a ser executado antes de dormir</span>
 <span class="c1">// ...</span>
 
 <span class="c1">// entra em sleep</span>
@@ -370,43 +696,47 @@
 <span class="c1">// trecho de codigo a ser executado depois de acordar</span>
 <span class="c1">// ...</span>
 </pre></div>
+
 <p>O modo <strong>Wait for Interrupt</strong> WFI é um dos modos de powersave mais básicos e menos eficientes do SAME70. Nele o CORE ainda é mantido energizado porém sem clock. A grande vantagem desse modo é que qualquer interrupção pode acordar o core, diferente de outros modos mais agressivos que desabilita complemente o CORE implicando em um menor gasto energético.</p>
 <p>Toda vez que essa função for chamada o CORE entrará em modo sleep e ficará "bloqueada" esperando por alguma interrupção. Após detectada a interrupção, o CORE irá acordar e resolver todas as interrupções que estão pendentes e então irá liberar essa função, ou seja, continuará a executar o código.</p>
-<h4 id="2-mais-rapido">2. Mais rápido !<a class="headerlink" href="#2-mais-rapido" title="Permanent link">¶</a></h4>
+<h4 id="2-mais-rapido">2. Mais rápido !<a class="headerlink" href="#2-mais-rapido" title="Permanent link">&para;</a></h4>
 <div class="admonition example">
 <p class="admonition-title">Modifique e teste</p>
 <p>Faça com que o LED pisque ainda mais rápido! Escolha uma frequência que achar adequado.</p>
 </div>
-<h4 id="3-piscar-durante-1-minuto-e-parar-durante-1-minuto-ciclico">3. Piscar durante 1 minuto e parar durante 1 minuto - cíclico<a class="headerlink" href="#3-piscar-durante-1-minuto-e-parar-durante-1-minuto-ciclico" title="Permanent link">¶</a></h4>
+<h4 id="3-piscar-durante-1-minuto-e-parar-durante-1-minuto-ciclico">3. Piscar durante 1 minuto e parar durante 1 minuto - cíclico<a class="headerlink" href="#3-piscar-durante-1-minuto-e-parar-durante-1-minuto-ciclico" title="Permanent link">&para;</a></h4>
 <div class="admonition example">
 <p class="admonition-title">Modifique e teste</p>
 <p>Faça com que o led pisque durante um minuto e fique um minuto sem piscar eternamente, faça isso de forma cíclica como na ilustração a baixo:</p>
-<p><img alt="Led da placa" src="../imgs/TC/led.png"/></p>
+<p><img alt="Led da placa" src="../imgs/TC/led.png" /></p>
 <p>Dicas:
     - Use o alarme do RTC para isso!
+    - utilize a função <code>rtc_get_time()</code>
     - Cuidado ao mudar de Hora/ Dia/ Mês</p>
 </div>
-<h4 id="4-flag-e-a-melhor-maneira">4. Flag é a melhor maneira ?<a class="headerlink" href="#4-flag-e-a-melhor-maneira" title="Permanent link">¶</a></h4>
+<h4 id="4-flag-e-a-melhor-maneira">4. Flag é a melhor maneira ?<a class="headerlink" href="#4-flag-e-a-melhor-maneira" title="Permanent link">&para;</a></h4>
 <p>A tomada de decisão se o LED está em modo "pisca pisca" é feita por uma variável global <code>flag_led0</code>:</p>
-<div class="highlight"><pre><span></span><span class="cm">/************************************************************************/</span>
+<div class="codehilite"><pre><span></span><span class="cm">/************************************************************************/</span>
 <span class="cm">/* VAR globais                                                          */</span>
 <span class="cm">/************************************************************************/</span>
 <span class="kt">uint8_t</span> <span class="n">flag_led0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </pre></div>
+
 <p>Dentro da interrupção do TC1 verificamos a flag:</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">TC1_Handler</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><span class="kt">void</span> <span class="nf">TC1_Handler</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     <span class="p">....</span>
 
     <span class="cm">/** Muda o estado do LED */</span>
     <span class="k">if</span><span class="p">(</span><span class="n">flag_led0</span><span class="p">)</span>
         <span class="n">pin_toggle</span><span class="p">(</span><span class="n">LED_PIO</span><span class="p">,</span> <span class="n">LED_PIN_MASK</span><span class="p">);</span>
 </pre></div>
+
 <p>O problema aqui é que a interrupção do TC1 continua ocorrendo mesmo com o piscar do LED desativado, o que pode ter um impacto no consumo e performance do projeto.</p>
 <div class="admonition example">
 <p class="admonition-title">Modifique e teste</p>
 <p>Proponha e implemente uma solução para essa questão.</p>
 </div>
-<h4 id="5-varias-frequencias">5. Várias frequências<a class="headerlink" href="#5-varias-frequencias" title="Permanent link">¶</a></h4>
+<h4 id="5-varias-frequencias">5. Várias frequências<a class="headerlink" href="#5-varias-frequencias" title="Permanent link">&para;</a></h4>
 <div class="admonition example">
 <p class="admonition-title">Modifique e teste</p>
 <p>Utilizando a placa OLED1 conectada ao kit de desenvolvimento, faça com que cada LED pisque nas frequências determinadas na tabela a baixo, utilize para cada LED um TC diferente.</p>
@@ -433,7 +763,7 @@
 </tbody>
 </table>
 </div>
-<h4 id="6-botoes">6. Botões<a class="headerlink" href="#6-botoes" title="Permanent link">¶</a></h4>
+<h4 id="6-botoes">6. Botões<a class="headerlink" href="#6-botoes" title="Permanent link">&para;</a></h4>
 <div class="admonition example">
 <p class="admonition-title">Modifique e teste</p>
 <p>Faça com que os botões (relacionados a cada LED) pare ou inicialize o piscar dos LEDs, utilize para isso interrupção do PIO.</p>
@@ -441,7 +771,7 @@
 <li>Não use flags para isso!</li>
 </ul>
 </div>
-<h4 id="7-oled1-exibir-hora">7. OLED1 - Exibir hora<a class="headerlink" href="#7-oled1-exibir-hora" title="Permanent link">¶</a></h4>
+<h4 id="7-oled1-exibir-hora">7. OLED1 - Exibir hora<a class="headerlink" href="#7-oled1-exibir-hora" title="Permanent link">&para;</a></h4>
 <div class="admonition example">
 <p class="admonition-title">Modifique e teste</p>
 <p>Utilize o <code>OLED1</code> para exibir a hora atual no display!</p>
@@ -458,48 +788,70 @@
   // Second increment interrupt
   if ((ul_status &amp; RTC_SR_SEC) == RTC_SR_SEC)
   {
-  /<em> limpa interrupcao segundos </em>/
+  /* limpa interrupcao segundos */
       rtc_clear_status(RTC, RTC_SCCR_SECCLR);
   }</p>
 </div>
 <p>```</p>
-</article>
-</div>
-</div>
-</main>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
 <footer class="md-footer">
-<div class="md-footer-nav">
-<nav class="md-footer-nav__inner md-grid">
-<a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../Lab-3-PIO-IRQ-Perguntas/" rel="prev" title="Perguntas">
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Lab-3-PIO-IRQ-Perguntas/" title="Perguntas" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
                   Previous
                 </span>
                 Perguntas
               </span>
-</div>
-</a>
-</nav>
-</div>
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<div class="md-footer-copyright">
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
         
         powered by
         <a href="https://www.mkdocs.org">MkDocs</a>
         and
         <a href="https://squidfunk.github.io/mkdocs-material/">
           Material for MkDocs</a>
-</div>
-</div>
-</div>
+      </div>
+      
+    </div>
+  </div>
 </footer>
-</div>
-<script src="../assets/javascripts/application.c648116f.js"></script>
-<script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
-</body>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
 </html>
