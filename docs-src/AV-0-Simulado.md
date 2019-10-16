@@ -55,16 +55,17 @@ Resumo:
 
 ## B
 
+Faça dois modos de operação AM/PM e 24h (use o botão do kit para isso)
+
+Dica: procure nas funções do RTC
+eu não
+
+## B+
+
 Agora vamos possibilitar que o usuário ajuste a hora do relógio, para isso ele deverá apertar o Button2 (o relógio para e o sistema entra em modo ajuste), e agora se o usuário apertar o Button0 ele aumenta a hora e se apertar o Button1 ele aumenta o minuto. Para sair do modo ajuste é só apertar o Button2.
 
 - Só uma unidade implementada (HH ou MM)
 
-## B+
-
-- As duas unidades implementadas (HH e MM)
-
 ## A
 
-Faça dois modos de operação AM/PM e 24h (use o botão do kit para isso)
-
-Dica: procure nas funções do RTC
+- As duas unidades implementadas (HH e MM)

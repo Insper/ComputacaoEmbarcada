@@ -1,15 +1,28 @@
 site_name: Embarcados Avançados
-theme: 
+theme:
+  feature:
+    tabs: true
   name: 'material'
   palette:
       primary: 'deep purple'
       accent: 'pink'
+  logo:
+      icon: 'developer_board'
+  font:
+    text: Roboto
+    code: Roboto Mono
 
 docs_dir: docs-src
 site_dir: docs
+
+repo_name: 'Insper/ComputacaoEmbarcada'
+repo_url: 'https://github.com/insper/ComputacaoEmbarcada'
+edit_uri: 'https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/'
+
 nav:
 - Home: index.md
 - Sobre: Sobre.md
+- 'SAME70-Exmamples': 'https://github.com/Insper/SAME70-examples'
 - Projetos:
     - 'Projeto 1 - Descrição': 'Projeto-1-Descrição.md'
     - 'Projeto 1 - Vending Machine': 'Projeto-1-Vending-Machine.md'
@@ -18,6 +31,7 @@ nav:
     - 'APS 1 - Musical': 'APS-1-Musical.md'
 - Avaliações:
     - 'AV0 Simulado': 'AV-0-Simulado.md'
+    - 'AV0 Pratica': 'AV-0.md'
 - Labs:
     - 'Lab 1 - IOs':
         - 'Teoria': 'Lab-1-IOs-Teoria.md'
@@ -32,10 +46,7 @@ nav:
         - 'Lab': 'Lab-3-PIO-IRQ-Lab.md'
         - 'Perguntas': 'Lab-3-PIO-IRQ-Perguntas.md'
     - 'Lab 4 - TC e RTC': 'Lab-4-TickTack-Lab.md'
-
-repo_name: 'Insper/ComputacaoEmbarcada'
-repo_url: 'https://github.com/insper/ComputacaoEmbarcada'
-edit_uri: 'https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/'
+    - 'Lab 5 - ADC': 'Lab-5-ADC.md'
 
 # Extensions
 markdown_extensions:
