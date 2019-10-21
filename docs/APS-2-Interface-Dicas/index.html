@@ -36,7 +36,7 @@
     
     
       
-        <title>Projeto 1 - Vending Machine - Embarcados Avançados</title>
+        <title>APS 2 Interface Dicas - Embarcados Avançados</title>
       
     
     
@@ -107,7 +107,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Projeto 1 - Vending Machine
+                APS 2 Interface Dicas
               
             </span>
           
@@ -175,16 +175,14 @@
       
         
 
-  
-
-<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+<nav class="md-tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
         
   <li class="md-tabs__item">
     
-      <a href=".." title="Home" class="md-tabs__link">
+      <a href=".." title="Home" class="md-tabs__link md-tabs__link--active">
         Home
       </a>
     
@@ -200,7 +198,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../Projeto-1-Descrição/" title="Projetos" class="md-tabs__link md-tabs__link--active">
+        <a href="../Projeto-1-Descrição/" title="Projetos" class="md-tabs__link">
           Projetos
         </a>
       
@@ -336,12 +334,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
       Projetos
@@ -369,18 +365,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" title="Projeto 1 - Vending Machine" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../Projeto-1-Vending-Machine/" title="Projeto 1 - Vending Machine" class="md-nav__link">
       Projeto 1 - Vending Machine
     </a>
-    
   </li>
 
         
@@ -737,13 +726,74 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/Projeto-1-Vending-Machine.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/APS-2-Interface-Dicas.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Projeto 1 - Vending Machine</h1>
+                  <h1>APS 2 Interface Dicas</h1>
                 
-                <p><img alt="" src="https://raw.githubusercontent.com/Insper/ComputacaoEmbarcada/master/Projeto%201/Vending%20machine%20pg1.png" /></p>
-<p><img alt="" src="https://raw.githubusercontent.com/Insper/ComputacaoEmbarcada/master/Projeto%201/Vending%20machine%20pg2.png" /></p>
+                <p>Você está perdido e não sabe como começar a APS? Vou tentar dar algumas dicas e passos aqui para facilitar sua vida. </p>
+<ol>
+<li>Encontre um parceiro para a APS e crie um repositório git</li>
+<li>Estude os cenários e a rubrica</li>
+<li>Estude o <a href="https://github.com/Insper/ComputacaoEmbarcada/blob/master/APS-2/">código</a> que define os ciclos<ul>
+<li>Entenda a estrutura do código!</li>
+</ul>
+</li>
+<li>Prototipe uma interface no papel <ul>
+<li>Com tamanho dos botões, icones e tudo mais! Vai facilitar muitooo o desenvolvimento.</li>
+</ul>
+</li>
+<li>Estude os exemplos  do LCD fornecidos na ordem apresentanda a seguir (<strong>estudar = entender e modificar o código</strong>) </li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="gi">+ Divida entre a dupla</span>
+</pre></div>
+
+<p><code>SAME70-examples/Screens/</code>:</p>
+<ul>
+<li><a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/LCD-maXTouch-Images"><code>LCD-maXTouch-Images</code></a>: Exemplo de como colocar uma imagem no LCD<ul>
+<li><strong>FAÇA: baixe um ICONE da web, converta para o <code>.h</code> e exiba no LCD</strong></li>
+</ul>
+</li>
+<li><a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/LCD-maxTouch-Switch-Toggle"><code>LCD-maxTouch-Switch-Toggle</code></a>: Exemplo de como fazer a leitura do touch screen do LCD<ul>
+<li><strong>FAÇA: implemente um terceito botão que faz o LED da placa piscar</strong></li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/LCD-maXTouch-New-Fonts"><code>LCD-maXTouch-New-Fonts</code></a>: Mostra como usar novas fontes no LCD (gerar e inserir no código)</p>
+<ul>
+<li><strong>FAÇA: Escolha uma fonte nova e insira nesse exemplo</strong></li>
+</ul>
+</li>
+<li>
+<p>Copie a pasta do <code>LCD-maxTouch-Switch-Toggle</code> para o repositório da APS</p>
+<ul>
+<li>Ele servirá como base do desenvolvimento</li>
+</ul>
+</li>
+<li>Busque por imagens na web para seus Icones e salve-os em uma pasta dentro do repositório (<code>icones</code>)<ul>
+<li><a href="https://thenounproject.com/">https://thenounproject.com/</a></li>
+<li><a href="https://medium.com/@101/the-best-free-icon-packs-26f36ddd732e">https://medium.com/@101/the-best-free-icon-packs-26f36ddd732e</a></li>
+</ul>
+</li>
+<li>Converta um dos icones para <code>.h</code> (documentando em <code>LCD-maXTouch-Images</code>) <ul>
+<li>Desenhe o icone na tela do LCD (Vai dar uma motivada!, use o exemplo <code>LCD-maXTouch-Images</code>)</li>
+</ul>
+</li>
+<li>Converta todos os outros icones para <code>.h</code><ul>
+<li>Duas são as soluções: Um <code>.h</code> por icone (resultando em N <code>.h</code>) ou Um <code>.h</code> para todos os icones (resultando em 1 <code>.h</code>) .</li>
+</ul>
+</li>
+<li>Comece por desenhar a interface padrão <ul>
+<li>Pegue um dos <a href="https://github.com/Insper/ComputacaoEmbarcada/blob/master/APS-2/maquina1.h#L18">ciclos de lavagem</a> como referência.</li>
+<li>Apenas desenhando Icones e Textos (sem botão/ touch)</li>
+</ul>
+</li>
+<li>Insira aos poucos os botões na interface<ul>
+<li>Se não estruturar o código direito vai dar muitoooo trabalho</li>
+</ul>
+</li>
+<li>Vá inserindo as funcionalidades, precisa lembra de usar a <code>struct t_ciclo</code> fornecida pela engenharia.</li>
+</ul>
                 
                   
                 
@@ -760,41 +810,6 @@
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../Projeto-1-Descrição/" title="Projeto 1 - Descrição" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Projeto 1 - Descrição
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../Projeto-1-Controle/" title="Projeto 1 - Controle" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Projeto 1 - Controle
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
