@@ -29,6 +29,11 @@ nav:
     - 'Projeto 1 - Controle': 'Projeto-1-Controle.md'
 - APS:
     - 'APS 1 - Musical': 'APS-1-Musical.md'
+    - 'APS 2 - Interface':
+        - 'Geral': 'APS-2-Interface.md'
+        - 'Design': 'APS-2-Interface-Design.md'
+        - 'Engenharia': 'APS-2-Interface-Engenharia.md'
+        - 'Dicas': 'APS-2-Interface-Dicas.md'
 - Avaliações:
     - 'AV0 Simulado': 'AV-0-Simulado.md'
     - 'AV0 Pratica': 'AV-0.md'
