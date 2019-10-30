@@ -1,0 +1,1281 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.1">
+    
+    
+      
+        <title>Lab 6 - RTOS - 5s - Computação Embarcada</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#7e57c2">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-purple" data-md-color-accent="pink">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#entrega" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="5s - Computação Embarcada" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">developer_board</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              5s - Computação Embarcada
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Lab 6 - RTOS
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Insper/ComputacaoEmbarcada
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Home" class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../Projeto-1-Descrição/" title="Projetos" class="md-tabs__link">
+          Projetos
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../APS-1-Musical/" title="APS" class="md-tabs__link">
+          APS
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../AV-0-Simulado/" title="Avaliações" class="md-tabs__link">
+          Avaliações
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../Lab-1-IOs-Teoria/" title="Labs" class="md-tabs__link">
+          Labs
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="5s - Computação Embarcada" class="md-nav__button md-logo">
+      
+        <i class="md-icon">developer_board</i>
+      
+    </a>
+    5s - Computação Embarcada
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Insper/ComputacaoEmbarcada
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Sobre/" title="Sobre" class="md-nav__link">
+      Sobre
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="https://github.com/Insper/SAME70-examples" title="SAME70-Exmamples" class="md-nav__link">
+      SAME70-Exmamples
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Projetos
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Projetos
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Projeto-1-Descrição/" title="Projeto 1 - Descrição" class="md-nav__link">
+      Projeto 1 - Descrição
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Projeto-1-Vending-Machine/" title="Projeto 1 - Vending Machine" class="md-nav__link">
+      Projeto 1 - Vending Machine
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Projeto-1-Controle/" title="Projeto 1 - Controle" class="md-nav__link">
+      Projeto 1 - Controle
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      APS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        APS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../APS-1-Musical/" title="APS 1 - Musical" class="md-nav__link">
+      APS 1 - Musical
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      APS 2 - Interface
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        APS 2 - Interface
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../APS-2-Interface/" title="Geral" class="md-nav__link">
+      Geral
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../APS-2-Interface-Design/" title="Design" class="md-nav__link">
+      Design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../APS-2-Interface-Engenharia/" title="Engenharia" class="md-nav__link">
+      Engenharia
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../APS-2-Interface-Dicas/" title="Dicas" class="md-nav__link">
+      Dicas
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Avaliações
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Avaliações
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../AV-0-Simulado/" title="AV0 Simulado" class="md-nav__link">
+      AV0 Simulado
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../AV-0/" title="AV0 Pratica" class="md-nav__link">
+      AV0 Pratica
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+    
+    <label class="md-nav__link" for="nav-7">
+      Labs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Labs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+    
+    <label class="md-nav__link" for="nav-7-1">
+      Lab 1 - IOs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-1">
+        Lab 1 - IOs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-1-IOs-Teoria/" title="Teoria" class="md-nav__link">
+      Teoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-1-IOs-Lab/" title="Lab" class="md-nav__link">
+      Lab
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-1-IOs-Dicas/" title="Dicas" class="md-nav__link">
+      Dicas
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-1-IOs-Perguntas/" title="Perguntas" class="md-nav__link">
+      Perguntas
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Lab 2 - PIO driver
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        Lab 2 - PIO driver
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-2-PIO-Driver-Teoria/" title="Teoria" class="md-nav__link">
+      Teoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-2-PIO-Driver-Teoria/" title="Lab" class="md-nav__link">
+      Lab
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-3" type="checkbox" id="nav-7-3">
+    
+    <label class="md-nav__link" for="nav-7-3">
+      Lab 3 - PIO IRQ
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-3">
+        Lab 3 - PIO IRQ
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-3-PIO-IRQ-Teoria/" title="Teoria" class="md-nav__link">
+      Teoria
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-3-PIO-IRQ-Lab/" title="Lab" class="md-nav__link">
+      Lab
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-3-PIO-IRQ-Perguntas/" title="Perguntas" class="md-nav__link">
+      Perguntas
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-4-TickTack-Lab/" title="Lab 4 - TC e RTC" class="md-nav__link">
+      Lab 4 - TC e RTC
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Lab-5-ADC/" title="Lab 5 - ADC" class="md-nav__link">
+      Lab 5 - ADC
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="Lab 6 - RTOS" class="md-nav__link md-nav__link--active">
+      Lab 6 - RTOS
+    </a>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/Lab-6-RTOS.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <p>Nesse Handout iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciarmos três LED e três botões (vamos refazer a entrega do <code>tickTackTock</code> porém agora com o uso do SO).</p>
+<p>O sistema operacional a ser utilizado é o <a href="http://freertos.org">FreeRtos (www.freertos.org)</a>, um sistema operacional muito utilizado pela industria, sendo o segundo sistema operacional (<strong>20%</strong>) mais utilizado em projetos embarcados, perdendo só para o <a href="https://m.eet.com/media/1246048/2017-embedded-market-study.pdf">Linux embarcado</a>.</p>
+<h2 id="entrega">Entrega<a class="headerlink" href="#entrega" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Pasta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Labs/freeRTOS</code></td>
+</tr>
+</tbody>
+</table>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Criar o exemplo via AtmelStudio</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Controlar a tarefa piscaled via interrupção do botão<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Via semáforo </li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Reproduzir Lab do ticktack:<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Adicionar o RTC para gerar a cadência (1 minuto)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Uma tarefa para controlar cada LED</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Um callback por botão</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Um semáforo por botão</li>
+</ul>
+</li>
+</ul>
+<h1 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h1>
+<p>(45 minutos)</p>
+<p><strong>Objetivo: Entender as tarefas de um RTOS e fazer pequenas modificações no código</strong></p>
+<p>Iremos trabalhar com o exemplo do <a href="https://www.freertos.org"><code>FreeRTOS</code></a> que a Atmel disponibiliza para a placa SAME70-XPLD, esse exemplo já inclui um projeto com as configurações iniciais do OS e um código exemplo que faz o LED da placa piscar a uma frequência determinada.</p>
+<p>No Atmel Studio, vá em: </p>
+<div class="admonition note">
+<p><img alt="➡" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/svg/27a1.svg" title=":arrow_right:" /> File <img alt="➡" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/svg/27a1.svg" title=":arrow_right:" /> New <img alt="➡" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/svg/27a1.svg" title=":arrow_right:" /> Example Project <img alt="➡" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/svg/27a1.svg" title=":arrow_right:" /></p>
+</div>
+<p>Filtre pelo microcontrolador: <code>SAME70</code> e busque pelo exemplo <code>FreeRTOS Basic Example on ...</code></p>
+<h3 id="terminal">Terminal<a class="headerlink" href="#terminal" title="Permanent link">&para;</a></h3>
+<p>Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:</p>
+<div class="admonition note">
+<p><img alt="➡" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/svg/27a1.svg" title=":arrow_right:" /> View <img alt="➡" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/svg/27a1.svg" title=":arrow_right:" /> Terminal Window</p>
+</div>
+<p><em>(você deve ter instalado o pacote extra do atmel listado no documento inicial de infra)</em></p>
+<p>Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de 115200.</p>
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<p>Compile e grave o código no uC, abra o terminal e analise o output.</p>
+</div>
+<h3 id="tasks">Tasks<a class="headerlink" href="#tasks" title="Permanent link">&para;</a></h3>
+<p>Esse exemplo cria inicialmente 2 tarefas: <code>task_monitor</code> e <code>task_led</code>. A primeira serve como monitor do sistema (como o monitor de tarefas do Windows/Linux), enviando via <code>printf</code> informações sobre o estado das tarefas do sistema embarcado. A segunda serve para gerenciar o LED e o faz piscar a uma taxa de uma vez por segundo.</p>
+<h4 id="task_led">task_led<a class="headerlink" href="#task_led" title="Permanent link">&para;</a></h4>
+<p>A <code>task_led</code> possui a implementação a seguir (limpei a parte que não é referente ao SAME70):</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * \brief This task, when activated, make LED blink at a fixed rate</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">task_led</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">UNUSED</span><span class="p">(</span><span class="n">pvParameters</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+        <span class="n">LED_Toggle</span><span class="p">(</span><span class="n">LED0</span><span class="p">);</span>
+        <span class="n">vTaskDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Notem que a função possui um laço infinito (<code>for (;;){}</code>), tasks em um RTOS não devem retornar, elas executam como se estivessem exclusividade da CPU (assim como um código bare-metal que não deve retornar da função <code>main</code>). A função <code>LED_Toggle</code> é na verdade um macro que faz o LED piscar, usando uma série de funções do PIO-ASF que não usamos no curso (podemos aqui usar a nossa função de pisca led). </p>
+<p>A função <a href="https://www.freertos.org/a00127.html">vTaskDelay()</a> faz com que a tarefa fique em estado de <strong>blocked</strong> (permite que outras tarefas utilizem a CPU) por um determinado número de <strong>ticks</strong>. Essa função é diferente da <code>delay_ms()</code> que bloqueia a CPU para sua execução. Deve-se evitar o uso de funções de delay baseadas em "queimar" clocks na tarefas de um RTOS, já que elas agem como um trecho de código a ser executada.</p>
+<p>A função <code>vTaskDelay()</code> faz com que o RTOS libere processamento para outras tarefas durante o tempo especificado em sua chamada. Esse valor é determinado em <code>ticks</code>. Podemos traduzir ticks para ms, usando o define <code>portTICK_PERIOD_MS</code> como no exemplo a seguir:</p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * \brief This task, when activated, make LED blink at a fixed rate</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">task_led</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* Block for 500ms. */</span>
+    <span class="k">const</span> <span class="n">TickType_t</span> <span class="n">xDelay</span> <span class="o">=</span> <span class="mi">500</span> <span class="o">/</span> <span class="n">portTICK_PERIOD_MS</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+        <span class="n">LED_Toggle</span><span class="p">(</span><span class="n">LED0</span><span class="p">);</span>
+        <span class="n">vTaskDelay</span><span class="p">(</span><span class="n">xDelay</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<ol>
+<li>Modifique o firmware com o código </li>
+<li>Programe o uC.</li>
+</ol>
+</div>
+<p>O Tick de um RTOS define quantas fezes por segundo o escalonador irá executar o algoritmo de mudança de tarefas, no ARM o tick é implementado utilizando um timer do próprio CORE da ARM chamado de <code>system clock</code> ou <a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s02s08.html"><code>systick</code></a>, criado para essa função.</p>
+<p>Por exemplo, um RTOS que opera com um tick de 10ms irá decidir pelo chaveamento de suas tarefas 100 vezes por segundo, já um tick configurado para 1ms irá executar o escalonador a uma taxa de 1000 vezes por segundo. Trechos de código que necessitam executar a uma taxa maior que 1000 vezes por segundo (tick = 1ms) não devem ser implementados em tasks do RTOS mas sim via interrupção de timer.</p>
+<p>A configuração da frequência do tick assim como o mesmo é implementando está no arquivo do projeto: <code>config/FreeRTOSConfig.h</code>:</p>
+<div class="codehilite"><pre><span></span><span class="p">....</span>
+<span class="cp">#define configTICK_RATE_HZ                      ( 1000 )</span>
+<span class="p">....</span>
+<span class="cp">#define xPortSysTickHandler SysTick_Handler</span>
+</pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Impacto do tick na função vTaskDelay é que a mesma só pode ser chamada com múltiplos inteiros referente ao tick. Não temos tanta resolução comparado com o TimerCounter. Quanto maior a frequência de chaveamento mais vezes/segundo o OS necessita salvar e recuperar o contexto, diminuindo assim sua eficiência.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<p>Modifique o define <code>configTICK_RATE_HZ</code> para 500</p>
+</div>
+<h4 id="task-monitor">Task Monitor<a class="headerlink" href="#task-monitor" title="Permanent link">&para;</a></h4>
+<p>Essa task é responsável por enviar pela serial (terminal) informações sobre o estado interno do sistema operacional e suas tarefas, ela possui um formato semelhante ao da <code>task_led</code> porém na sua execução (que acontece 2 vez por segundo já que nosso <code>TICK_RATE_HZ</code> é agora <strong>500</strong>) coleta o número de tarefas e suas listas e faz o envio via printf [2].</p>
+<ul>
+<li>[2] : <a href="https://www.freertos.org/a00021.html">https://www.freertos.org/a00021.html</a></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note que a função também está em um laço infinito! Nunca terminando de executar.</p>
+</div>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * \brief This task, when activated, send every ten seconds on debug UART</span>
+<span class="cm"> * the whole report of free heap and total tasks status</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">task_monitor</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="n">portCHAR</span> <span class="n">szList</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+    <span class="n">UNUSED</span><span class="p">(</span><span class="n">pvParameters</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;--- task ## %u&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="p">)</span><span class="n">uxTaskGetNumberOfTasks</span><span class="p">());</span>
+        <span class="n">vTaskList</span><span class="p">((</span><span class="kt">signed</span> <span class="n">portCHAR</span> <span class="o">*</span><span class="p">)</span><span class="n">szList</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="n">szList</span><span class="p">);</span>
+        <span class="n">vTaskDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Essa tarefa produz uma saída como a seguir [3]:</p>
+<div class="codehilite"><pre><span></span>--- task ## 4 Monitor   R   0   77  1
+IDLE          R         0   110 3
+Led           B         0   231 2
+Tmr Svc       B         4   225 4
+</pre></div>
+
+<p>Com a seguinte estrutura :</p>
+<div class="codehilite"><pre><span></span>taskName Status Priority WaterMark Task ID
+</pre></div>
+
+<ul>
+<li>taskName : nome dado a task na sua criação</li>
+<li>
+<p>Status : status da task [3]:</p>
+<ul>
+<li>Suspended</li>
+<li>Ready</li>
+<li>Running</li>
+<li>Blocked</li>
+</ul>
+</li>
+<li>
+<p>[3] : <a href="https://www.freertos.org/RTOS-task-states.html">https://www.freertos.org/RTOS-task-states.html</a></p>
+</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<ul>
+<li>Modifique a task para executar uma vez por segundos</li>
+<li>Programe o uC com essa modificação.</li>
+</ul>
+</div>
+<h3 id="criando-as-tarefas">Criando as tarefas<a class="headerlink" href="#criando-as-tarefas" title="Permanent link">&para;</a></h3>
+<p>Criar uma tarefa é similar ao de inicializar um programa em um sistema operacional, mas no caso devemos indicar para o RTOS quais "funções" irão se comportar como pequenos programas (tarefas). Para isso devemos chamar a função <code>xTaskCreate</code> que possui a seguinte estrutura [4]:</p>
+<ul>
+<li>[4] : <a href="https://docs.aws.amazon.com/freertos/latest/lib-ref/group__x_task_create.html">https://docs.aws.amazon.com/freertos/latest/lib-ref/group__x_task_create.html</a></li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * task. h</span>
+<span class="cm"> *</span>
+<span class="cm"> BaseType_t xTaskCreate(</span>
+<span class="cm">                              TaskFunction_t pvTaskCode,</span>
+<span class="cm">                              const char * const pcName,</span>
+<span class="cm">                              uint16_t usStackDepth,</span>
+<span class="cm">                              void *pvParameters,</span>
+<span class="cm">                              UBaseType_t uxPriority,</span>
+<span class="cm">                              TaskHandle_t *pvCreatedTask</span>
+<span class="cm">                          );</span>
+<span class="cm"> *</span>
+<span class="cm"> * Create a new task and add it to the list of tasks that are ready to run.</span>
+<span class="cm"> *</span>
+<span class="cm"> * xTaskCreate() can only be used to create a task that has unrestricted</span>
+<span class="cm"> * access to the entire microcontroller memory map.  Systems that include MPU</span>
+<span class="cm"> * support can alternatively create an MPU constrained task using</span>
+<span class="cm"> * xTaskCreateRestricted().</span>
+<span class="cm"> *</span>
+<span class="cm">*/</span>
+</pre></div>
+
+<p>A criação das tasks monitor e LED são feitas da seguinte maneira (na função <code>main</code>):</p>
+<div class="codehilite"><pre><span></span>    <span class="n">xTaskCreate</span><span class="p">(</span><span class="n">task_monitor</span><span class="p">,</span> <span class="s">&quot;Monitor&quot;</span><span class="p">,</span> <span class="n">TASK_MONITOR_STACK_SIZE</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>
+                <span class="n">TASK_MONITOR_STACK_PRIORITY</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);;</span>
+
+    <span class="n">xTaskCreate</span><span class="p">(</span><span class="n">task_led</span><span class="p">,</span> <span class="s">&quot;Led&quot;</span><span class="p">,</span> <span class="n">TASK_LED_STACK_SIZE</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>
+                <span class="n">TASK_LED_STACK_PRIORITY</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="p">}</span>
+</pre></div>
+
+<p>O primeiro parâmetro da <code>xTaskCreate</code> é o ponteiro da função que será lidada como uma task. A segunda é o nome dessa tarefa, a terceira é o tamanho da stack que cada task vai possuir, o quarto seria um ponteiro para uma estrutura de dados que poderia ser passada para a task em sua criação, o quinto a sua prioridade e o último é um ponteiro e retorna uma variável que pode ser usada para gerencias a task (deletar, pausar).</p>
+<p>O tamanho da stack da tarefa e sua prioridade estão definidos no próprio <code>main.c</code>:</p>
+<div class="codehilite"><pre><span></span><span class="cp">#define TASK_MONITOR_STACK_SIZE            (2048/sizeof(portSTACK_TYPE))</span>
+<span class="cp">#define TASK_MONITOR_STACK_PRIORITY        (tskIDLE_PRIORITY)</span>
+<span class="cp">#define TASK_LED_STACK_SIZE                (1024/sizeof(portSTACK_TYPE))</span>
+<span class="cp">#define TASK_LED_STACK_PRIORITY            (tskIDLE_PRIORITY)</span>
+</pre></div>
+
+<p>A cada tarefa pode ser atribuída uma prioridade que vai de <strong>0</strong> até <code>configMAX_PRIORITIES - 1</code>, onde <code>configMAX_PRIORITIES</code> está definido no arquivo de configuração <code>FreeRTOSConfig.h</code>, <strong>0 é menor prioridade</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Uma das dúvidas mais comum no uso de RTOS é o quanto de espaço devemos alocar para cada tarefa, e essa é uma pergunta que não existe um resposta correta, caso esse valor seja muito grande podemos estar alocando um espaço extra que nunca será utilizado e caso pequena, podemos ter um stack overflow e o firmware parar de funcionar. </p>
+<p>A melhor solução é a de executar o programa e analisar o consumo da stack pelas tasks ao longo de sua execução, tendo assim maiores parâmetros para a sua configuração.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<p>Modifique a prioridade da Task Led para prioridade máxima do FreeRTOS. </p>
+</div>
+<h3 id="power-save-mode">Power Save mode ?<a class="headerlink" href="#power-save-mode" title="Permanent link">&para;</a></h3>
+<p>Uma forma muito simples de conseguirmos diminuir o consumo energético de um sistema embarcado com RTOS é o de ativar os modos de baixo consumo energético (powersave/ sleep mode) quando o SO estiver na tarefa <code>idle</code>. A tarefa idle é aquela executada quando nenhuma outra tarefa está em execução. Sempre que essa tarefa idle for chamada a o RTOS irá executar a função a seguir já definida no <code>main.c</code>: </p>
+<div class="codehilite"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * \brief This function is called by FreeRTOS idle task</span>
+<span class="cm"> */</span>
+<span class="k">extern</span> <span class="kt">void</span> <span class="nf">vApplicationIdleHook</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Porém ainda devemos ativar essa funcionalidade no arquivo de configuração, via o define: <code>configUSE_IDLE_HOOK</code>.</p>
+<hr />
+<div class="admonition example">
+<ul>
+<li>No arquivo de configuração <code>FreeRTOSConfig.h</code> modifique :</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="o">+</span> <span class="err">#</span><span class="n">define</span> <span class="n">configUSE_IDLE_HOOK</span>   <span class="mi">1</span>
+</pre></div>
+
+</div>
+<hr />
+<p>Com isso podemos controlar o modo sleep na função <code>vApplicationIdleHook</code>.</p>
+<hr />
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<ul>
+<li>Entre em sleepmode quando em idle</li>
+<li>Dentro da função <code>vApplicationIdleHook</code> chame <code>pmc_sleep(SAM_PM_SMODE_SLEEP_WFI)</code></li>
+</ul>
+</div>
+<hr />
+<p>Note que devemos entrar em um modo de sleep que o timer utilizado pelo tick consiga ainda acordar a CPU executar, caso contrário o RTOS não irá operar corretamente já que o escalonador não será chamado. O timer usado pelo escalonador é o <a href="http://infocenter.arm.com/help/topic/com.arm.doc.dui0552a/Babieigh.html">System Timer, SysTick</a>.</p>
+<h1 id="api-comunicacao-entre-task-irq">API - Comunicação entre task / IRQ<a class="headerlink" href="#api-comunicacao-entre-task-irq" title="Permanent link">&para;</a></h1>
+<p>(30 minutos)</p>
+<p><strong>Objetivo : Comunicar a tarefa do LED para ser executada via a interrupção (callback) do botão da placa .</strong></p>
+<p>Uma das principais vantagens de usar um sistema operacional é o de usar ferramentas de comunicação entre tarefas ou entre ISR e tarefas, em um código baremetal fazemos esse comunicação via variáveis globais (buffers, flags, ...), essa implementação carece de funcionalidades que o RTOS irá suprir, tais como :</p>
+<ul>
+<li>
+<p>Semáforo (semaphore) É como uma flag binária, permitindo ou não a execução de uma task, funciona para sincronização de tarefas ou para exclusão mútua (multual exclusion), sem nenhum tipo de prioridade.</p>
+</li>
+<li>
+<p>Mutex: Similar aos semáforos porém com prioridade de execução (mutex alteram a prioridade da tarefa)</p>
+</li>
+<li>
+<p>MailBox ou Queues: Usado para enviar dados entre tarefas ou entre ISR e Tasks</p>
+</li>
+</ul>
+<p>[5] : <a href="https://www.freertos.org/Embedded-RTOS-Binary-Semaphores.html">https://www.freertos.org/Embedded-RTOS-Binary-Semaphores.html</a></p>
+<h1 id="botao-semaphore">Botão / semaphore<a class="headerlink" href="#botao-semaphore" title="Permanent link">&para;</a></h1>
+<p>Iremos implementar um semáforo para comunicação entre o callback do botão e a tarefa que faz o controle do LED, o callback do botão irá liberar o semáforo para a tarefa do LED executar em um formato: produtor-consumidor.</p>
+<p><img alt="Semáforo" src="../imgs/RTOS/semaforo.png" /></p>
+<p>Inclua o código a seguir no seu projeto (modifique a função <code>task_led</code>)</p>
+<ul>
+<li>Consulta: <a href="https://www.freertos.org/a00124.html">xSemaphoreGiveFromISR</a></li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="cm">/** Semaforo a ser usado pela task led */</span>
+<span class="n">SemaphoreHandle_t</span> <span class="n">xSemaphore</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * callback do botao</span>
+<span class="cm"> * libera semaforo: xSemaphore</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">but_callback</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">BaseType_t</span> <span class="n">xHigherPriorityTaskWoken</span> <span class="o">=</span> <span class="n">pdFALSE</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;but_callback </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">xSemaphoreGiveFromISR</span><span class="p">(</span><span class="n">xSemaphore</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">xHigherPriorityTaskWoken</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;semafaro tx </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Inicializa botao SW0 do kit com interrupcao</span>
+<span class="kt">void</span> <span class="nf">io_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Inicializa clock do periférico PIO responsavel pelo botao</span>
+  <span class="n">pmc_enable_periph_clk</span><span class="p">(</span><span class="n">BUT_PIO_ID</span><span class="p">);</span>
+
+  <span class="c1">// Configura PIO para lidar com o pino do botão como entrada</span>
+  <span class="c1">// com pull-up</span>
+  <span class="n">pio_configure</span><span class="p">(</span><span class="n">BUT_PIO</span><span class="p">,</span> <span class="n">PIO_INPUT</span><span class="p">,</span> <span class="n">BUT_IDX_MASK</span><span class="p">,</span> <span class="n">PIO_PULLUP</span><span class="p">);</span>
+
+  <span class="c1">// Configura interrupção no pino referente ao botao e associa</span>
+  <span class="c1">// função de callback caso uma interrupção for gerada</span>
+  <span class="c1">// a função de callback é a: but_callback()</span>
+  <span class="n">pio_handler_set</span><span class="p">(</span><span class="n">BUT_PIO</span><span class="p">,</span>
+  <span class="n">BUT_PIO_ID</span><span class="p">,</span>
+  <span class="n">BUT_IDX_MASK</span><span class="p">,</span>
+  <span class="n">PIO_IT_FALL_EDGE</span><span class="p">,</span>
+  <span class="n">but_callback</span><span class="p">);</span>
+
+  <span class="c1">// Ativa interrupção</span>
+  <span class="n">pio_enable_interrupt</span><span class="p">(</span><span class="n">BUT_PIO</span><span class="p">,</span> <span class="n">BUT_IDX_MASK</span><span class="p">);</span>
+
+  <span class="c1">// Configura NVIC para receber interrupcoes do PIO do botao</span>
+  <span class="c1">// com prioridade 4 (quanto mais próximo de 0 maior)</span>
+  <span class="n">NVIC_EnableIRQ</span><span class="p">(</span><span class="n">BUT_PIO_ID</span><span class="p">);</span>
+  <span class="n">NVIC_SetPriority</span><span class="p">(</span><span class="n">BUT_PIO_ID</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// Prioridade 4</span>
+<span class="p">}</span>
+
+
+<span class="cm">/**</span>
+<span class="cm"> * \brief This task, when activated, make LED blink at a fixed rate</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">task_led</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="cm">/* We are using the semaphore for synchronisation so we create a binary</span>
+<span class="cm">        semaphore rather than a mutex.  We must make sure that the interrupt</span>
+<span class="cm">        does not attempt to use the semaphore before it is created! */</span>
+    <span class="n">xSemaphore</span> <span class="o">=</span> <span class="n">xSemaphoreCreateBinary</span><span class="p">();</span>
+
+        <span class="cm">/* devemos iniciar a interrupcao no pino somente apos termos alocado</span>
+<span class="cm">           os recursos (no caso semaforo), nessa funcao inicializamos </span>
+<span class="cm">           o botao e seu callback*/</span>
+        <span class="n">io_init</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">xSemaphore</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;falha em criar o semaforo </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span> <span class="n">xSemaphoreTake</span><span class="p">(</span><span class="n">xSemaphore</span><span class="p">,</span> <span class="p">(</span> <span class="n">TickType_t</span> <span class="p">)</span> <span class="mi">500</span><span class="p">)</span> <span class="o">==</span> <span class="n">pdTRUE</span> <span class="p">){</span>
+            <span class="n">LED_Toggle</span><span class="p">(</span><span class="n">LED0</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><strong>Explicação:</strong></p>
+<p>Para implementarmos um semáforo precisamos primeiramente definir uma variável global que será utilizada pelo sistema operacional para definir o endereço desse semáforo (global):</p>
+<div class="codehilite"><pre><span></span><span class="n">SemaphoreHandle_t</span> <span class="n">xSemaphore</span><span class="p">;</span>
+</pre></div>
+
+<p>Devemos antes de usar o semáforo, fazermos sua criação/inicialização :</p>
+<div class="codehilite"><pre><span></span><span class="cm">/* Attempt to create a semaphore. */</span>
+<span class="n">xSemaphore</span> <span class="o">=</span> <span class="n">xSemaphoreCreateBinary</span><span class="p">();</span>
+</pre></div>
+
+<p>Uma vez criado o semáforo podemos esperar a liberação do semáforo via a função:</p>
+<div class="codehilite"><pre><span></span><span class="n">xSemaphoreTake</span><span class="p">(</span><span class="n">xSemaphore</span><span class="p">,</span> <span class="n">Tick</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li>xSemaphore  O semáforo a ser utilizado</li>
+<li>Tick : timeout (em ticks) que a função deve liberar caso o semáforo não chegue. Se passado o valor 0, a função irá bloquear até a chegada do semáforo.</li>
+</ul>
+<p>Para liberarmos o semáforo devemos usar a função de dentro da interrupção/callback:</p>
+<div class="codehilite"><pre><span></span><span class="n">xSemaphoreGiveFromISR</span><span class="p">(...);</span>
+</pre></div>
+
+<hr />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note o ISR no final da função, isso quer dizer que estamos liberando um semáforo de dentro de uma interrupção. Caso a liberação do semáforo não seja de dentro de uma interrupção, basta utilizar a função <code>xSemaphoreGive</code></p>
+<p><img alt="Semáforo" src="../imgs/RTOS/semaforo2.png" /></p>
+</div>
+<h2 id="piscar">Piscar<a class="headerlink" href="#piscar" title="Permanent link">&para;</a></h2>
+<p>Modifique a task e faça o LED piscar 5x antes toda vez que o botão for pressionado, utilizando a função     <br />
+<a href="https://www.freertos.org/a00127.html"><code>vTaskDelay()</code></a>.</p>
+<h1 id="entrega-final">Entrega Final<a class="headerlink" href="#entrega-final" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Usando a placa externa OLED faça com que cada LED pisque em uma frequência pré determinada por um determinado tempo. A entrega final deve possuir :</li>
+<li>Uma task para cada LED</li>
+<li>Um callback para cada botão</li>
+<li>Um semáforo para cada botão</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../Lab-5-ADC/" title="Lab 5 - ADC" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Lab 5 - ADC
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
