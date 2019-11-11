@@ -12,7 +12,7 @@ A entrega final deverá ser um sistema embarcado que via a adição de um [`buzz
 1. mudar de música
 2. parar / iniciar a música.
 
-!!! note
+!!! note "Entrega"
      Entrega:
      
     - Pode ser feito em dupla (não pode trio!!)

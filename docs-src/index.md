@@ -4,6 +4,8 @@ Disciplina do Quinto Semestre Engenharia de Computação [Insper](https://www.in
 
 Prof. Rafael Corsi / rafael.corsi@insper.edu.br
 
+Marco Mello
+
 ## OBJETIVOS:
 
 Ao final da disciplina o estudante será capaz de:
