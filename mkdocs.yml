@@ -1,4 +1,4 @@
-site_name: Embarcados Avançados
+site_name: 5s - Computação Embarcada
 theme:
   feature:
     tabs: true
@@ -36,7 +36,9 @@ nav:
         - 'Dicas': 'APS-2-Interface-Dicas.md'
 - Avaliações:
     - 'AV0 Simulado': 'AV-0-Simulado.md'
-    - 'AV0 Pratica': 'AV-0.md'
+    - 'AV0 Prática': 'AV-0.md'
+    - 'AV1 Simulado': 'AV-1-Simulado.md'
+    - 'AV1 Prática': 'AV-1.md'
 - Labs:
     - 'Lab 1 - IOs':
         - 'Teoria': 'Lab-1-IOs-Teoria.md'
@@ -52,6 +54,7 @@ nav:
         - 'Perguntas': 'Lab-3-PIO-IRQ-Perguntas.md'
     - 'Lab 4 - TC e RTC': 'Lab-4-TickTack-Lab.md'
     - 'Lab 5 - ADC': 'Lab-5-ADC.md'
+    - 'Lab 6 - RTOS': 'Lab-6-RTOS.md'
 
 # Extensions
 markdown_extensions:
