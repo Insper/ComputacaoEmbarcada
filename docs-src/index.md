@@ -2,9 +2,9 @@
 
 Disciplina do Quinto Semestre Engenharia de Computação [Insper](https://www.insper.edu.br/) 
 
-Prof. Rafael Corsi / rafael.corsi@insper.edu.br
-
-Marco Mello
+Prof. Rafael Corsi (contanto: rafael.corsi@insper.edu.br)
+Prof. Eduardo Marossi
+Técnico Marco Mello
 
 ## OBJETIVOS:
 
@@ -27,13 +27,8 @@ Ao final da disciplina o estudante será capaz de:
 - [Projeto 1](Projeto-1-Descrição)
     - [🎮 Controle](Projeto-1-Controle)
     - [🏧 Vending Machine](Projeto-1-Vending-Machine)
+- Projeto 2: Livre!
 
-## Avaliações
-
-- [AV1-Quiz](AV1-Quiz) / [AV1-Prática](AV1-Pratica)
-- [AV2-Quiz](AV2-Quiz) / [AV2-Prática](AV2-Pratica)
-    - [Tela branca e outras coisinhas](AV2-Dicas)
-    
 ## APS
 
 - [APS 1 - Musical ](APS-1-Musical)
@@ -43,6 +38,13 @@ Ao final da disciplina o estudante será capaz de:
 - [APS 3 - IoT](APS-3-IoT)
     - [WINC1500](APS-3-WINC-1500)
 - [APS 4 - Sensor](APS-4-Sensor)
+
+## Avaliações
+
+- [AV1-Quiz](AV1-Quiz) / [AV1-Prática](AV1-Pratica)
+- [AV2-Quiz](AV2-Quiz) / [AV2-Prática](AV2-Pratica)
+    - [Tela branca e outras coisinhas](AV2-Dicas)
+- AV3-Prática
 
 ## Labs
 
