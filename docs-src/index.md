@@ -10,7 +10,6 @@
     - **Prof. Rafael Corsi** / rafael.corsi@insper.edu.br
     - Prof. Eduardo Marossi
     - Técnico Marco Mello
-
 **© Todos os direitos reservados**
 
 ------------------
@@ -29,7 +28,6 @@ Ao final da disciplina o estudante será capaz de:
 
 Sistemas embarcados movem o mundo!
 
-
 ### Alguns Projetos de 2019
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xfCjqsRxOO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -43,8 +41,6 @@ Sistemas embarcados movem o mundo!
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nDGiS4ESHzE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/cLzB3bGji-c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
 
 ## Começando 
 
