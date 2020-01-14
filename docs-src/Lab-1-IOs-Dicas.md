@@ -1,4 +1,8 @@
-## Passos básicos
+# LAB 1 - PIO - DICAS
+
+Nesse laboratório iremos aprender como controlar e ler um pino digital do SAME70.
+
+## Passos
 
 1. Definir a direção do pino e propriedades
     - Entrada/ Saída

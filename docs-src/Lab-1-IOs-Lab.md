@@ -1,4 +1,6 @@
-O objetivo final desse laboratório é o de aprendermos a controlar de forma elementar os pinos digitais do microcontrolador a fim de podermos acionar saídas (LEDs/ Buzzers/ motores) e lermos entradas (botões/ ...) digitais simples.
+# LAB 1 - PIO
+
+Ao final desse laboratório você deve ser capaz de controlar pinos digitais do microcontrolador a fim de podermos acionar saídas (LEDs/ Buzzers/ motores) e lermos entradas (botões/ sensores/ ...).
 
 ## Entrega
 
@@ -11,15 +13,11 @@ O objetivo final desse laboratório é o de aprendermos a controlar de forma ele
     - [ ] A leitura de um botão (entrada)
     - [ ] LED acionado pelo botão
 - APS:
-    - [ ] Um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony)
+    - [ ] Já da para começar a primeira APS! Um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony)
 
-!!! note
-    A entrega FINAL pode ser feita em dupla, a de aula deve ser individual.
+## Laboratório
 
-# Laboratório
-
-Nessa aula iremos utilizar um projeto de referência [`SAME70-examples/SAME70-Clear`](https://github.com/Insper/SAME70-examples/tree/master/SAME70-Clear) que foi criado para ser o mais “clean” possível, inclusive, faltando algumas bibliotecas (ASF) básicas para a compilação. Para executarmos esse lab, seguiremos os seguintes passos:
-
+Nesse lab iremos utilizar um projeto de referência [`SAME70-examples/SAME70-Clear`](https://github.com/Insper/SAME70-examples/tree/master/SAME70-Clear) que foi criado para ser o mais “limpo” possível, inclusive, faltando algumas bibliotecas (ASF) básicas para a compilação. Para executarmos esse lab, seguiremos os seguintes passos:
 
 Parte 1: 
   1. Inserir drivers no projeto (ASF)
@@ -31,11 +29,11 @@ Parte 2:
   1. Configurar o PIO para controlar o pino do botão em modo entrada
   1. Ler o botão e agir sobre o LED
   
-## Inicializando/ ASF
+## Inicializando/ configurando o ASF
 
 Copie o projeto [`SAME70-examples/SAME70-Clear`](https://github.com/Insper/SAME70-examples/tree/master/SAME70-Clear) para seu repositório na pasta correta e abra o projeto no `AtmelStudio` verificando o conteúdo do arquivo `main.c` o mesmo deve estar praticamente vazio salvo comentários, inclusão do arquivo `asf.h` e duas função `init` e `main`:
 
-``` c
+```c
 #include "asf.h"
 
 // CÓDIGO OMITIDO 
@@ -65,14 +63,18 @@ int main(void)
 }
 ```
 
-O arquivo do tipo header `asf.h` é criado e atualizado dinamicamente pelo AtmelStudio e contém os frameworks/drivers inseridos no projeto. O [Atmel Software Framework (ASF)](http://asf.atmel.com/docs/latest/) é uma camada de abstração do acesso ao hardware, possibilitando que configuremos partes específicas do uC em um nível de abstração intermediário.
+O arquivo do tipo header `asf.h` é criado e atualizado dinamicamente pelo AtmelStudio e contém os frameworks/drivers inseridos no projeto. O [Advanced Software Framework (ASF)](http://asf.atmel.com/docs/latest/) é uma camada de abstração do acesso ao hardware, possibilitando que configuremos partes específicas do uC em um nível de abstração intermediário.
 
 ![](imgs/IOs/ASF.png)
 
+!!! note
+    Pense no ASF como uma biblioteca de códigos, que vai nos ajudar a programar o uC. Nela podemos encontrar
+    drivers para os diversos periféricos e também softwares para rede, gerenciamento de arquivos ... .
+
 A função `init` será utilizada para inserirmos códigos que farão a inicialização do uC e configuração correta dos periféricos e pinos. Já a função `main` é a primeira função a ser executada no uC (devido a linguagem C) e será a orquestradora de todo o sistema, como ilustrado a seguir:
 
-```
-main.c 
+``` c
+/** File: main.c  **/
   main(){
     // inicializacão
     init(){
@@ -86,11 +88,12 @@ main.c
   }
 ```
 
-## Incluindo dependências no ASF
+### Incluindo dependências no ASF
 
-- Existe uma etapa do projeto que é definir o que será necessário, e então incluir as dependências. Como esse é o primeiro lab de vocês já estamos dando o que será necessário inserir.
+!!! info
+    Existe uma etapa do projeto que é definir o que será necessário, e então incluir as dependências. Como esse é o primeiro lab de vocês já estamos dando o que será necessário inserir.
 
-No AtmelStudio abra o ASF Wizard clicando na barra superior em: `ASF -> ASF Wizard`. Após um tempo (sim demora para abrir) uma janela contendo: a esquerda uma lista dos possíveis drivers que podem ser utilizados para o microcontrolador escolhido e na coluna da direita os drivers/bibliotecas já inseridas na solução.
+No AtmelStudio abra o **ASF Wizard** clicando na barra superior em: `ASF` :arrow_right: `ASF Wizard`. Após um tempo (sim demora para abrir) uma janela contendo: a esquerda uma lista dos possíveis drivers que podem ser utilizados para o microcontrolador escolhido e na coluna da direita os drivers/bibliotecas já inseridas na solução.
 
 As seguintes bibliotecas já estão selecionadas e incluídas no projeto:
 
@@ -116,7 +119,6 @@ Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse proj
 
 ??? info "Para adicionar ou remover bibliotecas da solução utilize a barra inferior:"
     ![](imgs/IOs/asf-result.png)
-
 
 !!! tip  ""
      Ao final clique em APPLY para salvar as alterações.
@@ -144,21 +146,21 @@ Já a linha [`WDT->WDT_MR = WDT_MR_MDDIS`](https://pt.scribd.com/document/398420
 
 
 !!! info 
-    WatchDog Timer como o próprio nome diz é um cão de guarda do microcontrolador. Ele é  responsável por verificar se o código está 'travado** em alguma parte, causando o reset forçado do uC.
+    WatchDog Timer como o próprio nome diz é um cão de guarda do microcontrolador. Ele é  responsável por verificar se o código está 'travado' em alguma parte, causando o reset forçado do uC.
 
     ![](imgs/IOs/WDT-datasheet.png) 
 
-##  Configurando um pino como saída
+###  Configurando um pino como saída
 
 Para configurarmos um pino como saída será necessário seguirmos os passos a seguir:
 
 1. Identificar o pino a ser controlado (extrair dados do manual/ placa/ projeto)
 1. Exportar para o código informações do pino
-1. Ativar o periférico (PIO) responsável pelo pino
+1. Ativar/Energizar o periférico (PIO) responsável pelo pino 
 1. Configurar o PIO para controlar o pino como saída
 1. Controlar o pino (high/low).
 
-### Dados do pino
+#### Dados do pino
 
 Antes de configurarmos um pino como entrada (botão) ou saída (LED) é necessário descobrimos qual pino iremos controlar, para isso devemos verificar o manual da placa ([`manuais/SAME70-XPLD.pdf`](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70-XPLD.pdf)) para saber quais pinos possuímos disponíveis para uso. No caso da nossa placa, possuímos um pino conectado a um botão e outro pino conectado ao LED (já vieram montados na placa).
 
@@ -166,43 +168,47 @@ Antes de configurarmos um pino como entrada (botão) ou saída (LED) é necessá
 
 Todos os pinos digitais desse microcontrolador (em outros uC pode ser diferente) são conectados ao um periférico chamado de `Parallel Input/Output Controller (PIO)`, esse periférico é responsável por configurar diversas propriedades desses pino, inclusive se será entrada ou saída (configurado individualmente). Cada PIO pode controlar até 32 pinos (depois veremos o porque disso), e cada PINO está conectado a um único PIO. 
 
-Cada PIO possui um nome referenciado por uma letra: PIO**A** ; PIO**B**; PIO**C**;.... E cada pino possui um número único dentro desse PIO, por exemplo `PIOA11` referencia o "pino 11" do "PIOA". Outra notação utilizada no manual é `PA11`, que representa a mesma coisa.
+Cada PIO possui um nome referenciado por uma letra: PIO **A** ; PIO **B**; PIO **C**;.... E cada pino possui um número único dentro desse PIO, por exemplo `PIOA11` referencia o "pino 11" do "PIOA". Outra notação utilizada no manual é `PA11`, que representa a mesma coisa.
 
-
-!!! tip "Responda"
-    Vá até a secção [`4.4.3 LED` do SAME70-XPLD](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=31) leia sobre o LED encontrado no **kit de desenvolvimento** e responda:
+!!! tip "SAME70-XPLD.pdf"
+    A secção [`4.4.3 LED` do SAME70-XPLD](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=31) 
+    descreve como o LED do  **kit de desenvolvimento** foi utilizado na placa, a partir dessa secção 
+    conseguimos responder:
     
-    1. Como o LED é ativado ?
-    1. Se colocarmos 0 no pino conectado ao LED, ele irá acender ou apagar ?
+    1. Qual pino do uC controla o LED
+    1. Se colocarmos 1 (vcc/ ligado) no pino conectado ao LED, ele irá acender ou apagar
 
     ![](imgs/IOs/SAME70-LED.png)
 
-  
 A tabela [Table 4-16 LED Connection](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=32) descreve em qual pino e qual PIO será o responsável pelo controle do LED, podemos a partir do dado (escrito no manual) que o LED foi conectado ao pino **PC8** do microcontrolador extrair as seguintes informações:
 
-!!! info
-    O periférico PIO C (existem nesse uC 5 PIOs, cada um controla até 32 pinos) “pino/bit/índice” 8 é responsável por controlar o Liga/Desliga do LED verde da placa.
+Respondendo as perguntas anteriores:
 
-Conforme sintetizado na tabela a seguir:
+1. O periférico PIO C, 'bit' 8 é responsável por controlar o Liga/Desliga do LED verde da placa.
+1. Que o LED apaga quando o pino é acionado (pino ligado) e acende quando aterrado (pino desligado)
+
+Podemos sintetizar as informações do PIO que controla o pino na tabela a seguir:
 
 | **SAME70-XPLD** | **PIO** | **Index** | **ID_PIO** |
 |-----------------|---------|-----------|------------|
 | LED             | PIOC    |         8 |         12 |
 
+Agora será necessário transcrever essas informações para o nosso código em C, para isso iremos 
+`definir`
 
 !!! example "Modifique `main.c`"
     Iremos incorporar essa informação no nosso código via os `#defines` no começo do `main.c`:
 
-    ```diff
+    ```c
     #include "asf.h"
 
-    + #define LED_PIO           PIOC                  // periferico que controla o LED
-    + #define LED_PIO_ID        12                    // ID do periférico PIOC (controla LED)
-    + #define LED_PIO_IDX       8u                    // ID do LED no PIO
-    + #define LED_PIO_IDX_MASK  (1u << LED_PIO_IDX)   // Mascara para CONTROLARMOS o LED
+    #define LED_PIO           PIOC                  // periferico que controla o LED
+    #define LED_PIO_ID        12                    // ID do periférico PIOC (controla LED)
+    #define LED_PIO_IDX       8u                    // ID do LED no PIO
+    #define LED_PIO_IDX_MASK  (1u << LED_PIO_IDX)   // Mascara para CONTROLARMOS o LED
     ```
 
-??? note "Linguagem C - #defines"
+!!! note "Linguagem C - #defines"
     [defines em C](https://www.techonthenet.com/c_language/constants/create_define.php) são macros resolvidos em tempo de compilação 
 
 

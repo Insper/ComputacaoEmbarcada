@@ -1,12 +1,21 @@
 # Bem vindo a disciplina Computação Embarcada
 
-Disciplina do Quinto Semestre Engenharia de Computação [Insper](https://www.insper.edu.br/) 
+![](imgs/lab.jpeg)
 
-Prof. Rafael Corsi / rafael.corsi@insper.edu.br
+- **Curso:** Engenharia Da Computação - Quinto Semestre
+- **Disciplina:** Computação Embarcada [Insper](https://www.insper.edu.br/)
+- **Repositório:** [http:/github.com/Insper/ComputacaoEmbarcada](http:/github.com/Insper/ComputacaoEmbarcada)
+- **Local:** Laboratórios de Arquitetura de Computadores e Informática
+- **Equipe:**
+    - **Prof. Rafael Corsi** / rafael.corsi@insper.edu.br
+    - Prof. Eduardo Marossi
+    - Técnico Marco Mello
 
-Marco Mello
+**© Todos os direitos reservados**
 
-## OBJETIVOS:
+------------------
+
+## Objetivos
 
 Ao final da disciplina o estudante será capaz de:
 
@@ -16,63 +25,29 @@ Ao final da disciplina o estudante será capaz de:
 4.	Compreender as limitações de microcontroladores e seus periféricos;
 5.	Buscar e analisar documentação (datasheet) e extrair informações relevantes.
 
+## Motivação
 
-## Material de Aula
+Sistemas embarcados movem o mundo!
 
-  - [Sobre](Sobre.md)
-      - Objetivos/ Softwares/ Kit de Desenvolvimento
 
-## Projetos
+### Alguns Projetos de 2019
 
-- [Projeto 1](Projeto-1-Descrição)
-    - [🎮 Controle](Projeto-1-Controle)
-    - [🏧 Vending Machine](Projeto-1-Vending-Machine)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xfCjqsRxOO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Avaliações
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Xk86Dx85DUg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-- [AV1-Quiz](AV1-Quiz) / [AV1-Prática](AV1-Pratica)
-- [AV2-Quiz](AV2-Quiz) / [AV2-Prática](AV2-Pratica)
-    - [Tela branca e outras coisinhas](AV2-Dicas)
-    
-## APS
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SbB6z_b_fc8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-- [APS 1 - Musical ](APS-1-Musical)
-    - [Erros comus - feedback](APS-1-Erros)
-- [APS 2 - IHM](APS-2-Interface)
-    - [Dicas](APS-2-Interface-Dicas)
-- [APS 3 - IoT](APS-3-IoT)
-    - [WINC1500](APS-3-WINC-1500)
-- [APS 4 - Sensor](APS-4-Sensor)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3MskQc6xw5s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Labs
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nDGiS4ESHzE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
- - [Introdução](Introducao)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cLzB3bGji-c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-##### LAB 6 - RTOS
-  - [Teoria](freeRTOS)
-  - [Lab](freeRTOS-Lab) 
-  
-##### LAB 5 - ADC
-  - [Lab](ADC-Lab) 
 
-##### LAB 4 - TickTack
-  - [Lab](TickTack-Lab) 
-  - [Perguntas](TickTack-Perguntas)
 
-##### LAB 3 - PIO IRQ
-  - [Teoria](PIO-IRQ)
-  - [Lab](PIO-IRQ-Lab) 
-  - [Perguntas](PIO-IRQ-Perguntas)
+## Começando 
 
-##### LAB 2 - PIO Driver
-  - [Teoria](PIO-Driver-Teoria)
-  - [Lab](PIO-Driver-Lab) 
-
-##### LAB 1 - Digital I/O
-
-  - [Teoria](IOs)
-  - [Lab](IOs-Lab) 
-  - [Perguntas](IOs-Perguntas) 
-  - [Dicas](IOs-Dicas)
+Leia mais sobre o curso e a infra necessária em: [Sobre](Sobre.md)
 
 

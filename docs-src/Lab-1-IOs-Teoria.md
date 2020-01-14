@@ -4,28 +4,47 @@
     - [Renesas - GPIO](https://www.renesas.com/in/en/support/technical-resources/engineer-school/mcu-programming-peripherals-01-gpio.html)
     - [ARM](https://www.arm.com/products/silicon-ip-cpu)
 
-# Periféricos
+## Periféricos
 
 !!! note "Leitura Manual"
-    Utilize o manual encontrado em: [Manuais/SAME70](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70.pdf) para resolução dessa seção.
+    Utilize o manual encontrado em: [Manuais/SAME70](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70.pdf) para mais informações nesse assunto.
 
-Periféricos são hardwares auxiliares encontrados no uC que fornecem 
-funcionalidades extras tais como: gerenciador de energia (SUPC),
-comunicação serial UART (UART), comunicação a dois fios (TWI),
+Periféricos são hardwares auxiliares encontrados no microcontrolador (uC) que fornecem 
+funcionalidades extras tais como: gerenciador de energia (SUPC), 
+comunicação serial UART (UART), comunicação USB/ Ethernet/ Bluetooth ...,
 controlador de saída e entrada paralela (PIO), dentre muitos outros.
 
 Os periféricos são configuráveis via escrita/leitura nos registradores
 do microcontrolador, cada periférico possui um endereço único mapeado em
 memória.
 
-Dois periféricos serão utilizados para que possamos controlar os pinos do uC de forma digital (liga/ desliga), são eles o Power Manager Contoller (PMC) e o Parallel Input Output (PIO). O PMC é o periférico responsável por "gerenciar" a energia dos demais periféricos do uC SAME70 e o PIO é o periférico responsável por controlar um pino digital desse uC. Como ilustrado no diagrama a seguir:
+## Controlando um pino
+
+Vamos imaginar uma aplicação comum de um microcontrolador: controlar um pino digital (Ligado/ Desligado). Esse pino pode estar conectado a um LED. Nosso objetivo é conseguirmos escrever um software que é capaz de colocar energia (VCC/ ligado) no pino, ou desligar o pino (GND/ desligar). Como ilustrado no diagrama a seguir:
+
+![](imgs/IOs/led-uc.png)
+
+Dois periféricos serão utilizados para que possamos controlar os pinos do uC de forma digital (liga/ desliga), 
+são eles o Power Manager Contoller (PMC) e o Parallel Input Output (PIO). 
+O PMC é o periférico responsável por "gerenciar" a energia dos demais periféricos do 
+uC SAME70 e o PIO é o periférico responsável por controlar um pino digital desse uC. 
+Como ilustrado no diagrama a seguir:
 
 ![](imgs/IOs/visao-geral.png)
 
-# Power Manager Contoller  - PMC 
+!!! info
+    Os termos técnicos podem variar entre fabricantes, porém o conceito é o mesmo. Por exemplo,
+    é comum o uso de General Propose I/O (GPIO) no lugar de PIO.
+    
+!!! note
+    Nesse exemplo, a memória do uC está omitida. Ela pode ser considerada como um periférico do uC. Nesse 
+    caso seriam adicionados mais dois periféricos, um para a memória de programa (flash) e outra para a memória
+    de dados (SRAM)
 
-!!! note "Leitura datasheet"
-   Seção 31 do [datasheet SAME70](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70.pdf)
+### Power Manager Contoller  - PMC 
+
+!!! example "Leitura datasheet"
+    Seção 31 do [datasheet SAME70](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70.pdf)
 
 O Power Management Controller (PMC) é um periférico responsável por
 gerenciar a energia e clock dos demais periféricos. Para utilizarmos um
@@ -39,7 +58,7 @@ listados na Tabela: **13.1 do datasheet SAM-E70**.
 
 ![](imgs/IOs/perID.png)
 
-# Parallel Input Output (PIO)  
+### Parallel Input Output (PIO)  
 
 !!! note "Leitura datasheet"
     Secção 32 do datasheet. **Leitura necessária**
@@ -83,7 +102,7 @@ ativar o clock de cada PIO para que o periférico passe a funcionar.
 
 ![](imgs/IOs/PMC-PIOs.png)
 
-## Configurações
+#### Configurações
 
 O PIO suporta as seguintes configurações:
 
@@ -96,7 +115,7 @@ O PIO suporta as seguintes configurações:
 
 Iremos ver para que serve algumas dessas configurações ao longo do curso.
 
-## Funcionalidade
+#### Funcionalidade
 
 O diagrama de blocos do PIO é ilustrado no diagrama de blocos (Block Diagram)
 

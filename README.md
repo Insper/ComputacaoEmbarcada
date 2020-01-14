@@ -1,4 +1,4 @@
-Laboratórios e Materiais de aula (io)
+Laboratórios e Materiais de aula (github.io)
 
 - https://insper.github.io/ComputacaoEmbarcada/
 
