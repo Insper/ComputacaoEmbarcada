@@ -20,28 +20,32 @@ memória.
 
 ## Controlando um pino
 
-Vamos imaginar uma aplicação comum de um microcontrolador: controlar um pino digital (Ligado/ Desligado). Esse pino pode estar conectado a um LED. Nosso objetivo é conseguirmos escrever um software que é capaz de colocar energia (VCC/ ligado) no pino, ou desligar o pino (GND/ desligar). Como ilustrado no diagrama a seguir:
+Vamos imaginar uma aplicação comum de um microcontrolador: controlar um pino digital (Ligado/ Desligado). Esse pino pode estar conectado por exemplo a um LED. Nosso objetivo é conseguirmos escrever um software que seja capaz de colocar energia (VCC/ ligado) no pino, ou desligar o pino (GND/ desligar). Como ilustrado no diagrama a seguir:
 
 ![](imgs/IOs/led-uc.png)
 
-Dois periféricos serão utilizados para que possamos controlar os pinos do uC de forma digital (liga/ desliga), 
-são eles o Power Manager Contoller (PMC) e o Parallel Input Output (PIO). 
+Dois periféricos serão utilizados para que possamos controlar os pinos do uC de forma digital (liga/ desliga),
+são eles o Power Manager Contoller (**PMC**) e o Parallel Input Output (**PIO**). 
 O PMC é o periférico responsável por "gerenciar" a energia dos demais periféricos do 
 uC SAME70 e o PIO é o periférico responsável por controlar um pino digital desse uC. 
-Como ilustrado no diagrama a seguir:
+Como demonstrado a seguir:
 
 ![](imgs/IOs/visao-geral.png)
+
+!!! note
+    Pense nos periféricos como pequenos hardwares auxiliares ao microprocessador, esses periféricos fazem parte
+    do chip.
 
 !!! info
     Os termos técnicos podem variar entre fabricantes, porém o conceito é o mesmo. Por exemplo,
     é comum o uso de General Propose I/O (GPIO) no lugar de PIO.
     
 !!! note
-    Nesse exemplo, a memória do uC está omitida. Ela pode ser considerada como um periférico do uC. Nesse 
+    Nesse exemplo, a memória do uC está omitida, ela pode ser considerada como um periférico do uC. Nesse 
     caso seriam adicionados mais dois periféricos, um para a memória de programa (flash) e outra para a memória
     de dados (SRAM)
 
-### Power Manager Contoller  - PMC 
+### Power Manager Contoller - PMC 
 
 !!! example "Leitura datasheet"
     Seção 31 do [datasheet SAME70](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70.pdf)
@@ -90,8 +94,8 @@ A tabela na página 16 do datasheet (Table 5-1) ilustra quais periféricos
 podem ser associados aos respectivos pinos, a Fig. Mux PIOA mostra as opções para o PIOA0 até
 PIOA9.
 
-O SAME70 possui internamente 5 PIOs: PIO**A**, PIO**B**, PIO**C**, 
-PIO**D** e PIO**E**. Cada um é responsável por gerenciar até 32 pinos.
+O SAME70 possui internamente 5 PIOs: PIO **A**, PIO **B**, PIO **C**, 
+PIO **D** e PIO **E**. Cada um é responsável por gerenciar até 32 pinos.
 
 Os I/Os são classificados por sua vez em grandes grupos: A, B,C …. (exe:
 PA01, PB22, PC12) e cada grupo é controlado por um PIO (PIOA, PIOB,

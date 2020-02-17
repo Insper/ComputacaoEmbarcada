@@ -19,6 +19,9 @@ repo_name: 'Insper/ComputacaoEmbarcada'
 repo_url: 'https://github.com/insper/ComputacaoEmbarcada'
 edit_uri: 'https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/'
 
+# Copyright
+copyright: 'Copyright &copy; Rafael Corsi @ insper'
+
 nav:
 - Home: index.md
 - Sobre-Curso.md
@@ -30,22 +33,22 @@ nav:
         - 'Lab': 'Lab-1-IOs-Lab.md'
         - 'Dicas': 'Lab-1-IOs-Dicas.md'
         - 'Perguntas': 'Lab-1-IOs-Perguntas.md'
-    - 'Lab 2 - PIO driver':
-        - 'Teoria': 'Lab-2-PIO-Driver-Teoria.md'
-        - 'Lab': 'Lab-2-PIO-Driver-Teoria.md'
-    - 'Lab 3 - PIO IRQ':
-        - 'Teoria': 'Lab-3-PIO-IRQ-Teoria.md'
-        - 'Lab': 'Lab-3-PIO-IRQ-Lab.md'
-        - 'Perguntas': 'Lab-3-PIO-IRQ-Perguntas.md'
-    - 'Lab 4 - TC e RTC': 'Lab-4-TickTack-Lab.md'
-    - 'Lab 5 - ADC': 'Lab-5-ADC.md'
-    - 'Lab 6 - RTOS': 'Lab-6-RTOS.md'
-
+#    - 'Lab 2 - PIO driver':
+#        - 'Teoria': 'Lab-2-PIO-Driver-Teoria.md'
+#        - 'Lab': 'Lab-2-PIO-Driver-Teoria.md'
+#    - 'Lab 3 - PIO IRQ':
+#        - 'Teoria': 'Lab-3-PIO-IRQ-Teoria.md'
+#        - 'Lab': 'Lab-3-PIO-IRQ-Lab.md'
+#        - 'Perguntas': 'Lab-3-PIO-IRQ-Perguntas.md'
+#    - 'Lab 4 - TC e RTC': 'Lab-4-TickTack-Lab.md'
+#    - 'Lab 5 - ADC': 'Lab-5-ADC.md'
+#    - 'Lab 6 - RTOS': 'Lab-6-RTOS.md'
 - Projetos:
     - 'Projeto 1':
         - 'Descrição': 'Projeto-1-Descrição.md'
-        - 'Vending Machine': 'Projeto-1-Vending-Machine.md'
-        - 'Controle': 'Projeto-1-Controle.md'
+        - 'Vending Machine': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-VendingMachine.pdf'
+        - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
+        - 'Handout 1': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Handout%20descricao%20Projeto.pdf'
         - 'Dicas': 'Projeto-1-Dicas.md'
         - 'Projeto-1-Lista.md'
     - 'Projeto 2':
@@ -53,19 +56,30 @@ nav:
         - 'Projeto-2-Lista.md'
 - APS:
     - 'APS 1 - Musical': 'APS-1-Musical.md'
-    - 'APS 2 - Interface':
-        - 'Geral': 'APS-2-Interface.md'
-        - 'Design': 'APS-2-Interface-Design.md'
-        - 'Engenharia': 'APS-2-Interface-Engenharia.md'
-        - 'Dicas': 'APS-2-Interface-Dicas.md'
-- Avaliações:
-    - 'AV0 Simulado': 'AV-0-Simulado.md'
-    - 'AV0 Prática': 'AV-0.md'
-    - 'AV1 Simulado': 'AV-1-Simulado.md'
-    - 'AV1 Prática': 'AV-1.md'
+#    - 'APS 2 - Interface':
+#        - 'Geral': 'APS-2-Interface.md'
+#        - 'Design': 'APS-2-Interface-Design.md'
+#        - 'Engenharia': 'APS-2-Interface-Engenharia.md'
+#        - 'Dicas': 'APS-2-Interface-Dicas.md'
+#- Avaliações:
+#    - 'AV0 Simulado': 'AV-0-Simulado.md'
+#    - 'AV0 Prática': 'AV-0.md'
+#    - 'AV1 Simulado': 'AV-1-Simulado.md'
+#    - 'AV1 Prática': 'AV-1.md'
+- Util:
+    - 'Util-Documentos.md'
+
+#####################################################################
+extra_css:
+  - css/printing.css
+
+extra_javascript:
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+  - 'translate_admonitions.js'
 
 # Extensions
 markdown_extensions:
+  - markdown.extensions.attr_list
   - markdown.extensions.admonition
   - markdown.extensions.codehilite:
       guess_lang: false

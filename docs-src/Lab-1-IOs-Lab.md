@@ -20,18 +20,28 @@ Ao final desse laboratório você deve ser capaz de controlar pinos digitais do 
 Nesse lab iremos utilizar um projeto de referência [`SAME70-examples/SAME70-Clear`](https://github.com/Insper/SAME70-examples/tree/master/SAME70-Clear) que foi criado para ser o mais “limpo” possível, inclusive, faltando algumas bibliotecas (ASF) básicas para a compilação. Para executarmos esse lab, seguiremos os seguintes passos:
 
 Parte 1: 
+  
   1. Inserir drivers no projeto (ASF)
   1. Configurações básicas do uC (clock e WDT)
   1. Configurar PIO para controlar pino do LED em modo saída
   1. Acionar o pino
   
 Parte 2: 
+  
   1. Configurar o PIO para controlar o pino do botão em modo entrada
   1. Ler o botão e agir sobre o LED
   
 ## Inicializando/ configurando o ASF
 
-Copie o projeto [`SAME70-examples/SAME70-Clear`](https://github.com/Insper/SAME70-examples/tree/master/SAME70-Clear) para seu repositório na pasta correta e abra o projeto no `AtmelStudio` verificando o conteúdo do arquivo `main.c` o mesmo deve estar praticamente vazio salvo comentários, inclusão do arquivo `asf.h` e duas função `init` e `main`:
+### Começando
+
+1. Clone o repositório [`SAME70-examples`](https://github.com/Insper/SAME70-examples/) para a sua máquina.
+1. Copie a pasta `SAME70-Clear` para o seu repositório.
+1. Abra o projeto da pasta recém criada no AtmelStudio
+
+### main
+
+Já com o AtmelStudio aberto verifique o conteúdo do arquivo `main.c` o mesmo deve estar praticamente vazio salvo comentários, inclusão do arquivo `asf.h` e duas função `init` e `main`:
 
 ```c
 #include "asf.h"
@@ -76,12 +86,11 @@ A função `init` será utilizada para inserirmos códigos que farão a iniciali
 ``` c
 /** File: main.c  **/
   main(){
-    // inicializacão
-    init(){
-      // inicialização CLK
-      // inicialização PMC
-      // inicialização PIO
-    }
+    // inicialização CLK
+    // inicialização PMC
+    // inicialização PIO
+    init();
+    
     while(1){
       // Lógica
     }
@@ -90,10 +99,10 @@ A função `init` será utilizada para inserirmos códigos que farão a iniciali
 
 ### Incluindo dependências no ASF
 
-!!! info
-    Existe uma etapa do projeto que é definir o que será necessário, e então incluir as dependências. Como esse é o primeiro lab de vocês já estamos dando o que será necessário inserir.
+No AtmelStudio abra o **ASF Wizard** clicando na barra superior em: `ASF` :arrow_right: `ASF Wizard`. Após um tempo (sim demora para abrir) uma janela deve abrir contendo: a esquerda uma lista dos possíveis drivers que podem ser utilizados para o microcontrolador e na coluna da direita os drivers/bibliotecas já inseridas na solução.
 
-No AtmelStudio abra o **ASF Wizard** clicando na barra superior em: `ASF` :arrow_right: `ASF Wizard`. Após um tempo (sim demora para abrir) uma janela contendo: a esquerda uma lista dos possíveis drivers que podem ser utilizados para o microcontrolador escolhido e na coluna da direita os drivers/bibliotecas já inseridas na solução.
+!!! info
+    No AtmelStudio um projeto contém uma cópia dos códigos das bibliotecas utilizadas, se você editar essa cópia novos projetos não serão impactados.
 
 As seguintes bibliotecas já estão selecionadas e incluídas no projeto:
 
@@ -103,6 +112,9 @@ As seguintes bibliotecas já estão selecionadas e incluídas no projeto:
     - funções para controle do clock do uC
     
 Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse projeto:
+
+!!! example "Execute"
+    Você deve inserir as bibliotecas a seguir no projeto!
 
 - **GPIO - General purpose Input/OutPut (service)**
     - funções para configuração do PIO
@@ -125,7 +137,7 @@ Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse proj
 
 ## Inicialização do uC
 
-Antes da execução de qualquer `firmware` é necessário realizarmos configurações no uC que podem ir de configuração: pino/ inicialização de memória/ configuração de clock/ periféricos de comunicação/ .... No nosso caso iremos começar configurando o clock do uC e desativando o `WatchDog Timer`.
+Antes da execução de qualquer `firmware` é necessário realizarmos configurações no uC que pode variar desde configuração de pino, inicialização de memória, configuração de clock,  periféricos de comunicação/ .... No nosso caso iremos começar configurando o clock do uC e desativando o `WatchDog Timer`.
 
 !!! example "Modifique `main.c`"
     Modifique a função `init()` incluindo as seguintes linhas de código.
@@ -144,9 +156,8 @@ A função `sysclk_init()` é responsável por aplicar as configurações do arq
 
 Já a linha [`WDT->WDT_MR = WDT_MR_MDDIS`](https://pt.scribd.com/document/398420674/SAME70#page=188) faz com que o watchdog do microcontrolador seja desligado.
 
-
 !!! info 
-    WatchDog Timer como o próprio nome diz é um cão de guarda do microcontrolador. Ele é  responsável por verificar se o código está 'travado' em alguma parte, causando o reset forçado do uC.
+    WatchDog Timer como o próprio nome diz é um cão de guarda do microcontrolador. Ele é responsável por verificar se o código está 'travado' em alguma parte, causando o reset forçado do uC.
 
     ![](imgs/IOs/WDT-datasheet.png) 
 
@@ -180,9 +191,7 @@ Cada PIO possui um nome referenciado por uma letra: PIO **A** ; PIO **B**; PIO *
 
     ![](imgs/IOs/SAME70-LED.png)
 
-A tabela [Table 4-16 LED Connection](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=32) descreve em qual pino e qual PIO será o responsável pelo controle do LED, podemos a partir do dado (escrito no manual) que o LED foi conectado ao pino **PC8** do microcontrolador extrair as seguintes informações:
-
-Respondendo as perguntas anteriores:
+A tabela [Table 4-16 LED Connection](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=32) descreve qual o pino e qual PIO o LED do kit foi conectado, podemos a partir dos dados do manual extrair que o LED foi conectado ao pino **PC8** do microcontrolador, isso significa que:
 
 1. O periférico PIO C, 'bit' 8 é responsável por controlar o Liga/Desliga do LED verde da placa.
 1. Que o LED apaga quando o pino é acionado (pino ligado) e acende quando aterrado (pino desligado)
@@ -202,11 +211,14 @@ Agora será necessário transcrever essas informações para o nosso código em 
     ```c
     #include "asf.h"
 
-    #define LED_PIO           PIOC                  // periferico que controla o LED
-    #define LED_PIO_ID        12                    // ID do periférico PIOC (controla LED)
-    #define LED_PIO_IDX       8u                    // ID do LED no PIO
-    #define LED_PIO_IDX_MASK  (1u << LED_PIO_IDX)   // Mascara para CONTROLARMOS o LED
+    #define LED_PIO           PIOC                 // periferico que controla o LED
+    #define LED_PIO_ID        ???                  // ID do periférico PIOC (controla LED) 
+    #define LED_PIO_IDX       8                    // ID do LED no PIO
+    #define LED_PIO_IDX_MASK  (1 << LED_PIO_IDX)   // Mascara para CONTROLARMOS o LED
     ```
+    
+!!! warning
+    Note que o `LED_PIO_ID` está incompleto (???), vamos preencher na sequência.
 
 !!! note "Linguagem C - #defines"
     [defines em C](https://www.techonthenet.com/c_language/constants/create_define.php) são macros resolvidos em tempo de compilação 
@@ -225,16 +237,21 @@ Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datashee
 
 ![](imgs/IOs/ID.png)
 
-:exclamation: Note pela tabela que o **PIOC** (aquele que irá controlar o LED) possui ID 12, como já inserido nos #defines do nosso `main.c`:
+:exclamation: Note pela tabela que o **PIOC** (aquele que irá controlar o LED) possui ID 12, agora precisamos transpor isso para o nosso código! Vamos editar a linha do nosso `main.c` que possuia o **???**:
 
-```c
-#define LED_PIO_ID  12  // ID do periférico PIOC (controla LED)
-```
+!!! example "Modifique `main.c`"
+    Insira o valor `12` no lugar do **???** no define `LED_PIO_ID`
+    
+    ```c
+    #define LED_PIO_ID  12  // ID do periférico PIOC (controla LED)
+    ```
+
+#### `init()`
 
 O PMC possui diversas funções, estamos agora interessado naquela que ativa um periférico para podermos usar. Essa função é a [`pmc_enable_periph_clk(uint32_t ul_id)`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pmc__group.html#gad09de55bb493f4ebdd92305f24f27d62) que recebe como parâmetro o ID do periférico que queremos ativar. 
 
-!!! example "Modifique `main.c`"
-    Insira o seguinte trecho de código na nossa função de inicialização (`init()`) logo após desativarmos o WDT:
+!!! example "Modifique `init()`"
+    Insira o seguinte trecho de código na nossa função de inicialização (`init()`) logo após desativarmos o `WDT`:
 
     ```c
     // Ativa o PIO na qual o LED foi conectado
@@ -243,14 +260,13 @@ O PMC possui diversas funções, estamos agora interessado naquela que ativa um 
     ```
 
 !!! note ""
-    note que estamos usando o define: `LED_PIO_ID` que foi inserindo no código por vocês.
+    note que estamos usando o define: `LED_PIO_ID` que foi inserindo no código por vocês. 
 
 ### Configurando o PIOC
 
 Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será necessário indicarmos ao PIO. Para isso, usaremos a seguinte função [`pio_set_output(...)`]((http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html)), definida no [`ASF do SAME70`](http://asf.atmel.com/docs/latest/same70/html/).
 
-
-!!! example "Modifique"
+!!! example "Modifique `init()`"
     Inseria a seguinte chamada de função na inicialização. Isso configura o PIOC para tratar o bit 8 (index 8) como saída.
 
     ```c
@@ -260,7 +276,8 @@ Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será
     
     Essa função configura o **index 8** (LED_PIO_IDX) do **PIOC** como sendo saída inicializada em '0', sem [multidrive](https://embeddedartistry.com/blog/2018/6/4/demystifying-microcontroller-gpio-settings) e sem [resistor de pull-up](https://en.wikipedia.org/wiki/Pull-up_resistor).
 
-Note que temos que usar o `LED_PIO_IDX_MASK` nesse caso, em em praticamente todos os outros. Veremos o porque disso no próximo laboratório.
+!!! note
+     Note que a função recebe como parâmetro o PIO que ela ira editar e a máscara `LED_PIO_IDX_MASK`, isso será similar nas demais funções utilizadas. Veremos o porque disso no próximo laboratório.
 
 A função [`pio_set_output()`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#gaf3727cdc71e8b6c88a4069a90b72a78d) possui os seguintes parâmetros:
 
@@ -282,8 +299,8 @@ Sendo:
 - **ul_pull_up_enable**	    Indicates if the pin shall have its pull-up activated. 
 
 
-!!! example "Modifique"
-    Após todas as etapas anteriores sua função `init()` deve ficar como a seguir:
+!!! tip 
+    Após todas as etapas anteriores sua função `init()` deve ter ficado como a seguir:
 
     ```c
     // Função de inicialização do uC
@@ -320,7 +337,7 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
     - [pio_clear](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#ga4857b3d94c0517d54eeff7da85af2518)
 
 
-!!! example "Modifique"
+!!! example "Modifique `main()`"
     Modifique a função `main` para fazermos o LED piscar interruptamente (1 -> delay 200 ms -> 0 -> delay 200 ms -> ....):
 
     ```c
@@ -335,13 +352,18 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
       while (1)
       {
         pio_set(PIOC, LED_PIO_IDX_MASK);      // Coloca 1 no pino LED
-        delay_ms(200);                   // Delay por software de 200 ms
+        delay_ms(200);                        // Delay por software de 200 ms
         pio_clear(PIOC, LED_PIO_IDX_MASK);    // Coloca 0 no pino do LED
-        delay_ms(200);                   // Delay por software de 200 ms
+        delay_ms(200);                        // Delay por software de 200 ms
       }
       return 0;
     }
     ```
+    
+!!! example "Programe e teste"
+     1. Programe o uC
+     1. Verifique o resultado esperado
+     1. Brinque com os valores da função `delay_ms` 
 
 ??? note "Analogia ao Arduino"
 
@@ -417,47 +439,62 @@ Agora precisamos fazer a ponte entre o mundo externo e o firmware que será exec
     #define BUT_PIO_IDX 
     #define BUT_PIO_IDX_MASK (1u << BUT_PIO_IDX)
     ```
-    
-### Ativando o clock do PIO
+### init()
 
-  Com os defines "definidos" podemos ativar o clock do **PIO** que gerencia o pino, para isso insira na função de inicialização `init()` após a inicialização do LED.
+Agora é necessário: 
 
-!!! example "Modifique"
+1. Ativarmos o PIO no PMC
+1. Configurarmos o novo pino como entrada
+1. Ativamos PULL-UP no pino 
+
+
+#### PMC PIO
+
+Com os defines "definidos" podemos ativar o clock do **PIO** que gerencia o pino, para isso insira na função de inicialização `init()` após a inicialização do LED.
+
+!!! example "Modifique `init`"
     Modifique a função `init()` inserindo a inicialização do novo PIO:
 
     ```c
     // Inicializa PIO do botao
-    pmc_enable_periph_clk(BUT_PIO_ID);
+    pmc_enable_periph_clk(ARG0);
     ```
+    
+    :exclamation: Você deve substituir `ARG0` pelo valor correto!!
 
-### Configurando o pino como Input
+#### Configurando o pino como Input
 
 Agora é necessário configurarmos o `BUT_PIO` para gerenciar o `BUT_PIO_IDX` como uma entrada, para isso usaremos a função `pio_set_input()` definida na biblioteca da ASF:
 
 ```c
 // configura pino ligado ao botão como entrada com um pull-up.
-pio_set_input(XXXXX,YYYYY,ZZZZZ);
+pio_set_input(ARG0, ARG1, ARG2);
 ```
 
 !!! tip "Leia"
     Descrição da função: [`pio_set_input()`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#ga2908ec92df470e6520c6f5c38211ca0b)
-
-
-
+ 
 !!! tip "ul_attribute"
     - Dica: no `ul_attribute` utilize o seguinte define: **PIO_DEFAULT**. 
-    
+
+!!! example "init()"
+    :exclamation: Você deve fazer a seguinte chamada de função, substituindo os argumentos pelos valores corretos.
+
     ```c
-    pio_set_input(XXXXX,YYYYY,PIO_DEFAULT);
+    pio_set_input(ARG0, ARG1, PIO_DEFAULT);
     ```
+  
 #### PULL-UP
 
 Para esse pino funcionar é necessário que ativemos o `pull-up` nele. `Pull-up` é um resistor alimentando para `VCC`, ele faz com que o valor padrão do pino seja o energizado.
 
 Para ativarmos o `pull-up` basta chamar a função: [`pio_pull_up()`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#gaa9aa20867544ff93c6527b799b3dfcec), detalhada na documentação do ASF.
 
-!!! tip "Professor"
-    Peça explicação ao Professor!
+!!! example "Modifique: `init()`"
+    Você deve fazer uso da função `pio_pull_up()` na função `init()` 
+
+!!! alert "TODO"
+    INSERIR VÍDEO SOBRE PULLUP 
 
 ### Lendo o botão
 
@@ -468,8 +505,8 @@ Para lermos um valor de um pino, que foi configurado como entrada devemos utiliz
     - Procure pela função `pio_get()` na documentação do [ASF PIO](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html)
     - Utilize [`PIO_INPUT`](http://asf.atmel.com/docs/latest/same70/html/pio_8h.html#a3fec53808ef45d162a52443324c82773) no parâmetro `ul_type` da função. A função `pio_get` pode ler tanto uma entrada quanto uma saída (ai teria que usar `PIO__OUTPUT_0` no `ul_type`). 
 
-
-> No próximo lab vamos entender como essas funções funcionam!
+!!! example "Modifique: `loop()`"
+    Você deve fazer uso da função `pio_get()` na função `main()` para ler o valor de um pino.
 
 ### Implementando a lógica
 
