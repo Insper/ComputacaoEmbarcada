@@ -1,4 +1,27 @@
-# Anos anteriores
+# Lista de projetos
+
+## 2020
+
+|  **Tipo** | **Nome** | **Descrição** |  |  |  |
+| --- | --- | --- | --- | --- | --- |
+|  Controle | BoomBox | Controle de Som | GABRIEL ZANETTI TRAUMULLER KAWALL | HENRY FURQUIM ROCHA | MATHEUS PELLIZZON |
+|  Controle | Control Craft | Controle do minecraft com sensor de batida | JOSÉ HÉLIO PAIVA NETO | LUCAS LEAL VALE | RAFAEL ALVES DE MELLO ALMADA |
+|  Controle | Controle Pausa para Pipoca (PPP) |  | EVANDRO FONTANA ROMEIRO | MICHEL JOSÉ HANOCH VIEIRA DE MORAES |  |
+|  Controle | ContRos | Controle do robô de robôtica | ROGER RIBEIRO FAVA PINA | SAMUEL NAASSOM DO NASCIMENTO PORTO |  |
+|  Controle | Dance Mat | Tapete de dança | BEATRIZ MIE KOTSUBO KUWABARA | GABRIELA IANNINI CARUSO | LUIZA RODRIGUES SILVEIRA |
+|  Controle | HandShooter | Controle jogo tiro, que parece uma luva | ANDRÉ ELIMELEK DE WEBER | GUILHERME TEIXEIRA BATISTA | GUSTAVO BELTRÃO BRAGA |
+|  Controle | Joystick Invisible | Controle de jogo com 2 luvas | JOÃO PEDRO MONTEFELTRO JUNQUEIRA MEIRELLES | PEDRO VERO FONTES | RAFAEL DOS SANTOS |
+|  Controle | One Hand Controller | Controle para megaman | ABEL CAVALCANTE DE ANDRADE NETO | RODRIGO DE JESUS OLIVEIRA JUNIOR |  |
+|  Controle | PC Control | Macros para executar no PC | BRUNO SIGNORELLI DOMINGUES | GABRIEL MAGALHÃES DUARTE | THOMAS DE QUEIROZ BARROS SCHNEIDER |
+|  Controle | SPOTIFAR | Controle Spotify | MANUELA CASTILLA RUSSO CORREA | THIAGO VERARDO COSTA DOS SANTOS | VITOR CALCETE MARQUES |
+|  Controle | TraderScan | Controle que mostra dados da bolsa de valores | CAIO HORSCHUTZ FAUZA | LUIZ VITOR GERMANOS TEIXEIRA | PEDRO PAULO MENDONÇA TELHO |
+|  Controle | UmDrone | Controle para drones - ROS | GABRIEL FRIGO ZEZZE | PEDRO LUIZ DA COSTA BRAGA | VITOR GRANDO ELLER |
+|  Controle | YouControl | Controle para youtube | ERIC FERNANDO OTOFUJI ABRANTES | JOÃO VICTOR RODRIGUES SILVA |  |
+|  Vending Machine | 4Tune | Roleta de m&m | GIOVANNA SARDELLA CABRAL | LUCAS MUCHALUAT MOREIRA | MAYRA PETER DA ROCHA LOURES |
+|  Vending Machine | Camisinhas?? | Máquina de venda de camisinhas | MATHEUS PELLIZZON | PEDRO TEÓFILO RAMOS |  |
+|  Vending Machine | Coffe? | Venda de cápsulas de nespresso | EMANUELLE SILVA MOÇO | LEONARDO MENDES DE MORAES | PEDRO HENRIQUE CARVALHO DAHER |
+|  Vending Machine | Quick Dray | Venda de refil de cigarros eletrônicos | GABRIEL NOAL OLIVA | GUSTAVO MOLINA FRENEDA BENITES |  |
+
 
 ## 2019
 

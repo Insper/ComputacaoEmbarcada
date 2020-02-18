@@ -113,7 +113,7 @@ As seguintes bibliotecas já estão selecionadas e incluídas no projeto:
     
 Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse projeto:
 
-!!! example "Execute"
+!!! example "Tarefa"
     Você deve inserir as bibliotecas a seguir no projeto!
 
 - **GPIO - General purpose Input/OutPut (service)**
@@ -139,7 +139,7 @@ Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse proj
 
 Antes da execução de qualquer `firmware` é necessário realizarmos configurações no uC que pode variar desde configuração de pino, inicialização de memória, configuração de clock,  periféricos de comunicação/ .... No nosso caso iremos começar configurando o clock do uC e desativando o `WatchDog Timer`.
 
-!!! example "Modifique `main.c`"
+!!! example "Tarefa: Modifique `main.c`"
     Modifique a função `init()` incluindo as seguintes linhas de código.
     ```c
     // Função de inicialização do uC
@@ -205,7 +205,7 @@ Podemos sintetizar as informações do PIO que controla o pino na tabela a segui
 Agora será necessário transcrever essas informações para o nosso código em C, para isso iremos 
 `definir`
 
-!!! example "Modifique `main.c`"
+!!! example "Tarefa: Modifique `main.c`"
     Iremos incorporar essa informação no nosso código via os `#defines` no começo do `main.c`:
 
     ```c
@@ -239,7 +239,7 @@ Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datashee
 
 :exclamation: Note pela tabela que o **PIOC** (aquele que irá controlar o LED) possui ID 12, agora precisamos transpor isso para o nosso código! Vamos editar a linha do nosso `main.c` que possuia o **???**:
 
-!!! example "Modifique `main.c`"
+!!! example "Tarefa: Modifique `main.c`"
     Insira o valor `12` no lugar do **???** no define `LED_PIO_ID`
     
     ```c
@@ -266,7 +266,7 @@ O PMC possui diversas funções, estamos agora interessado naquela que ativa um 
 
 Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será necessário indicarmos ao PIO. Para isso, usaremos a seguinte função [`pio_set_output(...)`]((http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html)), definida no [`ASF do SAME70`](http://asf.atmel.com/docs/latest/same70/html/).
 
-!!! example "Modifique `init()`"
+!!! example "Tarefa: Modifique `init()`"
     Inseria a seguinte chamada de função na inicialização. Isso configura o PIOC para tratar o bit 8 (index 8) como saída.
 
     ```c
@@ -337,7 +337,7 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
     - [pio_clear](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#ga4857b3d94c0517d54eeff7da85af2518)
 
 
-!!! example "Modifique `main()`"
+!!! example "Tarefa: Modifique `main()`"
     Modifique a função `main` para fazermos o LED piscar interruptamente (1 -> delay 200 ms -> 0 -> delay 200 ms -> ....):
 
     ```c
@@ -360,7 +360,7 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
     }
     ```
     
-!!! example "Programe e teste"
+!!! example "Tarefa: Programe e teste"
      1. Programe o uC
      1. Verifique o resultado esperado
      1. Brinque com os valores da função `delay_ms` 
@@ -429,7 +429,7 @@ Utilizando o manual do kit de desenvolvimento ([SAME70-XPLD.pdf](https://github.
 
 Agora precisamos fazer a ponte entre o mundo externo e o firmware que será executado no microcontrolador, pela tabela anterior insira e complete os defines a seguir no `main.c` (perto dos defines do LED).
 
-!!! example "Modifique"
+!!! example "Tarefa: Modifique"
     Com a tabela preenchida, defina e inicialize novos defines para lidarmos com o botão, da mesma maneira que foi feito o LED:
 
     ```c
@@ -452,15 +452,13 @@ Agora é necessário:
 
 Com os defines "definidos" podemos ativar o clock do **PIO** que gerencia o pino, para isso insira na função de inicialização `init()` após a inicialização do LED.
 
-!!! example "Modifique `init`"
+!!! example "Tarefa: Modifique `init`"
     Modifique a função `init()` inserindo a inicialização do novo PIO:
 
     ```c
     // Inicializa PIO do botao
-    pmc_enable_periph_clk(ARG0);
+    pmc_enable_periph_clk(BUT_PIO);
     ```
-    
-    :exclamation: Você deve substituir `ARG0` pelo valor correto!!
 
 #### Configurando o pino como Input
 
@@ -475,7 +473,7 @@ pio_set_input(ARG0, ARG1, ARG2);
     Descrição da função: [`pio_set_input()`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#ga2908ec92df470e6520c6f5c38211ca0b)
  
 !!! tip "ul_attribute"
-    - Dica: no `ul_attribute` utilize o seguinte define: **PIO_DEFAULT**. 
+    - Dica: no `ul_attribute` utilize o seguinte define: `PIO_DEFAULT`. 
 
 !!! example "init()"
     :exclamation: Você deve fazer a seguinte chamada de função, substituindo os argumentos pelos valores corretos.
@@ -488,24 +486,21 @@ pio_set_input(ARG0, ARG1, ARG2);
 
 Para esse pino funcionar é necessário que ativemos o `pull-up` nele. `Pull-up` é um resistor alimentando para `VCC`, ele faz com que o valor padrão do pino seja o energizado.
 
-Para ativarmos o `pull-up` basta chamar a função: [`pio_pull_up()`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#gaa9aa20867544ff93c6527b799b3dfcec), detalhada na documentação do ASF.
+Para ativarmos o `pull-up` basta chamar a função: [`pio_pull_up()`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#gaa9aa20867544ff93c6527b799b3dfcec) com os parâmetros correto. A função está detalhada na documentação do ASF.
 
-!!! example "Modifique: `init()`"
+!!! example "Tarefa: Modifique: `init()`"
     Você deve fazer uso da função `pio_pull_up()` na função `init()` 
-
-!!! alert "TODO"
-    INSERIR VÍDEO SOBRE PULLUP 
 
 ### Lendo o botão
 
-Para lermos um valor de um pino, que foi configurado como entrada devemos utilizar alguma das funções fornecidas no ASF de interface com o PIO, procure por ela na documentação:
+Para lermos um valor de um pino, que já foi configurado como entrada, devemos utilizar alguma das funções fornecidas no ASF de interface com o PIO, procure por ela na documentação do PIO.
 
 !!! tip "Dicas"
     
     - Procure pela função `pio_get()` na documentação do [ASF PIO](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html)
     - Utilize [`PIO_INPUT`](http://asf.atmel.com/docs/latest/same70/html/pio_8h.html#a3fec53808ef45d162a52443324c82773) no parâmetro `ul_type` da função. A função `pio_get` pode ler tanto uma entrada quanto uma saída (ai teria que usar `PIO__OUTPUT_0` no `ul_type`). 
 
-!!! example "Modifique: `loop()`"
+!!! example "Tarefa: Modifique: `loop()`"
     Você deve fazer uso da função `pio_get()` na função `main()` para ler o valor de um pino.
 
 ### Implementando a lógica
@@ -517,4 +512,4 @@ Para lermos um valor de um pino, que foi configurado como entrada devemos utiliz
 
 Muito bom! Agora que tal pegar a placa OLED1 (que você recebeu no kit) e usar os LEDs e Botoẽs dela? 
 
-Já da para começar a [APS 1, que é para 15/3](IOs-APS)!
+Já da para começar a [APS 1, que é para 19/3](IOs-APS)!
