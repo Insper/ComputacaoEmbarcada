@@ -330,7 +330,8 @@ uint32_t pio_get(Pio *p_pio, const pio_type_t ul_type,
 {}
 ```
 
-!!! note `ul_type`
+!!! note ul_type
+
     - `PIO_INPUT`: quando for para ler uma `entrada`
     - `PIO_OUTPUT_0`: quando for para ler uma `saida`
 
