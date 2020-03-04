@@ -28,14 +28,12 @@ nav:
 - Sobre-Ferramental.md
 - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
 - Labs:
-    - 'Lab 1 - IOs':
-        - 'Teoria': 'Lab-1-IOs-Teoria.md'
-        - 'Lab': 'Lab-1-IOs-Lab.md'
-        - 'Dicas': 'Lab-1-IOs-Dicas.md'
-        - 'Perguntas': 'Lab-1-IOs-Perguntas.md'
-#    - 'Lab 2 - PIO driver':
-#        - 'Teoria': 'Lab-2-PIO-Driver-Teoria.md'
-#        - 'Lab': 'Lab-2-PIO-Driver-Teoria.md'
+    - 'PIO - Teoria': 'Lab-1-IOs-Teoria.md'
+    - 'PIO - Lab': 'Lab-1-IOs-Lab.md'
+    - 'PIO - Dicas': 'Lab-1-IOs-Dicas.md'
+    - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
+    - 'Lab-2-PIO-Driver-Teoria.md'
+    - 'Lab-2-PIO-Driver-Lab.md'
 #    - 'Lab 3 - PIO IRQ':
 #        - 'Teoria': 'Lab-3-PIO-IRQ-Teoria.md'
 #        - 'Lab': 'Lab-3-PIO-IRQ-Lab.md'

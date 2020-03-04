@@ -457,7 +457,7 @@ Com os defines "definidos" podemos ativar o clock do **PIO** que gerencia o pino
 
     ```c
     // Inicializa PIO do botao
-    pmc_enable_periph_clk(BUT_PIO);
+    pmc_enable_periph_clk(BUT_PIO_ID);
     ```
 
 #### Configurando o pino como Input
@@ -512,4 +512,4 @@ Para lermos um valor de um pino, que já foi configurado como entrada, devemos u
 
 Muito bom! Agora que tal pegar a placa OLED1 (que você recebeu no kit) e usar os LEDs e Botoẽs dela? 
 
-Já da para começar a [APS 1, que é para 19/3](IOs-APS)!
+Já da para começar a [APS 1, que é para 19/3](/ComputacaoEmbarcada/APS-1-Musical/)!

@@ -1,28 +1,28 @@
+# Driver - Lab 
 
-Nessa aula iremos utilizar como projeto referência o LAB-1. Vocês devem fazer uma cópia desse projeto para a pasta `Labs/PIO-Driver`, iremos modificar esse projeto. 
+Nessa aula iremos utilizar como projeto referência o LAB-1. 
 
-## Entrega
+> Sugestão: Vocês devem fazer uma cópia desse projeto para a pasta `Labs/PIO-Driver`, iremos modificar esse projeto. 
+
+## Ao final
 
 O objetivo desse laboratório é o do entendimento das funções utilizadas para configurar o PIO. Como um pino é configurado como saída e entrada? Como o firmware manipula o periférico PIO? Entender o que o PIO é capaz de fazer. Para isso iremos aqui implementar nossas próprias funções de interface com o PIO.
 
-| Pasta             |
-|-------------------|
-| `Labs/PIO-Driver` |
+- Ao final do lab, deverão ter implementado as seguintes funções:
+    - [ ] `_pio_set()`
+    - [ ] `_pio_clear()`
+    - [ ] `_pio_pull_up()`
+    - [ ] `_pio_set_input()`
+    - [ ] `_pio_set_output()`
+    - [ ] `_pio_set_get()`
 
-- Ao final da aula: 
-    - [ ] _pio_set()
-    - [ ] _pio_clear()
-    - [ ] _pio_pull_up()
-    - [ ] _pio_set_input()
-    - [ ] _pio_set_output()
-
-# Lab
+## Driver
 
 Vamos implementar uma série de funções que irão configurar o periférico PIO via a escrita em seu banco de registradores. Para isso será necessário ler o manual do uC mais especificamente a [secção do PIO](https://pt.scribd.com/document/398420674/SAME70?start_page=344).
 
-## _pio_set()
+### _pio_set()
 
-Iremos começar com essa função que é uma das mais simples. Crie uma função no `main.c` com a seguinte estrutura :
+Iremos começar com essa função que é uma das mais simples. Crie uma função no `main.c` com a seguinte estrutura:
 
 ```c
 /**
@@ -39,23 +39,28 @@ void _pio_set(Pio *p_pio, const uint32_t ul_mask)
 }
 ```
 
-Na primeira etapa iremos substituir a função que a Atmel/Microchip já nos disponibiliza por uma criada por nós, em todo lugar no código que você faz o uso da função `pio_set(...)` substitua a chamada por essa recém criada  `_pio_set(...)`.
+Na primeira etapa iremos substituir a função que a Microchip já nos disponibiliza por uma criada por nós, em todo lugar no código que você faz o uso da função `pio_set(...)` substitua a chamada por essa recém criada  `_pio_set(...)`.
+
+!!! example "Tarefa"
+    - Crie a função `_pio_set()`
+    - Substitua a chamada da função `pio_set()` pela `_pio_set()` (em todo o código)
+        - `%s/pio_set/_pio_set/g`
 
 !!! note
-    Lembre que essa funcão serve para acionarmos um pino digital (se ele for saída)
+    Lembre que essa função serve para acionarmos (colocar `1`) em um pino digital quando o mesmo é configurado como output.
 
-Agora será necessário entender como o PIO controla os pinos e o que deve ser feito para que ele atue sobre o pino como desejamos. A parte da secção do manual que fala sobre o PIO e suas saídas/entradas  é a secção 32 do (`manual SAME70`), vamos analisar:
+Agora será necessário entender como o PIO controla os pinos e o que deve ser feito para que ele atue sobre o pino como desejamos. A parte da secção do manual que fala sobre o PIO e suas saídas/entradas é a **secção 32** do (`manual SAME70`), vamos analisar:
 
 !!! note "SAME70-Manual: 32.5.4 Output Control"
-    ...
+    Texto extraído do manual:
+    
+    > The level driven on an I/O line can be determined by **writing** in the Set Output Data Register (**PIO_SODR**) and the Clear Output Data Register (PIO_CODR). These write operations, respectively, set and clear the Output Data Status Register (PIO_ODSR), which represents the data driven on the I/O lines**. Writing in PIO_OER and PIO_ODR manages PIO_OSR whether the pin is configured to be controlled by the PIO Controller or assigned to a peripheral function. This enables configuration of the I/O line prior to setting it to be managed by the PIO Controller.
 
-    The level driven on an I/O line can be determined by writing in the Set Output Data Register (PIO_SODR) and the Clear Output Data Register (PIO_CODR). These write operations, respectively, set and clear the Output Data Status Register (PIO_ODSR), which represents the data driven on the I/O lines**. Writing in PIO_OER and PIO_ODR manages PIO_OSR whether the pin is configured to be controlled by the PIO Controller or assigned to a peripheral function. This enables configuration of the I/O line prior to setting it to be managed by the PIO Controller.
-
-Agora sabemos que para termos 1 no pino devemos escrever no registrador **PIO_SODR**, no manual tem mais detalhes sobre todos os registradores do PIO. Vamos analisar a documentação desse registrador (`SODR`):
+Lendo o texto, podemos descobrir que  para termos `1` (`set`) no pino devemos escrever no registrador `PIO_SODR`, no manual tem mais detalhes sobre todos detalhes do PIO. Vamos analisar a documentação desse registrador (`SODR`):
 
 ![PIO_SODR](imgs/PIO-Driver/pio-sodr.png)
 
-Repare que esse registrador é do tipo **write-only** ou seja ele não pode ser lido, somente escrito. Cada bit desse registrador representa um pino, se pegarmos por exemplo o bit 30 desse registrador (pensando no PIOA) estaríamos nos referindo ao PA30, qualquer alteração **ESCRITA** nesse bit influenciará esse **SOMENTE** pino. 
+Repare que esse registrador é do tipo **write-only** ou seja ele não pode ser lido, somente escrito. Cada bit desse registrador representa um pino, se pegarmos por exemplo o bit 30 desse registrador (pensando no PIOA) estaríamos nos referindo ao `PA30`, qualquer alteração **ESCRITA** nesse bit influenciará **SOMENTE** esse pino. 
 
 !!! note
     Todos os registradores estão listados e explicados no datasheet, de uma olhada na página **362**, a descrição começa ai.
@@ -70,18 +75,61 @@ void _pio_set(Pio *p_pio, const uint32_t ul_mask)
 ```
 
 - `*p_pio`: é um endereço recebido do tipo Pio, ele indica o endereço de memória na qual o PIO (periférico) em questão está mapeado (vamos ver isso em detalhes).
-- `ul_mask` : é a máscara na qual iremos aplicar ao registrador que controla os pinos para colocarmos 1 na saída.
+- `ul_mask`: é a máscara na qual iremos aplicar ao registrador que controla os pinos para colocarmos 1 na saída.
 
-O que isso significa? Significa que estamos acessando o periférico passado como referência a função (um dos 5 PIOs: PIOA, PIOB, PIOC, ...) e estamos aplicando a máscara `ul_mask` no seu registrador `PIO_SODR`.
+O que isso significa? Significa que estamos acessando o periférico passado como referência a função (um dos 5 PIOs: *PIOA*,  *PIOB*, *PIOC*, ...) e estamos aplicando a máscara `ul_mask` no seu registrador `PIO_SODR`.
 
+!!! note "`Pio` type?"
+    O tipo `Pio` é uma struct alinhada com o endereço de memória do periférico, onde cada 'item' dessa struct representa um endereço da memória do periférico, essa é a maneira correta em `C` de darmos *nome* a endereços de memória.
+    
+    Isso já está definido no projeto (para facilitar):
+    
+    O `PIOA` é um struct que aponta para o endereço `0x400E0E00`
+    
+    ```c
+    #define PIOA   ((Pio    *)0x400E0E00U) /**< \brief (PIOA  ) Base Address */
+    ```
+    
+    O struct possui a seguinte estrutura:
+    
+    ```c
+      typedef struct {
+    __O  uint32_t PIO_PER;       /**< \brief (Pio Offset: 0x0000) PIO Enable Register */
+    __O  uint32_t PIO_PDR;       /**< \brief (Pio Offset: 0x0004) PIO Disable Register */
+    __I  uint32_t PIO_PSR;       /**< \brief (Pio Offset: 0x0008) PIO Status Register */
+    __I  uint32_t Reserved1[1];
+    __O  uint32_t PIO_OER;       /**< \brief (Pio Offset: 0x0010) Output Enable Register */
+    __O  uint32_t PIO_ODR;       /**< \brief (Pio Offset: 0x0014) Output Disable Register */
+    __I  uint32_t PIO_OSR;       /**< \brief (Pio Offset: 0x0018) Output Status Register */
+    __I  uint32_t Reserved2[1];
+    __O  uint32_t PIO_IFER;      /**< \brief (Pio Offset: 0x0020) Glitch Input Filter Enable Register */
+    __O  uint32_t PIO_IFDR;      /**< \brief (Pio Offset: 0x0024) Glitch Input Filter Disable Register */
+    ```
+    
+    Onde: `O,I` são macros que bloqueiam os endereçós para:
+    
+    - `__O` : Apenas escrita
+    - `__I` : Apenas Leitura
+    - `__IO` : Apenas Leitura
+    
+    ```c
+      #ifdef __cplusplus
+        #define   __I     volatile        /*!< Defines 'read only' permissions                 */
+      #else
+        #define   __I     volatile const  /*!< Defines 'read only' permissions                 */
+      #endif
+        #define   __O     volatile        /*!< Defines 'write only' permissions                */
+        #define   __IO    volatile        /*!< Defines 'read / write' permissions              */
 
+    ```
+    
 
 !!! example "Modifique e teste"
-    A função está pronta, agora precisamos testar. Com a modificação no código faça a gravação do uC e nada deve mudar na execução do código. Já que a função implementada possui a mesma funcionalidade daquela fornecida pelo Atmel.
+    A função está pronta, agora precisamos testar. Com a modificação no código faça a gravação do uC e nada deve mudar na execução do código. Já que a função implementada possui a mesma funcionalidade daquela fornecida pelo fabricante.
     
     - Embarque o código e o mesmo deve funcionar normalmente caso a função implementada esteja correta.
 
-## _pio_clear(..)
+### _pio_clear(..)
 
 Faça o mesmo para a função clear:
 
@@ -103,10 +151,12 @@ void _pio_clear(Pio *p_pio, const uint32_t ul_mask)
 Vocês deverão descobrir pelo manual qual o periférico que deve ser acessado. Releia a secção 32.5.4
 
 !!! example "Modifique e teste"
-    Teste a função implementada substituindo a função **pio_clear()** pela função **_pio_clear()** e embarque o código. Ele deve se comportar igual.
-    - Embarque o código e o mesmo deve funcionar normalmente caso a função implementada esteja correta.
+    - `%s/pio_clea/_pio_clear/g`
+    - Implemente
+    - Compile e programe
+    - Embarque e teste
 
-## _pio_pull_up(...)
+### _pio_pull_up(...)
 
 Vamos implementar uma função que faz a configuração do `pullup` nos pinos do PIO, esse pullup é utilizado no botão da placa. Para isso declare a função a seguir:
 
@@ -125,17 +175,18 @@ void _pio_pull_up(Pio *p_pio, const uint32_t ul_mask,
  }
 ```
 
-Essa função recebe o PIO que irá configurar, os pinos que serão configurados e como último parâmetro se o pullup estará ativado (1) ou desativado (0). Para implementar leia **a secção 32.5.1**.
+Essa função recebe o PIO que irá configurar, os pinos que serão configurados e como último parâmetro se o pullup estará ativado (1) ou desativado (0). 
 
-> Teste a função implementada substituindo a função **pio_pull_up()** pela função **_pio_pull_up()** e embarque o código. Ele deve se comportar igual.
+!!! info
+    Leia o manual do PIO, especificamente **a secção 32.5.1**.
 
+!!! example "Modifique e teste"
+    - `%s/pio_pull_up/_pio_pull_up/g`
+    - Implemente
+    - Compile e programe
+    - Embarque e Teste
 
-``` diff
-+ Embarque o código e o mesmo deve funcionar normalmente caso
-+ a função implementada esteja correta.
-```
-
-## _pio_set_input(...)
+### _pio_set_input(...)
 
 Agora vamos criar uma nova função para configurar um pino como entrada, para isso inclua os seguintes defines que serão utilizados como forma de configuração da função:
 
@@ -171,7 +222,6 @@ void _pio_set_input(Pio *p_pio, const uint32_t ul_mask,
 }
 ```
 
-> Leia a secção do `datasheet 32.5.9` para verificar os registradores necessários para implementar a função. 
 
 Para testar essa função substitua o seguinte trecho de código que configura um pino como entrada + o pull-up
 
@@ -186,12 +236,19 @@ Para :
 _pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_PULLUP);
 ```
 
-``` diff
-+ Embarque o código e o mesmo deve funcionar normalmente caso
-+ a função implementada esteja correta.
-```
+!!! info
+    Leia o manual do PIO, especificamente **a secção 32.5.9**.
 
-## _pio_set_output(...)
+!!! tip
+    Utilize a função já implementada `_pio_pull_up()`
+
+!!! example "Tarefa: Modifique e teste"
+    - `%s/pio_set_input/_pio_set_input/g`
+    - Implemente
+    - Compile e programe
+    - Embarque e Teste
+
+### _pio_set_output(...)
 
 Na aula passada utilizamos a função `pio_set_output` para configurarmos que o pino é uma saída. Iremos aqui definir uma nova função chamada de `_pio_set_output()` que implementa essa função.
 
@@ -230,7 +287,7 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
 2. Configurar o pino em modo saída
      - secção `32.5.4`
      
-3. Definir a saída inicial do pino (1 ou 0)
+3. Definir a saída inicial do pino (`1` ou `0`)
      - aqui você pode fazer uso das duas funções recentes implementadas. 
      
 4. Ativar ou não o multidrive :
@@ -241,15 +298,20 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
      
 > Uma vez implementada a função, utilize ela no seu código substituindo a função `pio_set_output()` por essa função `_pio_set_output()`. Teste se o LED continua funcionando, se continuar quer dizer que sua função foi executada com sucesso.
 
-``` diff
-+ Embarque o código e o mesmo deve funcionar normalmente caso
-+ a função implementada esteja correta.
+!!! tip
+    Utilize as funções já implementada `_pio_set()`, `_pio_clear()`, `_pio_pull_up()`
+
+!!! example "Tarefa: Modifique e teste"
+    - `%s/pio_set_output/_pio_set_output/g`
+    - Implemente
+    - Compile e programe
+    - Embarque e Teste
+
+### _pio_get(...)
+
+Implemente a função `_pio_get()`:
+
 ```
-
-# Extras
-
-## _pio_get(...)
-
 /**
  * \brief Return 1 if one or more PIOs of the given Pin instance currently have
  * a high level; otherwise returns 0. This method returns the actual value that
@@ -266,3 +328,14 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
 uint32_t pio_get(Pio *p_pio, const pio_type_t ul_type,
 		const uint32_t ul_mask)
 {}
+```
+
+!!! note `ul_type`
+    - `PIO_INPUT`: quando for para ler uma `entrada`
+    - `PIO_OUTPUT_0`: quando for para ler uma `saida`
+
+!!! example "Tarefa: Modifique e teste"
+    - `%s/pio_set_input/_pio_set_input/g`
+    - Implemente
+    - Compile e programe
+    - Embarque e Teste
