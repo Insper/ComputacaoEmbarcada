@@ -151,7 +151,7 @@ void _pio_clear(Pio *p_pio, const uint32_t ul_mask)
 Vocês deverão descobrir pelo manual qual o periférico que deve ser acessado. Releia a secção 32.5.4
 
 !!! example "Modifique e teste"
-    - `%s/pio_clea/_pio_clear/g`
+    - `%s/pio_clear/_pio_clear/g`
     - Implemente
     - Compile e programe
     - Embarque e teste
@@ -330,7 +330,7 @@ uint32_t pio_get(Pio *p_pio, const pio_type_t ul_type,
 {}
 ```
 
-!!! note `ul_type`
+!!! note "`ul_type`"
     - `PIO_INPUT`: quando for para ler uma `entrada`
     - `PIO_OUTPUT_0`: quando for para ler uma `saida`
 
