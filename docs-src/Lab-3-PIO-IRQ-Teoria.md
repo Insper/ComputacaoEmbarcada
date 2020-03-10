@@ -80,9 +80,8 @@ fim de executar essas operações, o que ele faz constantemente é:
 O CORE Cortex M7 com ponto flutuante operando a 300MHz fica realizado
 uma simples ação de comparar o valor de um registrador com uma máscara
 para detectarmos uma mudança no botão. E se, o código fosse alertado
-dessa alteração e uma função específica chamada para tratar essa mudança
-? O CORE poderia estar em um modo de baixo consumo energético (sleep
-mode) e configurado para acordar dado um determinado evento (exe.
+dessa alteração e uma função específica chamada para tratar essa mudança? O CORE poderia estar em um modo de baixo consumo energético (sleep
+mode) e configurado para acordar dado um determinado evento (ex:
 mudança de estado do botão).
 
 Deve-se ponderar a utilização do modo de baixo consumo energético já que
@@ -384,5 +383,5 @@ operação dessa parte do PIO:
 ## Referências
 
 [^1]: https://en.wikipedia.org/wiki/Event-driven_programming
-  - https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
+[^2]: https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
   - http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
