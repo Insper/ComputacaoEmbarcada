@@ -383,6 +383,6 @@ operação dessa parte do PIO:
 
 ## Referências
 
-[^1]:[1] https://en.wikipedia.org/wiki/Event-driven_programming 
+[^1]: [1] https://en.wikipedia.org/wiki/Event-driven_programming 
   - https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
   - http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
