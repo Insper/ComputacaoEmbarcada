@@ -4,11 +4,11 @@ Para que nosso `firmware` atue corretamente sobre o hardware será necessário a
 
 Não existe segredo! Será necessário abrirmos o [manual do uC](https://pt.scribd.com/document/398420674/SAME70) de mais de 1000 páginas e lermos as informações que o fabricante disponibiliza, lá teremos detalhado o que deve ser feito para ativarmos uma determinada função ou realizar uma configuração no periférico (isso vale para todos os [microcontroladores](http://www.ti.com/lit/ds/symlink/msp430g2553.pdf)). Cada chip e cada fabricante opta por implementar uma solução diferente, mais o formato do documento é mais ou menos o mesmo. 
 
-As soluções não são tão distintas assim, com a prática da para aos poucos ir pegando o linguajar e os truques, mas isso não diminui a necessidade de ler e reler o manual (e muitos manuais.....) até encontrar a informação que busca.
+As soluções não são tão distintas assim, com a prática conseguimos aos poucos ir pegando o linguajar e os truques, mas isso não diminui a necessidade de ler e reler o manual (e muitos manuais...) até encontrar a informação que busca.
 
 Os periféricos são controlados por registradores. Registradores são pequenas unidades de armazenamento que se comportam como uma memória quando alinhados (bem parecido com elementos, na construção da memória RAM). É pelos registradores que podemos ler e/ou escrever uma informação do periférico.
 
-Se tiver curiosidade de como esse lab seria realizado para outro uC, de uma lida nesse [post do EmbeddedFM](https://www.embedded.fm/blog/2016/5/16/ese101-peripherals-part-1)
+Se tiver curiosidade de como esse lab seria realizado para outro uC, dê uma lida nesse [post do EmbeddedFM](https://www.embedded.fm/blog/2016/5/16/ese101-peripherals-part-1)
 
 ## Registradores
 
@@ -29,7 +29,7 @@ No caso do PIO temos ao todo 89 registradores, e cada um tem um papel nesse peri
 
 ## Estrutura de software
 
-Sistemas embarcados tendem a possuir softwares muito complexos: Conectividade (wifi/ ethernet/ bluetooth), interface com usuário (LCD/ teclados/ ...), requisitos de tempo real, bateria, segurança de dados e para ajudar tudo isso miniaturizado em um hardware dedicado. 
+Sistemas embarcados tendem a possuir softwares muito complexos: Conectividade (wifi/ethernet/bluetooth), interface com usuário ( LCD / teclados /...), requisitos de tempo real, bateria, segurança de dados e para ajudar tudo isso miniaturizado em um hardware dedicado. 
 
 Como estamos trabalhando com baixo nível, muitas vezes precisamos configurar todas essas funcionalidades na 'unha', para isso, iremos utilizar uma estrutura de softwares que possui uma série de abstrações que facilitam a vida do desenvolvedor, diminui o tempo de desenvolvimento e minimiza erros.
 
@@ -39,7 +39,7 @@ Essa estrutura é formada por: Drivers, HAL e Sistema Operacional, conforme deta
 
 Um driver (framework/ api) são funções que possibilitam acessar o baixo nível sem se preocupar muito de como acessar o hardware, as funções fornecem uma forma direita de manipular registradores e core. 
 
-No nosso caso, iremos utilizar um framework chamado de [Advanced Software Framework Version 4](https://www.microchip.com/mplab/avr-support/advanced-software-framework), ele e fornecido e mantido pelo fabricante do microcontrolador que usamos no curso (SAME70) e serve para várias famílias de uC ARM (SAMD20/ SAMV71/ SAMG54/ ....). Foi com o ASF que fomos capazes de realizar o LAB1, onde configuramos pinos como entrada e saída e fomos capazes de ler e escrever nesses pinos.
+No nosso caso, iremos utilizar um framework chamado de [Advanced Software Framework Version 4](https://www.microchip.com/mplab/avr-support/advanced-software-framework), ele e fornecido e mantido pelo fabricante do microcontrolador que usamos no curso (SAME70) e serve para várias famílias de uC ARM (SAMD20 / SAMV71 / SAMG54 /...). Foi com o ASF que fomos capazes de realizar o LAB1, onde configuramos pinos como entrada e saída e fomos capazes de ler e escrever nesses pinos.
 
 ![](http://asf.atmel.com/docs/latest/doxygen_mainpage/images/asf_structure.jpg)
 
