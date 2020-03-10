@@ -39,7 +39,7 @@ interrupções de hardware, que são chamadas de funções (eventos)
 realizados pelo uC para eventos detectados pelos periféricos (no computador também tem, mas o OS toma conta de tudo).
 
 Podemos configurar o uC para que toda vez que um botão for pressionado
-(no nosso caso, mudança de HIGI par LOW) uma função (handler) seja
+(no nosso caso, mudança de HIGH para LOW) uma função (handler) seja
 executada. Evitando a necessidade de checarmos pela mudança de estado no
 while(1). Isso abre portas para uma série de otimizações sendo uma da
 principal a questão energética.
@@ -384,6 +384,6 @@ operação dessa parte do PIO:
 
 ## Referências
 
- - https://en.wikipedia.org/wiki/Event-driven_programming
+ -[1^]https://en.wikipedia.org/wiki/Event-driven_programming
  - https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
  - http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
