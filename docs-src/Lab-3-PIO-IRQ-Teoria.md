@@ -220,7 +220,7 @@ serão as interrupções que estarão ativas.
 Além de ativarmos a interrupção do periférico específico, precisamos
 definir sua prioridade. Na inicialização do uC o ARM configura todas as
 prioridades para o nível 0 (mais alto). Esse controle é realizado via
-acesso aos registradores especiais do NVIC, especificamente o .
+acesso aos registradores especiais do NVIC, especificamente o IRQ.
 
 ### Sinais de interrupção vindo dos periféricos
 
@@ -311,6 +311,7 @@ o periférico que será responsável por gerar a interrupção.
 O parâmetro IRQn das funções de configuração do NVIC é o ID do
 periférico em questão (o mesmo utilizado no PMC).
 
+
 PIO - Interrupção
 =================
 
@@ -384,4 +385,4 @@ operação dessa parte do PIO:
 
 [^1]: https://en.wikipedia.org/wiki/Event-driven_programming
 [^2]: https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
-  - http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
+[^3]: http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
