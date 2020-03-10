@@ -1,3 +1,5 @@
+# IRQ - Teoria
+
 Em computação é comum a necessidade de realizar ações com base em
 eventos. Eventos podem ser classificados como internos ou externos ao
 processador/microcontrolador. O término de um cálculo realizado por um
@@ -11,7 +13,7 @@ vantagens ao programador :
 
 1.  independência entre as diferentes partes do programador
 
-2.  facilmente modificável e escalável
+2.  facilidade de modificação e upgrade
 
 3.  definição de prioridades
 
@@ -26,23 +28,20 @@ eventos ocorram simultaneamente.
 Por exemplo, podemos definir uma função que é acionada toda vez que
 chega um dado pela porta Ethernet, e outra função que é executada toda
 vez que um botão for pressionado, podemos também definir eventos
-periódicos, tais como : execute uma função a cada **X** segundos.
+periódicos, tais como: execute uma função a cada **X** segundos (piscar LED!).
 
-Embarcados
-----------
+## Embarcado
 
 Em computadores os eventos são em geral tratados pelo sistema
-operacional (OS) (linux/ windows, \....) porém em sistemas embarcados
+operacional (OS) (linux/ windows, /....) porém em sistemas embarcados
 nem sempre possuímos um sistema operacional ou não podemos tolerar a
-latência entre a troca de contexto do OS. Existe para isso as
-interrupções de hardware, que são chamadas de funções (eventos)
+latência entre a troca de contexto do OS (nada é de graça!).
+Existe para isso as interrupções de hardware, 
+que são chamadas de funções (eventos)
 realizados pelo uC para eventos detectados pelos periféricos (no computador também tem, mas o OS toma conta de tudo).
 
-Podemos configurar o uC para que toda vez que um botão for pressionado
-(no nosso caso, mudança de HIGI par LOW) uma função (handler) seja
-executada. Evitando a necessidade de checarmos pela mudança de estado no
-while(1). Isso abre portas para uma série de otimizações sendo uma da
-principal a questão energética.
+Podemos por exemplo configurar o uC para que toda vez que um botão for pressionado (no nosso caso, mudança de HIGI par LOW) uma função (`handler`) seja
+executada. Evitando a necessidade de verificarmos pela mudança de estado do pino no `while(1)` (técnica conhecida como polling). Isso abre portas para uma série de otimizações sendo uma da principal a questão energética.
 
 O estilo de programação que fica checando por uma mudança é chamado de
 **polling**, o mesmo utilizado nos lab realizados até agora:
@@ -65,7 +64,7 @@ while(1){
 };
 ```
 
-Nesse código fica-se constantemente checando por alterações
+Nesse exemplo de código fica-se constantemente checando por alterações
 no registrador do PIO responsável pelo botão a fim de decidirmos se o
 LED ficará acesso ou apagado. O CORE está constantemente trabalhando a
 fim de executar essas operações, o que ele faz constantemente é:
@@ -80,22 +79,24 @@ fim de executar essas operações, o que ele faz constantemente é:
 
 O CORE Cortex M7 com ponto flutuante operando a 300MHz fica realizado
 uma simples ação de comparar o valor de um registrador com uma máscara
-para detectarmos uma mudança no botão. E se, o código fosse alertado
+para detectarmos uma mudança no botão, bem ineficiente né?! 
+
+E se, o código fosse alertado
 dessa alteração e uma função específica chamada para tratar essa mudança
-? O CORE poderia estar em um modo de baixo consumo energético (sleep
-mode) e configurado para acordar dado um determinado evento (exe.
+? O CORE poderia estar em um modo de baixo consumo energético (`sleep
+mode`) e configurado para acordar na vinda do determinado evento (exe.
 mudança de estado do botão).
 
 Deve-se ponderar a utilização do modo de baixo consumo energético já que
 esse tipo de ação (sleep mode -\> wakeup) implica em um atraso entre o
 evento e a retomada plena do CORE e início da execução do código. Esse
-atraso (pode variar no caso do SAME70 entre 10us e 2ms dependendo do
+atraso que pode variar entre microcontroladores (no caso do SAME70 entre 10us e 2ms dependendo do
 modo de powerdown) pode ser crítico para sistemas que devem agir de
 forma ágil a uma determinada ação.
 
 O trecho de código a seguir ilustra a possível solução utilizando
 interrupção para executar uma ação quando o botão é alterado. No
-while(1) o processador entra em modo sleep (função blocante) e só é
+`while(1)` o processador entra em modo `sleep` (função blocante) e só é
 "acordado" dado uma mudança no valor digital do pino que o botão está
 conectado.
 
@@ -129,8 +130,7 @@ void main(){
 }
 ```
 
-Exceções
-========
+## Exceções
 
 Exceções [^2] são eventos que causam uma mudança no fluxo de execução do
 programa, quando ocorridas levam a unidade de processamento a
@@ -141,24 +141,19 @@ volta a ser executado normalmente.
 ![Fontes de exceções](imgs/PIO-IRQ/nvic_core.png)
 
 O hardware responsável por gerenciar as exceções no ARM é chamado de
-**Nested vectored interrupt controller** (NVIC). O NVIC pode suportar de 1
-à 240 diferentes exceções, sendo elas classificadas basicamente em
+[**Nested vectored interrupt controller** (NVIC)](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s01s01.html). O NVIC pode suportar de 1 à 240 diferentes exceções, sendo elas classificadas basicamente em
 quatro grupos:
 
 -   System Exceptions
-
 -   Fault Detection
-
 -   Non-Maskable Interrupt (NMI)
-
 -   Interrupt Requests (IRQ)
 
 Exceções numeradas de -15 até -1 são consideradas exceções do sistema (reset,
 overflow, bus fault, \...), exceções de número superior a 15 são
 consideradas interrupções. No CortexM não existe exceção 0 (quem executa nesse nível é o `main`)
 
-Exemplos
---------
+### Exemplos
 
 -   O PIO pode gerar uma interrupção quando acontecer uma mudança de
     nível em uma entrada;
@@ -169,8 +164,7 @@ Exemplos
 -   O *timer* pode gerar uma interrupção quando atingido um determinado
     valor;
 
-Interrupção
-===========
+## Interrupção
 
 No ARM interrupções são um tipo de exceção, normalmente geradas pelos
 periféricos do microcontrolador.
@@ -179,12 +173,9 @@ Quando um periférico impõem um sinal de interrupção ao NVIC, o seguinte
 acontece:
 
 1.  uma interrupção é acionada (IRQ);
-
 2.  O processador suspende a execução do código;
-
 3.  O processador executa o serviço de rotina da interrupção (**Interrupt
     Service Routine** - ISR );
-
 4.  O processador retoma a execução do código para o estado anterior da
     interrupção acontecer.
 
@@ -192,8 +183,7 @@ Devemos notar que o processador deve salvar os contextos (registradores
 do core) na primeira passagem (1 -> 2) e após executar o ISR,
 recarregar os valores na passagem (2 -> 3).
 
-Prioridades
------------
+### Prioridades
 
 No ARM, podemos classificar as interrupções por prioridade sendo a de
 número menor considerada de MAIOR prioridade e de número maior de MENOR
@@ -212,8 +202,7 @@ Routine**).
 
 ![Ilustração do fluxo de interrupção](imgs/PIO-IRQ/flow.png)
 
-Interrupt Requests - IRQ
-------------------------
+### Interrupt Requests - IRQ
 
 As interrupções do tipo IRQs, geradas pelos periféricos são
 "mascaradas", ou seja, devemos ativar em em um registrador (de configuração do CORE) quais
@@ -224,7 +213,7 @@ definir sua prioridade. Na inicialização do uC o ARM configura todas as
 prioridades para o nível 0 (mais alto). Esse controle é realizado via
 acesso aos registradores especiais do NVIC, especificamente o .
 
-### Sinais de interrupção vindo dos periféricos
+#### Sinais de interrupção vindo dos periféricos
 
 Os periféricos geram um sinal de interrupção para o NVIC, esse sinal
 fica ativo até ser limpo manualmente pelo CORE e é utilizado pelo NVIC a
@@ -252,8 +241,7 @@ possuem um registrador específico para isso.
     "level", the interrupt is generated as long as the interrupt source is
     not cleared, even if some read accesses in PIO\_ISR are performed.
 
-Interrupt Service Routine - ISR
--------------------------------
+### Interrupt Service Routine - ISR
 
 Após uma interrupção ser detectada pelo NVIC, o CORE salva os contextos
 e aponta a execução do código para uma região específica. Uma função
@@ -283,8 +271,7 @@ Para uma interrupção ser aceita, devemos ter o seguinte cenário :
 -   A prioridade da interrupção é maior (menor valor) do que o nível
     atual.
 
-Software - CMSIS
-================
+## Software - CMSIS
 
 Utilizaremos as funções definidas no **Cortex Microcontroller Software
 Interface Standard** (CMSIS) [^3] para configurar o NVIC e o CORE, essas

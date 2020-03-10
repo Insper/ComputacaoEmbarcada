@@ -197,8 +197,6 @@ Agora vamos criar uma nova função para configurar um pino como entrada, para i
 #define _PIO_PULLUP              (1u << 0)
 /*  The internal glitch filter is active. */
 #define _PIO_DEGLITCH            (1u << 1)
-/*  The pin is open-drain. */
-#define _PIO_OPENDRAIN           (1u << 2)
 /*  The internal debouncing filter is active. */
 #define _PIO_DEBOUNCE            (1u << 3)
 ```
@@ -230,10 +228,10 @@ pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_DEFAULT);
 _pio_pull_up(BUT_PIO, BUT_PIN_MASK, 1);
 ```
 
-Para :
+Para:
 
 ```c
-_pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_PULLUP);
+_pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_PULLUP | _PIO_DEBOUNCE);
 ```
 
 !!! info
