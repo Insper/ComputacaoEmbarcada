@@ -6,7 +6,7 @@ memória são exemplos eventos interno ao CORE (processador). Já a
 notificação de um novo pacote oriundo da comunicação Ethernet é um
 exemplo de um evento externo ao CORE.
 
-A estruturação de um programa orientada a eventos[^1] dá uma série de vantagens ao programador:
+A estruturação de um programa orientada a eventos [^1] dá uma série de vantagens ao programador:
 
 1.  independência entre as diferentes partes do programador
 
