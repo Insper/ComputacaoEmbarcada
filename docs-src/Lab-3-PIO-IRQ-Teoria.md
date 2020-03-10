@@ -382,7 +382,7 @@ operação dessa parte do PIO:
     ![Detecção de eventos *SAME70 Datasheet*](imgs/PIO-IRQ/eventDetector.png)
 
 ## Referências
-  [1] https://en.wikipedia.org/wiki/Event-driven_programming 
+  [1] https://en.wikipedia.org/wiki/Event-driven_programming
   [2] https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
   [3] http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
   
