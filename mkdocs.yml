@@ -24,6 +24,7 @@ copyright: 'Copyright &copy; Rafael Corsi @ insper'
 
 nav:
 - Home: index.md
+- Util-corona.md
 - Sobre-Curso.md
 - Sobre-Ferramental.md
 - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
@@ -34,11 +35,10 @@ nav:
     - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
     - 'Lab-2-PIO-Driver-Teoria.md'
     - 'Lab-2-PIO-Driver-Lab.md'
-#    - 'Lab 3 - PIO IRQ':
-#        - 'Teoria': 'Lab-3-PIO-IRQ-Teoria.md'
-#        - 'Lab': 'Lab-3-PIO-IRQ-Lab.md'
-#        - 'Perguntas': 'Lab-3-PIO-IRQ-Perguntas.md'
-#    - 'Lab 4 - TC e RTC': 'Lab-4-TickTack-Lab.md'
+    - 'Lab-3-PIO-IRQ-Teoria.md'
+    - 'Lab-3-PIO-IRQ-Lab.md'
+    - 'Lab-3-PIO-IRQ-Perguntas.md'
+    - 'Lab-4-TickTack-Lab.md'
 #    - 'Lab 5 - ADC': 'Lab-5-ADC.md'
 #    - 'Lab 6 - RTOS': 'Lab-6-RTOS.md'
 - Projetos:
@@ -59,8 +59,8 @@ nav:
 #        - 'Design': 'APS-2-Interface-Design.md'
 #        - 'Engenharia': 'APS-2-Interface-Engenharia.md'
 #        - 'Dicas': 'APS-2-Interface-Dicas.md'
-#- Avaliações:
-#    - 'AV0 Simulado': 'AV-0-Simulado.md'
+- Avaliações:
+    - 'AV0 Simulado': 'AV-0-Simulado.md'
 #    - 'AV0 Prática': 'AV-0.md'
 #    - 'AV1 Simulado': 'AV-1-Simulado.md'
 #    - 'AV1 Prática': 'AV-1.md'

@@ -8,8 +8,7 @@ memória são exemplos eventos interno ao CORE (processador). Já a
 notificação de um novo pacote oriundo da comunicação Ethernet é um
 exemplo de um evento externo ao CORE.
 
-A estruturação de um programa orientada a eventos[^1] dá uma série de
-vantagens ao programador :
+A estruturação de um programa orientada a eventos[^1] dá uma série de vantagens ao programador:
 
 1.  independência entre as diferentes partes do programador
 
@@ -79,13 +78,9 @@ fim de executar essas operações, o que ele faz constantemente é:
 
 O CORE Cortex M7 com ponto flutuante operando a 300MHz fica realizado
 uma simples ação de comparar o valor de um registrador com uma máscara
-para detectarmos uma mudança no botão, bem ineficiente né?! 
-
-E se, o código fosse alertado
-dessa alteração e uma função específica chamada para tratar essa mudança
-? O CORE poderia estar em um modo de baixo consumo energético (`sleep
-mode`) e configurado para acordar na vinda do determinado evento (exe.
-mudança de estado do botão).
+para detectarmos uma mudança no botão. E se, o código fosse alertado
+dessa alteração e uma função específica chamada para tratar essa mudança? O CORE poderia estar em um modo de baixo consumo energético (sleep
+mode) e configurado para acordar dado um determinado evento (ex:mudança de estado do botão).
 
 Deve-se ponderar a utilização do modo de baixo consumo energético já que
 esse tipo de ação (sleep mode -\> wakeup) implica em um atraso entre o
@@ -211,7 +206,7 @@ serão as interrupções que estarão ativas.
 Além de ativarmos a interrupção do periférico específico, precisamos
 definir sua prioridade. Na inicialização do uC o ARM configura todas as
 prioridades para o nível 0 (mais alto). Esse controle é realizado via
-acesso aos registradores especiais do NVIC, especificamente o .
+acesso aos registradores especiais do NVIC, especificamente o IRQ.
 
 #### Sinais de interrupção vindo dos periféricos
 
@@ -300,6 +295,7 @@ o periférico que será responsável por gerar a interrupção.
 O parâmetro IRQn das funções de configuração do NVIC é o ID do
 periférico em questão (o mesmo utilizado no PMC).
 
+
 PIO - Interrupção
 =================
 
@@ -370,7 +366,14 @@ operação dessa parte do PIO:
     ![Detecção de eventos *SAME70 Datasheet*](imgs/PIO-IRQ/eventDetector.png)
 
 ## Referências
-
- - https://en.wikipedia.org/wiki/Event-driven_programming
- - https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
- - http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
+  [1] https://en.wikipedia.org/wiki/Event-driven_programming
+  
+  [2] https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
+  
+  [3] http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
+  
+  
+  
+[^1]: https://en.wikipedia.org/wiki/Event-driven_programming
+[^2]: https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
+[^3]: http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
