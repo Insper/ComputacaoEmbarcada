@@ -1,8 +1,3 @@
-- Marco Mello
-
-- 24/03/2020
-- Computação Embarcada
-
 # SAME70-XPLD - Erros de Utilização
 
 Aqui estão listados os erros mais frequentes na utilização da placa SAME70-XPLD.
