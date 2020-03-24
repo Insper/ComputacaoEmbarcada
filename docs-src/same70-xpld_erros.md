@@ -7,7 +7,7 @@
 
 Aqui estão listados os erros mais frequentes na utilização da placa SAME70-XPLD.
 
-![](C:\Users\MarcoASMA.INSPER\Downloads\ATSAME70XPLD_SPL.jpg)
+![](imgs\same70-xpld_erros\ATSAME70XPLD_SPL.jpg)
 
 ## 1) DEBUG USB x TARGET USB
 
