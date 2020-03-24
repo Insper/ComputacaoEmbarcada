@@ -1,0 +1,111 @@
+site_name: 5s - Computação Embarcada
+theme:
+  feature:
+    tabs: true
+  name: 'material'
+  palette:
+      primary: 'white'
+      accent: 'pink'
+  logo:
+      icon: 'developer_board'
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+docs_dir: docs-src
+site_dir: docs
+
+repo_name: 'Insper/ComputacaoEmbarcada'
+repo_url: 'https://github.com/insper/ComputacaoEmbarcada'
+edit_uri: 'https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/'
+
+# Copyright
+copyright: 'Copyright &copy; Rafael Corsi @ insper'
+
+nav:
+- Home: index.md
+- Util-corona.md
+- Sobre-Curso.md
+- Sobre-Ferramental.md
+- 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
+- Labs:
+    - 'PIO - Teoria': 'Lab-1-IOs-Teoria.md'
+    - 'PIO - Lab': 'Lab-1-IOs-Lab.md'
+    - 'PIO - Dicas': 'Lab-1-IOs-Dicas.md'
+    - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
+    - 'Lab-2-PIO-Driver-Teoria.md'
+    - 'Lab-2-PIO-Driver-Lab.md'
+    - 'Lab-3-PIO-IRQ-Teoria.md'
+    - 'Lab-3-PIO-IRQ-Lab.md'
+    - 'Lab-3-PIO-IRQ-Perguntas.md'
+    - 'Lab-4-TickTack-Lab.md'
+#    - 'Lab 5 - ADC': 'Lab-5-ADC.md'
+#    - 'Lab 6 - RTOS': 'Lab-6-RTOS.md'
+- Projetos:
+    - 'Projeto 1':
+        - 'Descrição': 'Projeto-1-Descrição.md'
+        - 'Vending Machine': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-VendingMachine.pdf'
+        - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
+        - 'Handout 1': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Handout%20descricao%20Projeto.pdf'
+        - 'Dicas': 'Projeto-1-Dicas.md'
+        - 'Projeto-1-Lista.md'
+    - 'Projeto 2':
+        - 'Descrição': 'Projeto-2-Descrição.md'
+        - 'Projeto-2-Lista.md'
+- APS:
+    - 'APS 1 - Musical': 'APS-1-Musical.md'
+#    - 'APS 2 - Interface':
+#        - 'Geral': 'APS-2-Interface.md'
+#        - 'Design': 'APS-2-Interface-Design.md'
+#        - 'Engenharia': 'APS-2-Interface-Engenharia.md'
+#        - 'Dicas': 'APS-2-Interface-Dicas.md'
+- Avaliações:
+    - 'AV0 Simulado': 'AV-0-Simulado.md'
+#    - 'AV0 Prática': 'AV-0.md'
+#    - 'AV1 Simulado': 'AV-1-Simulado.md'
+#    - 'AV1 Prática': 'AV-1.md'
+- Util:
+    - 'Util-Documentos.md'
+
+#####################################################################
+extra_css:
+  - css/printing.css
+
+extra_javascript:
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+  - 'translate_admonitions.js'
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.attr_list
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+plugins:
+    - search
+#    - pdf-export
