@@ -7,7 +7,7 @@
 
 Aqui estão listados os erros mais frequentes na utilização da placa SAME70-XPLD.
 
-![ATSAME70XPLD_SPL](C:\Users\MarcoASMA.INSPER\Downloads\ATSAME70XPLD_SPL.jpg)
+![](C:\Users\MarcoASMA.INSPER\Downloads\ATSAME70XPLD_SPL.jpg)
 
 ## 1) DEBUG USB x TARGET USB
 
@@ -15,7 +15,7 @@ Aqui estão listados os erros mais frequentes na utilização da placa SAME70-XP
 
 Interface USB utilizada para transferir o programa, e também para realizar o Debug via EDBG.
 
-![9_editada](imgs\same70-xpld_erros\9_editada.jpg)
+![](imgs\same70-xpld_erros\9_editada.jpg)
 
 
 
@@ -25,7 +25,7 @@ Interface USB de alta velocidade (USB high speed interface).
 
 OBS: Essa interface USB não realizar a gravação do chip.
 
-![12_editada](imgs\same70-xpld_erros\12_editada.jpg)
+![](imgs\same70-xpld_erros\12_editada.jpg)
 
 
 
