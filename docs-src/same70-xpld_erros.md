@@ -39,7 +39,7 @@ Basta olhar o código impresso em cima do CI do Microcontrolador:
 
 |                            REV. A                            |                            REV B                             |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![0 (Editada)](imgs\same70-xpld_erros\0 (Editada).jpg) | ![2 (Editada)](imgs\same70-xpld_erros\2 (Editada).jpg) |
+| ![0 (Editada)](img/\same70-xpld_erros/0 (Editada).jpg) | ![2 (Editada)](imgs\same70-xpld_erros/2 (Editada).jpg) |
 
 
 
@@ -47,37 +47,37 @@ Basta olhar o código impresso em cima do CI do Microcontrolador:
 
 Para alterar a versão do chip dentro do Atmel Studio basta realizar os seguintes passos:
 
-![FAQ_ATSAME70xpld](imgs\same70-xpld_erros\FAQ_ATSAME70xpld.gif)
+![FAQ_ATSAME70xpld](imgs/same70-xpld_erros/FAQ_ATSAME70xpld.gif)
 
 
 
 1. Clique no botão Device:
 
-![device](imgs\same70-xpld_erros\\device.PNG)
+![device](imgs/same70-xpld_erros/device.PNG)
 
 
 
 2. Clique no botão Change Device:
 
-![ChangeDevice](imgs\same70-xpld_erros\ChangeDevice.PNG)
+![ChangeDevice](imgs/same70-xpld_erros/ChangeDevice.PNG)
 
 
 
 3. Selecione a versão correta do chip e clique em OK, agora seu gravador(EDBG) deverá ser reconhecido pela IDE:
 
-![selection](imgs\same70-xpld_erros\selection.PNG)
+![selection](imgs/same70-xpld_erros/selection.PNG)
 
 
 
 5. Dentro da aba Tools, vá até o menu drop-down **Select debugger/programmer** e selecione o seu gravador, no caso desse gif:
 
-![SelectDebugger](imgs\same70-xpld_erros\SelectDebugger.PNG)
+![SelectDebugger](imgs/same70-xpld_erros/SelectDebugger.PNG)
 
 
 
 ## 3) J200 - Chip Erase Header
 
-![14 (Editada)_2](imgs\same70-xpld_erros\14 (Editada)_2.jpg)
+![14 (Editada)_2](imgs/same70-xpld_erros/14 (Editada)_2.jpg)
 
 Esse jumper quando conectado apaga o conteúdo da memória flash do chip (programa). Ele deve ficar conectado somente para essa finalidade, caso o jumper esteja conectado e tente-se transferir o programa para a placa, o mesmo não será gravado:
 
