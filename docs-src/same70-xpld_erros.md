@@ -15,7 +15,7 @@ Aqui estão listados os erros mais frequentes na utilização da placa SAME70-XP
 
 Interface USB utilizada para transferir o programa, e também para realizar o Debug via EDBG.
 
-![9_editada](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\9_editada.jpg)
+![9_editada](imgs\same70-xpld_erros\9_editada.jpg)
 
 
 
@@ -25,7 +25,7 @@ Interface USB de alta velocidade (USB high speed interface).
 
 OBS: Essa interface USB não realizar a gravação do chip.
 
-![12_editada](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\12_editada.jpg)
+![12_editada](imgs\same70-xpld_erros\12_editada.jpg)
 
 
 
@@ -39,7 +39,7 @@ Basta olhar o código impresso em cima do CI do Microcontrolador:
 
 |                            REV. A                            |                            REV B                             |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![0 (Editada)](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\WhatsApp Unknown 2020-03-24 at 11.05.39\0 (Editada).jpg) | ![2 (Editada)](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\WhatsApp Unknown 2020-03-24 at 11.05.39\2 (Editada).jpg) |
+| ![0 (Editada)](imgs\same70-xpld_erros\0 (Editada).jpg) | ![2 (Editada)](imgs\same70-xpld_erros\2 (Editada).jpg) |
 
 
 
@@ -47,38 +47,38 @@ Basta olhar o código impresso em cima do CI do Microcontrolador:
 
 Para alterar a versão do chip dentro do Atmel Studio basta realizar os seguintes passos:
 
-![FAQ_ATSAME70xpld](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\FAQ_ATSAME70xpld.gif)
+![FAQ_ATSAME70xpld](imgs\same70-xpld_erros\FAQ_ATSAME70xpld.gif)
 
 
 
 1. Clique no botão Device:
 
-![device](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\device.PNG)
+![device](imgs\same70-xpld_erros\\device.PNG)
 
 
 
 2. Clique no botão Change Device:
 
-![ChangeDevice](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\ChangeDevice.PNG)
+![ChangeDevice](imgs\same70-xpld_erros\ChangeDevice.PNG)
 
 
 
 3. Selecione a versão correta do chip e clique em OK, agora seu gravador(EDBG) deverá ser reconhecido pela IDE:
 
-![selection](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\selection.PNG)
+![selection](imgs\same70-xpld_erros\selection.PNG)
 
 
 
 5. Dentro da aba Tools, vá até o menu drop-down **Select debugger/programmer** e selecione o seu gravador, no caso desse gif:
 
-![SelectDebugger](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\SelectDebugger.PNG)
+![SelectDebugger](imgs\same70-xpld_erros\SelectDebugger.PNG)
 
 
 
 ## 3) J200 - Chip Erase Header
 
-![14 (Editada)_2](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\14 (Editada)_2.jpg)
+![14 (Editada)_2](imgs\same70-xpld_erros\14 (Editada)_2.jpg)
 
 Esse jumper quando conectado apaga o conteúdo da memória flash do chip (programa). Ele deve ficar conectado somente para essa finalidade, caso o jumper esteja conectado e tente-se transferir o programa para a placa, o mesmo não será gravado:
 
-> ![chipErase](C:\Users\MarcoASMA.INSPER\Downloads\Fotos ATSAME70-XPLD\chipErase.PNG)
+> ![chipErase](imgs\same70-xpld_erros\chipErase.PNG)
