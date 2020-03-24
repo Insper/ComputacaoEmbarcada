@@ -81,4 +81,4 @@ Para alterar a versão do chip dentro do Atmel Studio basta realizar os seguinte
 
 Esse jumper quando conectado apaga o conteúdo da memória flash do chip (programa). Ele deve ficar conectado somente para essa finalidade, caso o jumper esteja conectado e tente-se transferir o programa para a placa, o mesmo não será gravado:
 
-> ![chipErase](imgs\same70-xpld_erros\chipErase.PNG)
+> ![chipErase](imgs/same70-xpld_erros/chipErase.PNG)
