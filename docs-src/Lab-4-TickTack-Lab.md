@@ -1,225 +1,135 @@
-# TC - RTC - IRQ 
+# TC - RTC - RTT  
 
 !!! warning
     Esse lab já possui entrega com nota!
 
+!!! Repositório
+    Criar repositório para entregar o lab e preencher o formulário a seguir:
+    
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfS3x4QLibvCgUAiekQi0_cjWPZqwZ2j5xQwS_MG3QLSJzmUg/viewform?embedded=true" width="640" height="571" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
 | Pasta              |
 |--------------------|
-| `Labs/TC-RTC-IRQ/` |
+| `Labs/TC-RTC-RTT/` |
 
-- Parte 1: 
-    - [ ] Entra em sleep mode
-    - [ ] Led pisca mais rápido
-    - [ ] Pisca Pisca 
-- Parte 2:
-    - [ ] Corrigido uso de flag para parar o pisca pisca
-    - [ ] Usar placa OLED
-    - [ ] Para cada LED um TC diferente
-    - [ ] Cada LED é controlado por um botão
-    - [ ] Exibir hora atual no OLED1 
+- Parte 1 (C): 
 
-## Entenda o exemplo
+    1. Entender os exemplos (TC/RTT/RTC)
+    1. Incorporar todos os exemplos em um único projeto
+    1. Pisca pisca 
 
-| SAME70-Examples                                                                                                |
-|----------------------------------------------------------------------------------------------------------------|
-| [`Perifericos-uC/TC-RTC-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/TC-RTC-IRQ) |
+- Parte 2 
+    - C+ : fazer outro LED piscar com TC
+    - B : Exibir a hora atual no lcd
+    - A : Usar IRQ do segundos do RTC
 
+## Periféricos / Exemplos
 
-O firmware disponível no repositório de exemplos chamado de [`TC-RTC-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/TC-RTC-IRQ) configura o TimerCounter (TC) e o RTC do mircontrolador. O TC0 canal 1 é configurado para gerar uma interrupção (**TC1_Handler**) a cada 250ms (f=1/T -> de 4Hz) já o RTC é configurado para operar em modo de alarme, gerando uma interrupção (**RTC_Handler**) em um determinado momento. Inicialmente o RTC está configurado para gerar uma interrupção um minuto após o início do microcontrolador.
+!!! warning "SAME70-examples"
+    Antes de continuar atualize o repositório de exemplos, teve alteração.
 
-O TimerCounter faz com o o led pisque na frequência de 4Hz enquanto não ocorrer o alarme do RTC, após o acontecimento do alarme (interrupção do RTC) o piscar do led é desligado.
+Nesse lab iremos trabalhar com três periféricos que lidam com 'tempo', o TimerCounter - TC (temos no total e 4x3=12 no uC) o Real-time Timer - RTT (temos um) e o Real-time Clock RTC (temos um). Cada um possui sua especifidade:
 
-![](imgs/TC/overview.png){width=500}
+- TC: Faz várias coisas, nesse lab iremos usar para gerar interrupções maiores que 2Hz (**ele não consegue gerar tempos muito lentos!**)
+- RTT: É um contador que consegue gerar praticamente qualquer frequência (vamos usar para gerar frequências lentas)
+- RTC: É um como um calendário com relógio, ele conta anos, meses, dias, horas, minutos e segundos.
 
-!!! note "Entenda e execute"
-    1. Copie esse exemplo para a pasta do seu repositório [`Labs/TC-RTC-IRQ`].
-    1. Leia o [README](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/TC-RTC-IRQ) desse exemplo!
-    1. Execute o exemplo na placa!
-    1. Responda:
-        - Quais periféricos são utilizados?
-        - O que o firmware faz?
-        - Quantas interrupções são usada, quais são elas?
+Cada periférico está em um exemplo diferente:
 
-!!! warning
-    Não continue sem ter feito a etapa anterior
+| Periférico exemplos                                                                                   |
+| ----------             ----                                                                           |
+| [`Perifericos/TC-IRQ `](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/TC-IRQ)  |
+| [`Perifericos/RTT-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTT-IRQ) |
+| [`Perifericos/RTC-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTC-IRQ) |
 
-## Programando
+Cada exemplo possui o seu próprio `README` que da uma visão geral dos periféricos. Note que todos esses exemplos estão operando por interrupção! Onde cada periférico possui o seu `handler` para resolver a interrupção.
 
-Vamos agora trabalhar com o código exemplo, modificando e incorporando novas funcionalidades. 
+!!! example "Tarefa"
+    Para cada exemplo (TC,RTT e RTC):
+    1. Leia o README
+    1. Programe a placa (e veja os LEDs piscando!)
+    1. Entenda o código
 
-!!! warning ""
-    Nesse laboratório, não é permitido utilizar funções de delay por software:  `delay_s()` / `delay_ms()` / ...
+## Lab
 
-#### 1. Sleep 
-
-Vamos fazer nosso uc entrar em sleep sempre que não tiver nada para fazer. Para isso utilize a função `pmc_sleep(..)` no `while(1)`, como ilustrado a seguir.
-
-```c
-while(1){
-  // trecho de codigo a ser executado antes de dormir
-  // ...
-
-  // entra em sleep
-  pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
-
-  // trecho de codigo a ser executado depois de acordar
-  // ...
-}
-```
-
-O modo **Wait for Interrupt** WFI é um dos modos de powersave mais básicos e menos eficientes do SAME70. Nele o CORE ainda é mantido energizado porém sem clock. A grande vantagem desse modo é que qualquer interrupção pode acordar o core, diferente de outros modos mais agressivos que desabilita complemente o CORE implicando em um menor gasto energético.
-
-Toda vez que essa função for chamada o CORE entrará em modo sleep e ficará "bloqueada" esperando por alguma interrupção. Após detectada a interrupção, o CORE irá acordar e resolver todas as interrupções que estão pendentes e então irá liberar essa função, ou seja, continuará a executar o código.
-
-!!! example "Modifique e teste"
-    1. Faça o exemplo fazendo com o que o uC entre em modo sleep enquanto estiver ocioso.
-    1. Compile, programe e teste
+Nesse lab iremos utilizar a placa `OLED1`, para isso, você deve copiar o código exemplo: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI) para a pasta da entrega do seu repositório `Labs/TC-RTC-RTT`.
 
 
-#### 2. Mais rápido !
+### (C) TC, RTT e RTC 
 
-Vamos fazer com o que os LEDs pisquem mais rápidos, para isso será necessário modificar a frequência na qual o TimerCounter (TC) gera a interrupção.
+Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão), vocês devem configurar os botões e os LEDs da placa OLED, e então utilizando um `TC` fazer com que o `LED0` pisque a uma frequencia de 6 HZ; usando o RTT fazer com que o `LED1` pisque a uma frequência de 0.5Hz e com que o LED da placa pisque por 5x após 20s do sistema ter inicializado, fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 
-!!! example "Modifique e teste"
-    1. Faça com que o LED pisque ainda mais rápido! Escolha uma frequência que achar adequado.
-    1. Compile, programe e teste
+!!! example "Tarefa"
+    No código do OLED1:
+    
+    1. Configurar os pinos e os LEDs da placa OLED1
+    1. Fazer com que o `LED0` pisque a 4HZ usando o TC
+    1. Fazer com que o `LED1` pisque a cada 4s usando o RTT
+    1. Fazer com o que o `LED PLACA` pisque por 5 vezes após 20 segundos (USAR RTC)
+    1. Entrar em sleepmode
 
 !!! tip
-    De uma olhada nos parâmetros da função `tc_init()`
-
-#### 3. Piscar durante 1 minuto e parar durante 1 minuto - cíclico
-
-O objetivo agora é fazermos com que o LED da placa pisque por um minuto, e depois, pare de piscar por um minuto, e depois volte a piscar por um minuto (uma coisa cíclica), como ilustrado a seguir:
-
-![Led da placa](imgs/TC/led.png)
-
-!!! example "Modifique e teste"
-    1. Faça com que o led pisque durante um minuto e fique um minuto sem piscar eternamente, faça isso de forma cíclica.
-    1. Compile, programe e teste
+    Abrir o código atual e o exemplo e ir trazendo as funções e defines que precisa usar, não esqueça de chamar as funções no `main`
 
 !!! tip
-    - Use o alarme do RTC para isso!
-    - Utilize a função `[rtc_get_time()](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__rtc__group.html#ga91b1a1ac85e5bb5effefe275b824fe6a)` para saber a hora atual.
-    - Cuidado ao mudar de Hora/ Dia/ Mês
+    Você vai precisar incluir no `ASF WIZARD` os drivers do TCC e RTT
+    
+    Quando você fizer a busca vai reparar que tem dois drivers de `TC`,
+    para isso você deve clicar em `Details` e ver o TC que adiciona só
+    dois arquivos `tc.h` e `tc.c` como na figura a seguir
+    
+    ![](imgs/TC/ASF.png)
+    
+!!! info
+    Aqui já é C!
+    
+----------------------------
 
-------------------
+### (C+) Piscar mais um LED
 
-> Até aqui é C
+!!! example "Tarefa"
+    Faça o `LED2` da placa OLED piscar a 5Hz usando um novo TC
 
-------------------
+### (B) Exibindo HH:MM:SS
 
-#### 4. Flag é a melhor maneira ?
-
-A tomada de decisão se o LED está em modo "pisca pisca" é feita por uma variável global `flag_led0`:
-
-``` c
-/************************************************************************/
-/* VAR globais                                                          */
-/************************************************************************/
-uint8_t flag_led0 = 1;
-```
-
-Dentro da interrupção do TC1 verificamos a flag:
-
-``` c
-void TC1_Handler(void){
-    ....
-
-	/** Muda o estado do LED */
-    if(flag_led0)
-        pin_toggle(LED_PIO, LED_PIN_MASK);
-```
-
-O problema aqui é que a interrupção do TC1 continua ocorrendo mesmo com o piscar do LED desativado, o que pode ter um impacto no consumo e performance do projeto.
-
-!!! example "Modifique e teste"
-    1. Proponha e implemente uma solução para não usar mais flag.
-    1. Compile, programe e teste
-
+!!! example "Tarefa"
+    Exiba a hora no formato (HH:MM:SS) no display OLED
+    
 !!! tip
-    - Que tal fazer com que o `TC` pare de executar? Procure por uma função que faça isso.
-    - A função que faz o `TC` começar é a `tc_start()`
-
-
-
-#### 5. Várias frequências
-
- Utilizando a placa OLED1 conectada ao kit de desenvolvimento, faça com que cada LED pisque nas frequências determinadas na tabela a baixo, utilize para cada LED um TC diferente.
-
-    | LED OLED1 | Frequência  (Hz) |
-    |-----------|------------------|
-    | LED 1     | 8                |
-    | LED 2     | 11               |
-    | LED 3     | 17               |
-
-!!! example "Modifique e teste"
-    1. Faça com que os LEDs da placa OLED pisquem em diferentes frequências, usando 3 TCs
-    1. Compile, programe e teste
-
-!!! tip
-    A função `tc_init()` do código exemplo recebe como argumento:
-
-    - Um `TC`: 
-        - `TC0`, `TC1`, `TC2`
-
-    - Um ID do canal:  
+    O RTC tem uma função que você consegue buscar no periférico a hora atual: [`rtc_get_time()`](http://asf.atmel.com/docs/latest/sam.drivers.rtc.example.samv71_xplained_ultra/html/group__sam__drivers__rtc__group.html#ga91b1a1ac85e5bb5effefe275b824fe6a)
     
-    | TC    | Canal 0  | Canal 1  | Canal 2   |
-    |-------|----------|----------|-----------|
-    | `TC0` | `ID_TC0` | `ID_TC1` | `ID_TC2 ` |
-    | `TC1` | `ID_TC3` | `ID_TC4` | `ID_TC5 ` |
-    | `TC2` | `ID_TC6` | `ID_TC7` | `ID_TC8 ` |
-
-    - Um canal:
-        - `0`, `1`, `2`
-        
-    - E uma frequência
+!!! tip 
+    Para executar isso você deverá ser capaz de saber quando que o segundo mudou, duas são as opções:
     
-    --------------
+    1. Usar um novo TC configurado com 1hz
+    1. Pedir para o RTC gerar uma IRQ a cada mudança de segunda
     
-    Caso queira usar por exemplo o canal 1 do TC2 gerando uma interrupção a 10Hz, você deve chamar a função da seguinte maneira:
+    A segunda opção você faz modificando a função de init_rtc:
     
-    `TC_init(TC2, ID_TC7, 1, 10)`
-       
-    Uma vez feito isso, você deve definir a função de handler desse canal:
-     
+    ```
+    RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_ALREN | RTC_IER_SECEN);
+    ```
+    
+    E agora você consegue dentro do `RTC_handler` saber quando você entrou
+    na IRQ pelo segundo:
+    
     ```c
-    void TC7_Handler(void){
-
-    /* Devemos indicar ao TC que a interrupção foi satisfeita. */
-    volatile uint32_t ul_dummy = tc_get_status(TC2, 1);
+    /*  Verifica por qual motivo entrou
+	*  na interrupcao, se foi por segundo
+	*  ou Alarm
+	*/
+	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {
+        
+        //    
+        //  Entrou por segundo! 
+        // 
+		rtc_clear_status(RTC, RTC_SCCR_SECCLR);
+	}
+    ```
+   
+!!! warning
+    Você nunca deve atualizar display dentro de Handlers! Sempre no main
     
-    /* seu código vem aqui */
-
-    }
-    ```
-       
-#### 6. Botões
-
-Cada botão da placa OLED deve comandar o seu LED, uma vez apertado esse botão faça o LED relacionado a esse botão parar de piscar, quando apertar o botão novamente, o LED volta a piscar. Você deve tratar os botões com interrupção.
-
-!!! example "Modifique e teste"
-    1. Faça com que os botões (relacionados a cada LED) pare ou inicialize o piscar dos LEDs, utilize para isso interrupção do PIO.
-
-    - Não use flags para isso!
-
-#### 7. OLED1 - Exibir hora
-
-!!! example "Modifique e teste"
-    Utilize o `OLED1` para exibir a hora atual no display!
-
-    - Dica: 
-        - Ative a interrupção de segundos do RTC (além da de alarme)
-        - No handler, verifique o motivo de entrar na interrupção
-        - Trabalhe com flags, atualize o LCD no `while(1){}`
-
-    Para verificar se a interrupção foi referente a segundos (precisa ativar antes!):
-
-    ```
-      // Second increment interrupt
-      if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC)
-      {
-      /* limpa interrupcao segundos */
-          rtc_clear_status(RTC, RTC_SCCR_SECCLR);
-      }
-```
+#### A
+    
+Usar a IRQ do RTC por segundo para atualizar o display
