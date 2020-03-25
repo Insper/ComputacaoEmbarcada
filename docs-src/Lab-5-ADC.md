@@ -1,5 +1,3 @@
-![Roland Kirk](figs/ADC/Roland-Kirk.png)
-
 Ao final do lab você deve ter um sistema embarcado que faz a leitura de dois valores analógicos: Temperatura interna do uC e Valor da resistência de um potenciômetro, enviando esses valores para o terminal.
 
 Código base **SAME70-Examples**:
@@ -26,23 +24,26 @@ Copiar para:
 
 # Laboratório
 
+
 O código exemplo [`SAME70-exemples/Perifericos-uC/ADC-Temperatura`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/ADC-Temperatura) demonstra como configurar um dos ADCs (AFEC) do nosso uC para fazer uma conversão A/D de um sensor de temperatura interno ao chip.
 
+```diff
++ Copie esse exemplo para a pasta do
++ seu repositório.
+```
 
-!!! example "Execute"
-    Copie esse exemplo para a pasta do
-    seu repositório.
+**Leia o [README](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/ADC-Temperatura) desse exemplo!**
 
-!!! note "LEIA"
-    Leia o
-    [README](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/ADC-Temperatura)
-    desse exemplo!
-    
-!!! example ""
-    1. Execute o exemplo na placa!
-    1. Entenda como ele funciona!
+```diff
++ Execute o exemplo na placa!
+```
 
-## Programando 
+```diff
++ Entenda!
+```
+
+# Programando 
+
 
 Ao final do lab você deve ter um sistema embarcado que faz a leitura de dois valores analógicos: Temperatura interna do uC e Valor da resistência de um potenciômetro, enviando esses valores para o terminal. 
 
