@@ -45,27 +45,28 @@ Agora com o projeto inicializado vamos começar a implementar. A ideia é de que
 
 Resumo:
 
-- Efetuar a leitura dos botões para controlar a frequência com que os LEDs da placa piscam
-- Implementar pause/play através de um dos botões
+- Efetuar a leitura dos botões para controlar a frequência com que os LEDs da placa piscam.
+- Implementar pause/play através de um dos botões.
       
 
 ## C+
 
-- Controlar a frequência dos LEDs através dos botões
-- Mostra a  frequência com que os LEDs estão piscando no OLED
+- Controlar a frequência dos LEDs através dos botões.
+- Mostra a  frequência com que os LEDs estão piscando no OLED.
 
 
 
 ## B
 
-- Utilizar IRQ para ler os botões
+- Utilizar IRQ para ler os botões.
 - Utiliza TC para piscar os LEDs.
 
 
 
 ## B+
 
-- Implementar pause/play através dos botões
+- Implementar pause/play através dos botões.
+- Utilizar RTC e implementar HH:MM no display do OLED.
 
 ## A
 
