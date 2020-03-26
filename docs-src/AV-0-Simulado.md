@@ -52,7 +52,7 @@ Resumo:
 ## C+
 
 - Controlar a frequência dos LEDs através dos botões
-- Mostra a  frequência com que os LEDs estão piscar no OLED
+- Mostra a  frequência com que os LEDs estão piscando no OLED
 
 
 
