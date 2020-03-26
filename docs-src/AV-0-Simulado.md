@@ -11,21 +11,22 @@ Secundários:
 4.	Compreender as limitações de microcontroladores e seus periféricos;
 5.	Buscar e analisar documentação (datasheet) e extrair informações relevantes.
 
-Regas
+**Regas**
 
-	 - Consulta a colegas/ internet constituirão violações ao Código de Ética e de Conduta e acarretarão sanções nele previstas. Faça o seu trabalho de maneira ética!
-    - **A cada 15 minutos você deverá fazer um commit no seu código!**
-        - Códigos que não tiverem commit a cada 15min ou que mudarem drasticamente entre os commits serão descartados (conceito I) !!
-        - Você deve inserir mensagens condizentes nos commits!
-    - Duração: 2h
+Consulta a colegas/ internet constituirão violações ao Código de Ética e de Conduta e acarretarão sanções nele previstas. Faça o seu trabalho de maneira ética!
+- **A cada 15 minutos você deverá fazer um commit no seu código!**
+    - Códigos que não tiverem commit a cada 15min ou que mudarem drasticamente entre os commits serão descartados (conceito I) !!
+    - Você deve inserir mensagens condizentes nos commits!
+- Duração: 2h
 
 
 ## AV1-Simulado
 
-Começando
+**Começando**
 
-	- Atualize o `SAME70-examples`
-        - Atualize o arquivo ALUNO.json com seu nome e e-mail e faça um commit imediatamente.
+Atualize o `SAME70-examples`
+
+- Atualize o arquivo ALUNO.json com seu nome e e-mail e faça um commit imediatamente.
 
 Nessa avaliação iremos trabalhar com o módulo OLED1 (botões/ LEDs e Display), para isso, copie o projeto `same70-examples/screens/OLED-Xplained-Pro/SPI` para o repositório criado para entregar a avaliação. 
 
