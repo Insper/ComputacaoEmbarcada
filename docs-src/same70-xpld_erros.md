@@ -88,7 +88,7 @@ Em algumas situações é necessário que a memória seja apagada(zerada) fisica
 
 
 
-![jumper_erase](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\same70-xpld_erros\jumper_erase.gif)
+![jumper_erase](imgs/same70-xpld_erros/jumper_erase.gif)
 
 
 
