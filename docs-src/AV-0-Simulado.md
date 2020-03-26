@@ -41,22 +41,20 @@ Para começar a trabalhar na entrega, você deve pegar o projeto recém copiado 
   
 
 
-
 ## C
 
-Agora com o projeto inicializado vamos começar a implementar. A ideia é de que o display do kit OLED1 exiba um bargraph que representa a frequência atual em que os 3 LEDs da placa estarão piscando. Para isso será necessário utilizar interrupções (IRQ) na leitura dos botões. 
+Agora com o projeto inicializado vamos começar a implementar. A ideia é de que o display do kit OLED1 exiba uma informação contendo a frequência atual em que os 3 LEDs da placa estarão piscando.
 
 Resumo:
 
 - Efetuar a leitura dos botões para controlar a frequência com que os LEDs da placa piscam.
-- Implementar pause/play através de um dos botões.
+- Utilizar o OLED como interface gráfica
       
 
 ## C+
 
 - Controlar a frequência dos LEDs através dos botões.
-- Mostra a  frequência com que os LEDs estão piscando no OLED.
-
+- Mostra a frequência com que os LEDs estão piscando no OLED.
 
 
 ## B
@@ -65,14 +63,14 @@ Resumo:
 - Utiliza TC para piscar os LEDs.
 
 
-
 ## B+
 
 - Implementar pause/play através dos botões.
 - Utilizar RTC e implementar HH:MM no display do OLED.
 
+
 ## A
 
-- Exibir a frequência atual do LED por meio de um Bargraph no OLED: 
+- Exibir a frequência atual do LED por meio de um Bargraph no display OLED: 
 
 ![bargraf3](imgs/AV-0-Simulado-2020-1/bargraf3.jpg) ![bragraph](imgs/AV-0-Simulado-2020-1/bragraph.png)
