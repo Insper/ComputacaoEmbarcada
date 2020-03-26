@@ -70,13 +70,35 @@ Para alterar a versão do chip dentro do Atmel Studio basta realizar os seguinte
 
 
 
-## **3) JUMPER ERASE CONECTADO**
+## **3) JUMPER ERASE**
+
+### - Jumper se conectado não grava o programa
 
 ![14 (Editada)_2](imgs/same70-xpld_erros/14 (Editada)_2.jpg)
 
 Esse jumper (J200 - Chip Erase Header) quando conectado apaga o conteúdo da memória flash do chip (programa). Ele deve ficar conectado somente para essa finalidade, caso o jumper esteja conectado e tente-se transferir o programa para a placa, o mesmo não será gravado:
 
 > ![chipErase](imgs/same70-xpld_erros/chipErase.PNG)
+
+
+
+### - Apagando a memória de programa (FLASH)
+
+Em algumas situações é necessário que a memória seja apagada(zerada) fisicamente, para isso, 4 passos simples são executados:
+
+
+
+![jumper_erase](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\same70-xpld_erros\jumper_erase.gif)
+
+
+
+1 - Coloque o Jumper
+
+2 - Retire o cabo USB
+
+4 - Coloque o cabo USB
+
+3 - Retire o jumper
 
 
 
