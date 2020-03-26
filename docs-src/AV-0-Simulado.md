@@ -11,7 +11,7 @@ Secundários:
 4.	Compreender as limitações de microcontroladores e seus periféricos;
 5.	Buscar e analisar documentação (datasheet) e extrair informações relevantes.
 
-!!! note "Regas"
+**Regas**
     - Consulta a colegas/ internet constituirão violações ao Código de Ética e de Conduta e acarretarão sanções nele previstas. **Faça o seu trabalho de maneira ética!**
     - **A cada 15 minutos você deverá fazer um commit no seu código!**
         - Códigos que não tiverem commit a cada 15min ou que mudarem drasticamente entre os commits serão descartados (conceito I) !!
@@ -21,7 +21,7 @@ Secundários:
 
 ## AV1-Simulado
 
-!!! note "Começando"
+**Começando**
     - Atualize o `SAME70-examples`
         - Atualize o arquivo `ALUNO.json` com seu nome e e-mail e faça um **commit** imediatamente.
 
