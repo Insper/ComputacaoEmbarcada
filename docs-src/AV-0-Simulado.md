@@ -11,61 +11,66 @@ Secundários:
 4.	Compreender as limitações de microcontroladores e seus periféricos;
 5.	Buscar e analisar documentação (datasheet) e extrair informações relevantes.
 
-!!! note "Regas"
-    - Consulta a colegas/ internet constituirão violações ao Código de Ética e de Conduta e acarretarão sanções nele previstas. **Faça o seu trabalho de maneira ética!**
-    - **A cada 15 minutos você deverá fazer um commit no seu código!**
-        - Códigos que não tiverem commit a cada 15min ou que mudarem drasticamente entre os commits serão descartados (conceito I) !!
-        - Você deve inserir mensagens condizentes nos commits!
-    - **Duração: 2h**
+**Regas**
+
+Consulta a colegas/ internet constituirão violações ao Código de Ética e de Conduta e acarretarão sanções nele previstas. Faça o seu trabalho de maneira ética!
+- **A cada 15 minutos você deverá fazer um commit no seu código!**
+    - Códigos que não tiverem commit a cada 15min ou que mudarem drasticamente entre os commits serão descartados (conceito I) !!
+    - Você deve inserir mensagens condizentes nos commits!
+- Duração: 2h
 
 
 ## AV1-Simulado
 
-!!! note "Começando"
-    - Atualize o `SAME70-examples`
-    - Atualize o arquivo `ALUNO.json` com seu nome e email e faça um **commit** imediatamente.
+**Começando**
+
+Atualize o `SAME70-examples`
+
+- Atualize o arquivo ALUNO.json com seu nome e e-mail e faça um commit imediatamente.
 
 Nessa avaliação iremos trabalhar com o módulo OLED1 (botões/ LEDs e Display), para isso, copie o projeto `same70-examples/screens/OLED-Xplained-Pro/SPI` para o repositório criado para entregar a avaliação. 
 
 Para começar a trabalhar na entrega, você deve pegar o projeto recém copiado e adicionar as seguintes propriedades:
 
 - Configurar os três botões do OLED1 com interrupção e função de callback, sendo:
-    - Button0: Subida
+    - Button0: Subida 
     - Button1: Subida e Descida
     - Button2: Subida
 - Configurar os três LEDs do módulo OLED1 como saída
 - Fazer o microcontrolador entrar em sleepmode
-    
+  
+
+
 ## C
 
-Agora com o projeto inicializado vamos começar a implementar o relógio. A ideia é de que o display do kit OLED1 exiba a hora atual no formato: HH:MM:SS. Para isso será necessário utilizar o RTC. 
-Além de exibir a hora, faça os LEDs piscarem por dois segundos toda vez que o minuto mudar. 
+Agora com o projeto inicializado vamos começar a implementar. A ideia é de que o display do kit OLED1 exiba uma informação contendo a frequência atual em que os 3 LEDs da placa estarão piscando.
 
 Resumo:
 
-- Exibir hora no display: HH:MM:SS
-- Piscar LEDs por dois segundos a cada mudança de MM
- 
-!!! warning ""
-    Não atualize o LCD na interrupção do RTC, use flag para isso!!
-    
+- Efetuar a leitura dos botões para controlar a frequência com que os LEDs da placa piscam.
+- Utilizar o OLED como interface gráfica
+      
+
 ## C+
 
-- Utiliza TC para piscar os LEDs.
+- Controlar a frequência dos LEDs através dos botões.
+- Mostra a frequência com que os LEDs estão piscando no OLED.
+
 
 ## B
 
-Faça dois modos de operação AM/PM e 24h (use o botão do kit para isso)
+- Utilizar IRQ para ler os botões.
+- Utiliza TC para piscar os LEDs.
 
-Dica: procure nas funções do RTC
-eu não
 
 ## B+
 
-Agora vamos possibilitar que o usuário ajuste a hora do relógio, para isso ele deverá apertar o Button2 (o relógio para e o sistema entra em modo ajuste), e agora se o usuário apertar o Button0 ele aumenta a hora e se apertar o Button1 ele aumenta o minuto. Para sair do modo ajuste é só apertar o Button2.
+- Implementar pause/play através dos botões.
+- Utilizar RTC e implementar HH:MM no display do OLED.
 
-- Só uma unidade implementada (HH ou MM)
 
 ## A
 
-- As duas unidades implementadas (HH e MM)
+- Exibir a frequência atual do LED por meio de um Bargraph no display OLED: 
+
+![bargraf3](imgs/AV-0-Simulado-2020-1/bargraf3.jpg) ![bragraph](imgs/AV-0-Simulado-2020-1/bragraph.png)

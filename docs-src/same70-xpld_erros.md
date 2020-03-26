@@ -4,7 +4,7 @@ Aqui estão listados os erros mais frequentes na utilização da placa SAME70-XP
 
 ![](imgs/same70-xpld_erros/ATSAME70XPLD_SPL.jpg)
 
-## **1) DEBUG USB x TARGET USB**
+## **1) USB ERRADA**
 
 ### - Debug USB
 
@@ -24,7 +24,7 @@ Interface USB de alta velocidade (USB high speed interface).
 
 
 
-## **2) ATSAME70Q21 (Rev. A e Rev. B)**
+## **2) CHIP ERRADO**
 
 As placas SAME70-XPLD possuem o Microcontrolador ATSAME70Q21, contudo ele possui 2 versões, a ATSAME70Q21 (Rev. A) e a versão ATSAME70Q21**B** (Rev. B). Caso a versão não esteja correta na IDE Atmel Studio, o código a ser transferido para a placa pode não ser gravado corretamente e pode até nem ser reconhecida pela IDE.
 
@@ -70,10 +70,20 @@ Para alterar a versão do chip dentro do Atmel Studio basta realizar os seguinte
 
 
 
-## **3) J200 - Chip Erase Header**
+## **3) JUMPER ERASE CONECTADO**
 
 ![14 (Editada)_2](imgs/same70-xpld_erros/14 (Editada)_2.jpg)
 
-Esse jumper quando conectado apaga o conteúdo da memória flash do chip (programa). Ele deve ficar conectado somente para essa finalidade, caso o jumper esteja conectado e tente-se transferir o programa para a placa, o mesmo não será gravado:
+Esse jumper (J200 - Chip Erase Header) quando conectado apaga o conteúdo da memória flash do chip (programa). Ele deve ficar conectado somente para essa finalidade, caso o jumper esteja conectado e tente-se transferir o programa para a placa, o mesmo não será gravado:
 
 > ![chipErase](imgs/same70-xpld_erros/chipErase.PNG)
+
+
+
+------
+
+Marco Mello
+
+25/03/2020
+
+Computação Embarcada - 5s
