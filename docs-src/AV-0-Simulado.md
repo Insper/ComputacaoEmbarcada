@@ -71,4 +71,4 @@ Resumo:
 
 - Exibir a frequência atual do LED por meio de um Bargraph no OLED: 
 
-![bargraf3](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\AV-0-Simulado-2020-1\bargraf3.jpg) ![bragraph](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\AV-0-Simulado-2020-1\bragraph.png)
+![bargraf3](docs-src\imgs\AV-0-Simulado-2020-1\bargraf3.jpg) ![bragraph](docs-src\imgs\AV-0-Simulado-2020-1\bragraph.png)
