@@ -30,7 +30,7 @@ Nessa avaliação iremos trabalhar com o módulo OLED1 (botões/ LEDs e Display)
 Para começar a trabalhar na entrega, você deve pegar o projeto recém copiado e adicionar as seguintes propriedades:
 
 - Configurar os três botões do OLED1 com interrupção e função de callback, sendo:
-    - Button0: Subida
+    - Button0: Subida 
     - Button1: Subida e Descida
     - Button2: Subida
 - Configurar os três LEDs do módulo OLED1 como saída
