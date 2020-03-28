@@ -54,17 +54,16 @@ Cada exemplo possui o seu próprio `README` que da uma visão geral dos perifér
 
 Nesse lab iremos utilizar a placa `OLED1`, para isso, você deve copiar o código exemplo: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI) para a pasta da entrega do seu repositório `Labs/TC-RTC-RTT`.
 
-
 ### (C) TC, RTT e RTC 
 
-Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão), vocês devem configurar os botões e os LEDs da placa OLED, e então utilizando um `TC` fazer com que o `LED0` pisque a uma frequencia de 6 HZ; usando o RTT fazer com que o `LED1` pisque a uma frequência de 0.5Hz e com que o LED da placa pisque por 5x após 20s do sistema ter inicializado, fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
+Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão), vocês devem configurar os botões e os LEDs da placa OLED, e então utilizando um `TC` fazer com que o `LED0` pisque a uma frequencia de 4 HZ; usando o RTT fazer com que o `LED1` pisque a uma frequência de 0.5Hz e com que o LED da placa pisque por 5x após 20s do sistema ter inicializado, fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 
 !!! example "Tarefa"
     No código do OLED1:
     
     1. Configurar os pinos e os LEDs da placa OLED1
-    1. Fazer com que o `LED0` pisque a 4HZ usando o TC
-    1. Fazer com que o `LED1` pisque a cada 4s usando o RTT
+    1. Fazer com que o `LED1` pisque a 4HZ usando o TC
+    1. Fazer com que o `LED2` pisque a cada 4s usando o RTT
     1. Fazer com o que o `LED PLACA` pisque por 5 vezes após 20 segundos (USAR RTC)
     1. Entrar em sleepmode
 
@@ -130,6 +129,6 @@ Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão)
 !!! warning
     Você nunca deve atualizar display dentro de Handlers! Sempre no main
     
-#### A
+### A
     
 Usar a IRQ do RTC por segundo para atualizar o display

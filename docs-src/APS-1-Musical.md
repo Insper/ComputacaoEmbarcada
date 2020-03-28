@@ -1,7 +1,8 @@
 
 | ENTREGA |
 |---------|
-| 19/3    |
+| ~19/3~  |
+| 31/3    |
 
 Um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony)
 
