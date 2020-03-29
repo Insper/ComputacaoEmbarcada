@@ -93,6 +93,6 @@ Em algumas situações é necessário que a memória seja apagada(zerada) fisica
 
 Marco Mello
 
-25/03/2020
+29/03/2020
 
 Computação Embarcada - 5s
