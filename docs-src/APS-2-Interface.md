@@ -3,14 +3,14 @@
 !!! note
     Entrega:
     
-    - Pode pode ser feita em dupla!! 
-        - Não pode repetir a mesma dupla APS1
+    - Pode ser feita em dupla!! 
+        - Não pode repetir a mesma dupla da APS-1.
         - Preferencial na mesma bancada!
     - Cada grupo deve possuir um repositório (a entrega será feita ai)
     - **Deve entregar um vídeo da entrega funcionando.**
-   
+
 !!! warning "Direitos"   
-    Todo código/ arte que for utilizado e que não for de autoria da dupla, deve
+    Todo código / arte que for utilizado e que não for de autoria da dupla, deve
     ser referenciado no projeto.
     
 !!! warning "Conceito > C"

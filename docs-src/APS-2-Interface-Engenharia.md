@@ -73,5 +73,5 @@ do timer mudar (tick). Isso vai depender da frequência
 na qual ele foi configurado (funcionando similar ao TC).
 
 Utilize o exemplo disponibilizado em `SAME70-Examples/Perifericos-uC/RTT`
-que inicializa e configura o RTT do SAME70 para resolver a questão do calculo de velocidade.
+que inicializa e configura o RTT do SAME70 para resolver a questão do cálculo de velocidade.
 
