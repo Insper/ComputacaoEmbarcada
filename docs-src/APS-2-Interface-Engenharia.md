@@ -47,7 +47,11 @@ Com essa informação, você será capaz de indicar na interface a indicação d
 
 ### Velocidade média
 
-Pode 
+Pode ser calculada por quantas revoluções a roda deu em um determinado delta de tempo:
+
+`vm = Pulsos/dT`
+
+- `dT` deve ser o valor na qual você deseja atualizar a informação de velocidade média.
 
 ### Distância
 

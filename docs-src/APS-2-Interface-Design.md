@@ -1,9 +1,13 @@
 # APS - 2 - Design 
 
+| Entrega          | Data  |
+| ------           | ----  |
+| Design interface | 3 / 4 |
+
 A equipe de novos produtos disponibilizou alguns requisitos funcionais do protótipo
 (requisitos mínimo). 
 
-O hardware a ser utilizado é um LCD de 320x480px colorido e touch, que faz parte
+O hardware a ser utilizado é um LCD de `320`x`480`px colorido e touch, que faz parte
 do kit: [maXTouch Xplained Pro Extension
 Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/ATMXT-XPRO) e que
 integra com o nosso kit SAM-E70.
@@ -19,33 +23,40 @@ e ilustrado a seguir:
 
 Os requisitos mínimos estão listados a seguir:
 
-#### Relógio
+#### req0 - User
+
+A interface a ser projetada deve ser tal que o
+usuário consigo operar com apenas uma mão (lembre que é algo para ser usado na
+bike) e que as informações devem ser exibidas de forma clara, considerando uma
+leitura e operação em movimento.
+
+#### req1 - Relógio
 
 Indicação da hora atual, no formato: **HH:MM:SS**. Deve ser atualizado a cada
 segundo.
 
-#### Velocidade instantânea
+#### req2 - Velocidade instantânea
 
 Deve ser o componente principal da interface, medido em km/h
 
-#### Indicação da aceleração
+#### req3 - Indicação da aceleração
 
 Deve ser um componente gráfico que indica a aceleração atual da bicicleta
 (positiva/ negativa ou constante)
 
-#### Velocidade média
+#### req4 - Velocidade média
 
 Indicação em km/h da velocidade média no percurso
 
-#### Distância do percurso
+#### req5 - Distância do percurso
 
 Indicação em km da distância percorrida no percurso
 
-#### Tempo no percurso
+#### req6 - Tempo no percurso
 
 Indicação em **HH:MM** do tempo gasto em um percurso
 
-#### Start/ Stop/ Reset
+#### req7 - Botões: Start/ Stop/ Reset
 
 Botões (**touch**) que permitem: Iniciar a contagem de um novo percurso, parar a
 contagem desse percurso e reiniciar o percurso.
@@ -54,15 +65,12 @@ Quando o sistema estiver no módo **Stop**, o sistema deve exibir a
   velocidade instanânea, mas não pode atualizar outras informações referentes
 ao percurso (velocidade média/ distância no percurso/ tempo no percurso).
 
+#### req8 - Indicador status
+
 A tela deve possuir um indicador se a contagem da parte referente ao percurso
 está ou não ativada (Start/Stop).
 
-## Extras
-
-Além dessas funcionalidades, a interface a ser projetada deve ser tal que o
-usuário consigo operar com apenas uma mão (lembre que é algo para ser usado na
-bike) e que as informações devem ser exibidas de forma clara, considerando uma
-leitura e operação em movimento.
+### Extras 
 
 A equipe identificou funcionalidades extras que seriam interessante ao projeto:
 

@@ -42,24 +42,26 @@ nav:
     - 'Lab-4-TickTack-Lab.md'
 #    - 'Lab 5 - ADC': 'Lab-5-ADC.md'
 #    - 'Lab 6 - RTOS': 'Lab-6-RTOS.md'
-- Projetos:
-    - 'Projeto 1':
-        - 'Descrição': 'Projeto-1-Descrição.md'
-        - 'Vending Machine': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-VendingMachine.pdf'
-        - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
-        - 'Handout 1': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Handout%20descricao%20Projeto.pdf'
-        - 'Dicas': 'Projeto-1-Dicas.md'
-        - 'Projeto-1-Lista.md'
-    - 'Projeto 2':
-        - 'Descrição': 'Projeto-2-Descrição.md'
-        - 'Projeto-2-Lista.md'
+
+#- Projetos:
+#    - 'Projeto 1':
+#        - 'Descrição': 'Projeto-1-Descrição.md'
+#        - 'Vending Machine': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-VendingMachine.pdf'
+#        - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
+#        - 'Handout 1': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Handout%20descricao%20Projeto.pdf'
+#        - 'Dicas': 'Projeto-1-Dicas.md'
+#        - 'Projeto-1-Lista.md'
+#    - 'Projeto 2':
+#        - 'Descrição': 'Projeto-2-Descrição.md'
+#        - 'Projeto-2-Lista.md'
+
 - APS:
     - 'APS 1 - Musical': 'APS-1-Musical.md'
-#    - 'APS 2 - Interface':
-#        - 'Geral': 'APS-2-Interface.md'
-#        - 'Design': 'APS-2-Interface-Design.md'
-#        - 'Engenharia': 'APS-2-Interface-Engenharia.md'
-#        - 'Dicas': 'APS-2-Interface-Dicas.md'
+    - 'APS-2-Interface.md'
+    - 'APS-2-Interface-Design.md'
+    - 'APS-2-Interface-Engenharia.md'
+    - 'APS-2-Interface-Dicas.md'
+
 - Avaliações:
     - 'AV0 Simulado': 'AV-0-Simulado.md'
 #    - 'AV0 Prática': 'AV-0.md'
