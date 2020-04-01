@@ -30,7 +30,7 @@ Iremos trabalhar com o exemplo do [`FreeRTOS`](https://www.freertos.org) que a A
 !!! warning "Código exemplo"
     - Copie o código exemplo `Same70-Examples/RTOS/RTOS-LED` para a pasta da entrega do seu repositório `Labs/RTOS-LED`
     - Vamos modificar esse código exemplo.
- 
+
 ### Terminal
 
 Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:
@@ -145,7 +145,7 @@ static void task_monitor(void *pvParameters)
 		vTaskDelay(1000);
 	}
 }
-``` 
+```
 
 Essa tarefa produz uma saída como a seguir [3]:
 
@@ -242,7 +242,7 @@ A cada tarefa pode ser atribuída uma prioridade que vai de **0** até `configMA
     Uma das dúvidas mais comum no uso de RTOS é o quanto de espaço devemos alocar para cada tarefa, e essa é uma pergunta que não existe um resposta correta, caso esse valor seja muito grande podemos estar alocando um espaço extra que nunca será utilizado e caso pequena, podemos ter um stack overflow e o firmware parar de funcionar. 
 
     A melhor solução é a de executar o programa e analisar o consumo da stack pelas tasks ao longo de sua execução, tendo assim maiores parâmetros para a sua configuração.
-    
+
 
 #### Piscando LED1 OLED
 
@@ -262,7 +262,7 @@ Vamos agora criar uma nova tarefa e fazer ela controlar o LED1 da placa OLED, ne
     
 !!! tip "Solução"
     - [`main.c` implementando com a tarefa anterior](https://github.com/Insper/SAME70-examples/blob/master/RTOS/RTOS-LED/src/task_led1.c.c)
-   
+
 
 ### Power Save mode ?
 
@@ -301,8 +301,8 @@ Com isso podemos controlar o modo sleep na função `vApplicationIdleHook`.
     - Entre em sleepmode quando em idle
     - Dentro da função `vApplicationIdleHook` chame `pmc_sleep(SAM_PM_SMODE_SLEEP_WFI)`
 
---- 
- 
+---
+
 Note que devemos entrar em um modo de sleep que o timer utilizado pelo tick consiga ainda acordar a CPU executar, caso contrário o RTOS não irá operar corretamente já que o escalonador não será chamado. O timer usado pelo escalonador é o [System Timer, SysTick](http://infocenter.arm.com/help/topic/com.arm.doc.dui0552a/Babieigh.html).
 
 ###  API - Comunicação entre task / IRQ
@@ -316,7 +316,7 @@ Uma das principais vantagens de usar um sistema operacional é o de usar ferrame
 - Semáforo (semaphore) É como uma flag binária, permitindo ou não a execução de uma task, funciona para sincronização de tarefas ou para exclusão mútua (multual exclusion), sem nenhum tipo de prioridade.
 
 - Mutex: Similar aos semáforos porém com prioridade de execução (mutex alteram a prioridade da tarefa)
-    
+  
 - MailBox ou Queues: Usado para enviar dados entre tarefas ou entre ISR e Tasks
 
 [5] : https://www.freertos.org/Embedded-RTOS-Binary-Semaphores.html
@@ -327,7 +327,7 @@ Iremos implementar um semáforo para comunicação entre o callback do botão 1 
 
 ![Semáforo](imgs/RTOS/semaforo.png)
 
-Inclua o código a seguir no seu projeto (modifique a função `task_led1`)
+Inclua o código a seguir no seu projeto (modifique a função `task_led`)
 
  - Consulta: [xSemaphoreGiveFromISR](https://www.freertos.org/a00124.html)
 
@@ -350,7 +350,7 @@ Inclua o código a seguir no seu projeto (modifique a função `task_led1`)
         tem que ser var global! */
     SemaphoreHandle_t xSemaphore;
     ```
-    
+
 !!! example "Modifique"
     Inclua a função de callback do botão
 
@@ -359,14 +359,14 @@ Inclua o código a seguir no seu projeto (modifique a função `task_led1`)
     * callback do botao                                               
     * libera semaforo: xSemaphore                                    
     */
-    void but_callback(void){
+    void but1_callback(void){
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
         printf("but_callback \n");
         xSemaphoreGiveFromISR(xSemaphore, &xHigherPriorityTaskWoken);
         printf("semafaro tx \n");
     }
     ```
-   
+
 !!! example "Modifique"
     Agora vamos fazer a leitura do semáforo nessa task:
 
@@ -376,21 +376,21 @@ Inclua o código a seguir no seu projeto (modifique a função `task_led1`)
       semaphore rather than a mutex.  We must make sure that the interrupt
       does not attempt to use the semaphore before it is created! */
       xSemaphore = xSemaphoreCreateBinary();
-
+    
       /* devemos iniciar a interrupcao no pino somente apos termos alocado
       os recursos (no caso semaforo), nessa funcao inicializamos 
       o botao e seu callback*/
       /* init botão */
-      pmc_enable_periph_clk(BUT_PIO_ID);
-      pio_configure(BUT_PIO, PIO_INPUT, BUT_IDX_MASK, PIO_PULLUP);
-      pio_handler_set(BUT_PIO, BUT_PIO_ID, BUT_IDX_MASK, PIO_IT_FALL_EDGE, but_callback);
-      pio_enable_interrupt(BUT_PIO, BUT_IDX_MASK);
-      NVIC_EnableIRQ(BUT_PIO_ID);
-      NVIC_SetPriority(BUT_PIO_ID, 4); // Prioridade 4
-
+      pmc_enable_periph_clk(BUT1_PIO_ID);
+      pio_configure(BUT1_PIO, PIO_INPUT, BUT1_PIO_IDX_MASK, PIO_PULLUP);
+      pio_handler_set(BUT1_PIO, BUT1_PIO_ID, BUT1_PIO_IDX_MASK, PIO_IT_FALL_EDGE, but1_callback);
+      pio_enable_interrupt(BUT1_PIO, BUT1_PIO_IDX_MASK);
+      NVIC_EnableIRQ(BUT1_PIO_ID);
+      NVIC_SetPriority(BUT1_PIO_ID, 4); // Prioridade 4
+    
       if (xSemaphore == NULL)
         printf("falha em criar o semaforo \n");
-
+    
       for (;;) {
         if( xSemaphoreTake(xSemaphore, ( TickType_t ) 500) == pdTRUE ){
           LED_Toggle(LED0);
@@ -405,25 +405,25 @@ Inclua o código a seguir no seu projeto (modifique a função `task_led1`)
     ``` c
     SemaphoreHandle_t xSemaphore;
     ```
-
+    
     Devemos antes de usar o semáforo, fazermos sua criação/inicialização :
-
+    
     ``` c
     /* Attempt to create a semaphore. */
     xSemaphore = xSemaphoreCreateBinary();
     ```
-
+    
     Uma vez criado o semáforo podemos esperar a liberação do semáforo via a função:
-
+    
     ``` c
     xSemaphoreTake(xSemaphore, Tick);
     ```
-
+    
     - xSemaphore  O semáforo a ser utilizado
     - Tick : timeout (em ticks) que a função deve liberar caso o semáforo não chegue. Se passado o valor 0, a função irá bloquear até a chegada do semáforo.
-
+    
     Para liberarmos o semáforo devemos usar a função de dentro da interrupção/callback:
-
+    
     ``` c
     xSemaphoreGiveFromISR(...);
     ```
