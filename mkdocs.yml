@@ -29,6 +29,9 @@ nav:
 - Sobre-Ferramental.md
 - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
 - same70-xpld_erros.md
+
+- 'Aulas': 'Aulas.md'
+
 - Labs:
     - 'PIO - Teoria': 'Lab-1-IOs-Teoria.md'
     - 'PIO - Lab': 'Lab-1-IOs-Lab.md'
@@ -40,8 +43,8 @@ nav:
     - 'Lab-3-PIO-IRQ-Lab.md'
     - 'Lab-3-PIO-IRQ-Perguntas.md'
     - 'Lab-4-TickTack-Lab.md'
+    - 'Lab-5-RTOS.md'
 #    - 'Lab 5 - ADC': 'Lab-5-ADC.md'
-#    - 'Lab 6 - RTOS': 'Lab-6-RTOS.md'
 
 #- Projetos:
 #    - 'Projeto 1':
