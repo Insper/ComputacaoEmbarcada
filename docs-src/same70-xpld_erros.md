@@ -75,9 +75,9 @@ Esse jumper (J200 - Chip Erase Header) quando conectado apaga o conteúdo da mem
 
 > ![chipErase](imgs/same70-xpld_erros/chipErase.PNG)
 
-## 4) Deep Sleep mode
 
-Apagando a memória de programa (FLASH)
+
+### - Apagando a memória de programa (FLASH)
 
 Em algumas situações é necessário que a memória seja apagada(zerada) fisicamente, para isso, 4 passos simples são executados:
 
@@ -89,10 +89,21 @@ Em algumas situações é necessário que a memória seja apagada(zerada) fisica
 1. Retire o jumper
 1. Retire e coloque o cabo USB novamente
 
+
+
+## 4) Build > Clean Solution 
+
+Remove todos os arquivos da compilação anterior das pastas **bin** e **obj**.
+
+![image-20200330153918599](imgs/same70-xpld_erros/build_clean_solution.png)
+
+
+
 ------
 
 Marco Mello
 
-29/03/2020
+30/03/2020
 
 Computação Embarcada - 5s
+

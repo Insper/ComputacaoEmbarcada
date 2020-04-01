@@ -61,9 +61,7 @@ Indicação em **HH:MM** do tempo gasto em um percurso
 Botões (**touch**) que permitem: Iniciar a contagem de um novo percurso, parar a
 contagem desse percurso e reiniciar o percurso.
 
-Quando o sistema estiver no módo **Stop**, o sistema deve exibir a
-  velocidade instanânea, mas não pode atualizar outras informações referentes
-ao percurso (velocidade média/ distância no percurso/ tempo no percurso).
+Quando o sistema estiver no modo **Stop**, o sistema deve exibir a velocidade instantânea, mas não pode atualizar outras informações referentes ao percurso (velocidade média/ distância no percurso/ tempo no percurso).
 
 #### req8 - Indicador status
 
@@ -75,11 +73,10 @@ está ou não ativada (Start/Stop).
 A equipe identificou funcionalidades extras que seriam interessante ao projeto:
 
 - Possibilitar criar vários 'Percursos'
-- Exibir inclinação da bike (aclive/ plano)
+- Exibir inclinação da bike (aclive/plano)
 - Elevação total do percurso 
 - Tema Light/Dark
 - Cadência do pedal
-- Batimento cardíaco/ oximetria 
-- Interface com GPS
-e velocidade.
+- Batimento cardíaco/oximetria 
+- Interface com GPS e velocidade.
 
