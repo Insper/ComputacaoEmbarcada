@@ -114,23 +114,23 @@ Caso não encontre o terminal em View > Terminal Window (Imagem abaixo), você d
 
 1. Clique em Tools > Extensions and Update...
 
-   ![Terminal_2](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\same70-xpld_erros\Terminal_2.png)
+   ![Terminal_2](imgs/same70-xpld_erros/Terminal_2.png)
 
    
 
 2. Pesquise **Terminal** na caixa de busca a direita, depois clique em download.
 
-   ![Terminal_3](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\same70-xpld_erros\Terminal_3.png)
+   ![Terminal_3](imgs/same70-xpld_erros/Terminal_3.png)
 
    
 
 3. Após a instalação o Atmel Studio deverá reiniciar.
 
-   ![Terminal_4](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\same70-xpld_erros\Terminal_4.png)
+   ![Terminal_4](imgs/same70-xpld_erros/Terminal_4.png)
 
 4. Para verificar se o Terminal Windows foi instalado, clique em View > Terminal Window 
 
-   ![Terminal_5](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\same70-xpld_erros\Terminal_5.png)
+   ![Terminal_5](imgs/same70-xpld_erros/Terminal_5.png)
 
 
 
