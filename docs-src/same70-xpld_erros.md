@@ -99,11 +99,49 @@ Remove todos os arquivos da compilação anterior das pastas **bin** e **obj**.
 
 
 
+
+
+## 5) Não encontro o Terminal Window no Atmel Studio
+
+Caso não encontre o terminal em View > Terminal Window (Imagem abaixo), você deve seguir os passos para instalação do mesmo.
+
+![Terminal_5 - 300x300](imgs/same70-xpld_erros/Terminal_5.png)
+
+
+
+### - Instalando o Terminal Window
+
+1. Clique em Tools > Extensions and Update...
+
+   ![Terminal_2](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\same70-xpld_erros\Terminal_2.png)
+
+   
+
+2. Pesquise **Terminal** na caixa de busca a direita, depois clique em download.
+
+   ![Terminal_3](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\same70-xpld_erros\Terminal_3.png)
+
+   
+
+3. Após a instalação o Atmel Studio deverá reiniciar.
+
+   ![Terminal_4](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\same70-xpld_erros\Terminal_4.png)
+
+4. Para verificar se o Terminal Windows foi instalado, clique em View > Terminal Window 
+
+   ![Terminal_5](C:\Users\MarcoASMA.INSPER\Desktop\ComputacaoEmbarcada\docs-src\imgs\same70-xpld_erros\Terminal_5.png)
+
+
+
+
+
 ------
+
+
 
 Marco Mello
 
-30/03/2020
+01/04/2020
 
 Computação Embarcada - 5s
 
