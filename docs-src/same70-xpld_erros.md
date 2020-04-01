@@ -2,10 +2,11 @@
 
 Aqui estão listados os erros mais frequentes na utilização da placa SAME70-XPLD.
 
-1. USB errada
-1. Chip errado (rev A/ rev B)
-1. Jump Erase
-1. Como resetar o uC
+1. USB ERRADA
+1. CHIP ERRADO
+1. JUMPER ERASE
+1. Build > Clean Solution 
+1. Terminal Window no Atmel Studio
 
 ![](imgs/same70-xpld_erros/ATSAME70XPLD_SPL.jpg)
 
@@ -101,7 +102,7 @@ Remove todos os arquivos da compilação anterior das pastas **bin** e **obj**.
 
 
 
-## 5) Não encontro o Terminal Window no Atmel Studio
+## 5) Terminal Window no Atmel Studio
 
 Caso não encontre o terminal em View > Terminal Window (Imagem abaixo), você deve seguir os passos para instalação do mesmo.
 
