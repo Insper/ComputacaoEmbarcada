@@ -30,7 +30,8 @@ nav:
 - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
 - same70-xpld_erros.md
 
-- 'Aulas': 'Aulas.md'
+- 'Aulas':
+    - 'Aulas.md'
 
 - Labs:
     - 'PIO - Teoria': 'Lab-1-IOs-Teoria.md'
