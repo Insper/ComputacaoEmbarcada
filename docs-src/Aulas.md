@@ -1,5 +1,34 @@
 # Aulas
 
+## Aula estúdio - Segunda - 6/4
+
+!!! note "Recados"
+    - Reorganizei canais Teams
+        - bancadas são públicas
+    - Feedback interfaces APS2
+        - github issues
+    - Estudar para a nossa primeira avaliação!
+        - Já tenham funções prontas:
+            - configura pinos
+            - toggle led
+            - ...
+
+- Aula:
+
+| Início-Fim    | Atividade  | Canal Teams |
+| ---------     | ---------- | -----       |
+| 15h45 - 15h55 | Recados    | **Geral**   |
+| 15h44 - 17h45 | APS2       | Bancadas    |
+ 
+- Atendimento: 
+ 
+| Início-Fim    | Atividade  | Canal Teams |
+| ---------     | ---------- | -----       |
+| 17h45 - 19h15 | Simulado   | **Geral**   |
+
+ 
+  
+  
 ## Lab RTOS - Quarta e Quinta - 1 / 4 e 2 / 4
 
 | Estudo prévio                                                                                                                                                                                            |
