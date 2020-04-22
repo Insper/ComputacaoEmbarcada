@@ -2,6 +2,9 @@
 
 Nesse lab iremos trabalhar com conversão analógica digital e LCD.
 
+!!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScqWmljztbSRUTnal07ZktmgSp2qv_cvhJlGzFz3eUzeAK7Ug/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
 ## LAB
 
 | Pasta           |
@@ -17,8 +20,8 @@ Nesse lab iremos trabalhar com conversão analógica digital e LCD.
 ### Início
 
 !!! note "Conexão"
-     - EXT1: LCD
-     - EXT2: Potenciômetro no PD30, conforme exemplo
+     - EXT2: LCD
+     - EXT1: Potenciômetro no PC31, conforme exemplo [`SAME70-examples/Perifericos-uC/AFEC-Pin/`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/AFEC-Pin)
      
 !!! warning "Código exemplo"
     - Copie o código exemplo [`SAME70-examples/Screens/RTOS-LCD-maxTouch-Fontes`](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-LCD-maxTouch-Fontes) para a pasta da entrega do seu repositório `Labs/RTOS-ADC`
@@ -37,10 +40,11 @@ Vamos incorporar o exemplo do AFEC ao RTOS, iremos criar uma tarefa que será re
 !!! example "Modifique"
     1. Adicione no ASF o driver do `AFEC`
     1. Traga as funções, defines e variáveis globais do exemplo `AFEC-PIN`
+        - variáveis globais: `g_`
         - `defines`
         - `config_afec`
         - `AFEC_pot_Callback()`
-    1. Sem usar a função `AFEC_pot_Callback` compile o código para ver se está ok
+    1. Compile o código para ver se está ok
     
 Agora vamos criar uma task no RTOS para lidar com a leitura do AFEC, a tarefa tem a estrutura a seguir:
 
@@ -159,7 +163,7 @@ void task_lcd(void){
 +    // e imprime no LCD o dado
 +    if (xQueueReceive( xQueueADC, &(adc), ( TickType_t )  100 / portTICK_PERIOD_MS)) {
 +      char b[512];
-+      sprintf(b, "%4d", adc.value);
++      sprintf(b, "%04d", adc.value);
 +      font_draw_text(&arial_72, b, 50, 200, 2);
 +    }
   }
@@ -230,3 +234,4 @@ uint32_t ili9488_draw_filled_circle(uint32_t ul_x, uint32_t ul_y, uint32_t ul_r)
 ```
 
 Se for apenas uma barra é B, se for algo mais 'bonito' é A
+
