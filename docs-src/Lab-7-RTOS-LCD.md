@@ -2,13 +2,19 @@
 
 Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciar o LCD max Touch, o forte desse lab será a linguagem C e como estruturar um firmware.
 
+!!! note "Preencher ao finalizar o lab"
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfZNzzwcY__zmi7JeQV8hfEYT_Y1WaYgVp9tHCH0KUQW8aCdQ/viewform?embedded=true" width="640" height="1692" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
+
+
 ## LAB
 
-| Pasta           |
+| LABS                            |
 |-----------------|
-| `Labs/RTOS-LCD-maxToich-Switch` |
+| `Labs/RTOS-LCD-maxTouch-Switch` |
 
-1. Executar o demo do LCD
+1. Executar demo do LCD com RTOS
 1. 
 
 ### Início 
@@ -18,13 +24,13 @@ Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RT
 
 !!! warning "Código exemplo"
     - Copie o código exemplo `SAME70-examples/Screens/RTOS-LCD-maxTouch-Switch-Toggle/` para a pasta da entrega do seu repositório `Labs/RTOS-LCD-maxTouch-Switch`
-    - Vamos modificar esse código exemplo.
+        - Vamos modificar esse código exemplo.
 
 !!! note "Terminal"
     Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:
 
     :arrow_right: View :arrow_right: Terminal Window
-
+    
     Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de 115200.
 
 ## Entendendo o exemplo
@@ -79,7 +85,7 @@ typedef struct {
 Na `task_lcd` vamos criar o primeiro botão (`but0`):
 
 ```c
-t_but but1 = {.width = 120, .height = 75, .border = 2, 
+t_but but0= {.width = 120, .height = 75, .border = 2, 
                 .colorOn = COLOR_TOMATO, .colorOff = COLOR_BLACK, 
                 .x = ILI9488_LCD_WIDTH/2, .y = 40 };
 ```
@@ -105,7 +111,7 @@ void draw_button_new(t_but but, int status){
 } 
 ```
 
-Vamos editar a `task_lcd` para chamar essa função recém criada com o `but1`, ela deve ficar:
+Vamos editar a `task_lcd` para chamar essa função recém criada com o `but0`, ela deve ficar:
 
 ```c
 void task_lcd(void){
@@ -120,7 +126,7 @@ void task_lcd(void){
   uint8_t but0_status = 1;
   draw_button_new(but0, but0_status);
   
-  // strut local para armazenar msg enviada pela task do mxt
+  // struct local para armazenar msg enviada pela task do mxt
   touchData touch;
     
   while (true) {
@@ -140,9 +146,9 @@ void task_lcd(void){
          - crie o `but0`
          - crie a função `draw_button_new`
          - modifique a tarefa `task_lcd`
-     1. Compile e programe o código
-     1. Verifique a funcionalidade do programa
-         - rele na tela, o botão deve mudar!
+          1. Compile e programe o código
+          1. Verifique a funcionalidade do programa
+         - toque na tela, o botão deve mudar!
 
 #### melhorando a `draw_button_new`
 
@@ -174,7 +180,7 @@ Vamos criar dois novos botões (`but2`, `but3`), com as seguintes propriedades:
 
 > o que não foi definido, copiar do botão 0 (`but0`)
 
-Agora exiba os novos botões, e faça com que eles mudem o status quando relarem na tela!
+Agora exiba os novos botões, e faça com que eles mudem o status quando toque na região deles na tela!
 
 !!! example "Execute"
      1. Faça as alterações no código
@@ -204,7 +210,7 @@ Para criar o vetor de structs:
     ```
     
     Pode mudar para um for varrendo o nosso novo vetor `botoes`. O código vai ficar mais clean.
-    
+
 
 Com o vetor criado, vamos criar a função que processa o touch, ela será chamada de `processa_touch` e terá a seguinte implementação:
 
@@ -242,7 +248,7 @@ Com a função vamos agora alterar somente o status do botão que foi pressionad
      1. Declare a função `process_touch`
      1. Implemente a função `process_touch`
      1. Programe e teste
-        - Só o botão que for relado deve mudar de status
+        - Só o botão que for tocado deve mudar de status
         
 ## Extras (B)
 
