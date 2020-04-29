@@ -58,6 +58,7 @@ Adicione as funções `USART1_init`, `usart1_puts` e o handler `USART1_Handler` 
       pio_set_peripheral(PIOB, PIO_PERIPH_D, PIO_PB4); // RX
       pio_set_peripheral(PIOA, PIO_PERIPH_A, PIO_PA21); // TX
       MATRIX->CCFG_SYSIO |= CCFG_SYSIO_SYSIO4;
+    ```
 
       /* Configura opcoes USART */
       const sam_usart_opt_t usart_settings = {
@@ -71,7 +72,7 @@ Adicione as funções `USART1_init`, `usart1_puts` e o handler `USART1_Handler` 
       /* Ativa Clock periferico USART0 */
       sysclk_enable_peripheral_clock(ID_USART1);
     
-      stdio_serial_init(CONF_UART, &usart_settings);
+      stdio_serial_init(USART1, &usart_settings);
     
       /* Enable the receiver and transmitter. */
       usart_enable_tx(USART1);
