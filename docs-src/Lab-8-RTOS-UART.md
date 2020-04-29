@@ -58,7 +58,6 @@ Adicione as funções `USART1_init`, `usart1_puts` e o handler `USART1_Handler` 
       pio_set_peripheral(PIOB, PIO_PERIPH_D, PIO_PB4); // RX
       pio_set_peripheral(PIOA, PIO_PERIPH_A, PIO_PA21); // TX
       MATRIX->CCFG_SYSIO |= CCFG_SYSIO_SYSIO4;
-    ```
 
       /* Configura opcoes USART */
       const sam_usart_opt_t usart_settings = {
