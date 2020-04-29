@@ -1,1 +1,0 @@
-/home/corsi/work/ComputacaoEmbarcada/docs-src/APS-2-Interface-Dicas.md

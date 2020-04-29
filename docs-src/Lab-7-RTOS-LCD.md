@@ -3,23 +3,21 @@
 Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciar o LCD max Touch, o forte desse lab será a linguagem C e como estruturar um firmware.
 
 !!! note "Preencher ao finalizar o lab"
-
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfZNzzwcY__zmi7JeQV8hfEYT_Y1WaYgVp9tHCH0KUQW8aCdQ/viewform?embedded=true" width="640" height="1692" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfZNzzwcY__zmi7JeQV8hfEYT_Y1WaYgVp9tHCH0KUQW8aCdQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
 
 
 ## LAB
 
-| LABS                            |
+| LAB                            |
 |-----------------|
 | `Labs/RTOS-LCD-maxTouch-Switch` |
 
 1. Executar demo do LCD com RTOS
-1. 
+1. Trabalha com dados de touch e LCD
 
 ### Início 
 
-!!! info "OLED1"
+!!! info "LCD max Touch"
     Plugue o LCD max Touch no EXT2.
 
 !!! warning "Código exemplo"
@@ -85,7 +83,7 @@ typedef struct {
 Na `task_lcd` vamos criar o primeiro botão (`but0`):
 
 ```c
-t_but but0= {.width = 120, .height = 75, .border = 2, 
+t_but but0= {.width = 120, .height = 75, 
                 .colorOn = COLOR_TOMATO, .colorOff = COLOR_BLACK, 
                 .x = ILI9488_LCD_WIDTH/2, .y = 40 };
 ```
@@ -120,7 +118,7 @@ void task_lcd(void){
   draw_screen();
   font_draw_text(&digital52, "DEMO - BUT", 0, 0, 1);
 
-  t_but but0 = {.width = 120, .height = 75, .border = 2, 
+  t_but but0 = {.width = 120, .height = 75,  
                 .colorOn = COLOR_TOMATO, .colorOff = COLOR_BLACK, 
                 .x = ILI9488_LCD_WIDTH/2, .y = 40 };
   uint8_t but0_status = 1;
@@ -168,9 +166,9 @@ void draw_button_new(t_but but){}
 
 ### Novos botões
 
-Vamos criar dois novos botões (`but2`, `but3`), com as seguintes propriedades:
+Vamos criar dois novos botões (`but1`, `but2`), com as seguintes propriedades:
 
-- `but2`: 
+- `but1`: 
     - colorOn: [Escolher uma](https://github.com/Insper/SAME70-examples/blob/0819e835bcc9b29c841c97f848002d01ea2bbe37/Demos/Fita%20de%20LED%20-%20WS2812%20-%20(SAMe70)/src/ASF/sam/components/display/ili9488/ili9488.h#L247)
     - posição y `140`
 
@@ -184,7 +182,7 @@ Agora exiba os novos botões, e faça com que eles mudem o status quando toque n
 
 !!! example "Execute"
      1. Faça as alterações no código
-         - crie `but1` e `but0`
+         - crie `but1` e `but2`
          - exiba os botões e faça eles mudarem o status
      1. Programe e teste
      
@@ -224,6 +222,15 @@ Essa função recebe o vetor de structs e também a posição na tela de onde oc
 
 - `n` é o tamanho do vetor `botoes`.
 
+!!! warning
+    A função tem que ser genérica, suportando quantidade diferentes de botões e configurações diferentes de botões! 
+    
+    - Não pode isso:
+    
+    ![](imgs/RTOS-LCD/naopode.png){width=400}
+    
+    
+
 ??? tip
     Abra o terminal uart do atmel, lá você consegue ver os dados do touch:
     
@@ -234,8 +241,8 @@ Com a função vamos agora alterar somente o status do botão que foi pressionad
 ``` c
  if (xQueueReceive( xQueueTouch, &(touch), ( TickType_t )  500 / portTICK_PERIOD_MS)) {
       int b = process_touch(botoes, touch);
-      if(b > 0){
-        botoes[b].status !=  botoes[b].status;
+      if(b >= 0){
+        botoes[b].status = !botoes[b].status;
         draw_button_new(botoes[b]);
       }
 
@@ -249,7 +256,14 @@ Com a função vamos agora alterar somente o status do botão que foi pressionad
      1. Implemente a função `process_touch`
      1. Programe e teste
         - Só o botão que for tocado deve mudar de status
-        
+
+!!! tip
+    Chegou até aqui? Não esqueça de [preencher o forms](https://docs.google.com/forms/d/e/1FAIpQLSfZNzzwcY__zmi7JeQV8hfEYT_Y1WaYgVp9tHCH0KUQW8aCdQ/viewform?embedded=true%22) com a entrega!
+    
+## Extras (C+)
+
+- Adicione 2 novos botões!
+
 ## Extras (B)
 
 Que tal que para cada botão associar uma função de `callback`, toda vez que o botão for encontrado, a função de `callback` pode ser executada!
@@ -260,11 +274,15 @@ Que tal que para cada botão associar uma função de `callback`, toda vez que o
     - ponteiro de função
 - Validar
 
+!!! tip
+   [Function Pointer in C](https://www.geeksforgeeks.org/function-pointer-in-c/)
+
 ## Extras (A)
 
-No lugar dos botões terem cor, podemos fazer com que eles tenham uma imagem associada! Que tal fazer isso?
+No lugar dos botões terem cor podemos fazer com que eles tenham uma imagem associada! Que tal fazer isso?
 
-
+!!! tip
+    [SAME70-examples/Screens/RTOS-LCD-maxTouch-Images/](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-LCD-maxTouch-Images)
 
 
 
