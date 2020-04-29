@@ -5,7 +5,7 @@
 Nesse lab iremos trabalhar com comunicação UART (aquela do terminal / printf). Praticando RTOS (queue)
     
 ## Lab    
-    
+
 | LAB                |
 |--------------------|
 | `Labs/8-RTOS-UART` |
@@ -67,25 +67,24 @@ Adicione as funções `USART1_init`, `usart1_puts` e o handler `USART1_Handler` 
           .stop_bits   	= US_MR_NBSTOP_1_BIT	,
           .channel_mode   = US_MR_CHMODE_NORMAL
       };
-
+    
       /* Ativa Clock periferico USART0 */
-      sysclk_enable_peripheral_clock(USART_COM_ID);
-
-      /* Configura USART para operar em modo RS232 */
-      usart_init_rs232(USART_COM, &usart_settings, sysclk_get_peripheral_hz());
-
+      sysclk_enable_peripheral_clock(ID_USART1);
+    
+      stdio_serial_init(CONF_UART, &usart_settings);
+    
       /* Enable the receiver and transmitter. */
-      usart_enable_tx(USART_COM);
-      usart_enable_rx(USART_COM);
-
+      usart_enable_tx(USART1);
+      usart_enable_rx(USART1);
+    
       /* map printf to usart */
       ptr_put = (int (*)(void volatile*,char))&usart_serial_putchar;
       ptr_get = (void (*)(void volatile*,char*))&usart_serial_getchar;
-
+    
       /* ativando interrupcao */
-      usart_enable_interrupt(USART_COM, US_IER_RXRDY);
-      NVIC_SetPriority(USART_COM_ID, 4);
-      NVIC_EnableIRQ(USART_COM_ID);
+      usart_enable_interrupt(USART1, US_IER_RXRDY);
+      NVIC_SetPriority(ID_USART1, 4);
+      NVIC_EnableIRQ(ID_USART1);
     }
     ```
 
@@ -96,22 +95,22 @@ Adicione as funções `USART1_init`, `usart1_puts` e o handler `USART1_Handler` 
 
       BaseType_t xHigherPriorityTaskWoken = pdTRUE;
       char c;
-
+    
       // Verifica por qual motivo entrou na interrupçcao?
       // RXRDY ou TXRDY
       
       //  Dados disponível para leitura
       if(ret & US_IER_RXRDY){
-          usart_serial_getchar(USART_COM, &c);
+          usart_serial_getchar(USART1, &c);
           printf("%c", c);
-
+    
       // -  Transmissoa finalizada
       } else if(ret & US_IER_TXRDY){
-
+    
       }
     }
     ```
-    
+
 A função `usart1_puts` envia uma string para a serial pelo periférico USART1.
 
 ??? example "`usart1_puts`"
@@ -144,7 +143,7 @@ int main(void)
     1. Inclua `USART1_Handler`
     1. Inclua `usart1_puts`
     1. Substitua  `configure_console` por `USART1_init`
-   
+
 
 ## Lab 
 
