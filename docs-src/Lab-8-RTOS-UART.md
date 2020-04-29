@@ -72,7 +72,7 @@ Adicione as funções `USART1_init`, `usart1_puts` e o handler `USART1_Handler` 
       /* Ativa Clock periferico USART0 */
       sysclk_enable_peripheral_clock(ID_USART1);
     
-      stdio_serial_init(USART1, &usart_settings);
+      stdio_serial_init(CONF_UART, &usart_settings);
     
       /* Enable the receiver and transmitter. */
       usart_enable_tx(USART1);
