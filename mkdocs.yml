@@ -6,8 +6,8 @@ theme:
   palette:
       primary: 'white'
       accent: 'pink'
-  logo:
-      icon: 'developer_board'
+#  logo:
+#      icon: 'developer_board'
   font:
     text: Roboto
     code: Roboto Mono
@@ -46,6 +46,8 @@ nav:
     - 'Lab-4-TickTack-Lab.md'
     - 'Lab-5-RTOS.md'
     - 'Lab-6-RTOS-ADC.md'
+    - 'Lab-7-RTOS-LCD.md'
+    - 'Lab-8-RTOS-UART.md'
 
 #- Projetos:
 #    - 'Projeto 1':
@@ -84,6 +86,9 @@ extra_javascript:
   - 'post_progress.js'
 
 # Extensions
+
+
+# Extensions
 markdown_extensions:
   - markdown.extensions.attr_list
   - markdown.extensions.admonition
@@ -111,9 +116,10 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences
+  - pymdownx.tabbed
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
+
 plugins:
     - search
-#    - pdf-export
