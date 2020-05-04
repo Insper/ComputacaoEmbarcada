@@ -1,4 +1,4 @@
-# APS - 2 - Engenharia
+# Engenharia
 
 Além do design com o usuário, você deve ter os seguintes cuidados com a
 engenharia do protótipo. A seguir dicas de implementação:

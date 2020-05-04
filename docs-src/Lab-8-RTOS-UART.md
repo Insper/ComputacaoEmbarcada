@@ -16,7 +16,9 @@ Nesse lab iremos trabalhar com comunicação UART (aquela do terminal / printf).
 ### Início 
 
 !!! warning "Código exemplo"
-    - Vamos modificar o [lab-RTOS](https://github.com/Insper/SAME70-examples/tree/master/RTOS/RTOS-LED) (aquele dos leds e botões), faça uma cópia do seu lab para a nova pasta no seu seu repositório `Labs/8-RTOS-UART`
+    - Vamos modificar **o seu lab** [lab-RTOS](https://github.com/Insper/SAME70-examples/tree/master/RTOS/RTOS-LED) (aquele dos leds e botões), faça uma cópia do seu lab para a nova pasta no seu seu repositório `Labs/8-RTOS-UART`
+    
+    - O projeto já modificado do lab!
 
 !!! note "Terminal"
     Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:  :arrow_right: View :arrow_right: Terminal Window
@@ -94,7 +96,7 @@ Adicione as funções `USART1_init`, `usart1_puts` e o handler `USART1_Handler` 
 ??? example "`USART1_Handler`"
     ```c
     void USART1_Handler(void){
-      uint32_t ret = usart_get_status(USART_COM);
+      uint32_t ret = usart_get_status(USART1);
 
       BaseType_t xHigherPriorityTaskWoken = pdTRUE;
       char c;
@@ -163,12 +165,29 @@ A vantagem desse formato é:
 - o isolamento entre diferentes partes do firmware.
 
 
+### Dicas
+
+A seguir algumas dicas de como fazer o seu código. 
+
 #### xQueueChar
 
 Deve ser uma fila de caracteres, especificar um tamanho que caiba os comandos.
 
 ??? tip
-    Criar na `task_uartRX`
+    Criar logo antes de chamar a função `usart1_init` no main!
+    
+    ```c
+    int main(void){
+	/* Initialize the SAM system */
+	sysclk_init();
+	board_init();
+
+    // Criar a fila aqui!
+    //    |
+    //    v
+    
+	USART1_init();
+    ```
 
 #### USART1_handler
 
@@ -182,7 +201,7 @@ Irá receber um caracter da uart e colocar ele na fila `xQueueChar`
     ```c
       //  Dados disponível para leitura
       if(ret & US_IER_RXRDY){
-          usart_serial_getchar(USART_COM, &c);
+          usart_serial_getchar(USART1, &c);
           printf("%c", c);
     ```
 

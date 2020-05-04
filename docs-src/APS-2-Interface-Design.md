@@ -1,4 +1,4 @@
-# APS - 2 - Design 
+# Design 
 
 | Entrega          | Data  |
 | ------           | ----  |
