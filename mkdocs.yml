@@ -48,6 +48,12 @@ nav:
     - 'Lab-6-RTOS-ADC.md'
     - 'Lab-7-RTOS-LCD.md'
     - 'Lab-8-RTOS-UART.md'
+ #   - 'Lab-9-ADC-FIR.md'
+
+- 'Util':
+    - 'Util-Documentos.md'
+    - 'Util-lcd.md'
+    - 'Util-freertos.md'
 
 #- Projetos:
 #    - 'Projeto 1':
@@ -63,18 +69,18 @@ nav:
 
 - APS:
     - 'APS 1 - Musical': 'APS-1-Musical.md'
-    - 'APS-2-Interface.md'
-    - 'APS-2-Interface-Design.md'
-    - 'APS-2-Interface-Engenharia.md'
-    - 'APS-2-Interface-Dicas.md'
+    - 'APS 2':
+      - 'APS-2-Interface.md'
+      - 'APS-2-Rubrica.md'
+      - 'APS-2-Interface-Design.md'
+      - 'APS-2-Interface-Engenharia.md'
+      - 'APS-2-Interface-Dicas.md'
 
 - Avaliações:
     - 'AV0 Simulado': 'AV-0-Simulado.md'
 #    - 'AV0 Prática': 'AV-0.md'
 #    - 'AV1 Simulado': 'AV-1-Simulado.md'
 #    - 'AV1 Prática': 'AV-1.md'
-- Util:
-    - 'Util-Documentos.md'
 
 #####################################################################
 extra_css:
