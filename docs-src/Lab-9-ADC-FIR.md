@@ -4,11 +4,11 @@
 
 >Fonte: https://www.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/53983/versions/5/previews/html/ExampleECGBitalino.html
 
-Nesse lab iremos modificar o exemplo RTOS-ADC, que faz a leitura dp potenciometro via o periférico AFEC e exibe o valor lido no LCD. Iremos projetar um filtro digital do tipo FIR, e filtrar o dado lido do ADC com um passa baixas, exibindo no LCD em um gráfico temporal o valor original e o filtrado.
+Nesse lab iremos modificar o exemplo RTOS-ADC, que faz a leitura do potenciômetro via o periférico AFEC e exibe o valor lido no LCD. Iremos projetar um filtro digital do tipo FIR, e filtrar o dado lido do ADC com um passa baixas, exibindo no LCD em um gráfico temporal o valor original e o filtrado.
 
 !!! note "Preencher ao finalizar o lab"
     - MARCO Inserir link plz
-    
+
 ## Lab    
 
 | Exemplo base                  | LAB                   |
@@ -16,11 +16,12 @@ Nesse lab iremos modificar o exemplo RTOS-ADC, que faz a leitura dp potenciometr
 | `RTOS/RTOS-ADC` :arrow_right: | `Labs/9-RTOS-ADC-FIR` |
 
 !!! warning "Código exemplo"
-    - Vamos modificar o código exemplo `RTOS/RTOS-ADC`, faça uma cópia do seu lab para a nova pasta no seu seu repositório `Labs/9-RTOS-ADC-FIR`
-    
+    - Vamos modificar o código exemplo `RTOS/RTOS-ADC`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/9-RTOS-ADC-FIR`
+
 !!! note "Terminal"
     Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:  :arrow_right: View :arrow_right: Terminal Window
     
+
     Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de `115200`.
 
 ### FIR
@@ -128,7 +129,8 @@ Esse exemplo possui:
 - `AFEC`: Para realizar a leitura do potenciometro 
 - `xqueue_ADCraw`: Fila que envia o dado do ADC
 - `xqueue_ADCdata`: Fila com dado 'tratato' para ser exibido 
-    
+  
+
 !!! note
     Iremos usar o TC como trigger do AFEC (no lugar da task_adc fazer isso como no lab RTOS-ADC) pelos seguinte motivos:
     1. Garantir que a aquisição ocorra na taxa especificada
@@ -170,20 +172,20 @@ Agora você deve modificar o plot, para plotar além do `plot.raw` exibir o `plo
     ``` c
     ili9488_set_foreground_color(COLOR_CONVERT(COLOR_RED));
     ```
-    
+
 !!! example "Resumo Tarefas"
     1. Exibir o valor `plot.raw` graficamente no lcd 
-    1. Exibir o valor `filtrado.raw` graficamente no lcd 
+        1. Exibir o valor `plot.filtrado` graficamente no lcd 
 
 #### Filtrando dado
 
-Vamos agora aplicar o filtro projetado anteriormente no dado `adc`, iremos utilizar uma biblioteca da ARM chamada de [CMSIS DSP 4](http://www.keil.com/pack/doc/CMSIS/DSP/html/index.html) que possui uma série de funções matemáticas e de processamento de sinais. Dentro dessa biblioteca, iremos utilizar a função [`arm_fir_init_f32`](http://www.keil.com/pack/doc/CMSIS/DSP/html/group__FIR.html#ga5afaa7b8e6735bbc19e582aa9755b0e1) e [`arm_fir_f32`](http://www.keil.com/pack/doc/CMSIS/DSP/html/group__FIR.html#ga0cf008f650a75f5e2cf82d10691b64d9) que respectivamente: inicializa o filtro FIR do tipo `flot_32` e aplica o filtro (convolução) ao sinal.
+Vamos agora aplicar o filtro projetado anteriormente no dado `adc`, iremos utilizar uma biblioteca da ARM chamada de [CMSIS DSP 4](http://www.keil.com/pack/doc/CMSIS/DSP/html/index.html) que possui uma série de funções matemáticas e de processamento de sinais. Dentro dessa biblioteca, iremos utilizar a função [`arm_fir_init_f32`](http://www.keil.com/pack/doc/CMSIS/DSP/html/group__FIR.html#ga5afaa7b8e6735bbc19e582aa9755b0e1) e [`arm_fir_f32`](http://www.keil.com/pack/doc/CMSIS/DSP/html/group__FIR.html#ga0cf008f650a75f5e2cf82d10691b64d9) que respectivamente: inicializa o filtro FIR do tipo `float_32` e aplica o filtro (convolução) ao sinal.
 
 !!! tip 
     De uma olhada como essas funções são implementadas, elas abusam bastante da topologia interna do ARM (bem sistema hardware software) para entregarem uma função bem otimizada:
 
     - https://github.com/ARM-software/CMSIS_5/blob/9a825ef26043a0648894f5bf155edc0219b8212f/CMSIS/DSP/Source/FilteringFunctions/arm_fir_f32.c 
-    
+
 #### Inicializando filtro
 
 Crie os defines a seguir:
@@ -191,7 +193,7 @@ Crie os defines a seguir:
 ```c
 #define NUM_TAPS   8  // ordem do filtro (quantos coefientes)
 #define BLOCK_SIZE 1   // se será processado por blocos, no caso não.
-``` 
+```
 
 Agora vamos copiar os coeficientes do filtro que foram gerados na etapa do projeto do filtro para a variável `firCoeffs32`: 
 
