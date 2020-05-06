@@ -207,7 +207,7 @@ float32_t firStateF32[BLOCK_SIZE + NUM_TAPS - 1];
 float32_t inputF32[BLOCK_SIZE + NUM_TAPS - 1];
 float32_t outputF32[BLOCK_SIZE + NUM_TAPS - 1];
 arm_fir_instance_f32 S;
-arm_fir_init_f32(&S, NUM_TAPS, (float32_t *)&fir20[0], &firStateF32[0], BLOCK_SIZE);
+arm_fir_init_f32(&S, NUM_TAPS, (float32_t *)&firCoeffs32[0], &firStateF32[0], BLOCK_SIZE);
 ```
 
 !!! example "Resumo Tarefas"
@@ -236,3 +236,8 @@ if (xQueueReceive( xQueueADC, &(adc), 100)) {
 
 ## B
 
+- Criar um novo filtro de ordem 12 e trocar o atual
+
+## A
+
+No lugar de mostrar uma linha no tempo, fazer um ponto em um circulo 
