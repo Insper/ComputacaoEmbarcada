@@ -7,7 +7,8 @@
 Nesse lab iremos modificar o exemplo RTOS-ADC, que faz a leitura do potenciômetro via o periférico AFEC e exibe o valor lido no LCD. Iremos projetar um filtro digital do tipo FIR, e filtrar o dado lido do ADC com um passa baixas, exibindo no LCD em um gráfico temporal o valor original e o filtrado.
 
 !!! note "Preencher ao finalizar o lab"
-    - MARCO Inserir link plz
+
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf0KJtg1ejGUibIWZ-I2516jZLMRtGXeJgvkNddTh8DwyilUg/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
 
 ## Lab    
 
@@ -125,7 +126,7 @@ Esse exemplo possui:
     
     1. Garantir que a aquisição ocorra na taxa especificada
     1. Permitir uma taxa de aquisição maior que o tick do RTOS
-       
+
 #### Plotando ADC no tempo
 
 Vamos modificar a `task_lcd` para exibir o valor da leitura do potenciometro no tempo. O resultado esperado é o seguinte:
