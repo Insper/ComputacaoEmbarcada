@@ -153,6 +153,7 @@ Vamos modificar a `task_lcd` para exibir o valor da leitura do potenciometro no 
     ```
     1. O dado que deve ser plotado é o `plot.raw`
     1. Crie um contador que fará o incremento do eixo `x`
+       - dica: use `x = x + 5`;
     1. Incremente esse contador até chegar no final do LCD (`ILI9488_LCD_WIDTH`)
        - zere o contador quando chegar no final
        - apague a tela quando chegar no final `draw_screen()`
@@ -190,7 +191,7 @@ Crie os defines a seguir:
 
 ```c
 #define NUM_TAPS   8  // ordem do filtro (quantos coefientes)
-#define BLOCK_SIZE 1   // se será processado por blocos, no caso não.
+#define BLOCK_SIZE 1  // se será processado por blocos, no caso não.
 ``` 
 
 Agora vamos copiar os coeficientes do filtro que foram gerados na etapa do projeto do filtro para a variável `firCoeffs32`: 
@@ -225,7 +226,7 @@ arm_fir_init_f32(&S, NUM_TAPS, (float32_t *)&fir20[0], &firStateF32[0], BLOCK_SI
 
 #### Processando
 
-Modifique o while da task adc:
+Modifique o while da task adc para realizar a filtragem e enviar para o LCD exibir.
 
 ```
 
