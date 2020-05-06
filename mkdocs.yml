@@ -48,7 +48,7 @@ nav:
     - 'Lab-6-RTOS-ADC.md'
     - 'Lab-7-RTOS-LCD.md'
     - 'Lab-8-RTOS-UART.md'
- #   - 'Lab-9-ADC-FIR.md'
+    - 'Lab-9-ADC-FIR.md'
 
 - 'Util':
     - 'Util-Documentos.md'
