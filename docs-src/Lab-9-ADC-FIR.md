@@ -7,7 +7,6 @@
 Nesse lab iremos modificar o exemplo RTOS-ADC, que faz a leitura do potenciômetro via o periférico AFEC e exibe o valor lido no LCD. Iremos projetar um filtro digital do tipo FIR, e filtrar o dado lido do ADC com um passa baixas, exibindo no LCD em um gráfico temporal o valor original e o filtrado.
 
 !!! note "Preencher ao finalizar o lab"
-
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf0KJtg1ejGUibIWZ-I2516jZLMRtGXeJgvkNddTh8DwyilUg/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
 
 ## Lab    
@@ -25,6 +24,17 @@ Nesse lab iremos modificar o exemplo RTOS-ADC, que faz a leitura do potenciômet
 
     Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de `115200`.
 
+
+!!! info
+    Conecte o potenciômetro:
+    
+        - pino central no `PC31`
+        - Demais no `gnd` e `vcc`
+    
+    Como explicado em: https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/AFEC-Pin
+    
+    ![](https://raw.githubusercontent.com/Insper/SAME70-examples/d4eaed603a5aeb402412adbb15c1eeb9c93a26d3/Perifericos-uC/AFEC-Pin/doc/Diagrama_AFEC-Pin.svg){width=300}
+    
 ### FIR
 
 Filtragem de sinal pertence a uma grande área do conhecimento que é processamento de sinais, nesse laboratório iremos tratar do tema de forma superficial. Mas exemplos de aplicação de filtragem digital são:
@@ -222,6 +232,9 @@ arm_fir_init_f32(&S, NUM_TAPS, (float32_t *)&firCoeffs32[0], &firStateF32[0], BL
 Modifique o while da task adc para realizar a filtragem e enviar para o LCD exibir.
 
 ```
+int i = 0;
+
+while(1){
 
 if (xQueueReceive( xQueueADC, &(adc), 100)) {
         if(i <= NUM_TAPS){
@@ -234,6 +247,14 @@ if (xQueueReceive( xQueueADC, &(adc), 100)) {
           i = 0;
         }
 ```
+
+Resultado esperado:
+
+<video controls width="450">
+    <source src="http://54.162.111.146/shared/embarcados/lab9-lcd2.mp4"
+            type="video/mp4">
+    Sorry, your browser doesn't support embedded videos.
+</video>
 
 ## B
 
