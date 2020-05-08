@@ -1,6 +1,6 @@
 # RTOS - WIFI
 
-![RTOS-WIFI](/imgs/Lab-11-RTOS-WIFI/RTOS-WIFI.png)
+![RTOS-WIFI](imgs/Lab-11-RTOS-WIFI/RTOS-WIFI.png)
 
 Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET em um webserver (Flask) rodando em seu computador, onde o mesmo após receber essa requisição retorna um dado JSON. 
 
