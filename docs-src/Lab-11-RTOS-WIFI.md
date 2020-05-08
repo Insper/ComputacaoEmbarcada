@@ -167,9 +167,9 @@ Primeiramente temos que conseguir alterar o que será enviado para o servidor, e
 !!! example "Modifique"
     Inclua a função de callback para alterar a variável bufferSend
     ```c
-	flag_but1 = !flag_but1;
-	if(flag_but1) sprintf(bufferSend, "%s", "/");
-	else sprintf(bufferSend, "%s", "/but1");
+    flag_but1 = !flag_but1;
+    if(flag_but1) sprintf(bufferSend, "%s", "/");
+    else sprintf(bufferSend, "%s", "/but1");
     ```
 
 !!! note 
