@@ -58,11 +58,11 @@ python server.py
 
 O resultado esperado deve ser o seguinte:
 
-![runserver](/imgs/Lab-11-RTOS-WIFI/runserver.png)
+![runserver](imgs/Lab-11-RTOS-WIFI/runserver.png)
 
 Após isso seu servidor estará rodando, basta descobrir qual o IP local da sua máquina. Abra outro prompt e digite `ipconfig` e pressione enter:
 
-![ipconfigPaint](/imgs/Lab-11-RTOS-WIFI/ipconfigPaint.png)
+![ipconfigPaint](imgs/Lab-11-RTOS-WIFI/ipconfigPaint.png)
 
 Nesse caso o IP é o `192.168.42.104`  que é mesmo onde está rodando o webserver.
 
@@ -96,11 +96,11 @@ IP e porta do servidor (seu computador):
 
 Terminal Window (Atmel Studio):
 
-![printWIFI](/imgs/Lab-11-RTOS-WIFI/printWIFI.gif)
+![printWIFI](imgs/Lab-11-RTOS-WIFI/printWIFI.gif)
 
 Prompt onde foi iniciado o `server.py`:
 
-![printGet](/imgs/Lab-11-RTOS-WIFI/printGet.png)
+![printGet](imgs/Lab-11-RTOS-WIFI/printGet.png)
 
 
 
@@ -117,7 +117,7 @@ Prompt onde foi iniciado o `server.py`:
 
   
 
-  ![flask](D:\ComputacaoEmbarcada\docs-src\imgs\Lab-11-RTOS-WIFI\flask.png)
+  ![flask](imgs/Lab-11-RTOS-WIFI/flask.png)
 
 
 
@@ -215,8 +215,8 @@ if __name__ == '__main__':
 
 Enquanto o botão estiver pressionado o WebServer deverá responder com {'Botao1' : 'Pressionado'}:
 
-![flaskBOTAO](/imgs/Lab-11-RTOS-WIFI/flaskBOTAO.png)
+![flaskBOTAO](imgs/Lab-11-RTOS-WIFI/flaskBOTAO.png)
 
 Quando não pressionado deverá responder com {'hello' : 'world'}:
 
-![flaskHELLO](/imgs/Lab-11-RTOS-WIFI/flaskHELLO.png)
+![flaskHELLO](imgs/Lab-11-RTOS-WIFI/flaskHELLO.png)
