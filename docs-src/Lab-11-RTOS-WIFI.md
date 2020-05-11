@@ -265,7 +265,7 @@ Quando enviado uma requisição `/47` o mesmo responderá um JSON:
 
 ![responseGet](imgs/Lab-11-RTOS-WIFI/responseGet.png)
 
-O desafio é gerar uma requisição GET de um outro WebServer com sua respectiva posição na chamada e printar no `Terminal Windows`o Resultado.
+O desafio é gerar uma requisição GET de um outro WebServer com sua respectiva posição na chamada e printar no `Terminal Window`o Resultado.
 
 
 
