@@ -121,7 +121,7 @@ Prompt onde foi iniciado o `server.py`:
 
 
 
-### C Botão > GET > WebServer
+### C - Botão > GET > WebServer
 
 Vamos criar um botão que quando pressionado envia uma mensagem para o servidor e quando solto envia outra.
 
@@ -220,3 +220,40 @@ Enquanto o botão estiver pressionado o WebServer deverá responder com {'Botao1
 Quando não pressionado deverá responder com {'hello' : 'world'}:
 
 ![flaskHELLO](imgs/Lab-11-RTOS-WIFI/flaskHELLO.png)
+
+
+
+### B - Adicione 2 novos botões do OLED e acenda seu respectivo LED
+
+!!! tip
+    A resposta do WebServe é armazenada em `pstrRecv->pu8Buffer`:
+	```c
+	...
+		case SOCKET_MSG_RECV:
+	{
+		char *pcIndxPtr;
+		char *pcEndPtr;
+
+		tstrSocketRecvMsg *pstrRecv = (tstrSocketRecvMsg *)pvMsg;
+		if (pstrRecv && pstrRecv->s16BufferSize > 0) {
+			printf(pstrRecv->pu8Buffer);
+	...
+	```
+
+### A - Pegando resposta e printando 
+
+Temos um WebServer hospedado em um máquina na AWS, a mesma está configurada para responder a requisições GET baseado na sua posição da lista de chamada da disciplina, e para cada posição na lista de presença temos uma resposta diferente, por exemplo:
+
+Quando enviado uma requisição `/47` o mesmo responderá um JSON:
+
+```json
+{
+"ID": 404,
+"SETOR": Engenharia de Computacao,
+"LABORATORIO": Arquitetura de Computadores
+}
+```
+
+![responseGet](imgs/Lab-11-RTOS-WIFI/responseGet.png)
+
+O desafio é gerar uma requisição GET com sua respectiva posição na chamada e printar no `Terminal Windows`o Resultado.
