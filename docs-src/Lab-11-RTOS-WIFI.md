@@ -276,6 +276,5 @@ IP:  `http://3.93.57.147`
 Porta: `80`
 
 !!! warning "Tirar Print do Resultado"
-
-​	Não esqueça de tirar print para fazer o upload no Forms desse Lab.
+    Não esqueça de tirar print para fazer o upload no Forms desse Lab.
 
