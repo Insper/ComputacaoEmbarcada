@@ -223,7 +223,17 @@ Quando não pressionado deverá responder com {'hello' : 'world'}:
 
 
 
-### B - Adicione 2 novos botões do OLED e acenda seu respectivo LED
+### C+ - Adicione todos os 3 botões do OLED
+
+
+### B - Acenda seu respectivo LED conforme o estado do botão
+
+Exemplo:
+
+- Após receber `{'Botao1' : 'Pressionado'}`, acende o LED 1.
+
+- Após receber `{'Botao1' : 'Liberado'}`, apagar o LED 1.
+
 
 !!! tip
     A resposta do WebServe é armazenada em `pstrRecv->pu8Buffer`:
