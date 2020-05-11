@@ -234,7 +234,6 @@ Exemplo:
 
 - Após receber `{'Botao1' : 'Liberado'}`, apagar o LED 1.
 
-
 !!! tip
     A resposta do WebServe é armazenada em `pstrRecv->pu8Buffer`:
 	```c
@@ -266,4 +265,17 @@ Quando enviado uma requisição `/47` o mesmo responderá um JSON:
 
 ![responseGet](imgs/Lab-11-RTOS-WIFI/responseGet.png)
 
-O desafio é gerar uma requisição GET com sua respectiva posição na chamada e printar no `Terminal Windows`o Resultado.
+O desafio é gerar uma requisição GET de um outro WebServer com sua respectiva posição na chamada e printar no `Terminal Windows`o Resultado.
+
+
+
+Dados do WebServer:
+
+IP:  `http://3.93.57.147`
+
+Porta: `80`
+
+!!! warning "Tirar Print do Resultado"
+
+​	Não esqueça de tirar print para fazer o upload no Forms desse Lab.
+
