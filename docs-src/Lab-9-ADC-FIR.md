@@ -101,6 +101,9 @@ Para o projeto do filtro vamos utilizar uma ferramenta em python [`pyfda`](https
 1. Projetar FIR
 1. Extrair B e N
 
+!!! tip
+    Travou com o python? Pode seguir em frente e depois tenta voltar...
+
 Faça o download do repositório, instale dependências e execute o programa:
 
 ```bash
