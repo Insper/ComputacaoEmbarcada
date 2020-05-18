@@ -1,7 +1,7 @@
 site_name: 5s - Computação Embarcada
 theme:
-  feature:
-    tabs: true
+#  feature:
+#    tabs: true
   name: 'material'
   palette:
       primary: 'white'
