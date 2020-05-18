@@ -2,11 +2,10 @@
 
 ![RTOS-WIFI](imgs/Lab-11-RTOS-WIFI/RTOS-WIFI.png)
 
-Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET em um webserver (Flask) rodando em seu computador, onde o mesmo após receber essa requisição retorna um dado JSON. 
+Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET em um webserver (Flask) rodando em seu computador, onde o mesmo após receber essa requisição retorna um dado `JSON`. 
 
 !!! note "Preencher ao finalizar o lab"
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfanTEVc7BZ5gc7bTSkB7ICCUjANdb8cnKjqtQm7eFZoXL1tQ/viewform?embedded=true" width="640" height="520" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
 
 ## Lab    
 
@@ -16,7 +15,7 @@ Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET
 
 !!! warning "Código exemplo"
 
-    - Vamos modificar o código exemplo `RTOS/RTOS-WIFI`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/1-RTOS-WIFI`
+    - Vamos modificar o código exemplo `RTOS/RTOS-WIFI`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/11-RTOS-WIFI`
 
 !!! note "Terminal"
     Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:  :arrow_right: View :arrow_right: Terminal Window
@@ -28,7 +27,7 @@ Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET
 
 IoT (Internet of Things) é um conceito que tem como objetivo a conexão entre objetos, como por exemplo objetos onde é para acionamento como lâmpadas, motores, etc... Ou pontos de aquisição de dados utilizando sensores como os de temperatura, nível, etc... 
 
-#### Webserver - Flask
+### Webserver - Flask
 
 Um webserver fica responsável por receber requisições de clientes HTTP e gerar uma respostas a partir dessa requisição. Nesse lab utilizamos o [Flask](https://flask.palletsprojects.com/en/1.1.x/) para criar esse webserver em python que assim que receber um GET responde um Hello World na seguinte formatação:
 
@@ -46,14 +45,13 @@ Date: Fri, 08 May 2020 15:00:42 GMT
 
 
 
-#### Preparando o WebServer
+### Preparando o WebServer
 
 Acesse a pasta `Labs/11-RTOS-WIFI/WIFI-WINC1500-get-RTOS-EXT1/python-server` que contém o script `server.py`, instale o flask via pip e execute o programa:
 
 ```bash
-pip install -U Flask --user
-pip install flask-restful
-python server.py
+pip install -U Flask flask-restful --user
+python server.py --host=0.0.0.0
 ```
 
 O resultado esperado deve ser o seguinte:
@@ -66,31 +64,34 @@ Após isso seu servidor estará rodando, basta descobrir qual o IP local da sua 
 
 Nesse caso o IP é o `192.168.42.104`  que é mesmo onde está rodando o webserver.
 
+### Conectando o hardware
 
+Conecte o módulo `WINC1500` no EXT-1 do kit de desenvolvimento.
 
-#### Preparando o Firmware
+![ipconfigPaint](imgs/Lab-11-RTOS-WIFI/HW.png){width=300}
+
+### Preparando o Firmware
 
 Devemos configurar o `main.h` do exemplo, editando:
 
 A configuração da rede:
 
-```c
+``` C
 /** Wi-Fi Settings */
-#define MAIN_WLAN_SSID                    "LabArqComp" /**< Destination SSID */
-#define MAIN_WLAN_AUTH                    M2M_WIFI_SEC_WPA_PSK /**< Security manner */
-#define MAIN_WLAN_PSK                     "s4m370xpld" /**< Password for Destination SSID */
+#define MAIN_WLAN_SSID    "LabArqComp" /**< Destination SSID */
+#define MAIN_WLAN_AUTH    M2M_WIFI_SEC_WPA_PSK /**< Security manner */
+#define MAIN_WLAN_PSK     "s4m370xpld" /**< Password for Destination SSID */
 ```
 
 IP e porta do servidor (seu computador):
 
-```c
-#define MAIN_SERVER_PORT                    (5000)
-#define MAIN_SERVER_NAME                    "192.168.42.42"
+``` h
+#define MAIN_SERVER_PORT  (5000)
+#define MAIN_SERVER_NAME  "192.168.42.42"
 ```
 
 !!! warning
-
-​    O sistema embarcado e o webserver devem estar na mesma rede!
+    O sistema embarcado e o webserver devem estar na mesma rede!
 
 #### Resultados esperados
 
@@ -103,14 +104,13 @@ Prompt onde foi iniciado o `server.py`:
 ![printGet](imgs/Lab-11-RTOS-WIFI/printGet.png)
 
 
-
 #### Breve descrição do funcionamento
 
 - Nosso embarcado envia uma requisição GET através do `MAIN_PREFIX_BUFFER` definido dentro do `main.h`:
 
 ```c
 /** Send buffer of TCP socket. */
-#define MAIN_PREFIX_BUFFER                  "GET / HTTP/1.1\r\n Accept: */*\r\n\r\n"
+#define MAIN_PREFIX_BUFFER    "GET / HTTP/1.1\r\n Accept: */*\r\n\r\n"
 ```
 
 -  Nosso webserver (Flask) recebe essa requisição e verifica o que foi recebido, nesse caso ele recebe o "/" após o GET e responde com o seguinte JSON `{'hello' : 'world'}`:
@@ -131,11 +131,14 @@ Primeiramente temos que conseguir alterar o que será enviado para o servidor, e
 
 ```diff
 /** Send buffer of TCP socket. */
--	//#define MAIN_PREFIX_BUFFER                  "GET / HTTP/1.1\r\n Accept: */*\r\n\r\n"
-+	#define MAIN_PREFIX_BUFFER                  "GET "
+-	//#define MAIN_PREFIX_BUFFER        "GET / HTTP/1.1\r\n Accept: */*\r\n\r\n"
++	#define MAIN_PREFIX_BUFFER          "GET "
 +	char bufferSend[128] = "/";
-+	#define MAIN_SUFIX_BUFFER                  " HTTP/1.1\r\n Accept: */*\r\n\r\n"
++	#define MAIN_SUFIX_BUFFER           " HTTP/1.1\r\n Accept: */*\r\n\r\n"
 ```
+
+!!! warning
+Os espaços são importantes na string são importantes!
 
 - No `main.c` configure o botão para alterar a variável `bufferSend` quando pressionado
 

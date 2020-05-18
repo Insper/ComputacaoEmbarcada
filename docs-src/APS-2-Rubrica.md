@@ -1,6 +1,12 @@
 # Rubrica
 
-Rubrica da APS2
+## Entrega
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSenta6G-hpTRxkiJK5Am8Z7sVmNVlXiV2LNQ21sJZ_0Z1Fj-w/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+- https://docs.google.com/forms/d/e/1FAIpQLSenta6G-hpTRxkiJK5Am8Z7sVmNVlXiV2LNQ21sJZ_0Z1Fj-w/viewform?usp=sf_link
+
+##   Rubrica da APS2
 
 - A / B (Cada item, soma meio conceito a partir do **C**)
     - SleepMode: se não detectado um pulso em X tempo, desliga o LCD (pode pintar de preto). Toque ou pulsos 'acorda' interface
