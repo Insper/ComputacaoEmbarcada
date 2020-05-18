@@ -54,6 +54,7 @@ nav:
     - 'Util-Documentos.md'
     - 'Util-lcd.md'
     - 'Util-freertos.md'
+    - 'Util-FloatPrint.md'
 
 #- Projetos:
 #    - 'Projeto 1':
