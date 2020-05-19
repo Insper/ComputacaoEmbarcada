@@ -182,7 +182,7 @@ int main(void){
 ...
 
 	calendar rtc_initial = {2020, 7, 10, 28, 15, 45 ,1};
-	RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_ALREN | ); //RTC_IER_ALREN - IRQ por ALARME
+	RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_ALREN | RTC_IER_SECEN); //RTC_IER_ALREN - IRQ por ALARME
     													  //RTC_IER_SECEN - IRQ por SEGUNDO
 
 	/* configura alarme do RTC */
@@ -193,11 +193,88 @@ int main(void){
 }
 ```
 
+!!! alert
+
+​    O RTC não possui reinicialização automática na IRQ por ALARME, quando ocorrer a interrupção é necessário iniciá-lo novamente com um novo valor para o ALARME.
+
 
 
 ## RTT - Real Time Timer
 
+```C
+void RTT_Handler(void)
+{
+
+  uint32_t ul_status;
+
+  ul_status = rtt_get_status(RTT);
+    
+  if ((ul_status & RTT_SR_RTTINC) == RTT_SR_RTTINC) {
+      
+    ...
+	//instrução a ser executada quando a IRQ por TICK (pllPreScale) for ativada
+	...
+  
+    }
+
+  if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
+      
+    ...
+	//instrução a ser executada quando a IRQ por ALARME for ativada
+	...
+         
+   } 
+    
+}
+```
+
+```c
+static void RTT_init(uint16_t pllPreScale, uint32_t IrqNPulses)
+{
+    
+  uint32_t ul_previous_time;
+
+  /* Configure RTT for a 1 second tick interrupt */
+  rtt_sel_source(RTT, false);
+  rtt_init(RTT, pllPreScale);
+  
+  ul_previous_time = rtt_read_timer_value(RTT);
+  while (ul_previous_time == rtt_read_timer_value(RTT));
+  
+  rtt_write_alarm_time(RTT, IrqNPulses+ul_previous_time);
+
+  /* Enable RTT interrupt */
+  NVIC_DisableIRQ(RTT_IRQn);
+  NVIC_ClearPendingIRQ(RTT_IRQn);
+  NVIC_SetPriority(RTT_IRQn, 4);
+  NVIC_EnableIRQ(RTT_IRQn);
+    
+  rtt_enable_interrupt(RTT, RTT_MR_ALMIEN | RTT_MR_RTTINCIEN);
+    
+}
+```
+
+```C
+int main(void){
+...
+    
+	uint16_t pllPreScale = (int) (((float) 32768) / 4.0);
+    uint32_t irqRTTvalue = 8;
+      
+	// reinicia RTT para gerar um novo IRQ
+	RTT_init(pllPreScale, irqRTTvalue);         
+
+...
+}
+```
+
+!!! alert
+
+​    O RTT não possui reinicialização automática, quando ocorrer a interrupção é necessário iniciá-lo novamente.
+
 ## UART 
+
+
 
 ## AFEC / ADC - Analog Front End Converter 
 
