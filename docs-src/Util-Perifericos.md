@@ -194,8 +194,7 @@ int main(void){
 ```
 
 !!! alert
-
-​    O RTC não possui reinicialização automática na IRQ por ALARME, quando ocorrer a interrupção é necessário iniciá-lo novamente com um novo valor para o ALARME.
+    O RTC não possui reinicialização automática na IRQ por ALARME, quando ocorrer a interrupção é necessário iniciá-lo novamente com um novo valor para o ALARME.
 
 
 
@@ -269,8 +268,7 @@ int main(void){
 ```
 
 !!! alert
-
-​    O RTT não possui reinicialização automática, quando ocorrer a interrupção é necessário iniciá-lo novamente.
+    O RTT não possui reinicialização automática, quando ocorrer a interrupção é necessário iniciá-lo novamente.
 
 ## UART 
 
