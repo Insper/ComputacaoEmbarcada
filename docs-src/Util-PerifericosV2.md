@@ -45,7 +45,9 @@ Um pequeno resumo de como utilizar os periféricos do microcontrolador SAME70 no
     #define BUT_IDX 		11
     #define BUT_IDX_MASK	(1 << BUT_IDX)
     ```
-
+    
+    Defina a função de callback:
+    
     ``` c
     //Callback da IRQ do botão
     void but_callback(void){
