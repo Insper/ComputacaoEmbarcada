@@ -52,6 +52,8 @@ nav:
 
 - 'Util':
     - 'Util-Documentos.md'
+    - 'Util-Perifericos.md'
+    - 'Util-PerifericosV2.md'
     - 'Util-lcd.md'
     - 'Util-freertos.md'
     - 'Util-FloatPrint.md'
