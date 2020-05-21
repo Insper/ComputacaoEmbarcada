@@ -24,9 +24,11 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      # - if: steps.cache-python.outputs.cache-hit != 'true'
-      - run: pip install -r requirements.txt
-
+      # pip
+      - run: |
+          pip install -r requirements.txt
+          pip install mkdocs-minify-plugin>=0.2
+          
       # Set configuration for repository and deploy documentation
       - env:
           GH_TOKEN: ${{ secrets.mkdocs }}
@@ -37,10 +39,8 @@ jobs:
           git config --global user.name "${GH_NAME}"
           git config --global user.email "${GH_EMAIL}"
           git remote set-url origin ${REMOTE}
-      # Install theme and dependencies
-      - run: |
-          pip install mkdocs-minify-plugin>=0.2
-
+              
+      # deploy
       - run: |
           mkdocs gh-deploy --force
           mkdocs --version
