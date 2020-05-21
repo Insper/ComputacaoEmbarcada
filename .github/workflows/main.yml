@@ -39,7 +39,6 @@ jobs:
           git remote set-url origin ${REMOTE}
       # Install theme and dependencies
       - run: |
-          pip install .
           pip install mkdocs-minify-plugin>=0.2
 
       - run: |
