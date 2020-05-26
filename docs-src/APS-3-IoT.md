@@ -21,6 +21,7 @@ O sistema embarcado deve satisfazer os seguintes requisitos:
 ### Rubrica
  
 - **C**
+
   - Coletar e enviar para um servidor:
     - Um valor analógico externo a placa (1s)
     - Um valor digital externo a placa (1s)
@@ -29,6 +30,7 @@ O sistema embarcado deve satisfazer os seguintes requisitos:
   - Embarcado deve sincronizar hora com servidor Web
 
 - Cada item a mais adiciona meio conceito na nota.
+
   - Servidor hospedado em nuvem
   - Envio dos dados a cada 5 min
     - dado analógico: continua coletando a cada 1s, mas só envia de 5 em 5 minutos.
