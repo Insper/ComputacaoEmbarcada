@@ -19,6 +19,8 @@ Os dados devem possuir [timestamp](https://en.wikipedia.org/wiki/Timestamp) (TS)
 O sistema embarcado deve satisfazer os seguintes requisitos:
 
 ### Rubrica
+
+Deve gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor).
  
 - **C**
 
@@ -45,4 +47,3 @@ O sistema embarcado deve satisfazer os seguintes requisitos:
       - Usar HTTPS, certificado HW e certificado server
       - Criptografar os dados com AES
   - ~Demonstrar com mais de um dispositivo funcionando ao mesmo tempo~
-Deve gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor).
