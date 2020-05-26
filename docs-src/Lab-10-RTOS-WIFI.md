@@ -59,19 +59,6 @@ Esse laboratório faz uso do exemplo disponível no repositório `SAME70-Example
 
 ### python-server
 
-O servidor em flask é simples e permite que alteremos uma variável `led` via um form:
-
--  (http://localhost:5000)
-
-![](imgs/wifi/form.png){width=300}
-
-E uma página de status, que exibe o valor enviado no forms em json:
-
-- http://localhost:5000/status
-
-![](imgs/wifi/status.png){width=300}
-
-#### Preparando o WebServer
 
 Acesse a pasta `python-server` que contém o script `server.py`, instale o flask via pip e execute o programa:
 
@@ -94,6 +81,16 @@ O resultado esperado deve ser o seguinte:
  * Debugger is active!
  * Debugger PIN: 278-674-158
 ```
+
+O servidor em flask é simples e permite que alteremos uma variável `led` via um form e lermos o status via um get:
+
+|                                    |                                      |
+| -------------                      | --------                             |
+| http://localhost:5000              | http://localhost:5000/status         |
+| ![](imgs/wifi/form.png){width=300} | ![](imgs/wifi/status.png){width=300} |
+
+#### Preparando o WebServer
+
 
 Para validar, conecte **seu celular** na mesma rede wifi e acesse o ip da sua máquina na porta 5000 e valide se o webserver está funcionando.
 
