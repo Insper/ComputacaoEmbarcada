@@ -18,15 +18,15 @@ Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET
     - Vamos modificar o código exemplo `RTOS/RTOS-WIFI`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/11-RTOS-WIFI`
 
 !!! note "Terminal"
-    Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:  :arrow_right: View :arrow_right: Terminal Window
+    Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no Atmel Studio clique em:  :arrow_right: View :arrow_right: Terminal Window
     
-    Configure o terminal para a porta que (COM) correta (verificar no windows) e para operar com um BaudRate de `115200`.
+    Configure o terminal para a porta COM correta (verificar no Windows) e para operar com um Baudrate de `115200`.
 
 ### IoT	
 
-IoT (Internet of Things) é um conceito que tem como objetivo a conexão entre objetos e a internet, ela faz parte da revolução da Industria 4.0 e está cada vez mais presentes em nossas vidadas. Desenvolver sistemas embarcados muitas vezes envolvem conectar esses sistemas na internet, e isso pode se dar de diversos meios possíveis:
+IoT (Internet of Things) é um conceito que tem como objetivo a conexão entre objetos e a internet, ela faz parte da revolução da Industria 4.0 e está cada vez mais presentes em nossas vidas. Desenvolver sistemas embarcados muitas vezes envolvem conectar esses sistemas na internet, e isso pode se dar atráves de diversos meios possíveis:
 
-1. Cabo de rede (ethernet)
+1. Cabo de rede (Ethernet)
 1. Conexão WIFI
 1. 3G/4G/GSM
 1. Sistemas de comunicação de baixa energia:
@@ -34,7 +34,7 @@ IoT (Internet of Things) é um conceito que tem como objetivo a conexão entre o
 1. Sistema de comunicação proprietário 
    - AM/FM/...
 
-Para cada aplicação existe uma forma de comunicação ideal, e vocês como engenheiro de computação
+Para cada aplicação existe uma forma de comunicação ideal, e vocês como engenheiros de computação
 devem estar cientes dessas formas e saber interagir com elas.
 
 Nesse laboratório iremos explorar um pouco a comunicação WIFI em sistemas embarcados, para isso iremos conectar um módulo externo a nossa placa que servirá como 'placa de rede' do nosso microcontrolador, esse módulo é o WINC 1500.
@@ -42,9 +42,9 @@ Nesse laboratório iremos explorar um pouco a comunicação WIFI em sistemas emb
 
 ### WINC1500
 
-Existem inúmeros módulos wifi para serem utilizados em sistemas embarcados, existe até microcontroladores que possuem toda a parte wifi integrada no chip (exemplo: [STM32](https://www.st.com/en/microcontrollers-microprocessors/stm32-wireless-mcus.html)), nesses casos não é necessário conectar um módulo externo, tudo está integrado no chip (tirando a antena)!
+Existem inúmeros módulos WIFI para serem utilizados em sistemas embarcados, existe até microcontroladores que possuem toda a parte WIFI integrada no chip (exemplo: [STM32](https://www.st.com/en/microcontrollers-microprocessors/stm32-wireless-mcus.html)), nesses casos não é necessário conectar um módulo externo, tudo está integrado no chip (tirando a antena)!
 
-O módulo que iremos utilizar é desenvolvido pela microchip e chama [Winc1500](http://ww1.microchip.com/downloads/en/DeviceDoc/70005266B.pdf)
+O módulo que iremos utilizar é desenvolvido pela Microchip e chama [Winc1500](http://ww1.microchip.com/downloads/en/DeviceDoc/70005266B.pdf)
 
 <div style="text-align: center;" class="no-print"><embed src="http://ww1.microchip.com/downloads/en/DeviceDoc/70005266B.pdf" width="650" height="500"></div>
 
@@ -82,7 +82,7 @@ O resultado esperado deve ser o seguinte:
  * Debugger PIN: 278-674-158
 ```
 
-O servidor em flask é simples e permite que alteremos uma variável `led` via um form e lermos o status via um get:
+O servidor em Flask é simples e permite que alteremos uma variável `led` via um form e lermos o status via um get:
 
 |                                    |                                      |
 | -------------                      | --------                             |
@@ -92,7 +92,7 @@ O servidor em flask é simples e permite que alteremos uma variável `led` via u
 #### Preparando o WebServer
 
 
-Para validar, conecte **seu celular** na mesma rede wifi e acesse o ip da sua máquina na porta 5000 e valide se o webserver está funcionando.
+Para validar, conecte **seu celular** na mesma rede WIFi e acesse o ip da sua máquina na porta 5000 e valide se o webserver está funcionando.
 
 !!! info
     Deixe o servidor rodando, vamos fazer o embarcado se conectar nele.
@@ -102,14 +102,14 @@ Para validar, conecte **seu celular** na mesma rede wifi e acesse o ip da sua m�
     
     http://192.168.0.138:5000
     
-    **Anote esse IP, iremos usar mais para frente**
+    **Anote o seu IP, iremos usar mais para frente**
     
 !!! example "Tarefas"
     1. Instalar `requirements.txt`
-    1. Subir o servidor flask
+    1. Subir o servidor Flask
     1. Validar local (`http://localhost:5000`)
     1. Validar de outro dispositivo (exemplo: `http://192.168.0.138:500`)
-        - isso testa se o seu windows está permitindo acesso externo ao seu server, precisamos disso já que queremos que o embarcado se conecte a esse servidor.
+        - isso testa se o seu Windows está permitindo acesso externo ao seu server, precisamos disso já que queremos que o embarcado se conecte a esse servidor.
     1. Mantenha o servidor em execução.
     ==NÃO SIGA SEM QUE TODOS OS PASSOS ANTERIORES ESTIVEREM FUNCIONANDO==
  
@@ -127,11 +127,11 @@ Conecte o módulo `WINC1500` no EXT-1 do kit de desenvolvimento.
 
 #### Entendendo o firmware
 
-Vamos relembrar um pouco de camada física e tec-web agora, toda vez que você acessa uma página da internet um socket e criado, esse socket e um canal de comunicação TCP/UDP entre dois pontos via internet. Uma vez estabelecido o socket o client (no nosso caso o embarcado) pode fazer uma requisição (get) ou um envio de informação (post). Nesse exemplo iremos fazer um `get` no servidor que está rodando no seu computador.
+Vamos relembrar um pouco de camada física e Tecweb agora, toda vez que você acessa uma página da internet um socket e criado, esse socket e um canal de comunicação TCP/UDP entre dois pontos via internet. Uma vez estabelecido o socket o client (no nosso caso o embarcado) pode fazer uma requisição (get) ou um envio de informação (post). Nesse exemplo iremos fazer um `get` no servidor que está rodando no seu computador.
 
 ![](imgs/wifi/socket.svg)
 
-Nosso firmware irá Seguindo os passos a seguir:
+Nosso firmware irá seguindo os seguintes passos a seguir:
 
 - WIFI:
     1. Conecta no roteador
@@ -145,13 +145,13 @@ Nosso firmware irá Seguindo os passos a seguir:
 
 #### tasks
 
-O firmware exemplo possui duas tarefas: `task_wifi` e `task_process`, a primeira é responsável por realizar toda a comunicação com o módulo WINC1500 e fazer a inicialização da comunicação socket com o webserver em python, a segunda é responsável por gerenciar as mensagens que serão enviadas para o servidor.
+O firmware exemplo possui duas tarefas: `task_wifi` e `task_process`, a primeira é responsável por realizar toda a comunicação com o módulo WINC1500 e fazer a inicialização da comunicação socket com o webserver em Python, a segunda é responsável por gerenciar as mensagens que serão enviadas para o servidor.
 
 ![](imgs/wifi/firmware.svg)
 
-A `task_wifi` gerencia alguns `callbacks` de software, que são eventos gerados do módulo wifi, existem vários callbacks que podem ser utilizados, nesse exemplo usamos:
+A `task_wifi` gerencia alguns `callbacks` de software, que são eventos gerados do módulo WIFI, existem vários callbacks que podem ser utilizados, nesse exemplo usamos:
 
-- `wifi_cb`: callback de eventos relacionado a camada física do wifi ( conexão, ssid list, ...)
+- `wifi_cb`: callback de eventos relacionado a camada física do WIFI ( conexão, ssid list, ...)
 - `resolve_cb`: callback relacionado a resolução de nome no DNS, se quisermos acessar um HOST_NAME e não um ip (google.com -> 10.21.3.12).
 - `socket_cb`: eventos de socket (conexão/ nova mensagem/ erro/ ...)
 
@@ -179,7 +179,7 @@ Essa tarefa foi implementada com a máquina de estados a seguir em mente, usando
 !!! info
     Abra o projeto no Atmel Studio
 
-Vamos agora começar o lab para valer, primeiro vamos executar o exemplo. Mas para isso é necessários configurarmos o módulo wifi para acessar a rede que está disponível ai na sua casa.
+Vamos agora começar o lab para valer, primeiro vamos executar o exemplo. Mas para isso é necessários configurarmos o módulo WIFI para acessar a rede que está disponível da sua casa.
 
 ### Preparando o firmware
 
@@ -202,7 +202,7 @@ IP e porta do servidor (seu computador):
 
 !!! warning
     - O sistema embarcado e o webserver devem estar na mesma rede!
-    - O modulo winc1500 só se conecta em rede de 3Ghz
+    - O modulo winc1500 só se conecta em rede de 2.4Ghz
 
 !!! example "Tarefa"
     - Conecte o WINC1500 no EXT1
