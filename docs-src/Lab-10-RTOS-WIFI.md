@@ -39,6 +39,13 @@ devem estar cientes dessas formas e saber interagir com elas.
 
 Nesse laboratório iremos explorar um pouco a comunicação WIFI em sistemas embarcados, para isso iremos conectar um módulo externo a nossa placa que servirá como 'placa de rede' do nosso microcontrolador, esse módulo é o WINC 1500.
 
+!!! warning
+    Cuidado ao desenvolver sistemas IoT você é responsável pela segurança dos dados que estão sendo enviados/recebidos. E não só na ponta do embarcado, como também no armazenamento de dados no servidor.
+    
+    - https://www.iotforall.com/5-worst-iot-hacking-vulnerabilities/
+    - https://observer.com/2015/07/eight-internet-of-things-security-fails/
+    - https://medium.com/iot-security-review/5-internet-of-things-security-fails-fae2fb2bb871
+    - https://securityintelligence.com/organizations-continue-to-fail-at-iot-security-and-the-consequences-are-growing/
 
 ### WINC1500
 
@@ -307,16 +314,36 @@ A mensagem com o conteúdo (head + json) é salva no buffer `p_recvMsg->pu8Buffe
 
 == até aqui é C.==     
 
-### B - melhorando
+### B - melhorando o firmware
+
+Vamos alterar como o get é realizado, da forma atual temos um chamado de `#define MAIN_PREFIX_BUFFER` que define a string da mensagem que será enviada no `get`, que é copiada para o buffer global `g_sendBuffer`:
+
+```
+    case GET:
+      printf("STATE: GET \n");
+      sprintf((char *)g_sendBuffer, MAIN_PREFIX_BUFFER);
+      send(tcp_client_socket, g_sendBuffer, strlen((char *)g_sendBuffer), 0);
+      state = ACK;
+      break;
+```
+
+Muito melhor seria termos uma função que recebe como parâmetro o `g_sendBuffer` e o path do commando get (`/status`).
+
+!!! example "Tarefa"
+    1. Crie uma função que formate o comando get 
+    1. Use a função no estado GET
+    1. Teste!
+    
+!!! tip
+    1. Mude o valor no servidor flask e veja o led mudando o status
+    1. http://localhost:5000
+    1. Tem muito atraso? Quanto tempo leva essa atualização? pq?
+    
+### A 
 
 Podemos melhorar várias coisas nesse projeto, mas vamos por partes. A primeira coisa que podemos fazer é adicionar o botão da placa e fazer ele também controlar o LED.
 
 !!! example "Tarefa"
     - Adicione o botão da placa  -> callback -> semáforo 
-
-### A - post
-
-- post do botão -> LED
-
-
+    - O LED é controlado ou pelo botão da placa ou pelo servidor flask
 
