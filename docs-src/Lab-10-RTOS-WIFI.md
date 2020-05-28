@@ -14,7 +14,7 @@ Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET
 | `SAME70-Examples/RTOS/WIFI-WINC1500-get-RTOS-EXT1` :arrow_right: | `Labs/11-RTOS-WIFI` |
 
 !!! warning "Código exemplo"
-
+    - ==Atualizar o repositório do SAME70-Examples==
     - Vamos modificar o código exemplo `RTOS/RTOS-WIFI`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/11-RTOS-WIFI`
 
 !!! note "Terminal"
