@@ -33,12 +33,12 @@ Deve gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor).
 
 - Cada item a mais adiciona meio conceito na nota.
 
-  - Servidor hospedado em nuvem
-  - Envio dos dados a cada 5 min
+  - **Servidor hospedado em nuvem**
+  - **Envio dos dados a cada 5 min**
     - dado analógico: continua coletando a cada 1s, mas só envia de 5 em 5 minutos.
-  - dado digital: só envia quando seu estado muda
-  - Formatar dado para envio com [`json`](https://github.com/zserge/jsmn)
-  - Aviso visual que dado foi enviado com sucesso
+  - **dado digital: só envia quando seu estado muda**
+  - **Formatar dado para envio com [`json`](https://github.com/zserge/jsmn)**
+  - **Aviso visual que dado foi enviado com sucesso**
   - Forma fácil de configurar dispositivo em rede Wi-Fi
     - SDCARD/ UART/ `_provision_mode`
   - Não perder dado se servidor não estiver disponível
@@ -46,4 +46,4 @@ Deve gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor).
   - Segurança 
       - Usar HTTPS, certificado HW e certificado server
       - Criptografar os dados com AES
-  - ~Demonstrar com mais de um dispositivo funcionando ao mesmo tempo~
+  - **Demonstrar com mais de um dispositivo funcionando ao mesmo tempo**
