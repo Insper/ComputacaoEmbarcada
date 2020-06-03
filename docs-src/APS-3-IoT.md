@@ -23,27 +23,25 @@ O sistema embarcado deve satisfazer os seguintes requisitos:
 Deve gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor).
  
 - **C**
-
-  - Coletar e enviar para um servidor:
-    - Um valor analógico externo a placa (1s)
-    - Um valor digital externo a placa (1s)
-  - Dados devem possuir Timestamp - `TS`
-  - Dados devem possuir identificador de dispositivo - `ID`
-  - Embarcado deve sincronizar hora com servidor Web
+   - Coletar e enviar para um servidor:
+      - Um valor analógico externo a placa (1s)
+      - Um valor digital externo a placa (1s)
+   - Dados devem possuir Timestamp - `TS`
+   - Dados devem possuir identificador de dispositivo - `ID`
+   - Embarcado deve sincronizar hora com servidor Web
 
 - Cada item a mais adiciona meio conceito na nota.
-
-  - **Servidor hospedado em nuvem**
-  - **Envio dos dados a cada 5 min**
-    - dado analógico: continua coletando a cada 1s, mas só envia de 5 em 5 minutos.
-  - **dado digital: só envia quando seu estado muda**
-  - **Formatar dado para envio com [`json`](https://github.com/zserge/jsmn)**
-  - **Aviso visual que dado foi enviado com sucesso**
-  - Forma fácil de configurar dispositivo em rede Wi-Fi
-    - SDCARD/ UART/ `_provision_mode`
-  - Não perder dado se servidor não estiver disponível
+    - **Servidor hospedado em nuvem**
+    - **Envio dos dados a cada 5 min**
+      - dado analógico: continua coletando a cada 1s, mas só envia de 5 em 5 minutos.
+    - **dado digital: só envia quando seu estado muda**
+    - **Formatar dado para envio com [`json`](https://github.com/zserge/jsmn)**
+    - **Aviso visual que dado foi enviado com sucesso**
+    - Forma fácil de configurar dispositivo em rede Wi-Fi
+      - SDCARD/ UART/ `_provision_mode`
+    - Não perder dado se servidor não estiver disponível
     - Caso não haja conexão com internet manter dado salvo até link ativo novamente
-  - Segurança 
+    - Segurança 
       - Usar HTTPS, certificado HW e certificado server
       - Criptografar os dados com AES
-  - **Demonstrar com mais de um dispositivo funcionando ao mesmo tempo**
+    - **Demonstrar com mais de um dispositivo funcionando ao mesmo tempo**
