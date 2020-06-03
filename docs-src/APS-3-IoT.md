@@ -45,3 +45,4 @@ Deve gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor).
       - Usar HTTPS, certificado HW e certificado server
       - Criptografar os dados com AES
     - **Demonstrar com mais de um dispositivo funcionando ao mesmo tempo**
+    - Uma protótipo de alguma coisa "real" / produto
