@@ -29,7 +29,8 @@ Deve gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor).
   - Um valor digital externo a placa (1s)
 - Dados devem possuir Timestamp - `TS`
 - Dados devem possuir identificador de dispositivo - `ID`
-- Embarcado deve sincronizar hora com servidor Web
+- Embarcado deve sincronizar hora com Web
+   - exemplo já pega calendário e hora da web, precisa atualizar RTC com esses valores.
 
 #### extra
 
