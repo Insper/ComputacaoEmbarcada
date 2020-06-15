@@ -29,12 +29,12 @@ Deve gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor).
 #### C
 
 - Coletar e enviar para um servidor:
-  - Um valor analógico externo a placa (1s)
-  - Um valor digital externo a placa (1s)
+    - Um valor analógico externo a placa (1s)
+    - Um valor digital externo a placa (1s)
 - Dados devem possuir Timestamp - `TS`
 - Dados devem possuir identificador de dispositivo - `ID`
 - Embarcado deve sincronizar hora com Web
-   - exemplo já pega calendário e hora da web, precisa atualizar RTC com esses valores.
+     - exemplo já pega calendário e hora da web, precisa atualizar RTC com esses valores.
 
 #### extra
 
