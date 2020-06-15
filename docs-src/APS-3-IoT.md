@@ -22,6 +22,10 @@ O sistema embarcado deve satisfazer os seguintes requisitos:
 
 Deve gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor).
  
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd0G_dLc_T8SExPj1P-N0Ky0TFQlAYEPzFpMogVKVXk3Q7iCQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+- https://docs.google.com/forms/d/e/1FAIpQLSd0G_dLc_T8SExPj1P-N0Ky0TFQlAYEPzFpMogVKVXk3Q7iCQ/viewform?usp=sf_link
+ 
 #### C
 
 - Coletar e enviar para um servidor:
@@ -38,16 +42,16 @@ Cada item a mais adiciona meio conceito na nota.
 
 - **Servidor hospedado em nuvem**
 - **Envio dos dados a cada 5 min**
-  - dado analógico: continua coletando a cada 1s, mas só envia de 5 em 5 minutos.
+    - dado analógico: continua coletando a cada 1s, mas só envia de 5 em 5 minutos.
 - **dado digital: só envia quando seu estado muda**
 - **Formatar dado para envio com [`json`](https://github.com/zserge/jsmn)**
 - **Aviso visual que dado foi enviado com sucesso**
 - Forma fácil de configurar dispositivo em rede Wi-Fi
-  - SDCARD/ UART/ `_provision_mode`
+    - SDCARD/ UART/ `_provision_mode`
 - Não perder dado se servidor não estiver disponível
 - Caso não haja conexão com internet manter dado salvo até link ativo novamente
 - Segurança 
-  - Usar HTTPS, certificado HW e certificado server
-  - Criptografar os dados com AES
+    - Usar HTTPS, certificado HW e certificado server
+    - Criptografar os dados com AES
 - **Demonstrar com mais de um dispositivo funcionando ao mesmo tempo**
 - Uma protótipo de alguma coisa "real" / produto
