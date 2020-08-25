@@ -1,5 +1,8 @@
 # LAB 1 - PIO
 
+!!! success "2020-2"
+    Material atualizado.
+
 Ao final desse laboratório você deve ser capaz de controlar pinos digitais do microcontrolador a fim de podermos acionar saídas (LEDs/ Buzzers/ motores) e lermos entradas (botões/ sensores/ ...).
 
 ## Entrega

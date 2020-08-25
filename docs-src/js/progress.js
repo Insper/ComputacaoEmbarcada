@@ -55,10 +55,9 @@ function setButDoneOld(but) {
   but.className = "button0 buttonDone";
 }
 
-var url = window.location.href;
-var usrname = checkCookie();
-
 function progressBut(button_id) {
+    var url = window.location.href;
+    var usrname = checkCookie();
     var but = document.getElementById(button_id);
     var text = but.firstChild;
     if (usrname != "" && text.data == "Cheguei Aqui!"){
@@ -78,7 +77,7 @@ function progressBut(button_id) {
     }
 }
 
-var buttons = document.getElementsByClassName( "button0");
+var buttons = document.getElementsByClassName("button0");
 
 for ( var i = 0; i < buttons.length; i++) {
   var but = buttons[i];
