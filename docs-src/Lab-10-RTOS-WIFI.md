@@ -14,7 +14,7 @@ Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET
 | `SAME70-Examples/RTOS/WIFI-WINC1500-get-RTOS-EXT1` :arrow_right: | `Labs/11-RTOS-WIFI` |
 
 !!! warning "Código exemplo"
-
+    - ==Atualizar o repositório do SAME70-Examples==
     - Vamos modificar o código exemplo `RTOS/RTOS-WIFI`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/11-RTOS-WIFI`
 
 !!! note "Terminal"
@@ -30,8 +30,10 @@ IoT (Internet of Things) é um conceito que tem como objetivo a conexão entre o
 1. Conexão WIFI
 1. 3G/4G/GSM
 1. Sistemas de comunicação de baixa energia:
-   - LoRa/ ...
+    
+    - LoRa/ ...
 1. Sistema de comunicação proprietário 
+   
    - AM/FM/...
 
 Para cada aplicação existe uma forma de comunicação ideal, e vocês como engenheiros de computação
@@ -170,9 +172,7 @@ Essa tarefa foi implementada com a máquina de estados a seguir em mente, usando
  enum states {
     WAIT = 0,
     GET,
-    ACK_REQ,
     ACK,
-    MSG_REQ,
     MSG,
     TIMEOUT,
     DONE,
@@ -210,6 +210,7 @@ IP e porta do servidor (seu computador):
 !!! warning
     - O sistema embarcado e o webserver devem estar na mesma rede!
     - O modulo winc1500 só se conecta em rede de 2.4Ghz
+        - ==Sugestão: faça seu celular virar um acesspoint, conecte o embarcado e o computador nele!==
 
 !!! example "Tarefa"
     - Conecte o WINC1500 no EXT1

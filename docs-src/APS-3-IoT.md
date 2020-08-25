@@ -22,28 +22,36 @@ O sistema embarcado deve satisfazer os seguintes requisitos:
 
 Deve gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor).
  
-- **C**
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd0G_dLc_T8SExPj1P-N0Ky0TFQlAYEPzFpMogVKVXk3Q7iCQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 
-  - Coletar e enviar para um servidor:
+- https://docs.google.com/forms/d/e/1FAIpQLSd0G_dLc_T8SExPj1P-N0Ky0TFQlAYEPzFpMogVKVXk3Q7iCQ/viewform?usp=sf_link
+ 
+#### C
+
+- Coletar e enviar para um servidor:
     - Um valor analógico externo a placa (1s)
     - Um valor digital externo a placa (1s)
-  - Dados devem possuir Timestamp - `TS`
-  - Dados devem possuir identificador de dispositivo - `ID`
-  - Embarcado deve sincronizar hora com servidor Web
+- Dados devem possuir Timestamp - `TS`
+- Dados devem possuir identificador de dispositivo - `ID`
+- Embarcado deve sincronizar hora com Web
+     - exemplo já pega calendário e hora da web, precisa atualizar RTC com esses valores.
 
-- Cada item a mais adiciona meio conceito na nota.
+#### extra
 
-  - Servidor hospedado em nuvem
-  - Envio dos dados a cada 5 min
+Cada item a mais adiciona meio conceito na nota.
+
+- **Servidor hospedado em nuvem**
+- **Envio dos dados a cada 5 min**
     - dado analógico: continua coletando a cada 1s, mas só envia de 5 em 5 minutos.
-  - dado digital: só envia quando seu estado muda
-  - Formatar dado para envio com [`json`](https://github.com/zserge/jsmn)
-  - Aviso visual que dado foi enviado com sucesso
-  - Forma fácil de configurar dispositivo em rede Wi-Fi
+- **dado digital: só envia quando seu estado muda**
+- **Formatar dado para envio com [`json`](https://github.com/zserge/jsmn)**
+- **Aviso visual que dado foi enviado com sucesso**
+- Forma fácil de configurar dispositivo em rede Wi-Fi
     - SDCARD/ UART/ `_provision_mode`
-  - Não perder dado se servidor não estiver disponível
-    - Caso não haja conexão com internet manter dado salvo até link ativo novamente
-  - Segurança 
-      - Usar HTTPS, certificado HW e certificado server
-      - Criptografar os dados com AES
-  - ~Demonstrar com mais de um dispositivo funcionando ao mesmo tempo~
+- Não perder dado se servidor não estiver disponível
+- Caso não haja conexão com internet manter dado salvo até link ativo novamente
+- Segurança 
+    - Usar HTTPS, certificado HW e certificado server
+    - Criptografar os dados com AES
+- **Demonstrar com mais de um dispositivo funcionando ao mesmo tempo**
+- Uma protótipo de alguma coisa "real" / produto
