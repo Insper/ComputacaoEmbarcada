@@ -1,4 +1,4 @@
-# freertos
+# Freertos
 
 Resumo dos principais recursos do freertos utilizados no curso de computação embarcada.
 
@@ -14,7 +14,7 @@ Resumo dos principais recursos do freertos utilizados no curso de computação e
 
 ```c
  BaseType_t xTaskCreate(    TaskFunction_t pvTaskCode,
-                            const char * const pcName,
+                            const char * const pcName
                             configSTACK_DEPTH_TYPE usStackDepth,
                             void *pvParameters,
                             UBaseType_t uxPriority,

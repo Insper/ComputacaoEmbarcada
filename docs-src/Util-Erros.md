@@ -1,4 +1,4 @@
-# SAME70-XPLD - Erros
+# Erros comum
 
 Aqui estão listados os erros mais frequentes na utilização da placa SAME70-XPLD.
 

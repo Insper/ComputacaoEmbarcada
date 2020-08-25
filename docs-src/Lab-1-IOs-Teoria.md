@@ -1,6 +1,9 @@
 # Lab 1 - Digital IO 
 
-!!! note "Leitura recomendada"
+!!! success "2020-2"
+    Material atualizado.
+
+!!! note "Leitura rextra ecomendada"
     - [Renesas - GPIO](https://www.renesas.com/in/en/support/technical-resources/engineer-school/mcu-programming-peripherals-01-gpio.html)
     - [ARM](https://www.arm.com/products/silicon-ip-cpu)
 
@@ -20,7 +23,7 @@ memória.
 
 ## Controlando um pino
 
-Vamos imaginar uma aplicação comum de um microcontrolador: controlar um pino digital (Ligado/ Desligado). Esse pino pode estar conectado por exemplo a um LED. Nosso objetivo é conseguirmos escrever um software que seja capaz de colocar energia (VCC/ ligado) no pino, ou desligar o pino (GND/ desligar). Como ilustrado no diagrama a seguir:
+Vamos imaginar uma aplicação comum de um microcontrolador: controlar um pino digital (Ligado/ Desligado). Esse pino pode estar conectado a um LED, por exemplo. Nosso objetivo é conseguirmos escrever um software que seja capaz de colocar energia (VCC/ ligado) no pino, ou desligar o pino (GND/ desligar). Como ilustrado no diagrama a seguir:
 
 ![](imgs/IOs/led-uc.png)
 
@@ -41,7 +44,7 @@ Como demonstrado a seguir:
     é comum o uso de General Propose I/O (GPIO) no lugar de PIO.
     
 !!! note
-    Nesse exemplo, a memória do uC está omitida, ela pode ser considerada como um periférico do uC. Nesse 
+    Nesse exemplo, a memória do uC é omitida. Nesse 
     caso seriam adicionados mais dois periféricos, um para a memória de programa (flash) e outra para a memória
     de dados (SRAM)
 
@@ -68,13 +71,13 @@ listados na Tabela: **13.1 do datasheet SAM-E70**.
     Secção 32 do datasheet. **Leitura necessária**
 
 No ARM-Atmel os pinos são gerenciados por um hardware chamado de
-**Parallel Input/Output Controller (PIO)**, esse dispositivo é capaz de
+**Parallel Input/Output Controller (PIO)**, esse dispositivo pode
 gerenciar até 32 diferentes pinos (I/Os).
 
 Além do controle direito do pino pelo PIO, cada I/O no ARM-Atmel pode
 ser associado a uma função diferente (periférico), por exemplo: o I/O
 `PA20`  pode ser controlador pelo periférico do PWM enquanto o `PA18`
-pode ser controlador pela UART.
+e pela UART.
 
 Isso fornece flexibilidade ao desenvolvimento de uma aplicação, já que
 os I/Os não possuem uma funcionalidade fixa. Existe uma tabela que informa quais I/Os cada periféricos
@@ -84,7 +87,7 @@ podem controlar.
 
 Podemos interpretar a tabela como: o pino `102` do microcontrolador
 identificado como `PA0` (PIOA_0) pode ser utilizado como `WKUP0`
-(wakeup) ou mapeado para um dos tres perifericos:
+(wakeup) ou mapeado para um dos três periféricos:
 
   - Periférico A: PWM (Pulse width modulation)
   - Periférico B: TIOA0 (Timer 0)
@@ -110,7 +113,7 @@ ativar o clock de cada PIO para que o periférico passe a funcionar.
 
 O PIO suporta as seguintes configurações:
 
-  - Interrupção em nível ou borda em qualquer I/O
+  - Interrupção ao nível ou borda em qualquer I/O
   - Filtragem de "glitch"
   - Deboucing
   - Open-Drain

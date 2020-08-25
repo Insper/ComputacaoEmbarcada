@@ -1,6 +1,8 @@
-# Lista de projetos
+# Anos passados
 
-## 2020
+## 2020-1
+
+Devido ao corona cancelamos o projeto. Mas as ideias eram:
 
 |  **Tipo** | **Nome** | **Descrição** |  |  |  |
 | --- | --- | --- | --- | --- | --- |

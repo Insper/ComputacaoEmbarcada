@@ -1,5 +1,8 @@
 # Bem vindo a disciplina Computação Embarcada
 
+!!! success "2020-2"
+    Material atualizado.
+
 ![](imgs/lab.jpeg)
 
 - **Curso:** Engenharia Da Computação - Quinto Semestre
@@ -47,3 +50,26 @@ Sistemas embarcados movem o mundo!
 ## Começando 
 
 Leia mais sobre o curso e a infra necessária em: [Sobre](Sobre-Curso.md)
+
+## Histórico
+
+Pequeno histórico da evolução da disciplina:
+
+- 2020-2: 
+    - full online: sai APS-1 e entra projeto 1, mantém APS-2 e APS-3.
+    
+- 2020-1: 
+    - Devido ao corona o projeto foi cancelado, os alunos receberam um complemento do kit para trabalharem de casa. As APS foram: Musica, LCD bike e WIFI. As avaliaçòes individuais foram aprimoradas. A parte de UX foi bem trabalhada nesse semestre.
+     
+- 2019-2 (DP):
+    - Troquei a APS 2 da máquina de lavar para a Bike. Como só tinha um aluno, as APS viraram projetos.
+
+- 2019-1:
+    - Introduzi as APS: Musical; Máquina de Lavar e Wifi (tinha uma de sensores também), os alunos tiveram que entregar 2 projetos: controle/ vending machine e projeto livre. Primeira vez que aparece 
+      o projeto fechado do começo de semestre. **Estreia do lab de Arq.**
+    
+- 2018-1:
+    - Um projeto ao longo do semestre todo. Introduzi avaliação individual.
+
+- 2017-1 (primeira turma):
+    - Um projeto ao longo do semestre todo.

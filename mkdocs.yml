@@ -24,14 +24,17 @@ copyright: 'Copyright &copy; Rafael Corsi @ insper'
 
 nav:
 - Home: index.md
-- Util-corona.md
 - Sobre-Curso.md
-- Sobre-Ferramental.md
+- Sobre-2020-2.md
 - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
-- same70-xpld_erros.md
 
-- 'Aulas':
-    - 'Aulas.md'
+- 'Util':
+    - Sobre-Ferramental.md
+    - Util-Erros.md
+    - 'Util-Documentos.md'
+    - 'Util-lcd.md'
+    - 'Util-freertos.md'
+    - 'Util-FloatPrint.md'
 
 - Labs:
     - 'PIO - Teoria': 'Lab-1-IOs-Teoria.md'
@@ -51,26 +54,20 @@ nav:
     - 'Lab-9-ADC-FIR.md'
     - 'Lab-10-RTOS-WIFI.md'
 
-- 'Util':
-    - 'Util-Documentos.md'
-    - 'Util-lcd.md'
-    - 'Util-freertos.md'
-    - 'Util-FloatPrint.md'
-
-#- Projetos:
+- Projetos:
 #    - 'Projeto 1':
-#        - 'Descrição': 'Projeto-1-Descrição.md'
+        - 'Descrição': 'Projeto-1-Descrição.md'
 #        - 'Vending Machine': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-VendingMachine.pdf'
-#        - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
-#        - 'Handout 1': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Handout%20descricao%20Projeto.pdf'
+        - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
+        - 'Handout 1': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Handout%20descricao%20Projeto.pdf'
 #        - 'Dicas': 'Projeto-1-Dicas.md'
-#        - 'Projeto-1-Lista.md'
+        - 'Projeto-1-Lista.md'
 #    - 'Projeto 2':
 #        - 'Descrição': 'Projeto-2-Descrição.md'
 #        - 'Projeto-2-Lista.md'
 
 - APS:
-    - 'APS 1 - Musical': 'APS-1-Musical.md'
+#    - 'APS-1-Musical.md'
     - 'APS 2':
       - 'APS-2-Interface.md'
       - 'APS-2-Rubrica.md'
@@ -88,11 +85,12 @@ nav:
 #####################################################################
 extra_css:
   - css/printing.css
+  - css/progress.css
 
 extra_javascript:
   - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
   - 'translate_admonitions.js'
-  - 'post_progress.js'
+  - 'js/progress.js'
 
 # Extensions
 

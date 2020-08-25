@@ -1,5 +1,8 @@
 # Projeto 1 
 
+!!! success "2020-2"
+    Material atualizado.
+
 !!! note "Entrega"
     Entregar primeira semana pós AI.
     
@@ -43,7 +46,7 @@ Rubricas e detalhes de projeto no [folder Vending Machine](https://github.com/In
 !!! tip
     Para acelerar o desenvolvimento desse projeto, disponibilizamos um projeto mecânico 'padrão', que pode ser editado para adequação a ideia de vocês. Esse projeto está no repositório da disciplina: `Projeto-1/VendingMachine` (3D e pdf para corte na laser).
     
-    ![](Projeto-1/VendingMachine/VendingMachine.jpeg){width=300}
+    ![](imgs/Projeto-1/VendingMachine.jpeg){width=300}
     
     O material a ser utilizado é [foam board](https://www.printi.com.br/blog/foam-board-o-que-e-e-como-utilizar)
     

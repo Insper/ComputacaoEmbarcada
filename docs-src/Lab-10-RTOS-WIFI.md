@@ -346,4 +346,3 @@ Podemos melhorar várias coisas nesse projeto, mas vamos por partes. A primeira 
 !!! example "Tarefa"
     - Adicione o botão da placa  -> callback -> semáforo 
     - O LED é controlado ou pelo botão da placa ou pelo servidor flask
-

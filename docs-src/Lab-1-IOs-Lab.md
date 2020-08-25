@@ -31,15 +31,14 @@ Parte 2:
   1. Configurar o PIO para controlar o pino do botão em modo entrada
   1. Ler o botão e agir sobre o LED
   
-## Inicializando/ configurando o ASF
+## Inicializando e configurando o ASF
 
-### Começando
+!!! example "Tarefa: començando"
+    1. Clone o repositório [`SAME70-examples`](https://github.com/Insper/SAME70-examples/) para a sua máquina.
+    1. Copie a pasta `SAME70-Clear` para o seu repositório.
+    1. Abra o projeto da pasta recém criada no AtmelStudio
 
-1. Clone o repositório [`SAME70-examples`](https://github.com/Insper/SAME70-examples/) para a sua máquina.
-1. Copie a pasta `SAME70-Clear` para o seu repositório.
-1. Abra o projeto da pasta recém criada no AtmelStudio
-
-### main
+<button class="button0" id="0: startup" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
 Já com o AtmelStudio aberto verifique o conteúdo do arquivo `main.c` o mesmo deve estar praticamente vazio salvo comentários, inclusão do arquivo `asf.h` e duas função `init` e `main`:
 
@@ -97,7 +96,7 @@ A função `init` será utilizada para inserirmos códigos que farão a iniciali
   }
 ```
 
-### Incluindo dependências no ASF
+### Modificando o ASF
 
 No AtmelStudio abra o **ASF Wizard** clicando na barra superior em: `ASF` :arrow_right: `ASF Wizard`. Após um tempo (sim demora para abrir) uma janela deve abrir contendo: a esquerda uma lista dos possíveis drivers que podem ser utilizados para o microcontrolador e na coluna da direita os drivers/bibliotecas já inseridas na solução.
 
@@ -133,14 +132,26 @@ Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse proj
     ![](imgs/IOs/asf-result.png)
 
 !!! tip  ""
-     Ao final clique em APPLY para salvar as alterações.
+    Ao final clique em APPLY para salvar as alterações.
+
+<button class="button0" id="1:asf" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
 
 ## Inicialização do uC
 
-Antes da execução de qualquer `firmware` é necessário realizarmos configurações no uC que pode variar desde configuração de pino, inicialização de memória, configuração de clock,  periféricos de comunicação/ .... No nosso caso iremos começar configurando o clock do uC e desativando o `WatchDog Timer`.
+Antes da execução do nosso código é necessário realizarmos configurações no uC que irão preparar o core. Essas configurações variam de uC para uC e podem incluir a configuração de:
 
-!!! example "Tarefa: Modifique `main.c`"
-    Modifique a função `init()` incluindo as seguintes linhas de código.
+- clock
+- memória de execução / cache
+- Desativar funcionalidades específicas 
+- terminal para debug (printf)
+
+No nosso caso iremos começar configurando o clock do uC e desativando o `WatchDog Timer`.
+
+!!! example "Tarefa: função `init()`"
+
+    Modifique a função `init()` incluindo as seguintes linhas de código:
+    
     ```c
     // Função de inicialização do uC
     void init(void){
@@ -151,6 +162,9 @@ Antes da execução de qualquer `firmware` é necessário realizarmos configura�
       WDT->WDT_MR = WDT_MR_WDDIS;
     }
     ```
+    
+   <button class="button0" id="2:init" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+    
 
 A função `sysclk_init()` é responsável por aplicar as configurações do arquivo [`config/conf_clock.h`](https://github.com/Insper/SAME70-examples/blob/master/SAME70-Clear/src/config/conf_clock.h) no gerenciador de clock do microcontrolador (esse é o mesmo arquivo que foi modificado na primeira aula), que inicializa o Clock do sistema em `300 MHz`.
 
@@ -161,7 +175,7 @@ Já a linha [`WDT->WDT_MR = WDT_MR_MDDIS`](https://pt.scribd.com/document/398420
 
     ![](imgs/IOs/WDT-datasheet.png) 
 
-###  Configurando um pino como saída
+##  Pino as output
 
 Para configurarmos um pino como saída será necessário seguirmos os passos a seguir:
 
@@ -171,7 +185,7 @@ Para configurarmos um pino como saída será necessário seguirmos os passos a s
 1. Configurar o PIO para controlar o pino como saída
 1. Controlar o pino (high/low).
 
-#### Dados do pino
+### Dados do pino
 
 Antes de configurarmos um pino como entrada (botão) ou saída (LED) é necessário descobrimos qual pino iremos controlar, para isso devemos verificar o manual da placa ([`manuais/SAME70-XPLD.pdf`](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70-XPLD.pdf)) para saber quais pinos possuímos disponíveis para uso. No caso da nossa placa, possuímos um pino conectado a um botão e outro pino conectado ao LED (já vieram montados na placa).
 
@@ -190,7 +204,7 @@ Cada PIO possui um nome referenciado por uma letra: PIO **A** ; PIO **B**; PIO *
     1. Se colocarmos 1 (vcc/ ligado) no pino conectado ao LED, ele irá acender ou apagar
 
     ![](imgs/IOs/SAME70-LED.png)
-
+    
 A tabela [Table 4-16 LED Connection](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=32) descreve qual o pino e qual PIO o LED do kit foi conectado, podemos a partir dos dados do manual extrair que o LED foi conectado ao pino **PC8** do microcontrolador, isso significa que:
 
 1. O periférico PIO C, 'bit' 8 é responsável por controlar o Liga/Desliga do LED verde da placa.
@@ -216,15 +230,20 @@ Agora será necessário transcrever essas informações para o nosso código em 
     #define LED_PIO_IDX       8                    // ID do LED no PIO
     #define LED_PIO_IDX_MASK  (1 << LED_PIO_IDX)   // Mascara para CONTROLARMOS o LED
     ```
-    
+
+<button class="button0" id="3:define led" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
 !!! warning
     Note que o `LED_PIO_ID` está incompleto (???), vamos preencher na sequência.
 
-!!! note "Linguagem C - #defines"
+!!! note "#defines"
     [defines em C](https://www.techonthenet.com/c_language/constants/create_define.php) são macros resolvidos em tempo de compilação 
 
+### `init()`
 
-### PMC
+Vamos implementar os códigos necessários para configurarmos o pino como saída na função `init`
+
+#### PMC
 
 Antes de podemos configurar um PIO para controlar um pino é necessário ativarmos esse periférico. A maioria dos periféricos do SAME70 inicializam desligados, isso é feito para: diminuir o gasto energético; impedir um periférico que não foi configurado que execute.
 
@@ -246,7 +265,7 @@ Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datashee
     #define LED_PIO_ID  12  // ID do periférico PIOC (controla LED)
     ```
 
-#### `init()`
+<button class="button0" id="4:pmc" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
 O PMC possui diversas funções, estamos agora interessado naquela que ativa um periférico para podermos usar. Essa função é a [`pmc_enable_periph_clk(uint32_t ul_id)`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pmc__group.html#gad09de55bb493f4ebdd92305f24f27d62) que recebe como parâmetro o ID do periférico que queremos ativar. 
 
@@ -259,10 +278,12 @@ O PMC possui diversas funções, estamos agora interessado naquela que ativa um 
     pmc_enable_periph_clk(LED_PIO_ID);
     ```
 
+<button class="button0" id="5:init pmc_enable_periph_clk" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
 !!! note ""
     note que estamos usando o define: `LED_PIO_ID` que foi inserindo no código por vocês. 
 
-### Configurando o PIOC
+#### Configurando o PIOC
 
 Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será necessário indicarmos ao PIO. Para isso, usaremos a seguinte função [`pio_set_output(...)`]((http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html)), definida no [`ASF do SAME70`](http://asf.atmel.com/docs/latest/same70/html/).
 
@@ -275,6 +296,8 @@ Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será
     ```
     
     Essa função configura o **index 8** (LED_PIO_IDX) do **PIOC** como sendo saída inicializada em '0', sem [multidrive](https://embeddedartistry.com/blog/2018/6/4/demystifying-microcontroller-gpio-settings) e sem [resistor de pull-up](https://en.wikipedia.org/wiki/Pull-up_resistor).
+
+<button class="button0" id="6:init pio_set_output" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
 !!! note
      Note que a função recebe como parâmetro o PIO que ela ira editar e a máscara `LED_PIO_IDX_MASK`, isso será similar nas demais funções utilizadas. Veremos o porque disso no próximo laboratório.
@@ -320,7 +343,10 @@ Sendo:
     }
     ```
 
-## Interagindo com o LED
+<button class="button0" id="7:init led as output" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
+
+### Interagindo com o LED
 
 Uma vez que as configurações gerais do uC já foram realizadas (clock e WDT) e que o periférico PIO C já está pronto para acionar o LED (ou o que estiver conectado nele) podemos começar a fazer nossa implementação na função `main`. Duas são as funções que iremos usar para **acionar** ou **limpar** um determinado pino:
 
@@ -365,6 +391,8 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
      1. Verifique o resultado esperado
      1. Brinque com os valores da função `delay_ms` 
 
+<button class="button0" id="8: pisca led" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
 ??? note "Analogia ao Arduino"
 
     No arduino esse mesmo código seria escrito como:
@@ -400,7 +428,7 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
 
     Note que a função `setup()` do arduino precede de uma oura função `init()` que possui funcionalidade parecidas com a nossa de inicializar o clock do sistema e desabilitar o WDT.
 
-## Entrada Digital
+## Pino as input
 
 Para configurarmos um pino como entrada será necessário:
 
@@ -425,6 +453,8 @@ Utilizando o manual do kit de desenvolvimento ([SAME70-XPLD.pdf](https://github.
 
     DICA: Ver novamente como com o LED.
 
+<button class="button0" id="9: input manual" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
 ### Exportando informações para o código 
 
 Agora precisamos fazer a ponte entre o mundo externo e o firmware que será executado no microcontrolador, pela tabela anterior insira e complete os defines a seguir no `main.c` (perto dos defines do LED).
@@ -439,6 +469,9 @@ Agora precisamos fazer a ponte entre o mundo externo e o firmware que será exec
     #define BUT_PIO_IDX 
     #define BUT_PIO_IDX_MASK (1u << BUT_PIO_IDX)
     ```
+  
+<button class="button0" id="10:define but" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+  
 ### init()
 
 Agora é necessário: 
@@ -446,7 +479,6 @@ Agora é necessário:
 1. Ativarmos o PIO no PMC
 1. Configurarmos o novo pino como entrada
 1. Ativamos PULL-UP no pino 
-
 
 #### PMC PIO
 
@@ -482,6 +514,8 @@ pio_set_input(ARG0, ARG1, ARG2);
     pio_set_input(ARG0, ARG1, PIO_DEFAULT);
     ```
   
+<button class="button0" id="11:init but input" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+  
 #### PULL-UP
 
 Para esse pino funcionar é necessário que ativemos o `pull-up` nele. `Pull-up` é um resistor alimentando para `VCC`, ele faz com que o valor padrão do pino seja o energizado.
@@ -490,6 +524,8 @@ Para ativarmos o `pull-up` basta chamar a função: [`pio_pull_up()`](http://asf
 
 !!! example "Tarefa: Modifique: `init()`"
     Você deve fazer uso da função `pio_pull_up()` na função `init()` 
+
+<button class="button0" id="12:init pull_up" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
 ### Lendo o botão
 
@@ -502,14 +538,21 @@ Para lermos um valor de um pino, que já foi configurado como entrada, devemos u
 
 !!! example "Tarefa: Modifique: `loop()`"
     Você deve fazer uso da função `pio_get()` na função `main()` para ler o valor de um pino.
+    
 
 ### Implementando a lógica
 
 !!! example "Implementando"
     Agora que somos capazes de ler o estado de um pino, podemos implementar a lógica descrita anteriormente, onde o LED deve piscar 5 vezes somente quando o botão da placa for pressionado. 
 
+<button class="button0" id="13:but logica" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
 ## Terminou?
 
 Muito bom! Agora que tal pegar a placa OLED1 (que você recebeu no kit) e usar os LEDs e Botoẽs dela? 
 
+<button class="button0" id="14:but extra" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
+<!---
 Já da para começar a [APS 1, que é para 19/3](/ComputacaoEmbarcada/APS-1-Musical/)!
+-->

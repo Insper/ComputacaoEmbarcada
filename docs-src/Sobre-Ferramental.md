@@ -1,8 +1,9 @@
-# Sobre as ferramentas
+# Ferramentas
 
-## Hardware
+Sobre o hardware s software utilizados no kit.
 
-### Kit de desenvolvimento - ATSAME70-XPLD
+
+## Kit de desenvolvimento - ATSAME70-XPLD
 
 - https://www.microchip.com/developmenttools/ProductDetails/atsame70-xpld
 
@@ -16,7 +17,7 @@ características:
 
 ![SAM E70 Xplained](imgs/kit/kit.png)
 
-#### Arquitetura do uC
+### Arquitetura do uC
 
 1.  **Processador ARM :** Possui ampla dominação do mercado de
     microprocessadores/controladores [^1]; não é exclusivo de um único
