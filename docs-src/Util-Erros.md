@@ -7,6 +7,7 @@ Aqui estão listados os erros mais frequentes na utilização da placa SAME70-XP
 1. JUMPER ERASE
 1. Build > Clean Solution 
 1. Terminal Window no Atmel Studio
+1. Driver errado (windows)
 
 ![](imgs/same70-xpld_erros/ATSAME70XPLD_SPL.jpg)
 
@@ -133,8 +134,9 @@ Caso não encontre o terminal em View > Terminal Window (Imagem abaixo), você d
    ![Terminal_5](imgs/same70-xpld_erros/Terminal_5.png)
 
 
+## Driver errado
 
-
+usar https://zadig.akeo.ie/
 
 ------
 
