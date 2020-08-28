@@ -7,7 +7,7 @@ Aqui estão listados os erros mais frequentes na utilização da placa SAME70-XP
 1. JUMPER ERASE
 1. Build > Clean Solution 
 1. Terminal Window no Atmel Studio
-1. Driver errado (windows)
+1. Driver EDBG (USB) não está sendo reconhecido
 
 ![](imgs/same70-xpld_erros/ATSAME70XPLD_SPL.jpg)
 
@@ -43,7 +43,7 @@ Basta olhar o código impresso em cima do CI do Microcontrolador:
 !!! tip
     É bem difícil ver essas letras...
 
-### - Alterando a versão na IDE Atmel Studio
+### - Alterando do CHIP qa versão na IDE Atmel Studio
 
 Para alterar a versão do chip dentro do Atmel Studio basta realizar os seguintes passos:
 
@@ -134,9 +134,40 @@ Caso não encontre o terminal em View > Terminal Window (Imagem abaixo), você d
    ![Terminal_5](imgs/same70-xpld_erros/Terminal_5.png)
 
 
-## Driver errado
 
-usar https://zadig.akeo.ie/
+## 6) Driver EDBG (USB) não está sendo reconhecido
+
+Abra qualquer um dos **projetos** da disciplina **Computação Embarcada** e conecte a placa, confira se o chip configurado na interface é o mesmo que você está utilizando, senão volte a sessão 2:
+
+![7_1](imgs/same70-xpld_erros/7_1.png)
+
+
+
+Caso o driver EDGB (gravador) não tenha sido reconhecido (imagem abaixo) será necessário fazer o **Downgrade** do driver EDBG:
+
+![7_2](imgs/same70-xpld_erros/7_2.png)
+
+
+
+### - Downgrade do driver EDBG
+
+Faça o download do software [Zadig](https://zadig.akeo.ie/):
+
+- [Versão 2.5](https://github-production-release-asset-2e65be.s3.amazonaws.com/4975854/3043b700-726c-11ea-8a31-cd87633d48df?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200828%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200828T201855Z&X-Amz-Expires=300&X-Amz-Signature=30b0f6a83ad62a9b7fc19e9d9b5237bc90eeda5c915007b4e69c910a6fc9b4e5&X-Amz-SignedHeaders=host&actor_id=40698780&key_id=0&repo_id=4975854&response-content-disposition=attachment%3B%20filename%3Dzadig-2.5.exe&response-content-type=application%2Foctet-stream)
+
+
+
+1. Com a placa conectada, execute o software e selecione **Options > List All Devices**, feito isso selecione a opção **EDBG Data Gateway ** e em seguida clique em **Downgrade Driver**:
+
+![7_3](imgs/same70-xpld_erros/7_3.png)
+
+
+
+2. O driver deverá ser reconhecido pelo Atmel Studio, conforme a imagem abaixo:
+
+![7_4](imgs/same70-xpld_erros/7_4.png)
+
+
 
 ------
 
@@ -144,7 +175,7 @@ usar https://zadig.akeo.ie/
 
 Marco Mello
 
-01/04/2020
+28/08/2020
 
 Computação Embarcada - 5s
 
