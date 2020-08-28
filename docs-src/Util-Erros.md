@@ -137,7 +137,7 @@ Caso não encontre o terminal em View > Terminal Window (Imagem abaixo), você d
 
 ## 6) Driver EDBG (USB) não está sendo reconhecido
 
-Abra qualquer um dos **projetos** da disciplina **Computação Embarcada** e conecte a placa, confira se o chip configurado na interface é o mesmo que você está utilizando, senão volte a sessão 2:
+Abra qualquer um dos projetoda disciplina **Computação Embarcada** e conecte a placa, confira se o chip configurado na interface é o mesmo que você está utilizando, senão volte a sessão 2:
 
 ![7_1](imgs/same70-xpld_erros/7_1.png)
 
