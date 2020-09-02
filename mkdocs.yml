@@ -32,6 +32,9 @@ nav:
     - Sobre-Ferramental.md
     - Util-Erros.md
     - 'Util-Documentos.md'
+
+- Dicas:
+    - 'PIO - Dicas': 'Lab-1-IOs-Dicas.md'
     - 'Util-lcd.md'
     - 'Util-freertos.md'
     - 'Util-FloatPrint.md'
@@ -39,7 +42,6 @@ nav:
 - Labs:
     - 'PIO - Teoria': 'Lab-1-IOs-Teoria.md'
     - 'PIO - Lab': 'Lab-1-IOs-Lab.md'
-    - 'PIO - Dicas': 'Lab-1-IOs-Dicas.md'
     - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
     - 'Lab-2-PIO-Driver-Teoria.md'
     - 'Lab-2-PIO-Driver-Lab.md'
@@ -90,6 +92,7 @@ extra_css:
 extra_javascript:
   - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
   - 'translate_admonitions.js'
+  - 'js/dom-confetti.js'
   - 'js/progress.js'
 
 # Extensions

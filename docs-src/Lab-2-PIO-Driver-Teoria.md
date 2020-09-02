@@ -1,5 +1,8 @@
 # Driver - Teoria
 
+!!! success "2020-2"
+    Material atualizado.
+
 Para que nosso `firmware` atue corretamente sobre o hardware será necessário ampliarmos nossos conhecimentos sobre o mesmo. O `PIO` é um dos periféricos mais utilizados durante um projeto, e aparentemente o mais simples desse nosso uC (só que não!) com ele temos o controle de praticamente todos os pinos digitais do uC. O entendimento de como o mesmo funciona e como ele é configurado irá possibilitar que utilizemos outros periféricos mais para frente.
 
 Não existe segredo! Será necessário abrirmos o [manual do uC](https://pt.scribd.com/document/398420674/SAME70) de mais de 1000 páginas e lermos as informações que o fabricante disponibiliza, lá teremos detalhado o que deve ser feito para ativarmos uma determinada função ou realizar uma configuração no periférico (isso vale para todos os [microcontroladores](http://www.ti.com/lit/ds/symlink/msp430g2553.pdf)). Cada chip e cada fabricante opta por implementar uma solução diferente, mais o formato do documento é mais ou menos o mesmo. 
@@ -13,13 +16,8 @@ Se tiver curiosidade de como esse lab seria realizado para outro uC, dê uma lid
 ## Registradores
 
 !!! note "8. Memory Map and Registers"
-    Coursera: Embedded Software and Hardware Architecture
 
-    <video width="560" height="240" controls>
-    <source src="https://d3c33hcgiwev3.cloudfront.net/floDmjm9Eee_aRK4j07i2g.processed/full/360p/index.webm?Expires=1583366400&Signature=AwNH2cqvX-93cAOF~A9a5GV2LHscS-pO7s99Zm-jU9zBKAMwEZokBV0UV6~Wr6~sc58ElGzGgV~UXUWEhKHZ5WTs-IEABo9ZntViczVn8DnNZP152vfgaGr11VYkcby0lqhDD-odZAhYgqTmTIhlp--JvjpAkSKPIdHEIPv9aHM_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A">
-    </video> 
-    
-    > Fonte: https://pt.coursera.org/lecture/embedded-software-hardware/8-memory-map-and-registers-aQV4p
+    [Coursera: Embedded Software and Hardware Architecture]( https://pt.coursera.org/lecture/embedded-software-hardware/8-memory-map-and-registers-aQV4p)
 
 Os registradores podem ser utilizados no hardware de diversas maneiras: Cada bit do registrador (de 32 bits) pode fazer uma ação diferente no periférico; os 32 bits podem representar um número; cada bit pode configurar uma parte do periférico.
 
@@ -41,7 +39,7 @@ Um driver (framework/ api) são funções que possibilitam acessar o baixo níve
 
 No nosso caso, iremos utilizar um framework chamado de [Advanced Software Framework Version 4](https://www.microchip.com/mplab/avr-support/advanced-software-framework), ele e fornecido e mantido pelo fabricante do microcontrolador que usamos no curso (SAME70) e serve para várias famílias de uC ARM (SAMD20 / SAMV71 / SAMG54 /...). Foi com o ASF que fomos capazes de realizar o LAB1, onde configuramos pinos como entrada e saída e fomos capazes de ler e escrever nesses pinos.
 
-![](http://asf.atmel.com/docs/latest/doxygen_mainpage/images/asf_structure.jpg)
+![](imgs/PIO-Driver/asf.png){width=500}
 
 > fonte: http://asf.atmel.com/docs/latest/architecture.html
 

@@ -55,12 +55,14 @@ function setButDoneOld(but) {
   but.className = "button0 buttonDone";
 }
 
+var url = window.location.href;
 function progressBut(button_id) {
-    var url = window.location.href;
     var usrname = checkCookie();
     var but = document.getElementById(button_id);
     var text = but.firstChild;
-    if (usrname != "" && text.data == "Cheguei Aqui!"){
+
+    if (usrname != "" && text.data != "Progresso já reportado!"){
+      confetti(but)
       setButDone(but);
       setCookie(url+button_id, 'true', 365);
 
@@ -72,7 +74,10 @@ function progressBut(button_id) {
       fetch(scriptURL, { method: 'POST', body: f})
       .then(response => console.log('Success!', response))
       .catch(error => console.error('Error!', error.message));
-    } else {
+    } else if (text.data == "Progresso já reportado!") {
+      //pass
+    }
+    else {
       setButNameError(but);
     }
 }

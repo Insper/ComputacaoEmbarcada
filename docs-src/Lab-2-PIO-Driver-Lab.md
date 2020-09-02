@@ -1,8 +1,12 @@
 # Driver - Lab 
 
-Nessa aula iremos utilizar como projeto referência o LAB-1. 
+!!! success "2020-2"
+    Material atualizado.2
 
-> Sugestão: Vocês devem fazer uma cópia desse projeto para a pasta `Labs/PIO-Driver`, iremos modificar esse projeto. 
+!!! tip
+    Sugestão: Vocês devem fazer uma cópia desse projeto para a pasta `Labs/PIO-Driver`, iremos modificar esse projeto. 
+
+Nessa aula iremos utilizar como projeto referência o LAB-1. 
 
 ## Ao final
 
@@ -20,7 +24,9 @@ O objetivo desse laboratório é o do entendimento das funções utilizadas para
 
 Vamos implementar uma série de funções que irão configurar o periférico PIO via a escrita em seu banco de registradores. Para isso será necessário ler o manual do uC mais especificamente a [secção do PIO](https://pt.scribd.com/document/398420674/SAME70?start_page=344).
 
-### _pio_set()
+<button class="button0" id="0:comencando" onClick="progressBut(this.id);">Estou começando!</button>
+
+### _pio_set(...)
 
 Iremos começar com essa função que é uma das mais simples. Crie uma função no `main.c` com a seguinte estrutura:
 
@@ -44,10 +50,11 @@ Na primeira etapa iremos substituir a função que a Microchip já nos disponibi
 !!! example "Tarefa"
     - Crie a função `_pio_set()`
     - Substitua a chamada da função `pio_set()` pela `_pio_set()` (em todo o código)
-        - `%s/pio_set/_pio_set/g`
+        
+    <button class="button0" id="1:pio_set_init" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
 
 !!! note
-    Lembre que essa função serve para acionarmos (colocar `1`) em um pino digital quando o mesmo é configurado como output.
+    Lembre que essa função serve para acionarmos um pino digital quando o mesmo é configurado como output (fazer ele virar `3.3V`).
 
 Agora será necessário entender como o PIO controla os pinos e o que deve ser feito para que ele atue sobre o pino como desejamos. A parte da secção do manual que fala sobre o PIO e suas saídas/entradas é a **secção 32** do (`manual SAME70`), vamos analisar:
 
@@ -79,20 +86,18 @@ void _pio_set(Pio *p_pio, const uint32_t ul_mask)
 
 O que isso significa? Significa que estamos acessando o periférico passado como referência a função (um dos 5 PIOs: *PIOA*,  *PIOB*, *PIOC*, ...) e estamos aplicando a máscara `ul_mask` no seu registrador `PIO_SODR`.
 
-!!! note "`Pio` type?"
-    O tipo `Pio` é uma struct alinhada com o endereço de memória do periférico, onde cada 'item' dessa struct representa um endereço da memória do periférico, essa é a maneira correta em `C` de darmos *nome* a endereços de memória.
-    
-    Isso já está definido no projeto (para facilitar):
+!!! note "Pio type?"
+    O tipo `Pio` é uma struct alinhada com o endereço de memória do periférico, onde cada 'item' dessa struct representa um endereço da memória do periférico, essa é a maneira correta em `C` de darmos *nome* a endereços de memória.  Isso já está definido no projeto quando usamos o asf (para facilitar nossa vida):
     
     O `PIOA` é um struct que aponta para o endereço `0x400E0E00`
     
-    ```c
-    #define PIOA   ((Pio    *)0x400E0E00U) /**< \brief (PIOA  ) Base Address */
+    ``` c
+    #define PIOA ((Pio    *)0x400E0E00U) /**< \brief (PIOA  ) Base Address */
     ```
     
     O struct possui a seguinte estrutura:
     
-    ```c
+    ``` c
       typedef struct {
     __O  uint32_t PIO_PER;       /**< \brief (Pio Offset: 0x0000) PIO Enable Register */
     __O  uint32_t PIO_PDR;       /**< \brief (Pio Offset: 0x0004) PIO Disable Register */
@@ -106,30 +111,30 @@ O que isso significa? Significa que estamos acessando o periférico passado como
     __O  uint32_t PIO_IFDR;      /**< \brief (Pio Offset: 0x0024) Glitch Input Filter Disable Register */
     ```
     
-    Onde: `O,I` são macros que bloqueiam os endereçós para:
+    Onde: `O`, `I` são macros que bloqueiam os endereços para:
     
     - `__O` : Apenas escrita
     - `__I` : Apenas Leitura
     - `__IO` : Apenas Leitura
     
     ```c
-      #ifdef __cplusplus
-        #define   __I     volatile        /*!< Defines 'read only' permissions                 */
-      #else
-        #define   __I     volatile const  /*!< Defines 'read only' permissions                 */
-      #endif
-        #define   __O     volatile        /*!< Defines 'write only' permissions                */
-        #define   __IO    volatile        /*!< Defines 'read / write' permissions              */
-
+    #ifdef __cplusplus
+      #define   __I     volatile        /*!< Defines 'read only' permissions                 */
+    #else
+      #define   __I     volatile const  /*!< Defines 'read only' permissions                 */
+    #endif
+      #define   __O     volatile        /*!< Defines 'write only' permissions                */
+      #define   __IO    volatile        /*!< Defines 'read / write' permissions              */
     ```
     
-
 !!! example "Modifique e teste"
     A função está pronta, agora precisamos testar. Com a modificação no código faça a gravação do uC e nada deve mudar na execução do código. Já que a função implementada possui a mesma funcionalidade daquela fornecida pelo fabricante.
     
     - Embarque o código e o mesmo deve funcionar normalmente caso a função implementada esteja correta.
+    
+    <button class="button0" id="2:pio_set" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
 
-### _pio_clear(..)
+### _pio_clear(...)
 
 Faça o mesmo para a função clear:
 
@@ -151,10 +156,12 @@ void _pio_clear(Pio *p_pio, const uint32_t ul_mask)
 Vocês deverão descobrir pelo manual qual o periférico que deve ser acessado. Releia a secção 32.5.4
 
 !!! example "Modifique e teste"
-    - `%s/pio_clear/_pio_clear/g`
-    - Implemente
-    - Compile e programe
-    - Embarque e teste
+    1. Crie a função `_pio_clear()`
+    1. Substitua no código: `pio_clear` por `_pio_clear`
+    1. Implemente
+    1. Compile, programe e teste
+
+    <button class="button0" id="3:pio_clear" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
 
 ### _pio_pull_up(...)
 
@@ -181,10 +188,12 @@ Essa função recebe o PIO que irá configurar, os pinos que serão configurados
     Leia o manual do PIO, especificamente **a secção 32.5.1**.
 
 !!! example "Modifique e teste"
-    - `%s/pio_pull_up/_pio_pull_up/g`
-    - Implemente
-    - Compile e programe
-    - Embarque e Teste
+    1. Crie a função `_pio_pull_up`
+    1. Substitua no código: `pio_pull_up` por `_pio_pull_up`
+    1. Implemente
+    1. Compile, programe e Teste
+    
+    <button class="button0" id="4:pio_pull_up" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
 
 ### _pio_set_input(...)
 
@@ -203,7 +212,7 @@ Agora vamos criar uma nova função para configurar um pino como entrada, para i
 
 Esses defines serão passados como configuração da função `_pio_set_input()` no parâmetro `ul_attribute`. Declare no seu código a seguinte função:
 
-```c
+``` c
 /**
  * \brief Configure one or more pin(s) or a PIO controller as inputs.
  * Optionally, the corresponding internal pull-up(s) and glitch filter(s) can
@@ -223,14 +232,14 @@ void _pio_set_input(Pio *p_pio, const uint32_t ul_mask,
 
 Para testar essa função substitua o seguinte trecho de código que configura um pino como entrada + o pull-up
 
-```c
+``` c
 pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_DEFAULT);
 _pio_pull_up(BUT_PIO, BUT_PIN_MASK, 1);
 ```
 
 Para:
 
-```c
+``` c
 _pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_PULLUP | _PIO_DEBOUNCE);
 ```
 
@@ -241,10 +250,12 @@ _pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_PULLUP | _PIO_DEBOUNCE);
     Utilize a função já implementada `_pio_pull_up()`
 
 !!! example "Tarefa: Modifique e teste"
-    - `%s/pio_set_input/_pio_set_input/g`
-    - Implemente
-    - Compile e programe
-    - Embarque e Teste
+    1. Crie a função `_pio_set_input`
+    1. Substitua no código: `pio_set_input` por `_pio_set_input`
+    1. Implemente
+    1. Compile, programe e teste
+    
+    <button class="button0" id="5:pio_set_input" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
 
 ### _pio_set_output(...)
 
@@ -300,16 +311,18 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
     Utilize as funções já implementada `_pio_set()`, `_pio_clear()`, `_pio_pull_up()`
 
 !!! example "Tarefa: Modifique e teste"
-    - `%s/pio_set_output/_pio_set_output/g`
-    - Implemente
-    - Compile e programe
-    - Embarque e Teste
+    1. Crie a função `_pio_set_output`
+    1. Substitua:`pio_set_output` por `_pio_set_output`
+    1. Implemente
+    1. Compile, programe e teste
 
+    <button class="button0" id="6:pio_set_output" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+    
 ### _pio_get(...)
 
 Implemente a função `_pio_get()`:
 
-```
+``` c
 /**
  * \brief Return 1 if one or more PIOs of the given Pin instance currently have
  * a high level; otherwise returns 0. This method returns the actual value that
@@ -333,7 +346,10 @@ uint32_t pio_get(Pio *p_pio, const pio_type_t ul_type,
     - `PIO_OUTPUT_0`: quando for para ler uma `saida`
 
 !!! example "Tarefa: Modifique e teste"
-    - `%s/pio_set_input/_pio_set_input/g`
-    - Implemente
-    - Compile e programe
-    - Embarque e Teste
+    1. Crie a função `_pio_get()`
+    1. Substitua no código: `pio_get` por `_pio_get()`
+    1. Implemente
+    1. Compile, programe e teste
+    
+    
+    <button class="button0" id="7:pio_get" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
