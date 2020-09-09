@@ -1,18 +1,23 @@
 # PIO - IRQ
 
+!!! success "2020-2"
+    Material atualizado.
+
 | Pasta          |
 |----------------|
 | `Labs/PIO-IRQ` |
 
-- LAB PIO IRQ: 
-    1. Executa exemplo e entende exemplo `PIO-IRQ`
-    1. Modificar exemplo para trabalhar com `flag`
-    1. Entrar em `sleep mode`
-    1. Integrar exemplo `PIO-IRQ` no exemplo do `OLED`
-    1. Configurar 3 novos botões externos a placa em modo leitura e com interrupção
-    1. Implementar lógica de controle da frequência do LED
-    1. Exibir no LCD a frequência do LED
+Outline:
 
+1. Executa e enetender o exemplo `PIO-IRQ`
+1. Modificar exemplo para trabalhar com `flag`
+1. Entrar em `sleep mode`
+1. Integrar exemplo `PIO-IRQ` no `OLED`
+1. Configurar 3 novos botões externos a placa em modo leitura e com interrupção
+1. Implementar lógica de controle da frequência do LED
+1. Exibir no LCD a frequência do LED
+
+<button class="button0" id="0:comencando" onClick="progressBut(this.id);">Começando Laboratório!</button>
 
 O código exemplo [`SAME70-exemples/PIO-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ) demonstra como configurar o botão da placa e utilizar a interrupção em um pino do PIO. Vamos trabalhar com esse código de base para esse laboratório.
 
@@ -22,12 +27,13 @@ O código exemplo [`SAME70-exemples/PIO-IRQ`](https://github.com/Insper/SAME70-e
     1. Execute o exemplo na placa!
 
 !!! warning
-    Não continue sem ter feito a etapa anterior
+    Não continue sem ter feito a etapa anterior.
 
+<button class="button0" id="1:exemplo" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
 ## Melhorando o exemplo
 
-Vamos entender melhor e melhorar o código fornecido.
+Iremos entender melhor e começar a implementar mudanças no código de exemplo.
 
 ### Bordas
 
@@ -37,14 +43,15 @@ Vamos agora modificar o código um pouco, o exemplo está funcionando com interr
     1. Mude a função que configura a interrupção do pino para operar em `PIO_IT_RISE_EDGE`. 
     1. Teste na placa.
 
+<button class="button0" id="2:borda" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
 ### IRQ - Keep it short and simple 
 
-O tempo que um uC deve ficar na interrupção deve ser o mais rápido possível, não é uma boa prática gastar muito tempo dentro de uma interrupção, a interrupção só deve executar códigos críticos o resto deve ser processado no loop principal (`while(1)`) pelos principais motivos a seguir:
+O tempo que um firmware deve ficar na interrupção deve ser o menor possível, pelos principais motivos:
 
-1. Outras interrupções de mesma prioridade irão aguardar o retorno da interrupção. O firmware irá deixará de servir de maneira rápida a diferentes interrupções se gastar tempo nelas.
+1. Outras interrupções de mesma prioridade irão aguardar o retorno da interrupção. O firmware irá deixar de servir de maneira rápida a diferentes interrupções se gastar tempo nelas.
 2. Nem todas as funções são reentrantes. Funções como `printf` podem não operar corretamente dentro de interrupções (mais de uma chamada por vez).
 3. RTOS: As tarefas devem ser executadas em tasks e não nas interrupções, possibilitando assim um maior controle do fluxo de execução do firmware (vamos ver isso mais para frente).
-
 
 #### FLAG
 
@@ -55,7 +62,7 @@ A solução a esse problema é realizar o processamento de uma interrupção no 
 - `while(1)` verifica status da `flag` para realizar ação.
 - `while(1)` zera `flag` (acknowledge) 
 
-Exemplo
+Exemplo:
 
 ``` c
 /* flag */
@@ -73,7 +80,8 @@ void main(void){
   
    // trata interrupção do botão
    if(but_flag){
-     /* ....   */
+     // trata irq
+     // ..
      // zera flag
      but_flag = 0;
    }
@@ -82,33 +90,41 @@ void main(void){
 ```
 
 !!! note "volatile"
-    Sempre que uma interrupção alterar uma variável global, essa deve possuir o 'pragma' (modificador) [`volatile`](https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword). Exemplo: `volatile int valADC;`. Esse pragma serve para informar o compilador (no nosso caso GCC) que essa variável será modificada sem que ele saiba. 
+    Sempre que uma interrupção alterar uma variável global, essa deve possuir o 'pragma' /modificador [`volatile`](https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword).
+    
+    Exemplo: `volatile int valADC;`
+    
+    Esse pragma serve para informar o compilador (no nosso caso GCC) que essa variável será modificada sem que ele saiba evitando assim que ele não a implemente. 
 
-    Compiladores são projetados para otimizar nosso código e remover trechos ou variáveis desnecessárias. Como a função de `Handler` (interrupção) nunca é chamada diretamente pelo programa, o compilador pode achar que essa função não vai ser executada nunca e pode optimizar a variável que nela seria atualizada (já que não é chamada diretamente!). 
+    Compiladores são projetados para otimizar programas removendo trechos ou variáveis desnecessárias. Como a função de `Handler` (interrupção) nunca é chamada diretamente pelo programa, o compilador pode supor que essa função não vai ser executada nunca e pode optimizar a variável que nela seria atualizada (já que não é chamada diretamente, mas sim pelo hardware quando ocorre um evento). 
 
     - Leia mais sobre [volatile](https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword)
 
+    ==ATENÇÃO: só usar `volatile` quando necessário==
+    
 !!! example "Modifique e teste"
     1. Modifique o exemplo para piscar o led no `while(1)` utilizando `flag` vindo da interrupção. 
         - Dentro do callback do botão não pode ter a função `pisca_led`!
     1. Programe e teste no HW
 
+<button class="button0" id="3:flag" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
 ### Low power modes
 
 Trabalhar por interrupção possui duas grandes vantagens: 
 
-1. Responder imediato a um evento 
-2. Possibilitar o uC entrar em modos de baixo gasto energético (`sleep modes`).
+1. Resposta quase imediata a um evento 
+2. Possibilitar o uC entrar em modos de operação de baixo consumo energético (`sleep modes`).
 
-No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com sua vantagem / desvantagem.
+No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com sua vantagem / desvantagem:
 
-- Active Mode: Active mode is the normal running mode with the core clock running from the fast RC oscillator, the main crystaloscillator or the PLLA. The Power Management Controller can be used to adapt the core, bus and peripheral frequencies and to enable and/or disable the peripheral clocks.
+- *Active Mode: Active mode is the normal running mode with the core clock running from the fast RC oscillator, the main crystaloscillator or the PLLA. The Power Management Controller can be used to adapt the core, bus and peripheral frequencies and to enable and/or disable the peripheral clocks.*
 
-- Backup mode: The purpose of Backup mode is to achieve the lowest power consumption possible in a system which is performing periodic wake-ups to perform tasks but not requiring fast startup time.
+- *Backup mode: The purpose of Backup mode is to achieve the lowest power consumption possible in a system which is performing periodic wake-ups to perform tasks but not requiring fast startup time.*
 
-- Wait mode: The purpose of Wait mode is to achieve very low power consumption while maintaining the whole device in a powered state for a startup time of less than 10 us.
+- *Wait mode: The purpose of Wait mode is to achieve very low power consumption while maintaining the whole device in a powered state for a startup time of less than 10 us.*
 
-- Sleep Mode: The purpose of sleep mode is to optimize power consumption of the device versus response time. In this mode, only the core clock is stopped. The peripheral clocks can be enabled. The current consumption in this mode is application-dependent:
+- *Sleep Mode: The purpose of sleep mode is to optimize power consumption of the device versus response time. In this mode, only the core clock is stopped. The peripheral clocks can be enabled. The current consumption in this mode is application-dependent*
 
 !!! note ""
     Mais informações na secção 6.6 do datasheet
@@ -119,11 +135,10 @@ No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com
     - Alguns modos podem perder informações da memória RAM
     
     ![](imgs/PIO-IRQ/lowpower-table.png)
-    
 
-####  Adicionando lowpower mode (ASF Wizard)
+#### Adicionando lowpower mode (ASF Wizard)
 
-Para termos acesso as funções da atmel que lidam com o `sleep mode` devemos adicionar a biblioteca no Atmel Studio:
+Para termos acessos as funções da atmel que lidam com o `sleep mode` devemos adicionar a biblioteca **Sleep manager (service)** no Atmel Studio:
 
 - `ASF` :arrow_right: `ASF Wizard` :arrow_right: 
 
@@ -136,33 +151,36 @@ Agora podemos usar as funções de low power, primeiramente iremos utilizar some
 ``` c
 void main(void){ 
   while(1){
-     // Entra em sleep mode
-     // Código 'trava' aqui até ser
-     // 'acordado' 
+     // trata flag
+     // ...
+     // .....
+  
+     // Entra em sleep mode    
+     // Código 'trava' aqui até ser 'acordado' 
      pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
-      
-     ...
   }
 }
 ```
 
-Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt), essa função age como "blocante" onde  execução do código é interrompida nela até que uma interrupção "acorde" o uC.
+Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt), essa função age como "blocante" onde execução do código é interrompida nela até que uma interrupção "acorde" o uC.
 
 !!! example "Modifique e teste"
     1. Modifique o exemplo para entrar em modo sleep
     1. Programe e teste no HW
 
-## Código exemplo OLED
+<button class="button0" id="4:sleep" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
+## OLED
 
 | Pasta             |
 |-------------------|
 | `Labs/OLED-PIO` |
 
-Copie o projeto localizado no repositório exemplos: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI/OLED-Xplained-Pro-SPI) para a pasta do seu repositório da disciplina `Labs/OLED-PIO`.
+Copie o projeto localizado no repositório de exemplos: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI/OLED-Xplained-Pro-SPI) para a pasta do seu repositório da disciplina `Labs/OLED-PIO`.
 
-Iremos trabalhar com esse exemplo que configura o OLED (que deve ser conectado na placa no **EXT1**) e incorporando o exemplo da interrupção aqui (vamos ampliar sua funcionalidade!).
+Agora iremos trabalhar com esse exemplo que configura o OLED (que deve ser conectado na placa no **EXT1**) e incorporar o exemplo da interrupção aqui (vamos ampliar sua funcionalidade!).
 
- A entrega final deve possuir três botões externo a placa que irão configurar a frequência na qual o LED irá piscar (via interrupção é claro). Um dos botões irá aumentar a frequência do piscar do LED e o outro irá diminuir a frequência que o LED irá piscar. O OLED deverá exibir a frequência atual do LED. 
+A entrega final deve possuir três botões externos a placa que irão configurar a frequência na qual o LED irá piscar (via interrupção é claro). Um dos botões irá aumentar a frequência do piscar do LED e o outro irá diminuir a frequência que o LED deverá piscar. O OLED deverá exibir a frequência atual do LED. 
 
 - O código deve funcionar por interrupção nos botões **e sempre que possível, entrar em sleep mode**.
 

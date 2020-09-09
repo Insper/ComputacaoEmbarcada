@@ -1,4 +1,6 @@
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxJTJIvfkJzTusu8PGkyP1aGmA7KSrKq8H4OiiQYSl9Lf6ZVM8/exec';
+const sDone = 'Cheguei Aqui!'
+const sReportado = 'Progresso reportado!'
 
 function setCookie(cname, cvalue, exdays) {
   var d = new Date();
@@ -36,7 +38,7 @@ function checkCookie() {
 
 function setButDefauld(but) {
   but.className = "button0";
-  but.firstChild.data = "Cheguei Aqui!";
+  but.firstChild.data = sDone;
 }
 
 function setButNameError(but) {
@@ -46,12 +48,12 @@ function setButNameError(but) {
 }
 
 function setButDone(but) {
-  but.firstChild.data = "Progresso reportado!";
+  but.firstChild.data = sReportado;
   but.className = "button0 buttonDone";
 }
 
 function setButDoneOld(but) {
-  but.firstChild.data = "Progresso já reportado!";
+  but.firstChild.data = sReportado;
   but.className = "button0 buttonDone";
 }
 
@@ -61,8 +63,8 @@ function progressBut(button_id) {
     var but = document.getElementById(button_id);
     var text = but.firstChild;
 
-    if (usrname != "" && text.data != "Progresso já reportado!"){
-      confetti(but)
+    confetti(but)
+    if (usrname != "" && text.data != sReportado){
       setButDone(but);
       setCookie(url+button_id, 'true', 365);
 
@@ -74,7 +76,7 @@ function progressBut(button_id) {
       fetch(scriptURL, { method: 'POST', body: f})
       .then(response => console.log('Success!', response))
       .catch(error => console.error('Error!', error.message));
-    } else if (text.data == "Progresso já reportado!") {
+    } else if (text.data == sReportado) {
       //pass
     }
     else {
