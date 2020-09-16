@@ -1,28 +1,35 @@
 # TC - RTC - RTT  
 
-!!! warning
-    Esse lab já possui entrega com nota!
+!!! success "2020-2"
+    Material atualizado.
 
+<!--
 !!! Repositório
     Criar repositório para entregar o lab e preencher o formulário a seguir:
     
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfS3x4QLibvCgUAiekQi0_cjWPZqwZ2j5xQwS_MG3QLSJzmUg/viewform?embedded=true" width="640" height="571" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+-->
 
 | Pasta              |
 |--------------------|
 | `Labs/TC-RTC-RTT/` |
 
-- Parte 1 (C): 
-
+- Parte 1: 
     1. Entender os exemplos (TC/RTT/RTC)
     1. Incorporar todos os exemplos em um único projeto
     1. Pisca pisca 
+    
+- Parte 2:
+    1. fazer outro LED piscar com TC
+    1. Exibir a hora atual no lcd
+    1. Usar IRQ do segundos do RTC
 
+<!--
 - Parte 2 
     - C+ : fazer outro LED piscar com TC
     - B : Exibir a hora atual no lcd
     - A : Usar IRQ do segundos do RTC
-
+ -->
 ## Periféricos / Exemplos
 
 !!! warning "SAME70-examples"
@@ -52,9 +59,9 @@ Cada exemplo possui o seu próprio `README` que da uma visão geral dos perifér
 
 ## Lab
 
-Nesse lab iremos utilizar a placa `OLED1`, para isso, você deve copiar o código exemplo: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI) para a pasta da entrega do seu repositório `Labs/TC-RTC-RTT`.
+O lab faz uso da placa `OLED1` e de um código exemplo. Para começar você deve copiar o código exemplo: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI) para a pasta da entrega do seu repositório `Labs/TC-RTC-RTT`.
 
-### (C) TC, RTT e RTC 
+### 1. TC, RTT e RTC 
 
 Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão), vocês devem configurar os botões e os LEDs da placa OLED, e então utilizando um `TC` fazer com que o `LED0` pisque a uma frequencia de 4 HZ; usando o RTT fazer com que o `LED1` pisque a uma frequência de 0.5Hz e com que o LED da placa pisque por 5x após 20s do sistema ter inicializado, fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 
@@ -84,12 +91,12 @@ Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão)
     
 ----------------------------
 
-### (C+) Piscar mais um LED
+### 2. Piscar mais um LED
 
 !!! example "Tarefa"
     Faça o `LED2` da placa OLED piscar a 5Hz usando um novo TC
 
-### (B) Exibindo HH:MM:SS
+### 3. Exibindo HH:MM:SS
 
 !!! example "Tarefa"
     Exiba a hora no formato (HH:MM:SS) no display OLED
@@ -127,8 +134,9 @@ Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão)
     ```
    
 !!! warning
-    Você nunca deve atualizar display dentro de Handlers! Sempre no main
+    Você nunca deve atualizar display dentro de interrupção (**handler**)! Sempre no main.
     
-### A
+### 4. IRQ de segundos
     
-Usar a IRQ do RTC por segundo para atualizar o display
+Usar a IRQ do RTC por segundo para atualizar o display.
+
