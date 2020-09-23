@@ -1,11 +1,13 @@
 # RTOS
 
+!!! success "2020-2"
+    Material atualizado.
+
 Nesse Handout iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciarmos três LED e três botões (vamos refazer a entrega do `tickTackTock` porém agora com o uso do SO).
 
 O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://freertos.org), um sistema operacional muito utilizado pela industria, sendo o segundo sistema operacional (**20%**) mais utilizado em projetos embarcados, perdendo só para o [Linux embarcado](https://m.eet.com/media/1246048/2017-embedded-market-study.pdf).
 
 ## LAB
-
 
 | Pasta           |
 |-----------------|
@@ -433,19 +435,14 @@ Inclua o código a seguir no seu projeto (modifique a função `task_led`)
 
     ![Semáforo](imgs/RTOS/semaforo2.png)
 
-
-## Entrega extra (A/B)
+### Praticando
 
 Para os próximos passos vocês devem criar um semáforo por botão e um callback por botão.
 
-### B
-
 - Faça o mesmo para o LED2:
     - criar task que faz o LED2 piscar
-    - botão do LED2 libera semáforo para a task_led2
-
-### A
+    - botão do LED2 libera semáforo para a `task_led2`
 
 - Faça o mesmo para o LED3:
     - criar task que faz o LED3 piscar
-    - botão do LED3 libera semáforo para a task_led3
+    - botão do LED3 libera semáforo para a `task_led3`
