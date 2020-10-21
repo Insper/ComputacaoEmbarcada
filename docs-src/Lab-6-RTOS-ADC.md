@@ -2,9 +2,6 @@
 
 Nesse lab iremos trabalhar com conversão analógica digital e LCD.
 
-!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScqWmljztbSRUTnal07ZktmgSp2qv_cvhJlGzFz3eUzeAK7Ug/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
 ## LAB
 
 | Pasta           |
@@ -29,7 +26,7 @@ Nesse lab iremos trabalhar com conversão analógica digital e LCD.
     
 ### Exemplo AFEC
 
-Abra o exemplo do AFEC-Pin, localizado em [`SAME70-examples/Perifericos-uC/AFEC-Pin/`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/AFEC-Pin), leia o README desse exemplo e o execute na sua placa. 
+Abra o exemplo do AFEC-Pin, localizado em [`SAME70-examples/Perifericos-uC/AFEC-Pin/`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/AFEC-Pin), leia o `README` desse exemplo e o execute na sua placa. 
 
 Note que será necessário conectar o potenciômetro ao kit.
 
@@ -91,15 +88,16 @@ Note que a única coisa que eu mudei dessa task para a parte do exemplo que lida
 
 ### mailbox - `queue`
 
-Mailbox/ `queue` é uma das maneiras de enviarmos dados em um sistema operacional, com ele podemos comunicar interrupção com tarefa e tarefa com tarefa. Vamos modificar o código criando um fila para comunicar a tarefa `task_adc` com a tarefa `task_lcd`.
+Mailbox/ `queue` é uma das maneiras de enviarmos dados entre tarefa em um sistema operacional, com ele podemos comunicar interrupção com tarefa e tarefa com tarefa. 
+
 
 !!! note
-    > Queues are the primary form of intertask communications. They can be used to send messages between tasks, and between interrupts and tasks. In most cases they are used as thread safe FIFO (First In First Out) buffers with new data being sent to the back of the queue, although data can also be sent to the front. 
+    Queues are the primary form of intertask communications. They can be used to send messages between tasks, and between interrupts and tasks. In most cases they are used as thread safe FIFO (First In First Out) buffers with new data being sent to the back of the queue, although data can also be sent to the front. 
     
-    ![](https://www.freertos.org/wp-content/uploads/2018/07/queue_animation.gif)
+    Writing to and reading from a queue. In this example the queue was created to hold 5 items, and the queue never becomes full.
     
-    > Writing to and reading from a queue. In this example the queue was created to hold 5 items, and the queue never becomes full.
-    
+![](https://www.freertos.org/fr-content-src/uploads/2018/07/queue_animation.gif) 
+
     Material retirado do site: https://www.freertos.org/Embedded-RTOS-Queues.html
 
 !!! tip
@@ -107,15 +105,18 @@ Mailbox/ `queue` é uma das maneiras de enviarmos dados em um sistema operaciona
     
     - https://www.freertos.org/Embedded-RTOS-Queues.html
     - https://freertos.org/a00018.html 
-    
-    
+ 
+## Modificando firmware
 
+Iremos modificar o código, criando um fila para comunicar a tarefa `task_adc` com a tarefa `task_lcd`.
+
+### Criando variável
 
 Vamos criar um `queue` chamado de `xQueueADC`, essa variável deve ser global:
 
 ```diff
 /************************************************************************/
-/* RTOS                                                                  */
+/* RTOS                                                                 */
 /************************************************************************/
 #define TASK_MXT_STACK_SIZE            (2*1024/sizeof(portSTACK_TYPE))
 #define TASK_MXT_STACK_PRIORITY        (tskIDLE_PRIORITY)
@@ -137,13 +138,15 @@ QueueHandle_t xQueueTouch;
 +QueueHandle_t xQueueADC;
 ```
 
+### Modificando task_lcd
+
 Agora modifique a tarefa `task_lcd` para alocar uma fila nesse "endereço", vamos também criar uma variável local da task chamada de `adc` para recebimento de dados dessa fila, e imprimir na tela o resultado:
 
 
 ```diff
 void task_lcd(void){
   xQueueTouch = xQueueCreate( 10, sizeof( touchData ) );
-+  xQueueADC   = xQueueCreate( 5, sizeof( adcData ) );
++ xQueueADC   = xQueueCreate( 5, sizeof( adcData ) );
 
   // inicializa LCD e pinta de branco
   configure_lcd();
@@ -151,21 +154,20 @@ void task_lcd(void){
 
   // strut local para armazenar msg enviada pela task do mxt
   touchData touch;
-+  adcData adc;
++ adcData adc;
   
   while (true) {
     if (xQueueReceive( xQueueTouch, &(touch), ( TickType_t )  100 / portTICK_PERIOD_MS)) {
       printf("Touch em: x:%d y:%d\n", touch.x, touch.y);
     }
     
-+    // Busca um novo valor na fila do adc!
-+    // formata
-+    // e imprime no LCD o dado
-+    if (xQueueReceive( xQueueADC, &(adc), ( TickType_t )  100 / portTICK_PERIOD_MS)) {
-+      char b[512];
-+      sprintf(b, "%04d", adc.value);
-+      font_draw_text(&arial_72, b, 50, 200, 2);
-+    }
++   // Busca um novo valor na fila do ADC!
++   // formata e imprime no LCD o dado
++   if (xQueueReceive( xQueueADC, &(adc), ( TickType_t )  100 / portTICK_PERIOD_MS)) {
++     char b[512];
++     sprintf(b, "%04d", adc.value);
++     font_draw_text(&arial_72, b, 50, 200, 2);
++   }
   }
 }
 ```
@@ -173,6 +175,8 @@ void task_lcd(void){
 !!! note
     Note que essa task já faz uso de uma outra fila chamada de `xQueueTouch`, ela serve para recebimento de informações do touch screen entre a `task_lcd` e a tarefa que faz a leitura do touch `task_mxt`.
     
+### Modificando task_adc
+
 Agora precisamos modificar a `task_adc` para enviar o dado por essa fila:
 
 ```diff
@@ -204,21 +208,31 @@ void task_adc(void){
 }
 ```
 
+!!! task "Tarefa"
+    Modifique o código como indicado anteriormente
+    
+    - Teste programando a placa
+
 ### semáforo 
 
 Agora vamos modificar o código para usar um semáforo para substituir a flag: `g_is_conversion_done`, esse semáforo precisa ser liberado na `AFEC_pot_Callback` e recebido na `task_adc`.
 
-!!! example "Modifique"
-    - substitua a flag `g_is_conversion_done` por um semáforo.
+!!! example "Tarefa"
+    Substitua a flag `g_is_conversion_done` por um semáforo.
+    
+    Dica: Você deve criar um semáforo, inicializar e enviar.
 
 !!! warning ""
     Até aqui é C
 
-## B - Dado direto do IRQ AFEC para a task_lcd
+## Dado direto do IRQ AFEC para a task_lcd
 
 Podemos fazer o envio do dado direto do `AFEC_pot_Callback` para a `task_lcd`, para isso teremos que usar a função [`xQueueSendFromISR`](https://freertos.org/a00119.html) no lugar da `xQueueSend`.
 
-##  A
+!!! task "Tarefa"
+    Faça o envio direto do callback do AFEC para a `task_lcd`
+
+##  Exibindo graficamente
 
 Faça a exibição do potenciômetro de forma gráfica no LCD, use as funções de desenho que está disponível:
 
@@ -232,6 +246,3 @@ void ili9488_draw_filled_rectangle(uint32_t ul_x1, uint32_t ul_y1,
 uint32_t ili9488_draw_circle(uint32_t ul_x, uint32_t ul_y, uint32_t ul_r);
 uint32_t ili9488_draw_filled_circle(uint32_t ul_x, uint32_t ul_y, uint32_t ul_r);
 ```
-
-Se for apenas uma barra é B, se for algo mais 'bonito' é A
-
