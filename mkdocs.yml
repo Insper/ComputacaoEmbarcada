@@ -69,14 +69,15 @@ nav:
 #        - 'Projeto-2-Lista.md'
 
 - APS:
+    - '20b/APS-1-Interface.md'
 #    - 'APS-1-Musical.md'
-    - 'APS 2':
-      - 'APS-2-Interface.md'
-      - 'APS-2-Rubrica.md'
-      - 'APS-2-Interface-Design.md'
-      - 'APS-2-Interface-Engenharia.md'
-      - 'APS-2-Interface-Dicas.md'
-    - 'APS-3-IoT.md'
+#    - 'APS 2':
+#      - 'APS-2-Interface.md'
+#      - 'APS-2-Rubrica.md'
+#      - 'APS-2-Interface-Design.md'
+#      - 'APS-2-Interface-Engenharia.md'
+#      - 'APS-2-Interface-Dicas.md'
+#    - 'APS-3-IoT.md'
 
 - Avaliações:
     - '20b/AV1.md'
