@@ -167,13 +167,13 @@ Fila é um recurso do freertos que permite troca de mensagens (qualquer tipo de 
     void but1_callback(void){
       // envia o char `1` na fila
       char id = `1`;
-      xQueueSendFromISR(xQueueButId, &c, 0);
+      xQueueSendFromISR(xQueueButId, &id, 0);
     }
     
-    void but1_callback(void){
+    void but2_callback(void){
       // envia o char `2` na fila
       char id = `2`;
-      xQueueSendFromISR(xQueueButId, &c, 0);
+      xQueueSendFromISR(xQueueButId, &id, 0);
     }
 
     static void task_led(void *pvParameters){
