@@ -3,9 +3,6 @@
 Nesta APS vocês irão desenvolver um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony), para isso, irão utilizar um 
 buzzer conectado a um pino do microcontrolador.
 
-!!! info "Um pouco de história:"
-    <iframe width="520" height="320" src="https://www.youtube.com/embed/jvIzIAgRWV0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Regras
 
 Leia atentamente as regras a seguir:
@@ -45,8 +42,6 @@ Os materiais a seguir estão disponíveis no kit de embarcados e são necessári
 - 1x buzzer 
 
 ![](imgs/APS-1/falante.jpeg){width=200}
-
-
 
 ## Referências
 
