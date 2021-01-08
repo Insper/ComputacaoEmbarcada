@@ -5,10 +5,10 @@
 
 ![](imgs/lab.jpeg)
 
-- **Curso:** Engenharia Da Computação - Quinto Semestre
-- **Disciplina:** Computação Embarcada [Insper](https://www.insper.edu.br/)
+- **Curso:** Engenharia Da Computação - Quinto Semestre - [Insper](https://www.insper.edu.br/)
+- **Disciplina:** Computação Embarcada 
 - **Repositório:** [http:/github.com/Insper/ComputacaoEmbarcada](http:/github.com/Insper/ComputacaoEmbarcada)
-- **Local:** Laboratórios de Arquitetura de Computadores e Informática
+- **Local:** Laboratórios de Arquitetura de Computadores e Laboratório de Informática
 - **Equipe:**
     - **Prof. Rafael Corsi** / rafael.corsi@insper.edu.br
     - Prof. Eduardo Marossi

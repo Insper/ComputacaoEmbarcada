@@ -25,7 +25,6 @@ copyright: 'Copyright &copy; Rafael Corsi @ insper'
 nav:
 - Home: index.md
 - Sobre-Curso.md
-- Sobre-2020-2.md
 - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
 
 - 'Util':
@@ -34,7 +33,7 @@ nav:
     - 'Util-Documentos.md'
 
 - Dicas:
-    - 'PIO - Dicas': 'Lab-1-IOs-Dicas.md'
+    - 'Lab-1-IOs-Dicas.md'
     - 'Util-lcd.md'
     - 'Util-freertos.md'
     - 'Util-FloatPrint.md'
@@ -69,8 +68,10 @@ nav:
 #        - 'Projeto-2-Lista.md'
 
 - APS:
-    - '20b/APS-1-Interface.md'
-#    - 'APS-1-Musical.md'
+#    - '20b/APS-1-Interface.md'
+#   - 'APS 1 - Musical':
+      - 'APS-1-Musical.md'
+      - 'APS-1-Musical-software.md'
 #    - 'APS 2':
 #      - 'APS-2-Interface.md'
 #      - 'APS-2-Rubrica.md'

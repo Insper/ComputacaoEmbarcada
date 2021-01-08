@@ -1,22 +1,25 @@
-# LAB 1 - PIO - DICAS
+# PIO 
 
-Nesse laboratório iremos aprender como controlar e ler um pino digital do SAME70.
+Dicas de como lidar com a entrada e saída (I/O) digital do microcontrolador 
+SAME-70.
 
 ## Passos
 
+Antes de comecar é necessário:
+
 1. Definir a direção do pino e propriedades
-    - Entrada/ Saída
-    - Pullup ? pullDown ? ...
+    - Entrada ou Saída?
+    - Precisa de Pullup? e pullDown ?
 1. Identificar o pino e seu PIO
     - ex: `PC18`
 1. Extrair para o firmware esses dados
-    - #defines 
-1. Ativar PMC para controlar pino
-    - `pmc_enable_periph_clk()`
+    - `#define` 
+1. Ativar no PMC o PIO que controla o pino:
+    - `pmc_enable_periph_clk(ID_PIOA)`
 1. Configurar PIO para gerenciar pino no modo correto
     - `pio_output()`
     - `pio_input()`
-1. Agir/ler o pino 
+1. Agir/ ler o pino 
     - `pio_set()` / `pio_clear()`
     - `pio_get()`
 
@@ -53,13 +56,13 @@ Todas as funcões que controlam o PIO estão documentadas em:
 
 O ID do PIO (ou de qualquer outro periférico) é um número inteiro único que identifica o periférico. Esse valor pode ser extraído do manual do microcontrolador (secção 13), ou utilizando o valor já definido no arquivo .h de configuração do uC. Exemplo:
 
-```c
-#define LED_PIO_ID 12 // PIOC possui ID 12
+``` c
+#define LED_PIO_ID ID_PIOC // PIOC possui ID 12
 ```
 
 Podemos usar o ID que já foi definido no arquivo `.h`:
 
-```c
+``` c
 #define LED_PIO_ID ID_PIOC
 ```
 
@@ -69,7 +72,7 @@ Sendo esse segundo método mais aconselhável pois possibilita maior portabilida
 
 A máscara é utilizada para configurarmos apenas alguns bits específicos. Vamos considerar o exemplo do LED do kit SAME70-XPLD:
 
-```c
+``` c
 #define LED_PIO_IDX       8u                    // ID do LED no PIO
 #define LED_PIO_IDX_MASK  (1u << LED_PIO_IDX)   // Mascara para CONTROLARMOS o LED
 ```
@@ -91,4 +94,3 @@ LED_PIO_IDX_MASK = 0000 0001 0000 0000
 
 #### p_pio
 
-> Explicar o p_pio, ponteiro organizado em forma de struct que ordena um endereco de memória....

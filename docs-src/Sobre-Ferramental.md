@@ -1,37 +1,34 @@
 # Ferramentas
 
-Sobre o hardware s software utilizados no kit.
-
+Sobre o hardware e software utilizados no curso.
 
 ## Kit de desenvolvimento - ATSAME70-XPLD
 
-- https://www.microchip.com/developmenttools/ProductDetails/atsame70-xpld
-
 O kit de desenvolvimento escolhido para o curso é o *SAM E70 Xplained*
-[^3] desenvolvido pela Atmel-Microchip possui as principais
-características:
+[^3] desenvolvido pela Microchip e possui como principais características:
 
--   SAM-E70 - high-performance ARM Cortex-M7 core-based MCU
--   Ethernet, HS USB, SD card
--   Embedded debugger
+- SAM-E70 high-performance ARM Cortex-M7 core-based MCU
+- Ethernet, HS USB, SD card
+- Embedded debugger
 
 ![SAM E70 Xplained](imgs/kit/kit.png)
 
 ### Arquitetura do uC
 
-1.  **Processador ARM :** Possui ampla dominação do mercado de
-    microprocessadores/controladores [^1]; não é exclusivo de um único
-    fabricante [^2]; arquitetura de 32 bits.
+1.  **Processador ARM:** Possui ampla dominação do mercado de
+    microprocessadores/controladores[^1]; não é exclusivo de um único
+    fabricante[^2]; arquitetura de 32 bits.
 
-2.  **Cortex M :** família M é classificada como a de
+2.  **Cortex M:** família M é classificada como a de
     microcontroladores, possuindo uma arquitetura interna menos
     sofisticadas das demais (A,R), possibilitando um melhor entendimento
     de seu funcionamento.
 
 ## Softwares
 
-!!! warning "Alerta para usuários de Linux e Windows"
-    Não funciona no VirtualBox! Deve utilizar o **VMware** como máquina virtual
+!!! warning "Linux e MAC"
+    - A infra só funciona no Windows!
+    - Se for virtualizar, não funciona no VirtualBox! Deve utilizar o **VMware** como máquina virtual (ou parallels).
 
 O AtmelStudio, IDE utilizado para programação dos microcontroladores ARM da microchip (usado no curso), é nativo **Windows**. Se for virtualizar, utilizar o [VMware Player](https://my.vmware.com/en/web/vmware/free#desktop_end_user_computing/vmware_workstation_player/12_0) pois o VirtualBox possui problemas com o driver USB do gravador.
 
@@ -44,17 +41,15 @@ A seguir informações a seguir do que fazer para cada sistema operacional:
 
 !!! note "Nota"
     reservar **2h** para instalação
+    
 
 Instalar os seguintes softwares no Windows:
 
-- Sistema Operacional 
-    - Windows 10
-- Softwares:
-    - [Atmel Studio 7](http://studio.download.atmel.com/7.0.2397/as-installer-7.0.2397-web.exe) - Instalar a *versão WEB*
-    - [Serial Port for AtmelStudio](https://gallery.microchip.com/api/v2/package/EFC4C002-63A3-4BB9-981F-0C1ACAF81E03/2.8.4)
-    - [git/github](https://desktop.github.com/)
+1. [Atmel Studio 7](http://studio.download.atmel.com/7.0.2397/as-installer-7.0.2397-web.exe) - Instalar a *versão WEB*
+1. [Serial Port for AtmelStudio](https://gallery.microchip.com/api/v2/package/EFC4C002-63A3-4BB9-981F-0C1ACAF81E03/2.8.4)
+1. [git/github](https://desktop.github.com/)
         
-#### Usuários Linux/ MAC
+#### Linux/ MAC
 
 !!! note "Nota"
     reservar **4h** para instalação
@@ -135,4 +130,4 @@ Módulo com OLED de 32 linhas.
 [^2]: ARM não produz CIs mas fornece a arquitetura para fabricantes de
     chips (Atmel, Texas, Nvidia,...)
 
-[^3]: <http://www.atmel.com/pt/br/tools/ATSAME70-XPLD.aspx?tab=applications>
+[^3]: https://www.microchip.com/developmenttools/ProductDetails/atsame70-xpld

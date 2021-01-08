@@ -1,8 +1,10 @@
 # LCD max Touch
 
+Dicas para usar o LCD maxTouch.
+
 ## Orientação
 
-Podemos fazer o LCD ser orientando na vertical (portrait) ou horizontal (landscape), para isso, basta alterar a função `static void configure_lcd(void){...}`
+Podemos fazer o LCD ser orientando na vertical (portrait) ou horizontal (landscape), para isso, basta seguir o roteiro a seguir:
 
 === "portrait"
     ```c
@@ -51,12 +53,12 @@ Podemos fazer o LCD ser orientando na vertical (portrait) ou horizontal (landsca
     }
     ```
     
-!!! note
-    Note que está trocado, quando queremos `landscape` chamamos por `PORTRAIT`, isso se dá por um erro em um `enumarete` fornecido pelo driver do LCD, no arquivo `ili9488.h`:
-    
-    ```c
-    enum ili9488_display_direction{
-	LANDSCAPE  = 0,
-	PORTRAIT   = 1
-    };
-    ```
+    !!! note
+        Note que na chamada da funcão estamos trocando, quando queremos `landscape` chamamos por `PORTRAIT`, isso se dá por um erro em um `enumarete` fornecido pelo driver do LCD, no arquivo `ili9488.h`:
+
+        ```c
+        enum ili9488_display_direction{
+          LANDSCAPE  = 0,
+          PORTRAIT   = 1
+        };
+        ```
