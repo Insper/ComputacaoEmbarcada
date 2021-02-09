@@ -1,9 +1,4 @@
-# Bem vindo a disciplina Computação Embarcada
-
-!!! success "2020-2"
-    Material atualizado.
-
-![](imgs/lab.jpeg)
+# Bem vindo a disciplina de Computação Embarcada
 
 - **Curso:** Engenharia Da Computação - Quinto Semestre - [Insper](https://www.insper.edu.br/)
 - **Disciplina:** Computação Embarcada 
@@ -13,7 +8,10 @@
     - **Prof. Rafael Corsi** / rafael.corsi@insper.edu.br
     - Prof. Eduardo Marossi
     - Técnico Marco Mello
-**© Todos os direitos reservados**
+
+- **© Todos os direitos reservados**
+
+![](imgs/lab.jpeg){width=300}
 
 ------------------
 
@@ -31,22 +29,6 @@ Ao final da disciplina o estudante deve ser capaz de:
 
 Sistemas embarcados movem o mundo!
 
-### Alguns Projetos de 2019
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xfCjqsRxOO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Rtngc9UBV-k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Xk86Dx85DUg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SbB6z_b_fc8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3MskQc6xw5s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/nDGiS4ESHzE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/cLzB3bGji-c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Começando 
 
 Leia mais sobre o curso e a infra necessária em: [Sobre](Sobre-Curso.md)
@@ -54,6 +36,11 @@ Leia mais sobre o curso e a infra necessária em: [Sobre](Sobre-Curso.md)
 ## Histórico
 
 Pequeno histórico da evolução da disciplina:
+
+- 2020-1:
+    - Aulas de segunda online e labs no modelo híbrido. APS-1 musical/ Projeto 1 (controle) / APS-2 IHM oxímetro / APS-3 Wifi
+    A ideia da APS-2 virar o oxímetro é para trazer um tema atual para dentro da 
+    disciplina.
 
 - 2020-2: 
     - full online: sai APS-1 e entra projeto 1, mantém APS-2 e APS-3.
@@ -73,3 +60,19 @@ Pequeno histórico da evolução da disciplina:
 
 - 2017-1 (primeira turma):
     - Um projeto ao longo do semestre todo.
+
+### Alguns Projetos de 2019
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xfCjqsRxOO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Rtngc9UBV-k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Xk86Dx85DUg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SbB6z_b_fc8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3MskQc6xw5s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nDGiS4ESHzE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cLzB3bGji-c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

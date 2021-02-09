@@ -1,10 +1,7 @@
 # Driver - Lab 
 
-!!! success "2020-2"
-    Material atualizado.2
-
 !!! tip
-    Sugestão: Vocês devem fazer uma cópia desse projeto para a pasta `Labs/PIO-Driver`, iremos modificar esse projeto. 
+    Sugestão: Vocês devem fazer uma cópia do LAB1 para a pasta `Labs/PIO-Driver`, iremos modificar o que fizemos na aula passada.
 
 Nessa aula iremos utilizar como projeto referência o LAB-1. 
 

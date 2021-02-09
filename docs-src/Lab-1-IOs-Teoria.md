@@ -1,9 +1,6 @@
 # Lab 1 - Digital IO 
 
-!!! success "2020-2"
-    Material atualizado.
-
-!!! note "Leitura rextra ecomendada"
+!!! note "Leitura extra ecomendada"
     - [Renesas - GPIO](https://www.renesas.com/in/en/support/technical-resources/engineer-school/mcu-programming-peripherals-01-gpio.html)
     - [ARM](https://www.arm.com/products/silicon-ip-cpu)
 

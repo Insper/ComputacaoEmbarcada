@@ -1,8 +1,5 @@
 # Driver - Teoria
 
-!!! success "2020-2"
-    Material atualizado.
-
 Para que nosso `firmware` atue corretamente sobre o hardware será necessário ampliarmos nossos conhecimentos sobre o mesmo. O `PIO` é um dos periféricos mais utilizados durante um projeto, e aparentemente o mais simples desse nosso uC (só que não!) com ele temos o controle de praticamente todos os pinos digitais do uC. O entendimento de como o mesmo funciona e como ele é configurado irá possibilitar que utilizemos outros periféricos mais para frente.
 
 Não existe segredo! Será necessário abrirmos o [manual do uC](https://pt.scribd.com/document/398420674/SAME70) de mais de 1000 páginas e lermos as informações que o fabricante disponibiliza, lá teremos detalhado o que deve ser feito para ativarmos uma determinada função ou realizar uma configuração no periférico (isso vale para todos os [microcontroladores](http://www.ti.com/lit/ds/symlink/msp430g2553.pdf)). Cada chip e cada fabricante opta por implementar uma solução diferente, mais o formato do documento é mais ou menos o mesmo. 

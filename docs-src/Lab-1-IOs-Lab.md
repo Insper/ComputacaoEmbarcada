@@ -1,8 +1,5 @@
 # LAB 1 - PIO
 
-!!! success "2020-2"
-    Material atualizado.
-
 Ao final desse laboratório você deve ser capaz de controlar pinos digitais do microcontrolador a fim de podermos acionar saídas (LEDs/ Buzzers/ motores) e lermos entradas (botões/ sensores/ ...).
 
 ## Entrega
@@ -267,6 +264,17 @@ Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datashee
     ```c
     #define LED_PIO_ID  12  // ID do periférico PIOC (controla LED)
     ```
+    
+!!! tip
+    No lugar de ficar abrindo o manual, podemos usar `ID_PIOC` no código:
+    
+    ```c
+    #define LED_PIO_ID  ID_PIOC  // ID do periférico PIOC (controla LED)
+    ```
+    
+    o ASF possui esses defines que facilitam muito o desenvolvimento e
+    minimizam erros.
+    
 
 <button class="button0" id="4:pmc" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
@@ -281,14 +289,15 @@ O PMC possui diversas funções, estamos agora interessado naquela que ativa um 
     pmc_enable_periph_clk(LED_PIO_ID);
     ```
 
+!!! tip 
+    note que estamos usando o define: `LED_PIO_ID` que foi inserindo no código por vocês, e não o valor **12**, isto é importante porque deixa o código mais claro.
+
 <button class="button0" id="5:init pmc_enable_periph_clk" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
-!!! note ""
-    note que estamos usando o define: `LED_PIO_ID` que foi inserindo no código por vocês. 
 
-#### Configurando o PIOC
+#### Configurando o pino do LED
 
-Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será necessário indicarmos ao PIO. Para isso, usaremos a seguinte função [`pio_set_output(...)`]((http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html)), definida no [`ASF do SAME70`](http://asf.atmel.com/docs/latest/same70/html/).
+Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será necessário indicarmos ao PIO. Para isso, usaremos a seguinte função [`pio_set_output(...)`](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#gaf3727cdc71e8b6c88a4069a90b72a78d), definida no [`ASF do SAME70`]( https://asf.microchip.com/docs/latest/search.html?device=same70).
 
 !!! example "Tarefa: Modifique `init()`"
     Inseria a seguinte chamada de função na inicialização. Isso configura o PIOC para tratar o bit 8 (index 8) como saída.
@@ -298,7 +307,7 @@ Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será
     pio_set_output(LED_PIO, LED_PIO_IDX_MASK, 0, 0, 0);
     ```
     
-    Essa função configura o **index 8** (LED_PIO_IDX) do **PIOC** como sendo saída inicializada em '0', sem [multidrive](https://embeddedartistry.com/blog/2018/6/4/demystifying-microcontroller-gpio-settings) e sem [resistor de pull-up](https://en.wikipedia.org/wiki/Pull-up_resistor).
+    Podemos ler: essa função configura o **index 8** (LED_PIO_IDX) do **PIOC** como sendo saída inicializada em '0', sem [multidrive](https://embeddedartistry.com/blog/2018/6/4/demystifying-microcontroller-gpio-settings) e sem [resistor de pull-up](https://en.wikipedia.org/wiki/Pull-up_resistor).
 
 <button class="button0" id="6:init pio_set_output" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
