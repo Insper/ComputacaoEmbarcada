@@ -1,4 +1,4 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxJTJIvfkJzTusu8PGkyP1aGmA7KSrKq8H4OiiQYSl9Lf6ZVM8/exec';
+const scriptURL = 'http://35.173.122.31:5000';
 const sDone = 'Cheguei Aqui!'
 const sReportado = 'Progresso reportado!'
 const mdProgress = '---PROGRESSO---'
@@ -78,6 +78,8 @@ function progressBut(button_id) {
       f.append('time', new Date());
       f.append('id', button_id);
       f.append('url', url);
+      f.append('semester', '2021s1');
+      f.append('course', 'embarcados');
       fetch(scriptURL, { method: 'POST', body: f})
       .then(response => console.log('Success!', response))
       .catch(error => console.error('Error!', error.message));
