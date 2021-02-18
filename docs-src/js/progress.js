@@ -1,6 +1,9 @@
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxJTJIvfkJzTusu8PGkyP1aGmA7KSrKq8H4OiiQYSl9Lf6ZVM8/exec';
 const sDone = 'Cheguei Aqui!'
 const sReportado = 'Progresso reportado!'
+const mdProgress = '---PROGRESSO---'
+const htmlButton = '<button class="button0" id="0: startup" onClick="progressBut(this.id);">Cheguei Aqui!</button>'
+
 
 function setCookie(cname, cvalue, exdays) {
   var d = new Date();
@@ -28,9 +31,11 @@ function getCookie(cname) {
 function checkCookie() {
   var username = getCookie("username");
   if (username == "") {
-    username = prompt("Informe seu nome completo:", "");
+    username = prompt("Ao informar o seu nome você concorda que com o uso de cookies essenciais e tecnologias semelhantes. \r\n\nCada vez que apartar o botão de progresso iremos armazenar o seu nome, o ID do botão e a hora, estes dados serão utilziados para melhor entender o comportamento dos alunos durante os estudos e aulas. \r\n\nNome completo:", "");
     if (username != "" && username != null) {
       setCookie("username", username, 365);
+    } else {
+      username = null;
     }
   }
   return username;
@@ -42,9 +47,9 @@ function setButDefauld(but) {
 }
 
 function setButNameError(but) {
-  but.firstChild.data = "Preencha o nome antes de seguir.";
+  but.firstChild.data = "Você deve aceitar os termos e preencher o seu nome para reportar progresso.";
   but.className = "button1";
-  setTimeout(() => { setButDefauld(but)}, 2000);
+  setTimeout(() => { setButDefauld(but)}, 6000);
 }
 
 function setButDone(but) {
@@ -63,8 +68,8 @@ function progressBut(button_id) {
     var but = document.getElementById(button_id);
     var text = but.firstChild;
 
-    confetti(but)
-    if (usrname != "" && text.data != sReportado){
+    if (usrname != null && text.data != sReportado){
+      confetti(but)
       setButDone(but);
       setCookie(url+button_id, 'true', 365);
 
@@ -77,6 +82,7 @@ function progressBut(button_id) {
       .then(response => console.log('Success!', response))
       .catch(error => console.error('Error!', error.message));
     } else if (text.data == sReportado) {
+      confetti(but)
       //pass
     }
     else {
@@ -84,8 +90,23 @@ function progressBut(button_id) {
     }
 }
 
-var buttons = document.getElementsByClassName("button0");
 
+/* Coloca botao de progresso */
+/*
+var innerHTML = document.body.innerHTML.replace(markdown_progress, html_button);
+
+let admonitions = document.querySelectorAll(".admonition-title");
+for (var i = 0; i < admonitions.length; i++) {
+    let el = admonitions[i];
+
+    if (el.innerText == mdProgress) {
+
+        el.innerText = en_pt[el.innerText];
+    }
+}*/
+
+/* verifica estado botoes */
+var buttons = document.getElementsByClassName("button0");
 for ( var i = 0; i < buttons.length; i++) {
   var but = buttons[i];
   var isTrue = getCookie(url+but.id);
@@ -93,3 +114,4 @@ for ( var i = 0; i < buttons.length; i++) {
     setButDoneOld(but)
   }
 }
+
