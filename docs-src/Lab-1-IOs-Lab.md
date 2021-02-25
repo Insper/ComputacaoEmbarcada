@@ -327,7 +327,7 @@ Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será
 !!! note
      Note que a função recebe como parâmetro o PIO que ela ira editar e a máscara `LED_PIO_IDX_MASK`, isso será similar nas demais funções utilizadas. Veremos o porque disso no próximo laboratório.
 
-A função [`pio_set_output()`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#gaf3727cdc71e8b6c88a4069a90b72a78d) possui os seguintes parâmetros:
+A função [`pio_set_output()`](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#gaf3727cdc71e8b6c88a4069a90b72a78d) possui os seguintes parâmetros:
 
 ```c
 void pio_set_output (    Pio * 	p_pio,
@@ -384,8 +384,8 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
 ```
 
 - Documentação das funções:
-    - [pio_set](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#gaff11c04817b1f7279971d1bada01184a)
-    - [pio_clear](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#ga4857b3d94c0517d54eeff7da85af2518)
+    - [pio_set](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#gaff11c04817b1f7279971d1bada01184a)
+    - [pio_clear](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#ga4857b3d94c0517d54eeff7da85af2518)
 
 
 !!! example "Tarefa: Modifique `main()`"
@@ -527,7 +527,7 @@ pio_set_input(ARG0, ARG1, ARG2);
 ```
 
 !!! tip "Leia"
-    Descrição da função: [`pio_set_input()`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#ga2908ec92df470e6520c6f5c38211ca0b)
+    Descrição da função: [`pio_set_input()`](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#ga2908ec92df470e6520c6f5c38211ca0b)
  
 !!! tip "ul_attribute"
     - Dica: no `ul_attribute` utilize o seguinte define: `PIO_DEFAULT`. 
@@ -545,7 +545,7 @@ pio_set_input(ARG0, ARG1, ARG2);
 
 Para esse pino funcionar é necessário que ativemos o `pull-up` nele. `Pull-up` é um resistor alimentando para `VCC`, ele faz com que o valor padrão do pino seja o energizado.
 
-Para ativarmos o `pull-up` basta chamar a função: [`pio_pull_up()`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html#gaa9aa20867544ff93c6527b799b3dfcec) com os parâmetros correto. A função está detalhada na documentação do ASF.
+Para ativarmos o `pull-up` basta chamar a função: [`pio_pull_up()`](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#gaa9aa20867544ff93c6527b799b3dfcec) com os parâmetros correto. A função está detalhada na documentação do ASF.
 
 !!! example "Tarefa: Modifique: `init()`"
     Você deve fazer uso da função `pio_pull_up()` na função `init()` 
@@ -558,8 +558,8 @@ Para lermos um valor de um pino, que já foi configurado como entrada, devemos u
 
 !!! tip "Dicas"
     
-    - Procure pela função `pio_get()` na documentação do [ASF PIO](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pio__group.html)
-    - Utilize [`PIO_INPUT`](http://asf.atmel.com/docs/latest/same70/html/pio_8h.html#a3fec53808ef45d162a52443324c82773) no parâmetro `ul_type` da função. A função `pio_get` pode ler tanto uma entrada quanto uma saída (ai teria que usar `PIO__OUTPUT_0` no `ul_type`). 
+    - Procure pela função `pio_get()` na documentação do [ASF PIO](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#ga370c08649d026fbe46cef9434526edf9)
+    - Utilize [`PIO_INPUT`](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/pio_8h.html#a5b347a9dbe228bdc43e90cd4ac4889e0) no parâmetro `ul_type` da função. A função `pio_get` pode ler tanto uma entrada quanto uma saída (ai teria que usar `PIO__OUTPUT_0` no `ul_type`). 
 
 !!! example "Tarefa: Modifique: `loop()`"
     Você deve fazer uso da função `pio_get()` na função `main()` para ler o valor de um pino.
