@@ -78,7 +78,7 @@ function progressBut(button_id) {
       f.append('time', new Date());
       f.append('id', button_id);
       f.append('url', url);
-      f.append('semester', '2021s1');
+      f.append('semester', '21a');
       f.append('course', 'embarcados');
       fetch(scriptURL, { method: 'POST', body: f})
       .then(response => console.log('Success!', response))

@@ -36,11 +36,11 @@ Parte 2:
 !!! example "Tarefa: començando"
     1. Clone o repositório [`SAME70-examples`](https://github.com/Insper/SAME70-examples/) para a sua máquina.
     1. Copie a pasta `SAME70-Clear` para o seu repositório.
-    1. Abra o projeto da pasta recém criada no AtmelStudio
+    1. Abra o projeto da pasta recém criada no Microchip Studio
 
 <button class="button0" id="0: startup" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
-Já com o AtmelStudio aberto verifique o conteúdo do arquivo `main.c` o mesmo deve estar praticamente vazio salvo comentários, inclusão do arquivo `asf.h` e duas função `init` e `main`:
+Já com o Microchip Studio aberto verifique o conteúdo do arquivo `main.c` o mesmo deve estar praticamente vazio salvo comentários, inclusão do arquivo `asf.h` e duas função `init` e `main`:
 
 ```c
 #include "asf.h"
@@ -72,7 +72,7 @@ int main(void)
 }
 ```
 
-O arquivo do tipo header `asf.h` é criado e atualizado dinamicamente pelo AtmelStudio e contém os frameworks/drivers inseridos no projeto. O [Advanced Software Framework (ASF)](http://asf.atmel.com/docs/latest/) é uma camada de abstração do acesso ao hardware, possibilitando que configuremos partes específicas do uC em um nível de abstração intermediário.
+O arquivo do tipo header `asf.h` é criado e atualizado dinamicamente pelo Microchip Studio e contém os frameworks/drivers inseridos no projeto. O [Advanced Software Framework (ASF)](http://asf.atmel.com/docs/latest/) é uma camada de abstração do acesso ao hardware, possibilitando que configuremos partes específicas do uC em um nível de abstração intermediário.
 
 ![](imgs/IOs/ASF.png)
 
@@ -98,10 +98,10 @@ A função `init` será utilizada para inserirmos códigos que farão a iniciali
 
 ### Modificando o ASF
 
-No AtmelStudio abra o **ASF Wizard** clicando na barra superior em: `ASF` :arrow_right: `ASF Wizard`. Após um tempo (sim demora para abrir) uma janela deve abrir contendo: a esquerda uma lista dos possíveis drivers que podem ser utilizados para o microcontrolador e na coluna da direita os drivers/bibliotecas já inseridas na solução.
+No Microchip Studio abra o **ASF Wizard** clicando na barra superior em: `ASF` :arrow_right: `ASF Wizard`. Após um tempo (sim demora para abrir) uma janela deve abrir contendo: a esquerda uma lista dos possíveis drivers que podem ser utilizados para o microcontrolador e na coluna da direita os drivers/bibliotecas já inseridas na solução.
 
 !!! info
-    No AtmelStudio um projeto contém uma cópia dos códigos das bibliotecas utilizadas, se você editar essa cópia novos projetos não serão impactados.
+    No Microchip Studio um projeto contém uma cópia dos códigos das bibliotecas utilizadas, se você editar essa cópia novos projetos não serão impactados.
 
 As seguintes bibliotecas já estão selecionadas e incluídas no projeto:
 
@@ -128,14 +128,14 @@ Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse proj
 - **Delay routines**
     - funções de delay (por software)
 
-??? info "Para adicionar ou remover bibliotecas da solução utilize a barra inferior:"
-    ![](imgs/IOs/asf-result.png)
+!!! info 
+    Para adicionar ou remover bibliotecas da solução utilize a barra inferior:
+    
+    ![](imgs/IOs/asf-result.png){width=500}
 
-!!! tip  ""
-    Ao final clique em APPLY para salvar as alterações.
+    ==Ao final clique em APPLY para salvar as alterações.==
 
 <button class="button0" id="1:asf" onClick="progressBut(this.id);">Cheguei Aqui!</button>
-
 
 ## Inicialização do uC
 
@@ -150,7 +150,7 @@ No nosso caso iremos começar configurando o clock do uC e desativando o `WatchD
 
 !!! example "Tarefa: função `init()`"
 
-    Modifique a função `init()` incluindo as seguintes linhas de código:
+    Modifique a função `init()` para ficar como a seguir:
     
     ```c
     // Função de inicialização do uC
@@ -166,16 +166,19 @@ No nosso caso iremos começar configurando o clock do uC e desativando o `WatchD
    <button class="button0" id="2:init" onClick="progressBut(this.id);">Cheguei Aqui!</button>
     
 
-A função `sysclk_init()` é responsável por aplicar as configurações do arquivo [`config/conf_clock.h`](https://github.com/Insper/SAME70-examples/blob/master/SAME70-Clear/src/config/conf_clock.h) no gerenciador de clock do microcontrolador (esse é o mesmo arquivo que foi modificado na primeira aula), que inicializa o Clock do sistema em `300 MHz`.
+A função `sysclk_init()` é responsável por aplicar as configurações do arquivo [`config/conf_clock.h`](https://github.com/Insper/SAME70-examples/blob/master/SAME70-Clear/src/config/conf_clock.h) no gerenciador de clock do microcontrolador, que está configurado para operar em`300 MHz`.
 
 Já a linha [`WDT->WDT_MR = WDT_MR_MDDIS`](https://pt.scribd.com/document/398420674/SAME70#page=188) faz com que o watchdog do microcontrolador seja desligado.
 
 !!! info 
     WatchDog Timer como o próprio nome diz é um cão de guarda do microcontrolador. Ele é responsável por verificar se o código está 'travado' em alguma parte, causando o reset forçado do uC.
+    
+    O whatchdog timer deve ser ativado só nos estágios finais de desenvolvimento
+    de um produto.
 
     ![](imgs/IOs/WDT-datasheet.png) 
 
-##  Pino as output
+##  Pino como saída (output)
 
 Para configurarmos um pino como saída será necessário seguirmos os passos a seguir:
 
@@ -191,9 +194,9 @@ Antes de configurarmos um pino como entrada (botão) ou saída (LED) é necessá
 
 ![](imgs/IOs/SAME70-IO.png) 
 
-Todos os pinos digitais desse microcontrolador (em outros uC pode ser diferente) são conectados ao um periférico chamado de `Parallel Input/Output Controller (PIO)`, esse periférico é responsável por configurar diversas propriedades desses pino, inclusive se será entrada ou saída (configurado individualmente). Cada PIO pode controlar até 32 pinos (depois veremos o porque disso), e cada PINO está conectado a um único PIO. 
+Todos os pinos digitais desse microcontrolador (em outros uC pode ser diferente) são conectados ao um periférico chamado de `Parallel Input/Output Controller (PIO)`, esse periférico é responsável por configurar diversas propriedades desses pino, inclusive se será entrada ou saída (configurado individualmente). Cada PIO pode controlar até 32 pinos (depois veremos o porque disso), e cada ==pino== está conectado a um único PIO. 
 
-Cada PIO possui um nome referenciado por uma letra: PIO **A** ; PIO **B**; PIO **C**;.... E cada pino possui um número único dentro desse PIO, por exemplo `PIOA11` referencia o "pino 11" do "PIOA". Outra notação utilizada no manual é `PA11`, que representa a mesma coisa.
+Cada PIO possui um nome referenciado por uma letra: PIO **A** ; PIO **B**; PIO **C**;.... E cada pino possui um número único dentro desse PIO, por exemplo ==PIOA11== referencia o "pino 11" do "PIOA". Outra notação utilizada no manual é ==PA11==, que representa a mesma coisa.
 
 !!! tip "SAME70-XPLD.pdf"
     A secção [`4.4.3 LED` do SAME70-XPLD](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=31) 
@@ -205,10 +208,10 @@ Cada PIO possui um nome referenciado por uma letra: PIO **A** ; PIO **B**; PIO *
 
     ![](imgs/IOs/SAME70-LED.png)
     
-A tabela [Table 4-16 LED Connection](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=32) descreve qual o pino e qual PIO o LED do kit foi conectado, podemos a partir dos dados do manual extrair que o LED foi conectado ao pino **PC8** do microcontrolador, isso significa que:
+A tabela [Table 4-16 LED Connection](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=32) descreve qual o pino e qual PIO o LED do kit foi conectado, podemos a partir dos dados do manual extrair que o LED foi conectado ao pino ==PC8== do microcontrolador, isso significa que:
 
 1. O periférico PIO C, 'bit' 8 é responsável por controlar o Liga/Desliga do LED verde da placa.
-1. Que o LED apaga quando o pino é acionado (pino ligado) e acende quando aterrado (pino desligado)
+1. Que o LED apaga quando o pino é acionado (pino ligado/ um no pino/ high) e acende quando aterrado (pino desligado/ zero no pino/ low)
 
 Podemos sintetizar as informações do PIO que controla o pino na tabela a seguir:
 
@@ -216,8 +219,7 @@ Podemos sintetizar as informações do PIO que controla o pino na tabela a segui
 |-----------------|---------|-----------|------------|
 | LED             | PIOC    |         8 |         12 |
 
-Agora será necessário transcrever essas informações para o nosso código em C, para isso iremos 
-`definir`
+Agora será necessário transcrever essas informações para o nosso código em C, para isso iremos usar um recurso de C chamado [`define`](https://www.pucsp.br/~so-comp/cursoc/aulas/c830.html)
 
 !!! example "Tarefa: Modifique `main.c`"
     Iremos incorporar essa informação no nosso código via os `#defines` no começo do `main.c`:
@@ -231,13 +233,21 @@ Agora será necessário transcrever essas informações para o nosso código em 
     #define LED_PIO_IDX_MASK  (1 << LED_PIO_IDX)   // Mascara para CONTROLARMOS o LED
     ```
 
-<button class="button0" id="3:define led" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
 !!! warning
     Note que o `LED_PIO_ID` está incompleto (???), vamos preencher na sequência.
 
-!!! note "#defines"
-    [defines em C](https://www.techonthenet.com/c_language/constants/create_define.php) são macros resolvidos em tempo de compilação 
+!!! info "#define"
+    O `#define` é uma macro, ou seja, é um recurso de C que é executado
+    em tempo de compilação, o `define` é diferente de uma variável/ constant
+    pois o compilador não irá alocar um endereço de memória para ela. 
+    
+    Antes de compilar o programa, o compilador irá varrer o seu código fonte
+    e substituir todos os `defines` pelos valores definidos. 
+    Pense nisso como um recurso que facilita a vida do programador.
+
+
+<button class="button0" id="3:define led" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
 ### `init()`
 
@@ -275,10 +285,13 @@ Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datashee
     o ASF possui esses defines que facilitam muito o desenvolvimento e
     minimizam erros.
     
+!!! example "Tarefa: Modifique `main.c`"
+    Troque o número ==12== do define por `ID_PIOC`
+    
 
 <button class="button0" id="4:pmc" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
-O PMC possui diversas funções, estamos agora interessado naquela que ativa um periférico para podermos usar. Essa função é a [`pmc_enable_periph_clk(uint32_t ul_id)`](http://asf.atmel.com/docs/latest/same70/html/group__sam__drivers__pmc__group.html#gad09de55bb493f4ebdd92305f24f27d62) que recebe como parâmetro o ID do periférico que queremos ativar. 
+O PMC possui diversas funções, estamos agora interessado naquela que ativa um periférico para podermos usar. Essa função é a [`pmc_enable_periph_clk(uint32_t ul_id)`](https://asf.microchip.com/docs/latest/sam.drivers.pmc.pmc_clock_switching_example.same70_xplained/html/group__sam__drivers__pmc__group.html#gad09de55bb493f4ebdd92305f24f27d62) que recebe como parâmetro o ID do periférico que queremos ativar. 
 
 !!! example "Modifique `init()`"
     Insira o seguinte trecho de código na nossa função de inicialização (`init()`) logo após desativarmos o `WDT`:
@@ -484,7 +497,7 @@ Agora precisamos fazer a ponte entre o mundo externo e o firmware que será exec
   
 <button class="button0" id="10:define but" onClick="progressBut(this.id);">Cheguei Aqui!</button>
   
-### init()
+### Função `init()`
 
 Agora é necessário: 
 
