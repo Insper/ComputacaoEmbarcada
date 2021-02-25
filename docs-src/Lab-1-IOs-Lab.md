@@ -72,7 +72,7 @@ int main(void)
 }
 ```
 
-O arquivo do tipo header `asf.h` é criado e atualizado dinamicamente pelo Microchip Studio e contém os frameworks/drivers inseridos no projeto. O [Advanced Software Framework (ASF)](http://asf.atmel.com/docs/latest/) é uma camada de abstração do acesso ao hardware, possibilitando que configuremos partes específicas do uC em um nível de abstração intermediário.
+O arquivo do tipo header `asf.h` é criado e atualizado dinamicamente pelo Microchip Studio e contém os frameworks/drivers inseridos no projeto. O [Advanced Software Framework (ASF)](https://www.microchip.com/en-us/development-tools-tools-and-software/libraries-code-examples-and-more/advanced-software-framework-for-sam-devices#Documentation) é uma camada de abstração do acesso ao hardware, possibilitando que configuremos partes específicas do uC em um nível de abstração intermediário.
 
 ![](imgs/IOs/ASF.png)
 
