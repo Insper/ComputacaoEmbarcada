@@ -2,6 +2,9 @@
 
 Ao final desse laboratório você deve ser capaz de controlar pinos digitais do microcontrolador a fim de podermos acionar saídas (LEDs/ Buzzers/ motores) e lermos entradas (botões/ sensores/ ...).
 
+!!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScOMBee6nuESfZEvaIr3dsVxrh9Fqvtb9Vw9sU0Gl4xABSLAw/viewform?embedded=true" width="640" height="320frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
 ## Entrega
 
 | Pasta         |

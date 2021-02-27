@@ -12,6 +12,8 @@ Dicas de como começar usar o kit de desenvolvimento SAME70.
 
 !!! tip
     Não funcionou? Mande mensagem no canal ==Suporte== do teams, assim qualquer um da equipe consegue ajudar.
+    
+    [Acesse o canal clicando aqui!](https://teams.microsoft.com/l/channel/19%3a274b9061bb5143f38d1c79397ab9f536%40thread.tacv2/Suporte?groupId=fce5a025-4419-4faf-8af0-8f5d97bc39fd&tenantId=6370a6c0-7b90-4709-bd6e-59c28ede833b)
  
  Passos para testar:
  
