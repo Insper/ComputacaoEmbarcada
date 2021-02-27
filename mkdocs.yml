@@ -22,6 +22,11 @@ edit_uri: 'https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/'
 # Copyright
 copyright: 'Copyright &copy; Rafael Corsi @ insper'
 
+# ana
+google_analytics:
+  - G-GBPXHW97ZP
+  - auto
+
 nav:
 - Home: index.md
 - Sobre-Curso.md
