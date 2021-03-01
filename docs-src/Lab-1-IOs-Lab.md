@@ -2,14 +2,20 @@
 
 Ao final desse laboratório você deve ser capaz de controlar pinos digitais do microcontrolador a fim de podermos acionar saídas (LEDs/ Buzzers/ motores) e lermos entradas (botões/ sensores/ ...).
 
+!!! info
+    Para criar o repositório de entregas entrar no link a seguir:
+    
+    https://classroom.github.com/a/_mwvM6tB
+
 !!! note "Preencher ao finalizar o lab"
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScOMBee6nuESfZEvaIr3dsVxrh9Fqvtb9Vw9sU0Gl4xABSLAw/viewform?embedded=true" width="640" height="320frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
 
 ## Entrega
 
+
 | Pasta         |
 |---------------|
-| `Labs/PIO-IO` |
+| `PIO-IO` |
 
 - Ao final da aula: 
     - [ ] Um LED piscando a cada segundo
@@ -33,15 +39,18 @@ Parte 2:
   
   1. Configurar o PIO para controlar o pino do botão em modo entrada
   1. Ler o botão e agir sobre o LED
-  
-## Inicializando e configurando o ASF
 
+Copie a pasta `SAEM70-Clear` para dentro do repositório criado pelo classroom, renomear a pasta para `PIO-IO` e trabalhar nela!
+  
 !!! example "Tarefa: començando"
     1. Clone o repositório [`SAME70-examples`](https://github.com/Insper/SAME70-examples/) para a sua máquina.
     1. Copie a pasta `SAME70-Clear` para o seu repositório.
+    1. Renomei a pasta para `PIO-IO`
     1. Abra o projeto da pasta recém criada no Microchip Studio
 
 <button class="button0" id="0: startup" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
+## Inicializando e configurando ASF
 
 Já com o Microchip Studio aberto verifique o conteúdo do arquivo `main.c` o mesmo deve estar praticamente vazio salvo comentários, inclusão do arquivo `asf.h` e duas função `init` e `main`:
 
