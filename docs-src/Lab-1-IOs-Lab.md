@@ -30,10 +30,11 @@ Nesse lab iremos utilizar um projeto de referência [`SAME70-examples/SAME70-Cle
 
 Parte 1: 
   
-  1. Inserir drivers no projeto (ASF)
-  1. Configurações básicas do uC (clock e WDT)
-  1. Configurar PIO para controlar pino do LED em modo saída
-  1. Acionar o pino
+  1. Inserir drivers no projeto (ASF) 
+      - ==Isso será feito no próprio Microchip Studio!==
+  3. Configurações básicas do uC (clock e WDT)
+  4. Configurar PIO para controlar pino do LED em modo saída
+  5. Acionar o pino
   
 Parte 2: 
   
