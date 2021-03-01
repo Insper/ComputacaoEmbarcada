@@ -21,14 +21,17 @@ Leia atentamente as regras a seguir:
 !!! tip "Dupla"
     - A APS pode ser realizada em dupla.
     - Você não vai poder repetir dupla na próxima APS.
-    - O desenvolvimento do projeto deve ser feito em um repositório git (a entrega também)
+    - O desenvolvimento do projeto deve ser feito no repositório criado
+    pelo classroom:
+    
+    https://classroom.github.com/g/MDaOpEYN
 
 !!! tip "Entrega"
     - Ao finalizar o projeto preencher o forms: https://forms.gle/f7ZuBvc9tozxZRnaA
 
 ## Descrição
 
-A entrega final deverá ser um sistema embarcado que via a adição de um [`buzzer`](https://en.wikipedia.org/wiki/Buzzer) ao uC o mesmo deve ser capaz de reproduzir músicas 'conhecidas'. Além do buzzer deve-se adicionar dois botões ao kit, para ser usado: 
+A entrega final deverá ser um sistema embarcado que via a adição de um [`buzzer`](https://en.wikipedia.org/wiki/Buzzer) ao uC o mesmo deve ser capaz de reproduzir músicas 'conhecidas'. Além do buzzer deve-se adicionar dois botões ao kit, para ser usado para: 
 
 - mudar de música
 - parar / iniciar a música.
@@ -53,6 +56,11 @@ A seguir algumas referências:
 - https://www.hackster.io/muhammed-shameel-k-v/how-to-play-music-with-a-buzzer-and-arduino-b9a25d
 - https://github.com/xitangg/-Pirates-of-the-Caribbean-Theme-Song/blob/master/Pirates_of_the_Caribbean_-_Theme_Song.ino
 
+## Dicas
+
+A página [APS/APS 1 - Musical - Firmware](/ComputacaoEmbarcada/APS-1-Musical-software) possui
+dicas valiosas de como realizar a implementação.
+
 ## Rubrica
 
 !!! info "Entrega"
@@ -76,13 +84,15 @@ A rubrica a seguir será aplicada a nota da entrega:
     - Utiliza `struct` para organizar as músicas
     - Código organizado em funções e que recebem `struct` contendo música
     - Fecha todos os `issues` que forem abertos no repositório (pela equipe)
+- C+
+    - LED piscando de acordo com a música (adicionar um LED ao projeto)
 - C
     - Repositório contém `README.md`com ligações elétrica e passos de como usar o projeto, assim como link para o vídeo e **referência a outros códigos**
     - Funcionalidade de `PAUSE`/ `PLAY`
     - Botão de seleção musical
-    - Reproduz duas músicas (de forma inteligível)
-    - LED piscando de acordo com a música
     - Indicação visual de qual música foi selecionada
+    - Reproduz duas músicas (de forma inteligível)
+    - Utiliza músicas do repositório indicado
 - D
     - Faltando um item de C
 - I

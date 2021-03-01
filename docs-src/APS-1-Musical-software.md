@@ -206,7 +206,7 @@ if (divider > 0) {
 }
 ```
 
-- onde `thisNote` é o index da nota atual.
+- `thisNote` é o index da nota atual.
 
 !!! tip
     Eu reescreveria este trecho de código da seguinte maneira, com o objetivo
