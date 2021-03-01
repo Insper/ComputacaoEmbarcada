@@ -38,6 +38,11 @@ Para gerarmos o som é necessário termos algum dispositivo capaz de gerar movim
 
 Buzzers são diferentes de altofalantes[^2] em vários aspectos (mecânico, eletromecânico): não necessitam de tensão negativa; possuem um espectro de operação menor; baixa resistência; baixa potência ... .
 
+A conexão do buzzer com um microcontrolador se da por dois pinos: Um conectado no terra (gnd) e outro conectado
+em um pino que o microcontrolador possui controle, conforme ilustração a seguir:
+
+![image](https://user-images.githubusercontent.com/1039615/109496798-e660e380-7a6f-11eb-831d-604cce45f5f6.png){width=500}
+
 [^2]: https://en.wikipedia.org/wiki/Loudspeaker
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/77h1JhD9Syw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -47,7 +52,7 @@ Buzzers são diferentes de altofalantes[^2] em vários aspectos (mecânico, elet
 Podemos fazer com que o buzzer oscile em uma determinada frequência, para isso basta gerarmos um sinal de onda quadrada  no terminal positivo do dispositivo, isso irá fazer com que o piezo movimente na mesma frequência, gerando o tom desejado.
 
 !!! tip "Notas"
-    As notas musicais são definidas pela frequência principal que elas emitem, um Dó-4 é definido por 262 Hz, um Lá-4 por 440Hz e assim por diante (o 4 se refere ao meio do piano). Além da frequência principal, cada instrumento musical emite outras frequências que compõem o som, gerando um som único.
+    As notas musicais são definidas pela frequência principal que elas emitem, um Dó-4 é definido por 262 Hz, um Lá-4 por 440Hz e assim por diante (o 4 se refere ao meio do piano). Além da frequência principal, cada instrumento musical emite outras frequências que compõem o som, gerando um som único para cada instrumento.
     
     Iremos usar a notacao americana para as notas:
     
@@ -58,18 +63,17 @@ Podemos fazer com que o buzzer oscile em uma determinada frequência, para isso 
     ![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Frequency_vs_name.svg/350px-Frequency_vs_name.svg.png)
     
     > Ref: https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Frequency_vs_name.svg/350px-Frequency_vs_name.svg.png Wikipidia 
-        
 
 !!! info "Frequências"
-    Lembre que uma onda quadrada pode ser decomposta em infinitas senoides pela
-    transformada de Fourier. 
+    Lembre que uma onda quadrada pode ser decomposta em infinitas senoides pela transformada de Fourier. 
+    
     ![](https://mathworld.wolfram.com/images/eps-gif/FourierSeriesSquareWave_800.gif){width=300}
     
-    Sendo a componente principal (de maior energia) centrada na frequência da onda quadrada:
+    Sendo a componente principal (de maior energia) centrada na frequência da onda quadrada (no nosso caso):
     
     ![](https://mathworld.wolfram.com/images/equations/FourierSeriesSquareWave/NumberedEquation3.gif)
 
-    Portanto o som que iremos escutar será composto da frequência principal mais as secundárias e harmónicas.
+    Portanto o som que iremos escutar será composto da frequência principal mais as harmónicas.
 
     > ref: https://mathworld.wolfram.com/images/eps-gif/FourierSeriesSquareWave_800.gif
     
@@ -97,7 +101,7 @@ while(1){
 
 ## Música
 
-Eu fiz por anos aula de sax alto e meu professor falava que para tocar uma música bastava: `tocar a nota certa no momento certo e não tocar quando não for para tocar`, para quem tem prática é fácil, mas para mim não era. Trouxe este assunto para explicar um pouco como iremos reproduzir uma música. Cada música será formada por notas (frequências), pela duração da nota e por silêncio entre notas (que também tem duração ). Toda essa informação está presente na partitura:
+Eu fiz por anos aula de sax alto e meu professor falava que para começar a tocar uma música bastava: `tocar a nota certa no momento certo e não tocar quando não for para tocar`, para quem tem prática é fácil, mas para mim não era. Trouxe este assunto para explicar um pouco como iremos reproduzir uma música. Cada música será formada por notas (frequências), pela duração da nota e por um silêncio entre notas (que também tem duração ). Toda essa informação está presente na partitura:
 
 ![](https://cdn.statically.io/img/www.musicnotes.com/now/wp-content/uploads/2018/02/4.png?quality=80&f=auto)
 
@@ -111,22 +115,23 @@ Portanto para reproduzirmos uma música teremos que para cada intervalo de tempo
 
 ## Referência
 
-Sugerimos utilizarem as músicas fornecidas no repositório (código para Arduino, não funciona no nosso =) ): 
+Nesta APS é para utilizarem as músicas fornecidas no repositório a seguir: 
 
 - https://github.com/robsoncouto/arduino-songs
 
 > Fornecido por:  Robson Couto, 2019
 
 !!! info
-    Os exemplos deste repositório só funcionam em Arduino, não conseguimos
-    usar de maneira direta no nosso kit de desenvolvimento.
+    Os exemplos deste repositório só funcionam em Arduino, não conseguimos usar de maneira direta no nosso kit de desenvolvimento.
 
 !!! warning
     Lembre de referenciar o repositório quando utilizar as músicas por ele fornecido. Como descrito no próprio README.
     
     > Every sketch here has been written by myself, although based on scores I found online or books I own. These scores are linked in each file when possible. You can use the sketches for anything, I only kindly ask that you give credit if you use these codes on a tutorial, video, example, etc.
-    
-O desenvolvedor disponibiliza diversas músicas, de vários temas diferentes: Filmes, Jogos, Clássicas, ... . Vamos analisar como as músicas são disponibilizadas. Para isso iremos pegar como exemplo a música tema do Mário:
+ 
+## Analisando firmware 
+
+O desenvolvedor disponibiliza diversas músicas de vários temas diferentes: Filmes, Jogos, Clássicas, ... . Vamos analisar como as músicas são disponibilizadas. Para isso iremos pegar como exemplo a música tema do Mário:
 
 - https://github.com/robsoncouto/arduino-songs/blob/master/supermariobros/supermariobros.ino
 
@@ -183,7 +188,8 @@ O valor da semibreve/wholenote é definida no próprio código:
 // change this to make the song slower or faster
 int tempo = 200;
 
-....
+// hide code
+// ....
 
 // this calculates the duration of a whole note in ms
 int wholenote = (60000 * 4) / tempo;
