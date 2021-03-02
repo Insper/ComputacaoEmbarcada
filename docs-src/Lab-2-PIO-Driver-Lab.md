@@ -1,21 +1,36 @@
 # Driver - Lab 
 
-!!! tip
-    Sugestão: Vocês devem fazer uma cópia do LAB1 para a pasta `Labs/PIO-Driver`, iremos modificar o que fizemos na aula passada.
-
 Nessa aula iremos utilizar como projeto referência o LAB-1. 
 
-## Ao final
+## Entrega
+
+| Pasta             |
+|-------------------|
+| `Lab2-PIO-Driver` |
+
+!!! note "Como começar:"
+    - Vocês devem realizar uma cópia do LAB-1 que está no seu repositório para a pasta `Lab2-PIO-Driver`, iremos modificar o que fizemos no laboratório passado.
+    
+    - A entrega continua sendo feita pelo repositório que foi gerado no laboratório passado.
+    
+    - ==Estou mudando o padrão do nome das pastas, eu tirei a subpasta `Labs` e adicionei
+    o número do lab no nome da pasta.==
+    
 
 O objetivo desse laboratório é o do entendimento das funções utilizadas para configurar o PIO. Como um pino é configurado como saída e entrada? Como o firmware manipula o periférico PIO? Entender o que o PIO é capaz de fazer. Para isso iremos aqui implementar nossas próprias funções de interface com o PIO.
 
-- Ao final do lab, deverão ter implementado as seguintes funções:
-    - [ ] `_pio_set()`
-    - [ ] `_pio_clear()`
-    - [ ] `_pio_pull_up()`
-    - [ ] `_pio_set_input()`
-    - [ ] `_pio_set_output()`
-    - [ ] `_pio_set_get()`
+Ao final do lab, deverão ter implementado as seguintes funções:
+
+- C:
+    - [ ] `_pio_set(...)`
+    - [ ] `_pio_clear(...)`
+    - [ ] `_pio_pull_up(...)`
+    - [ ] `_pio_set_input(...)`
+    - [ ] `_pio_set_output(...)`
+- B:
+    - [ ] `_pio_get(...)`
+- A:
+    - [ ] `_delay_ms(...)`
 
 ## Driver
 
@@ -42,16 +57,18 @@ void _pio_set(Pio *p_pio, const uint32_t ul_mask)
 }
 ```
 
+!!! tip
+    Lembre que essa função serve para acionarmos um pino digital quando o mesmo é configurado como output (fazer ele virar `3.3V`).
+
 Na primeira etapa iremos substituir a função que a Microchip já nos disponibiliza por uma criada por nós, em todo lugar no código que você faz o uso da função `pio_set(...)` substitua a chamada por essa recém criada  `_pio_set(...)`.
 
 !!! example "Tarefa"
-    - Crie a função `_pio_set()`
-    - Substitua a chamada da função `pio_set()` pela `_pio_set()` (em todo o código)
+    1. Crie a função `_pio_set()`
+    1. Substitua no código toda ocorrência de `pio_set()` pela `_pio_set()`. 
+    1. Execute o código, **ele não deve funcionar :bangbang:.**
+        - pois agora a função que aciona um pino não está implementada.
         
-    <button class="button0" id="1:pio_set_init" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
-
-!!! note
-    Lembre que essa função serve para acionarmos um pino digital quando o mesmo é configurado como output (fazer ele virar `3.3V`).
+<button class="button0" id="1:pio_set_init" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
 
 Agora será necessário entender como o PIO controla os pinos e o que deve ser feito para que ele atue sobre o pino como desejamos. A parte da secção do manual que fala sobre o PIO e suas saídas/entradas é a **secção 32** do (`manual SAME70`), vamos analisar:
 
@@ -60,7 +77,7 @@ Agora será necessário entender como o PIO controla os pinos e o que deve ser f
     
     > The level driven on an I/O line can be determined by **writing** in the Set Output Data Register (**PIO_SODR**) and the Clear Output Data Register (PIO_CODR). These write operations, respectively, set and clear the Output Data Status Register (PIO_ODSR), which represents the data driven on the I/O lines**. Writing in PIO_OER and PIO_ODR manages PIO_OSR whether the pin is configured to be controlled by the PIO Controller or assigned to a peripheral function. This enables configuration of the I/O line prior to setting it to be managed by the PIO Controller.
 
-Lendo o texto, podemos descobrir que  para termos `1` (`set`) no pino devemos escrever no registrador `PIO_SODR`, no manual tem mais detalhes sobre todos detalhes do PIO. Vamos analisar a documentação desse registrador (`SODR`):
+Lendo o texto, podemos descobrir que  para termos `1` (`set`) no pino devemos escrever no registrador `PIO_SODR`, no manual tem mais detalhes sobre tudo do PIO. Vamos analisar a documentação especifica deste registrador (`SODR`):
 
 ![PIO_SODR](imgs/PIO-Driver/pio-sodr.png)
 
@@ -81,10 +98,10 @@ void _pio_set(Pio *p_pio, const uint32_t ul_mask)
 - `*p_pio`: é um endereço recebido do tipo Pio, ele indica o endereço de memória na qual o PIO (periférico) em questão está mapeado (vamos ver isso em detalhes).
 - `ul_mask`: é a máscara na qual iremos aplicar ao registrador que controla os pinos para colocarmos 1 na saída.
 
-O que isso significa? Significa que estamos acessando o periférico passado como referência a função (um dos 5 PIOs: *PIOA*,  *PIOB*, *PIOC*, ...) e estamos aplicando a máscara `ul_mask` no seu registrador `PIO_SODR`.
+O que isso significa? Significa que estamos acessando o periférico passado como referência a função (um dos cinco PIO disponíveis no uc: *PIOA*,  *PIOB*, *PIOC*, ...) e estamos aplicando a máscara `ul_mask` no seu registrador `PIO_SODR`.
 
 !!! note "Pio type?"
-    O tipo `Pio` é uma struct alinhada com o endereço de memória do periférico, onde cada 'item' dessa struct representa um endereço da memória do periférico, essa é a maneira correta em `C` de darmos *nome* a endereços de memória.  Isso já está definido no projeto quando usamos o asf (para facilitar nossa vida):
+    O tipo `Pio` é uma struct alinhada com o endereço de memória do periférico, onde cada 'item' dessa struct representa um endereço da memória do periférico, essa é uma maneira em `C` de darmos *nome* a endereços de memória.  Isso já está definido no projeto quando usamos o asf (para facilitar nossa vida):
     
     O `PIOA` é um struct que aponta para o endereço `0x400E0E00`
     
@@ -124,12 +141,16 @@ O que isso significa? Significa que estamos acessando o periférico passado como
       #define   __IO    volatile        /*!< Defines 'read / write' permissions              */
     ```
     
+    O diagrama a seguir ilustra o que acontece quando fazemos: `p_pio->PIO_SODR = ul_mask;`
+    
+    ![](imgs/PIO-Driver/diagrama.png){width=500}
+    
 !!! example "Modifique e teste"
-    A função está pronta, agora precisamos testar. Com a modificação no código faça a gravação do uC e nada deve mudar na execução do código. Já que a função implementada possui a mesma funcionalidade daquela fornecida pelo fabricante.
+    A função está pronta, agora precisamos testar. Com a modificação no código faça a gravação do uC e ele deve voltar a piscar o LED quando você aperta o botão. Agora a função implementada possui a mesma funcionalidade daquela fornecida pelo fabricante.
     
     - Embarque o código e o mesmo deve funcionar normalmente caso a função implementada esteja correta.
     
-    <button class="button0" id="2:pio_set" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+<button class="button0" id="2:pio_set" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
 
 ### _pio_clear(...)
 
@@ -150,17 +171,20 @@ void _pio_clear(Pio *p_pio, const uint32_t ul_mask)
 }
 ```
 
-Vocês deverão descobrir pelo manual qual o periférico que deve ser acessado. Releia a secção 32.5.4
+Vocês deverão descobrir pelo manual qual registrador que deve ser acessado. Releia a secção 32.5.4
 
 !!! example "Modifique e teste"
     1. Crie a função `_pio_clear()`
-    1. Substitua no código: `pio_clear` por `_pio_clear`
-    1. Implemente
+    1. Substitua no código toda ocorrência de `pio_clear` por `_pio_clear`
+    1. Implemente a função.
     1. Compile, programe e teste
 
-    <button class="button0" id="3:pio_clear" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+<button class="button0" id="3:pio_clear" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
 
 ### _pio_pull_up(...)
+
+!!! warning
+    Só continue se a implementação anterior funcionou.
 
 Vamos implementar uma função que faz a configuração do `pullup` nos pinos do PIO, esse pullup é utilizado no botão da placa. Para isso declare a função a seguir:
 
@@ -186,7 +210,7 @@ Essa função recebe o PIO que irá configurar, os pinos que serão configurados
 
 !!! example "Modifique e teste"
     1. Crie a função `_pio_pull_up`
-    1. Substitua no código: `pio_pull_up` por `_pio_pull_up`
+    1. Substitua no código toda ocorrência de `pio_pull_up` por `_pio_pull_up`.
     1. Implemente
     1. Compile, programe e Teste
     
@@ -248,13 +272,14 @@ _pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_PULLUP | _PIO_DEBOUNCE);
 
 !!! example "Tarefa: Modifique e teste"
     1. Crie a função `_pio_set_input`
-    1. Substitua no código: `pio_set_input` por `_pio_set_input`
+    1. Substitua no código toda ocorrência de `pio_set_input` por `_pio_set_input`.
     1. Implemente
     1. Compile, programe e teste
     
-    <button class="button0" id="5:pio_set_input" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+<button class="button0" id="5:pio_set_input" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
 
-### _pio_set_output(...)
+
+### _pio_set_output(...) 
 
 Na aula passada utilizamos a função `pio_set_output` para configurarmos que o pino é uma saída. Iremos aqui definir uma nova função chamada de `_pio_set_output()` que implementa essa função.
 
@@ -309,13 +334,16 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
 
 !!! example "Tarefa: Modifique e teste"
     1. Crie a função `_pio_set_output`
-    1. Substitua:`pio_set_output` por `_pio_set_output`
+    1. Substitua no código toda ocorrência de `pio_set_output` por `_pio_set_output`.
     1. Implemente
     1. Compile, programe e teste
 
-    <button class="button0" id="6:pio_set_output" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+<button class="button0" id="6:pio_set_output" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
     
-### _pio_get(...)
+!!! info ""
+    Até aqui é conceito C.
+    
+### Conceito B: _pio_get(...)
 
 Implemente a função `_pio_get()`:
 
@@ -344,9 +372,19 @@ uint32_t pio_get(Pio *p_pio, const pio_type_t ul_type,
 
 !!! example "Tarefa: Modifique e teste"
     1. Crie a função `_pio_get()`
-    1. Substitua no código: `pio_get` por `_pio_get()`
+    1. Substitua no código todas as ocorrências de `pio_get` por `_pio_get()`
     1. Implemente
     1. Compile, programe e teste
     
-    
-    <button class="button0" id="7:pio_get" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+<button class="button0" id="7:pio_get" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+
+
+### Conceito A: _delay_ms(...)
+
+Crie sua Própria função de `delay_ms`
+
+!!! example "Tarefa: Modifique e teste"
+    1. Crie a função `_delay_ms()`
+    1. Substitua no código todas as ocorrências de `delay_ms` por `_delay_ms()`
+    1. Implemente
+    1. Compile, programe e teste
