@@ -23,8 +23,9 @@ Leia atentamente as regras a seguir:
     - Você não vai poder repetir dupla na próxima APS.
     - O desenvolvimento do projeto deve ser feito no repositório criado
     pelo classroom:
-    
-    https://classroom.github.com/g/MDaOpEYN
+        - https://classroom.github.com/g/MDaOpEYN
+    - Leia atentamente como trabalhar no repositório:
+         - [APS HowTo](/ComputacaoEmbarcada/APS-howto/)
 
 !!! tip "Entrega"
     - Ao finalizar o projeto preencher o forms: https://forms.gle/f7ZuBvc9tozxZRnaA

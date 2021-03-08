@@ -3,6 +3,14 @@
 A seguir iremos explicar os conceitos e dicas de como vocês deverem prosseguir para
 executarem esta APS.
 
+!!! info
+    1. Lembrem de trabalhar no repositório criado pelo classroom:
+        - https://classroom.github.com/g/jRtKiGWA
+        
+    1. Leia atentamente como trabalhar no repositório:
+    
+        - [APS HowTo](/ComputacaoEmbarcada/APS-howto/)
+        
 ## Músicas monofonica
 
 Músicas monofonicas[^1] são aquelas que só possuem uma única nota tocada por vez, como indicado na partitura a seguir:
@@ -13,7 +21,7 @@ Músicas monofonicas[^1] são aquelas que só possuem uma única nota tocada por
 
 [^1]:  https://en.wikipedia.org/wiki/Monophony
 
-A música monofonica tem a textura a seguir:
+A música monofonica tem o som como a seguir:
 
 <figure>
     <figcaption>Pop Goes the Weasel.ogg (wiki)</figcaption>
@@ -318,4 +326,6 @@ void tone(int freq, int time){
 }
 ```
 
-
+!!! info
+    Como fazer? O melhor jeito é contar quantos pulsos (freq) existem dentro de um tempo (time) e então
+    fazer um loop que gere a quantidade de pulsos (na frequência certa).
