@@ -69,13 +69,11 @@ dicas valiosas de como realizar a implementação.
 
 A rubrica a seguir será aplicada a nota da entrega:
 
-- A (1 item de **Embarcado** + 1 item de **Linguagem C**)
-    - **Embarcado**
-        - Utiliza dois falantes (para fazer uma música mais complexa)
-        - Utiliza interrupção nos botões
-    - **Linguagem C**
-        - Cria um arquivo `.c` `.h` com as funções de reprodução musical
-        - Músicas organizadas em vetores de `structs` (ponteiros)
+- A+ 
+    - Músicas organizadas em vetores de `structs` (ponteiros)
+- A 
+    - Utiliza interrupção nos botões
+    - Cria um arquivo `.c` `.h` com as funções de reprodução musical
 - B+
     - `README.md` explica como o software foi estruturado
     - Faz uso de `#define` sempre que possível 
@@ -84,7 +82,7 @@ A rubrica a seguir será aplicada a nota da entrega:
     - Música separadas em arquivos `.h`
     - Utiliza `struct` para organizar as músicas
     - Código organizado em funções e que recebem `struct` contendo música
-    - Fecha todos os `issues` que forem abertos no repositório (pela equipe)
+    - Fecha todos os `issues` que forem abertos após a entrega
 - C+
     - LED piscando de acordo com a música (adicionar um LED ao projeto)
 - C
@@ -94,6 +92,7 @@ A rubrica a seguir será aplicada a nota da entrega:
     - Indicação visual de qual música foi selecionada
     - Reproduz duas músicas (de forma inteligível)
     - Utiliza músicas do repositório indicado
+    - Fecha todos os `issues` que forem abertos pela equipe
 - D
     - Faltando um item de C
 - I
