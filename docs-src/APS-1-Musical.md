@@ -78,10 +78,12 @@ A rubrica a seguir será aplicada a nota da entrega:
     - `README.md` explica como o software foi estruturado
     - Faz uso de `#define` sempre que possível 
     - Terceira música
+    - ==Exibir uma barra com a indicação do progresso da música==
 - B 
     - Música separadas em arquivos `.h`
     - Utiliza `struct` para organizar as músicas
     - Código organizado em funções e que recebem `struct` contendo música
+    - ==Exibir o nome da música no OLED==
     - Fecha todos os `issues` que forem abertos após a entrega
 - C+
     - LED piscando de acordo com a música (adicionar um LED ao projeto)
