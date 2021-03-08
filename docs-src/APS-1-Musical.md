@@ -1,5 +1,9 @@
 # APS 1 - Musical
 
+| Entrega Final |
+|---------------|
+| 19/3 |
+
 Nesta APS vocês irão desenvolver um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony), para isso, irão utilizar um 
 buzzer conectado a um pino do microcontrolador.
 
