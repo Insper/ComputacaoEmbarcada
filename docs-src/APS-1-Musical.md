@@ -24,7 +24,9 @@ Leia atentamente as regras a seguir:
     - O desenvolvimento do projeto deve ser feito no repositório criado
     pelo classroom:
     
-    https://classroom.github.com/g/MDaOpEYN
+    https://classroom.github.com/g/jRtKiGWA
+    
+    (**eu tive que gerar outro**)
 
 !!! tip "Entrega"
     - Ao finalizar o projeto preencher o forms: https://forms.gle/f7ZuBvc9tozxZRnaA
