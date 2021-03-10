@@ -214,3 +214,9 @@ Acrescente os outros dois botões do oled (2 e 3) do OLED para:
 
 Exiba no OLED não só a frequência, mas uma barra indicando quando
 o LED irá parar de piscar (como uma barra de progresso).
+
+----------
+
+!!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeWssrtLFmA068YSJUyqlGIqeVOTLyi-A1clOeVmgNKp7Q55Q/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
