@@ -1,28 +1,21 @@
 # PIO - IRQ
 
-!!! success "2020-2"
-    Material atualizado.
-
 | Pasta          |
 |----------------|
-| `Labs/PIO-IRQ` |
-
-Outline:
-
-1. Executa e enetender o exemplo `PIO-IRQ`
-1. Modificar exemplo para trabalhar com `flag`
-1. Entrar em `sleep mode`
-1. Integrar exemplo `PIO-IRQ` no `OLED`
-1. Configurar 3 novos botões externos a placa em modo leitura e com interrupção
-1. Implementar lógica de controle da frequência do LED
-1. Exibir no LCD a frequência do LED
+| `Lab3-PIO-IRQ` |
 
 <button class="button0" id="0:comencando" onClick="progressBut(this.id);">Começando Laboratório!</button>
+
+!!! tip 
+    Antes de seguir leia:
+    
+    - [IRQ Teoria](/ComputacaoEmbarcada/Lab-3-PIO-IRQ-Teoria/)
+
 
 O código exemplo [`SAME70-exemples/PIO-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ) demonstra como configurar o botão da placa e utilizar a interrupção em um pino do PIO. Vamos trabalhar com esse código de base para esse laboratório.
 
 !!! example "Entenda e execute"
-    1. Copie [esse exemplo (SAME70-examples/PIO-IRQ)](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ) para a pasta do seu repositório.
+    1. Copie o exemplo `SAME70-examples/PIO-IRQ` para a pasta`Lab3-PIO-IRQ` do seu repositório.
     1. Estude o [README](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/README.md) desse exemplo!
     1. Execute o exemplo na placa!
 
@@ -37,7 +30,7 @@ Iremos entender melhor e começar a implementar mudanças no código de exemplo.
 
 ### Bordas
 
-Vamos agora modificar o código um pouco, o exemplo está funcionando com interrupção em borda de descida no pino, vamos modificar para ele operar com borda de subida.
+Vamos agora modificar o código um pouco, o exemplo está funcionando com interrupção em borda de descida no pino, ou seja, a função de callback e chamada quando você aperta o botão, vamos modificar para ele operar com borda de subida (o led vai piscar quando soltar o botão).
 
 !!! example "Modifique e teste"
     1. Mude a função que configura a interrupção do pino para operar em `PIO_IT_RISE_EDGE`. 
@@ -162,43 +155,62 @@ void main(void){
 }
 ```
 
-Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt), essa função age como "blocante" onde execução do código é interrompida nela até que uma interrupção "acorde" o uC.
+Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt), essa função é do tipo "blocante" onde execução do código é interrompida nela até que uma interrupção "acorde" o uC.
 
 !!! example "Modifique e teste"
     1. Modifique o exemplo para entrar em modo sleep
     1. Programe e teste no HW
 
+!!! info "Como testar o sleepmode?"
+    Se tivéssemos acesso aos equipamentos do laboratório poderíamos medir a corrente
+    consumida pelo microcontrolador antes e depois de chamar a função de sleep, porém
+    na versão online do curso não conseguimos fazer isso.
+
 <button class="button0" id="4:sleep" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
-## OLED
+## Praticando - OLED
 
-| Pasta             |
-|-------------------|
-| `Labs/OLED-PIO` |
+| Pasta               |
+|---------------------|
+| `Led3-OLED-PIO-IRQ` |
 
-Copie o projeto localizado no repositório de exemplos: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI/OLED-Xplained-Pro-SPI) para a pasta do seu repositório da disciplina `Labs/OLED-PIO`.
+Agora vamos usar interrupção em um outro projeto.
 
-Agora iremos trabalhar com esse exemplo que configura o OLED (que deve ser conectado na placa no **EXT1**) e incorporar o exemplo da interrupção aqui (vamos ampliar sua funcionalidade!).
+Copie o projeto localizado no repositório de exemplos: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI/OLED-Xplained-Pro-SPI) para a pasta do seu repositório da disciplina `Lab3-OLED-PIO-IRQ`.
 
-A entrega final deve possuir três botões externos a placa que irão configurar a frequência na qual o LED irá piscar (via interrupção é claro). Um dos botões irá aumentar a frequência do piscar do LED e o outro irá diminuir a frequência que o LED deverá piscar. O OLED deverá exibir a frequência atual do LED. 
+Iremos trabalhar com esse exemplo que configura o OLED (que deve ser conectado na placa no **EXT1**) e incorporar o exemplo da interrupção aqui (vamos ampliar sua funcionalidade!).
+
+A entrega final (conceito A) deve possuir três botões externos a placa que irão configurar a frequência na qual o LED irá piscar (via interrupção é claro). Um dos botões irá aumentar a frequência do piscar do LED e o outro irá diminuir a frequência que o LED deverá piscar. O OLED deverá exibir a frequência atual do LED. 
 
 - O código deve funcionar por interrupção nos botões **e sempre que possível, entrar em sleep mode**.
 
-!!! example "Entrega Final"
-    A entrega final deve possuir as funcionalidades a seguir:
+### Conceito C
 
-    - Três botões externos a placa
-      - Botão 1: aumenta frequência do LED
-      - Botão 3: diminui frequência do LED
-      - Botão 2: para pisca LED
-    - OLED deve exibir a frequência do LED
-    - Entrar em `sleep mode` sempre que possível
+Agora você deve adicionar o botão 1 da placa OLED para aumentar a frequência na qual o LED irá piscar. Além disso, você precisa exibir o valor da frequência no display do OLED.
 
-    - Consumo medido da placa nos modos:
-      - Piscando/ Parado
-    - Diagrama de blocos que especifica quais periféricos e pinos foram usados no projeto e como cada pino é lido.
+1. Botão OLED1: Aumentar a frequência do LED (por IRQ)
+1. Exibir o valor da frequência no OLED
 
-!!! warning "Desafios extras"
-    - Faça os LEDs piscarem com o [TimerCounter](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/TC-RTC-IRQ/TC-RTC-IRQ)!
-    - Faça um gráfico temporal da frequência do LED
-    - Entre em um modo de sleep mais profundo
+!!! tip
+    Pino botão:
+    
+    1. Lembre de sempre usar interrupção nos botões
+    1. Consulte o [manual do OLED](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf) para saber os pinos
+    1. Consulte o diagrama de pinos que vocês receberam.
+    
+    Display Oled: 
+    
+    - Você deve usar [sprintf](http://www.cplusplus.com/reference/cstdio/sprintf/) para formatar a string que irá exibir no OLED
+    - Para exibir uma string no OLED use a função `gfx_mono_draw_string`
+
+### Conceito B
+
+Acrescente os outros dois botões do oled (2 e 3) do OLED para:
+
+- Botão 2: Para o pisca pisca
+- Botão 3: Diminuir a frequência
+
+### Conceito A
+
+Exiba no OLED não só a frequência, mas uma barra indicando quando
+o LED irá parar de piscar (como uma barra de progresso).
