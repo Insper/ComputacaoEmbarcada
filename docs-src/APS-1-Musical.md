@@ -1,5 +1,9 @@
 # APS 1 - Musical
 
+| Entrega Final |
+|---------------|
+| 19/3 |
+
 Nesta APS vocês irão desenvolver um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony), para isso, irão utilizar um 
 buzzer conectado a um pino do microcontrolador.
 
@@ -23,7 +27,7 @@ Leia atentamente as regras a seguir:
     - Você não vai poder repetir dupla na próxima APS.
     - O desenvolvimento do projeto deve ser feito no repositório criado
     pelo classroom:
-        - https://classroom.github.com/g/MDaOpEYN
+        - https://classroom.github.com/g/jRtKiGWA
     - Leia atentamente como trabalhar no repositório:
          - [APS HowTo](/ComputacaoEmbarcada/APS-howto/)
 
@@ -78,10 +82,12 @@ A rubrica a seguir será aplicada a nota da entrega:
     - `README.md` explica como o software foi estruturado
     - Faz uso de `#define` sempre que possível 
     - Terceira música
+    - ==Exibir uma barra com a indicação do progresso da música==
 - B 
     - Música separadas em arquivos `.h`
     - Utiliza `struct` para organizar as músicas
     - Código organizado em funções e que recebem `struct` contendo música
+    - ==Exibir o nome da música no OLED==
     - Fecha todos os `issues` que forem abertos após a entrega
 - C+
     - LED piscando de acordo com a música (adicionar um LED ao projeto)
