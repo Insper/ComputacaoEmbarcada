@@ -15,7 +15,7 @@
 O código exemplo [`SAME70-exemples/Perifericos-uC/PIO-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ) demonstra como configurar o botão da placa e utilizar a interrupção em um pino do PIO. Vamos trabalhar com esse código de base para esse laboratório.
 
 !!! example "Entenda e execute"
-    1. Copie o exemplo `SAME70-examples/PIO-IRQ` para a pasta`Lab3-PIO-IRQ` do seu repositório.
+    1. Copie o exemplo `SAME70-examples/Perifericos-uC/PIO-IRQ` para a pasta`Lab3-PIO-IRQ` do seu repositório.
     1. Estude o [README](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/README.md) desse exemplo!
     1. Execute o exemplo na placa!
 
