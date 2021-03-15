@@ -11,7 +11,6 @@
     
     - [IRQ Teoria](/ComputacaoEmbarcada/Lab-3-PIO-IRQ-Teoria/)
 
-
 O código exemplo [`SAME70-exemples/PIO-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ) demonstra como configurar o botão da placa e utilizar a interrupção em um pino do PIO. Vamos trabalhar com esse código de base para esse laboratório.
 
 !!! example "Entenda e execute"

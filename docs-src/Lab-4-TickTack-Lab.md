@@ -1,43 +1,40 @@
 # TC - RTC - RTT  
 
-!!! success "2020-2"
-    Material atualizado.
+Neste laboratório iremos trabalhar com os periféricos de contagem de tempo
+do nosso microcontrolador.
 
-<!--
-!!! Repositório
-    Criar repositório para entregar o lab e preencher o formulário a seguir:
-    
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfS3x4QLibvCgUAiekQi0_cjWPZqwZ2j5xQwS_MG3QLSJzmUg/viewform?embedded=true" width="640" height="571" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
--->
+<button class="button0" id="0:comencando" onClick="progressBut(this.id);">Começando Laboratório!</button>
 
 | Pasta              |
 |--------------------|
-| `Labs/TC-RTC-RTT/` |
+| `Lab4-TC-RTC-RTT` |
 
-- Parte 1: 
+Os periféricos trados neste laboratório são:
+
+- Real Time Clock - RTC
+- Timer Counter - TC
+- Real Time Timer - RTT
+
+O laboratório é formado por duas partes:
+
+- Parte 1 (mínimo): 
     1. Entender os exemplos (TC/RTT/RTC)
     1. Incorporar todos os exemplos em um único projeto
     1. Pisca pisca 
     
 - Parte 2:
-    1. fazer outro LED piscar com TC
-    1. Exibir a hora atual no lcd
-    1. Usar IRQ do segundos do RTC
+    - **C+**: fazer outro LED piscar com TC
+    - **B** : Exibir a hora atual no OLED 
+    - **A** : Usar IRQ do segundos do RTC
 
-<!--
-- Parte 2 
-    - C+ : fazer outro LED piscar com TC
-    - B : Exibir a hora atual no lcd
-    - A : Usar IRQ do segundos do RTC
- -->
-## Periféricos / Exemplos
+## Exemplos
 
 !!! warning "SAME70-examples"
-    Antes de continuar atualize o repositório de exemplos, teve alteração.
+    Antes de continuar atualize o repositório de exemplos ele pode ter tido melhorias.
 
-Nesse lab iremos trabalhar com três periféricos que lidam com 'tempo', o TimerCounter - TC (temos no total e 4x3=12 no uC) o Real-time Timer - RTT (temos um) e o Real-time Clock RTC (temos um). Cada um possui sua especifidade:
+Nesse lab iremos trabalhar com três periféricos que lidam com 'tempo', o TimerCounter - TC (temos no total de quatro periféricos e cada pode lidar com três contagens, totalizando 12) o Real-time Timer - RTT (temos um) e o Real-time Clock RTC (temos um). Cada um possui sua especifidade:
 
-- TC: Faz várias coisas, nesse lab iremos usar para gerar interrupções maiores que 2Hz (**ele não consegue gerar tempos muito lentos!**)
+- TC: Faz várias coisas, neste lab iremos usar para gerar interrupções maiores que 2Hz (**ele não consegue gerar tempos muito lentos!**)
 - RTT: É um contador que consegue gerar praticamente qualquer frequência (vamos usar para gerar frequências lentas)
 - RTC: É um como um calendário com relógio, ele conta anos, meses, dias, horas, minutos e segundos.
 
@@ -49,21 +46,30 @@ Cada periférico está em um exemplo diferente:
 | [`Perifericos/RTT-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTT-IRQ) |
 | [`Perifericos/RTC-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTC-IRQ) |
 
-Cada exemplo possui o seu próprio `README` que da uma visão geral dos periféricos. Note que todos esses exemplos estão operando por interrupção! Onde cada periférico possui o seu `handler` para resolver a interrupção.
+Cada exemplo possui o seu próprio `README` que explica de forma ampla os periféricos. Note que todos esses exemplos estão operando por interrupção! Onde cada periférico possui o seu `handler` para resolver a interrupção.
 
 !!! example "Tarefa"
     Para cada exemplo (TC,RTT e RTC):
+    
     1. Leia o README
     1. Programe a placa (e veja os LEDs piscando!)
     1. Entenda o código
 
+<button class="button0" id="1:exemplos" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
 ## Lab
 
-O lab faz uso da placa `OLED1` e de um código exemplo. Para começar você deve copiar o código exemplo: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI) para a pasta da entrega do seu repositório `Labs/TC-RTC-RTT`.
+O lab faz uso da placa `OLED1` e de um código exemplo. Para começar você deve copiar o código exemplo: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI) para a pasta da entrega do seu repositório `Lab4-TC-RTC-RTT`.
 
-### 1. TC, RTT e RTC 
+### C: TC, RTT e RTC 
 
-Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão), vocês devem configurar os botões e os LEDs da placa OLED, e então utilizando um `TC` fazer com que o `LED0` pisque a uma frequencia de 4 HZ; usando o RTT fazer com que o `LED1` pisque a uma frequência de 0.5Hz e com que o LED da placa pisque por 5x após 20s do sistema ter inicializado, fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
+Com o código do OLED1 copiado, vocês devem configurar os botões e os LEDs da placa OLED e então utilizando os periféricos fazer:
+
+- Que o `LED1` pisque na frequência de 4 HZ, para isso utilize o **TC**;
+- Fazer com que o `LED2` pisque a uma frequência de 0.5Hz, para isso utilize o **RTT**;
+- Piscar o `LED3` depois de 20 segundos do botão 1 da placa OLED ter sido pressionado, para isso utilize o alarme do RTC.
+
+Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 
 !!! example "Tarefa"
     No código do OLED1:
@@ -71,14 +77,14 @@ Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão)
     1. Configurar os pinos e os LEDs da placa OLED1
     1. Fazer com que o `LED1` pisque a 4HZ usando o TC
     1. Fazer com que o `LED2` pisque a cada 4s usando o RTT
-    1. Fazer com o que o `LED PLACA` pisque por 5 vezes após 20 segundos (USAR RTC)
-    1. Entrar em sleepmode
+    1. Fazer com o que o `LED3` pisque após 20 segundos do botão 1 ter sido pressionado, use o RTC.
+    1. Entrar em sleepmode sempre que possível
 
 !!! tip
     Abrir o código atual e o exemplo e ir trazendo as funções e defines que precisa usar, não esqueça de chamar as funções no `main`
 
 !!! tip
-    Você vai precisar incluir no `ASF WIZARD` os drivers do TCC e RTT
+    Você vai precisar incluir no `ASF WIZARD` os drivers do TC, RTT e RTT
     
     Quando você fizer a busca vai reparar que tem dois drivers de `TC`,
     para isso você deve clicar em `Details` e ver o TC que adiciona só
@@ -86,23 +92,25 @@ Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão)
     
     ![](imgs/TC/ASF.png)
     
-!!! info
-    Aqui já é C!
-    
-----------------------------
 
-### 2. Piscar mais um LED
+<button class="button0" id="2:rubrica-C" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
+### C+: Piscar mais um LED
 
 !!! example "Tarefa"
-    Faça o `LED2` da placa OLED piscar a 5Hz usando um novo TC
+    Faça o LED da placa piscar a 5Hz usando um novo TC.
 
-### 3. Exibindo HH:MM:SS
+<button class="button0" id="2:rubrica-C+" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
+### B: Exibindo HH:MM:SS
 
 !!! example "Tarefa"
     Exiba a hora no formato (HH:MM:SS) no display OLED
     
 !!! tip
     O RTC tem uma função que você consegue buscar no periférico a hora atual: [`rtc_get_time()`](http://asf.atmel.com/docs/latest/sam.drivers.rtc.example.samv71_xplained_ultra/html/group__sam__drivers__rtc__group.html#ga91b1a1ac85e5bb5effefe275b824fe6a)
+    
+    - Leia a função e entenda os seus parâmetros!! 
     
 !!! tip 
     Para executar isso você deverá ser capaz de saber quando que o segundo mudou, duas são as opções:
@@ -112,7 +120,7 @@ Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão)
     
     A segunda opção você faz modificando a função de init_rtc:
     
-    ```
+    ```c
     RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_ALREN | RTC_IER_SECEN);
     ```
     
@@ -136,7 +144,11 @@ Com o código do OLED1 copiado (eu dei uma simplificada nele nessa nova versão)
 !!! warning
     Você nunca deve atualizar display dentro de interrupção (**handler**)! Sempre no main.
     
-### 4. IRQ de segundos
-    
-Usar a IRQ do RTC por segundo para atualizar o display.
+<button class="button0" id="2:rubrica-B" onClick="progressBut(this.id);">Cheguei Aqui!</button>
 
+### A: Melhorando
+
+Quando o botão 1 da placa OLED for pressionado, após 20 segundos, faça o LED 3 piscar 
+com um novo TC.
+
+<button class="button0" id="2:rubrica-A" onClick="progressBut(this.id);">Cheguei Aqui!</button>
