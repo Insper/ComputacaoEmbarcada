@@ -152,3 +152,8 @@ Quando o botão 1 da placa OLED for pressionado, após 20 segundos, faça o LED 
 com um novo TC.
 
 <button class="button0" id="2:rubrica-A" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+
+----------
+
+!!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfuDhfKfPGbG-SHpCFSShFpK3Mp1d0GbCwYMGz--gydEU_zFQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
