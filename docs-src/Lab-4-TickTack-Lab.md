@@ -76,7 +76,7 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     
     1. Configurar os pinos e os LEDs da placa OLED1
     1. Fazer com que o `LED1` pisque a 4Hz usando o TC
-    1. Fazer com que o `LED2` pisque a cada 4s usando o RTT
+    1. Fazer com que o `LED2` inverta seu estado a cada 4s usando o RTT
     1. Fazer com o que o `LED3` pisque após 20 segundos do botão 1 ter sido pressionado, use o RTC.
     1. Entrar em sleepmode sempre que possível
 
