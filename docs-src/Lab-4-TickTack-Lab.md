@@ -66,7 +66,7 @@ O lab faz uso da placa `OLED1` e de um código exemplo. Para começar você deve
 Com o código do OLED1 copiado, vocês devem configurar os botões e os LEDs da placa OLED e então utilizando os periféricos fazer:
 
 - Que o `LED1` pisque na frequência de 4Hz, para isso utilize o **TC**;
-- Fazer com que o `LED2` pisque a uma frequência de 0.5Hz, para isso utilize o **RTT**;
+- Fazer com que o `LED2` pisque a uma frequência de 0.25Hz, para isso utilize o **RTT**;
 - Piscar o `LED3` depois de 20 segundos do botão 1 da placa OLED ter sido pressionado, para isso utilize o alarme do RTC.
 
 Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
