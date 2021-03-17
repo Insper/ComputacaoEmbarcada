@@ -31,7 +31,7 @@ nav:
 - Home: index.md
 - Sobre-Curso.md
 - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
-
+- 'Vídeos': Util-Videos.md
 - 'Util':
     - Sobre-Ferramental.md
     - Util-Startup.md
