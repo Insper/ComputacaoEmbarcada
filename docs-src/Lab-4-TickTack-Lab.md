@@ -91,7 +91,7 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     ![](imgs/TC/ASF.png)
     
 !!! tip
-    O RTC tem uma função que você consegue buscar no periférico a hora atual: [`rtc_get_time()`](http://asf.atmel.com/docs/latest/sam.drivers.rtc.example.samv71_xplained_ultra/html/group__sam__drivers__rtc__group.html#ga91b1a1ac85e5bb5effefe275b824fe6a), você pode então configurar um alarme para daqui 20s. 
+    O RTC tem uma função que você consegue buscar no periférico a hora atual: [`rtc_get_time()`](https://asf.microchip.com/docs/latest/same70/html/group__sam__drivers__rtc__group.html#ga91b1a1ac85e5bb5effefe275b824fe6a), você pode então configurar um alarme para daqui 20s. 
     
     - Leia a função e entenda os seus parâmetros!! 
 
