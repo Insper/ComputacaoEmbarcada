@@ -84,11 +84,9 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     Abrir o código atual e o exemplo e ir trazendo as funções e defines que precisa usar, não esqueça de chamar as funções no `main`
 
 !!! tip
-    Você vai precisar incluir no `ASF WIZARD` os drivers do TC, RTT e RTT
+    Você vai precisar incluir no `ASF WIZARD` os drivers do ~~TC~~, RTT e RTT
     
-    Quando você fizer a busca vai reparar que tem dois drivers de `TC`,
-    para isso você deve clicar em `Details` e ver o TC que adiciona só
-    dois arquivos `tc.h` e `tc.c` como na figura a seguir
+    ==O TC já foi adicionado, não adicone outro que vai dar problema!!!!==
     
     ![](imgs/TC/ASF.png)
     
