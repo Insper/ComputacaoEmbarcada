@@ -1,4 +1,4 @@
-const scriptURL = 'http://35.173.122.31:5000';
+const scriptURL = 'https://mongo.computacao-embarcada.com';
 const sDone = 'Cheguei Aqui!'
 const sReportado = 'Progresso reportado!'
 const mdProgress = '---PROGRESSO---'
