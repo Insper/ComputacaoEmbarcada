@@ -86,7 +86,7 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 !!! tip
     Você vai precisar incluir no `ASF WIZARD` os drivers do ~~TC~~, RTT e RTT
     
-    ==O TC já foi adicionado, não adicone outro que vai dar problema!!!!==
+    ==O TC já foi adicionado no código exemplo (OLED-Xplained-Pro-SPI), não adicone o outro que vai dar problema!!!!==
     
     ![](imgs/TC/ASF.png)
     
