@@ -45,21 +45,26 @@ nav:
     - 'Util-FloatPrint.md'
 
 - Labs:
-    - 'PIO - Teoria': 'Lab-1-IOs-Teoria.md'
-    - 'PIO - Lab': 'Lab-1-IOs-Lab.md'
-    - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
-    - 'Lab-2-PIO-Driver-Teoria.md'
-    - 'Lab-2-PIO-Driver-Lab.md'
-    - 'Lab-3-PIO-IRQ-Teoria.md'
-    - 'Lab-3-PIO-IRQ-Lab.md'
-    - 'Lab-3-PIO-IRQ-Perguntas.md'
-    - 'Lab-4-TickTack-Lab.md'
-    - 'Lab-5-RTOS.md'
-    - 'Lab-6-RTOS-ADC.md'
-    - 'Lab-7-RTOS-LCD.md'
-    - 'Lab-8-RTOS-UART.md'
-    - 'Lab-9-ADC-FIR.md'
-    - 'Lab-10-RTOS-WIFI.md'
+    - 'Lab 1 - PIO ':
+      - 'Teoria': 'Lab-1-IOs-Teoria.md'
+      - 'Lab': 'Lab-1-IOs-Lab.md'
+ #     - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
+    - 'Lab 2 - Driver':
+      - 'Teoria': 'Lab-2-PIO-Driver-Teoria.md'
+      - 'Lab': 'Lab-2-PIO-Driver-Lab.md'
+    - 'Lab 3 - PIO IRQ':
+      - 'Teoria': 'Lab-3-PIO-IRQ-Teoria.md'
+      - 'Lab' : 'Lab-3-PIO-IRQ-Lab.md'
+ #     - 'Lab-3-PIO-IRQ-Perguntas.md'
+    - 'Lab 4 - TC RTC RTT': 'Lab-4-TickTack-Lab.md'
+    - 'Lab 5 - RTOS': 'Lab-5-RTOS.md'
+#    - 'Lab 6 - RTOS ADC':
+#      - 'Lab-6-RTOS-ADC.md'
+#    - 'Lab 7 - RTOS LCD':
+#      - 'Lab-7-RTOS-LCD.md'
+#    - 'Lab-9-ADC-FIR.md'
+#    - 'Lab-8-RTOS-UART.md'
+#    - 'Lab-10-RTOS-WIFI.md'
 
 - Projetos:
 #    - 'Projeto 1':
