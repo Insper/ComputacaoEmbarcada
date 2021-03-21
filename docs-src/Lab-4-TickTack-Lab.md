@@ -66,7 +66,7 @@ O lab faz uso da placa `OLED1` e de um código exemplo. Para começar você deve
 Com o código do OLED1 copiado, vocês devem configurar os botões e os LEDs da placa OLED e então utilizando os periféricos fazer:
 
 - Que o `LED1` pisque na frequência de 4Hz, para isso utilize o **TC**;
-- Fazer com que o `LED2` pisque a uma frequência de 0.5Hz, para isso utilize o **RTT**;
+- Fazer com que o `LED2` pisque a uma frequência de 0.25Hz, para isso utilize o **RTT**;
 - Piscar o `LED3` depois de 20 segundos do botão 1 da placa OLED ter sido pressionado, para isso utilize o alarme do RTC.
 
 Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
@@ -84,16 +84,14 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     Abrir o código atual e o exemplo e ir trazendo as funções e defines que precisa usar, não esqueça de chamar as funções no `main`
 
 !!! tip
-    Você vai precisar incluir no `ASF WIZARD` os drivers do TC, RTT e RTT
+    Você vai precisar incluir no `ASF WIZARD` os drivers do ~~TC~~, RTT e RTT
     
-    Quando você fizer a busca vai reparar que tem dois drivers de `TC`,
-    para isso você deve clicar em `Details` e ver o TC que adiciona só
-    dois arquivos `tc.h` e `tc.c` como na figura a seguir
+    ==O TC já foi adicionado no código exemplo (OLED-Xplained-Pro-SPI), não adicone o outro que vai dar problema!!!!==
     
     ![](imgs/TC/ASF.png)
     
 !!! tip
-    O RTC tem uma função que você consegue buscar no periférico a hora atual: [`rtc_get_time()`](http://asf.atmel.com/docs/latest/sam.drivers.rtc.example.samv71_xplained_ultra/html/group__sam__drivers__rtc__group.html#ga91b1a1ac85e5bb5effefe275b824fe6a), você pode então configurar um alarme para daqui 20s. 
+    O RTC tem uma função que você consegue buscar no periférico a hora atual: [`rtc_get_time()`](https://asf.microchip.com/docs/latest/same70/html/group__sam__drivers__rtc__group.html#ga91b1a1ac85e5bb5effefe275b824fe6a), você pode então configurar um alarme para daqui 20s. 
     
     - Leia a função e entenda os seus parâmetros!! 
 
