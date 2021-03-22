@@ -68,7 +68,7 @@ nav:
 
 - Projetos:
 #    - 'Projeto 1':
-        - 'Descrição': 'Projeto-1-Descrição.md'
+        - 'Descrição': 'Projeto-1-Descricao.md'
 #        - 'Vending Machine': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-VendingMachine.pdf'
         - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
         - 'Handout 1': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Handout%20descricao%20Projeto.pdf'
