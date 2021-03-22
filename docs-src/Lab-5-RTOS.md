@@ -1,19 +1,23 @@
-# RTOS
+# RTOS - freeRTOS
 
-!!! success "2020-2"
-    Material atualizado.
+!!! tip "Embedded FM - episódio 175"
+    **How Hard Could It Be?**
+    
+    Jean Labrosse of Micrium (@Micrium) spoke with us about writing a real time operating system (uC/OS), building a business, and caring about code quality.
+    
+    - https://embedded.fm/episodes/175
 
-Nesse Handout iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciarmos três LED e três botões (vamos refazer a entrega do `tickTackTock` porém agora com o uso do SO).
+Neste laboratório iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciarmos três LED e três botões (vamos refazer a entrega do `tickTackTock` porém agora com o uso do SO).
 
 O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://freertos.org), um sistema operacional muito utilizado pela industria, sendo o segundo sistema operacional (**20%**) mais utilizado em projetos embarcados, perdendo só para o [Linux embarcado](https://m.eet.com/media/1246048/2017-embedded-market-study.pdf).
 
 ## LAB
 
-| Pasta           |
-|-----------------|
-| `Labs/RTOS-LED` |
+| Pasta            |
+|------------------|
+| `Lab5-RTOS-LED` |
 
-1. Executar um demo de RTOS
+1. Executar uma demo de RTOS
 1. Entender e modificar o exemplo
 1. Criar uma task que controla o LED1 do OLED
 1. Criar um semáforo que é liberado pelo botão do OLED1
@@ -171,9 +175,8 @@ taskName Status Priority WaterMark Task ID
      - Running
      - Blocked
 
-
-!!! tip
-    ![](https://www.freertos.org/wp-content/uploads/2018/07/tskstate.gif)
+!!! info
+    ![](https://www.freertos.org/fr-content-src/uploads/2018/07/tskstate.gif){}
     
     - fonte: https://www.freertos.org/RTOS-task-states.html
 
