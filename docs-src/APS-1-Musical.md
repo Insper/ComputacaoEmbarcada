@@ -32,7 +32,7 @@ Leia atentamente as regras a seguir:
          - [APS HowTo](/ComputacaoEmbarcada/APS-howto/)
 
 !!! tip "Entrega"
-    - Ao finalizar o projeto preencher o forms: https://forms.gle/f7ZuBvc9tozxZRnaA
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdxK9l2RX2gRtSW5dTWMg-GmiITHVMRpgCBmcj6sxso7ygC2w/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 
 ## Descrição
 
@@ -67,9 +67,6 @@ A página [APS/APS 1 - Musical - Firmware](/ComputacaoEmbarcada/APS-1-Musical-so
 dicas valiosas de como realizar a implementação.
 
 ## Rubrica
-
-!!! info "Entrega"
-    - Ao finalizar o projeto preencher o forms: https://forms.gle/f7ZuBvc9tozxZRnaA
 
 A rubrica a seguir será aplicada a nota da entrega:
 
