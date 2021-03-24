@@ -7,14 +7,16 @@
     
     - https://embedded.fm/episodes/175
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/F321087yYy4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Neste laboratório iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciarmos três LED e três botões (vamos refazer a entrega do `tickTackTock` porém agora com o uso do SO).
 
 O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://freertos.org), um sistema operacional muito utilizado pela industria, sendo o segundo sistema operacional (**20%**) mais utilizado em projetos embarcados, perdendo só para o [Linux embarcado](https://m.eet.com/media/1246048/2017-embedded-market-study.pdf).
 
 ## LAB
 
-| Pasta            |
-|------------------|
+| Pasta           |
+|-----------------|
 | `Lab5-RTOS-LED` |
 
 1. Executar uma demo de RTOS
@@ -34,7 +36,7 @@ O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://
 Iremos trabalhar com o exemplo do [`FreeRTOS`](https://www.freertos.org) que a Atmel disponibiliza para a placa SAME70-XPLD, esse exemplo já inclui um projeto com as configurações iniciais do OS e um código exemplo que faz o LED da placa piscar a uma frequência determinada.
 
 !!! warning "Código exemplo"
-    - Copie o código exemplo `Same70-Examples/RTOS/RTOS-LED` para a pasta da entrega do seu repositório `Labs/RTOS-LED`
+    - Copie o código exemplo `Same70-Examples/RTOS/RTOS-LED` para a pasta da entrega do seu repositório `LAB5-RTOS-LED`
     - Vamos modificar esse código exemplo.
 
 ### Terminal
@@ -42,12 +44,13 @@ Iremos trabalhar com o exemplo do [`FreeRTOS`](https://www.freertos.org) que a A
 Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:
 
 !!! note ""
-    No atmel studio:
+    1. No atmel studio:
     :arrow_right: View :arrow_right: Terminal Window
 
-*(você deve ter instalado o [pacote extra do atmel](https://gallery.microchip.com/packages/EFC4C002-63A3-4BB9-981F-0C1ACAF81E03/2.8.4)*
+    1. Configure o terminal para a porta COM correta (verificar no windows) para operar com um BaudRate de 115200.
 
-Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de 115200.
+!!! info
+    Caso não tenha essa opção, instale o [pacote extra do microchip studio](https://gallery.microchip.com/packages/EFC4C002-63A3-4BB9-981F-0C1ACAF81E03/2.8.4)
 
 !!! example "Tarefa"
     1. Compile e grave o código no uC
@@ -60,7 +63,7 @@ Esse exemplo cria inicialmente 2 tarefas: `task_monitor` e `task_led`. A primeir
 
 #### task_led
 
-A `task_led` possui a implementação a seguir (limpei a parte que não é referente ao SAME70):
+A `task_led` possui a implementação a seguir:
 
 ``` c
 /**
@@ -117,7 +120,7 @@ A configuração da frequência do tick assim como o mesmo é implementando est�
 ```
 
 !!! note
-    - O impacto do tick na função vTaskDelay é que a mesma só pode ser chamada com múltiplos inteiros referente ao tick.
+    - O impacto do tick na função `vTaskDelay` é que a mesma só pode ser chamada com múltiplos inteiros referente ao tick.
     
     - Não temos uma resolução tão boa quanto o TimerCounter ou RTT.
     
@@ -190,7 +193,8 @@ taskName Status Priority WaterMark Task ID
 
 Criar uma tarefa é similar ao de inicializar um programa em um sistema operacional, mas no caso devemos indicar para o RTOS quais "funções" irão se comportar como pequenos programas (tarefas). Para isso devemos chamar a função `xTaskCreate` que possui a seguinte estrutura:
 
-- https://docs.aws.amazon.com/freertos/latest/lib-ref/group__x_task_create.html
+!!! info ""
+    **ACESS E LEIA:** https://docs.aws.amazon.com/freertos/latest/lib-ref/group__x_task_create.html
 
 ```c
 /**
@@ -254,7 +258,7 @@ A cada tarefa pode ser atribuída uma prioridade que vai de **0** até `configMA
 Vamos agora criar uma nova tarefa e fazer ela controlar o LED1 da placa OLED, nessa tarefa vocês devem fazer o LED1 piscar por 5 vezes e então ficar 3 segundos em piscar, depois voltar a piscar novamente!
 
 !!! example "Tarefa"
-    1. Crie uma função simular a task LED só que com nome: `task_led1`
+    1. Crie uma função similar a task LED só que com nome: `task_led1`
         - não esqueça do `while(1)` e nem de usar o `vTaskDelay()`
         - faça essa função iniciar o pino do LED1 como saída (`PA0`)
         - faça essa função piscar o LED 3 vezes a cada 3 segundos
@@ -262,11 +266,11 @@ Vamos agora criar uma nova tarefa e fazer ela controlar o LED1 da placa OLED, ne
     1. Criei os defines:
         - `#define TASK_LED1_STACK_SIZE  (1024/sizeof(portSTACK_TYPE))`
         - `#define TASK_LED1_STACK_PRIORITY (tskIDLE_PRIORITY)`
-    1. E então criei a task no rtos, no `main(){}`
+    1. E então criei a task no rtos, dentro do `main(){}`
         - `xTaskCreate(task_led1, "Led1", TASK_LED1_STACK_SIZE, NULL, TASK_LED1_STACK_PRIORITY, NULL);`
     
 !!! tip "Solução"
-    - [`main.c` implementando com a tarefa anterior](https://github.com/Insper/SAME70-examples/blob/master/RTOS/RTOS-LED/src/task_led1.c.c)
+    - [`main.c` com a implementação anterior](https://github.com/Insper/SAME70-examples/blob/master/RTOS/RTOS-LED/src/task_led1.c.c)
 
 
 ### Power Save mode ?
@@ -332,60 +336,76 @@ Iremos implementar um semáforo para comunicação entre o callback do botão 1 
 
 ![Semáforo](imgs/RTOS/semaforo.png)
 
-Inclua o código a seguir no seu projeto (modifique a função `task_led`)
 
  - Consulta: [xSemaphoreGiveFromISR](https://www.freertos.org/a00124.html)
 
+Adicione os defines e a variável global que indica o semáforo:
+
 !!! example "Modifique"
-    Inclua os defines do botão
     
+    1. Inclua os defines:
     ```c
     #define BUT1_PIO			PIOD
     #define BUT1_PIO_ID			16
     #define BUT1_PIO_IDX		28
     #define BUT1_PIO_IDX_MASK	(1u << BUT1_PIO_IDX)
     ```
-
-!!! example "Modifique"
-    Inclua a variável global a seguir que será o semáforo.
-    > (no começo do arquivo main.c)
+    2. Inclua a variável global a seguir que será o semáforo.
+    (no começo do arquivo main.c)
 
     ``` c
     /** Semaforo a ser usado pela task led 
         tem que ser var global! */
     SemaphoreHandle_t xSemaphore;
     ```
+    
+
+Agora vamos incluir a função de callback recém criada
+para liberar o semáforo `xSemaphore` que a `task_led` está aguardando:
 
 !!! example "Modifique"
-    Inclua a função de callback do botão
-
     ```c
     /**                                                               
     * callback do botao                                               
     * libera semaforo: xSemaphore                                    
     */
     void but1_callback(void){
-        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
         printf("but_callback \n");
+        BaseType_t xHigherPriorityTaskWoken = pdFALSE;
         xSemaphoreGiveFromISR(xSemaphore, &xHigherPriorityTaskWoken);
-        printf("semafaro tx \n");
     }
     ```
+    
+    Note que estamos usando uma função chamada de `xSemaphoreGiveFromISR`
+    para fazer a ponte entre a interrupção do botão (algo que o RTOS não controla) 
+    com a task que o RTOS controla.
+    
+    Toda vez que o botão for apertado o mesmo libera o semáforo (vira verde).
+
+Agora vamos modificar a função `task_led` para inicializar um semáforo, e configura
+o botão da placa OLED para funcionar com interrupção chamanado a função: `but1_callback`
+sempre que houver uma borda de descida no pino que lê o botão.
+
+A tarefa agora fica no `while(1)` aguardando o semáforo `xSemaphore` que será
+liberado pelo callback. Sempre que houver a leitura do semáforo, o mesmo torna-se
+vermelho.
 
 !!! example "Modifique"
-    Agora vamos fazer a leitura do semáforo nessa task:
 
     ``` c
     static void task_led(void *pvParameters) {
-      /* We are using the semaphore for synchronisation so we create a binary
-      semaphore rather than a mutex.  We must make sure that the interrupt
-      does not attempt to use the semaphore before it is created! */
+      /*
+       * We are using the semaphore for synchronisation so we create a binary
+       * semaphore rather than a mutex.  We must make sure that the interrupt
+       * does not attempt to use the semaphore before it is created!
+       */
       xSemaphore = xSemaphoreCreateBinary();
     
-      /* devemos iniciar a interrupcao no pino somente apos termos alocado
-      os recursos (no caso semaforo), nessa funcao inicializamos 
-      o botao e seu callback*/
-      /* init botão */
+      /*
+       * devemos iniciar a interrupcao no pino somente apos termos alocado
+       * os recursos (no caso semaforo), nessa funcao inicializamos 
+       * o botao e seu callback
+      */
       pmc_enable_periph_clk(BUT1_PIO_ID);
       pio_configure(BUT1_PIO, PIO_INPUT, BUT1_PIO_IDX_MASK, PIO_PULLUP);
       pio_handler_set(BUT1_PIO, BUT1_PIO_ID, BUT1_PIO_IDX_MASK, PIO_IT_FALL_EDGE, but1_callback);
@@ -394,17 +414,20 @@ Inclua o código a seguir no seu projeto (modifique a função `task_led`)
       NVIC_SetPriority(BUT1_PIO_ID, 4); // Prioridade 4
     
       if (xSemaphore == NULL)
-        printf("falha em criar o semaforo \n");
+        printf("Falha em criar o semaforo \n");
     
       for (;;) {
-        if( xSemaphoreTake(xSemaphore, ( TickType_t ) 500) == pdTRUE ){
+        // aguarda semáforo com timeout de  500 ms
+        if( xSemaphoreTake(xSemaphore, ( TickType_t ) 500 / portTICK_PERIOD_MS) == pdTRUE ){
           LED_Toggle(LED0);
+        } else {
+          // time out
         }
       }
     }
     ```
 
-!!! tip "Entendo"
+!!! tip "Visão geral"
     Para implementarmos um semáforo precisamos primeiramente definir uma variável global que será utilizada pelo sistema operacional para definir o endereço desse semáforo (global):
 
     ``` c
@@ -438,14 +461,36 @@ Inclua o código a seguir no seu projeto (modifique a função `task_led`)
 
     ![Semáforo](imgs/RTOS/semaforo2.png)
 
-### Praticando
+## C - Praticando
 
-Para os próximos passos vocês devem criar um semáforo por botão e um callback por botão.
+Vamos praticar um pouco, agora faça o mesmo para o LED1 da placa OLED, para iso você deverá:
 
-- Faça o mesmo para o LED2:
-    - criar task que faz o LED2 piscar
-    - botão do LED2 libera semáforo para a `task_led2`
+- criar task que faz o LED1 piscar
+- botão do LED1 libera semáforo para a `task_led1`
+- LED1 pisca após botão apertado
 
-- Faça o mesmo para o LED3:
-    - criar task que faz o LED3 piscar
-    - botão do LED3 libera semáforo para a `task_led3`
+## B - Semáforo entre tasks
+
+O LED2 pisca apenas após o LED1 ter piscado. Para isso você deverá:
+
+- criar `task_led2` que controla o LED2
+- fim da `task_led1` libera semáforo para a `task_led2`
+
+```
+\ botao OLED1
+ \ 
+  x -----> LED1 pisca -----> LED2 pisca 
+```
+
+## A - Várias dependências 
+
+O LED3 pisca apenas após o LED2 ter piscado e o botão 3 da
+placa OLED1 ter sido pressionado.
+
+Lembre de criar uma task e um semáforo para o Led3: `task_led3`
+
+```
+\ botao1 OLED1                                   \ botao3 OLED
+ \                                                \
+  x -----> LED1 pisca -----> LED2 pisca ---------- x -----> LED3 pisca
+```
