@@ -3,13 +3,19 @@
 !!! note "Entrega"
     Entregar primeira aula após AI.
     
-O primeiro projeto de computação Embarcada é de escopo fechado e tem como principal objetivo fazer com que vocês passem por todo o ciclo de desenvolvimento de um protótipo de um dispositivo embarcado: especificação :arrow_right: implementação :arrow_right: problemas :arrow_right: teste :arrow_right: problemas :arrow_right: finalização.
+!!! info 
+    - Em dupla
+    - Não pode repetir dupla, mas pode fazer par com colega do outro lab.
+
+    Cria repositório via classroom: https://classroom.github.com/g/0M_7xFQT
+    
+O projeto de computação Embarcada é de escopo fechado e tem como principal objetivo fazer com que vocês passem por todo o ciclo de desenvolvimento de um protótipo de um dispositivo embarcado: especificação :arrow_right: implementação :arrow_right: problemas :arrow_right: teste :arrow_right: problemas :arrow_right: finalização.
 
 Neste projeto vocês terão que criar um controle remoto bluetooth, controlado pelo kit de desenvolvimento usado na disciplina (SAME70-XPLD), com a adição de um módulo externo bluetooth HC-05.
 
 Algumas restrições serão impostas ao projeto com a finalidade de facilitar o desenvolvimento, pois estamos trabalhando de casa e não temos muitos recursos (componentes, equipamentos de testes, ...).
 
-A entrega do projeto deve ser um protótipo funcional, e deve possuir todas as funcionalidades esperadas (e especificadas).
+A entrega do projeto deve ser um protótipo funcional, e deve possuir todas as funcionalidades esperadas (e especificadas), descrito no folder do controle.
 
 <!--
 ## Máquina de venda automática
