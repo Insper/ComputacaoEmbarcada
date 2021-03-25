@@ -466,8 +466,11 @@ vermelho.
 Vamos praticar um pouco, agora faça o mesmo para o LED1 da placa OLED, para iso você deverá:
 
 - criar task que faz o LED1 piscar
-- botão do LED1 libera semáforo para a `task_led1`
+- botão do LED1 libera semáforo para a `task_led1` 
 - LED1 pisca após botão apertado
+
+==Note que o botão faz o LED1 piscar, e mantém o que já estava sendo feito antes: o LED da placa precisa continuar 
+piscando.==
 
 ## B - Semáforo entre tasks
 
