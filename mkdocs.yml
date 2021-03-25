@@ -92,8 +92,8 @@ nav:
 #      - 'APS-2-Interface-Dicas.md'
 #    - 'APS-3-IoT.md'
 
-- Avaliações:
-    - '20b/AV1.md'
+- Avaliações e Simulados: 'Avaliacoes.md'
+#    - '20b/AV1.md'
 #    - 'AV0 Simulado': 'AV-0-Simulado.md'
 #    - 'AV0 Prática': 'AV-0.md'
 #    - 'AV1 Simulado': 'AV-1-Simulado.md'
