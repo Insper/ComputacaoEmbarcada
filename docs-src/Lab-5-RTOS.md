@@ -479,6 +479,18 @@ O LED2 pisca apenas após o LED1 ter piscado. Para isso você deverá:
 - criar `task_led2` que controla o LED2
 - fim da `task_led1` libera semáforo para a `task_led2`
 
+!!! tip "Prioridade"
+    A prioridade de qualquer interrupção que não a que o freertos gerencia
+    não pode ser maior que 3 (quanto menor maior a prioridade), portanto
+    configurem a interrupção no botão com no mínimo prioridade 4. 
+    
+    ```c
+    // exemplo:
+    NVIC_SetPriority(OLED_BUT2_PIO_ID, 4)
+    ```
+
+Ilustração do que deve acontecer:
+
 ```
 \ botao OLED1
  \ 
