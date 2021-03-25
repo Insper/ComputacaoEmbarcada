@@ -11,12 +11,12 @@ site da matéria.
 realizar o estudo, ==pois no dia da avaliação terão 3h==.
 
 
-
 ## Avaliação 1 
 
 Conteúdo: 
 
 - APS-1, Lab1-PIO, Lab2-Driver, Lab3-PIO-IRQ, Lab4-TC-RTT-RTC.
+- OLED1
 
 Sugerimos realizarem o estudo a seguir, antes do simulado:
 
