@@ -57,7 +57,9 @@ nav:
       - 'Lab' : 'Lab-3-PIO-IRQ-Lab.md'
  #     - 'Lab-3-PIO-IRQ-Perguntas.md'
     - 'Lab 4 - TC RTC RTT': 'Lab-4-TickTack-Lab.md'
-    - 'Lab 5 - RTOS': 'Lab-5-RTOS.md'
+    - 'Lab 5 - RTOS':
+       - 'Lab': 'Lab-5-RTOS.md'
+       - 'Dicas': 'Lab-5-RTOS-dicas.md'
 #    - 'Lab 6 - RTOS ADC':
 #      - 'Lab-6-RTOS-ADC.md'
 #    - 'Lab 7 - RTOS LCD':
