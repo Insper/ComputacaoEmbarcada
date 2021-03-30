@@ -15,15 +15,16 @@ realizar o estudo, ==pois no dia da avaliação terão 3h==.
 
 Conteúdo: 
 
-- APS-1, Lab1-PIO, Lab2-Driver, Lab3-PIO-IRQ, Lab4-TC-RTT-RTC.
+- APS-1
+- Lab1-PIO, Lab2-Driver, Lab3-PIO-IRQ, Lab4-TC-RTT-RTC
 - OLED1
 
-Sugerimos realizarem o estudo a seguir, antes do simulado:
+Sugerimos realizarem o estudo a seguir antes de iniciarem os simulados:
 
 - [Simulado AV1 - 20a](https://github.com/Insper/AV1-Embarcados-Simulado)
 
 A seguir uma lista de simulados e avaliações dos outros semestres,
-seve como base para vocês estudarem. 
+serve como base para vocês estudarem. 
 
 - [AV1 - 20b](/ComputacaoEmbarcada/20b/AV1)
     - Os alunos não tinham buzzer, mas vocês podem se quiser adicionar um tom (`tone`) para cada botão, vai ficar legal! Se fizer me manda o vídeo!
