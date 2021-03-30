@@ -21,7 +21,7 @@ Conteúdo:
 
 Sugerimos realizarem o estudo a seguir antes de iniciarem os simulados:
 
-- [Simulado AV1 - 20a](https://github.com/Insper/AV1-Embarcados-Simulado)
+- [Estudo pré simulados](https://github.com/Insper/AV1-Embarcados-Simulado)
 
 A seguir uma lista de simulados e avaliações dos outros semestres,
 serve como base para vocês estudarem. 
