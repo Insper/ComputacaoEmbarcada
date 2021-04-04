@@ -139,7 +139,7 @@ Existem duas soluções para esse problemas, a primeira seria a de usar um [Coun
 1. Criar o semáforo dentro da `task_led1`
 1. Usar o semáforo novo na `task_led1`
 
-![](imgs/RTOS/task-led1.png){width=500}
+![](imgs/RTOS/task-led1b.png){width=500}
 
 ```diff
 SemaphoreHandle_t xSemaphore;
