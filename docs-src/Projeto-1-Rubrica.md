@@ -19,7 +19,7 @@ A rubrica a seguir será aplicada a nota da entrega:
 botão e `task_bluetooth`.
   
 - B 
-    - Grupo cria um primeiro protótipo mecânico para o controle (pode usar papelão, massinha, ...), não precisa ligar a parte elétrica ao mecânico.
+    - Grupo cria um primeiro protótipo mecânico para o controle (pode usar papelão, massinha, modelo cad 3d, ...), não precisa ligar a parte elétrica ao mecânico, é só para termos uma ideia de como seria.
     
     - Cria uma task dedicada para receber e processar dados da comunicação (computador --> uC).
     
