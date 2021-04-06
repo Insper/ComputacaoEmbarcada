@@ -60,8 +60,7 @@ nav:
     - 'Lab 5 - RTOS':
        - 'Lab': 'Lab-5-RTOS.md'
        - 'Dicas': 'Lab-5-RTOS-dicas.md'
-#    - 'Lab 6 - RTOS ADC':
-#      - 'Lab-6-RTOS-ADC.md'
+    - 'Lab 6 - RTOS - ADC': 'Lab-6-RTOS-ADC.md'
 #    - 'Lab 7 - RTOS LCD':
 #      - 'Lab-7-RTOS-LCD.md'
 #    - 'Lab-9-ADC-FIR.md'
