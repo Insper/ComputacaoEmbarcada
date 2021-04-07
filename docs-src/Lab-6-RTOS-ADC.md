@@ -19,10 +19,10 @@ Neste laboratório iremos trabalhar com conversão analógica digital, vamos apr
 
 !!! info "Conexões"
      - EXT1: OLED
-     - Potenciômetro no PC31 conforme exemplo [`SAME70-examples/Perifericos-uC/AFEC-Pin/`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/AFEC-Pin)
+     - Potenciômetro no PD30 conforme exemplo [`SAME70-examples/Perifericos-uC/AFEC-Pin/`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/AFEC-Pin)
      
 !!! warning "Código exemplo"
-    1. Atualizem o repositório SAME70-Examples 
+    1. ==Atualizem o repositório SAME70-Examples== antes de continuar
     1. Vamos usar como base o código [Screens/RTOS-OLED-Xplained-Pro](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-OLED-Xplained-Pro), copie para o seu repositório de entregas e renomeia para: `Lab6-RTOS-ADC`
     
 ### Exemplo AFEC
@@ -34,7 +34,7 @@ Abra o exemplo do AFEC-Pin localizado em [`SAME70-examples/Perifericos-uC/AFEC-P
 
 ## Incorporando AFEC ao RTOS
 
-Vamos incorporar o exemplo do AFEC ao çódigo do OLED com RTOS, para isso iremos criar uma tarefa que será responsável por ler o valor do AFEC.
+Vamos incorporar o exemplo do AFEC ao código do OLED com RTOS, para isso iremos criar uma tarefa que será responsável por ler o valor do AFEC.
 
 !!! example "Modifique"
     1. Adicione no ASF o driver do `AFEC`
@@ -59,6 +59,7 @@ void task_adc(void){
   
   while(1){
     if(g_is_conversion_done){
+      g_is_conversion_done = 0;
       printf("%d\n", g_ul_value);
       delay_ms(500);
       
@@ -89,6 +90,11 @@ Agora é necessário modificar a função `main` para que o freeRTOS crie essa t
 !!! warning
     1. Essa task continua usando uma flag que é alterada do callback do AFEC para indicar quando o valor está pronto, isso não é bom e vamos mudar mais para frente!
     1. Usa `delay_ms` no lugar do vstaskDelay.
+
+!!! info "Diagrama"
+    ![](imgs/RTOS-ADC/parte1.png)
+
+## Melhorando
 
 Agora vamos melhorar isso, começando por trocar o delay pelo delay do freertos.
 
@@ -179,6 +185,9 @@ void task_oled(void){
     1. Modifique a `task_oled`
     1. Compile para ver se possui erros.
     
+!!! info "Diagrama"
+    ![](imgs/RTOS-ADC/parte2.png)
+
 ### Modificando task_adc
 
 Agora precisamos modificar a `task_adc` para enviar o dado por essa fila:
@@ -217,6 +226,9 @@ void task_adc(void){
     1. Programe o uC 
     1. Teste mudando o valor do potênciometro e verificando se o valor no oled muda.
 
+!!! info "Diagrama"
+    ![](imgs/RTOS-ADC/parte3.png)
+
 ### semáforo 
 
 Agora vamos modificar o código para usar um semáforo para substituir a flag: `g_is_conversion_done`, esse semáforo precisa ser liberado na `AFEC_pot_Callback` e recebido na `task_adc`.
@@ -226,12 +238,32 @@ Agora vamos modificar o código para usar um semáforo para substituir a flag: `
     
     Dica: Você deve criar um semáforo, inicializar e enviar.
 
+!!! info "Diagrama"
+    ![](imgs/RTOS-ADC/parte4.png)
+
 ## C - Dado direto do IRQ AFEC para a task_oled
 
 Podemos fazer o envio do dado direto do `AFEC_pot_Callback` para a `task_oled`, para isso teremos que usar a função [`xQueueSendFromISR`](https://freertos.org/a00119.html) no lugar da `xQueueSend`.
 
+!!! tip 
+    Você sabia que pode alterar a fonte do OLED? De uma olhada no arquivo: `src/config/conf_sysfont`:
+    
+    ```c
+    //#define USE_FONT_BPMONO_10x16
+    #define USE_FONT_BPMONO_10x14 
+    /* #define USE_FONT_MONO_MMM_10x12 */
+    //#define USE_FONT_BASIC_6x7
+    ```
+    
+    Basta escolher entre `define` diferente.
+
 !!! task "Tarefa"
-    Faça o envio direto do callback do AFEC para a `task_oled`
+    1. Faça o envio direto do callback do AFEC para a `task_oled`
+    1. Programe e teste.
+    1. Teste mudando o valor do potênciometro e verificando se o valor no oled muda.
+
+!!! info "Diagrama"
+    ![](imgs/RTOS-ADC/parte5.png)
 
 ## B - Exibindo graficamente
 
