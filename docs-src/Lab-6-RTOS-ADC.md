@@ -273,3 +273,8 @@ Faça a exibição do potenciômetro de forma gráfica no oled.
 
 No lugar de fazer apenas uma entrada analógica vamos fazer a leitura de dois valores,
 para isso vocês podem utilizar o joystick analógico que vocês possuem no kit.
+
+----------
+
+!!! note "Preencher ao finalizar o lab"
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSci4k9eempzAus1-L9gLUfEov9nRv4DBVuNL3tTTy7Zl6kISQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
