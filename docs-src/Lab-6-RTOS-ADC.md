@@ -175,7 +175,7 @@ void task_oled(void){
 +   if (xQueueReceive( xQueueADC, &(adc), ( TickType_t )  100 / portTICK_PERIOD_MS)) {
 +     char b[512];
 +     sprintf(b, "%04d", adc.value);
-+     gfx_mono_draw_string(b, 0, 20);
++     gfx_mono_draw_string(b, 0, 20, &sysfont);
 +   }
   }
 }
