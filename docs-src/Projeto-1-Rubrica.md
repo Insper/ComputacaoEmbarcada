@@ -5,7 +5,14 @@
     - Não pode repetir dupla, mas pode fazer par com colega do outro lab.
 
     Cria repositório via classroom: https://classroom.github.com/g/0M_7xFQT
+
+!!! tip
+    Ao terminar preencha o forms a seguir:
     
+    - https://forms.gle/GuA7ZGbrERPMdGdp7
+    
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdNF5ocUMjA9tczfyP6tBnvBNIWEClous0JP_D4B3FMgmrjUQ/viewform?embedded=true" width="640" height="300" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+   
 A rubrica a seguir será aplicada a nota da entrega:
 
 - A+
