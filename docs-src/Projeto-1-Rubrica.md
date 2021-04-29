@@ -19,7 +19,8 @@ A rubrica a seguir será aplicada a nota da entrega:
     - Testa controle com pessoa externa ao projeto (filma interação)
   
 - A (cada item = meio conceito)
-    - Firmware e python suportam mais de um controle ao mesmo tempo
+    - ~~Firmware e python suportam mais de um controle ao mesmo tempo~~
+        - Não da para fazer só com uma placa!
     - Possibilita usuário Ligar e Desligar controle (sleep mode)
         - Deve ajustar o python para reconhecer quando o controle ligar novamente
     - Programa em python envia informações ao controle e isso é exibido ao usuário.
