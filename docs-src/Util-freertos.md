@@ -177,13 +177,13 @@ Fila é um recurso do freertos que permite troca de mensagens (qualquer tipo de 
     
     void but1_callback(void){
       // envia o char `1` na fila
-      char id = `1`;
+      char id = '1';
       xQueueSendFromISR(xQueueButId, &id, 0);
     }
     
     void but2_callback(void){
       // envia o char `2` na fila
-      char id = `2`;
+      char id = '2';
       xQueueSendFromISR(xQueueButId, &id, 0);
     }
 
@@ -206,9 +206,9 @@ Fila é um recurso do freertos que permite troca de mensagens (qualquer tipo de 
           // aguarda por até 500 ms pelo se for liberado entra no if
           if( xQueueReceive( xQueueButId, &id, ( TickType_t ) 500 )){
             
-            if(id == 1)
+            if(id == '1')
               LED_Toggle(LED1);
-            else if(id == 2)
+            else if(id == '2')
               LED_Toggle(LED2);
           }
         }
