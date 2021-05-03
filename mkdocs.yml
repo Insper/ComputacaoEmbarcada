@@ -61,8 +61,9 @@ nav:
        - 'Lab': 'Lab-5-RTOS.md'
        - 'Dicas': 'Lab-5-RTOS-dicas.md'
     - 'Lab 6 - RTOS - ADC': 'Lab-6-RTOS-ADC.md'
-#    - 'Lab 7 - RTOS LCD':
-    - 'Lab-7-RTOS-LCD-lvgl.md'
+    - 'Lab 7 - RTOS LCD':
+        - 'Lab-7-RTOS-LCD-lvgl.md'
+#        - 'Lab-7-RTOS-LCD-lvgl-lab.md'
 #    - 'Lab-9-ADC-FIR.md'
 #    - 'Lab-8-RTOS-UART.md'
 #    - 'Lab-10-RTOS-WIFI.md'
@@ -109,6 +110,9 @@ extra_css:
 
 extra_javascript:
   - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+  - https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js
+  - https://www.gstatic.com/firebasejs/8.4.0/firebase-database.js
+   - js/markdown-enhancer.js
   - 'translate_admonitions.js'
   - 'js/dom-confetti.js'
   - 'js/progress.js'
@@ -150,4 +154,5 @@ markdown_extensions:
   - pymdownx.tilde
 
 plugins:
-    - search
+  - git-revision-date-localized
+  - search

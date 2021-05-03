@@ -1,11 +1,9 @@
-# Lab 7 - RTOS - LCD 
+# Começando
 
 Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciar o LCD max Touch, o forte desse lab será a linguagem C e como estruturar um firmware.
 
 !!! warning
     ==Atualizem o repositório SAME70-Examples antes de continuar==
-
-## LAB
 
 | LAB                  |
 |----------------------|
@@ -16,8 +14,7 @@ Neste laboratório iremos:
 1. Conectar o LCD no kit de desenvolvimento
 1. Executar demo de teste do LCD
 1. Executar demo de teste do touch
-1. Incorporar o LVGL no projeto
-1. Desenvolver uma interface 
+1. Executar e modificar o exemplo do lvgl
 
 ### Início 
 
@@ -118,9 +115,9 @@ Com esse software seremos capazes de desenvolver interfaces similares ao exemplo
 
 ![](https://camo.githubusercontent.com/4052401b2c5594c76c20e97dc8e2567d8ec49cc85e2c6779770524e9c239b872/68747470733a2f2f6c76676c2e696f2f6173736574732f696d616765732f696d675f312e706e67){width=500}
 
-### Começando
+### Base
 
-Iremos trabalhar com o código base: [RTOS-TFT-LCD-ILI9341-LVGL](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-TFT-LCD-ILI9341-LVGL) que já possui:
+Iremos trabalhar com o código base: [RTOS-TFT-LCD-ILI9341-LVGL](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-TFT-LCD-ILI9341-LVGL) que já possui configurado:
 
 - FreeRTOS v8
 - Driver ili9341
@@ -132,7 +129,7 @@ Iremos trabalhar com o código base: [RTOS-TFT-LCD-ILI9341-LVGL](https://github.
     
 Antes de começarmos vamos entender um pouco o código de exemplo e como o lvgl trabalha.
 
-### LVGL porting
+### Porting lvgl
 
 O [site do LVGL](https://docs.lvgl.io/latest/en/html/porting/index.html) descreve o passo a passo de como incorporar a biblioteca em um novo projeto/ microcontrolador, além de criar um arquivo de configuração `lv_conf.h` com as propriedades do LCD e com configurações de como a biblioteca irá trabalhar, temos que implementar duas funções:
 
@@ -261,4 +258,56 @@ static void task_lcd(void *pvParameters) {
 }
 ```
 
-### 
+### Criando tela
+
+Note que na `task_lcd` chamamos a função `lv_ex_btn_1()` está função cria os widgets no LCD, os widgets estão listados na página: 
+
+- https://docs.lvgl.io/latest/en/html/widgets/index.html
+
+Podemos listar alguns aqui como exemplo:
+
+| Widget               | Example                                 |
+| ------               | -------                                 |
+| Button (`lv_btn`)    | ![](imgs/lvgl/lv_button.png){width=100} |
+| LED (`lv_led`)       | ![](imgs/lvgl/lv_leds.png){width=100}   |
+| Roller (`lv_roller`) | ![](imgs/lvgl/lv_roller.png){width=100} |
+| Bar (`lv_bar`)       | ![](imgs/lvgl/lv_bar.png){width=100}    |
+
+O exemplo fornecido cria dois tipos de botões diferentes um do push button e outro do tipo toggle, notem que tudo é realizado pela API do lvgl. Podemos associar um handler (`event_handler`) ao botão, este handler sera chamado (pela `lv_task_handler`) sempre que acontecer um evento neste widget (botão aprtado, botão liberado, ...).
+
+=== "lv_ex_btn_1"
+    ```c
+    void lv_ex_btn_1(void) {
+        lv_obj_t * label;
+
+        lv_obj_t * btn1 = lv_btn_create(lv_scr_act(), NULL);
+        lv_obj_set_event_cb(btn1, event_handler);
+        lv_obj_align(btn1, NULL, LV_ALIGN_CENTER, 0, -40);
+
+        label = lv_label_create(btn1, NULL);
+        lv_label_set_text(label, "Button");
+
+        lv_obj_t * btn2 = lv_btn_create(lv_scr_act(), NULL);
+        lv_obj_set_event_cb(btn2, event_handler);
+        lv_obj_align(btn2, NULL, LV_ALIGN_CENTER, 0, 40);
+        lv_btn_set_checkable(btn2, true);
+        lv_btn_toggle(btn2);
+        lv_btn_set_fit2(btn2, LV_FIT_NONE, LV_FIT_TIGHT);
+
+        label = lv_label_create(btn2, NULL);
+        lv_label_set_text(label, "Toggled");
+    }
+    ```
+    
+=== "event_handler(...)"
+    ```c
+    static void event_handler(lv_obj_t * obj, lv_event_t event) {
+        if(event == LV_EVENT_CLICKED) {
+            printf("Clicked\n");
+        }
+        else if(event == LV_EVENT_VALUE_CHANGED) {
+            printf("Toggled\n");
+        }
+    }
+    
+    ```
