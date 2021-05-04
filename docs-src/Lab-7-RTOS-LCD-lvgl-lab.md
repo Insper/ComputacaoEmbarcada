@@ -239,7 +239,7 @@ Vamos criar uma fonte de **tamanho 120** -> **DSEG7-Modern/DSEG7Modern-Regular.t
     A fonte gerada terá somente esses símbolos, se você quiser usar por exemplo a letra C não vai poder. Gerar somente os símbolos que vai usar é importante porque o uC possui pouca memória e não seria possível ter várias fontes diferentes com todos os símbolos.
 
 ??? info "Imagem"
-    ![](imgs/lvgl/conv-font.png){width=400px}
+    <img src="imgs/lvgl/conv-font.png" width="200">
 
 O site irá gerar um arquivo `dseg120.c` salve o mesmo dentro da pasta `src/` do projeto que estamos trabalhando.
 
