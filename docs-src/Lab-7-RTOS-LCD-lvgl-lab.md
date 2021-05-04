@@ -148,7 +148,7 @@ Podemos usar o símbolo `LV_SYMBOL_POWER` para recriar o botão da interface pla
 Com isso obtemos o seguinte resultado:
 
 !!! warning
-    ![](imgs/lvgl/btn_power_default.jpeg){width=400}
+    ![](imgs/lvgl/btn_power_default.jpeg){width=100}
     
 !!! tip
     Você pode utilizar a função ** lv_obj_set_width(obj, new_width);** para alterar o comprimento do botão:
@@ -163,7 +163,7 @@ Com isso obtemos o seguinte resultado:
 Com isso obtemos o seguinte resultado:
 
 !!! warning
-    ![](imgs/lvgl/btn_power_width_40.jpeg){width=400}
+    ![](imgs/lvgl/btn_power_width_40.jpeg){width=100}
     
 !!! example "Tarefa: Botão power"
     Conforme descrito anteriormente:
