@@ -202,7 +202,7 @@ O LVGL irá então manter uma cópia do que será exibido no LCD nesta região c
 Agora com tudo configurado devemos realizar as seguintes inicializações antes de podemos usar o lvgl controlando o display:
 
 === "passos"
-    1. Bord e Sysclock
+    1. Board e Sysclock
     1. LCD e driver ili9341
     1. Touch
     1. lvgl buffer e display
