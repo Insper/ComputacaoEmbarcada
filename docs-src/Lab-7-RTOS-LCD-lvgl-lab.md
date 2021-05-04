@@ -232,7 +232,7 @@ Vamos criar uma fonte de **tamanho 120** - > **DSEG/src/DSEG7Modern-Regular.ttf*
 - Name: `dseg120`
 - Size: `120`
 - Bpp: `1 bit-per-pixel`
-- TTF: `DSEG7-Modern/DSEG7Modern-Regular.ttf`
+- TTF: `DSEG/src/DSEG7Modern-Regular.ttf`
 - Symbols: `-./0123456789: `
 
 !!! info "Symbols"
