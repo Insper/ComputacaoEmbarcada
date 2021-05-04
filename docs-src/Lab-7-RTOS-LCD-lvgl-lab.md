@@ -149,7 +149,6 @@ Com isso obtemos o seguinte resultado:
 
 !!! warning
     <img src="imgs/lvgl/btn_power_default.jpeg" width="200">
-    ![](imgs/lvgl/btn_power_default.jpeg){width=200}
     
 !!! tip
     Você pode utilizar a função ** lv_obj_set_width(obj, new_width);** para alterar o comprimento do botão:
@@ -165,7 +164,6 @@ Com isso obtemos o seguinte resultado:
 
 !!! warning
     <img src="imgs/lvgl/btn_power_width_40.jpeg" width="200">
-    ![](imgs/lvgl/btn_power_width_40.jpeg){width=200}
     
 !!! example "Tarefa: Botão power"
     Conforme descrito anteriormente:
