@@ -248,8 +248,17 @@ O site irá gerar um arquivo `dseg120.c` salve o mesmo dentro da pasta `src/` do
 
 #### 2. Adicionando no Microchip Studio
 
-!!! warning 
-    TODO: Marco inserir como faz para add no microchip studio
+1) Clique com o botão direito em src e clique em Add > Existing Item...
+
+<img src="imgs/lvgl/add_file.png" width="400">
+
+2) Encontre o arquivo dseg120.c que foi baixado e clique em Add
+
+<img src="imgs/lvgl/add_file_2.png" width="400">
+
+3) Verifique se o arquivo dseg120.c foi adicionado
+
+<img src="imgs/lvgl/add_file_3.png" width="400">
     
 !!! progress
     Click para continuar....
