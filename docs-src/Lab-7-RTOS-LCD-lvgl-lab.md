@@ -148,6 +148,7 @@ Podemos usar o símbolo `LV_SYMBOL_POWER` para recriar o botão da interface pla
 Com isso obtemos o seguinte resultado:
 
 !!! warning
+    <img src="imgs/lvgl/btn_power_default.jpeg" width="200">
     ![](imgs/lvgl/btn_power_default.jpeg){width=200}
     
 !!! tip
@@ -163,6 +164,7 @@ Com isso obtemos o seguinte resultado:
 Com isso obtemos o seguinte resultado:
 
 !!! warning
+    <img src="imgs/lvgl/btn_power_width_40.jpeg" width="200">
     ![](imgs/lvgl/btn_power_width_40.jpeg){width=200}
     
 !!! example "Tarefa: Botão power"
