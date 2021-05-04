@@ -227,12 +227,12 @@ Com a fonte escolhida precisamos agora converter para o formato que o LVGL conse
 
 - https://lvgl.io/tools/fontconverter
 
-Vamos criar uma fonte de **tamanho 120** - > **DSEG/src/DSEG7Modern-Regular.ttf**, esse arquivo será usada no site e foi extraído na etapa anterior. Configure a interface como no exemplo a seguir:
+Vamos criar uma fonte de **tamanho 120** -> **DSEG7-Modern/DSEG7Modern-Regular.ttf**, esse arquivo será usada no site e foi extraído na etapa anterior. Configure a interface como no exemplo a seguir:
 
 - Name: `dseg120`
 - Size: `120`
 - Bpp: `1 bit-per-pixel`
-- TTF: `DSEG/src/DSEG7Modern-Regular.ttf`
+- TTF: `DSEG7-Modern/DSEG7Modern-Regular.ttf`
 - Symbols: `-./0123456789: `
 
 !!! info "Symbols"
