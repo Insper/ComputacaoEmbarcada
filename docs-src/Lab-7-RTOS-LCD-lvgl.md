@@ -38,6 +38,8 @@ Antes de começarmos será necessário realizarmos a conexão do LCD no kit e en
     
     Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de 115200.
 
+
+    
 ## LCD
 
 O LCD que iremos usar nas próximas atividades da disciplina é fabricado pela adafruit com o nome de: [`2.8" TFT LCD with Touchscreen Breakout Board w/MicroSD Socket - ILI9341`](https://www.adafruit.com/product/1770) ele possui um LCD de `240x320` pixels operando em RGB e com uma sensor touch resistivo. O LCD é controlado por um controlador chamado de [**ILI9341**](https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf) ele é responsável por atualizar e exibir as informações na tela. 

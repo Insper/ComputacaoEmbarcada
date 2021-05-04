@@ -13,6 +13,8 @@ Neste laboratório iremos trabalhar com o uso de um sistema operacional de tempo
 
 O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://freertos.org), um sistema operacional muito utilizado pela industria, sendo o segundo sistema operacional (**20%**) mais utilizado em projetos embarcados, perdendo só para o [Linux embarcado](https://m.eet.com/media/1246048/2017-embedded-market-study.pdf).
 
+ <embed type="text/html" src="http://localhost:3000/pl/course_instance/2/instructor/question/114/preview" width="800" height="500"> 
+
 ## LAB
 
 | Pasta           |

@@ -1,13 +1,9 @@
 site_name: 5s - Computação Embarcada
 theme:
-#  feature:
-#    tabs: true
   name: 'material'
   palette:
-      primary: 'white'
-      accent: 'pink'
-#  logo:
-#      icon: 'developer_board'
+    primary: 'black'
+    accent: 'pink'
   font:
     text: Roboto
     code: Roboto Mono
@@ -21,11 +17,6 @@ edit_uri: 'https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/'
 
 # Copyright
 copyright: 'Copyright &copy; Rafael Corsi @ insper'
-
-# ana
-google_analytics:
-  - G-GBPXHW97ZP
-  - auto
 
 nav:
 - Home: index.md
@@ -63,7 +54,7 @@ nav:
     - 'Lab 6 - RTOS - ADC': 'Lab-6-RTOS-ADC.md'
     - 'Lab 7 - RTOS LCD':
         - 'Lab-7-RTOS-LCD-lvgl.md'
-#        - 'Lab-7-RTOS-LCD-lvgl-lab.md'
+        - 'Lab-7-RTOS-LCD-lvgl-lab.md'
 #    - 'Lab-9-ADC-FIR.md'
 #    - 'Lab-8-RTOS-UART.md'
 #    - 'Lab-10-RTOS-WIFI.md'
@@ -104,21 +95,18 @@ nav:
 #    - 'AV1 Prática': 'AV-1.md'
 
 #####################################################################
-extra_css:
-  - css/printing.css
-  - css/progress.css
+#extra_css:
+#  - css/printing.css
+#  - css/progress.css
 
 extra_javascript:
-  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
   - https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js
   - https://www.gstatic.com/firebasejs/8.4.0/firebase-database.js
-   - js/markdown-enhancer.js
-  - 'translate_admonitions.js'
-  - 'js/dom-confetti.js'
-  - 'js/progress.js'
-
-# Extensions
-
+  - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
+  - js/markdown-enhancer.js
+#  - 'js/dom-confetti.js'
+#  - 'js/progress.js'
 
 # Extensions
 markdown_extensions:
