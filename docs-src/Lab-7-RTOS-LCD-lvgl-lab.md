@@ -254,11 +254,11 @@ O site irá gerar um arquivo `dseg120.c` salve o mesmo dentro da pasta `src/` do
 
 2) Encontre o arquivo dseg120.c que foi baixado e clique em Add
 
-<img src="imgs/lvgl/add_file_2.png" width="400">
+<img src="imgs/lvgl/add_file_2.PNG" width="400">
 
 3) Verifique se o arquivo dseg120.c foi adicionado
 
-<img src="imgs/lvgl/add_file_3.png" width="400">
+<img src="imgs/lvgl/add_file_3.PNG" width="400">
     
 !!! progress
     Click para continuar....
