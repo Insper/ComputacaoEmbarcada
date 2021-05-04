@@ -104,9 +104,6 @@ A Conexão do touch resistivo com o uC acontece da seguinte maneira:
 
 ## LVGL
 
-!!! info "Começando"
-    Vamos usar de exemplo o projeto `2.8-TFT-LCD-ILI9341-touch`, copie para o seu repositório renomeando para `Lab7-RTOS-LCD-lvgl`.
-
 Uma coisa é conseguir acessar o LCD e transmitir pixels outra é ter uma biblioteca capaz de desenhar coisas no LCD (botões, imagens, textos, gráficos, ...). Existem várias bibliotecas gráficas para sistemas embarcados, o site a seguir possui uma lista e um comparativo entre elas: 
 
 - https://itnext.io/top-five-libraries-for-creating-gui-on-embedded-linux-5ce03903be32
