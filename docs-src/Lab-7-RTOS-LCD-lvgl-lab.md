@@ -150,6 +150,17 @@ Com isso obtemos o seguinte resultado:
 !!! warning
     INSERIR IMAGEM PLACA
     
+!!! tip
+    Você pode utilizar a função ** lv_obj_set_width(obj, new_width);** para alterar o comprimento do botão:
+    
+    ``` c
+    lv_obj_t * btn1 = lv_btn_create(lv_scr_act(), NULL);
+    lv_obj_set_event_cb(btn1, event_handler);
+    +lv_obj_set_width(btnPower, 40);
+    lv_obj_align(btn1, NULL, LV_ALIGN_CENTER, 0, -40);
+    ```
+
+    
 !!! example "Tarefa: Botão power"
     Conforme descrito anteriormente:
     
