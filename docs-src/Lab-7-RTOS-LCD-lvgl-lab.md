@@ -148,7 +148,7 @@ Podemos usar o símbolo `LV_SYMBOL_POWER` para recriar o botão da interface pla
 Com isso obtemos o seguinte resultado:
 
 !!! warning
-    <img src="imgs/lvgl/btn_power_default.jpeg" width="200">
+     ![](imgs/lvgl/btn_power_default.jpeg){width=200}
     
 !!! tip
     Você pode utilizar a função ** lv_obj_set_width(obj, new_width);** para alterar o comprimento do botão:
@@ -163,7 +163,7 @@ Com isso obtemos o seguinte resultado:
 Com isso obtemos o seguinte resultado:
 
 !!! warning
-    <img src="imgs/lvgl/btn_power_width_40.jpeg" width="200">
+    ![](imgs/lvgl/btn_power_width_40.jpeg){width=200}
     
 !!! example "Tarefa: Botão power"
     Conforme descrito anteriormente:
@@ -249,12 +249,10 @@ O site irá gerar um arquivo `dseg120.c` salve o mesmo dentro da pasta `src/` do
 #### 2. Adicionando no Microchip Studio
 
 1) Clique com o botão direito em src e clique em Add > Existing Item...
-
-<img src="imgs/lvgl/add_file.png" width="400">
+![](imgs/lvgl/add_file.png){width=400}
 
 2) Encontre o arquivo dseg120.c que foi baixado e clique em Add
-
-<img src="imgs/lvgl/add_file_2.PNG" width="400">
+![](imgs/lvgl/add_file_2.PNG){width=400}
 
 3) Verifique se o arquivo dseg120.c foi adicionado
 ![](imgs/lvgl/add_file_3.PNG){width=400}
