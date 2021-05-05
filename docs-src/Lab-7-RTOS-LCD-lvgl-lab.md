@@ -343,7 +343,7 @@ Com a fonte escolhida precisamos agora converter para o formato que o LVGL conse
 
 Vamos criar uma fonte de **tamanho 70** -> **DSEG7-Modern/DSEG7Modern-Regular.ttf**, esse arquivo será usada no site e foi extraído na etapa anterior. Configure a interface como no exemplo a seguir:
 
-- Name: `dseg120`
+- Name: `dseg70`
 - Size: `70`
 - Bpp: `1 bit-per-pixel`
 - TTF: `DSEG7-Modern/DSEG7Modern-Regular.ttf`
@@ -395,7 +395,7 @@ Agora podemos utilizar a nova fonte no nosso projeto, ainda dentro da `lv_termos
    }
 ```
 
-Para usarmos a fonte devemo indicar ao LVGL que a fonte existe, para isso adicione a linha a seguir no topo do arquivo `main.c`:
+Para usarmos a fonte devemos indicar ao LVGL que a fonte existe, para isso adicione a linha a seguir no topo (após os #include) do arquivo `main.c`:
 
 ```c
 LV_FONT_DECLARE(dseg70);
