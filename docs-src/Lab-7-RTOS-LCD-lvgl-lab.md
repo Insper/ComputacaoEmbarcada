@@ -499,6 +499,8 @@ Temos um relógio na interface, vamos fazer ele funcionar? Para isso terão que 
 !!! example "Tarefa"
     Inclua o RTC no projeto e faça o relógio funcionar!
     
+    O relǵio deve exibir HH:MM, o **:** deve piscar uma vez por segundo.
+    
     Dicas:
     
     1. Incluir RTC
