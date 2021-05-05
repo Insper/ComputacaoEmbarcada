@@ -248,8 +248,6 @@ static  lv_obj_t * labelPower;
         void lv_termostato(void) {
             lv_obj_set_style_local_bg_color(lv_scr_act(), LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
 
-            lv_obj_t * labelPower, * labelMenu, * labelClk, * labelUp, * labelDown;
-
             // POWER
             lv_obj_t * btnPower = lv_btn_create(lv_scr_act(), NULL);
             lv_obj_set_event_cb(btnPower, event_handler);
