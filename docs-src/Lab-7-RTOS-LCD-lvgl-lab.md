@@ -513,7 +513,7 @@ Temos um relógio na interface, vamos fazer ele funcionar? Para isso terão que 
  
 ## Extras
 
-Temos muito o que fazer na interface, vou sugerir algumas coisas que irão dar nota a mais para vocês neste lab, cada item é meio conceito a mais.
+Temos muito o que fazer na interface, vou sugerir algumas coisas que irão dar nota a mais para vocês neste lab, ==cada item é meio conceito a mais.==
 
 - [ ] Implementar o digito da Temperatura: 23 **.4**
      - Dica: use uma das fontes menores para isso
@@ -522,3 +522,7 @@ Temos muito o que fazer na interface, vou sugerir algumas coisas que irão dar n
 - [ ] Gerar um logo para o relógio e usar no lugar do de `settings`
 - [ ] Implementar o botão de `Power` que desliga a tela
 - [ ] Colocar um potenciômetro que altera o valor da temperatura atual.
+ 
+!!! note "Preencher ao finalizar o lab"
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf52OFKZi-QRgQ7CRX97pEWQlZhsgcvPO--jlU7vI6BagmL5g/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> 
+
