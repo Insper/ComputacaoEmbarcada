@@ -347,7 +347,7 @@ Vamos criar uma fonte de **tamanho 70** -> **DSEG7-Modern/DSEG7Modern-Regular.tt
 - Size: `70`
 - Bpp: `1 bit-per-pixel`
 - TTF: `DSEG7-Modern/DSEG7Modern-Regular.ttf`
-- Symbols: `-./0123456789: `
+- Symbols: `-./0123456789 :` (o espaço  é necessário pq ele é um caráter)
 
 !!! info "Symbols"
     A fonte gerada terá somente esses símbolos, se você quiser usar por exemplo a letra C não vai poder. Gerar somente os símbolos que vai usar é importante porque o uC possui pouca memória e não seria possível ter várias fontes diferentes com todos os símbolos.
