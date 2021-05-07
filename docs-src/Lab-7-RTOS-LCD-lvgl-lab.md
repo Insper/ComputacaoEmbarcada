@@ -379,14 +379,21 @@ Agora é necessário adicionar o arquivo ao MS:
     
 #### 3. Criando label e usando fonte
 
-Agora podemos utilizar a nova fonte no nosso projeto, ainda dentro da `lv_termostato` vamos criar um novo label que irá exibir o valor da temperatura atual. Fazemos isso similar ao botão, porém agora iremos associar o label a tela e não ao botão e também iremos customizar a fonte para usarmos o `dseg70`:
+Agora podemos utilizar a nova fonte no nosso projeto, ainda dentro da `lv_termostato` vamos criar um novo label que irá exibir o valor da temperatura atual. Fazemos isso similar ao botão, porém agora iremos associar o label a tela e não ao botão e também iremos customizar a fonte para usarmos o `dseg70`.
+
+Crei a variável global que irá apontar para o label:
+
+```c
+lv_obj_t * labelFloor;
+```
+
+E então modifique a função termostato:
 
 ```c
   void lv_termostato(void){
     // ....
     // ....
     
-    lv_obj_t * labelFloor;
     labelFloor = lv_label_create(lv_scr_act(), NULL);
     lv_obj_align(labelFloor, NULL, LV_ALIGN_IN_LEFT_MID, 35 , -45);
     lv_obj_set_style_local_text_font(labelFloor, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, &dseg70);
