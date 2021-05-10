@@ -34,6 +34,7 @@ nav:
     - 'Util-lcd.md'
     - 'Util-freertos.md'
     - 'Util-FloatPrint.md'
+    - 'Util-lvgl.md' 
 
 - Labs:
     - 'Lab 1 - PIO ':
