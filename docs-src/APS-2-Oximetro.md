@@ -38,7 +38,7 @@ static void task_aps2(void *pvParameters) {...}
 !!! tip
     - Para ter acesso ao batimento cardíaco leia o valor analógico que sai do pino PB13
     - Range do dado: 0..4095
-    - Faça a leitura analógica em uma frequência de 500Hz
+    - Faça a leitura analógica em uma frequência de 250Hz
 
 O electrocardiograma (ECG) será um valor analógico gerado pelo próprio microcontrolador, uma tabela do pulso elétrico foi gerado usando o pacote [neurokit2](https://pypi.org/project/neurokit2/), trado e exportado para um vetor (`aps2/ecg.h`). 
 
