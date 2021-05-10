@@ -9,6 +9,13 @@ Desenvolver um protótipo de um oxímetro, dispositivo médico para medir indire
 
 > fonte: https://pt.wikipedia.org/wiki/Ox%C3%ADmetro_de_pulso
 
+!!! info
+    Para começar crie o repositório no classroom:
+    
+    - https://classroom.github.com/g/Sp5pYx1p
+
+    Você deve utilizar como base o código disponível no repositório! 
+
 ## firmware
 
 O projeto deve ser desenvolvido usando um [ RTOS](https://www.mddionline.com/software/rtos-medical-devices-101), no desenvolvimento devem isolar as tarefas de processamento de dados das de exibicão (LCD).
