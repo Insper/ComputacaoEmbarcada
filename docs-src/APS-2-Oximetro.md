@@ -36,7 +36,7 @@ static void task_aps2(void *pvParameters) {...}
 ### ECG
 
 !!! tip
-    - Para ter acesso ao batimento cardíaco leia o valor analógico do pino PB13
+    - Para ter acesso ao batimento cardíaco leia o valor analógico que sai do pino PB13
     - Range do dado: 0..4095
     - Faça a leitura analógica a cada 500Hz
 
