@@ -32,7 +32,7 @@ Dicas sobre o LVGL.
 - Abrir o arquivo .c, remover o include do topo (que tem um #ifdef) e deixar apenas ```#include "lvgl.h"```
 - Criar um arquivo .h com mesmo nome do .c
 - Abrir o arquivo .c e copiar o nome da estrutura que está final do .c. (exemplo: ```const lv_img_dsc_t imagem_nome;```)
-- Colocar no topo do .h,  ```#include "lvgl.h"  e depois a linha da estrutura ```const lv_img_dsc_t imagem_nome```;
+- Colocar no topo do .h,  ```#include "lvgl.h"```  e depois a linha da estrutura ```const lv_img_dsc_t imagem_nome```;
 - No main.c, incluir o .h da imagem. Usar exemplo do site do lvgl como usar
 ```c
   lv_obj_t * img1 = lv_img_create(lv_scr_act(), NULL);
