@@ -73,6 +73,9 @@ void TC0_Handler(void) {
 }
 ```
 
+!!! warning "Não utilizar o TC0"
+    O TC0 está sendo utilizado para gerar os valores, então não utilize-o
+
 ### Oximometria
 
 !!! tip
