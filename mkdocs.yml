@@ -56,6 +56,7 @@ nav:
     - 'Lab 7 - RTOS LCD':
         - 'Lab-7-RTOS-LCD-lvgl.md'
         - 'Lab-7-RTOS-LCD-lvgl-lab.md'
+    - 'Lab 8 - ECG': 'Lab-9-ECG.md'
 #    - 'Lab-9-ADC-FIR.md'
 #    - 'Lab-8-RTOS-UART.md'
 #    - 'Lab-10-RTOS-WIFI.md'
