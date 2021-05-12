@@ -184,6 +184,9 @@ A ideia aqui é que a `task_process` irá pegar os dados do ECG, processar e ext
     - [ ] Faça a leitura da fila `xQueueEcgInfo`
     - [ ] Altere o printf da `task_process` para `task_main` para validar a transmissão dos dados.
 
+!!! warning
+    Cuidado para não usar funções que terminam com **FromISR** quando estiver interagindo com o RTOS de dentro de tarefas. 
+
 !!! progress
     Click para continuar....
 
@@ -287,7 +290,7 @@ A implementação que iremos fazer aqui envolve aplicar um threshold no valor e 
     !!! details ""
         A conta a ser feita é
 
-        1. Econtra **dT = 75s**
+        1. Econtra **dT = 0.75s**
         1. Do dT calcula a frequência em Hz -> 1/dT: **1.33**
         1. Hz = 1/s, multiplica por 60 para encontrar a frequência em minuto: **1.33*60 = 80 bpm**
 
