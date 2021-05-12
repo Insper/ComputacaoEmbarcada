@@ -32,7 +32,7 @@ Neste laboratório iremos aquisitar e processar o sinal de ECG que vocês terão
 Vamos conectar o pino PB13 que gera o sinal o sinal analógico do batimento cardíaco ao pino PC31 do EXT1 que possui o AFEC1 conforme imagem e diagrama a baixo:
 
 === "Imagem"
-    - TODO INSERIR IMAGEM
+    ![](imgs/EC/ajmp_pb13.jpeg){width=400}
 
 === "Manual"
     ![](imgs/ECG/afec1.png){width=500}
