@@ -1,41 +1,108 @@
-# RTOS - ADC - FIR
+# Lab 8 - FIR
 
 ![](https://www.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/53983/versions/5/previews/html/ExampleECGBitalino_02.png)
 
 >Fonte: https://www.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/53983/versions/5/previews/html/ExampleECGBitalino.html
 
-Nesse lab iremos modificar o exemplo RTOS-ADC, que faz a leitura do potenciômetro via o periférico AFEC e exibe o valor lido no LCD. Iremos projetar um filtro digital do tipo FIR, e filtrar o dado lido do ADC com um passa baixas, exibindo no LCD em um gráfico temporal o valor original e o filtrado.
+Neste laboratório iremos processar o sinal de ECG que vocês precisam processar na APS2. Vocês podem e devem usar o código do laboratório na APS.
 
-!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf0KJtg1ejGUibIWZ-I2516jZLMRtGXeJgvkNddTh8DwyilUg/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+!!! note "Preencher ao finalizar o lab" 
+    - TODO: MARCO 
 
 ## Lab    
 
-| Exemplo base                                  | LAB                   |
-|-----------------------------------------------|-----------------------|
-| `SAME70-Examples/RTOS/RTOS-ADC` :arrow_right: | `Labs/9-RTOS-ADC-FIR` |
+| Exemplo base                                          | LAB                   |
+|-------------------------------------------------------|-----------------------|
+| `SAME70-Examples/ TODO: CODIGO EXEMPLO` :arrow_right: | `Labs-8-RTOS-ADC-FIR` |
 
 !!! warning "Código exemplo"
-    - Vamos modificar o código exemplo `RTOS/RTOS-ADC`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/9-RTOS-ADC-FIR`
+    - Vamos modificar o código exemplo `TODO: CODIGO EXEMPLO`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/9-RTOS-ADC-FIR`
 
 !!! note "Terminal"
     Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:  :arrow_right: View :arrow_right: Terminal Window
     
-
-    Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de `115200`.
-
+    Configure o terminal para a porta que (COM) correta (verificar no windows) e configure para operar com um BaudRate de `115200`.
 
 !!! info
-    Conecte o potenciômetro:
+    Iremos utilizar os seguintes periféricos diretamente:
     
-        - pino central no `PC31`
-        - Demais no `gnd` e `vcc`
+    - AFEC1 (EXT1 PC31)
+    - TC1 canal 1
     
-    Como explicado em: https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/AFEC-Pin
+    Indiretamente (o projeto já usa):
     
-    ![](https://raw.githubusercontent.com/Insper/SAME70-examples/d4eaed603a5aeb402412adbb15c1eeb9c93a26d3/Perifericos-uC/AFEC-Pin/doc/Diagrama_AFEC-Pin.svg){width=300}
+    - DAC0 (PB13)
+    - TC0 canal 0
     
-### FIR
+### Conectando
+
+Vamos conectar o pino PB13 que gera o sinal o sinal analógico do batimento cardíaco ao pino PC31 do EXT1 que possui o AFEC1 conforme imagem e diagrama a baixo:
+
+=== "Imagem"
+    - TODO INSERIR IMAGEM
+
+=== "Diagrama"
+    ```
+    ┌───────────────────┐
+    │           ┌─────┐ │
+    │           │afec │◄├────┐
+    │           └─────┘ │    │
+    │                   │    │ ecg 
+    │  ┌─────┐  ┌─────┐ │    │
+    │  │ tc0 ├─►│dac  ├─x────┘
+    │  └─────┘  └─────┘ │ PB13
+    └───────────────────┘
+    ```
+
+!!! progress
+    Click para continuar....
+
+### ECG
+
+O sinal ECG gerado no pino PB13 possui a forma de onda a seguir:
+
+![](imgs/FIR/ecg1.png){width=300}
+
+E se analisarmos o espectro do sinal via transformada de fourier, obtemos a seguinte composição espectral:
+
+![](imgs/FIR/ecg-fft.png){width=300}
+
+!!! question short
+    O que você consegue extrair de informações dos gráficos anteriores?
+    
+    !!! details ""
+        No primeiro (ecg no tempo) podemos ver claramente que existe uma
+        alta frequência no sinal, mas que o envelope é a informação do ecg.
+        
+        Já no fourier somos capazes se distinguir que existem duas regiões 
+        com bastante informações, uma de baixa frquência (0..25)Hz e outra
+        de 60Hz.
+        
+        ![](imgs/FIR/ecg-fft2.png){width=300}
+
+!!! progress
+    Click para continuar....
+
+#### 60 Hz
+
+Notamos claramente que existe um sinal centrada em 60Hz, isso é muito comum quando trabalhamos com eletrônica e reflete o 60Hz da rede elétrica que é propagada de diversas formas para o transdutor responsável em amostrar o dado do pulso elétrico do corpo humano, causando um ruído no sinal não desejável. 
+
+Para trarmos o dado corretamente teremos que filtar o ruído. ==Lembre que em alguns paises a frequência da rede elétrica é de 50Hz e não de 60Hz como no Brasil.==
+
+!!! info
+    O som desse ruído em 60hz é chamado de [Zumbido elétrico](https://pt.wikipedia.org/wiki/Zumbido_el%C3%A9trico) soa como:
+
+    <audio controls>
+    <source src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Mains_hum_60_Hz.ogg" type="audio/ogg">
+    </audio>
+    
+    > ref: wiki
+
+
+!!! progress
+    Click para continuar....
+
+## Filtros digitais
 
 Filtragem de sinal pertence a uma grande área do conhecimento que é processamento de sinais, nesse laboratório iremos tratar do tema de forma superficial. Mas exemplos de aplicação de filtragem digital são:
 
@@ -46,7 +113,9 @@ Filtragem de sinal pertence a uma grande área do conhecimento que é processame
 
 !!! tip
     Para saber mais leia: [The Scientist and Engineer's Guide to Digital Signal Processing](http://www.dspguide.com/)
-    
+
+### FIR
+
 O [`Finite Impulse Response` (FIR)](https://en.wikipedia.org/wiki/Finite_impulse_response) é uma técnica de processamento digital de sinais (DSP) que é capaz de realizar filtragens em um sinal. Com o FIR somos capazes de aplicar um filtro do tipo: 
 
 - passa baixas: Elimina as altas frequências
@@ -92,22 +161,17 @@ O projeto do filtro envolve vários parâmetros e diversas escolhas, vamos verif
 - $f_c$: Frequência de corte, quando a componente espectral já possui um ganho baixo e não influencia 'tanto' no sinal. Na $f_c$ o ganho do sinal é geralmente -3dB, o que significa em volts, que o sinal possui $sqrt(1/2)=0.707$ do seu valor inicial.
 
 !!! note
-    A filtragem não só altera o valor absoluto de um dado, como também afeta sua frequência! Dependendo do sinal, isso pode afetar o resultado.
+    A filtragem não só altera o valor absoluto de um sinal, como também afeta sua frequência! Dependendo do que estiver analisando isso pode afetar o resultado final.
     
-Para o projeto do filtro vamos utilizar uma ferramenta em python [`pyfda`](https://github.com/chipmuenk/pyFDA/) que vai nos ajudar encontrar os coeficientes `b` e `N`. 
+!!! progress
+    Click para continuar....
+    
+#### pyfda
 
-1. Download do programa
-1. Instalar `requirements` 
-1. Projetar FIR
-1. Extrair B e N
-
-!!! tip
-    Travou com o python? Pode seguir em frente e depois tenta voltar...
-
-Faça o download do repositório, instale dependências e execute o programa:
+Para o projeto do filtro vamos utilizar uma ferramenta em python [`pyfda`](https://github.com/chipmuenk/pyFDA/) que vai nos ajudar encontrar os coeficientes `b` e `N` do filtro. Para isso siga os passos de instalação a seguir:
 
 ```bash
-git clone  https://github.com/chipmuenk/pyFDA/
+git clone https://github.com/chipmuenk/pyFDA/
 cd pyFDA
 pip3 install -r requirements.txt --user
 python3 -m pyfda.pyfdax
@@ -115,14 +179,11 @@ python3 -m pyfda.pyfdax
 
 Configure o filtro para:
 
-![](imgs/FIR/config.png)
+![](imgs/FIR/config.png){width=300}
 
-!!! warning 
-    :arrow_right: **DESIGN FILTER**
+E agora clique em :arrow_right: **DESIGN FILTER**. Vá na aba **b,a** e ==salve os valores de b em um txt, vamos usar mais tarde !==
 
-Vá na aba **b,a** e salve os parâmetro para uso mais tarde:
-
-![](imgs/FIR/taps.png)
+![](imgs/FIR/taps.png){width=200}
 
 ### firmware
 
