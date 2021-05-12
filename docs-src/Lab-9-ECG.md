@@ -107,7 +107,7 @@ Vamos criar uma tarefa no RTOS que será responsável por processar os dados do 
 
 ## Leitura analógica
 
-Para começarmos precisamos ler o valor do ECG que está sendo gerado no pino PB13, para isso iremos configurar a leitura analógica no AFEC1 canal 6. A leitura anlógica deve ser executada a 256 Hz, para garantirmos que estaremos lendo a uma taxa de amostragem fixa, vamos configurar um TC para fazer a conversão do sinal. O valor convertido deve ser colocado em uma fila para processamento futuro, como indicado a seguir:
+Para começarmos precisamos ler o valor do ECG que está sendo gerado no pino PB13, para isso iremos configurar a leitura analógica no AFEC1 canal 6. A leitura anlógica deve ser executada a 250 Hz, para garantirmos que estaremos lendo a uma taxa de amostragem fixa, vamos configurar um TC para fazer a conversão do sinal. O valor convertido deve ser colocado em uma fila para processamento futuro, como indicado a seguir:
 
 ![](imgs/ECG/afec-tc3.png){width=600}
 
@@ -119,7 +119,7 @@ Para começarmos precisamos ler o valor do ECG que está sendo gerado no pino PB
     Além disso, o uso de uma task para gerar a taxa de amostragem limita a taxa que podemos usar, o RTOS executa no máximo a 1000Hz.
     
 !!! question choice
-    Qual handler é referente ao TC1 canal 6?
+    Qual handler é referente ao TC1 canal 0?
     
     - [ ] `TC6_Handler`
     - [ ] `TC1_Handler`
@@ -128,7 +128,7 @@ Para começarmos precisamos ler o valor do ECG que está sendo gerado no pino PB
 !!! example "Tarefa: Lendo dados"
     No começo da `task_process`:
     
-    - [ ] Criar uma fila de inteiros `xQueueECG` de tamanho 256
+    - [ ] Criar uma fila de inteiros `xQueueECG` de tamanho 250
     - [ ] Configurar TC1 canal 0 para gerar uma interrupção a cada 250Hz
     - [ ] Configurar leitura no AFEC 1 canal 6
     
@@ -191,7 +191,7 @@ A ideia aqui é que a `task_process` irá pegar os dados do ECG, processar e ext
 
 Agora que já temos o caminho do dado pronto vamos exibir no LCD usando o widget [lv_chart](https://docs.lvgl.io/latest/en/html/widgets/chart.html#overview). O site explica vários modos de fazer isso, eu irei sugerir um que fiz e funcionou bem.
 
-Primeiro teremos que criar um vetor global (`int ser1_data[256]`) que irá armazenar os pontos do gráfico, o vetor precisa ter o tamanho da quantidade de pontos que queremos exibir. Vamos começar com 256, depois vocês podem ajustar até encontrarem um valor adequado. 
+Primeiro teremos que criar um vetor global (`int ser1_data[250]`) que irá armazenar os pontos do gráfico, o vetor precisa ter o tamanho da quantidade de pontos que queremos exibir. Vamos começar com 250, depois vocês podem ajustar até encontrarem um valor adequado. 
 
 Depois precisamos criar o ponteiro para o gráfico (`lv_obj_t * chart;`) e para a série do (`ser1`) também global (assim como fazermos para os labels e botões). E então inicializar o gráfico. Aqui eu irei fazer na função `lv_screen_chart` que deve ser chamada no começo da `task_LCD`, como demonstrado a seguir:
 
@@ -201,7 +201,7 @@ Depois precisamos criar o ponteiro para o gráfico (`lv_obj_t * chart;`) e para 
     
     ```c
     // globais
-    #define CHAR_DATA_LEN 256
+    #define CHAR_DATA_LEN 250
     int ser1_data[CHAR_DATA_LEN];
     lv_obj_t * chart;
     lv_chart_series_t * ser1;
@@ -395,4 +395,10 @@ O resultado esperado é algo como:
 - Filtrar o sinal
 - Fazer o threshold ser dinâmico 
 - Deixar gráfico maios bonito
+
+## B/A
+
+- Adicionar beep com o buzzer, conforme frequência.
+- Procurar pico usando a energia do sinal do sinal no lugar do valor no tempo.
+- 
 
