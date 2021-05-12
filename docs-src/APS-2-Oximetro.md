@@ -9,6 +9,13 @@ Desenvolver um protótipo de um oxímetro, dispositivo médico para medir indire
 
 > fonte: https://pt.wikipedia.org/wiki/Ox%C3%ADmetro_de_pulso
 
+!!! info
+    Para começar crie o repositório no classroom:
+    
+    - https://classroom.github.com/g/Sp5pYx1p
+
+    Você deve utilizar como base o código disponível no repositório! 
+
 ## firmware
 
 O projeto deve ser desenvolvido usando um [ RTOS](https://www.mddionline.com/software/rtos-medical-devices-101), no desenvolvimento devem isolar as tarefas de processamento de dados das de exibicão (LCD).
@@ -36,9 +43,9 @@ static void task_aps2(void *pvParameters) {...}
 ### ECG
 
 !!! tip
-    - Para ter acesso ao batimento cardíaco leia o valor analógico do pino PB13
+    - Para ter acesso ao batimento cardíaco leia o valor analógico que sai do pino PB13
     - Range do dado: 0..4095
-    - Faça a leitura analógica a cada 500Hz
+    - Faça a leitura analógica em uma frequência de 250Hz
 
 O electrocardiograma (ECG) será um valor analógico gerado pelo próprio microcontrolador, uma tabela do pulso elétrico foi gerado usando o pacote [neurokit2](https://pypi.org/project/neurokit2/), trado e exportado para um vetor (`aps2/ecg.h`). 
 
@@ -72,6 +79,9 @@ void TC0_Handler(void) {
     dacc_write_conversion_data(DACC_BASE, ecg[ecgCnt], DACC_CHANNEL);
 }
 ```
+
+!!! warning "Não utilizar o TC0"
+    O TC0 está sendo utilizado para gerar os valores, então não utilize-o
 
 ### Oximometria
 

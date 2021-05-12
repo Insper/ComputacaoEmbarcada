@@ -382,6 +382,11 @@ O resultado esperado é algo como:
     - [ ] Crie um label novo para exibir a informação
     - [ ] A cada novo dado na fila atualize o valor do label.
  
+!!! tip
+    Caso queira que o valor da frequência mude com maior periodicidade, altera o define `ECG_CHANGE_TIME` que está no arquivo `aps2/aps2.h`, este define especifica (em ms) a cada quanto tempo o valor do delay entre um pulso e outro será atualizado.
+    
+    Sugestão de valor: 1000 (1 segundo)
+
  !!! progress
     Click para continuar....
  
