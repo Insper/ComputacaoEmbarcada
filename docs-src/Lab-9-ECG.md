@@ -7,10 +7,10 @@ Neste laboratório iremos aquisitar e processar o sinal de ECG que vocês terão
 
 | Exemplo base                                          | LAB                   |
 |-------------------------------------------------------|-----------------------|
-| `SAME70-Examples/ TODO: CODIGO EXEMPLO` :arrow_right: | `Labs-8-RTOS-ADC-FIR` |
+| `SAME70-Examples/Demos/ECG` :arrow_right: | `Labs-8-RTOS-ADC-FIR` |
 
 !!! warning "Código exemplo"
-    - Vamos modificar o código exemplo `TODO: CODIGO EXEMPLO`, faça uma cópia para o seu repositório de laboratórios renomeando para `Labs/8-RTOS-ECG`.
+    - Vamos modificar o código exemplo [SAME70-examples/Demos/ECG/](https://github.com/Insper/SAME70-examples/tree/master/Demos/ECG), faça uma cópia para o seu repositório de laboratórios renomeando para `Labs/8-RTOS-ECG`.
 
 !!! info "Periféricos"
     Iremos utilizar os seguintes periféricos diretamente:
@@ -32,7 +32,7 @@ Neste laboratório iremos aquisitar e processar o sinal de ECG que vocês terão
 Vamos conectar o pino PB13 que gera o sinal o sinal analógico do batimento cardíaco ao pino PC31 do EXT1 que possui o AFEC1 conforme imagem e diagrama a baixo:
 
 === "Imagem"
-    ![](imgs/EC/ajmp_pb13.jpeg){width=400}
+    ![](imgs/ECG/jmp_pb13.jpeg){width=400}
 
 === "Manual"
     ![](imgs/ECG/afec1.png){width=500}
