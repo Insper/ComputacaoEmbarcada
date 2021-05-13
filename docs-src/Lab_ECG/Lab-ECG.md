@@ -1,4 +1,4 @@
-# Lab 8 - ECG
+# Lab - ECG
 
 Neste laboratório iremos aquisitar e processar o sinal de ECG que vocês terão que usar na APS2. 
 
@@ -23,7 +23,7 @@ Neste laboratório iremos aquisitar e processar o sinal de ECG que vocês terão
     
     - DAC0 (PB13)
     - TC0 canal 0
-    
+
 ### Conectando
 
 !!! info
@@ -32,10 +32,10 @@ Neste laboratório iremos aquisitar e processar o sinal de ECG que vocês terão
 Vamos conectar o pino PB13 que gera o sinal o sinal analógico do batimento cardíaco ao pino PC31 do EXT1 que possui o AFEC1 conforme imagem e diagrama a baixo:
 
 === "Imagem"
-    ![](imgs/ECG/jmp_pb13.jpg){width=400}
+    ![](imgs/jmp_pb13.jpg){width=400}
 
 === "Manual"
-    ![](imgs/ECG/afec1.png){width=500}
+    ![](imgs/afec1.png){width=500}
 
 === "Diagrama"
     ```
@@ -57,11 +57,11 @@ Vamos conectar o pino PB13 que gera o sinal o sinal analógico do batimento card
 
 O sinal ECG gerado no pino PB13 possui a forma de onda a seguir:
 
-![](imgs/FIR/ecg1.png){width=300}
+![](imgs/ecg1.png){width=300}
 
 E se analisarmos o espectro do sinal via transformada de fourier, obtemos a seguinte composição espectral:
 
-![](imgs/FIR/ecg-fft.png){width=300}
+![](imgs/ecg-fft.png){width=300}
 
 !!! question short
     O que você consegue extrair de informações dos gráficos anteriores?
@@ -117,14 +117,14 @@ Para começarmos precisamos ler o valor do ECG que está sendo gerado no pino PB
     A forma como fizemos no laboratório do AFEC não é boa aqui, porque lá usávamos uma tarefa do RTOS para gerar a taxa de amostragem (`vtaskDelay`) e isso não garante que tenhamos uma taxa fixa, pois não é garantido que a tarefá vá executar exatamente no delay proposto (outras taréfas de prioridade superior podem estar executando).
     
     Além disso, o uso de uma task para gerar a taxa de amostragem limita a taxa que podemos usar, o RTOS executa no máximo a 1000Hz.
-    
+
 !!! question choice
     Qual handler é referente ao TC1 canal 0?
     
     - [ ] `TC6_Handler`
     - [ ] `TC1_Handler`
     - [x] `TC3_Handler`
-    
+
 !!! example "Tarefa: Lendo dados"
     No começo da `task_process`:
     
@@ -141,14 +141,14 @@ Para começarmos precisamos ler o valor do ECG que está sendo gerado no pino PB
     Dentro do while da `task_process`:
     
     - [ ] Ler o dado da fila `xQueueECG` e imprimir no terminal.
-
+    
     ==Validar:==
     
     - [ ] Executar o programar, abrir o terminal e obter dados que variam no tempo (entre 0 e 3000).
-    
+
 !!! progress
     Click para continuar....
- 
+
 ## Retransmitindo o dado
 
 Uma boa prática é atualizar o LCD apenas em uma tarefa, o LVGL **não é thread-safe by default**, como o site indica na página página:
@@ -177,7 +177,7 @@ A ideia aqui é que a `task_process` irá pegar os dados do ECG, processar e ext
     - [ ] Crie uma fila `xQueueEcgInfo` capaz de armazenar até 32 valores do `ecgInfo`
         - ==Dica: Sugerirmos criar na função main, antes de iniciarem as tasks.==   
     - [ ] Faça o envio do dado do Ecg da `task_process` para a `task_main`, coloque qualquer valor no bpm.
-    
+
 
     `task_main`:
     
@@ -208,7 +208,7 @@ Depois precisamos criar o ponteiro para o gráfico (`lv_obj_t * chart;`) e para 
     int ser1_data[CHAR_DATA_LEN];
     lv_obj_t * chart;
     lv_chart_series_t * ser1;
-
+    
     // Desenha gráfico no LCD
     void lv_screen_chart(void) {
     chart = lv_chart_create(lv_scr_act(), NULL);
@@ -219,7 +219,7 @@ Depois precisamos criar o ponteiro para o gráfico (`lv_obj_t * chart;`) e para 
     lv_chart_set_point_count(chart, CHAR_DATA_LEN);
     lv_chart_set_div_line_count(chart, 0, 0);
     lv_chart_set_update_mode(chart, LV_CHART_UPDATE_MODE_SHIFT);
-
+    
     ser1 = lv_chart_add_series(chart, LV_COLOR_BLUE);
     lv_chart_set_ext_array(chart, ser1, ser1_data, CHAR_DATA_LEN);
     lv_obj_set_style_local_line_width(chart, LV_CHART_PART_SERIES, LV_STATE_DEFAULT, 1);
@@ -227,11 +227,11 @@ Depois precisamos criar o ponteiro para o gráfico (`lv_obj_t * chart;`) e para 
     ```
     
     Faça as modificações como indicado a seguir:
-
+    
     ```diff
     static void task_lcd(void *pvParameters) {
     + lv_screen_chart();
-
+    
     for (;;)  {
         lv_tick_inc(50);
         lv_task_handler();
@@ -249,7 +249,7 @@ Agora temos que modificar a função `task_main` para toda hora que receber um n
 
 Com isso vocês devem obter algo como:
 
-![](imgs/ECG/grafico.jpg){width=300}
+![](imgs/grafico.jpg){width=300}
 
 !!! example "Tarefa: Exibindo"
     Agora modifique o firmware para atualizar o dado da série e exibir o dado toda vez que receber um dado novo na fila `xQueueEcgInfo`. Para isso vão precisar usar as duas funções a seguir:
@@ -260,9 +260,9 @@ Com isso vocês devem obter algo como:
     lv_chart_set_next(chart, ser1, value);
     lv_chart_refresh(chart);
     ```
-
-    - Programe e teste na placa
     
+    - Programe e teste na placa
+
 !!! progress
     Click para continuar....
 
@@ -274,11 +274,11 @@ Agora vamos modificar a `task_process` para detectar a frequência cardiaca, na 
 
 A ideia principal é detectar o intervalo de tempo entre cada pico:
 
-![](imgs/ECG/frequencia.png){width=300}
+![](imgs/frequencia.png){width=300}
 
 A implementação que iremos fazer aqui envolve aplicar um threshold no valor e esperar até o próximo pico, calculando o tempo entre os dois sinais.
 
-![](imgs/ECG/frequencia2.png){width=400}
+![](imgs/frequencia2.png){width=400}
 
 !!! question choice
     No exemplo anterior qual o valor da frequência cardiaca em batimento por minuto?
@@ -289,7 +289,7 @@ A implementação que iremos fazer aqui envolve aplicar um threshold no valor e 
     
     !!! details ""
         A conta a ser feita é
-
+    
         1. Econtra **dT = 0.75s**
         1. Do dT calcula a frequência em Hz -> 1/dT: **1.33**
         1. Hz = 1/s, multiplica por 60 para encontrar a frequência em minuto: **1.33*60 = 80 bpm**
@@ -310,7 +310,7 @@ Neste caso não iremos usar a interrupção do RTT de alarme, mas sim a de tempo
     - [ ] Inicialize o RTT para operar a 1000Hz
         - não vamos usar o alarme, coloque qualquer valor.
     - [ ] A cada interrupção de tick do RTT, incremente a variável `g_dT`
-    
+
 !!! progress
     Click para continuar....
 
@@ -320,9 +320,9 @@ Iremos aplicar o threshold e procurar por valores que nos ajudem a encontra o pi
 
 !!! example "Tarefa: threshold"
     Para cada dado recebido na fila do ecg aplique o threshold e imprima o valor encontrado e seu dT, lembre de zerar o dT.
-   
-    Sugerimos aplicar **3280** como threshold.
 
+    Sugerimos aplicar **3280** como threshold.
+    
     ??? info "Exemplo"
         ```c
         if (xQueueReceive( xQueueAdc, &adc, 50 )) {
@@ -343,7 +343,7 @@ Iremos aplicar o threshold e procurar por valores que nos ajudem a encontra o pi
 
 A implementação anterior não funciona muito bem, as vezes encontramos mais de um valor no mesmo pico dentro do range estipulado:
 
-![](imgs/ECG/threshold.png){width=500}
+![](imgs/threshold.png){width=500}
 
 !!! example "Melhorando"
     Faça alguma mágica para desconsiderar mais de um ponto no mesmo pico.
@@ -384,7 +384,7 @@ O resultado esperado é algo como:
     - [ ] Envie o dado do bpm para a task_main via a fila
     - [ ] Crie um label novo para exibir a informação
     - [ ] A cada novo dado na fila atualize o valor do label.
- 
+
 !!! tip
     Caso queira que o valor da frequência mude com maior periodicidade, altera o define `ECG_CHANGE_TIME` que está no arquivo `aps2/aps2.h`, este define especifica (em ms) a cada quanto tempo o valor do delay entre um pulso e outro será atualizado.
     
@@ -392,7 +392,7 @@ O resultado esperado é algo como:
 
  !!! progress
     Click para continuar....
- 
+
 ## Próximos passos?
 
 - Filtrar o sinal
@@ -408,4 +408,5 @@ O resultado esperado é algo como:
 -----------------
 
 !!! note "Preencher ao finalizar o lab"
+
    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeV03DlPyoeKlEeVZs-zSyzajoOgX9892Fy-l7-anb6-KDTUA/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>

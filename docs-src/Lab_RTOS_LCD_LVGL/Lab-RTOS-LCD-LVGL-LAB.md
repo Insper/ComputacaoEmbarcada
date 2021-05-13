@@ -28,7 +28,7 @@ Muitas vezes o protótipo da interface esbarra em problemas técnicos e de imple
     Vamos usar muito a documentação do lvgl é importante que você tenha o site aberto e a consulte sempre:
     
     - https://docs.lvgl.io/latest/en/html/overview/index.html
-    
+
 O LVGL possui vasta documentação e muitos bons exemplos (testamos vários e todos funcionaram no embarcado), neste laboratório iremos usar alguns widgets do LVGL e aos poucos vamos customizando eles.
 
 ### Preparando firmware
@@ -43,10 +43,11 @@ Vamos criar uma nova função chamada de `void lv_termostato(void){ }` onde irem
     +void lv_termostato(void) {
     +
     +}
-    
-    
-    static void task_lcd(void *pvParameters) {
 
+
+​    
+    static void task_lcd(void *pvParameters) {
+    
     -  lv_ex_btn_1();
     +  lv_termostato();
     
@@ -68,7 +69,7 @@ Notem que a interface a ser recriada possui fundo preto, isso é ajustado no LVG
         lv_obj_set_style_local_bg_color(lv_scr_act(), LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
     }
     ```
-    
+
 #### Tamanho fonte
 
 Para recriar a interface iremos usar um tamanho de fonte um pouco maior que o padrão (14) do LVGL, para isso teremos que modificar o arquivo de configuração: `src/config/lv_conf.h`
@@ -91,7 +92,7 @@ O LVGL não inclui todas as fontes por padrão, a lista das fontes que irão ser
 #define LV_FONT_MONTSERRAT_10    0
 #define LV_FONT_MONTSERRAT_12    0
 #define LV_FONT_MONTSERRAT_14    1
-```   
+```
 
 !!! example "Tarefa"
     Modifique o arquivo `lv_conf.h` para:
@@ -119,14 +120,14 @@ A primeira etapa após ter a interface definida é identificar quais widgets pod
 !!! question short
     Identifique quais widgets você usaria para reconstruir a imagem a seguir:
     
-    ![](imgs/lvgl/lab.svg){width=400}
-
+    ![](imgs/lab.svg){width=400}
+    
     !!! details ""
         O correto é:
         
         - (a): lv_label
         - (b): lv_button
-        
+
 !!! progress
     Click para continuar....
     
@@ -177,7 +178,7 @@ Conforme a [documentação do lvgl para objetos](https://docs.lvgl.io/latest/en/
 
 Agora vamos criar os botões da interface proposta, primeiro iremos criar o botão de **power**, para isso iremos alinhar-lho no canto inferior esquerdo, conforme figura a seguir:
 
-![](imgs/lvgl/lab-botoes.svg){width=500}
+![](imgs/lab-botoes.svg){width=500}
 
 A implementação será realizada dento da função `lv_termostato` conforme indicado a seguir:
 
@@ -240,24 +241,24 @@ static  lv_obj_t * labelPower;
     1. Teste na placa
     
     Resultado esperado:
-
-    ![](imgs/lvgl/btn_power.jpeg){width=300}
+    
+    ![](imgs/btn_power.jpeg){width=300}
     
     ??? tip "Código completo do lv_termostato()"
         ```c
         void lv_termostato(void) {
             lv_obj_set_style_local_bg_color(lv_scr_act(), LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
-
+    
             // POWER
             lv_obj_t * btnPower = lv_btn_create(lv_scr_act(), NULL);
             lv_obj_set_event_cb(btnPower, event_handler);
             lv_obj_set_width(btnPower, 60);  lv_obj_set_height(btnPower, 60);
             lv_obj_align(btnPower, NULL, LV_ALIGN_IN_BOTTOM_LEFT, 10, -15);
-
+    
             lv_obj_set_style_local_bg_color(btnPower, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK );
             lv_obj_set_style_local_border_color(btnPower, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK );
             lv_obj_set_style_local_border_width(btnPower, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 0);
-
+    
             labelPower = lv_label_create(btnPower, NULL);
             lv_label_set_recolor(labelPower, true);
             lv_label_set_text(labelPower, "#ffffff [  " LV_SYMBOL_POWER "  |#");
@@ -277,7 +278,7 @@ static  lv_obj_t * labelPower;
     - `Clock` (`btnClk`/ `clk_handler`): Relógio 
     - `^` (`btnUp`/ `up_handler`): Aumentar (temperatura/ alarme): 
     - `v` (`btnDown`/ `down_handler`): Baixar (temperatura/ alarme)
-  
+      
     ==Lembre de testar na placa! Vai precisar de ajustes.==
     
     !!! tip 
@@ -299,7 +300,7 @@ static  lv_obj_t * labelPower;
     
     ==(o seu pode ficar diferente, mas lembre que a ideia é recriar o display e não criar um novo!)==
     
-    ![](imgs/lvgl/btn_all.jpeg){width=300}
+    ![](imgs/btn_all.jpeg){width=300}
 
 !!! progress
     Click para continuar....
@@ -365,11 +366,11 @@ Agora é necessário adicionar o arquivo ao MS:
 1. Encontre o arquivo dseg120.c que foi baixado e clique em Add
 1. Verifique se o arquivo dseg120.c foi adicionado
 
-![](imgs/lvgl/add_file.png){width=400}
+![](imgs/add_file.png){width=400}
 
-![](imgs/lvgl/add_file_2.PNG){width=400}
+![](imgs/add_file_2.PNG){width=400}
 
-![](imgs/lvgl/add_file_3.PNG){width=300}
+![](imgs/add_file_3.PNG){width=300}
     
 !!! info
     O exemplo foi feito para a fonte de tamanho 120, mas depois resolvemos trocar por uma menor, note que onde na imagem tem dseg120 você deve colocar a dseg70.
@@ -377,6 +378,7 @@ Agora é necessário adicionar o arquivo ao MS:
 !!! progress
     Click para continuar....
     
+
 #### 3. Criando label e usando fonte
 
 Agora podemos utilizar a nova fonte no nosso projeto, ainda dentro da `lv_termostato` vamos criar um novo label que irá exibir o valor da temperatura atual. Fazemos isso similar ao botão, porém agora iremos associar o label a tela e não ao botão e também iremos customizar a fonte para usarmos o `dseg70`.
@@ -426,7 +428,7 @@ Antes de continuar temos que editar o começo arquivo da fonte `dseg70`, incluin
 
     Resultado esperado:
     
-    ![](imgs/lvgl/label-floor.jpeg){width=300}
+    ![](imgs/label-floor.jpeg){width=300}
 
 !!! progress
     Click para continuar....
@@ -440,10 +442,10 @@ Agora vocês precisam criar os outros dois labels: Relógio e Temperatura config
     1. Crie o label para o relógio: `labelClock`
     
     ==Para cada label você terá que converter uma nova fonte de tamanho diferente, consulte os passos anteriores.==
-
+    
     Resultado esperado:
     
-    ![](imgs/lvgl/labels-all.jpeg){width=300}
+    ![](imgs/labels-all.jpeg){width=300}
 
 !!! progress
     Click para continuar....
@@ -487,7 +489,7 @@ static void up_handler(lv_obj_t * obj, lv_event_t event) {
         A fonte utilizada tem um problema, o caracter vázio (espaço: ` `) não apaga 100% o último valor, por exemplo: Quando o digito muda de 2 para 1 acontece de ficar uma barra em baixo.
         
         Depois vemos como resolver isso! Eu ainda não sei =/
-        
+
 !!! progress
     Click para continuar....
 
@@ -498,7 +500,7 @@ Agora implemente a ação do botão down.
 !!! example "Tarefa"
     1. Implemente o `down_handler`
     1. Teste na placa
- 
+
 ### relógio 
 
 Temos um relógio na interface, vamos fazer ele funcionar? Para isso terão que incluir o RTC no projeto e fazer uso dele.
@@ -517,7 +519,7 @@ Temos um relógio na interface, vamos fazer ele funcionar? Para isso terão que 
 
 !!! progress
     ==Até aqui é C!==
- 
+
 ## Extras
 
 Temos muito o que fazer na interface, vou sugerir algumas coisas que irão dar nota a mais para vocês neste lab, ==cada item é meio conceito a mais.==
@@ -529,7 +531,7 @@ Temos muito o que fazer na interface, vou sugerir algumas coisas que irão dar n
 - [ ] Gerar um logo para o relógio e usar no lugar do de `settings`
 - [ ] Implementar o botão de `Power` que desliga a tela
 - [ ] Colocar um potenciômetro que altera o valor da temperatura atual.
- 
+
 !!! note "Preencher ao finalizar o lab"
    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf52OFKZi-QRgQ7CRX97pEWQlZhsgcvPO--jlU7vI6BagmL5g/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> 
 

@@ -6,8 +6,8 @@ Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RT
     ==Atualizem o repositório SAME70-Examples antes de continuar==
 
 | LAB                  |
-|----------------------|
-| `Lab7-RTOS-LCD-lvgl` |
+| -------------------- |
+| `Lab7-RTOS-LCD-LVGL` |
 
 Neste laboratório iremos:
 
@@ -39,7 +39,7 @@ Antes de começarmos será necessário realizarmos a conexão do LCD no kit e en
     Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de 115200.
 
 
-    
+​    
 ## LCD
 
 O LCD que iremos usar nas próximas atividades da disciplina é fabricado pela adafruit com o nome de: [`2.8" TFT LCD with Touchscreen Breakout Board w/MicroSD Socket - ILI9341`](https://www.adafruit.com/product/1770) ele possui um LCD de `240x320` pixels operando em RGB e com uma sensor touch resistivo. O LCD é controlado por um controlador chamado de [**ILI9341**](https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf) ele é responsável por atualizar e exibir as informações na tela. 
@@ -78,8 +78,8 @@ O LCD utiliza o circuito integrado [ILI9341](https://cdn-shop.adafruit.com/datas
 
 O LCD possui um "película" de [touchscreen resistivo](https://en.wikipedia.org/wiki/Resistive_touchscreen) que possibilita detectarmos toques na tela.
 
-![](imgs/lvgl/resistive.png){width=300} 
-![](imgs/lvgl/resistive2.png){width=300}
+![](imgs/resistive.png){width=300} 
+![](imgs/resistive2.png){width=300}
 
 A película fornece dois valores de resistência: X e Y e via duas leituras analógicas conseguimos estimar onde aconteceu o toque na tela, e inclusive a pressão do toque.
 
@@ -124,7 +124,7 @@ Iremos trabalhar com o código base: [RTOS-TFT-LCD-ILI9341-LVGL](https://github.
 - lvgl
 
 !!! warning "Entrega"
-    Você deve copiar o código RTOS-TFT-LCD-ILI9341-LVGL para o repositório de entregas de laboratório e renomear para **Lab7-RTOS-LCD-lvgl**. Vamos trabalhar nesta pasta.
+    Você deve copiar o código RTOS-TFT-LCD-ILI9341-LVGL para o repositório de entregas de laboratório e renomear para **Lab7-RTOS-LCD-LVGL**. Vamos trabalhar nesta pasta.
     
 Antes de começarmos vamos entender um pouco o código de exemplo e como o lvgl trabalha.
 
@@ -145,28 +145,29 @@ O [site do LVGL](https://docs.lvgl.io/latest/en/html/porting/index.html) descrev
     void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p) {
         ili9341_set_top_left_limit(area->x1, area->y1);   ili9341_set_bottom_right_limit(area->x2, area->y2);
         ili9341_copy_pixels_to_screen(color_p,  (area->x2 - area->x1) * (area->y2 - area->y1));
-
+    
         /* IMPORTANT!!!
         * Inform the graphics library that you are ready with the flushing*/
         lv_disp_flush_ready(disp_drv);
     }
     ```
-    
-    
-=== "my_input_read"
-    Esta função retorna no `*data` se um toque foi encontrado e o valor X Y lido.
-    
-    ```c
-    bool my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data) {
-        int px, py, pressed;
 
+
+​    
+=== "my_input_read"
+​    Esta função retorna no `*data` se um toque foi encontrado e o valor X Y lido.
+​    
+​    ```c
+​    bool my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data) {
+​        int px, py, pressed;
+​    
         if (readPoint(&px, &py)) {
             data->state = LV_INDEV_STATE_PR;
         }
         else {
             data->state = LV_INDEV_STATE_REL;
         }
-
+    
         data->point.x = px;
         data->point.y = py;
         return false; /*No buffering now so no more data read*/
@@ -220,7 +221,7 @@ Agora com tudo configurado devemos realizar as seguintes inicializações antes 
     ili9341_init();
     configure_touch();
     ili9341_backlight_on();
-
+    
     /*LittlevGL init*/
     lv_init();
     lv_disp_drv_t disp_drv;                 /*A variable to hold the drivers. Can be local variable*/
@@ -230,7 +231,7 @@ Agora com tudo configurado devemos realizar as seguintes inicializações antes 
     disp_drv.flush_cb = my_flush_cb;        /*Set a flush callback to draw to the display*/
     lv_disp_t * disp;
     disp = lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
-
+    
     /* Init input on LVGL */
     lv_indev_drv_t indev_drv;
     lv_indev_drv_init(&indev_drv);      /*Basic initialization*/
@@ -265,12 +266,12 @@ Note que na `task_lcd` chamamos a função `lv_ex_btn_1()` está função cria o
 
 Podemos listar alguns aqui como exemplo:
 
-| Widget               | Example                                 |
-| ------               | -------                                 |
-| Button (`lv_btn`)    | ![](imgs/lvgl/lv_button.png){width=100} |
-| LED (`lv_led`)       | ![](imgs/lvgl/lv_leds.png){width=100}   |
-| Roller (`lv_roller`) | ![](imgs/lvgl/lv_roller.png){width=100} |
-| Bar (`lv_bar`)       | ![](imgs/lvgl/lv_bar.png){width=100}    |
+| Widget               | Example                            |
+| -------------------- | ---------------------------------- |
+| Button (`lv_btn`)    | ![](imgs/lv_button.png){width=100} |
+| LED (`lv_led`)       | ![](imgs/lv_leds.png){width=100}   |
+| Roller (`lv_roller`) | ![](imgs/lv_roller.png){width=100} |
+| Bar (`lv_bar`)       | ![](imgs/lv_bar.png){width=100}    |
 
 O exemplo fornecido cria dois tipos de botões diferentes um do push button e outro do tipo toggle, notem que tudo é realizado pela API do lvgl. Podemos associar um handler (`event_handler`) ao botão, este handler sera chamado (pela `lv_task_handler`) sempre que acontecer um evento neste widget (botão aprtado, botão liberado, ...).
 
@@ -282,22 +283,22 @@ O exemplo fornecido cria dois tipos de botões diferentes um do push button e ou
         lv_obj_t * btn1 = lv_btn_create(lv_scr_act(), NULL);
         lv_obj_set_event_cb(btn1, event_handler);
         lv_obj_align(btn1, NULL, LV_ALIGN_CENTER, 0, -40);
-
+    
         label = lv_label_create(btn1, NULL);
         lv_label_set_text(label, "Button");
-
+    
         lv_obj_t * btn2 = lv_btn_create(lv_scr_act(), NULL);
         lv_obj_set_event_cb(btn2, event_handler);
         lv_obj_align(btn2, NULL, LV_ALIGN_CENTER, 0, 40);
         lv_btn_set_checkable(btn2, true);
         lv_btn_toggle(btn2);
         lv_btn_set_fit2(btn2, LV_FIT_NONE, LV_FIT_TIGHT);
-
+    
         label = lv_label_create(btn2, NULL);
         lv_label_set_text(label, "Toggled");
     }
     ```
-    
+
 === "event_handler(...)"
     ```c
     static void event_handler(lv_obj_t * obj, lv_event_t event) {
@@ -309,4 +310,5 @@ O exemplo fornecido cria dois tipos de botões diferentes um do push button e ou
         }
     }
     
+
     ```

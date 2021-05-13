@@ -53,10 +53,10 @@ nav:
        - 'Lab': 'Lab-5-RTOS.md'
        - 'Dicas': 'Lab-5-RTOS-dicas.md'
     - 'Lab 6 - RTOS - ADC': 'Lab-6-RTOS-ADC.md'
-    - 'Lab 7 - RTOS LCD':
-        - 'Lab-7-RTOS-LCD-lvgl.md'
-        - 'Lab-7-RTOS-LCD-lvgl-lab.md'
-    - 'Lab 8 - ECG': 'Lab-9-ECG.md'
+    - 'Lab 7 - RTOS - LCD - LVGL':
+        - 'Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
+        - 'Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'
+    - 'Lab 8 - ECG': 'Lab_ECG/Lab-ECG.md'
 #    - 'Lab-9-ADC-FIR.md'
 #    - 'Lab-8-RTOS-UART.md'
 #    - 'Lab-10-RTOS-WIFI.md'
