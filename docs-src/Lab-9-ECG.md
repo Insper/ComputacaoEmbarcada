@@ -5,8 +5,8 @@ Neste laboratório iremos aquisitar e processar o sinal de ECG que vocês terão
 
 ## Lab    
 
-| Exemplo base                                          | LAB                   |
-|-------------------------------------------------------|-----------------------|
+| Exemplo base                              | LAB                   |
+|-------------------------------------------|-----------------------|
 | `SAME70-Examples/Demos/ECG` :arrow_right: | `Labs-8-RTOS-ADC-FIR` |
 
 !!! warning "Código exemplo"
@@ -387,7 +387,7 @@ O resultado esperado é algo como:
     
     Sugestão de valor: 1000 (1 segundo)
 
- !!! progress
+!!! progress
     Click para continuar....
  
 ## Próximos passos?
