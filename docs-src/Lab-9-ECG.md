@@ -184,6 +184,9 @@ A ideia aqui é que a `task_process` irá pegar os dados do ECG, processar e ext
     - [ ] Faça a leitura da fila `xQueueEcgInfo`
     - [ ] Altere o printf da `task_process` para `task_main` para validar a transmissão dos dados.
 
+!!! warning
+    Cuidado para não usar funções que terminam com **FromISR** quando estiver interagindo com o RTOS de dentro de tarefas. 
+
 !!! progress
     Click para continuar....
 
@@ -287,7 +290,7 @@ A implementação que iremos fazer aqui envolve aplicar um threshold no valor e 
     !!! details ""
         A conta a ser feita é
 
-        1. Econtra **dT = 75s**
+        1. Econtra **dT = 0.75s**
         1. Do dT calcula a frequência em Hz -> 1/dT: **1.33**
         1. Hz = 1/s, multiplica por 60 para encontrar a frequência em minuto: **1.33*60 = 80 bpm**
 
@@ -394,7 +397,7 @@ O resultado esperado é algo como:
 
 - Filtrar o sinal
 - Fazer o threshold ser dinâmico 
-- Deixar gráfico maios bonito
+- Deixar gráfico mais bonito
 
 ## B/A
 
@@ -402,3 +405,7 @@ O resultado esperado é algo como:
 - Procurar pico usando a energia do sinal do sinal no lugar do valor no tempo.
 - 
 
+-----------------
+
+!!! note "Preencher ao finalizar o lab"
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeV03DlPyoeKlEeVZs-zSyzajoOgX9892Fy-l7-anb6-KDTUA/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
