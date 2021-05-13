@@ -397,7 +397,7 @@ O resultado esperado é algo como:
 
 - Filtrar o sinal
 - Fazer o threshold ser dinâmico 
-- Deixar gráfico maios bonito
+- Deixar gráfico mais bonito
 
 ## B/A
 
@@ -405,3 +405,7 @@ O resultado esperado é algo como:
 - Procurar pico usando a energia do sinal do sinal no lugar do valor no tempo.
 - 
 
+-----------------
+
+!!! note "Preencher ao finalizar o lab"
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeV03DlPyoeKlEeVZs-zSyzajoOgX9892Fy-l7-anb6-KDTUA/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
