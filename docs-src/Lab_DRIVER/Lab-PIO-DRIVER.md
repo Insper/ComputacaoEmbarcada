@@ -1,4 +1,4 @@
-# Driver - Lab 
+# LAB - PIO - DRIVER
 
 Nessa aula iremos utilizar como projeto referência o LAB-1. 
 
@@ -15,7 +15,7 @@ Nessa aula iremos utilizar como projeto referência o LAB-1.
     
     - ==Estou mudando o padrão do nome das pastas, eu tirei a subpasta `Labs` e adicionei
     o número do lab no nome da pasta.==
-    
+
 
 O objetivo desse laboratório é o do entendimento das funções utilizadas para configurar o PIO. Como um pino é configurado como saída e entrada? Como o firmware manipula o periférico PIO? Entender o que o PIO é capaz de fazer. Para isso iremos aqui implementar nossas próprias funções de interface com o PIO.
 
@@ -79,7 +79,7 @@ Agora será necessário entender como o PIO controla os pinos e o que deve ser f
 
 Lendo o texto, podemos descobrir que  para termos `1` (`set`) no pino devemos escrever no registrador `PIO_SODR`, no manual tem mais detalhes sobre tudo do PIO. Vamos analisar a documentação especifica deste registrador (`SODR`):
 
-![PIO_SODR](imgs/PIO-Driver/pio-sodr.png)
+![PIO_SODR](imgs/pio-sodr.png)
 
 Repare que esse registrador é do tipo **write-only** ou seja ele não pode ser lido, somente escrito. Cada bit desse registrador representa um pino, se pegarmos por exemplo o bit 30 desse registrador (pensando no PIOA) estaríamos nos referindo ao `PA30`, qualquer alteração **ESCRITA** nesse bit influenciará **SOMENTE** esse pino. 
 
@@ -143,13 +143,13 @@ O que isso significa? Significa que estamos acessando o periférico passado como
     
     O diagrama a seguir ilustra o que acontece quando fazemos: `p_pio->PIO_SODR = ul_mask;`
     
-    ![](imgs/PIO-Driver/diagrama.png){width=500}
-    
+    ![](imgs/diagrama.png){width=500}
+
 !!! example "Modifique e teste"
     A função está pronta, agora precisamos testar. Com a modificação no código faça a gravação do uC e ele deve voltar a piscar o LED quando você aperta o botão. Agora a função implementada possui a mesma funcionalidade daquela fornecida pelo fabricante.
     
     - Embarque o código e o mesmo deve funcionar normalmente caso a função implementada esteja correta.
-    
+
 <button class="button0" id="2:pio_set" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
 
 ### _pio_clear(...)
@@ -312,9 +312,8 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
 
 1. Configurar o PIO para controlar o pino
      - secção 32.5.2
-     
 > When a pin is multiplexed with one or two peripheral functions, the selection is controlled with the Enable Register (PIO_PER) and the Disable Register (PIO_PDR). The Status Register (PIO_PSR) is the result of the set and clear registers and indicates whether the pin is controlled by the corresponding peripheral or by the PIO Controller.
- 
+
 2. Configurar o pino em modo saída
      - secção `32.5.4`
      
@@ -326,7 +325,6 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
      
 5. Ativar ou não o pull-up :
      - utilize a função `_pio_pull_up()` recém declarada.
-     
 > Uma vez implementada a função, utilize ela no seu código substituindo a função `pio_set_output()` por essa função `_pio_set_output()`. Teste se o LED continua funcionando, se continuar quer dizer que sua função foi executada com sucesso.
 
 !!! tip

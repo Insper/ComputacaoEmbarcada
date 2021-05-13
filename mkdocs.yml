@@ -38,21 +38,21 @@ nav:
 
 - Labs:
     - 'Lab 1 - PIO ':
-      - 'Teoria': 'Lab-1-IOs-Teoria.md'
-      - 'Lab': 'Lab-1-IOs-Lab.md'
+      - 'Teoria': 'Lab_PIO/Lab-PIO-Teoria.md'
+      - 'Lab': 'Lab_PIO/Lab-PIO.md'
  #     - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
-    - 'Lab 2 - Driver':
-      - 'Teoria': 'Lab-2-PIO-Driver-Teoria.md'
-      - 'Lab': 'Lab-2-PIO-Driver-Lab.md'
-    - 'Lab 3 - PIO IRQ':
-      - 'Teoria': 'Lab-3-PIO-IRQ-Teoria.md'
-      - 'Lab' : 'Lab-3-PIO-IRQ-Lab.md'
+    - 'Lab 2 - PIO - Driver':
+      - 'Teoria': 'Lab_DRIVER/Lab-PIO-DRIVER-Teoria.md'
+      - 'Lab': 'Lab_DRIVER/Lab-PIO-DRIVER.md'
+    - 'Lab 3 - PIO - IRQ':
+      - 'Teoria': 'Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria.md'
+      - 'Lab' : 'Lab_PIO_IRQ/Lab-PIO-IRQ.md'
  #     - 'Lab-3-PIO-IRQ-Perguntas.md'
-    - 'Lab 4 - TC RTC RTT': 'Lab-4-TickTack-Lab.md'
+    - 'Lab 4 - TC - RTC - RTT': 'Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md'
     - 'Lab 5 - RTOS':
-       - 'Lab': 'Lab-5-RTOS.md'
-       - 'Dicas': 'Lab-5-RTOS-dicas.md'
-    - 'Lab 6 - RTOS - ADC': 'Lab-6-RTOS-ADC.md'
+       - 'Lab': 'Lab_RTOS/Lab-RTOS.md'
+       - 'Dicas': 'Lab_RTOS/Lab-RTOS-dicas.md'
+    - 'Lab 6 - RTOS - ADC': 'Lab_RTOS_ADC/Lab-RTOS-ADC.md'
     - 'Lab 7 - RTOS - LCD - LVGL':
         - 'Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
         - 'Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'

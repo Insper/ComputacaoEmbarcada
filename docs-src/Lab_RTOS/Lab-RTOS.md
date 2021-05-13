@@ -1,4 +1,4 @@
-# RTOS - freeRTOS
+# LAB - RTOS (freeRTOS)
 
 !!! tip "Embedded FM - episódio 175"
     **How Hard Could It Be?**
@@ -336,7 +336,7 @@ Uma das principais vantagens de usar um sistema operacional é o de usar ferrame
 
 Iremos implementar um semáforo para comunicação entre o callback do botão 1 do OLED e a tarefa que faz o controle do LED (da placa), o callback do botão irá liberar o semáforo para a tarefa do LED executar em um formato: produtor-consumidor.
 
-![Semáforo](imgs/RTOS/semaforo.png)
+![Semáforo](imgs/semaforo.png)
 
 
  - Consulta: [xSemaphoreGiveFromISR](https://www.freertos.org/a00124.html)
@@ -354,13 +354,13 @@ Adicione os defines e a variável global que indica o semáforo:
     ```
     2. Inclua a variável global a seguir que será o semáforo.
     (no começo do arquivo main.c)
-
+    
     ``` c
     /** Semaforo a ser usado pela task led 
         tem que ser var global! */
     SemaphoreHandle_t xSemaphore;
     ```
-    
+
 
 Agora vamos incluir a função de callback recém criada
 para liberar o semáforo `xSemaphore` que a `task_led` está aguardando:
@@ -461,7 +461,7 @@ vermelho.
 !!! note 
     Note o ISR no final da função, isso quer dizer que estamos liberando um semáforo de dentro de uma interrupção. Caso a liberação do semáforo não seja de dentro de uma interrupção, basta utilizar a função `xSemaphoreGive`
 
-    ![Semáforo](imgs/RTOS/semaforo2.png)
+    ![Semáforo](imgs/semaforo2.png)
 
 ## C - Praticando
 

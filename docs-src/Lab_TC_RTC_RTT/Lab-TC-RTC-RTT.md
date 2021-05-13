@@ -1,4 +1,4 @@
-# TC - RTC - RTT  
+# LAB - TC - RTC - RTT  
 
 Neste laboratório iremos trabalhar com os periféricos de contagem de tempo
 do nosso microcontrolador.
@@ -88,8 +88,8 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     
     ==O TC já foi adicionado no código exemplo (OLED-Xplained-Pro-SPI), não adicone o outro que vai dar problema!!!!==
     
-    ![](imgs/TC/ASF.png)
-    
+    ![](imgs/ASF.png)
+
 !!! tip
     O RTC tem uma função que você consegue buscar no periférico a hora atual: [`rtc_get_time()`](https://asf.microchip.com/docs/latest/same70/html/group__sam__drivers__rtc__group.html#ga91b1a1ac85e5bb5effefe275b824fe6a), você pode então configurar um alarme para daqui 20s. 
     
@@ -110,7 +110,7 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     Exiba a hora no formato (HH:MM:SS) no display OLED
     
 
-    
+
 !!! tip 
     Para executar isso você deverá ser capaz de saber quando que o segundo mudou, duas são as opções:
     
@@ -128,18 +128,18 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     
     ```c
     /*  Verifica por qual motivo entrou
-	*  na interrupcao, se foi por segundo
-	*  ou Alarm
-	*/
-	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {
+    *  na interrupcao, se foi por segundo
+    *  ou Alarm
+    */
+    if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {
         
         //    
         //  Entrou por segundo! 
         // 
-		rtc_clear_status(RTC, RTC_SCCR_SECCLR);
-	}
+    	rtc_clear_status(RTC, RTC_SCCR_SECCLR);
+    }
     ```
-   
+
 !!! warning
     Você nunca deve atualizar display dentro de interrupção (**handler**)! Sempre no main.
     

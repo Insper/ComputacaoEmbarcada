@@ -133,7 +133,7 @@ executar uma parte específica do código chamada de: **exception
 handler**. Depois do término da execução da exceção o programa principal
 volta a ser executado normalmente.
 
-![Fontes de exceções](imgs/PIO-IRQ/nvic_core.png)
+![Fontes de exceções](imgs/nvic_core.png)
 
 O hardware responsável por gerenciar as exceções no ARM é chamado de
 [**Nested vectored interrupt controller** (NVIC)](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s01s01.html). O NVIC pode suportar de 1 à 240 diferentes exceções, sendo elas classificadas basicamente em
@@ -195,7 +195,7 @@ ativada quando um sistema operacional está em uso, nesse caso existem
 dois tipos distintos de interrupção : IRQ e FIQ (**Fast Interruption
 Routine**).
 
-![Ilustração do fluxo de interrupção](imgs/PIO-IRQ/flow.png)
+![Ilustração do fluxo de interrupção](imgs/flow.png)
 
 ### Interrupt Requests - IRQ
 
@@ -310,7 +310,7 @@ configurada para detectar:
 Uma visão geral do hardware responsável por gerenciar as interrupções é
 demonstrado a seguir:
 
-![PIO interrupção SAME70 Datasheet](imgs/PIO-IRQ/PIO.png)
+![PIO interrupção SAME70 Datasheet](imgs/PIO.png)
 
 O texto a seguir foi extraído do datasheet do SAME70 e descreve a
 operação dessa parte do PIO:
@@ -324,56 +324,56 @@ operação dessa parte do PIO:
     enabled. The Input Change interrupt is available regardless of the
     configuration of the I/O line, i.e., configured as an input only,
     controlled by the PIO Controller or assigned to a peripheral function.
-
+    
     By default, the interrupt can be generated at any time an edge is
     detected on the input.
-
+    
     and Additional Interrupt Modes Disable Register (PIO\_AIMDR). The
     current state of this selection can be read through the Additional
     Interrupt Modes Mask Register (PIO\_AIMMR).
-
+    
     **These additional modes are:**
     -   **Rising edge detection**
     -   **Falling edge detection**
     -   Low-level detection
-
+    
     -   High-level detection
-
+    
     In order to select an additional interrupt mode:
-
+    
     -   must be selected by writing in the Edge Select Register () and Level
         Select Register () which select, respectively, the edge and level
         detection.
-
+    
     -   The current status of this selection is accessible through the
         Edge/Level Status Register (PIO\_ELSR).
-
+    
     must be selected by in the Falling Edge/Low-Level Select Register () and
     Rising Edge/High-Level Select Register () which allow to select falling
     or rising edge (if edge is selected in PIO\_ELSR) edge or high- or
     low-level detection (if level is selected in PIO\_ELSR). The current
     status of this selection is accessible through the Fall/Rise - Low/High
     Status Register (PIO\_FRLHSR).
-
+    
     , the corresponding in the Interrupt Status Register () is . If the
     corresponding bit in , the PIO Controller interrupt line is asserted.
-
+    
     . This signifies that all the interrupts that are pending when PIO\_ISR
     is read must be handled. When an Interrupt is enabled on a "level", the
     interrupt is generated as long as the interrupt source is not cleared,
     even if some read accesses in PIO\_ISR are performed.
-
-    ![Detecção de eventos *SAME70 Datasheet*](imgs/PIO-IRQ/eventDetector.png)
+    
+    ![Detecção de eventos *SAME70 Datasheet*](imgs/eventDetector.png)
 
 ## Referências
   [1] https://en.wikipedia.org/wiki/Event-driven_programming
-  
+
   [2] https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
-  
+
   [3] http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
+
   
-  
-  
+
 [^1]: https://en.wikipedia.org/wiki/Event-driven_programming
 [^2]: https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf
 [^3]: http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php

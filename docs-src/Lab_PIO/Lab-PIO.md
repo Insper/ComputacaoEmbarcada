@@ -1,4 +1,4 @@
-# LAB 1 - PIO
+# LAB - PIO
 
 Ao final desse laboratório você deve ser capaz de controlar pinos digitais do microcontrolador a fim de podermos acionar saídas (LEDs/ Buzzers/ motores) e lermos entradas (botões/ sensores/ ...).
 
@@ -29,20 +29,20 @@ Ao final desse laboratório você deve ser capaz de controlar pinos digitais do 
 Nesse lab iremos utilizar um projeto de referência [`SAME70-examples/SAME70-Clear`](https://github.com/Insper/SAME70-examples/tree/master/SAME70-Clear) que foi criado para ser o mais “limpo” possível, inclusive, faltando algumas bibliotecas (ASF) básicas para a compilação. Para executarmos esse lab, seguiremos os seguintes passos:
 
 Parte 1: 
-  
+
   1. Inserir drivers no projeto (ASF) 
       - ==Isso será feito no próprio Microchip Studio!==
   3. Configurações básicas do uC (clock e WDT)
   4. Configurar PIO para controlar pino do LED em modo saída
   5. Acionar o pino
-  
+
 Parte 2: 
-  
+
   1. Configurar o PIO para controlar o pino do botão em modo entrada
   1. Ler o botão e agir sobre o LED
 
 Copie a pasta `SAEM70-Clear` para dentro do repositório criado pelo classroom, renomear a pasta para `PIO-IO` e trabalhar nela!
-  
+
 !!! example "Tarefa: començando"
     1. Clone o repositório [`SAME70-examples`](https://github.com/Insper/SAME70-examples/) para a sua máquina.
     1. Copie a pasta `SAME70-Clear` para o seu repositório.
@@ -87,7 +87,7 @@ int main(void)
 
 O arquivo do tipo header `asf.h` é criado e atualizado dinamicamente pelo Microchip Studio e contém os frameworks/drivers inseridos no projeto. O [Advanced Software Framework (ASF)](https://www.microchip.com/en-us/development-tools-tools-and-software/libraries-code-examples-and-more/advanced-software-framework-for-sam-devices#Documentation) é uma camada de abstração do acesso ao hardware, possibilitando que configuremos partes específicas do uC em um nível de abstração intermediário.
 
-![](imgs/IOs/ASF.png)
+![](imgs/ASF.png)
 
 !!! note
     Pense no ASF como uma biblioteca de códigos, que vai nos ajudar a programar o uC. Nela podemos encontrar
@@ -122,7 +122,7 @@ As seguintes bibliotecas já estão selecionadas e incluídas no projeto:
     - drivers de compilação para o uC da placa
 - **System Clock Control (service)**
     - funções para controle do clock do uC
-    
+
 Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse projeto:
 
 !!! example "Tarefa"
@@ -144,8 +144,8 @@ Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse proj
 !!! info 
     Para adicionar ou remover bibliotecas da solução utilize a barra inferior:
     
-    ![](imgs/IOs/asf-result.png){width=500}
-
+    ![](imgs/asf-result.png){width=500}
+    
     ==Ao final clique em APPLY para salvar as alterações.==
 
 <button class="button0" id="1:asf" onClick="progressBut(this.id);">Cheguei Aqui!</button>
@@ -170,12 +170,12 @@ No nosso caso iremos começar configurando o clock do uC e desativando o `WatchD
     void init(void){
       // Initialize the board clock
       sysclk_init();
-
+    
       // Desativa WatchDog Timer
       WDT->WDT_MR = WDT_MR_WDDIS;
     }
     ```
-    
+
    <button class="button0" id="2:init" onClick="progressBut(this.id);">Cheguei Aqui!</button>
     
 
@@ -188,8 +188,8 @@ Já a linha [`WDT->WDT_MR = WDT_MR_MDDIS`](https://pt.scribd.com/document/398420
     
     O whatchdog timer deve ser ativado só nos estágios finais de desenvolvimento
     de um produto.
-
-    ![](imgs/IOs/WDT-datasheet.png) 
+    
+    ![](imgs/WDT-datasheet.png) 
 
 ##  Pino como saída (output)
 
@@ -205,7 +205,7 @@ Para configurarmos um pino como saída será necessário seguirmos os passos a s
 
 Antes de configurarmos um pino como entrada (botão) ou saída (LED) é necessário descobrimos qual pino iremos controlar, para isso devemos verificar o manual da placa ([`manuais/SAME70-XPLD.pdf`](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70-XPLD.pdf)) para saber quais pinos possuímos disponíveis para uso. No caso da nossa placa, possuímos um pino conectado a um botão e outro pino conectado ao LED (já vieram montados na placa).
 
-![](imgs/IOs/SAME70-IO.png) 
+![](imgs/SAME70-IO.png) 
 
 Todos os pinos digitais desse microcontrolador (em outros uC pode ser diferente) são conectados ao um periférico chamado de `Parallel Input/Output Controller (PIO)`, esse periférico é responsável por configurar diversas propriedades desses pino, inclusive se será entrada ou saída (configurado individualmente). Cada PIO pode controlar até 32 pinos (depois veremos o porque disso), e cada ==pino== está conectado a um único PIO. 
 
@@ -218,9 +218,9 @@ Cada PIO possui um nome referenciado por uma letra: PIO **A** ; PIO **B**; PIO *
     
     1. Qual pino do uC controla o LED
     1. Se colocarmos 1 (vcc/ ligado) no pino conectado ao LED, ele irá acender ou apagar
-
-    ![](imgs/IOs/SAME70-LED.png)
     
+    ![](imgs/SAME70-LED.png)
+
 A tabela [Table 4-16 LED Connection](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=32) descreve qual o pino e qual PIO o LED do kit foi conectado, podemos a partir dos dados do manual extrair que o LED foi conectado ao pino ==PC8== do microcontrolador, isso significa que:
 
 1. O periférico PIO C, 'bit' 8 é responsável por controlar o Liga/Desliga do LED verde da placa.
@@ -239,7 +239,7 @@ Agora será necessário transcrever essas informações para o nosso código em 
 
     ```c
     #include "asf.h"
-
+    
     #define LED_PIO           PIOC                 // periferico que controla o LED
     #define LED_PIO_ID        ???                  // ID do periférico PIOC (controla LED) 
     #define LED_PIO_IDX       8                    // ID do LED no PIO
@@ -273,11 +273,11 @@ Antes de podemos configurar um PIO para controlar um pino é necessário ativarm
 !!! info
     O Power Managament Controller (PMC) é o periférico responsável por "ligar/desligar" os demais periféricos, isso é feito via a liberação ou não do clock para os periféricos. O PMC possui também diversas outras funcionalidades, como descrito no manual do microcontrolador ([`SAME70 Datasheet`](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70.pdf)):
 
-    ![](imgs/IOs/PMC-descricao-datasheet.png)
+    ![](imgs/PMC-descricao-datasheet.png)
 
 Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datasheet`](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70.pdf)) que é utilizado em duas situações: Para indicar ao PMC e ao NVIC (veremos futuramente) qual periférico estamos nos referindo. A seguir uma parte dessa tabela extraída do datasheet.
 
-![](imgs/IOs/ID.png)
+![](imgs/ID.png)
 
 :exclamation: Note pela tabela que o **PIOC** (aquele que irá controlar o LED) possui ID 12, agora precisamos transpor isso para o nosso código! Vamos editar a linha do nosso `main.c` que possuia o **???**:
 
@@ -287,7 +287,7 @@ Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datashee
     ```c
     #define LED_PIO_ID  12  // ID do periférico PIOC (controla LED)
     ```
-    
+
 !!! tip
     No lugar de ficar abrindo o manual, podemos usar `ID_PIOC` no código:
     
@@ -297,7 +297,7 @@ Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datashee
     
     o ASF possui esses defines que facilitam muito o desenvolvimento e
     minimizam erros.
-    
+
 !!! example "Tarefa: Modifique `main.c`"
     Troque o número ==12== do define por `ID_PIOC`
     
@@ -368,14 +368,14 @@ Sendo:
     void init(void){
       // Initialize the board clock
       sysclk_init();
-
+    
       // Disativa WatchDog Timer
       WDT->WDT_MR = WDT_MR_WDDIS;
-
+    
       // Ativa o PIO na qual o LED foi conectado
       // para que possamos controlar o LED.
       pmc_enable_periph_clk(LED_PIO_ID); 
-
+    
       //Inicializa PC8 como saída
       pio_set_output(LED_PIO, LED_PIO_IDX_MASK, 0, 0, 0);
     }
@@ -410,7 +410,7 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
     {
       // inicializa sistema e IOs
       init();
-
+    
       // super loop
       // aplicacoes embarcadas não devem sair do while(1).
       while (1)
@@ -423,7 +423,7 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
       return 0;
     }
     ```
-    
+
 !!! example "Tarefa: Programe e teste"
      1. Programe o uC
      1. Verifique o resultado esperado
@@ -434,14 +434,14 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
 ??? note "Analogia ao Arduino"
 
     No arduino esse mesmo código seria escrito como:
-
+    
     ```c
     // the setup function runs once when you press reset or power the board
     void setup() {
       // initialize digital pin LED_BUILTIN as an output.
       pinMode(LED_BUILTIN, OUTPUT);
     }
-
+    
     // the loop function runs over and over again forever
     void loop() {
       digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
@@ -450,20 +450,20 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
       delay(1000);                       // wait for a second
     }
     ```
-
+    
     O Arduino esconde a função main(), que seria:
-
+    
     ```c
     void main(void){
       init();
       setup();
-
+    
       while(1){
         loop();
       }
     }
     ```
-
+    
     Note que a função `setup()` do arduino precede de uma oura função `init()` que possui funcionalidade parecidas com a nossa de inicializar o clock do sistema e desabilitar o WDT.
 
 ## Pino as input
@@ -488,7 +488,7 @@ Utilizando o manual do kit de desenvolvimento ([SAME70-XPLD.pdf](https://github.
     | Perif. SAME70-XPLD    |   PIO(A,B,C,D,...) |     INDEX       |   ID_PIO      |
     |-----------------------|--------------------|-----------------|---------------|
     | Botão SW300           |                    |                 |               |
-
+    
     DICA: Ver novamente como com o LED.
 
 <button class="button0" id="9: input manual" onClick="progressBut(this.id);">Cheguei Aqui!</button>
@@ -507,9 +507,9 @@ Agora precisamos fazer a ponte entre o mundo externo e o firmware que será exec
     #define BUT_PIO_IDX 
     #define BUT_PIO_IDX_MASK (1u << BUT_PIO_IDX)
     ```
-  
+
 <button class="button0" id="10:define but" onClick="progressBut(this.id);">Cheguei Aqui!</button>
-  
+
 ### Função `init()`
 
 Agora é necessário: 
@@ -541,7 +541,7 @@ pio_set_input(ARG0, ARG1, ARG2);
 
 !!! tip "Leia"
     Descrição da função: [`pio_set_input()`](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#ga2908ec92df470e6520c6f5c38211ca0b)
- 
+
 !!! tip "ul_attribute"
     - Dica: no `ul_attribute` utilize o seguinte define: `PIO_DEFAULT`. 
 
@@ -551,9 +551,9 @@ pio_set_input(ARG0, ARG1, ARG2);
     ```c
     pio_set_input(ARG0, ARG1, PIO_DEFAULT);
     ```
-  
+
 <button class="button0" id="11:init but input" onClick="progressBut(this.id);">Cheguei Aqui!</button>
-  
+
 #### PULL-UP
 
 Para esse pino funcionar é necessário que ativemos o `pull-up` nele. `Pull-up` é um resistor alimentando para `VCC`, ele faz com que o valor padrão do pino seja o energizado.

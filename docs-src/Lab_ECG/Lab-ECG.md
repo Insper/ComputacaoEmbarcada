@@ -1,4 +1,4 @@
-# Lab - ECG
+# LAB - ECG
 
 Neste laboratório iremos aquisitar e processar o sinal de ECG que vocês terão que usar na APS2. 
 

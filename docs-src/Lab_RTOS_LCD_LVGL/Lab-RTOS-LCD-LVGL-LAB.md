@@ -1,4 +1,4 @@
-# LAB
+# LAB - RTOS - LCD - LVGL
 
 Agora vamos começar mexer com o LVGL e criar nossa interface. A ideia é recriar uma interface de um termostato inspirado no produto a seguir:
 
@@ -46,8 +46,8 @@ Vamos criar uma nova função chamada de `void lv_termostato(void){ }` onde irem
 
 
 ​    
-    static void task_lcd(void *pvParameters) {
-    
+​    static void task_lcd(void *pvParameters) {
+​    
     -  lv_ex_btn_1();
     +  lv_termostato();
     

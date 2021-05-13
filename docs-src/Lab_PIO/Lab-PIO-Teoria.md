@@ -22,7 +22,7 @@ memória.
 
 Vamos imaginar uma aplicação comum de um microcontrolador: controlar um pino digital (Ligado/ Desligado). Esse pino pode estar conectado a um LED, por exemplo. Nosso objetivo é conseguirmos escrever um software que seja capaz de colocar energia (VCC/ ligado) no pino, ou desligar o pino (GND/ desligar). Como ilustrado no diagrama a seguir:
 
-![](imgs/IOs/led-uc.png)
+![](imgs/led-uc.png)
 
 Dois periféricos serão utilizados para que possamos controlar os pinos do uC de forma digital (liga/ desliga),
 são eles o Power Manager Contoller (**PMC**) e o Parallel Input Output (**PIO**). 
@@ -30,7 +30,7 @@ O PMC é o periférico responsável por "gerenciar" a energia dos demais perifé
 uC SAME70 e o PIO é o periférico responsável por controlar um pino digital desse uC. 
 Como demonstrado a seguir:
 
-![](imgs/IOs/visao-geral.png)
+![](imgs/visao-geral.png)
 
 !!! note
     Pense nos periféricos como pequenos hardwares auxiliares ao microprocessador, esses periféricos fazem parte
@@ -54,13 +54,13 @@ O Power Management Controller (PMC) é um periférico responsável por
 gerenciar a energia e clock dos demais periféricos. Para utilizarmos um
 periférico é necessário primeiramente ativarmos o mesmo no PMC.
 
-![](imgs/IOs/PMC-descricao-datasheet.png)
+![](imgs/PMC-descricao-datasheet.png)
 
 Cada periférico é referenciado no PMC via um número único (ID), esse ID
 também será utilizado para o gerenciamento de interrupções. Os IDs estão
 listados na Tabela: **13.1 do datasheet SAM-E70**.
 
-![](imgs/IOs/perID.png)
+![](imgs/perID.png)
 
 ### Parallel Input Output (PIO)  
 
@@ -80,7 +80,7 @@ Isso fornece flexibilidade ao desenvolvimento de uma aplicação, já que
 os I/Os não possuem uma funcionalidade fixa. Existe uma tabela que informa quais I/Os cada periféricos
 podem controlar.
 
-![](imgs/IOs/PIOA_mux.png)
+![](imgs/PIOA_mux.png)
 
 Podemos interpretar a tabela como: o pino `102` do microcontrolador
 identificado como `PA0` (PIOA_0) pode ser utilizado como `WKUP0`
@@ -104,7 +104,7 @@ PIOC, …).
 Cada PIO possui controle independente de energia via o PMC, sendo necessário
 ativar o clock de cada PIO para que o periférico passe a funcionar.
 
-![](imgs/IOs/PMC-PIOs.png)
+![](imgs/PMC-PIOs.png)
 
 #### Configurações
 
@@ -123,7 +123,7 @@ Iremos ver para que serve algumas dessas configurações ao longo do curso.
 
 O diagrama de blocos do PIO é ilustrado no diagrama de blocos (Block Diagram)
 
-![ Block Diagram - pg. 346](imgs/IOs/PIO_geral.png)
+![ Block Diagram - pg. 346](imgs/PIO_geral.png)
 
 onde:
 
@@ -141,7 +141,7 @@ onde:
 
 4.  Embedded peripheral: O acesso aos pinos pelos periféricos do uC é realizado
     via PIO.
-    
+
 Um diagrama lógico mais detalhado pode ser encontrado no datasheet (I/O Line Control Logic), esse diagrama mostra as funções dos registradores e seu impacto no PIO.
 
-![Datasheet pg. 571 - I/O Line Control Logic](imgs/IOs/PIO_interno2.png) 
+![Datasheet pg. 571 - I/O Line Control Logic](imgs/PIO_interno2.png) 

@@ -1,4 +1,4 @@
-# PIO - IRQ
+# LAB - PIO - IRQ
 
 | Pasta          |
 |----------------|
@@ -87,13 +87,13 @@ void main(void){
     Exemplo: `volatile int valADC;`
     
     Esse pragma serve para informar o compilador (no nosso caso GCC) que essa variável será modificada sem que ele saiba evitando assim que ele não a implemente. 
-
-    Compiladores são projetados para otimizar programas removendo trechos ou variáveis desnecessárias. Como a função de `Handler` (interrupção) nunca é chamada diretamente pelo programa, o compilador pode supor que essa função não vai ser executada nunca e pode optimizar a variável que nela seria atualizada (já que não é chamada diretamente, mas sim pelo hardware quando ocorre um evento). 
-
-    - Leia mais sobre [volatile](https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword)
-
-    ==ATENÇÃO: só usar `volatile` quando necessário==
     
+    Compiladores são projetados para otimizar programas removendo trechos ou variáveis desnecessárias. Como a função de `Handler` (interrupção) nunca é chamada diretamente pelo programa, o compilador pode supor que essa função não vai ser executada nunca e pode optimizar a variável que nela seria atualizada (já que não é chamada diretamente, mas sim pelo hardware quando ocorre um evento). 
+    
+    - Leia mais sobre [volatile](https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword)
+    
+    ==ATENÇÃO: só usar `volatile` quando necessário==
+
 !!! example "Modifique e teste"
     1. Modifique o exemplo para piscar o led no `while(1)` utilizando `flag` vindo da interrupção. 
         - Dentro do callback do botão não pode ter a função `pisca_led`!
@@ -126,7 +126,7 @@ No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com
     - Quanto mais profundo o sleep, mais tempo o uC leva para 'acordar'
     - Alguns modos podem perder informações da memória RAM
     
-    ![](imgs/PIO-IRQ/lowpower-table.png)
+    ![](imgs/lowpower-table.png)
 
 #### Adicionando lowpower mode (ASF Wizard)
 

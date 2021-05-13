@@ -20,7 +20,7 @@ Os registradores podem ser utilizados no hardware de diversas maneiras: Cada bit
 
 No caso do PIO temos ao todo 89 registradores, e cada um tem um papel nesse periférico. Na documentação do PIO temos um diagrama que mostra alguns desses registradores e seus papeis no HW:
 
-![](imgs/IOs/PIO_interno2.png)
+![](imgs/PIO_interno2.png)
 
 ## Estrutura de software
 
@@ -36,7 +36,7 @@ Um driver (framework/ api) são funções que possibilitam acessar o baixo níve
 
 No nosso caso, iremos utilizar um framework chamado de [Advanced Software Framework Version 4](https://www.microchip.com/mplab/avr-support/advanced-software-framework), ele e fornecido e mantido pelo fabricante do microcontrolador que usamos no curso (SAME70) e serve para várias famílias de uC ARM (SAMD20 / SAMV71 / SAMG54 /...). Foi com o ASF que fomos capazes de realizar o LAB1, onde configuramos pinos como entrada e saída e fomos capazes de ler e escrever nesses pinos.
 
-![](imgs/PIO-Driver/asf.png){width=500}
+![](imgs/asf.png){width=500}
 
 > fonte: http://asf.atmel.com/docs/latest/architecture.html
 

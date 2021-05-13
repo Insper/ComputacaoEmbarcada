@@ -1,4 +1,4 @@
-# Lab 5 - RTOS - Dicas
+# Lab - RTOS - Dicas
 
 Notei alguns erros e dificuldades neste laboratório que
 pretendo retomar aqui. Vale notar que este exemplo foi extraído dos exemplos fornecidos pelo fabricante do microcontrolador e possui algumas coisas diferentes do que estamos acostumados.
@@ -49,7 +49,7 @@ função com o `vTaskDelay(1000)` faz o LED piscar.
 
 Essa função é muito específica e não ajuda muito porque não podemos usar em outros pinos (LEDs), só funciona para o LED0 que foi definido em um include muito específico do projeto. 
 
-![](imgs/RTOS/led-toggle-LED0.png)
+![](imgs/led-toggle-LED0.png)
 
 Podemos no lugar ousar esta outra implementação que faz a mesma coisa, mas recebe como parâmetro o PIO e a máscara e inverte o valor do pino (1 --> 0 --> 1) toda vez que a função for chamada, a função a seguir implementa isso:
 
@@ -75,8 +75,9 @@ void pin_toggle(Pio *pio, uint32_t mask){
                 pio_set(LED_PIO, LED_IDX_MASK);
             else
                 pio_clear(LED_PIO, LED_IDX_MASK);
-            
-            
+
+
+​            
             vTaskDelay(1000);
         }
     }
@@ -130,7 +131,7 @@ static void task_led1(void *pvParameters) {
 
 O problema disso é que tanto a `task_led` quanto a `task_led1` estão compartilhando o mesmo semáforo, e o semáforo usado aqui é do tipo binário, ou seja, pode ser `0` ou `1` a primeira tarefa que **consumir** o semáforo vai o tornar `0` e a segunda tarefa não vai ser executada corretamente, conforme diagrama a baixo:
 
-![](imgs/RTOS/task-led1.png){width=500}
+![](imgs/task-led1.png){width=500}
 
 Existem duas soluções para esse problemas, a primeira seria a de usar um [Counting Semaphores](https://www.freertos.org/Real-time-embedded-RTOS-Counting-Semaphores.html) a outra é a de usar um outro semáforo para indicar para a nova tarefa que ela deve ser executada, para isso:
 
@@ -139,7 +140,7 @@ Existem duas soluções para esse problemas, a primeira seria a de usar um [Coun
 1. Criar o semáforo dentro da `task_led1`
 1. Usar o semáforo novo na `task_led1`
 
-![](imgs/RTOS/task-led1b.png){width=500}
+![](imgs/task-led1b.png){width=500}
 
 ```diff
 SemaphoreHandle_t xSemaphore;

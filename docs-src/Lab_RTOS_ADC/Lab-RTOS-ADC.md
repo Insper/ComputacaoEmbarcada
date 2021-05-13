@@ -1,4 +1,4 @@
-#  RTOS - ADC
+#  LAB - RTOS - ADC
 
 Neste laboratório iremos trabalhar com conversão analógica digital, vamos aprender como usar um recurso do rtos chamado de fila.
 
@@ -92,7 +92,7 @@ Agora é necessário modificar a função `main` para que o freeRTOS crie essa t
     1. Usa `delay_ms` no lugar do vstaskDelay.
 
 !!! info "Diagrama"
-    ![](imgs/RTOS-ADC/parte1.png)
+    ![](imgs/parte1.png)
 
 ## Melhorando
 
@@ -113,7 +113,7 @@ Mailbox/ `queue` é uma das maneiras de enviarmos dados entre tarefa em um siste
     Writing to and reading from a queue. In this example the queue was created to hold 5 items, and the queue never becomes full.
     
     ![](https://www.freertos.org/fr-content-src/uploads/2018/07/queue_animation.gif) 
-
+    
     > Material retirado do site: https://www.freertos.org/Embedded-RTOS-Queues.html
 
 !!! tip
@@ -183,10 +183,10 @@ void task_oled(void){
 
 !!! example "Tarefa"
     1. Modifique a `task_oled`
-    1. Compile para ver se possui erros.
-    
+        1. Compile para ver se possui erros.
+
 !!! info "Diagrama"
-    ![](imgs/RTOS-ADC/parte2.png)
+    ![](imgs/parte2.png)
 
 ### Modificando task_adc
 
@@ -227,7 +227,7 @@ void task_adc(void){
     1. Teste mudando o valor do potênciometro e verificando se o valor no oled muda.
 
 !!! info "Diagrama"
-    ![](imgs/RTOS-ADC/parte3.png)
+    ![](imgs/parte3.png)
 
 ### semáforo 
 
@@ -239,7 +239,7 @@ Agora vamos modificar o código para usar um semáforo para substituir a flag: `
     Dica: Você deve criar um semáforo, inicializar e enviar.
 
 !!! info "Diagrama"
-    ![](imgs/RTOS-ADC/parte4.png)
+    ![](imgs/parte4.png)
 
 ## C - Dado direto do IRQ AFEC para a task_oled
 
@@ -263,7 +263,7 @@ Podemos fazer o envio do dado direto do `AFEC_pot_Callback` para a `task_oled`, 
     1. Teste mudando o valor do potênciometro e verificando se o valor no oled muda.
 
 !!! info "Diagrama"
-    ![](imgs/RTOS-ADC/parte5.png)
+    ![](imgs/parte5.png)
 
 ## B - Exibindo graficamente
 
@@ -277,4 +277,5 @@ para isso vocês podem utilizar o joystick analógico que vocês possuem no kit.
 ----------
 
 !!! note "Preencher ao finalizar o lab"
+
    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSci4k9eempzAus1-L9gLUfEov9nRv4DBVuNL3tTTy7Zl6kISQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
