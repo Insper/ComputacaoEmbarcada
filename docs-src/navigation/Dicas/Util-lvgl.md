@@ -4,7 +4,7 @@ Dicas sobre o LVGL.
 
 !!! tip ""
     - https://docs.lvgl.io/latest/en/html/widgets/index.html
-  
+
 ## Orientação
 
 

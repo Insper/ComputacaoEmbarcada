@@ -33,7 +33,7 @@ Neste laboratório iremos processar o sinal de ECG que vocês precisam processar
     
     - DAC0 (PB13)
     - TC0 canal 0
-    
+
 ### Conectando
 
 Vamos conectar o pino PB13 que gera o sinal o sinal analógico do batimento cardíaco ao pino PC31 do EXT1 que possui o AFEC1 conforme imagem e diagrama a baixo:
@@ -61,11 +61,11 @@ Vamos conectar o pino PB13 que gera o sinal o sinal analógico do batimento card
 
 O sinal ECG gerado no pino PB13 possui a forma de onda a seguir:
 
-![](imgs/FIR/ecg1.png){width=300}
+![](imgs/ecg1.png){width=300}
 
 E se analisarmos o espectro do sinal via transformada de fourier, obtemos a seguinte composição espectral:
 
-![](imgs/FIR/ecg-fft.png){width=300}
+![](imgs/ecg-fft.png){width=300}
 
 !!! question short
     O que você consegue extrair de informações dos gráficos anteriores?
@@ -78,7 +78,7 @@ E se analisarmos o espectro do sinal via transformada de fourier, obtemos a segu
         com bastante informações, uma de baixa frquência (0..25)Hz e outra
         de 60Hz.
         
-        ![](imgs/FIR/ecg-fft2.png){width=300}
+        ![](imgs/ecg-fft2.png){width=300}
 
 !!! progress
     Click para continuar....
@@ -179,11 +179,11 @@ python3 -m pyfda.pyfdax
 
 Configure o filtro para:
 
-![](imgs/FIR/config.png){width=300}
+![](imgs/config.png){width=300}
 
 E agora clique em :arrow_right: **DESIGN FILTER**. Vá na aba **b,a** e ==salve os valores de b em um txt, vamos usar mais tarde !==
 
-![](imgs/FIR/taps.png){width=200}
+![](imgs/taps.png){width=200}
 
 ### firmware
 

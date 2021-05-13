@@ -1,6 +1,6 @@
-# RTOS - WIFI
+# LAB - RTOS - WIFI
 
-![RTOS-WIFI](imgs/wifi/RTOS-WIFI.png)
+![RTOS-WIFI](imgs/RTOS-WIFI.png)
 
 Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET em um webserver (Flask) rodando em seu computador, onde o mesmo após receber essa requisição retorna um dado `JSON`. 
 
@@ -15,7 +15,7 @@ Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET
 
 !!! warning "Código exemplo"
     - ==Atualizar o repositório do SAME70-Examples==
-    - Vamos modificar o código exemplo `RTOS/RTOS-WIFI`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/11-RTOS-WIFI`
+        - Vamos modificar o código exemplo `RTOS/RTOS-WIFI`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/11-RTOS-WIFI`
 
 !!! note "Terminal"
     Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no Atmel Studio clique em:  :arrow_right: View :arrow_right: Terminal Window
@@ -30,7 +30,7 @@ IoT (Internet of Things) é um conceito que tem como objetivo a conexão entre o
 1. Conexão WIFI
 1. 3G/4G/GSM
 1. Sistemas de comunicação de baixa energia:
-    
+   
     - LoRa/ ...
 1. Sistema de comunicação proprietário 
    
@@ -93,10 +93,10 @@ O resultado esperado deve ser o seguinte:
 
 O servidor em Flask é simples e permite que alteremos uma variável `led` via um form e lermos o status via um get:
 
-|                                    |                                      |
-| -------------                      | --------                             |
-| http://localhost:5000              | http://localhost:5000/status         |
-| ![](imgs/wifi/form.png){width=300} | ![](imgs/wifi/status.png){width=300} |
+|                               |                                 |
+| ----------------------------- | ------------------------------- |
+| http://localhost:5000         | http://localhost:5000/status    |
+| ![](imgs/form.png){width=300} | ![](imgs/status.png){width=300} |
 
 #### Preparando o WebServer
 
@@ -112,7 +112,7 @@ Para validar, conecte **seu celular** na mesma rede WIFi e acesse o ip da sua m�
     http://192.168.0.138:5000
     
     **Anote o seu IP, iremos usar mais para frente**
-    
+
 !!! example "Tarefas"
     1. Instalar `requirements.txt`
     1. Subir o servidor Flask
@@ -121,24 +121,24 @@ Para validar, conecte **seu celular** na mesma rede WIFi e acesse o ip da sua m�
         - isso testa se o seu Windows está permitindo acesso externo ao seu server, precisamos disso já que queremos que o embarcado se conecte a esse servidor.
     1. Mantenha o servidor em execução.
     ==NÃO SIGA SEM QUE TODOS OS PASSOS ANTERIORES ESTIVEREM FUNCIONANDO==
- 
+
 ###  `WIFI-RTOS-get`
- 
+
  Vamos agora explorar e executar o nosso firmware.
- 
+
 #### Conectando o hardware
 
 Conecte o módulo `WINC1500` no EXT-1 do kit de desenvolvimento.
 
-| Diagrama                               | Conexão                          |
-| --                                     | ---                              |
-| ![](imgs/wifi/diagrama.svg){width=300} | ![](imgs/wifi/HW.png){width=300} |
+| Diagrama                          | Conexão                     |
+| --------------------------------- | --------------------------- |
+| ![](imgs/diagrama.svg){width=300} | ![](imgs/HW.png){width=300} |
 
 #### Entendendo o firmware
 
 Vamos relembrar um pouco de camada física e Tecweb agora, toda vez que você acessa uma página da internet um socket e criado, esse socket e um canal de comunicação TCP/UDP entre dois pontos via internet. Uma vez estabelecido o socket o client (no nosso caso o embarcado) pode fazer uma requisição (get) ou um envio de informação (post). Nesse exemplo iremos fazer um `get` no servidor que está rodando no seu computador.
 
-![](imgs/wifi/socket.svg)
+![](imgs/socket.svg)
 
 Nosso firmware irá seguindo os seguintes passos a seguir:
 
@@ -156,7 +156,7 @@ Nosso firmware irá seguindo os seguintes passos a seguir:
 
 O firmware exemplo possui duas tarefas: `task_wifi` e `task_process`, a primeira é responsável por realizar toda a comunicação com o módulo WINC1500 e fazer a inicialização da comunicação socket com o webserver em Python, a segunda é responsável por gerenciar as mensagens que serão enviadas para o servidor.
 
-![](imgs/wifi/firmware.svg)
+![](imgs/firmware.svg)
 
 A `task_wifi` gerencia alguns `callbacks` de software, que são eventos gerados do módulo WIFI, existem vários callbacks que podem ser utilizados, nesse exemplo usamos:
 
@@ -179,7 +179,7 @@ Essa tarefa foi implementada com a máquina de estados a seguir em mente, usando
   };
 ```
 
-![](imgs/wifi/state.png){width=400}
+![](imgs/state.png){width=400}
 
 ## Lab
 
@@ -222,7 +222,7 @@ IP e porta do servidor (seu computador):
 
 Terminal Window (Atmel Studio):
 
-![printWIFI](imgs/wifi/term.jpeg){width=300}
+![printWIFI](imgs/term.jpeg){width=300}
 
 Terminal do flask:
 
@@ -234,14 +234,14 @@ Terminal do flask:
 !!! info "Breve descrição do funcionamento"
 
     Nosso embarcado envia uma requisição GET através do `MAIN_PREFIX_BUFFER` definido dentro do `main.h`:
-
+    
     ```c
     /** Send buffer of TCP socket. */
     #define MAIN_PREFIX_BUFFER                  "GET /status HTTP/1.1\r\n Accept: */*\r\n\r\n"
     ```
-
+    
     Nosso webserver (Flask) recebe essa requisição e verifica o que foi recebido, nesse caso ele recebe o "/status" após o GET e responde com o seguinte JSON `{led' : '1'}`:
-
+    
     ```py
     @app.route('/status', methods = ['POST', 'GET'])
     def status():

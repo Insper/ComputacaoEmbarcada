@@ -1,12 +1,12 @@
 # RTOS - UART
 
-![Camelos](imgs/RTOS-UART/camelos.png){width=100%}
+![Camelos](imgs/camelos.png){width=100%}
 
 Nesse lab iremos trabalhar com comunicação UART (aquela do terminal / printf). Praticando RTOS (queue)
 
 !!! note "Preencher ao finalizar o lab"
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfstM-nI2npzGDx6-QOH99b0NjYay3TxyVp9j8qHWifklvomA/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-    
+
 ## Lab    
 
 | LAB                |
@@ -178,15 +178,15 @@ Deve ser uma fila de caracteres, especificar um tamanho que caiba os comandos.
     
     ```c
     int main(void){
-	/* Initialize the SAM system */
-	sysclk_init();
-	board_init();
-
+    /* Initialize the SAM system */
+    sysclk_init();
+    board_init();
+    
     // Criar a fila aqui!
     //    |
     //    v
     
-	USART1_init();
+    USART1_init();
     ```
 
 #### USART1_handler

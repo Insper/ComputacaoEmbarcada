@@ -1,4 +1,4 @@
-# PIO 
+# Lab-PIO-Dicas
 
 Dicas de como lidar com a entrada e saída (I/O) digital do microcontrolador 
 SAME-70.

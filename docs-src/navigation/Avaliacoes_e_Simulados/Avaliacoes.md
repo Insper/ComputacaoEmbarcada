@@ -1,4 +1,4 @@
-# Avaliações / Simulados
+# Avaliações e Simulados
 
 Aqui um resumo das avaliações e simulados para vocês usarem
 como base de estudo.

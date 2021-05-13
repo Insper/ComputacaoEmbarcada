@@ -51,7 +51,7 @@ typedef struct {
 
 O diagrama a seguir ilustra o firmware:
 
-![](imgs/RTOS-LCD/diagrama.svg)
+![](imgs/diagrama.svg)
 
 !!! example "Execute"
     1. Programe o uC com o firmware exemplo
@@ -227,14 +227,15 @@ Essa função recebe o vetor de structs e também a posição na tela de onde oc
     
     - Não pode isso:
     
-    ![](imgs/RTOS-LCD/naopode.png){width=400}
-    
-    
+    ![](imgs/naopode.png){width=400}
+
+
+​    
 
 ??? tip
     Abra o terminal uart do atmel, lá você consegue ver os dados do touch:
     
-    ![](imgs/RTOS-LCD/touch.gif){width=400}
+    ![](imgs/touch.gif){width=400}
 
 Com a função vamos agora alterar somente o status do botão que foi pressionado, para isso, vocês devem alterar o  `while(1)` da função `task_lcd`, para chamar a `process_touch`. Uma sugestão de  como implementar isso a seguir:
 
@@ -283,7 +284,6 @@ No lugar dos botões terem cor podemos fazer com que eles tenham uma imagem asso
 
 !!! tip
     [SAME70-examples/Screens/RTOS-LCD-maxTouch-Images/](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-LCD-maxTouch-Images)
-
 
 
 
