@@ -49,7 +49,8 @@ Copie a pasta `SAEM70-Clear` para dentro do repositório criado pelo classroom, 
     1. Renomei a pasta para `PIO-IO`
     1. Abra o projeto da pasta recém criada no Microchip Studio
 
-<button class="button0" id="0: startup" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ## Inicializando e configurando ASF
 
@@ -148,7 +149,8 @@ Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse proj
     
     ==Ao final clique em APPLY para salvar as alterações.==
 
-<button class="button0" id="1:asf" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ## Inicialização do uC
 
@@ -176,7 +178,8 @@ No nosso caso iremos começar configurando o clock do uC e desativando o `WatchD
     }
     ```
 
-   <button class="button0" id="2:init" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
     
 
 A função `sysclk_init()` é responsável por aplicar as configurações do arquivo [`config/conf_clock.h`](https://github.com/Insper/SAME70-examples/blob/master/SAME70-Clear/src/config/conf_clock.h) no gerenciador de clock do microcontrolador, que está configurado para operar em`300 MHz`.
@@ -260,7 +263,8 @@ Agora será necessário transcrever essas informações para o nosso código em 
     Pense nisso como um recurso que facilita a vida do programador.
 
 
-<button class="button0" id="3:define led" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ### `init()`
 
@@ -302,7 +306,8 @@ Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datashee
     Troque o número ==12== do define por `ID_PIOC`
     
 
-<button class="button0" id="4:pmc" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 O PMC possui diversas funções, estamos agora interessado naquela que ativa um periférico para podermos usar. Essa função é a [`pmc_enable_periph_clk(uint32_t ul_id)`](https://asf.microchip.com/docs/latest/sam.drivers.pmc.pmc_clock_switching_example.same70_xplained/html/group__sam__drivers__pmc__group.html#gad09de55bb493f4ebdd92305f24f27d62) que recebe como parâmetro o ID do periférico que queremos ativar. 
 
@@ -318,7 +323,8 @@ O PMC possui diversas funções, estamos agora interessado naquela que ativa um 
 !!! tip 
     note que estamos usando o define: `LED_PIO_ID` que foi inserindo no código por vocês, e não o valor **12**, isto é importante porque deixa o código mais claro.
 
-<button class="button0" id="5:init pmc_enable_periph_clk" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 
 #### Configurando o pino do LED
@@ -335,7 +341,8 @@ Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será
     
     Podemos ler: essa função configura o **index 8** (LED_PIO_IDX) do **PIOC** como sendo saída inicializada em '0', sem [multidrive](https://embeddedartistry.com/blog/2018/6/4/demystifying-microcontroller-gpio-settings) e sem [resistor de pull-up](https://en.wikipedia.org/wiki/Pull-up_resistor).
 
-<button class="button0" id="6:init pio_set_output" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 !!! note
      Note que a função recebe como parâmetro o PIO que ela ira editar e a máscara `LED_PIO_IDX_MASK`, isso será similar nas demais funções utilizadas. Veremos o porque disso no próximo laboratório.
@@ -381,7 +388,8 @@ Sendo:
     }
     ```
 
-<button class="button0" id="7:init led as output" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 
 ### Interagindo com o LED
@@ -429,7 +437,8 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
      1. Verifique o resultado esperado
      1. Brinque com os valores da função `delay_ms` 
 
-<button class="button0" id="8: pisca led" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ??? note "Analogia ao Arduino"
 
@@ -491,7 +500,8 @@ Utilizando o manual do kit de desenvolvimento ([SAME70-XPLD.pdf](https://github.
     
     DICA: Ver novamente como com o LED.
 
-<button class="button0" id="9: input manual" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ### Exportando informações para o código 
 
@@ -508,7 +518,8 @@ Agora precisamos fazer a ponte entre o mundo externo e o firmware que será exec
     #define BUT_PIO_IDX_MASK (1u << BUT_PIO_IDX)
     ```
 
-<button class="button0" id="10:define but" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ### Função `init()`
 
@@ -552,7 +563,8 @@ pio_set_input(ARG0, ARG1, ARG2);
     pio_set_input(ARG0, ARG1, PIO_DEFAULT);
     ```
 
-<button class="button0" id="11:init but input" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 #### PULL-UP
 
@@ -563,7 +575,8 @@ Para ativarmos o `pull-up` basta chamar a função: [`pio_pull_up()`](https://as
 !!! example "Tarefa: Modifique: `init()`"
     Você deve fazer uso da função `pio_pull_up()` na função `init()` 
 
-<button class="button0" id="12:init pull_up" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ### Lendo o botão
 
@@ -583,13 +596,15 @@ Para lermos um valor de um pino, que já foi configurado como entrada, devemos u
 !!! example "Implementando"
     Agora que somos capazes de ler o estado de um pino, podemos implementar a lógica descrita anteriormente, onde o LED deve piscar 5 vezes somente quando o botão da placa for pressionado. 
 
-<button class="button0" id="13:but logica" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ## Terminou?
 
 Muito bom! Agora que tal pegar a placa OLED1 (que você recebeu no kit) e usar os LEDs e Botoẽs dela? 
 
-<button class="button0" id="14:but extra" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 <!---
 Já da para começar a [APS 1, que é para 19/3](/ComputacaoEmbarcada/APS-1-Musical/)!

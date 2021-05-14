@@ -68,7 +68,8 @@ Na primeira etapa iremos substituir a função que a Microchip já nos disponibi
     1. Execute o código, **ele não deve funcionar :bangbang:.**
         - pois agora a função que aciona um pino não está implementada.
         
-<button class="button0" id="1:pio_set_init" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+!!! progress
+    Próxima etapa ....
 
 Agora será necessário entender como o PIO controla os pinos e o que deve ser feito para que ele atue sobre o pino como desejamos. A parte da secção do manual que fala sobre o PIO e suas saídas/entradas é a **secção 32** do (`manual SAME70`), vamos analisar:
 
@@ -150,7 +151,8 @@ O que isso significa? Significa que estamos acessando o periférico passado como
     
     - Embarque o código e o mesmo deve funcionar normalmente caso a função implementada esteja correta.
 
-<button class="button0" id="2:pio_set" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+!!! progress
+    Próxima etapa ....
 
 ### _pio_clear(...)
 
@@ -179,7 +181,8 @@ Vocês deverão descobrir pelo manual qual registrador que deve ser acessado. Re
     1. Implemente a função.
     1. Compile, programe e teste
 
-<button class="button0" id="3:pio_clear" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+!!! progress
+    Próxima etapa .... 
 
 ### _pio_pull_up(...)
 
@@ -214,7 +217,8 @@ Essa função recebe o PIO que irá configurar, os pinos que serão configurados
     1. Implemente
     1. Compile, programe e Teste
     
-    <button class="button0" id="4:pio_pull_up" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+!!! progress
+    Próxima etapa ....
 
 ### _pio_set_input(...)
 
@@ -276,8 +280,8 @@ _pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_PULLUP | _PIO_DEBOUNCE);
     1. Implemente
     1. Compile, programe e teste
     
-<button class="button0" id="5:pio_set_input" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
-
+!!! progress
+    Próxima etapa ....
 
 ### _pio_set_output(...) 
 
@@ -336,7 +340,8 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
     1. Implemente
     1. Compile, programe e teste
 
-<button class="button0" id="6:pio_set_output" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+!!! progress
+    Próxima etapa .... 
     
 !!! info ""
     Até aqui é conceito C.
@@ -374,7 +379,8 @@ uint32_t pio_get(Pio *p_pio, const pio_type_t ul_type,
     1. Implemente
     1. Compile, programe e teste
     
-<button class="button0" id="7:pio_get" onClick="progressBut(this.id);">Cheguei Aqui!</button> 
+!!! progress
+    Próxima etapa ....
 
 
 ### Conceito A: _delay_ms(...)

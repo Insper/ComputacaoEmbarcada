@@ -1,4 +1,4 @@
-# LAB - RTOS - LCD - LVGL
+# Lab
 
 Agora vamos começar mexer com o LVGL e criar nossa interface. A ideia é recriar uma interface de um termostato inspirado no produto a seguir:
 

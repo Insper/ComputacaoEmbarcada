@@ -3,8 +3,9 @@
 Neste laboratório iremos trabalhar com os periféricos de contagem de tempo
 do nosso microcontrolador.
 
-<button class="button0" id="0:comencando" onClick="progressBut(this.id);">Começando Laboratório!</button>
-
+!!! progress
+    Click para continuar....
+	
 | Pasta              |
 |--------------------|
 | `Lab4-TC-RTC-RTT` |
@@ -55,7 +56,8 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
     1. Programe a placa (e veja os LEDs piscando!)
     1. Entenda o código
 
-<button class="button0" id="1:exemplos" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ## Lab
 
@@ -95,14 +97,16 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     
     - Leia a função e entenda os seus parâmetros!! 
 
-<button class="button0" id="2:rubrica-C" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ### C+: Piscar mais um LED
 
 !!! example "Tarefa"
     Faça o LED da placa piscar a 5Hz usando um novo TC.
 
-<button class="button0" id="2:rubrica-C+" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ### B: Exibindo HH:MM:SS
 
@@ -143,14 +147,16 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 !!! warning
     Você nunca deve atualizar display dentro de interrupção (**handler**)! Sempre no main.
     
-<button class="button0" id="2:rubrica-B" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ### A: Melhorando
 
 Quando o botão 1 da placa OLED for pressionado, após 20 segundos, faça o LED 3 piscar 
 com um novo TC.
 
-<button class="button0" id="2:rubrica-A" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ----------
 

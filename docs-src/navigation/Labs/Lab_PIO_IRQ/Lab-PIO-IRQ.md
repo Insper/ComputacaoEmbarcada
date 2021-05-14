@@ -4,7 +4,8 @@
 |----------------|
 | `Lab3-PIO-IRQ` |
 
-<button class="button0" id="0:comencando" onClick="progressBut(this.id);">Começando Laboratório!</button>
+!!! progress
+    Click para continuar....
 
 !!! tip 
     Antes de seguir leia:
@@ -21,7 +22,8 @@ O código exemplo [`SAME70-exemples/Perifericos-uC/PIO-IRQ`](https://github.com/
 !!! warning
     Não continue sem ter feito a etapa anterior.
 
-<button class="button0" id="1:exemplo" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ## Melhorando o exemplo
 
@@ -35,7 +37,8 @@ Vamos agora modificar o código um pouco, o exemplo está funcionando com interr
     1. Mude a função que configura a interrupção do pino para operar em `PIO_IT_RISE_EDGE`. 
     1. Teste na placa.
 
-<button class="button0" id="2:borda" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ### IRQ - Keep it short and simple 
 
@@ -99,7 +102,8 @@ void main(void){
         - Dentro do callback do botão não pode ter a função `pisca_led`!
     1. Programe e teste no HW
 
-<button class="button0" id="3:flag" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ### Low power modes
 
@@ -165,7 +169,8 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
     consumida pelo microcontrolador antes e depois de chamar a função de sleep, porém
     na versão online do curso não conseguimos fazer isso.
 
-<button class="button0" id="4:sleep" onClick="progressBut(this.id);">Cheguei Aqui!</button>
+!!! progress
+    Click para continuar....
 
 ## Praticando - OLED
 
