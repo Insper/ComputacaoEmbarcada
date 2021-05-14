@@ -262,7 +262,12 @@ Com isso vocês devem obter algo como:
     ```
 
     - Programe e teste na placa
-    
+
+!!! tip
+    Dica do Carlos Dip.
+
+    Para tirar os pontos do gráfico execute: `lv_obj_set_style_local_size(chart, LV_CHART_PART_SERIES, LV_STATE_DEFAULT, LV_DPI/150);`
+
 !!! progress
     Click para continuar....
 
