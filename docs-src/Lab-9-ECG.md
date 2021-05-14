@@ -395,22 +395,23 @@ O resultado esperado é algo como:
     
     Sugestão de valor: 1000 (1 segundo)
 
- !!! progress
-    Click para continuar....
- 
-## Próximos passos?
+!!! info
+    Até aqui é C.
 
-- Filtrar o sinal
-- Fazer o threshold ser dinâmico 
-- Deixar gráfico mais bonito
+    !!! note "Preencher ao finalizar o lab"
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeV03DlPyoeKlEeVZs-zSyzajoOgX9892Fy-l7-anb6-KDTUA/viewform?embedded=true" width="550" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
+!!! progress
+    Click para continuar....
 
 ## B/A
 
 - Adicionar beep com o buzzer, conforme frequência.
 - Procurar pico usando a energia do sinal do sinal no lugar do valor no tempo.
-- 
 
------------------
-
-!!! note "Preencher ao finalizar o lab"
-   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeV03DlPyoeKlEeVZs-zSyzajoOgX9892Fy-l7-anb6-KDTUA/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+!!! info
+    O que mais poderiamos fazer?
+    
+    - Filtrar o sinal
+    - Fazer o threshold ser dinâmico (o valor que detecta pico)
+    - Deixar gráfico mais bonito
