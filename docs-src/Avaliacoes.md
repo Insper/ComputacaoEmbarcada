@@ -10,6 +10,17 @@ site da matéria.
 É importante vocês cronometrarem o tempo que levaram para 
 realizar o estudo, ==pois no dia da avaliação terão 3h==.
 
+## Avaliação 2
+
+Conteúdo: 
+
+- RTOS
+- Projeto 1/ APS-2
+- PIO, TC, RTT, RTC, ADC
+- LCD
+- LVGL
+
+Conforme prometido estou liberando um estudo para a AV2 (https://github.com/insper-classroom/21a-emb-av2-simulado), ficou um pouco longo... por isso estou chamando de Estudo e não simulado.
 
 ## Avaliação 1 
 
@@ -32,7 +43,4 @@ serve como base para vocês estudarem.
 
 ## Avaliação 2
 
-Estudando:
-
-- [Simulado AV2](https://github.com/Insper/AV2-Embarcados-Simulado)
 
