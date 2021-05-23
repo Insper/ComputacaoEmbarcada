@@ -1,48 +1,37 @@
-# RTOS - WIFI
+# Lab 9 - WIFI
 
-![RTOS-WIFI](imgs/wifi/RTOS-WIFI.png)
+![RTOS-WIFI](imgs/wifi/RTOS-WIFI.png){width=300}
 
-Nesse lab iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET em um webserver (Flask) rodando em seu computador, onde o mesmo após receber essa requisição retorna um dado `JSON`. 
-
-!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfanTEVc7BZ5gc7bTSkB7ICCUjANdb8cnKjqtQm7eFZoXL1tQ/viewform?embedded=true" width="640" height="520" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+Neste laboratório iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET em um webserver (Flask) rodando em seu computador, onde o mesmo após receber essa requisição retorna um dado `JSON`. 
 
 ## Lab    
 
 | Exemplo base                                                     | LAB                 |
 | ------------------------------------------------------------     | ------------------- |
-| `SAME70-Examples/RTOS/WIFI-WINC1500-get-RTOS-EXT1` :arrow_right: | `Labs/11-RTOS-WIFI` |
+| `SAME70-Examples/RTOS/WIFI-WINC1500-get-RTOS-EXT1` :arrow_right: | `Lab9-RTOS-WIFI`  |
 
 !!! warning "Código exemplo"
     - ==Atualizar o repositório do SAME70-Examples==
-    - Vamos modificar o código exemplo `RTOS/RTOS-WIFI`, faça uma cópia do seu lab para a nova pasta no seu repositório `Labs/11-RTOS-WIFI`
-
-!!! note "Terminal"
-    Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no Atmel Studio clique em:  :arrow_right: View :arrow_right: Terminal Window
-    
-    Configure o terminal para a porta COM correta (verificar no Windows) e para operar com um Baudrate de `115200`.
+    - Vamos modificar o código exemplo `RTOS/RTOS-WIFI`, faça uma cópia do seu lab para a nova pasta no seu repositório `Lab9-RTOS-WIFI`
 
 ### IoT	
 
-IoT (Internet of Things) é um conceito que tem como objetivo a conexão entre objetos e a internet, ela faz parte da revolução da Industria 4.0 e está cada vez mais presentes em nossas vidas. Desenvolver sistemas embarcados muitas vezes envolvem conectar esses sistemas na internet, e isso pode se dar atráves de diversos meios possíveis:
+IoT (Internet of Things) é um conceito que tem como objetivo a conexão entre objetos e a internet, ela faz parte da revolução da Industria 4.0 e está cada vez mais presentes em nossas vidas. Desenvolver sistemas embarcados muitas vezes envolvem conectar esses sistemas na internet, e isso pode se dar atráves de diversos meios:
 
 1. Cabo de rede (Ethernet)
 1. Conexão WIFI
 1. 3G/4G/GSM
 1. Sistemas de comunicação de baixa energia:
-    
     - LoRa/ ...
 1. Sistema de comunicação proprietário 
-   
-   - AM/FM/...
+    - AM/FM/...
 
-Para cada aplicação existe uma forma de comunicação ideal, e vocês como engenheiros de computação
-devem estar cientes dessas formas e saber interagir com elas.
+Para cada aplicação existe uma forma de comunicação ideal, e vocês como engenheiros de computação devem estar cientes dessas formas e saber interagir com elas.
 
 Nesse laboratório iremos explorar um pouco a comunicação WIFI em sistemas embarcados, para isso iremos conectar um módulo externo a nossa placa que servirá como 'placa de rede' do nosso microcontrolador, esse módulo é o WINC 1500.
 
 !!! warning
-    Cuidado ao desenvolver sistemas IoT você é responsável pela segurança dos dados que estão sendo enviados/recebidos. E não só na ponta do embarcado, como também no armazenamento de dados no servidor.
+    Ao desenvolver sistemas IoT você é responsável pela segurança dos dados que estão sendo enviados/recebidos. E não só na ponta do embarcado, como também no armazenamento de dados no servidor.
     
     - https://www.iotforall.com/5-worst-iot-hacking-vulnerabilities/
     - https://observer.com/2015/07/eight-internet-of-things-security-fails/
@@ -107,12 +96,10 @@ Para validar, conecte **seu celular** na mesma rede WIFi e acesse o ip da sua m�
     Deixe o servidor rodando, vamos fazer o embarcado se conectar nele.
 
 !!! tip
-    Para descobrir seu IP abra outro terminal e execute o comando `ipconfig`, aqui para mim eu tive que acessar:
-    
-    http://192.168.0.138:5000
+    Para descobrir seu IP abra outro terminal e execute o comando `ipconfig`, nos exemplos iremos usar:  http://192.168.0.138:5000, mas ==você deve adequar o IP ao seu==.
     
     **Anote o seu IP, iremos usar mais para frente**
-    
+ 
 !!! example "Tarefas"
     1. Instalar `requirements.txt`
     1. Subir o servidor Flask
@@ -136,17 +123,17 @@ Conecte o módulo `WINC1500` no EXT-1 do kit de desenvolvimento.
 
 #### Entendendo o firmware
 
-Vamos relembrar um pouco de camada física e Tecweb agora, toda vez que você acessa uma página da internet um socket e criado, esse socket e um canal de comunicação TCP/UDP entre dois pontos via internet. Uma vez estabelecido o socket o client (no nosso caso o embarcado) pode fazer uma requisição (get) ou um envio de informação (post). Nesse exemplo iremos fazer um `get` no servidor que está rodando no seu computador.
+Vamos relembrar um pouco de camada física e Tecweb agora, toda vez que você acessa uma página da internet um socket é criado, este socket é um canal de comunicação TCP/UDP entre dois pontos via comunicação internet. Uma vez estabelecido o socket o client (no nosso caso o embarcado) pode fazer uma requisição (get) ou um envio de informação (post). Nesse exemplo iremos fazer um `get` no servidor que está rodando no seu computador.
 
 ![](imgs/wifi/socket.svg)
 
 Nosso firmware irá seguindo os seguintes passos a seguir:
 
-- WIFI:
+1. WIFI (camadas: `network access` e `internet`)
     1. Conecta no roteador
     1. Busca IP no DCHP
 
-- Socket (loop)
+2. Socket (camadas: `application` e `transport`)
     1. Cria novo socket
     1. Realiza get
     1. Lê ack
@@ -313,7 +300,8 @@ A mensagem com o conteúdo (head + json) é salva no buffer `p_recvMsg->pu8Buffe
        - status = 1: acende
        - status = 0: apaga
 
-== até aqui é C.==     
+!!! progress
+    Até aqui é C
 
 ### B - melhorando o firmware
 
