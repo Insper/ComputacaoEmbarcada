@@ -96,6 +96,13 @@ A oxiometria é gerada na tarefa `task_aps2` de forma artificial o dado gerado �
 
 A interface deve possuir identidade visual com o logo da empresa que escolheram, os recursos mínimos e extras do projeto estão listados a seguir.
 
+!!! info "Ao finalizar preencher"
+    ==Vai precisar gravar um vídeo.==
+    
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4OIkTlMoCxRAMqoH082zfQ1ibnrcfldery7pKzva5hYCeKg/viewform?embedded=true" width="640" height="340" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+    - https://docs.google.com/forms/d/e/1FAIpQLSe4OIkTlMoCxRAMqoH082zfQ1ibnrcfldery7pKzva5hYCeKg/viewform?usp=sf_link
+
 ### C
 
 Deve exibir:
