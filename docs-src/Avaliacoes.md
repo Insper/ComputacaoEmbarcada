@@ -40,7 +40,3 @@ serve como base para vocês estudarem.
 - [AV1 - 20b](/ComputacaoEmbarcada/20b/AV1)
     - Os alunos não tinham buzzer, mas vocês podem se quiser adicionar um tom (`tone`) para cada botão, vai ficar legal! Se fizer me manda o vídeo!
 - [AV1 - 20a](https://github.com/Insper/2020a-AV1-Embarcados)
-
-## Avaliação 2
-
-
