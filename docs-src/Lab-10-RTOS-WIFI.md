@@ -250,7 +250,7 @@ Vamos agora acionar o LED da placa conforme o status recebido no comando `get`, 
 
 Para isso, será necessário realizar o parse da mensagem HTML que é enviada pelo servidor, isso deve ser feito dentro da `task_process`. Lembre que nessa tarefa implementamos uma máquina de estados, e é no estado `msg` que possuímos a mensagem com o status do nosso LED.
 
-??? info "case msg"
+!!! info "case msg"
     ```c
       case MSG:
       printf("STATE: MSG \n");
