@@ -29,20 +29,26 @@ Dicas sobre o LVGL.
 
 - Controlar raio objeto (ex: botao quadrado):
 
-`lv_obj_set_style_local_radius(btn_on, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 0);`
+`lv_obj_set_style_local_radius(btn1, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 0);`
 
 - Mudar cor de fundo (ex: background do lcd):
 
 `lv_obj_set_style_local_bg_color(lv_scr_act(), LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);`
 
+Talvez seja necessário mudar a transparência (ex: label):
+
+```
+lv_obj_set_style_local_bg_color(label1, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_YELLOW);
+v_obj_set_style_local_bg_opa(label1, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_100);
+```
+
 - Mudar tamanho da fonte (ex: label):
 
-`lv_obj_set_style_local_text_font(labelFloor, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, &dseg70);`
+`lv_obj_set_style_local_text_font(label1, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, &dseg70);`
 
 - Mudar cor da fonte (ex: label):
 
- `lv_obj_set_style_local_text_color(labelFloor, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_YELLOW);`
-
+ `lv_obj_set_style_local_text_color(label1, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_YELLOW);`
 
 ## Extras
 
