@@ -104,7 +104,7 @@ Para validar, conecte **seu celular** na mesma rede WIFi e acesse o ip da sua m�
     1. Instalar `requirements.txt`
     1. Subir o servidor Flask
     1. Validar local (`http://localhost:5000`)
-    1. Validar de outro dispositivo (exemplo: `http://192.168.0.138:500`)
+    1. Validar de outro dispositivo (exemplo: `http://192.168.0.138:5000`)
         - isso testa se o seu Windows está permitindo acesso externo ao seu server, precisamos disso já que queremos que o embarcado se conecte a esse servidor.
     1. Mantenha o servidor em execução.
     ==NÃO SIGA SEM QUE TODOS OS PASSOS ANTERIORES ESTIVEREM FUNCIONANDO==
