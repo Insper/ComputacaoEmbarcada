@@ -271,6 +271,7 @@ Para isso, será necessário realizar o parse da mensagem HTML que é enviada pe
 
 A mensagem com o conteúdo (head + json) é salva no buffer `p_recvMsg->pu8Buffer)`. 
 
+
 !!! info "Exemplo do conteúdo do buffer"
     ```
     Content-Type: application/json
