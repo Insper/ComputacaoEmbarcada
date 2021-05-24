@@ -335,3 +335,9 @@ Podemos melhorar várias coisas nesse projeto, mas vamos por partes. A primeira 
 !!! example "Tarefa"
     - Adicione o botão da placa  -> callback -> semáforo 
     - O LED é controlado ou pelo botão da placa ou pelo servidor flask
+
+------------
+
+!!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc_G8Uhd5flV_VzFYauCQgGg3St8VFl-Ah4iMQtfmFd7GvWkg/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
