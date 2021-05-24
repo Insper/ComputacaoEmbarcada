@@ -57,7 +57,6 @@ Esse laboratório faz uso do exemplo disponível no repositório `SAME70-Example
 
 ### python-server
 
-
 Acesse a pasta `python-server` que contém o script `server.py`, instale o flask via pip e execute o programa:
 
 ```bash
@@ -89,7 +88,6 @@ O servidor em Flask é simples e permite que alteremos uma variável `led` via u
 
 #### Preparando o WebServer
 
-
 Para validar, conecte **seu celular** na mesma rede WIFi e acesse o ip da sua máquina na porta 5000 e valide se o webserver está funcionando.
 
 !!! info
@@ -100,6 +98,12 @@ Para validar, conecte **seu celular** na mesma rede WIFi e acesse o ip da sua m�
     
     **Anote o seu IP, iremos usar mais para frente**
  
+    Se não funcionar, talvez seja necessário desativar o firewall do windows:
+    
+    - https://support.microsoft.com/en-us/windows/turn-microsoft-defender-firewall-on-or-off-ec0844f7-aebd-0583-67fe-601ecf5d774f
+    
+    ==Lembre de ativar novamente após a atividade.==
+    
 !!! example "Tarefas"
     1. Instalar `requirements.txt`
     1. Subir o servidor Flask
