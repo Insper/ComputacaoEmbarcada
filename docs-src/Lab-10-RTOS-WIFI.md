@@ -8,7 +8,7 @@ Neste laboratório iremos modificar o exemplo RTOS-WIFI, que realiza uma requisi
 
 | Exemplo base                                                     | LAB                 |
 | ------------------------------------------------------------     | ------------------- |
-| `SAME70-Examples/RTOS/WIFI-WINC1500-get-RTOS-EXT1` :arrow_right: | `Lab9-RTOS-WIFI`  |
+| [SAME70-Examples/Comunicacao/WIFI-WINC1500-get-RTOS-EXT1](https://github.com/Insper/SAME70-examples/tree/master/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1)https://github.com/Insper/SAME70-examples/tree/master/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1 :arrow_right: | `Lab9-RTOS-WIFI`  |
 
 !!! warning "Código exemplo"
     - ==Atualizar o repositório do SAME70-Examples==
@@ -57,7 +57,6 @@ Esse laboratório faz uso do exemplo disponível no repositório `SAME70-Example
 
 ### python-server
 
-
 Acesse a pasta `python-server` que contém o script `server.py`, instale o flask via pip e execute o programa:
 
 ```bash
@@ -89,7 +88,6 @@ O servidor em Flask é simples e permite que alteremos uma variável `led` via u
 
 #### Preparando o WebServer
 
-
 Para validar, conecte **seu celular** na mesma rede WIFi e acesse o ip da sua máquina na porta 5000 e valide se o webserver está funcionando.
 
 !!! info
@@ -100,11 +98,17 @@ Para validar, conecte **seu celular** na mesma rede WIFi e acesse o ip da sua m�
     
     **Anote o seu IP, iremos usar mais para frente**
  
+    Se não funcionar, talvez seja necessário desativar o firewall do windows:
+    
+    - https://support.microsoft.com/en-us/windows/turn-microsoft-defender-firewall-on-or-off-ec0844f7-aebd-0583-67fe-601ecf5d774f
+    
+    ==Lembre de ativar novamente após a atividade.==
+    
 !!! example "Tarefas"
     1. Instalar `requirements.txt`
     1. Subir o servidor Flask
     1. Validar local (`http://localhost:5000`)
-    1. Validar de outro dispositivo (exemplo: `http://192.168.0.138:500`)
+    1. Validar de outro dispositivo (exemplo: `http://192.168.0.138:5000`)
         - isso testa se o seu Windows está permitindo acesso externo ao seu server, precisamos disso já que queremos que o embarcado se conecte a esse servidor.
     1. Mantenha o servidor em execução.
     ==NÃO SIGA SEM QUE TODOS OS PASSOS ANTERIORES ESTIVEREM FUNCIONANDO==
@@ -250,7 +254,7 @@ Vamos agora acionar o LED da placa conforme o status recebido no comando `get`, 
 
 Para isso, será necessário realizar o parse da mensagem HTML que é enviada pelo servidor, isso deve ser feito dentro da `task_process`. Lembre que nessa tarefa implementamos uma máquina de estados, e é no estado `msg` que possuímos a mensagem com o status do nosso LED.
 
-??? info "case msg"
+!!! info "case msg"
     ```c
       case MSG:
       printf("STATE: MSG \n");
@@ -270,6 +274,7 @@ Para isso, será necessário realizar o parse da mensagem HTML que é enviada pe
     ```
 
 A mensagem com o conteúdo (head + json) é salva no buffer `p_recvMsg->pu8Buffer)`. 
+
 
 !!! info "Exemplo do conteúdo do buffer"
     ```
@@ -335,3 +340,9 @@ Podemos melhorar várias coisas nesse projeto, mas vamos por partes. A primeira 
 !!! example "Tarefa"
     - Adicione o botão da placa  -> callback -> semáforo 
     - O LED é controlado ou pelo botão da placa ou pelo servidor flask
+
+------------
+
+!!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSed-8ufGYoCbJlhiZt2vhSIt7KwIXyjGS70o79EQyJAtvjyWw/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
