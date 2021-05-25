@@ -1,0 +1,103 @@
+milestone:
+  mile0:
+    title: 23/4           
+    state: open
+    due_on: '2021-06-16T23:00:01Z'
+
+issues:
+  issue0:
+    Title: 1 - Valor Digital
+    Milestone: 23/4
+    Body: |
+      Definir e configurar pino que será utilizado para o valor digital.
+
+      [comment]: <> (- [ ] Atualizar `README.md` com definição do pino.)
+      - [ ] Inserir `#defines` no  `main.c` com valores certos
+      ```c
+      #define DIGITAL_PIO
+      #define DIGITAL_PIO_ID
+      #define DIGITAL_PIO_IDX
+      #define DIGITAL_PIO_IDX_MASK
+      ```
+      - [ ] Atualizar função  `init()` configurando o pino como input
+
+      Dicas (opcional):
+
+	  -[ ] Escolher um pino diferente do que já utilizado pelo módulo WIFI ou pela tela LCD
+	  -[ ] Testar a leitura do valor digital no terminal `printf("digital: %d", valor_digital)`;
+      [comment]: <> (- [ ] Criar função `void set_buzzer();` que coloca 1 no pino do buzzer)
+      [comment]: <> (- [ ] Criar função `void clear_buzzer();` que coloca 0 no pino do buzzer)
+
+      > Lembre de não fechar o issue, pedir feedback para a equipe!
+
+  issue1:
+    Title: 2 - Valor Analógico
+    Milestone: 23/4
+    Body: |
+      Definir e configurar pino que será utilizado para o valor analógico.
+
+	  - [ ] Consultar no manual o pino disponível para se utilizar o AFEC
+      - [ ] Atualizar `README.md` com definição do pino.
+      - [ ] Inserir `#defines` no  `main.c` com valores certos
+      ```c
+      #define ANALOG_PIO
+      #define ANALOG_PIO_ID
+      #define ANALOG_PIO_IDX
+      #define ANALOG_PIO_IDX_MASK
+      ```
+      - [ ] Atualizar função `init()` para configurar o pino do AFEC `config_AFEC_pot()`
+
+      Dicas (opcional):
+
+      [comment]: <> (- [ ] Criar função `int get_startstop();` que retorna o status do botão (1/0))
+	  - [ ] Escolher um pino diferente do que já utilizado pelo módulo WIFI ou pela tela LCD
+	  - [ ] Testar a leitura do valor analógico no terminal `printf("%d", adc.value);`;
+	  
+      > Lembre de não fechar o issue, pedir feedback para a equipe!
+
+  issue2:
+    Title: 3 - Task para a leitura dos valores
+    Milestone: 23/4
+    Body: |
+      Criar uma task que inicie os pinos, e coloque os valores em uma fila
+
+      - [ ] Atualizar `README.md` com definição da task_values
+      ```
+
+      ```
+      - [ ] Criar a taks e a fila na `main()`
+      ```c
+	  xQueueCreate();
+	  xTaskCreate();
+	  ```
+
+      Dicas (opcional):
+
+      - [ ] Testar a leitura da fila, printando os valores Digital e Analogico
+
+      > Lembre de não fechar o issue, pedir feedback para a equipe!
+	  
+  issue3:
+    Title: 4 - Hospedar aplicação flask
+    Milestone: 23/4
+    Body: |
+      Hospedar na AWS, Heroku ou algum outro de sua preferência
+
+     
+      - [ ] Enviar os dados e verificar se o servidor está recebendo
+      - [ ] 
+
+      > Lembre de não fechar o issue, pedir feedback para a equipe!
+
+  issue5:
+    Title: 5 - Enviar o valores com ID e Timestamp
+    Milestone: 23/4
+    Body: |
+      Criar uma task para enviar os valores ao servidor com ID e Timestamp
+
+     
+      - [ ] Criar a task
+	  - [ ] Configurar o RTC, utilizar o `rtc_get_time()`
+      - [ ] Acrescenta na struct para envio dos valores ID e Timestamp
+
+      > Lembre de não fechar o issue, pedir feedback para a equipe!
