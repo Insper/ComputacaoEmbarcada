@@ -300,8 +300,8 @@ A mensagem com o conteúdo (head + json) é salva no buffer `p_recvMsg->pu8Buffe
 
 !!! example "Tarefas"
     1. Inicialize o led da placa como saída
-    1. Modificar o estado `get` para encontrar o valor do led
-    1. modifique o status do led:
+    1. Modificar o estado `MSG` para encontrar o valor do led
+    1. modifique O led para:
        - status = 1: acende
        - status = 0: apaga
 
