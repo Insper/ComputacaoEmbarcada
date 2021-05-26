@@ -6,6 +6,10 @@
 
 Um sistema embarcado de coleta e transmissão de dados via Wi-Fi (data logger), será utilizado o módulo [`WINC1500`](https://www.microchip.com/wwwproducts/en/ATWINC1500) como placa de rede Wi-Fi do nosso uC. 
 
+
+!!! info
+    Criar repositório pelo classroom: https://classroom.github.com/g/XY1XxJiK
+
 ## Descrição
 
 Nessa APS vocês deverão desenvolver um sistema embarcado e uma aplicação web que coleta alguns dados do mundo real e os envia para um servidor Web. Esse envio será feito via uma conexão Wi-Fi (módulo conectado no kit de desenvolvimento) e deverá ser armazenado por um servidor desenvolvido por vocês e hospedado na Web.
