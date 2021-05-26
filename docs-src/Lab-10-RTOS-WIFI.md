@@ -6,10 +6,9 @@ Neste laboratório iremos modificar o exemplo RTOS-WIFI, que realiza uma requisi
 
 ## Lab    
 
-| Exemplo base                                                     | LAB                 |
-| ------------------------------------------------------------     | ------------------- |
-| [
-SAME70-examples/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1/](https://github.com/Insper/SAME70-examples/tree/master/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1) :arrow_right: | `Lab9-RTOS-WIFI`  |
+| Exemplo base                              | LAB                   |
+|-------------------------------------------|-----------------------|
+| `SAME70-examples/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1` :arrow_right: | `Lab9-RTOS-WIFI` |
 
 !!! warning "Código exemplo"
     - ==Atualizar o repositório do SAME70-Examples==
