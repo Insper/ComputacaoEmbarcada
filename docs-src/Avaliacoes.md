@@ -10,6 +10,10 @@ site da matéria.
 É importante vocês cronometrarem o tempo que levaram para 
 realizar o estudo, ==pois no dia da avaliação terão 3h==.
 
+## Avaliação 3
+
+O mesmo conteúdo da AV2, sugerimos estudar pelos simulados e avaliações (AV1 e AV2).
+
 ## Avaliação 2
 
 Conteúdo: 
