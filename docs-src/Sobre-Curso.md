@@ -9,14 +9,13 @@ A avaliação é composta de: Projeto, APS, Avaliação Prática e Auto avaliaç
 - Avaliação prática: individual, são 3 no total (2 + delta)
 - Auto avaliação: individual, mapeia os objetivos de aprendizagem.
 
-!!! info "2021-1"
-    Aulas de Segunda 100% online dedicadas ao Projeto e APSs, as de laboratório às Quartas/Quintas (com 1/2 turma) no formato hibrido.
+Critérios Para um aluno ser aprovado no curso, é necessário que:
 
-    - Projeto-1: Desenvolver um controle bluetooth
-    - APS-1: Musical
-    - APS-2: Interface gráfica oxímetro
-    - APS-3: IoT
-    - Entrega dos LABs
+1. Todas as APS com conceito igual ou superior a C.
+2. Possuir ao menos duas notas com valor igual ou superior a C entre as três avaliações.
+3. Projeto com nota igual ou superior a C.
+
+A nota final se dará pela média simples entre: AI, APS e Projeto (descartando a pior nota da AI)
 
 ## Objetivos de aprendizagem 
 
