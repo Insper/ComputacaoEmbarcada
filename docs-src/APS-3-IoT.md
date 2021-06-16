@@ -32,9 +32,9 @@ O protótipo deve possuir os recursos mínimos (C) e para cada item extra é adi
 - Dados devem possuir identificador de dispositivo - `ID`
 - Embarcado deve sincronizar hora com Web
     - exemplo já pega calendário e hora da web, precisa atualizar RTC com esses valores.
-- **Servidor hospedado em nuvem (aws, ...)**
-- **Demonstrar com mais de um dispositivo funcionando ao mesmo tempo**
-    - os dois integrantes executam ao mesmo tempo.
+- ~~Servidor hospedado em nuvem (aws, ...)~~
+- ~~Demonstrar com mais de um dispositivo funcionando ao mesmo tempo~~
+    - ~~os dois integrantes executam ao mesmo tempo.~~
     
 ### extras
 
@@ -53,3 +53,7 @@ Cada item a mais adiciona meio conceito na nota.
 - **Formatar dado para envio com [`json`](https://github.com/zserge/jsmn)**
 - Forma fácil de configurar dispositivo em rede WIFI
     - SDCARD/ UART/ `_provision_mode`
+
+- (+1.0) Servidor hospedado em nuvem (aws, ...)**
+- (+0.5) Demonstrar com mais de um dispositivo funcionando ao mesmo tempo
+    - os dois integrantes executam ao mesmo tempo.
