@@ -23,6 +23,11 @@ Os dados devem possuir [timestamp](https://en.wikipedia.org/wiki/Timestamp) (TS)
 
 O protótipo deve possuir os recursos mínimos (C) e para cada item extra é adiconado meio conceito. Vocês Devem gravar um vídeo demonstrando o funcionamento da APS (embarcado, servidor) funcionando.
 
+!!! info
+    Ao finalizar preencher o forms a seguir:
+    
+    - https://docs.google.com/forms/d/e/1FAIpQLSf8Y3ZrmyTn0DkS5bNTRbRQCQ6lBXUE6E-o3fF7_GXiyv5tVg/viewform
+
 ### C
 
 - Coletar e enviar para um servidor:
