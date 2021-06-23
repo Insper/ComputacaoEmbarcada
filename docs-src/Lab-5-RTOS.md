@@ -402,6 +402,9 @@ vermelho.
        * does not attempt to use the semaphore before it is created!
        */
       xSemaphore = xSemaphoreCreateBinary();
+           
+      if (xSemaphore == NULL)
+        printf("Falha em criar o semaforo \n");
     
       /*
        * devemos iniciar a interrupcao no pino somente apos termos alocado
@@ -414,10 +417,7 @@ vermelho.
       pio_enable_interrupt(BUT1_PIO, BUT1_PIO_IDX_MASK);
       NVIC_EnableIRQ(BUT1_PIO_ID);
       NVIC_SetPriority(BUT1_PIO_ID, 4); // Prioridade 4
-    
-      if (xSemaphore == NULL)
-        printf("Falha em criar o semaforo \n");
-    
+        
       for (;;) {
         // aguarda semáforo com timeout de  500 ms
         if( xSemaphoreTake(xSemaphore, ( TickType_t ) 500 / portTICK_PERIOD_MS) == pdTRUE ){
