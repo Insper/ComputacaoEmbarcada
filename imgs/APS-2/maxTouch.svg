@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="maxTouch.svg">
+  <defs
+     id="defs2">
+    <clipPath
+       id="clipPath852"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path850"
+         d="M 0,0 H 539 V 899 H 0 Z" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="-61.096077"
+     inkscape:cy="1166.8802"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2880"
+     inkscape:window-height="1620"
+     inkscape:window-x="950"
+     inkscape:window-y="193"
+     inkscape:window-maximized="0"
+     showborder="false" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g1394">
+      <g
+         transform="translate(0,-0.1663086)"
+         id="g1380">
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -161.76456,-61.465671 h -7.48354"
+           id="path1301"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -161.76456,-55.432978 h -7.48354"
+           id="path1301-0"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -161.76456,-49.400273 h -7.48354"
+           id="path1301-1"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -161.76456,-46.383933 h -7.48354"
+           id="path1301-01"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -161.76456,-52.416635 h -7.48354"
+           id="path1301-3"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -161.76456,-58.449342 h -7.48354"
+           id="path1301-7"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -161.76456,-64.482037 h -7.48354"
+           id="path1301-72"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m -161.76456,-43.36756 h -7.48354"
+           id="path1301-01-6"
+           inkscape:connector-curvature="0" />
+      </g>
+      <g
+         transform="translate(14.03165,-16.771163)"
+         id="g1110">
+        <path
+           inkscape:connector-curvature="0"
+           style="opacity:1;fill:#4d4d4d;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m -625.94922,-320.67383 c -14.89576,0 -26.88672,11.99096 -26.88672,26.88672 v 104.16406 h -18.44531 c -0.27981,0 -0.50391,0.22605 -0.50391,0.50586 v 96.130862 c 0,0.279812 0.2241,0.505859 0.50391,0.505859 h 18.44531 V 11.683594 c 0,14.895756 11.99096,26.886718 26.88672,26.886718 h 445.46875 c 14.89576,0 26.88867,-11.990962 26.88867,-26.886718 V -293.78711 c 0,-14.89576 -11.99291,-26.88672 -26.88867,-26.88672 z"
+           transform="scale(0.26458333)"
+           id="rect815-3-6" />
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.79374999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="rect815-3"
+           width="121.50833"
+           height="84.466667"
+           x="-167.43794"
+           y="-79.553276"
+           ry="0" />
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Inconsolata;-inkscape-font-specification:Inconsolata;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-167.47937"
+       y="93.198845"
+       id="text1061"><tspan
+         sodipodi:role="line"
+         x="-167.47937"
+         y="99.866348"
+         style="stroke-width:0.26458332"
+         id="tspan1067" /></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1096"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:Inconsolata;font-style:normal;font-weight:normal;font-size:42.66666667px;line-height:1.25;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:Inconsolata;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion1098"><rect
+           id="rect1100"
+           width="65.714287"
+           height="378.57144"
+           x="-698.57141"
+           y="-601.76605" /></flowRegion><flowPara
+         id="flowPara1102"></flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:Inconsolata;-inkscape-font-specification:Inconsolata;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-177.08876"
+       y="-118.64735"
+       id="text1106"><tspan
+         sodipodi:role="line"
+         id="tspan1104"
+         x="-177.08876"
+         y="-118.64735"
+         style="stroke-width:0.26458332">APS INTERFACE - CicloComputador</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Inconsolata;-inkscape-font-specification:Inconsolata;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-166.31157"
+       y="31.350201"
+       id="text1170"><tspan
+         sodipodi:role="line"
+         id="tspan1168"
+         x="-166.31157"
+         y="31.350201"
+         style="stroke-width:0.26458332">O LCD utilizado na disciplina possui</tspan><tspan
+         sodipodi:role="line"
+         x="-166.31157"
+         y="40.169643"
+         style="stroke-width:0.26458332"
+         id="tspan1172">480x320 pixels.</tspan><tspan
+         sodipodi:role="line"
+         x="-166.31157"
+         y="48.98909"
+         style="stroke-width:0.26458332"
+         id="tspan1211" /><tspan
+         sodipodi:role="line"
+         x="-166.31157"
+         y="57.808533"
+         style="stroke-width:0.26458332"
+         id="tspan1213">Note que toda fonte utilizada deve ser gerada </tspan><tspan
+         sodipodi:role="line"
+         x="-166.31157"
+         y="66.627975"
+         style="stroke-width:0.26458332"
+         id="tspan1215">para o sistema embarcado (tipo, tamanho e</tspan><tspan
+         sodipodi:role="line"
+         x="-166.31157"
+         y="75.447418"
+         style="stroke-width:0.26458332"
+         id="tspan1217">fundo), o mesmo se aplica a imagens/icones.</tspan><tspan
+         sodipodi:role="line"
+         x="-166.31157"
+         y="84.266869"
+         style="stroke-width:0.26458332"
+         id="tspan1263" /><tspan
+         sodipodi:role="line"
+         x="-166.31157"
+         y="93.086311"
+         style="stroke-width:0.26458332"
+         id="tspan1271">Você deve justificar a escolha da</tspan><tspan
+         sodipodi:role="line"
+         x="-166.31157"
+         y="101.90575"
+         style="stroke-width:0.26458332"
+         id="tspan1273">fonte, dos icones e da localicação </tspan><tspan
+         sodipodi:role="line"
+         x="-166.31157"
+         y="110.7252"
+         style="stroke-width:0.26458332"
+         id="tspan1275">dos elementos.</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1198"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:Inconsolata;font-style:normal;font-weight:normal;font-size:42.66666667px;line-height:1.25;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:Inconsolata;font-stretch:normal;font-variant:normal"><flowRegion
+         id="flowRegion1200"><rect
+           id="rect1202"
+           width="573.76666"
+           height="67.680222"
+           x="187.88837"
+           y="-69.46032" /></flowRegion><flowPara
+         id="flowPara1204"></flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Inconsolata;-inkscape-font-specification:Inconsolata;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-14.699824"
+       y="-70.228325"
+       id="text1285"><tspan
+         sodipodi:role="line"
+         id="tspan1283"
+         x="-14.699824"
+         y="-70.228325"
+         style="stroke-width:0.26458332">Referências:</tspan><tspan
+         sodipodi:role="line"
+         x="-14.699824"
+         y="-61.408882"
+         style="stroke-width:0.26458332"
+         id="tspan1287">  - https://thenounproject.com/</tspan><tspan
+         sodipodi:role="line"
+         x="-14.699824"
+         y="-52.589436"
+         style="stroke-width:0.26458332"
+         id="tspan1289">  - https://www.flaticon.com/  </tspan><tspan
+         sodipodi:role="line"
+         x="-14.699824"
+         y="-43.769993"
+         style="stroke-width:0.26458332"
+         id="tspan1291">  - https://www.freepik.com/</tspan><tspan
+         sodipodi:role="line"
+         x="-14.699824"
+         y="-34.950546"
+         style="stroke-width:0.26458332"
+         id="tspan1293"> </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Inconsolata;-inkscape-font-specification:Inconsolata;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-9.0871639"
+       y="-29.068823"
+       id="text1297"><tspan
+         sodipodi:role="line"
+         id="tspan1295"
+         x="-9.0871639"
+         y="-29.068823"
+         style="stroke-width:0.26458332;font-weight:bold">Alerta: Se usar icones com direito autoral, o mesmo</tspan><tspan
+         sodipodi:role="line"
+         x="-9.0871639"
+         y="-20.249378"
+         style="stroke-width:0.26458332;font-weight:bold"
+         id="tspan1299">deve ser referênciado no projeto e sua licença respeitada</tspan></text>
+  </g>
+</svg>

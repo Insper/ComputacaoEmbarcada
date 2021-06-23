@@ -1,0 +1,1660 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.8">
+    
+    
+      
+        <title>Começando - 5s - Computação Embarcada</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="pink">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#comecando" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="5s - Computação Embarcada" class="md-header__button md-logo" aria-label="5s - Computação Embarcada" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            5s - Computação Embarcada
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Começando
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Insper/ComputacaoEmbarcada
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="5s - Computação Embarcada" class="md-nav__button md-logo" aria-label="5s - Computação Embarcada" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    5s - Computação Embarcada
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Insper/ComputacaoEmbarcada
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sobre-Curso.html" class="md-nav__link">
+        Sobre o curso
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Insper/SAME70-examples" class="md-nav__link">
+        SAME70-Examples
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Videos.html" class="md-nav__link">
+        Vídeos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Util
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Util" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Util
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sobre-Ferramental.html" class="md-nav__link">
+        Ferramental
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Startup.html" class="md-nav__link">
+        Startup
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Erros.html" class="md-nav__link">
+        Erros comum
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Documentos.html" class="md-nav__link">
+        Documentos
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Dicas
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Dicas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Dicas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Dicas.html" class="md-nav__link">
+        PIO
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-lcd.html" class="md-nav__link">
+        LCD max Touch
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-freertos.html" class="md-nav__link">
+        Freertos
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-FloatPrint.html" class="md-nav__link">
+        Float Print (Atmel Studio)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-lvgl.html" class="md-nav__link">
+        LVGL
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7">
+        Labs
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Labs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Labs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
+      
+      <label class="md-nav__link" for="__nav_7_1">
+        Lab 1 - PIO 
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 1 - PIO " data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 1 - PIO 
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
+      
+      <label class="md-nav__link" for="__nav_7_2">
+        Lab 2 - Driver
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 2 - Driver" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 2 - Driver
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-2-PIO-Driver-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-2-PIO-Driver-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
+      
+      <label class="md-nav__link" for="__nav_7_3">
+        Lab 3 - PIO IRQ
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 3 - PIO IRQ" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 3 - PIO IRQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-3-PIO-IRQ-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-3-PIO-IRQ-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-4-TickTack-Lab.html" class="md-nav__link">
+        Lab 4 - TC RTC RTT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      <label class="md-nav__link" for="__nav_7_5">
+        Lab 5 - RTOS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 5 - RTOS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 5 - RTOS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-5-RTOS.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-5-RTOS-dicas.html" class="md-nav__link">
+        Dicas
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-6-RTOS-ADC.html" class="md-nav__link">
+        Lab 6 - RTOS - ADC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7" type="checkbox" id="__nav_7_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7_7">
+        Lab 7 - RTOS LCD
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 7 - RTOS LCD" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_7">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 7 - RTOS LCD
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Começando
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Lab-7-RTOS-LCD-lvgl.html" class="md-nav__link md-nav__link--active">
+        Começando
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inicio" class="md-nav__link">
+    Início
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lcd" class="md-nav__link">
+    LCD
+  </a>
+  
+    <nav class="md-nav" aria-label="LCD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ili9341" class="md-nav__link">
+    ILI9341
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#touch" class="md-nav__link">
+    Touch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lvgl" class="md-nav__link">
+    LVGL
+  </a>
+  
+    <nav class="md-nav" aria-label="LVGL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base" class="md-nav__link">
+    Base
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#porting-lvgl" class="md-nav__link">
+    Porting lvgl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framebuffer" class="md-nav__link">
+    framebuffer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcao-main" class="md-nav__link">
+    Função main
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task_lcd" class="md-nav__link">
+    task_lcd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-tela" class="md-nav__link">
+    Criando tela
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-7-RTOS-LCD-lvgl-lab.html" class="md-nav__link">
+        LAB
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-9-ECG.html" class="md-nav__link">
+        Lab 8 - ECG
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-10-RTOS-WIFI.html" class="md-nav__link">
+        Lab 9 - WIFI
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        Projeto
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Projeto" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Projeto
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Descricao.html" class="md-nav__link">
+        Descrição
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf" class="md-nav__link">
+        Controle
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://app.mural.co/t/elementos9119/m/elementos9119/1616424619557/3341fbe703cab0b531da459548f0124af1af1669" class="md-nav__link">
+        Handout 1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Rubrica.html" class="md-nav__link">
+        Rubrica
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Dicas.html" class="md-nav__link">
+        Dicas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Lista.html" class="md-nav__link">
+        Anos passados
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      <label class="md-nav__link" for="__nav_9">
+        APS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="APS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          APS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-howto.html" class="md-nav__link">
+        HowTo
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
+      
+      <label class="md-nav__link" for="__nav_9_2">
+        APS 1 - Musical
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="APS 1 - Musical" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_2">
+          <span class="md-nav__icon md-icon"></span>
+          APS 1 - Musical
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-1-Musical.html" class="md-nav__link">
+        APS 1 - Musical
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-1-Musical-software.html" class="md-nav__link">
+        APS 1 - Musical - Firmware
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-2-Oximetro.html" class="md-nav__link">
+        APA 2 - Oxímetro
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-3-IoT.html" class="md-nav__link">
+        APS 3 - IoT
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Avaliacoes.html" class="md-nav__link">
+        Avaliações e Simulados
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#inicio" class="md-nav__link">
+    Início
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lcd" class="md-nav__link">
+    LCD
+  </a>
+  
+    <nav class="md-nav" aria-label="LCD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ili9341" class="md-nav__link">
+    ILI9341
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#touch" class="md-nav__link">
+    Touch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lvgl" class="md-nav__link">
+    LVGL
+  </a>
+  
+    <nav class="md-nav" aria-label="LVGL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base" class="md-nav__link">
+    Base
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#porting-lvgl" class="md-nav__link">
+    Porting lvgl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#framebuffer" class="md-nav__link">
+    framebuffer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcao-main" class="md-nav__link">
+    Função main
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task_lcd" class="md-nav__link">
+    task_lcd
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-tela" class="md-nav__link">
+    Criando tela
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/Lab-7-RTOS-LCD-lvgl.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="comecando">Começando<a class="headerlink" href="#comecando" title="Permanent link">&para;</a></h1>
+<p>Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciar o LCD max Touch, o forte desse lab será a linguagem C e como estruturar um firmware.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><mark>Atualizem o repositório SAME70-Examples antes de continuar</mark></p>
+</div>
+<table>
+<thead>
+<tr>
+<th>LAB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Lab7-RTOS-LCD-lvgl</code></td>
+</tr>
+</tbody>
+</table>
+<p>Neste laboratório iremos:</p>
+<ol>
+<li>Conectar o LCD no kit de desenvolvimento</li>
+<li>Executar demo de teste do LCD</li>
+<li>Executar demo de teste do touch</li>
+<li>Executar e modificar o exemplo do lvgl</li>
+</ol>
+<h3 id="inicio">Início<a class="headerlink" href="#inicio" title="Permanent link">&para;</a></h3>
+<p>Antes de começarmos será necessário realizarmos a conexão do LCD no kit e então validarmos a conexão do LCD e depois do touch.</p>
+<div class="admonition info">
+<p class="admonition-title">Conectando LCD</p>
+<p>Primeiro faça as ligações:</p>
+<ol>
+<li>Plugue o LCD max Touch no <mark>EXT2</mark> seguindo as instruções em: <a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-Hardware">SAME70-examples/Screens/2.8-TFT-LCD-ILI9341-Hardware</a></li>
+</ol>
+<p>Depois valide: </p>
+<ul>
+<li>
+<p>Execute o código exemplo que desenha uma foto no LCD: <a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-image">Screens/2.8-TFT-LCD-ILI9341-image/</a></p>
+</li>
+<li>
+<p>Valide o touchscreen com o código: <a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-touch">Screens/2.8-TFT-LCD-ILI9341-touch/</a></p>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Terminal</p>
+<p>Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:</p>
+<p><img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> View <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> Terminal Window</p>
+<p>Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de 115200.</p>
+</div>
+<h2 id="lcd">LCD<a class="headerlink" href="#lcd" title="Permanent link">&para;</a></h2>
+<p>O LCD que iremos usar nas próximas atividades da disciplina é fabricado pela adafruit com o nome de: <a href="https://www.adafruit.com/product/1770"><code>2.8" TFT LCD with Touchscreen Breakout Board w/MicroSD Socket - ILI9341</code></a> ele possui um LCD de <code>240x320</code> pixels operando em RGB e com uma sensor touch resistivo. O LCD é controlado por um controlador chamado de <a href="https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf"><strong>ILI9341</strong></a> ele é responsável por atualizar e exibir as informações na tela. </p>
+<p><img alt="" src="https://cdn-shop.adafruit.com/970x728/1770-01.jpg" width="500" /></p>
+<h3 id="ili9341">ILI9341<a class="headerlink" href="#ili9341" title="Permanent link">&para;</a></h3>
+<p>O LCD utiliza o circuito integrado <a href="https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf">ILI9341</a> como controlador do display, este CI é responsável por toda parte de baixo nível de acesso ao LCD, este chip possui duas formas de interface com o uC: Paralelo e SPI. Iremos utilizar ele operando via SPI como ilustrado a seguir:</p>
+<div class="highlight"><pre><span></span><code>  x---------x           x---------x
+  |         |           |         |
+  | uc      |           | LCD     |
+  |   ------|    spi    |-------  |
+  |   | spi | &lt;---/---&gt; | ili  |  |
+  x---------x           x---------x
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Para realizar a interface com o LCD portei o código de referência da ATMEL <br />
+<a href="https://asf.microchip.com/docs/latest/xmegaa/html/group__ili9341__group.html">ILI9341 Display Controller Component Driver</a> para o SAME70.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">ILI9341</p>
+<p><strong>a-Si TFT LCD Single Chip Driver 240RGBx320 Resolution and 262K color</strong></p>
+<p>LI9341 is a 262,144-color single-chip SOC driver for a-TFT liquid crystal display with resolution of 240RGBx320 dots,  comprising  a  720-channel  source  driver,  a  320-channel  gate  driver,  172,800 bytes  GRAM  for  graphic display data of 240RGBx320 dots, and power supply circuit.</p>
+<p>ILI9341  supports  parallel  8-/9-/16-/18-bit  data  bus  MCU  interface,  6-/16-/18-bit  data  bus  RGB  interface  and 3-/4-line serial peripheral interface (SPI). The moving picture area can be specified in internal GRAM by window address  function.  The  specified  window  area  can  be updated  selectively,  so  that  moving  picture  can  be displayed simultaneously independent of still picture area. </p>
+<p>ILI9341  can  operate  with  1.65V  ~  3.3V  I/O  interface  voltage  and  an  incorporated  voltage  follower  circuit  to generate voltage levels for driving an LCD. ILI9341 supports full color, 8-color display mode and sleep mode for precise power control by software and these features make the ILI9341 an ideal LCD driver for medium or small size portable products such as digital cellular phones, smart phone, MP3 and PMP where long battery life is a major concern.  </p>
+<blockquote>
+<p>Extraído do manual.</p>
+</blockquote>
+</div>
+<h3 id="touch">Touch<a class="headerlink" href="#touch" title="Permanent link">&para;</a></h3>
+<p>O LCD possui um "película" de <a href="https://en.wikipedia.org/wiki/Resistive_touchscreen">touchscreen resistivo</a> que possibilita detectarmos toques na tela.</p>
+<p><img alt="" src="imgs/lvgl/resistive.png" width="300" /> 
+<img alt="" src="imgs/lvgl/resistive2.png" width="300" /></p>
+<p>A película fornece dois valores de resistência: X e Y e via duas leituras analógicas conseguimos estimar onde aconteceu o toque na tela, e inclusive a pressão do toque.</p>
+<blockquote>
+<p>Fonte das figuras: <a href="https://www.ti.com/lit/an/slyt209a/slyt209a.pdf">https://www.ti.com/lit/an/slyt209a/slyt209a.pdf</a></p>
+</blockquote>
+<p>A Conexão do touch resistivo com o uC acontece da seguinte maneira:</p>
+<div class="highlight"><pre><span></span><code>  x---------x          x----------- x
+  |     dx  | -------&gt; |  t  | LCD |
+  | uc  dy  | -------&gt; |  o  |     |
+  |    AFEC | &lt;------- |  u  |     |
+  |    AFEC | &lt;------- |  c  |     |
+  x---------x          x-----------x
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Para realizar a leitura do touch resistivo portei o código da <a href="https://github.com/adafruit/Adafruit_TouchScreen">adafruit TouchScreen</a> para o SAME70.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Telas resistivas não são tão boas quanto as capacitivas que apenas com o toque na tela o contato já é detectado, nas resistivas é necessário um pouco mais de pressão.</p>
+</div>
+<h2 id="lvgl">LVGL<a class="headerlink" href="#lvgl" title="Permanent link">&para;</a></h2>
+<p>Uma coisa é conseguir acessar o LCD e transmitir pixels outra é ter uma biblioteca capaz de desenhar coisas no LCD (botões, imagens, textos, gráficos, ...). Existem várias bibliotecas gráficas para sistemas embarcados, o site a seguir possui uma lista e um comparativo entre elas: </p>
+<ul>
+<li><a href="https://itnext.io/top-five-libraries-for-creating-gui-on-embedded-linux-5ce03903be32">https://itnext.io/top-five-libraries-for-creating-gui-on-embedded-linux-5ce03903be32</a></li>
+</ul>
+<p>Nós iremos usar o <a href="https://lvgl.io/">LVGL -  LVGL - Light and Versatile Graphics Library</a>, uma biblioteca livre liberada na licença MIT feita para sistemas embarcados, 100% em C, bastante customizável de boa documentação e com suporte a vários tipos de displays e interface com usuário (touch screen, mouse, ...).</p>
+<p>Com esse software seremos capazes de desenvolver interfaces similares ao exemplo a seguir:</p>
+<p><img alt="" src="https://camo.githubusercontent.com/4052401b2c5594c76c20e97dc8e2567d8ec49cc85e2c6779770524e9c239b872/68747470733a2f2f6c76676c2e696f2f6173736574732f696d616765732f696d675f312e706e67" width="500" /></p>
+<h3 id="base">Base<a class="headerlink" href="#base" title="Permanent link">&para;</a></h3>
+<p>Iremos trabalhar com o código base: <a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-TFT-LCD-ILI9341-LVGL">RTOS-TFT-LCD-ILI9341-LVGL</a> que já possui configurado:</p>
+<ul>
+<li>FreeRTOS v8</li>
+<li>Driver ili9341</li>
+<li>Driver Touch resistivo</li>
+<li>lvgl</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Entrega</p>
+<p>Você deve copiar o código RTOS-TFT-LCD-ILI9341-LVGL para o repositório de entregas de laboratório e renomear para <strong>Lab7-RTOS-LCD-lvgl</strong>. Vamos trabalhar nesta pasta.</p>
+</div>
+<p>Antes de começarmos vamos entender um pouco o código de exemplo e como o lvgl trabalha.</p>
+<h3 id="porting-lvgl">Porting lvgl<a class="headerlink" href="#porting-lvgl" title="Permanent link">&para;</a></h3>
+<p>O <a href="https://docs.lvgl.io/latest/en/html/porting/index.html">site do LVGL</a> descreve o passo a passo de como incorporar a biblioteca em um novo projeto/ microcontrolador, além de criar um arquivo de configuração <code>lv_conf.h</code> com as propriedades do LCD e com configurações de como a biblioteca irá trabalhar, temos que implementar duas funções:</p>
+<ul>
+<li><code>my_flush_cb</code>  : Função chamada pelo lvgl sempre que necessita atualizar a tela<ul>
+<li>Depende do driver ili9341</li>
+</ul>
+</li>
+<li><code>my_input_read</code>: Função chamada pelo lvgl sempre que quer ler uma informação de touch<ul>
+<li>Depende do driver do touch resistivo</li>
+</ul>
+</li>
+</ul>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">my_flush_cp</label><div class="tabbed-content">
+<p>Note que o LVGL apenas atualiza no LCD a região que sofreu alteração.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">my_flush_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span> <span class="o">*</span> <span class="n">disp_drv</span><span class="p">,</span> <span class="k">const</span> <span class="n">lv_area_t</span> <span class="o">*</span> <span class="n">area</span><span class="p">,</span> <span class="n">lv_color_t</span> <span class="o">*</span> <span class="n">color_p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ili9341_set_top_left_limit</span><span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">x1</span><span class="p">,</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span><span class="p">);</span>   <span class="n">ili9341_set_bottom_right_limit</span><span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">x2</span><span class="p">,</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span><span class="p">);</span>
+    <span class="n">ili9341_copy_pixels_to_screen</span><span class="p">(</span><span class="n">color_p</span><span class="p">,</span>  <span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">x2</span> <span class="o">-</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span> <span class="o">-</span> <span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span><span class="p">));</span>
+
+    <span class="cm">/* IMPORTANT!!!</span>
+<span class="cm">    * Inform the graphics library that you are ready with the flushing*/</span>
+    <span class="n">lv_disp_flush_ready</span><span class="p">(</span><span class="n">disp_drv</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">my_input_read</label><div class="tabbed-content">
+<p>Esta função retorna no <code>*data</code> se um toque foi encontrado e o valor X Y lido.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">bool</span> <span class="nf">my_input_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span> <span class="o">*</span> <span class="n">drv</span><span class="p">,</span> <span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">,</span> <span class="n">pressed</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">readPoint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">px</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">py</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span> <span class="o">=</span> <span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">px</span><span class="p">;</span>
+    <span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">py</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="cm">/*No buffering now so no more data read*/</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+<p>E isso é tudo o que deve ser feito para incorporar o lvgl em um novo projeto.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Eu devo ter demorado umas 10h de trabalho para sair de um projeto zerado e conseguir fazer o exemplo que vocês irão utilizar hoje. São várias etapas necessárias: </p>
+<ol>
+<li>Escolher LCD</li>
+<li>Entender conexão de hardware</li>
+<li>Implementar driver ili9341</li>
+<li>Implementar driver touch</li>
+<li>Entender LVGL e como porta</li>
+</ol>
+</div>
+<h3 id="framebuffer">framebuffer<a class="headerlink" href="#framebuffer" title="Permanent link">&para;</a></h3>
+<p>O LVGL opera com no mínimo um framebuffer, <a href="https://en.wikipedia.org/wiki/Framebuffer">framebuffer</a> é uma região contínua de memória usada para armazenar a imagem que será exibida na tela, essa tecnologia é usado em vários lugares, inclusive no <a href="https://en.wikipedia.org/wiki/Linux_framebuffer">linux</a>. Em alguns casos é necessário dois framebuffers operando no modo <a href="https://embedded.fm/blog/2017/3/21/ping-pong-buffers">ping pong buffer</a></p>
+<p>No LVGL devemos declarar esse frame buffer como global ou estático:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/*Static or global buffer(s). The second buffer is optional*/</span>
+<span class="k">static</span> <span class="n">lv_color_t</span> <span class="n">buf_1</span><span class="p">[</span><span class="n">LV_HOR_RES_MAX</span> <span class="o">*</span> <span class="n">LV_VER_RES_MAX</span><span class="p">];</span>
+</code></pre></div>
+<p>O LVGL irá então manter uma cópia do que será exibido no LCD nesta região continua de memória e de tempos em tempos atualizar o LCD chamando a função <code>my_flush_cb</code>.</p>
+<h3 id="funcao-main">Função main<a class="headerlink" href="#funcao-main" title="Permanent link">&para;</a></h3>
+<p>Agora com tudo configurado devemos realizar as seguintes inicializações antes de podemos usar o lvgl controlando o display:</p>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">passos</label><div class="tabbed-content">
+<ol>
+<li>Board e Sysclock</li>
+<li>LCD e driver ili9341</li>
+<li>Touch</li>
+<li>lvgl buffer e display</li>
+<li>lvgl input</li>
+</ol>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Código</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="cm">/* board and sys init */</span>
+<span class="n">board_init</span><span class="p">();</span>
+<span class="n">sysclk_init</span><span class="p">();</span>
+<span class="n">configure_console</span><span class="p">();</span>
+
+<span class="cm">/* LCd int */</span>
+<span class="n">configure_lcd</span><span class="p">();</span>
+<span class="n">ili9341_init</span><span class="p">();</span>
+<span class="n">configure_touch</span><span class="p">();</span>
+<span class="n">ili9341_backlight_on</span><span class="p">();</span>
+
+<span class="cm">/*LittlevGL init*/</span>
+<span class="n">lv_init</span><span class="p">();</span>
+<span class="n">lv_disp_drv_t</span> <span class="n">disp_drv</span><span class="p">;</span>                 <span class="cm">/*A variable to hold the drivers. Can be local variable*/</span>
+<span class="n">lv_disp_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span>            <span class="cm">/*Basic initialization*/</span>
+<span class="n">lv_disp_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">,</span> <span class="n">buf_1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_HOR_RES_MAX</span> <span class="o">*</span> <span class="n">LV_VER_RES_MAX</span><span class="p">);</span>  <span class="cm">/*Initialize `disp_buf` with the buffer(s) */</span>
+<span class="n">disp_drv</span><span class="p">.</span><span class="n">buffer</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">;</span>            <span class="cm">/*Set an initialized buffer*/</span>
+<span class="n">disp_drv</span><span class="p">.</span><span class="n">flush_cb</span> <span class="o">=</span> <span class="n">my_flush_cb</span><span class="p">;</span>        <span class="cm">/*Set a flush callback to draw to the display*/</span>
+<span class="n">lv_disp_t</span> <span class="o">*</span> <span class="n">disp</span><span class="p">;</span>
+<span class="n">disp</span> <span class="o">=</span> <span class="n">lv_disp_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span> <span class="cm">/*Register the driver and save the created display objects*/</span>
+
+<span class="cm">/* Init input on LVGL */</span>
+<span class="n">lv_indev_drv_t</span> <span class="n">indev_drv</span><span class="p">;</span>
+<span class="n">lv_indev_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span>      <span class="cm">/*Basic initialization*/</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">LV_INDEV_TYPE_POINTER</span><span class="p">;</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span> <span class="o">=</span> <span class="n">my_input_read</span><span class="p">;</span>
+<span class="cm">/*Register the driver in LVGL and save the created input device object*/</span>
+<span class="n">lv_indev_t</span> <span class="o">*</span> <span class="n">my_indev</span> <span class="o">=</span> <span class="n">lv_indev_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+<h3 id="task_lcd">task_lcd<a class="headerlink" href="#task_lcd" title="Permanent link">&para;</a></h3>
+<p>Com o lvlg configurado devemos chamar periodicamente a função que atualiza o lvgl (<code>lv_task_handler</code>), no exemplo criamos uma task dedicada a isso:</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">task_lcd</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="n">lv_ex_btn_1</span><span class="p">();</span>
+
+  <span class="k">for</span> <span class="p">(;;)</span>  <span class="p">{</span>
+    <span class="n">lv_tick_inc</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+    <span class="n">lv_task_handler</span><span class="p">();</span>
+    <span class="n">vTaskDelay</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="criando-tela">Criando tela<a class="headerlink" href="#criando-tela" title="Permanent link">&para;</a></h3>
+<p>Note que na <code>task_lcd</code> chamamos a função <code>lv_ex_btn_1()</code> está função cria os widgets no LCD, os widgets estão listados na página: </p>
+<ul>
+<li><a href="https://docs.lvgl.io/latest/en/html/widgets/index.html">https://docs.lvgl.io/latest/en/html/widgets/index.html</a></li>
+</ul>
+<p>Podemos listar alguns aqui como exemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Widget</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Button (<code>lv_btn</code>)</td>
+<td><img alt="" src="imgs/lvgl/lv_button.png" width="100" /></td>
+</tr>
+<tr>
+<td>LED (<code>lv_led</code>)</td>
+<td><img alt="" src="imgs/lvgl/lv_leds.png" width="100" /></td>
+</tr>
+<tr>
+<td>Roller (<code>lv_roller</code>)</td>
+<td><img alt="" src="imgs/lvgl/lv_roller.png" width="100" /></td>
+</tr>
+<tr>
+<td>Bar (<code>lv_bar</code>)</td>
+<td><img alt="" src="imgs/lvgl/lv_bar.png" width="100" /></td>
+</tr>
+</tbody>
+</table>
+<p>O exemplo fornecido cria dois tipos de botões diferentes um do push button e outro do tipo toggle, notem que tudo é realizado pela API do lvgl. Podemos associar um handler (<code>event_handler</code>) ao botão, este handler sera chamado (pela <code>lv_task_handler</code>) sempre que acontecer um evento neste widget (botão aprtado, botão liberado, ...).</p>
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">lv_ex_btn_1</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">lv_ex_btn_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span><span class="p">;</span>
+
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn1</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">-40</span><span class="p">);</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button&quot;</span><span class="p">);</span>
+
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn2</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
+    <span class="n">lv_btn_set_checkable</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_btn_toggle</span><span class="p">(</span><span class="n">btn2</span><span class="p">);</span>
+    <span class="n">lv_btn_set_fit2</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="n">LV_FIT_NONE</span><span class="p">,</span> <span class="n">LV_FIT_TIGHT</span><span class="p">);</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Toggled&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">event_handler(...)</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_CLICKED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Clicked</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Toggled</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 23, 2021</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="Lab-6-RTOS-ADC.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lab 6 - RTOS - ADC" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Lab 6 - RTOS - ADC
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="Lab-7-RTOS-LCD-lvgl-lab.html" class="md-footer__link md-footer__link--next" aria-label="Next: LAB" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              LAB
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; Rafael Corsi @ insper
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.76f349be.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+      
+        <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-database.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="js/markdown-enhancer.js"></script>
+      
+    
+  </body>
+</html>

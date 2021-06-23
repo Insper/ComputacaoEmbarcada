@@ -1,0 +1,1607 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.8">
+    
+    
+      
+        <title>Lab - 5s - Computação Embarcada</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="pink">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pio-irq" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="5s - Computação Embarcada" class="md-header__button md-logo" aria-label="5s - Computação Embarcada" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            5s - Computação Embarcada
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Insper/ComputacaoEmbarcada
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="5s - Computação Embarcada" class="md-nav__button md-logo" aria-label="5s - Computação Embarcada" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    5s - Computação Embarcada
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Insper/ComputacaoEmbarcada
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sobre-Curso.html" class="md-nav__link">
+        Sobre o curso
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Insper/SAME70-examples" class="md-nav__link">
+        SAME70-Examples
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Videos.html" class="md-nav__link">
+        Vídeos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Util
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Util" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Util
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sobre-Ferramental.html" class="md-nav__link">
+        Ferramental
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Startup.html" class="md-nav__link">
+        Startup
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Erros.html" class="md-nav__link">
+        Erros comum
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Documentos.html" class="md-nav__link">
+        Documentos
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Dicas
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Dicas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Dicas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Dicas.html" class="md-nav__link">
+        PIO
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-lcd.html" class="md-nav__link">
+        LCD max Touch
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-freertos.html" class="md-nav__link">
+        Freertos
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-FloatPrint.html" class="md-nav__link">
+        Float Print (Atmel Studio)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-lvgl.html" class="md-nav__link">
+        LVGL
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7">
+        Labs
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Labs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Labs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
+      
+      <label class="md-nav__link" for="__nav_7_1">
+        Lab 1 - PIO 
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 1 - PIO " data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 1 - PIO 
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
+      
+      <label class="md-nav__link" for="__nav_7_2">
+        Lab 2 - Driver
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 2 - Driver" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 2 - Driver
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-2-PIO-Driver-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-2-PIO-Driver-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" checked>
+      
+      <label class="md-nav__link" for="__nav_7_3">
+        Lab 3 - PIO IRQ
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 3 - PIO IRQ" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 3 - PIO IRQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-3-PIO-IRQ-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Lab
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Lab-3-PIO-IRQ-Lab.html" class="md-nav__link md-nav__link--active">
+        Lab
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#melhorando-o-exemplo" class="md-nav__link">
+    Melhorando o exemplo
+  </a>
+  
+    <nav class="md-nav" aria-label="Melhorando o exemplo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bordas" class="md-nav__link">
+    Bordas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#irq-keep-it-short-and-simple" class="md-nav__link">
+    IRQ - Keep it short and simple
+  </a>
+  
+    <nav class="md-nav" aria-label="IRQ - Keep it short and simple">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    FLAG
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#low-power-modes" class="md-nav__link">
+    Low power modes
+  </a>
+  
+    <nav class="md-nav" aria-label="Low power modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adicionando-lowpower-mode-asf-wizard" class="md-nav__link">
+    Adicionando lowpower mode (ASF Wizard)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entrando-em-lowpower" class="md-nav__link">
+    Entrando em lowpower
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#praticando-oled" class="md-nav__link">
+    Praticando - OLED
+  </a>
+  
+    <nav class="md-nav" aria-label="Praticando - OLED">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceito-c" class="md-nav__link">
+    Conceito C
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-b" class="md-nav__link">
+    Conceito B
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-a" class="md-nav__link">
+    Conceito A
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-4-TickTack-Lab.html" class="md-nav__link">
+        Lab 4 - TC RTC RTT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      <label class="md-nav__link" for="__nav_7_5">
+        Lab 5 - RTOS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 5 - RTOS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 5 - RTOS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-5-RTOS.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-5-RTOS-dicas.html" class="md-nav__link">
+        Dicas
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-6-RTOS-ADC.html" class="md-nav__link">
+        Lab 6 - RTOS - ADC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7" type="checkbox" id="__nav_7_7" >
+      
+      <label class="md-nav__link" for="__nav_7_7">
+        Lab 7 - RTOS LCD
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 7 - RTOS LCD" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_7">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 7 - RTOS LCD
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-7-RTOS-LCD-lvgl.html" class="md-nav__link">
+        Começando
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-7-RTOS-LCD-lvgl-lab.html" class="md-nav__link">
+        LAB
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-9-ECG.html" class="md-nav__link">
+        Lab 8 - ECG
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-10-RTOS-WIFI.html" class="md-nav__link">
+        Lab 9 - WIFI
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        Projeto
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Projeto" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Projeto
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Descricao.html" class="md-nav__link">
+        Descrição
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf" class="md-nav__link">
+        Controle
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://app.mural.co/t/elementos9119/m/elementos9119/1616424619557/3341fbe703cab0b531da459548f0124af1af1669" class="md-nav__link">
+        Handout 1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Rubrica.html" class="md-nav__link">
+        Rubrica
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Dicas.html" class="md-nav__link">
+        Dicas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Lista.html" class="md-nav__link">
+        Anos passados
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      <label class="md-nav__link" for="__nav_9">
+        APS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="APS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          APS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-howto.html" class="md-nav__link">
+        HowTo
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
+      
+      <label class="md-nav__link" for="__nav_9_2">
+        APS 1 - Musical
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="APS 1 - Musical" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_2">
+          <span class="md-nav__icon md-icon"></span>
+          APS 1 - Musical
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-1-Musical.html" class="md-nav__link">
+        APS 1 - Musical
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-1-Musical-software.html" class="md-nav__link">
+        APS 1 - Musical - Firmware
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-2-Oximetro.html" class="md-nav__link">
+        APA 2 - Oxímetro
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-3-IoT.html" class="md-nav__link">
+        APS 3 - IoT
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Avaliacoes.html" class="md-nav__link">
+        Avaliações e Simulados
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#melhorando-o-exemplo" class="md-nav__link">
+    Melhorando o exemplo
+  </a>
+  
+    <nav class="md-nav" aria-label="Melhorando o exemplo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bordas" class="md-nav__link">
+    Bordas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#irq-keep-it-short-and-simple" class="md-nav__link">
+    IRQ - Keep it short and simple
+  </a>
+  
+    <nav class="md-nav" aria-label="IRQ - Keep it short and simple">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    FLAG
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#low-power-modes" class="md-nav__link">
+    Low power modes
+  </a>
+  
+    <nav class="md-nav" aria-label="Low power modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adicionando-lowpower-mode-asf-wizard" class="md-nav__link">
+    Adicionando lowpower mode (ASF Wizard)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entrando-em-lowpower" class="md-nav__link">
+    Entrando em lowpower
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#praticando-oled" class="md-nav__link">
+    Praticando - OLED
+  </a>
+  
+    <nav class="md-nav" aria-label="Praticando - OLED">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceito-c" class="md-nav__link">
+    Conceito C
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-b" class="md-nav__link">
+    Conceito B
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conceito-a" class="md-nav__link">
+    Conceito A
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/Lab-3-PIO-IRQ-Lab.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="pio-irq">PIO - IRQ<a class="headerlink" href="#pio-irq" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>Pasta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Lab3-PIO-IRQ</code></td>
+</tr>
+</tbody>
+</table>
+<p><button class="button0" id="0:comencando" onClick="progressBut(this.id);">Começando Laboratório!</button></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Antes de seguir leia:</p>
+<ul>
+<li><a href="/ComputacaoEmbarcada/Lab-3-PIO-IRQ-Teoria/">IRQ Teoria</a></li>
+</ul>
+</div>
+<p>O código exemplo <a href="https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ"><code>SAME70-exemples/Perifericos-uC/PIO-IRQ</code></a> demonstra como configurar o botão da placa e utilizar a interrupção em um pino do PIO. Vamos trabalhar com esse código de base para esse laboratório.</p>
+<div class="admonition example">
+<p class="admonition-title">Entenda e execute</p>
+<ol>
+<li>Copie o exemplo <code>SAME70-examples/Perifericos-uC/PIO-IRQ</code> para a pasta<code>Lab3-PIO-IRQ</code> do seu repositório.</li>
+<li>Estude o <a href="https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/README.md">README</a> desse exemplo!</li>
+<li>Execute o exemplo na placa!</li>
+</ol>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Não continue sem ter feito a etapa anterior.</p>
+</div>
+<p><button class="button0" id="1:exemplo" onClick="progressBut(this.id);">Cheguei Aqui!</button></p>
+<h2 id="melhorando-o-exemplo">Melhorando o exemplo<a class="headerlink" href="#melhorando-o-exemplo" title="Permanent link">&para;</a></h2>
+<p>Iremos entender melhor e começar a implementar mudanças no código de exemplo.</p>
+<h3 id="bordas">Bordas<a class="headerlink" href="#bordas" title="Permanent link">&para;</a></h3>
+<p>Vamos agora modificar o código um pouco, o exemplo está funcionando com interrupção em borda de descida no pino, ou seja, a função de callback e chamada quando você aperta o botão, vamos modificar para ele operar com borda de subida (o led vai piscar quando soltar o botão).</p>
+<div class="admonition example">
+<p class="admonition-title">Modifique e teste</p>
+<ol>
+<li>Mude a função que configura a interrupção do pino para operar em <code>PIO_IT_RISE_EDGE</code>. </li>
+<li>Teste na placa.</li>
+</ol>
+</div>
+<p><button class="button0" id="2:borda" onClick="progressBut(this.id);">Cheguei Aqui!</button></p>
+<h3 id="irq-keep-it-short-and-simple">IRQ - Keep it short and simple<a class="headerlink" href="#irq-keep-it-short-and-simple" title="Permanent link">&para;</a></h3>
+<p>O tempo que um firmware deve ficar na interrupção deve ser o menor possível, pelos principais motivos:</p>
+<ol>
+<li>Outras interrupções de mesma prioridade irão aguardar o retorno da interrupção. O firmware irá deixar de servir de maneira rápida a diferentes interrupções se gastar tempo nelas.</li>
+<li>Nem todas as funções são reentrantes. Funções como <code>printf</code> podem não operar corretamente dentro de interrupções (mais de uma chamada por vez).</li>
+<li>RTOS: As tarefas devem ser executadas em tasks e não nas interrupções, possibilitando assim um maior controle do fluxo de execução do firmware (vamos ver isso mais para frente).</li>
+</ol>
+<h4 id="flag">FLAG<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h4>
+<p>A solução a esse problema é realizar o processamento de uma interrupção no loop principal (<code>while(1)</code>), essa abordagem é muito utilizada em sistemas embarcados. E deve ser feita da forma a seguir:</p>
+<ul>
+<li>Define-se uma variável global que servirá como <code>flag</code> (<code>true</code> ou <code>false</code>) (<strong>essa variável precisa ser do tipo <code>volatile</code></strong>)</li>
+<li>Interrupção muda status da <code>flag</code></li>
+<li><code>while(1)</code> verifica status da <code>flag</code> para realizar ação.</li>
+<li><code>while(1)</code> zera <code>flag</code> (acknowledge) </li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* flag */</span>
+<span class="k">volatile</span> <span class="kt">char</span> <span class="n">but_flag</span><span class="p">;</span>
+
+<span class="cm">/* funcao de callback/ Handler */</span>
+<span class="kt">void</span> <span class="nf">but_callBack</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+ <span class="n">but_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+  <span class="cm">/* inicializacao */</span>
+
+  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+
+   <span class="c1">// trata interrupção do botão</span>
+   <span class="k">if</span><span class="p">(</span><span class="n">but_flag</span><span class="p">){</span>
+     <span class="c1">// trata irq</span>
+     <span class="c1">// ..</span>
+     <span class="c1">// zera flag</span>
+     <span class="n">but_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">volatile</p>
+<p>Sempre que uma interrupção alterar uma variável global, essa deve possuir o 'pragma' /modificador <a href="https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword"><code>volatile</code></a>.</p>
+<p>Exemplo: <code>volatile int valADC;</code></p>
+<p>Esse pragma serve para informar o compilador (no nosso caso GCC) que essa variável será modificada sem que ele saiba evitando assim que ele não a implemente. </p>
+<p>Compiladores são projetados para otimizar programas removendo trechos ou variáveis desnecessárias. Como a função de <code>Handler</code> (interrupção) nunca é chamada diretamente pelo programa, o compilador pode supor que essa função não vai ser executada nunca e pode optimizar a variável que nela seria atualizada (já que não é chamada diretamente, mas sim pelo hardware quando ocorre um evento). </p>
+<ul>
+<li>Leia mais sobre <a href="https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword">volatile</a></li>
+</ul>
+<p><mark>ATENÇÃO: só usar <code>volatile</code> quando necessário</mark></p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Modifique e teste</p>
+<ol>
+<li>Modifique o exemplo para piscar o led no <code>while(1)</code> utilizando <code>flag</code> vindo da interrupção. <ul>
+<li>Dentro do callback do botão não pode ter a função <code>pisca_led</code>!</li>
+</ul>
+</li>
+<li>Programe e teste no HW</li>
+</ol>
+</div>
+<p><button class="button0" id="3:flag" onClick="progressBut(this.id);">Cheguei Aqui!</button></p>
+<h3 id="low-power-modes">Low power modes<a class="headerlink" href="#low-power-modes" title="Permanent link">&para;</a></h3>
+<p>Trabalhar por interrupção possui duas grandes vantagens: </p>
+<ol>
+<li>Resposta quase imediata a um evento </li>
+<li>Possibilitar o uC entrar em modos de operação de baixo consumo energético (<code>sleep modes</code>).</li>
+</ol>
+<p>No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com sua vantagem / desvantagem:</p>
+<ul>
+<li>
+<p><em>Active Mode: Active mode is the normal running mode with the core clock running from the fast RC oscillator, the main crystaloscillator or the PLLA. The Power Management Controller can be used to adapt the core, bus and peripheral frequencies and to enable and/or disable the peripheral clocks.</em></p>
+</li>
+<li>
+<p><em>Backup mode: The purpose of Backup mode is to achieve the lowest power consumption possible in a system which is performing periodic wake-ups to perform tasks but not requiring fast startup time.</em></p>
+</li>
+<li>
+<p><em>Wait mode: The purpose of Wait mode is to achieve very low power consumption while maintaining the whole device in a powered state for a startup time of less than 10 us.</em></p>
+</li>
+<li>
+<p><em>Sleep Mode: The purpose of sleep mode is to optimize power consumption of the device versus response time. In this mode, only the core clock is stopped. The peripheral clocks can be enabled. The current consumption in this mode is application-dependent</em></p>
+</li>
+</ul>
+<div class="admonition note">
+<p>Mais informações na secção 6.6 do datasheet</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Informações importantes</p>
+<ul>
+<li>Não é qualquer interrupção que consegue tirar o uC de modos de sleep mais profundos</li>
+<li>Quanto mais profundo o sleep, mais tempo o uC leva para 'acordar'</li>
+<li>Alguns modos podem perder informações da memória RAM</li>
+</ul>
+<p><img alt="" src="imgs/PIO-IRQ/lowpower-table.png" /></p>
+</div>
+<h4 id="adicionando-lowpower-mode-asf-wizard">Adicionando lowpower mode (ASF Wizard)<a class="headerlink" href="#adicionando-lowpower-mode-asf-wizard" title="Permanent link">&para;</a></h4>
+<p>Para termos acessos as funções da atmel que lidam com o <code>sleep mode</code> devemos adicionar a biblioteca <strong>Sleep manager (service)</strong> no Atmel Studio:</p>
+<ul>
+<li><code>ASF</code> <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> <code>ASF Wizard</code> <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> </li>
+</ul>
+<p>Agora basta adicionar a biblioteca <strong>Sleep manager (service)</strong> ao projeto.</p>
+<h4 id="entrando-em-lowpower">Entrando em lowpower<a class="headerlink" href="#entrando-em-lowpower" title="Permanent link">&para;</a></h4>
+<p>Agora podemos usar as funções de low power, primeiramente iremos utilizar somente o modo <code>sleep mode</code> via a chamada da função <code>pmc_sleep()</code> conforme exemplo a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span> 
+  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+     <span class="c1">// trata flag</span>
+     <span class="c1">// ...</span>
+     <span class="c1">// .....</span>
+
+     <span class="c1">// Entra em sleep mode    </span>
+     <span class="c1">// Código &#39;trava&#39; aqui até ser &#39;acordado&#39; </span>
+     <span class="n">pmc_sleep</span><span class="p">(</span><span class="n">SAM_PM_SMODE_SLEEP_WFI</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt), essa função é do tipo "blocante" onde execução do código é interrompida nela até que uma interrupção "acorde" o uC.</p>
+<div class="admonition example">
+<p class="admonition-title">Modifique e teste</p>
+<ol>
+<li>Modifique o exemplo para entrar em modo sleep</li>
+<li>Programe e teste no HW</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Como testar o sleepmode?</p>
+<p>Se tivéssemos acesso aos equipamentos do laboratório poderíamos medir a corrente
+consumida pelo microcontrolador antes e depois de chamar a função de sleep, porém
+na versão online do curso não conseguimos fazer isso.</p>
+</div>
+<p><button class="button0" id="4:sleep" onClick="progressBut(this.id);">Cheguei Aqui!</button></p>
+<h2 id="praticando-oled">Praticando - OLED<a class="headerlink" href="#praticando-oled" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Pasta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Led3-OLED-PIO-IRQ</code></td>
+</tr>
+</tbody>
+</table>
+<p>Agora vamos usar interrupção em um outro projeto.</p>
+<p>Copie o projeto localizado no repositório de exemplos: <a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI/OLED-Xplained-Pro-SPI"><code>SAME70-examples/Screens/OLED-Xplained-Pro-SPI/</code></a> para a pasta do seu repositório da disciplina <code>Lab3-OLED-PIO-IRQ</code>.</p>
+<p>Iremos trabalhar com esse exemplo que configura o OLED (que deve ser conectado na placa no <strong>EXT1</strong>) e incorporar o exemplo da interrupção aqui (vamos ampliar sua funcionalidade!).</p>
+<p>A entrega final (conceito A) deve possuir três botões externos a placa que irão configurar a frequência na qual o LED irá piscar (via interrupção é claro). Um dos botões irá aumentar a frequência do piscar do LED e o outro irá diminuir a frequência que o LED deverá piscar. O OLED deverá exibir a frequência atual do LED. </p>
+<ul>
+<li>O código deve funcionar por interrupção nos botões <strong>e sempre que possível, entrar em sleep mode</strong>.</li>
+</ul>
+<h3 id="conceito-c">Conceito C<a class="headerlink" href="#conceito-c" title="Permanent link">&para;</a></h3>
+<p>Agora você deve adicionar o botão 1 da placa OLED para aumentar a frequência na qual o LED irá piscar. Além disso, você precisa exibir o valor da frequência no display do OLED.</p>
+<ol>
+<li>Botão OLED1: Aumentar a frequência do LED (por IRQ)</li>
+<li>Exibir o valor da frequência no OLED</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Pino botão:</p>
+<ol>
+<li>Lembre de sempre usar interrupção nos botões</li>
+<li>Consulte o <a href="https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf">manual do OLED</a> para saber os pinos</li>
+<li>Consulte o diagrama de pinos que vocês receberam.</li>
+</ol>
+<p>Display Oled: </p>
+<ul>
+<li>Você deve usar <a href="http://www.cplusplus.com/reference/cstdio/sprintf/">sprintf</a> para formatar a string que irá exibir no OLED</li>
+<li>Para exibir uma string no OLED use a função <code>gfx_mono_draw_string</code></li>
+</ul>
+</div>
+<h3 id="conceito-b">Conceito B<a class="headerlink" href="#conceito-b" title="Permanent link">&para;</a></h3>
+<p>Acrescente os outros dois botões do oled (2 e 3) do OLED para:</p>
+<ul>
+<li>Botão 2: Para o pisca pisca</li>
+<li>Botão 3: Diminuir a frequência</li>
+</ul>
+<h3 id="conceito-a">Conceito A<a class="headerlink" href="#conceito-a" title="Permanent link">&para;</a></h3>
+<p>Exiba no OLED não só a frequência, mas uma barra indicando quando
+o LED irá parar de piscar (como uma barra de progresso).</p>
+<hr />
+<div class="admonition note">
+<p class="admonition-title">Preencher ao finalizar o lab</p>
+<p><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeWssrtLFmA068YSJUyqlGIqeVOTLyi-A1clOeVmgNKp7Q55Q/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe></p>
+</div>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 23, 2021</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="Lab-3-PIO-IRQ-Teoria.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Teoria" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Teoria
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="Lab-4-TickTack-Lab.html" class="md-footer__link md-footer__link--next" aria-label="Next: Lab 4 - TC RTC RTT" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Lab 4 - TC RTC RTT
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; Rafael Corsi @ insper
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.76f349be.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+      
+        <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-database.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="js/markdown-enhancer.js"></script>
+      
+    
+  </body>
+</html>

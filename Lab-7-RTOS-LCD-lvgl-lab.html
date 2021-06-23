@@ -1,0 +1,2009 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.8">
+    
+    
+      
+        <title>LAB - 5s - Computação Embarcada</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="pink">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lab" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="5s - Computação Embarcada" class="md-header__button md-logo" aria-label="5s - Computação Embarcada" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            5s - Computação Embarcada
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LAB
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Insper/ComputacaoEmbarcada
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="5s - Computação Embarcada" class="md-nav__button md-logo" aria-label="5s - Computação Embarcada" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    5s - Computação Embarcada
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Insper/ComputacaoEmbarcada
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sobre-Curso.html" class="md-nav__link">
+        Sobre o curso
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Insper/SAME70-examples" class="md-nav__link">
+        SAME70-Examples
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Videos.html" class="md-nav__link">
+        Vídeos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Util
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Util" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Util
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sobre-Ferramental.html" class="md-nav__link">
+        Ferramental
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Startup.html" class="md-nav__link">
+        Startup
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Erros.html" class="md-nav__link">
+        Erros comum
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Documentos.html" class="md-nav__link">
+        Documentos
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Dicas
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Dicas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Dicas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Dicas.html" class="md-nav__link">
+        PIO
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-lcd.html" class="md-nav__link">
+        LCD max Touch
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-freertos.html" class="md-nav__link">
+        Freertos
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-FloatPrint.html" class="md-nav__link">
+        Float Print (Atmel Studio)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-lvgl.html" class="md-nav__link">
+        LVGL
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7">
+        Labs
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Labs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Labs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
+      
+      <label class="md-nav__link" for="__nav_7_1">
+        Lab 1 - PIO 
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 1 - PIO " data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 1 - PIO 
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
+      
+      <label class="md-nav__link" for="__nav_7_2">
+        Lab 2 - Driver
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 2 - Driver" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 2 - Driver
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-2-PIO-Driver-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-2-PIO-Driver-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" >
+      
+      <label class="md-nav__link" for="__nav_7_3">
+        Lab 3 - PIO IRQ
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 3 - PIO IRQ" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 3 - PIO IRQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-3-PIO-IRQ-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-3-PIO-IRQ-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-4-TickTack-Lab.html" class="md-nav__link">
+        Lab 4 - TC RTC RTT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      <label class="md-nav__link" for="__nav_7_5">
+        Lab 5 - RTOS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 5 - RTOS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 5 - RTOS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-5-RTOS.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-5-RTOS-dicas.html" class="md-nav__link">
+        Dicas
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-6-RTOS-ADC.html" class="md-nav__link">
+        Lab 6 - RTOS - ADC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7" type="checkbox" id="__nav_7_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7_7">
+        Lab 7 - RTOS LCD
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 7 - RTOS LCD" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_7">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 7 - RTOS LCD
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-7-RTOS-LCD-lvgl.html" class="md-nav__link">
+        Começando
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          LAB
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Lab-7-RTOS-LCD-lvgl-lab.html" class="md-nav__link md-nav__link--active">
+        LAB
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#etapas" class="md-nav__link">
+    Etapas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementando" class="md-nav__link">
+    Implementando
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementando">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparando-firmware" class="md-nav__link">
+    Preparando firmware
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparando firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tamanho-fonte" class="md-nav__link">
+    Tamanho fonte
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identificando-widgets" class="md-nav__link">
+    Identificando widgets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#botoes" class="md-nav__link">
+    Botões
+  </a>
+  
+    <nav class="md-nav" aria-label="Botões">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#botao-de-power" class="md-nav__link">
+    Botão de power
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demais-botoes" class="md-nav__link">
+    Demais botões
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labels" class="md-nav__link">
+    Labels
+  </a>
+  
+    <nav class="md-nav" aria-label="Labels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#floor-temp" class="md-nav__link">
+    Floor Temp
+  </a>
+  
+    <nav class="md-nav" aria-label="Floor Temp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-convertendo" class="md-nav__link">
+    1. Convertendo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-adicionando-no-microchip-studio" class="md-nav__link">
+    2. Adicionando no Microchip Studio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-criando-label-e-usando-fonte" class="md-nav__link">
+    3. Criando label e usando fonte
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demais-labels" class="md-nav__link">
+    Demais labels
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handlers" class="md-nav__link">
+    Handlers
+  </a>
+  
+    <nav class="md-nav" aria-label="Handlers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#up_handler" class="md-nav__link">
+    up_handler
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#down_handler" class="md-nav__link">
+    down_handler
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relogio" class="md-nav__link">
+    relógio
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extras" class="md-nav__link">
+    Extras
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-9-ECG.html" class="md-nav__link">
+        Lab 8 - ECG
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-10-RTOS-WIFI.html" class="md-nav__link">
+        Lab 9 - WIFI
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        Projeto
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Projeto" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Projeto
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Descricao.html" class="md-nav__link">
+        Descrição
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf" class="md-nav__link">
+        Controle
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://app.mural.co/t/elementos9119/m/elementos9119/1616424619557/3341fbe703cab0b531da459548f0124af1af1669" class="md-nav__link">
+        Handout 1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Rubrica.html" class="md-nav__link">
+        Rubrica
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Dicas.html" class="md-nav__link">
+        Dicas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Lista.html" class="md-nav__link">
+        Anos passados
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      <label class="md-nav__link" for="__nav_9">
+        APS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="APS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          APS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-howto.html" class="md-nav__link">
+        HowTo
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
+      
+      <label class="md-nav__link" for="__nav_9_2">
+        APS 1 - Musical
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="APS 1 - Musical" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_2">
+          <span class="md-nav__icon md-icon"></span>
+          APS 1 - Musical
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-1-Musical.html" class="md-nav__link">
+        APS 1 - Musical
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-1-Musical-software.html" class="md-nav__link">
+        APS 1 - Musical - Firmware
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-2-Oximetro.html" class="md-nav__link">
+        APA 2 - Oxímetro
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-3-IoT.html" class="md-nav__link">
+        APS 3 - IoT
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Avaliacoes.html" class="md-nav__link">
+        Avaliações e Simulados
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#etapas" class="md-nav__link">
+    Etapas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementando" class="md-nav__link">
+    Implementando
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementando">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparando-firmware" class="md-nav__link">
+    Preparando firmware
+  </a>
+  
+    <nav class="md-nav" aria-label="Preparando firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tamanho-fonte" class="md-nav__link">
+    Tamanho fonte
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identificando-widgets" class="md-nav__link">
+    Identificando widgets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#botoes" class="md-nav__link">
+    Botões
+  </a>
+  
+    <nav class="md-nav" aria-label="Botões">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#botao-de-power" class="md-nav__link">
+    Botão de power
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demais-botoes" class="md-nav__link">
+    Demais botões
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labels" class="md-nav__link">
+    Labels
+  </a>
+  
+    <nav class="md-nav" aria-label="Labels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#floor-temp" class="md-nav__link">
+    Floor Temp
+  </a>
+  
+    <nav class="md-nav" aria-label="Floor Temp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-convertendo" class="md-nav__link">
+    1. Convertendo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-adicionando-no-microchip-studio" class="md-nav__link">
+    2. Adicionando no Microchip Studio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-criando-label-e-usando-fonte" class="md-nav__link">
+    3. Criando label e usando fonte
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demais-labels" class="md-nav__link">
+    Demais labels
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handlers" class="md-nav__link">
+    Handlers
+  </a>
+  
+    <nav class="md-nav" aria-label="Handlers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#up_handler" class="md-nav__link">
+    up_handler
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#down_handler" class="md-nav__link">
+    down_handler
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relogio" class="md-nav__link">
+    relógio
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extras" class="md-nav__link">
+    Extras
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/Lab-7-RTOS-LCD-lvgl-lab.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="lab">LAB<a class="headerlink" href="#lab" title="Permanent link">&para;</a></h1>
+<p>Agora vamos começar mexer com o LVGL e criar nossa interface. A ideia é recriar uma interface de um termostato inspirado no produto a seguir:</p>
+<div class="admonition info">
+<p>KKmoon LCD Touch Screen Termostato Sistema de Aquecimento de Piso Elétrico Aquecimento de Água Termorregulador AC85-240 V Controlador de Temperatura Preto </p>
+<ul>
+<li><a href="https://www.amazon.com.br/KKmoon-Aquecimento-Termorregulador-Controlador-Temperatura/dp/B07X3CDM83">https://www.amazon.com.br/KKmoon-Aquecimento-Termorregulador-Controlador-Temperatura/dp/B07X3CDM83</a></li>
+</ul>
+</div>
+<p><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/51iNUfjxJDL._AC_SL1000_.jpg" width="500" /></p>
+<h2 id="etapas">Etapas<a class="headerlink" href="#etapas" title="Permanent link">&para;</a></h2>
+<p>Quando começamos projetar uma <a href="https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction">interface homem máquina (IHM)</a> é necessário analisarmos várias frentes:</p>
+<ul>
+<li>Usabilidade</li>
+<li>Acessibilidade</li>
+<li>Branding</li>
+<li>Implementação</li>
+</ul>
+<p>A usabilidade irá indicar como as funções do produto estarão disponíveis e serão exibidas aos usuários, isso deve estar atrelada aos conceitos da marca do produto. O público alvo deve ser analisado e o produto deve ser acessível, para isso, muitos testes de usabilidade devem ser feitos para validar o conceito.</p>
+<p>Muitas vezes o protótipo da interface esbarra em problemas técnicos e de implementação, muitas imagens e fontes impactam no tamanho total do firmware que pode impossibilitar a implementação da interface proposta, ou necessitar a adição de formas alternativas de armazenamento de dados. Microcontroladores de forma geral não possuem GPU (alguns sim, exemplo: <a href="https://www.st.com/en/microcontrollers-microprocessors/stm32mp157.html">STM32MP157</a> ) e isso impacta na performance da interface e muito provavelmente no gasto energético.</p>
+<h2 id="implementando">Implementando<a class="headerlink" href="#implementando" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Vamos usar muito a documentação do lvgl é importante que você tenha o site aberto e a consulte sempre:</p>
+<ul>
+<li><a href="https://docs.lvgl.io/latest/en/html/overview/index.html">https://docs.lvgl.io/latest/en/html/overview/index.html</a></li>
+</ul>
+</div>
+<p>O LVGL possui vasta documentação e muitos bons exemplos (testamos vários e todos funcionaram no embarcado), neste laboratório iremos usar alguns widgets do LVGL e aos poucos vamos customizando eles.</p>
+<h3 id="preparando-firmware">Preparando firmware<a class="headerlink" href="#preparando-firmware" title="Permanent link">&para;</a></h3>
+<p>Vamos criar uma nova função chamada de <code>void lv_termostato(void){ }</code> onde iremos fazer a implementação da interface do termostato. Além de criarmos esta função, teremos que modificar a <code>task_lcd</code> para chamar a nova função.</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<p>Modifique o fimrware original incluindo a função e modificando a <code>task_lcd</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="gi">+void lv_termostato(void) {</span>
+<span class="gi">+</span>
+<span class="gi">+}</span>
+
+
+static void task_lcd(void *pvParameters) {
+
+<span class="gd">-  lv_ex_btn_1();</span>
+<span class="gi">+  lv_termostato();</span>
+
+  ....
+  ....
+}
+</code></pre></div>
+</div>
+<h4 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h4>
+<p>Notem que a interface a ser recriada possui fundo preto, isso é ajustado no LVGL pela função <code>lv_obj_set_style_local_bg_color</code>, para um fundo preto basta passarmos <code>LV_COLOR_BLACK</code> no ũltimo argumento da função, como indicado a seguir:</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Modifique a função <code>lv_termostato</code> para definirmos o fundo como preto</li>
+<li>Teste no uC</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">lv_termostato</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">lv_obj_set_style_local_bg_color</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">LV_OBJ_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_BLACK</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h4 id="tamanho-fonte">Tamanho fonte<a class="headerlink" href="#tamanho-fonte" title="Permanent link">&para;</a></h4>
+<p>Para recriar a interface iremos usar um tamanho de fonte um pouco maior que o padrão (14) do LVGL, para isso teremos que modificar o arquivo de configuração: <code>src/config/lv_conf.h</code></p>
+<p>As fontes padrões são definidas nas linhas:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define LV_THEME_DEFAULT_FONT_SMALL         &amp;lv_font_montserrat_14</span>
+<span class="cp">#define LV_THEME_DEFAULT_FONT_NORMAL        &amp;lv_font_montserrat_14</span>
+<span class="cp">#define LV_THEME_DEFAULT_FONT_SUBTITLE      &amp;lv_font_montserrat_14</span>
+<span class="cp">#define LV_THEME_DEFAULT_FONT_TITLE         &amp;lv_font_montserrat_14</span>
+</code></pre></div>
+<p>O LVGL não inclui todas as fontes por padrão, a lista das fontes que irão ser compiladas está neste mesmo arquivo:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* Montserrat fonts with bpp = 4</span>
+<span class="cm"> * https://fonts.google.com/specimen/Montserrat  */</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_8     0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_10    0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_12    0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_14    1</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<p>Modifique o arquivo <code>lv_conf.h</code> para:</p>
+<ol>
+<li>Incluir a a fonte tamanho 24</li>
+<li>Tornar a fonte tamanho 24 padrão em tudo</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="cp">#define LV_FONT_MONTSERRAT_12    0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_14    0</span>
+<span class="p">...</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_24    1</span>
+<span class="p">...</span>
+<span class="p">...</span>
+<span class="cp">#define LV_THEME_DEFAULT_FONT_SMALL         &amp;lv_font_montserrat_24</span>
+<span class="cp">#define LV_THEME_DEFAULT_FONT_NORMAL        &amp;lv_font_montserrat_24</span>
+<span class="cp">#define LV_THEME_DEFAULT_FONT_SUBTITLE      &amp;lv_font_montserrat_24</span>
+<span class="cp">#define LV_THEME_DEFAULT_FONT_TITLE         &amp;lv_font_montserrat_24</span>
+</code></pre></div>
+</div>
+<h2 id="identificando-widgets">Identificando widgets<a class="headerlink" href="#identificando-widgets" title="Permanent link">&para;</a></h2>
+<p>A primeira etapa após ter a interface definida é identificar quais widgets podem ser utilizados para montar a interface. </p>
+<div class="admonition question short">
+<p class="admonition-title">Question</p>
+<p>Identifique quais widgets você usaria para reconstruir a imagem a seguir:</p>
+<p><img alt="" src="imgs/lvgl/lab.svg" width="400" /></p>
+<div class="admonition details">
+<p>O correto é:</p>
+<ul>
+<li>(a): lv_label</li>
+<li>(b): lv_button</li>
+</ul>
+</div>
+</div>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p>Click para continuar....</p>
+</div>
+<h2 id="botoes">Botões<a class="headerlink" href="#botoes" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p><a href="https://docs.lvgl.io/latest/en/html/widgets/btn.html">https://docs.lvgl.io/latest/en/html/widgets/btn.html</a></p>
+</div>
+<p>O <code>lv_button</code> permite que criemos um ou mais botões, os botões podem ou não ter label, podemos associar para cada botão uma função de handler que será chamada assim que um evento neste botão for detectado, os eventos disponíveis são:</p>
+<ul>
+<li><code>LV_BTN_STATE_RELEASED</code></li>
+<li><code>LV_BTN_STATE_PRESSED</code></li>
+<li><code>LV_BTN_STATE_CHECKED_RELEASED</code></li>
+<li><code>LV_BTN_STATE_CHECKED_PRESSED</code></li>
+<li><code>LV_BTN_STATE_DISABLED</code></li>
+<li><code>LV_BTN_STATE_CHECKED_DISABLED</code></li>
+</ul>
+<p>O exemplo fornecido na função (<code>lv_ex_btn_1</code>) cria um botão chamado <code>btn1</code> e o alinha no centro da tela, a função <code>event_handler</code> foi associada como callback deste widget, assim que um evento ocorrer a mesma será executada.</p>
+<div class="highlight"><pre><span></span><code><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btn1</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_CENTER</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">-40</span><span class="p">);</span>
+</code></pre></div>
+<p>Depois cria um <code>label</code> e o associa ao botão:</p>
+<div class="highlight"><pre><span></span><code><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">label</span><span class="p">;</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="s">&quot;Button&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Conforme a <a href="https://docs.lvgl.io/latest/en/html/widgets/obj.html">documentação do lvgl para objetos</a> Podemos alinhar um objeto em vários locais diferentes na tela. Isso é feito pela função <code>lv_obj_align(obj, obj_ref, LV_ALIGN_..., x_ofs, y_ofs)</code> que recebe como parâmetro:</p>
+<ul>
+<li><code>obj</code> is the object to align.</li>
+<li><code>obj_ref</code> is a reference object. obj will be aligned to it. If <code>obj_ref = NULL</code>, then the parent of <code>obj</code> will be used.</li>
+<li>The third argument is the type of alignment. These are the possible options: </li>
+</ul>
+<p><img alt="" src="https://docs.lvgl.io/latest/en/html/_images/align.png" width="500" /></p>
+<blockquote>
+<p>Extraído da documentação.</p>
+</blockquote>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p>Click para continuar....</p>
+</div>
+<h3 id="botao-de-power">Botão de power<a class="headerlink" href="#botao-de-power" title="Permanent link">&para;</a></h3>
+<p>Agora vamos criar os botões da interface proposta, primeiro iremos criar o botão de <strong>power</strong>, para isso iremos alinhar-lho no canto inferior esquerdo, conforme figura a seguir:</p>
+<p><img alt="" src="imgs/lvgl/lab-botoes.svg" width="500" /></p>
+<p>A implementação será realizada dento da função <code>lv_termostato</code> conforme indicado a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">lv_termostato</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//-------------------</span>
+    <span class="c1">// POWER</span>
+    <span class="c1">//-------------------</span>
+
+    <span class="c1">// cria botao de tamanho 60x60 redondo</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btnPower</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+    <span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>  <span class="n">lv_obj_set_height</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
+
+    <span class="c1">// alinha no canto esquerdo e desloca um pouco para cima e para direita</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_BOTTOM_LEFT</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">-15</span><span class="p">);</span>
+
+    <span class="c1">// altera a cor de fundo, borda do botão criado para PRETO</span>
+    <span class="n">lv_obj_set_style_local_bg_color</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="n">LV_OBJ_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_BLACK</span> <span class="p">);</span>
+    <span class="n">lv_obj_set_style_local_border_color</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="n">LV_OBJ_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_BLACK</span> <span class="p">);</span>
+    <span class="n">lv_obj_set_style_local_border_width</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="n">LV_OBJ_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>O exemplo de botão fornecido modifica:</p>
+<ul>
+<li>width e height do botão: <code>lv_obj_set_width</code> e <code>lv_obj_set_height</code></li>
+<li>cor de fundo: <code>lv_obj_set_style_local_bg_color</code></li>
+<li>cor da borda: <code>lv_obj_set_style_local_border_color</code></li>
+<li>largura da borda: <code>lv_obj_set_style_local_border_width</code></li>
+</ul>
+</div>
+<p>Vamos agora criar um label para ele, no LVGL podemos utilizar alguns símbolos já pré definidos, os detalhes estão na <a href="https://docs.lvgl.io/latest/en/html/overview/font.html">documentação de fonts</a>, mas serão listados aqui:</p>
+<p><img alt="" src="https://docs.lvgl.io/latest/en/html/_images/symbols.png" width="300" /></p>
+<p>Notem que podemos usar o símbolo <code>LV_SYMBOL_POWER</code> para recriar o botão da interface planejada:</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">labelPower</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_recolor</span><span class="p">(</span><span class="n">labelPower</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">labelPower</span><span class="p">,</span> <span class="s">&quot;#ffffff [  &quot;</span> <span class="n">LV_SYMBOL_POWER</span> <span class="s">&quot;  |#&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Vocês devem definir o label como variável glogal, permitindo assim que outra parte do código altera o valor escrito:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// global</span>
+<span class="k">static</span>  <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">labelPower</span><span class="p">;</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Com o <a href="https://docs.lvgl.io/latest/en/html/widgets/label.html#text-recolor"><code>recolor</code></a> ativado podemos definir a cor <code>#ffffff</code> (branco) do texto que será exibido no label.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: Botão power</p>
+<p>Conforme descrito anteriormente, você deve executar os seguintes passos:</p>
+<ol>
+<li>Inicialize o btnPower</li>
+<li>Inicialize o label e o configure</li>
+<li>Crie a variável global: <code>labelPower</code></li>
+<li>Teste na placa</li>
+</ol>
+<p>Resultado esperado:</p>
+<p><img alt="" src="imgs/lvgl/btn_power.jpeg" width="300" /></p>
+<details class="tip"><summary>Código completo do lv_termostato()</summary><div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">lv_termostato</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">lv_obj_set_style_local_bg_color</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="n">LV_OBJ_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_BLACK</span><span class="p">);</span>
+
+    <span class="c1">// POWER</span>
+    <span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">btnPower</span> <span class="o">=</span> <span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">);</span>
+    <span class="n">lv_obj_set_width</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>  <span class="n">lv_obj_set_height</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_BOTTOM_LEFT</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">-15</span><span class="p">);</span>
+
+    <span class="n">lv_obj_set_style_local_bg_color</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="n">LV_OBJ_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_BLACK</span> <span class="p">);</span>
+    <span class="n">lv_obj_set_style_local_border_color</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="n">LV_OBJ_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_BLACK</span> <span class="p">);</span>
+    <span class="n">lv_obj_set_style_local_border_width</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="n">LV_OBJ_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">labelPower</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">btnPower</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_label_set_recolor</span><span class="p">(</span><span class="n">labelPower</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">labelPower</span><span class="p">,</span> <span class="s">&quot;#ffffff [  &quot;</span> <span class="n">LV_SYMBOL_POWER</span> <span class="s">&quot;  |#&quot;</span><span class="p">);</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p>Click para continuar....</p>
+</div>
+<h3 id="demais-botoes">Demais botões<a class="headerlink" href="#demais-botoes" title="Permanent link">&para;</a></h3>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: Demais botões</p>
+<p>Agora você é capaz de recriar os demais botões da interface, para cada botão criei uma função de callback (similar ao <code>event_handler</code>). </p>
+<p>Implemente:</p>
+<ul>
+<li><code>M</code> (<code>btnMenu</code>/ <code>menu_handler</code>): Menu </li>
+<li><code>Clock</code> (<code>btnClk</code>/ <code>clk_handler</code>): Relógio </li>
+<li><code>^</code> (<code>btnUp</code>/ <code>up_handler</code>): Aumentar (temperatura/ alarme): </li>
+<li><code>v</code> (<code>btnDown</code>/ <code>down_handler</code>): Baixar (temperatura/ alarme)</li>
+</ul>
+<p><mark>Lembre de testar na placa! Vai precisar de ajustes.</mark></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Handlers:</p>
+<ul>
+<li><mark>Crie um handler diferente por botão.</mark></li>
+</ul>
+<p>Alinhamento:</p>
+<ul>
+<li>Pense em como usar o alinhamento a seu favor.</li>
+</ul>
+<p>Símbolos:</p>
+<ul>
+<li>Relógio: Você pode usar um outro símbolo no lugar.</li>
+<li>v, ^: Tem símbolos prontos para isso</li>
+</ul>
+</div>
+<p>Resultado esperado:</p>
+<p><mark>(o seu pode ficar diferente, mas lembre que a ideia é recriar o display e não criar um novo!)</mark></p>
+<p><img alt="" src="imgs/lvgl/btn_all.jpeg" width="300" /></p>
+</div>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p>Click para continuar....</p>
+</div>
+<h2 id="labels">Labels<a class="headerlink" href="#labels" title="Permanent link">&para;</a></h2>
+<p>Vamos agora implementar os labels, mas antes será preciso escolhermos a fonte que iremos usar na interface, o lvgl possui algumas fontes disponíveis por padrão, mas nem sempre atendem a necessidade da interface. As fontes padrões do LVGL estão no link a seguir:</p>
+<ul>
+<li><a href="https://docs.lvgl.io/latest/en/html/overview/font.html">https://docs.lvgl.io/latest/en/html/overview/font.html</a></li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Para usar as fontes padrões do LVGL é necessário editar o arquivo: <code>config/lv_conf.h</code></p>
+</div>
+<p>Para a interface proposta sugiro usarmos a fonte DSEG (open source) e que lembra um display de sete segmentos:</p>
+<p><a href="https://github.com/keshikan/DSEG">https://github.com/keshikan/DSEG</a></p>
+<p><img alt="" src="https://raw.githubusercontent.com/keshikan/DSEG/master/sample/all_DSEG_list.png" width="500" /></p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Baixe a fonte para o seu computador</li>
+<li><a href="https://github.com/keshikan/DSEG/releases/download/v0.46/fonts-DSEG_v046.zip">https://github.com/keshikan/DSEG/releases/download/v0.46/fonts-DSEG_v046.zip</a></li>
+<li>Extrai a pasta</li>
+</ol>
+</div>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p>Click para continuar....</p>
+</div>
+<h3 id="floor-temp">Floor Temp<a class="headerlink" href="#floor-temp" title="Permanent link">&para;</a></h3>
+<p>Vamos agora implementar o label da temperatura atual do chão, e iremos seguir os passos a seguir:</p>
+<ol>
+<li>Converter fonte</li>
+<li>Adicionar no lvgl/ Microchip studio</li>
+<li>Criando label e usando fonte</li>
+</ol>
+<h4 id="1-convertendo">1. Convertendo<a class="headerlink" href="#1-convertendo" title="Permanent link">&para;</a></h4>
+<p>Com a fonte escolhida precisamos agora converter para o formato que o LVGL consegue interpretar (bitmap), para isso usaremos a ferramenta online do LVGL. Acesse o site:</p>
+<ul>
+<li><a href="https://lvgl.io/tools/fontconverter">https://lvgl.io/tools/fontconverter</a></li>
+</ul>
+<p>Vamos criar uma fonte de <strong>tamanho 70</strong> -&gt; <strong>DSEG7-Modern/DSEG7Modern-Regular.ttf</strong>, esse arquivo será usada no site e foi extraído na etapa anterior. Configure a interface como no exemplo a seguir:</p>
+<ul>
+<li>Name: <code>dseg70</code></li>
+<li>Size: <code>70</code></li>
+<li>Bpp: <code>1 bit-per-pixel</code></li>
+<li>TTF: <code>DSEG7-Modern/DSEG7Modern-Regular.ttf</code></li>
+<li>Symbols: <code>-./0123456789 :</code> (o espaço  é necessário pq ele é um caráter)</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Symbols</p>
+<p>A fonte gerada terá somente esses símbolos, se você quiser usar por exemplo a letra C não vai poder. Gerar somente os símbolos que vai usar é importante porque o uC possui pouca memória e não seria possível ter várias fontes diferentes com todos os símbolos.</p>
+</div>
+<p>O site irá gerar um arquivo <code>dseg70.c</code> salve o mesmo dentro da pasta <code>src/</code> do projeto (a mesma que contém o arquivo main.c) que estamos trabalhando.</p>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p>Click para continuar....</p>
+</div>
+<h4 id="2-adicionando-no-microchip-studio">2. Adicionando no Microchip Studio<a class="headerlink" href="#2-adicionando-no-microchip-studio" title="Permanent link">&para;</a></h4>
+<p>Agora é necessário adicionar o arquivo ao MS:</p>
+<ol>
+<li>Clique com o botão direito em src e clique em Add &gt; Existing Item...</li>
+<li>Encontre o arquivo dseg120.c que foi baixado e clique em Add</li>
+<li>Verifique se o arquivo dseg120.c foi adicionado</li>
+</ol>
+<p><img alt="" src="imgs/lvgl/add_file.png" width="400" /></p>
+<p><img alt="" src="imgs/lvgl/add_file_2.PNG" width="400" /></p>
+<p><img alt="" src="imgs/lvgl/add_file_3.PNG" width="300" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>O exemplo foi feito para a fonte de tamanho 120, mas depois resolvemos trocar por uma menor, note que onde na imagem tem dseg120 você deve colocar a dseg70.</p>
+</div>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p>Click para continuar....</p>
+</div>
+<h4 id="3-criando-label-e-usando-fonte">3. Criando label e usando fonte<a class="headerlink" href="#3-criando-label-e-usando-fonte" title="Permanent link">&para;</a></h4>
+<p>Agora podemos utilizar a nova fonte no nosso projeto, ainda dentro da <code>lv_termostato</code> vamos criar um novo label que irá exibir o valor da temperatura atual. Fazemos isso similar ao botão, porém agora iremos associar o label a tela e não ao botão e também iremos customizar a fonte para usarmos o <code>dseg70</code>.</p>
+<p>Crei a variável global que irá apontar para o label:</p>
+<div class="highlight"><pre><span></span><code><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">labelFloor</span><span class="p">;</span>
+</code></pre></div>
+<p>E então modifique a função termostato:</p>
+<div class="highlight"><pre><span></span><code>  <span class="kt">void</span> <span class="nf">lv_termostato</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="c1">// ....</span>
+    <span class="c1">// ....</span>
+
+    <span class="n">labelFloor</span> <span class="o">=</span> <span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">lv_obj_align</span><span class="p">(</span><span class="n">labelFloor</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">LV_ALIGN_IN_LEFT_MID</span><span class="p">,</span> <span class="mi">35</span> <span class="p">,</span> <span class="mi">-45</span><span class="p">);</span>
+    <span class="n">lv_obj_set_style_local_text_font</span><span class="p">(</span><span class="n">labelFloor</span><span class="p">,</span> <span class="n">LV_OBJ_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dseg70</span><span class="p">);</span>
+    <span class="n">lv_obj_set_style_local_text_color</span><span class="p">(</span><span class="n">labelFloor</span><span class="p">,</span> <span class="n">LV_OBJ_PART_MAIN</span><span class="p">,</span> <span class="n">LV_STATE_DEFAULT</span><span class="p">,</span> <span class="n">LV_COLOR_WHITE</span><span class="p">);</span>
+    <span class="n">lv_label_set_text_fmt</span><span class="p">(</span><span class="n">labelFloor</span><span class="p">,</span> <span class="s">&quot;%02d&quot;</span><span class="p">,</span> <span class="mi">23</span><span class="p">);</span>
+   <span class="p">}</span>
+</code></pre></div>
+<p>Para usarmos a fonte devemos indicar ao LVGL que a fonte existe, para isso adicione a linha a seguir no topo (após os #include) do arquivo <code>main.c</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">LV_FONT_DECLARE</span><span class="p">(</span><span class="n">dseg70</span><span class="p">);</span>
+</code></pre></div>
+<p>Antes de continuar temos que editar o começo arquivo da fonte <code>dseg70</code>, incluindo o define a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="gi">+#define LV_LVGL_H_INCLUDE_SIMPLE</span>
+#ifdef LV_LVGL_H_INCLUDE_SIMPLE
+#include &quot;lvgl.h&quot;
+#else
+#include &quot;lvgl/lvgl.h&quot;
+#endif
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Crie o novo label como indicado anteriormente</li>
+<li>Edite o arquivo <code>dseg70.h</code></li>
+<li>Teste na placa</li>
+</ol>
+<p>Resultado esperado:</p>
+<p><img alt="" src="imgs/lvgl/label-floor.jpeg" width="300" /></p>
+</div>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p>Click para continuar....</p>
+</div>
+<h4 id="demais-labels">Demais labels<a class="headerlink" href="#demais-labels" title="Permanent link">&para;</a></h4>
+<p>Agora vocês precisam criar os outros dois labels: Relógio e Temperatura configurada, para isso será necessário gerar outras duas fontes de tamanhos diferentes e criar os labels.</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Crie o label temperatura referência: <code>labelSetValue</code></li>
+<li>Crie o label para o relógio: <code>labelClock</code></li>
+</ol>
+<p><mark>Para cada label você terá que converter uma nova fonte de tamanho diferente, consulte os passos anteriores.</mark></p>
+<p>Resultado esperado:</p>
+<p><img alt="" src="imgs/lvgl/labels-all.jpeg" width="300" /></p>
+</div>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p>Click para continuar....</p>
+</div>
+<h2 id="handlers">Handlers<a class="headerlink" href="#handlers" title="Permanent link">&para;</a></h2>
+<p>Até agora estávamos apenas criando a interface no LCD, agora precisamos adicionar inteligência a ela. Isso será feito pelos callbacks dos botões. Vamos focar apenas nos botões UP e DOWN que configuram a temperatura de referência (da direita).</p>
+<p>Vamos implementar o código para o <code>up_handler</code>, callback do botão de aumento de temperatura.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Eu dei o nome de <code>up_handler</code> você pode ter dado outro nome, precisa ficar atento a isso.</p>
+</div>
+<h3 id="up_handler">up_handler<a class="headerlink" href="#up_handler" title="Permanent link">&para;</a></h3>
+<p>Existem várias maneiras de fazermos com que o handler altera o valor do label, eu sugiro o código a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">up_handler</span><span class="p">(</span><span class="n">lv_obj_t</span> <span class="o">*</span> <span class="n">obj</span><span class="p">,</span> <span class="n">lv_event_t</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="kt">char</span> <span class="o">*</span> <span class="n">c</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">temp</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">event</span> <span class="o">==</span> <span class="n">LV_EVENT_CLICKED</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">c</span> <span class="o">=</span> <span class="n">lv_label_get_text</span><span class="p">(</span><span class="n">labelSetValue</span><span class="p">);</span>
+      <span class="n">temp</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+      <span class="n">lv_label_set_text_fmt</span><span class="p">(</span><span class="n">labelSetValue</span><span class="p">,</span> <span class="s">&quot;%02d&quot;</span><span class="p">,</span> <span class="n">temp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A vantagem da implementação sugerida é que não precisamos de uma variável global para armazenar o valor da temperatura, nós recuperamos o valor lendo o que estava salvo no label e convertendo para inteiro.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Implemente o handler</li>
+<li>Teste na placa</li>
+<li>Aperte o botão de up e verifique se a referência muda.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A fonte utilizada tem um problema, o caracter vázio (espaço: <code></code>) não apaga 100% o último valor, por exemplo: Quando o digito muda de 2 para 1 acontece de ficar uma barra em baixo.</p>
+<p>Depois vemos como resolver isso! Eu ainda não sei =/</p>
+</div>
+</div>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p>Click para continuar....</p>
+</div>
+<h3 id="down_handler">down_handler<a class="headerlink" href="#down_handler" title="Permanent link">&para;</a></h3>
+<p>Agora implemente a ação do botão down.</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Implemente o <code>down_handler</code></li>
+<li>Teste na placa</li>
+</ol>
+</div>
+<h3 id="relogio">relógio<a class="headerlink" href="#relogio" title="Permanent link">&para;</a></h3>
+<p>Temos um relógio na interface, vamos fazer ele funcionar? Para isso terão que incluir o RTC no projeto e fazer uso dele.</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<p>Inclua o RTC no projeto e faça o relógio funcionar!</p>
+<p>O relǵio deve exibir HH:MM, o <strong>:</strong> deve piscar uma vez por segundo.</p>
+<p>Dicas:</p>
+<ol>
+<li>Incluir RTC</li>
+<li>Criar task dedicada para atualizar o RTC</li>
+<li>Inicializar RTC na task</li>
+<li>Task fica esperando semáforo do tick de segundos e atualiza o label do relógio.</li>
+</ol>
+</div>
+<div class="admonition progress">
+<p class="admonition-title">Progress</p>
+<p><mark>Até aqui é C!</mark></p>
+</div>
+<h2 id="extras">Extras<a class="headerlink" href="#extras" title="Permanent link">&para;</a></h2>
+<p>Temos muito o que fazer na interface, vou sugerir algumas coisas que irão dar nota a mais para vocês neste lab, <mark>cada item é meio conceito a mais.</mark></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implementar o digito da Temperatura: 23 <strong>.4</strong><ul>
+<li>Dica: use uma das fontes menores para isso</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> O botão de <code>settings</code> deve possibilitar o usuário configurar a hora certa (usando as setas v e ^).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Incluir demais labels e logos</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Gerar um logo para o relógio e usar no lugar do de <code>settings</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implementar o botão de <code>Power</code> que desliga a tela</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Colocar um potenciômetro que altera o valor da temperatura atual.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Preencher ao finalizar o lab</p>
+</div>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf52OFKZi-QRgQ7CRX97pEWQlZhsgcvPO--jlU7vI6BagmL5g/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 23, 2021</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="Lab-7-RTOS-LCD-lvgl.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Começando" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Começando
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="Lab-9-ECG.html" class="md-footer__link md-footer__link--next" aria-label="Next: Lab 8 - ECG" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Lab 8 - ECG
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; Rafael Corsi @ insper
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.76f349be.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+      
+        <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-database.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="js/markdown-enhancer.js"></script>
+      
+    
+  </body>
+</html>

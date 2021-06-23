@@ -1,0 +1,1690 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.8">
+    
+    
+      
+        <title>Teoria - 5s - Computação Embarcada</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="pink">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#irq-teoria" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="5s - Computação Embarcada" class="md-header__button md-logo" aria-label="5s - Computação Embarcada" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            5s - Computação Embarcada
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Teoria
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Insper/ComputacaoEmbarcada
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="5s - Computação Embarcada" class="md-nav__button md-logo" aria-label="5s - Computação Embarcada" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    5s - Computação Embarcada
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/insper/ComputacaoEmbarcada/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Insper/ComputacaoEmbarcada
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sobre-Curso.html" class="md-nav__link">
+        Sobre o curso
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Insper/SAME70-examples" class="md-nav__link">
+        SAME70-Examples
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Videos.html" class="md-nav__link">
+        Vídeos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Util
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Util" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Util
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sobre-Ferramental.html" class="md-nav__link">
+        Ferramental
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Startup.html" class="md-nav__link">
+        Startup
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Erros.html" class="md-nav__link">
+        Erros comum
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-Documentos.html" class="md-nav__link">
+        Documentos
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Dicas
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Dicas" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Dicas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Dicas.html" class="md-nav__link">
+        PIO
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-lcd.html" class="md-nav__link">
+        LCD max Touch
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-freertos.html" class="md-nav__link">
+        Freertos
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-FloatPrint.html" class="md-nav__link">
+        Float Print (Atmel Studio)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Util-lvgl.html" class="md-nav__link">
+        LVGL
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      <label class="md-nav__link" for="__nav_7">
+        Labs
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Labs" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Labs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
+      
+      <label class="md-nav__link" for="__nav_7_1">
+        Lab 1 - PIO 
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 1 - PIO " data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 1 - PIO 
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-1-IOs-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
+      
+      <label class="md-nav__link" for="__nav_7_2">
+        Lab 2 - Driver
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 2 - Driver" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 2 - Driver
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-2-PIO-Driver-Teoria.html" class="md-nav__link">
+        Teoria
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-2-PIO-Driver-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_3" type="checkbox" id="__nav_7_3" checked>
+      
+      <label class="md-nav__link" for="__nav_7_3">
+        Lab 3 - PIO IRQ
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 3 - PIO IRQ" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_3">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 3 - PIO IRQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Teoria
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Lab-3-PIO-IRQ-Teoria.html" class="md-nav__link md-nav__link--active">
+        Teoria
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#embarcado" class="md-nav__link">
+    Embarcado
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#excecoes" class="md-nav__link">
+    Exceções
+  </a>
+  
+    <nav class="md-nav" aria-label="Exceções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplos" class="md-nav__link">
+    Exemplos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interrupcao" class="md-nav__link">
+    Interrupção
+  </a>
+  
+    <nav class="md-nav" aria-label="Interrupção">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prioridades" class="md-nav__link">
+    Prioridades
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupt-requests-irq" class="md-nav__link">
+    Interrupt Requests - IRQ
+  </a>
+  
+    <nav class="md-nav" aria-label="Interrupt Requests - IRQ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sinais-de-interrupcao-vindo-dos-perifericos" class="md-nav__link">
+    Sinais de interrupção vindo dos periféricos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupt-service-routine-isr" class="md-nav__link">
+    Interrupt Service Routine - ISR
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-cmsis" class="md-nav__link">
+    Software - CMSIS
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-3-PIO-IRQ-Lab.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-4-TickTack-Lab.html" class="md-nav__link">
+        Lab 4 - TC RTC RTT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_5" type="checkbox" id="__nav_7_5" >
+      
+      <label class="md-nav__link" for="__nav_7_5">
+        Lab 5 - RTOS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 5 - RTOS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_5">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 5 - RTOS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-5-RTOS.html" class="md-nav__link">
+        Lab
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-5-RTOS-dicas.html" class="md-nav__link">
+        Dicas
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-6-RTOS-ADC.html" class="md-nav__link">
+        Lab 6 - RTOS - ADC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_7" type="checkbox" id="__nav_7_7" >
+      
+      <label class="md-nav__link" for="__nav_7_7">
+        Lab 7 - RTOS LCD
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lab 7 - RTOS LCD" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_7">
+          <span class="md-nav__icon md-icon"></span>
+          Lab 7 - RTOS LCD
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-7-RTOS-LCD-lvgl.html" class="md-nav__link">
+        Começando
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-7-RTOS-LCD-lvgl-lab.html" class="md-nav__link">
+        LAB
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-9-ECG.html" class="md-nav__link">
+        Lab 8 - ECG
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Lab-10-RTOS-WIFI.html" class="md-nav__link">
+        Lab 9 - WIFI
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        Projeto
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Projeto" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Projeto
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Descricao.html" class="md-nav__link">
+        Descrição
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf" class="md-nav__link">
+        Controle
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://app.mural.co/t/elementos9119/m/elementos9119/1616424619557/3341fbe703cab0b531da459548f0124af1af1669" class="md-nav__link">
+        Handout 1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Rubrica.html" class="md-nav__link">
+        Rubrica
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Dicas.html" class="md-nav__link">
+        Dicas
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Projeto-1-Lista.html" class="md-nav__link">
+        Anos passados
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      <label class="md-nav__link" for="__nav_9">
+        APS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="APS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          APS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-howto.html" class="md-nav__link">
+        HowTo
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_2" type="checkbox" id="__nav_9_2" >
+      
+      <label class="md-nav__link" for="__nav_9_2">
+        APS 1 - Musical
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="APS 1 - Musical" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_2">
+          <span class="md-nav__icon md-icon"></span>
+          APS 1 - Musical
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-1-Musical.html" class="md-nav__link">
+        APS 1 - Musical
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-1-Musical-software.html" class="md-nav__link">
+        APS 1 - Musical - Firmware
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-2-Oximetro.html" class="md-nav__link">
+        APA 2 - Oxímetro
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="APS-3-IoT.html" class="md-nav__link">
+        APS 3 - IoT
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Avaliacoes.html" class="md-nav__link">
+        Avaliações e Simulados
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#embarcado" class="md-nav__link">
+    Embarcado
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#excecoes" class="md-nav__link">
+    Exceções
+  </a>
+  
+    <nav class="md-nav" aria-label="Exceções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplos" class="md-nav__link">
+    Exemplos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interrupcao" class="md-nav__link">
+    Interrupção
+  </a>
+  
+    <nav class="md-nav" aria-label="Interrupção">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prioridades" class="md-nav__link">
+    Prioridades
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupt-requests-irq" class="md-nav__link">
+    Interrupt Requests - IRQ
+  </a>
+  
+    <nav class="md-nav" aria-label="Interrupt Requests - IRQ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sinais-de-interrupcao-vindo-dos-perifericos" class="md-nav__link">
+    Sinais de interrupção vindo dos periféricos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupt-service-routine-isr" class="md-nav__link">
+    Interrupt Service Routine - ISR
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#software-cmsis" class="md-nav__link">
+    Software - CMSIS
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/Lab-3-PIO-IRQ-Teoria.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="irq-teoria">IRQ - Teoria<a class="headerlink" href="#irq-teoria" title="Permanent link">&para;</a></h1>
+<p>Em computação é comum a necessidade de realizar ações com base em
+eventos. Eventos podem ser classificados como internos ou externos ao
+processador/microcontrolador. O término de um cálculo realizado por um
+dos núcleos de um processador multicore ou a detecção de um overflow de
+memória são exemplos eventos interno ao CORE (processador). Já a
+notificação de um novo pacote oriundo da comunicação Ethernet é um
+exemplo de um evento externo ao CORE.</p>
+<p>A estruturação de um programa orientada a eventos<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> dá uma série de vantagens ao programador:</p>
+<ol>
+<li>
+<p>independência entre as diferentes partes do programador</p>
+</li>
+<li>
+<p>facilidade de modificação e upgrade</p>
+</li>
+<li>
+<p>definição de prioridades</p>
+</li>
+<li>
+<p>facilita a correlação entre o código e a documentação</p>
+</li>
+</ol>
+<p>Nesse paradigma de programação define-se funções para determinados
+eventos e essas funções são executada quando um evento é detectado. As
+funções/eventos podem possuir diferentes níveis de prioridades, o que
+possibilita ao programador definir o que deve ser executado caso dois
+eventos ocorram simultaneamente.</p>
+<p>Por exemplo, podemos definir uma função que é acionada toda vez que
+chega um dado pela porta Ethernet, e outra função que é executada toda
+vez que um botão for pressionado, podemos também definir eventos
+periódicos, tais como: execute uma função a cada <strong>X</strong> segundos (piscar LED!).</p>
+<h2 id="embarcado">Embarcado<a class="headerlink" href="#embarcado" title="Permanent link">&para;</a></h2>
+<p>Em computadores os eventos são em geral tratados pelo sistema
+operacional (OS) (linux/ windows, /....) porém em sistemas embarcados
+nem sempre possuímos um sistema operacional ou não podemos tolerar a
+latência entre a troca de contexto do OS (nada é de graça!).
+Existe para isso as interrupções de hardware, 
+que são chamadas de funções (eventos)
+realizados pelo uC para eventos detectados pelos periféricos (no computador também tem, mas o OS toma conta de tudo).</p>
+<p>Podemos por exemplo configurar o uC para que toda vez que um botão for pressionado (no nosso caso, mudança de HIGI par LOW) uma função (<code>handler</code>) seja
+executada. Evitando a necessidade de verificarmos pela mudança de estado do pino no <code>while(1)</code> (técnica conhecida como polling). Isso abre portas para uma série de otimizações sendo uma da principal a questão energética.</p>
+<p>O estilo de programação que fica checando por uma mudança é chamado de
+<strong>polling</strong>, o mesmo utilizado nos lab realizados até agora:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+  <span class="cm">/**</span>
+<span class="cm">  * @Brief Verifica constantemente o status do botao</span>
+<span class="cm">  * 1 : nao apertado</span>
+<span class="cm">  * 0 : apertado</span>
+<span class="cm">  */</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">BUT_PIO</span><span class="o">-&gt;</span><span class="n">PIO_PDSR</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">BUT_PIN_MASK</span><span class="p">))</span>
+  <span class="p">{</span>
+     <span class="n">LED_PIO</span><span class="o">-&gt;</span><span class="n">PIO_CODR</span> <span class="o">=</span> <span class="n">LED_PIN_MASK</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+     <span class="n">LED_PIO</span><span class="o">-&gt;</span><span class="n">PIO_SODR</span> <span class="o">=</span> <span class="n">LED_PIN_MASK</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>Nesse exemplo de código fica-se constantemente checando por alterações
+no registrador do PIO responsável pelo botão a fim de decidirmos se o
+LED ficará acesso ou apagado. O CORE está constantemente trabalhando a
+fim de executar essas operações, o que ele faz constantemente é:</p>
+<ol>
+<li>
+<p>busca o valor do registrador <code>PIO_PDSR</code></p>
+</li>
+<li>
+<p>aplica a máscara ao valor</p>
+</li>
+<li>
+<p>checa se o resultado da máscara é verdadeiro ou falso</p>
+</li>
+<li>
+<p>executa uma das duas ações diferentes</p>
+</li>
+</ol>
+<p>O CORE Cortex M7 com ponto flutuante operando a 300MHz fica realizado
+uma simples ação de comparar o valor de um registrador com uma máscara
+para detectarmos uma mudança no botão. E se, o código fosse alertado
+dessa alteração e uma função específica chamada para tratar essa mudança? O CORE poderia estar em um modo de baixo consumo energético (sleep
+mode) e configurado para acordar dado um determinado evento (ex:mudança de estado do botão).</p>
+<p>Deve-se ponderar a utilização do modo de baixo consumo energético já que
+esse tipo de ação (sleep mode -> wakeup) implica em um atraso entre o
+evento e a retomada plena do CORE e início da execução do código. Esse
+atraso que pode variar entre microcontroladores (no caso do SAME70 entre 10us e 2ms dependendo do
+modo de powerdown) pode ser crítico para sistemas que devem agir de
+forma ágil a uma determinada ação.</p>
+<p>O trecho de código a seguir ilustra a possível solução utilizando
+interrupção para executar uma ação quando o botão é alterado. No
+<code>while(1)</code> o processador entra em modo <code>sleep</code> (função blocante) e só é
+"acordado" dado uma mudança no valor digital do pino que o botão está
+conectado.</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">*  Funcao responsavel por tratar a mudanca de</span>
+<span class="cm">*  estado do botao.</span>
+<span class="cm">*  E&#39; chamada sempre que houver uma transicao</span>
+<span class="cm">*  de High -&gt; Low (falling_egde).</span>
+<span class="cm">*/</span>
+<span class="kt">void</span> <span class="nf">but_Handler</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">BUT_PIO</span><span class="o">-&gt;</span><span class="n">PIO_PDSR</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">BUT_PIN_MASK</span><span class="p">)){</span>
+     <span class="n">LED_PIO</span><span class="o">-&gt;</span><span class="n">PIO_CODR</span> <span class="o">=</span> <span class="n">LED_PIN_MASK</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span><span class="p">{</span>
+     <span class="n">LED_PIO</span><span class="o">-&gt;</span><span class="n">PIO_SODR</span> <span class="o">=</span> <span class="n">LED_PIN_MASK</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">(){</span>
+ <span class="cm">/* inicializacoes */</span>
+  <span class="p">...</span>
+
+ <span class="cm">/**</span>
+<span class="cm">  * Superloop em modo sleep</span>
+<span class="cm">  */</span>
+ <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+   <span class="n">pmc_sleep</span><span class="p">(</span><span class="n">SLEEPMGR_SLEEP_WFI</span><span class="p">);</span>
+ <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="excecoes">Exceções<a class="headerlink" href="#excecoes" title="Permanent link">&para;</a></h2>
+<p>Exceções <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> são eventos que causam uma mudança no fluxo de execução do
+programa, quando ocorridas levam a unidade de processamento a
+executar uma parte específica do código chamada de: <strong>exception
+handler</strong>. Depois do término da execução da exceção o programa principal
+volta a ser executado normalmente.</p>
+<p><img alt="Fontes de exceções" src="imgs/PIO-IRQ/nvic_core.png" /></p>
+<p>O hardware responsável por gerenciar as exceções no ARM é chamado de
+<a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s01s01.html"><strong>Nested vectored interrupt controller</strong> (NVIC)</a>. O NVIC pode suportar de 1 à 240 diferentes exceções, sendo elas classificadas basicamente em
+quatro grupos:</p>
+<ul>
+<li>System Exceptions</li>
+<li>Fault Detection</li>
+<li>Non-Maskable Interrupt (NMI)</li>
+<li>Interrupt Requests (IRQ)</li>
+</ul>
+<p>Exceções numeradas de -15 até -1 são consideradas exceções do sistema (reset,
+overflow, bus fault, ...), exceções de número superior a 15 são
+consideradas interrupções. No CortexM não existe exceção 0 (quem executa nesse nível é o <code>main</code>)</p>
+<h3 id="exemplos">Exemplos<a class="headerlink" href="#exemplos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>O PIO pode gerar uma interrupção quando acontecer uma mudança de
+    nível em uma entrada;</p>
+</li>
+<li>
+<p>O periférico do USB pode gerar uma interrupção quando um dado novo
+    chegar; ou quando a transmissão de um dado finalizar;</p>
+</li>
+<li>
+<p>O <em>timer</em> pode gerar uma interrupção quando atingido um determinado
+    valor;</p>
+</li>
+</ul>
+<h2 id="interrupcao">Interrupção<a class="headerlink" href="#interrupcao" title="Permanent link">&para;</a></h2>
+<p>No ARM interrupções são um tipo de exceção, normalmente geradas pelos
+periféricos do microcontrolador.</p>
+<p>Quando um periférico impõem um sinal de interrupção ao NVIC, o seguinte
+acontece:</p>
+<ol>
+<li>uma interrupção é acionada (IRQ);</li>
+<li>O processador suspende a execução do código;</li>
+<li>O processador executa o serviço de rotina da interrupção (<strong>Interrupt
+    Service Routine</strong> - ISR );</li>
+<li>O processador retoma a execução do código para o estado anterior da
+    interrupção acontecer.</li>
+</ol>
+<p>Devemos notar que o processador deve salvar os contextos (registradores
+do core) na primeira passagem (1 -&gt; 2) e após executar o ISR,
+recarregar os valores na passagem (2 -&gt; 3).</p>
+<h3 id="prioridades">Prioridades<a class="headerlink" href="#prioridades" title="Permanent link">&para;</a></h3>
+<p>No ARM, podemos classificar as interrupções por prioridade sendo a de
+número menor considerada de MAIOR prioridade e de número maior de MENOR
+prioridade. O ARM permite que tenhamos uma gama de 256 níveis de
+prioridades distintas porém fica a cargo do fabricante decidir a
+quantidade de níveis.</p>
+<p>Quando duas interrupções acontecem (não necessariamente simultaneamente)
+o NVIC verificará qual é a de maior prioridade e a executará primeiro,
+após sua execução é chamada o ISR da interrupção de menor prioridade.</p>
+<p>A figura a seguir ilustra o que acontece quando uma interrupção é
+ativada quando um sistema operacional está em uso, nesse caso existem
+dois tipos distintos de interrupção : IRQ e FIQ (<strong>Fast Interruption
+Routine</strong>).</p>
+<p><img alt="Ilustração do fluxo de interrupção" src="imgs/PIO-IRQ/flow.png" /></p>
+<h3 id="interrupt-requests-irq">Interrupt Requests - IRQ<a class="headerlink" href="#interrupt-requests-irq" title="Permanent link">&para;</a></h3>
+<p>As interrupções do tipo IRQs, geradas pelos periféricos são
+"mascaradas", ou seja, devemos ativar em em um registrador (de configuração do CORE) quais
+serão as interrupções que estarão ativas.</p>
+<p>Além de ativarmos a interrupção do periférico específico, precisamos
+definir sua prioridade. Na inicialização do uC o ARM configura todas as
+prioridades para o nível 0 (mais alto). Esse controle é realizado via
+acesso aos registradores especiais do NVIC, especificamente o IRQ.</p>
+<h4 id="sinais-de-interrupcao-vindo-dos-perifericos">Sinais de interrupção vindo dos periféricos<a class="headerlink" href="#sinais-de-interrupcao-vindo-dos-perifericos" title="Permanent link">&para;</a></h4>
+<p>Os periféricos geram um sinal de interrupção para o NVIC, esse sinal
+fica ativo até ser limpo manualmente pelo CORE e é utilizado pelo NVIC a
+fim de gerar a interrpução no CORE.</p>
+<p>É de responsabilidade do programador (código) em dizer ao periférico que
+a interrupção foi resolvida, isso é feito acessando um registrador
+específico do periférico.</p>
+<p>O NVIC trata as interrupções de maior prioridade antes das de menor
+prioridade, nesse meio termo os periféricos de menor prioridade devem
+manter sua requisição de interrupção ao NVIC. Os periféricos não possuem
+uma maneira direta de saber que a interrupção já foi tratada, por isso
+mantém em alto a requisição até receberem um mensagem dizendo que podem
+baixar o sinal da interrupção. Isso é feito via acesso do CORE a um
+registrador do periférico, todos os periféricos que geram interrupções
+possuem um registrador específico para isso.</p>
+<div class="admonition note">
+<p class="admonition-title">Podemos tomar por exemplo o PIO:</p>
+<p><strong>31.5.10 Input Edge/Level Interrupt</strong></p>
+<p>When the software reads PIO_ISR, all the interrupts are automatically
+cleared. This signifies that all the interrupts that are pending when
+PIO_ISR is read must be handled. When an Interrupt is enabled on a
+"level", the interrupt is generated as long as the interrupt source is
+not cleared, even if some read accesses in PIO_ISR are performed.</p>
+</div>
+<h3 id="interrupt-service-routine-isr">Interrupt Service Routine - ISR<a class="headerlink" href="#interrupt-service-routine-isr" title="Permanent link">&para;</a></h3>
+<p>Após uma interrupção ser detectada pelo NVIC, o CORE salva os contextos
+e aponta a execução do código para uma região específica. Uma função
+especial para cada periférico chamada de Handler é utilizado a fim de
+tratar as interrupções em nível de software.</p>
+<p>Uma interrupção no uC pode estar nos seguintes estados :</p>
+<ul>
+<li>
+<p>Cada interrupção pode estar desativada (padrão) ou ativada;</p>
+</li>
+<li>
+<p>Cada interrupção pode estar pendente (esperando para ser executada)
+    ou não pendente;</p>
+</li>
+<li>
+<p>Cada interrupção pode estar ativada (em execução) ou inativada.</p>
+</li>
+</ul>
+<p>Podemos fazer diferentes combinações dos atributos listados
+anteriormente, por exemplo, enquanto estivermos lidando com uma
+interrupção (ativada) podemos desativar lá para que a mesma interrupção
+não seja chamada novamente quando a interrupção acabar de ser executada.</p>
+<p>Para uma interrupção ser aceita, devemos ter o seguinte cenário :</p>
+<ul>
+<li>
+<p>A interrupção está em pendência,</p>
+</li>
+<li>
+<p>A interrupção está ativada, e,</p>
+</li>
+<li>
+<p>A prioridade da interrupção é maior (menor valor) do que o nível
+    atual.</p>
+</li>
+</ul>
+<h2 id="software-cmsis">Software - CMSIS<a class="headerlink" href="#software-cmsis" title="Permanent link">&para;</a></h2>
+<p>Utilizaremos as funções definidas no <strong>Cortex Microcontroller Software
+Interface Standard</strong> (CMSIS) <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> para configurar o NVIC e o CORE, essas
+funções são de uso geral do ARM Cortex e são independentes do fabricante
+(Atmel, Texas, ...).</p>
+<p>As funções utilizadas serão :</p>
+<div class="highlight"><pre><span></span><code>    <span class="c1">//Set the priority grouping</span>
+    <span class="kt">void</span> <span class="n">NVIC_SetPriorityGrouping</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">priority_grouping</span><span class="p">)</span>
+
+    <span class="c1">//Enable IRQn</span>
+    <span class="kt">void</span> <span class="n">NVIC_EnableIRQ</span><span class="p">(</span><span class="n">IRQn_t</span> <span class="n">IRQn</span><span class="p">)</span> 
+
+    <span class="c1">// Disable IRQn</span>
+    <span class="kt">void</span> <span class="n">NVIC_DisableIRQ</span><span class="p">(</span><span class="n">IRQn_t</span> <span class="n">IRQn</span><span class="p">)</span> 
+
+    <span class="c1">// Set priority for IRQn</span>
+    <span class="kt">void</span> <span class="n">NVIC_SetPriority</span> <span class="p">(</span><span class="n">IRQn_t</span> <span class="n">IRQn</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">priority</span><span class="p">)</span> 
+</code></pre></div>
+<p>Essas funções apenas configura o NVIC + CORE, devemos também configurar
+o periférico que será responsável por gerar a interrupção.</p>
+<p>O parâmetro IRQn das funções de configuração do NVIC é o ID do
+periférico em questão (o mesmo utilizado no PMC).</p>
+<h1 id="pio-interrupcao">PIO - Interrupção<a class="headerlink" href="#pio-interrupcao" title="Permanent link">&para;</a></h1>
+<p>A interrupção no PIO é gerenciada por meio de registradores e pode ser
+configurada para detectar:</p>
+<ul>
+<li>Rising edge detection</li>
+<li>Falling edge detection</li>
+<li>Low-level detection</li>
+<li>High-level detection</li>
+</ul>
+<p>Uma visão geral do hardware responsável por gerenciar as interrupções é
+demonstrado a seguir:</p>
+<p><img alt="PIO interrupção SAME70 Datasheet" src="imgs/PIO-IRQ/PIO.png" /></p>
+<p>O texto a seguir foi extraído do datasheet do SAME70 e descreve a
+operação dessa parte do PIO:</p>
+<div class="admonition note">
+<p class="admonition-title">31.5.10 Input Edge/Level Interrupt</p>
+<p>... is controlled by writing the Interrupt Enable Register () and the
+Interrupt Disable Register (), which enable and disable the input change
+interrupt respectively by setting and clearing the corresponding bit in
+the Interrupt Mask Register (PIO_IMR). , the peripheral clock must be
+enabled. The Input Change interrupt is available regardless of the
+configuration of the I/O line, i.e., configured as an input only,
+controlled by the PIO Controller or assigned to a peripheral function.</p>
+<p>By default, the interrupt can be generated at any time an edge is
+detected on the input.</p>
+<p>and Additional Interrupt Modes Disable Register (PIO_AIMDR). The
+current state of this selection can be read through the Additional
+Interrupt Modes Mask Register (PIO_AIMMR).</p>
+<p><strong>These additional modes are:</strong>
+-   <strong>Rising edge detection</strong>
+-   <strong>Falling edge detection</strong>
+-   Low-level detection</p>
+<ul>
+<li>High-level detection</li>
+</ul>
+<p>In order to select an additional interrupt mode:</p>
+<ul>
+<li>
+<p>must be selected by writing in the Edge Select Register () and Level
+    Select Register () which select, respectively, the edge and level
+    detection.</p>
+</li>
+<li>
+<p>The current status of this selection is accessible through the
+    Edge/Level Status Register (PIO_ELSR).</p>
+</li>
+</ul>
+<p>must be selected by in the Falling Edge/Low-Level Select Register () and
+Rising Edge/High-Level Select Register () which allow to select falling
+or rising edge (if edge is selected in PIO_ELSR) edge or high- or
+low-level detection (if level is selected in PIO_ELSR). The current
+status of this selection is accessible through the Fall/Rise - Low/High
+Status Register (PIO_FRLHSR).</p>
+<p>, the corresponding in the Interrupt Status Register () is . If the
+corresponding bit in , the PIO Controller interrupt line is asserted.</p>
+<p>. This signifies that all the interrupts that are pending when PIO_ISR
+is read must be handled. When an Interrupt is enabled on a "level", the
+interrupt is generated as long as the interrupt source is not cleared,
+even if some read accesses in PIO_ISR are performed.</p>
+<p><img alt="Detecção de eventos *SAME70 Datasheet*" src="imgs/PIO-IRQ/eventDetector.png" /></p>
+</div>
+<h2 id="referencias">Referências<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<p>[1] <a href="https://en.wikipedia.org/wiki/Event-driven_programming">https://en.wikipedia.org/wiki/Event-driven_programming</a></p>
+<p>[2] <a href="https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf">https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf</a></p>
+<p>[3] <a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php</a></p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://en.wikipedia.org/wiki/Event-driven_programming">https://en.wikipedia.org/wiki/Event-driven_programming</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf">https://www.ece.umd.edu/class/enee447.S2016/ARM-Documentation/ARM-Interrupts-1.pdf</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php">http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 23, 2021</span>
+      
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="Lab-2-PIO-Driver-Lab.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lab" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Lab
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="Lab-3-PIO-IRQ-Lab.html" class="md-footer__link md-footer__link--next" aria-label="Next: Lab" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Lab
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; Rafael Corsi @ insper
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.76f349be.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+      
+        <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-database.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js"></script>
+      
+        <script src="js/markdown-enhancer.js"></script>
+      
+    
+  </body>
+</html>
