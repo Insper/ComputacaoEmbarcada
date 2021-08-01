@@ -19,8 +19,8 @@ edit_uri: 'https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/'
 copyright: 'Copyright &copy; Rafael Corsi @ insper'
 
 nav:
-- Home: 'navigation/Home/index.md'
-- Sobre o curso: 'navigation/Sobre_o_curso/Sobre-Curso.md'
+- Home: 'index.md'
+- Sobre o curso: 'navigation/Util/Sobre-Curso.md'
 - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
 - 'Vídeos': 'navigation/Videos/Util-Videos.md'
 - 'Util':
@@ -59,7 +59,7 @@ nav:
     - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
 #    - 'Lab-9-ADC-FIR.md'
 #    - 'Lab-8-RTOS-UART.md'
-#    - 'Lab-10-RTOS-WIFI.md'
+    - 'Lab-10-RTOS-WIFI.md'
 
 - Projeto:
 #    - 'Projeto 1':
@@ -76,12 +76,12 @@ nav:
 #        - 'navigation/Projeto-2-Lista.md'
 
 - APS:
-    - navigation/APS/APS-howto.md
+    - 'navigation/APS/APS-howto.md'
     - 'APS 1 - Musical':
         - 'navigation/APS/APS-1-Musical.md'
         - 'navigation/APS/APS-1-Musical-software.md'
-    - navigation/APS/APS-2-Oximetro.md
-#    - 'navigation/APS-3-IoT.md'
+    - 'navigation/APS/APS-2-Oximetro.md'
+    - 'navigation/APS/APS-3-IoT.md'
 
 - Avaliações e Simulados: navigation/Avaliacoes_e_Simulados/Avaliacoes.md
 #    - 'navigation/Avaliacoes_e_Simulados/20b/AV1.md'
@@ -101,8 +101,6 @@ extra_javascript:
   - https://www.gstatic.com/firebasejs/8.4.0/firebase-database.js
   - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
   - js/markdown-enhancer.js
-#  - 'js/dom-confetti.js'
-#  - 'js/progress.js'
 
 # Extensions
 markdown_extensions:

@@ -5,8 +5,8 @@ Neste laboratório iremos aquisitar e processar o sinal de ECG que vocês terão
 
 ## Lab    
 
-| Exemplo base                                          | LAB                   |
-|-------------------------------------------------------|-----------------------|
+| Exemplo base                              | LAB                   |
+|-------------------------------------------|-----------------------|
 | `SAME70-Examples/Demos/ECG` :arrow_right: | `Labs-8-RTOS-ADC-FIR` |
 
 !!! warning "Código exemplo"
@@ -260,8 +260,13 @@ Com isso vocês devem obter algo como:
     lv_chart_set_next(chart, ser1, value);
     lv_chart_refresh(chart);
     ```
-    
+
     - Programe e teste na placa
+
+!!! tip
+    Dica do Carlos Dip.
+
+    Para tirar os pontos do gráfico execute: `lv_obj_set_style_local_size(chart, LV_CHART_PART_SERIES, LV_STATE_DEFAULT, LV_DPI/150);`
 
 !!! progress
     Click para continuar....
@@ -390,23 +395,25 @@ O resultado esperado é algo como:
     
     Sugestão de valor: 1000 (1 segundo)
 
- !!! progress
+!!! info
+    Até aqui é C.
+
+    !!! note "Preencher ao finalizar o lab"
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeV03DlPyoeKlEeVZs-zSyzajoOgX9892Fy-l7-anb6-KDTUA/viewform?embedded=true" width="550" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
+!!! progress
     Click para continuar....
-
-## Próximos passos?
-
-- Filtrar o sinal
-- Fazer o threshold ser dinâmico 
-- Deixar gráfico mais bonito
 
 ## B/A
 
 - Adicionar beep com o buzzer, conforme frequência.
 - Procurar pico usando a energia do sinal do sinal no lugar do valor no tempo.
-- 
 
 -----------------
 
-!!! note "Preencher ao finalizar o lab"
-
-   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeV03DlPyoeKlEeVZs-zSyzajoOgX9892Fy-l7-anb6-KDTUA/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+!!! info
+    O que mais poderiamos fazer?
+    
+    - Filtrar o sinal
+    - Fazer o threshold ser dinâmico (o valor que detecta pico)
+    - Deixar gráfico mais bonito
