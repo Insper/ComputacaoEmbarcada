@@ -6,11 +6,13 @@ Neste laboratório iremos modificar o exemplo RTOS-WIFI, que realiza uma requisi
 
 ## Lab    
 
-| Exemplo base                                                     | LAB                 |
-| ------------------------------------------------------------     | ------------------- |
-| [SAME70-Examples/Comunicacao/WIFI-WINC1500-get-RTOS-EXT1](https://github.com/Insper/SAME70-examples/tree/master/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1)https://github.com/Insper/SAME70-examples/tree/master/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1 :arrow_right: | `Lab9-RTOS-WIFI`  |
+| Exemplo base                              | LAB                   |
+|-------------------------------------------|-----------------------|
+| `SAME70-examples/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1` :arrow_right: | `Lab9-RTOS-WIFI` |
 
-    - Vamos modificar o código exemplo `RTOS/RTOS-WIFI`, faça uma cópia do seu lab para a nova pasta no seu repositório `Lab9-RTOS-WIFI`
+!!! warning "Código exemplo"
+    - ==Atualizar o repositório do SAME70-Examples==
+    - Vamos modificar o código exemplo `Comunicacao/RTOS-WIFI-WINC1500-get-RTOS-EXT1`, faça uma cópia do seu lab para a nova pasta no seu repositório `Lab9-RTOS-WIFI`
 
 ### IoT	
 
@@ -298,8 +300,8 @@ A mensagem com o conteúdo (head + json) é salva no buffer `p_recvMsg->pu8Buffe
 
 !!! example "Tarefas"
     1. Inicialize o led da placa como saída
-    1. Modificar o estado `get` para encontrar o valor do led
-    1. modifique o status do led:
+    1. Modificar o estado `MSG` para encontrar o valor do led
+    1. modifique O led para:
        - status = 1: acende
        - status = 0: apaga
 
