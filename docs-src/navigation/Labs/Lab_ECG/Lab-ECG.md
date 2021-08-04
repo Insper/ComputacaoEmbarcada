@@ -74,7 +74,7 @@ E se analisarmos o espectro do sinal via transformada de fourier, obtemos a segu
         com bastante informações, uma de baixa frquência (0..25)Hz e outra
         de 60Hz.
         
-        ![](imgs/FIR/ecg-fft2.png){width=300}
+        ![](imgs/ecg-fft2.png){width=300}
 
 !!! progress
     Click para continuar....
@@ -109,7 +109,7 @@ Vamos criar uma tarefa no RTOS que será responsável por processar os dados do 
 
 Para começarmos precisamos ler o valor do ECG que está sendo gerado no pino PB13, para isso iremos configurar a leitura analógica no AFEC1 canal 6. A leitura anlógica deve ser executada a 250 Hz, para garantirmos que estaremos lendo a uma taxa de amostragem fixa, vamos configurar um TC para fazer a conversão do sinal. O valor convertido deve ser colocado em uma fila para processamento futuro, como indicado a seguir:
 
-![](imgs/ECG/afec-tc3.png){width=600}
+![](imgs/afec-tc3.png){width=600}
 
 !!! info
     Taxa de amostragem fixa simplifica muito o processamento de sinais digitais, muitas técnicas assumem que o valor é constante.
@@ -166,7 +166,7 @@ Por conta disso iremos retransmitir o dado da fila do ECG para a `task_main` por
 
 A ideia aqui é que a `task_process` irá pegar os dados do ECG, processar e extrair o valor da frequência cardiaca (em batimentos por minuto) e retransmitir para a `task_main` exibir no LCD.
 
-![](imgs/ECG/retransmitindo.png){width=500}
+![](imgs/retransmitindo.png){width=500}
 
 !!! example "Tarefa: Retransmitindo"
     Vamos restransmitir o dado do ecg da `task_process` para a `task_main`.
@@ -260,7 +260,7 @@ Com isso vocês devem obter algo como:
     lv_chart_set_next(chart, ser1, value);
     lv_chart_refresh(chart);
     ```
-
+    
     - Programe e teste na placa
 
 !!! tip
@@ -381,7 +381,7 @@ Agora que temos o valor do bpm, vamos enviar essa informação junto com o ecg p
 
 O resultado esperado é algo como:
 
-![](imgs/ECG/fim.jpg){width=400}
+![](imgs/fim.jpg){width=400}
 
 !!! example "Tarefa: Exibindo"
     Execute:

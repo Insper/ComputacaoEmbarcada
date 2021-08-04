@@ -20,7 +20,7 @@ copyright: 'Copyright &copy; Rafael Corsi @ insper'
 
 nav:
 - Home: 'index.md'
-- Sobre o curso: 'navigation/Util/Sobre-Curso.md'
+- Sobre o curso: 'Sobre-Curso.md'
 - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
 - 'Vídeos': 'navigation/Videos/Util-Videos.md'
 - 'Util':
@@ -59,7 +59,7 @@ nav:
     - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
 #    - 'Lab-9-ADC-FIR.md'
 #    - 'Lab-8-RTOS-UART.md'
-    - 'Lab-10-RTOS-WIFI.md'
+    - 'Lab 9 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
 
 - Projeto:
 #    - 'Projeto 1':

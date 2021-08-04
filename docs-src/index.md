@@ -47,7 +47,7 @@ Pequeno histórico da evolução da disciplina:
     
 - 2020-1: 
     - Devido ao corona o projeto foi cancelado, os alunos receberam um complemento do kit para trabalharem de casa. As APS foram: Musica, LCD bike e WIFI. As avaliaçòes individuais foram aprimoradas. A parte de UX foi bem trabalhada nesse semestre.
-     
+    
 - 2019-2 (DP):
     - Troquei a APS 2 da máquina de lavar para a Bike. Como só tinha um aluno, as APS viraram projetos.
 

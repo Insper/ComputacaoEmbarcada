@@ -72,7 +72,7 @@ O microondas deve possuir três botões (placa OLED1), cada botão servirá para
 - `Botão 1`: +10 segundos / Stop
 - `Botão 2`: +60 segundos
 
-![](imgs/AV2/oled.png)
+![](imgs/AV1/oled.png)
 
 Quando o microondas estiver funcionando, os LEDs da placa OLED devem estar ligados, quando acabar o ciclo, os leds devem apagarem.
 
@@ -80,13 +80,13 @@ Quando o microondas estiver funcionando, os LEDs da placa OLED devem estar ligad
 
 Você deve implementar a interface a seguir:
 
-![](imgs/AV2/Micro-interface.png)
+![](imgs/AV1/Micro-interface.png)
 
 1. Os icones e a fonte já foram convertidos e estão na pasta do exemplo `RTOS-LCD-maxTouch`:
 
 | `digital521.h`    | `done.h`               | `pause.h`               | `on.h`               |
-|-------------------|------------------------|-------------------------|----------------------|
-| Fonte a ser usada | ![](imgs/AV2/done.png) | ![](imgs/AV2/pause.png) | ![](imgs/AV2/on.png) |
+| ----------------- | ---------------------- | ----------------------- | -------------------- |
+| Fonte a ser usada | ![](imgs/AV1/done.png) | ![](imgs/AV1/pause.png) | ![](imgs/AV1/on.png) |
 
 ### Firmware
 
@@ -99,13 +99,12 @@ O botão de start/stop e pause deve ser da seguinte maneira:
 ```
     Botao 0:  --> Run --> Pause --> Run --> \
     Botão 1:                                 \ Stop -->
-```  
+```
 
 ```
     Botao 0:  --> Run --> Pause --> \
     Botão 1:                         \ Stop -->
-```  
-
+```
 
 
 

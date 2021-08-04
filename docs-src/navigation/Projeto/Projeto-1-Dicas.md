@@ -49,4 +49,4 @@ Para verificar se existe um byte a ser lido na USART utilize a função a seguir
  */
 uint32_t usart_is_rx_ready(Usart *p_usart) {...}
 ```
-    
+

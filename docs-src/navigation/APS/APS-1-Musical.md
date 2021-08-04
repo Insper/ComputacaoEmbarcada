@@ -18,10 +18,10 @@ Leia atentamente as regras a seguir:
     - Código da internet? Se usou alguma coisa, referencie no README.
     
     A regra completa pode ser acessada em: https://www.insper.edu.br/portaldoaluno/wp-content/uploads/2018/08/orientacoes_integridade_intelectual-Engenharias.pdf
-    
+
 !!! info "Atraso"
     - Para cada 3 dias de atraso será descontado meia rubrica.
- 
+
 !!! tip "Dupla"
     - A APS pode ser realizada em dupla.
     - Você não vai poder repetir dupla na próxima APS.

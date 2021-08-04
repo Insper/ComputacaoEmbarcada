@@ -13,7 +13,7 @@ Desenvolver um protótipo de um oxímetro, dispositivo médico para medir indire
     Para começar crie o repositório no classroom:
     
     - https://classroom.github.com/g/Sp5pYx1p
-
+    
     Você deve utilizar como base o código disponível no repositório! 
 
 ## firmware
@@ -49,7 +49,7 @@ static void task_aps2(void *pvParameters) {...}
 
 O electrocardiograma (ECG) será um valor analógico gerado pelo próprio microcontrolador, uma tabela do pulso elétrico foi gerado usando o pacote [neurokit2](https://pypi.org/project/neurokit2/), trado e exportado para um vetor (`aps2/ecg.h`). 
 
-![](21a-aps2/ecg.png){width=300}
+![](imgs/APS-2/ecg.png){width=300}
 
 !!! tip
     Se tiver curiosidade de como o dado foi gerado consulte o jupyter notebook na pasta `APS2` do repositório da disciplina.
@@ -67,7 +67,7 @@ O TC0 foi configurado para operar a 1kHz onde a cada interrupção gera no pino 
 │  └─────┘  └─────┘ │ PB13
 └───────────────────┘
 ```
- 
+
 Tudo acontece na interrupção do TCO:
 
 ```c
@@ -100,7 +100,7 @@ A interface deve possuir identidade visual com o logo da empresa que escolheram,
     ==Vai precisar gravar um vídeo.==
     
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4OIkTlMoCxRAMqoH082zfQ1ibnrcfldery7pKzva5hYCeKg/viewform?embedded=true" width="640" height="340" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-
+    
     - https://docs.google.com/forms/d/e/1FAIpQLSe4OIkTlMoCxRAMqoH082zfQ1ibnrcfldery7pKzva5hYCeKg/viewform?usp=sf_link
 
 ### C
