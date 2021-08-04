@@ -70,7 +70,7 @@ O SPI é utilizado pela API `ili9488` para acessar e configurar o LCD.
 ### ili9488 (controlador LCD)
 
 O ili9488 é um CI dedicado ao controle do LCD integrado no módulo LCD maX Touch X PLAINED PRO, a comunicação do microcontrolador com o
-LCD é via a interface com o [ili9488](https/www.lpcware.com/system/files/ILI9488_Preliminary_DS_V090.pdf).
+LCD é via a interface com o [ili9488](https://pdf1.alldatasheet.com/datasheet-pdf/view/1131840/ETC1/ILI9488.html).
 Esse dispositivo é responsável por :
 
 - Acionar independente cada pixel (RGB) e fazer o acionamento (analógico)
@@ -127,7 +127,7 @@ Passos :
 1. Definir a imagem na dimensão correta (em pixels)
 1. Converter a imagem para o formato do LCD gerar um vetor de pxs
    - Gerar um arquivo .h para ser incluído no projeto
-1.. Ler o arquivo .h e atualizar o LCD via a interface com ili9488
+   1.. Ler o arquivo .h e atualizar o LCD via a interface com ili9488
 
 Para isso iremos utilizar o programa [`lcd-image-converter`](https/sourceforge.net/projects/lcd-image-converter/), fazer o download e instalar (windows)/
 
@@ -153,7 +153,7 @@ Salve o arquivo no PC: `lavagens.png`, repare que essa imagem possui dimissão d
     - Arquivo de config. fornecido nesse tutorial
 1. `File` :arrow_right: `Convert...`
     - name: `lavagens.h`
-  
+
 Os passos anteriores convertem a imagem (`lavagens.png`) para um vetor de pixels (`lavagens.h`) utilizando a configuração `R8G8B8`. O arquivo `lavagens.h` possui:
 
 #### tImage
@@ -254,10 +254,10 @@ Temos algumas opções para desenhar a imagem no LCD:
    
 2. Fazermos uma transferência direta de memória entre o uc e o ili9488 (burst)
    - mais eficiente e melhor método.
- 
+
  Para implementarmos a transferência direta de memória é necessário configurarmos a região do LCD que será atualizado, para isso
  utilizaremos a função `ili9488\_draw\_pixmap` que possui implementa uma atualização parcial de uma região de memória do LCD. A implementação da funcão está na biblioteca do `ili9488` e copiado a baixo:
- 
+
 ```C
 **
  * \brief Draw a pixmap on LCD.
@@ -290,10 +290,10 @@ void ili9488_draw_pixmap(uint32_t ul_x, uint32_t ul_y, uint32_t ul_width,
  * Reset the refresh window area */
   ili9488_set_window(0, 0, ILI9488_LCD_WIDTH, ILI9488_LCD_HEIGHT);
 }
- ```
- 
+```
+
 Para usarmos essa função, basta a chamarmos com os parâmetros da imagem que desejamos desenhar. Insira no main logo antes do while(1):
- 
+
  ```diff
   ili9488_set_foreground_color(COLOR_CONVERT(COLOR_BLACK));
   sprintf(stingLCD, "Computacao Embarcada %d", 2018);
@@ -302,6 +302,6 @@ Para usarmos essa função, basta a chamarmos com os parâmetros da imagem que d
 +/ desenha imagem lavagem na posicao X=80 e Y=150
 + ili9488_draw_pixmap(80, 150, lavagem.width, lavagem.height, lavagem.data);
  ```
- 
+
 
 

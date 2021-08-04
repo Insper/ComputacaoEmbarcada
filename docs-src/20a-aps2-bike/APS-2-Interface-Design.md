@@ -17,7 +17,9 @@ ilustrada no inkscape, um documento referência é fornecido:
 [ComputacaoEmbarcada/APS-2/](https://github.com/Insper/ComputacaoEmbarcada/tree/master/APS-2)
 e ilustrado a seguir:
 
-![](imgs/APS-2/maxTouch.png)
+![](C:\Users\M3LL0\Downloads\ComputacaoEmbarcada\docs-src\imgs\APS-2\maxTouch.png)
+
+
 
 # Requisitos
 
