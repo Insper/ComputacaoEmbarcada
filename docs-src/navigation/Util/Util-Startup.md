@@ -3,7 +3,7 @@
 Dicas de como começar usar o kit de desenvolvimento SAME70.
 
 !!! info
-    Você deve ter instalado o software [Microchip Studio](/ComputacaoEmbarcada/Sobre-Ferramental)
+    Você deve ter instalado o software [Microchip Studio](https://insper.github.io/ComputacaoEmbarcada/navigation/Util/Sobre-Ferramental/)
 
 !!! note
     O vídeo faz referência ao repositório:
