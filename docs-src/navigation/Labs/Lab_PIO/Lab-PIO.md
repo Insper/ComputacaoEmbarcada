@@ -648,3 +648,9 @@ Para lermos um valor de um pino, que já foi configurado como entrada, devemos u
 ## Terminou?
 
 Muito bom! Agora que tal pegar a placa OLED1 (que você recebeu no kit) e usar os LEDs e Botoẽs dela? Para isso você vai ter que entender quais pinos configurar como entrada e saída. Procure um professor para te ajudar com isso!
+
+Para isso será necessário consultar os manuais a seguir e entender a relacão entre eles. :
+
+- Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf
+- SAME70-XPLD.pdf
+
