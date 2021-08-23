@@ -4,6 +4,9 @@ extensions:
   - quiz
   - short-questions
   - progress-check
+  - long-questions
+  - videos
+  - notify-old-page
 #  - slides
 #  - counter
 

@@ -52,6 +52,7 @@
                 check_quiz.checked = false;
             }
 
+            
             if (previous_answer === null) {
                 form_quiz_choices[i].addEventListener("click", (evt) => {
                     if (check_quiz.disabled) return false;
@@ -64,12 +65,7 @@
                         check_quiz.classList.add("wrong-answer");
                     }
 
-                    if (localStorage.getItem(storage_key) == null) {
-                        if(window.ihandout_config["report"]["enable"] == true) {
-                            quizReport(document_addr, storage_key, choice.textContent.trim() , correct_choice.textContent.trim());
-                        }
-                        localStorage[storage_key] = i;
-                    }
+                    localStorage[storage_key] = i;
 
                     toggle_disabled(form_quiz_choices, true);
 

@@ -1,3 +1,5 @@
+import notification from "./notification.js";
+
 {
     // HACK: depends on mkdocs-material styles
     let style_progress = document.head.appendChild(document.createElement("style"));
@@ -41,35 +43,26 @@
             while (prev != null) {
                 if (prev.dataset.answered !== undefined &&
                     prev.dataset.answered === "false") {
+                        notification.toast("Please answer all questions before continuing.");
                         return;
                     }
                 prev = prev.previousElementSibling;
             }
 
-            var enable = true;
-            if (localStorage.getItem(storage_key) == null) {
-                if(window.ihandout_config["report"]["enable"] == true) {
-                    enable = checkpointReport(storage_key, document_addr);
-                }
-            }
+            localStorage[storage_key] = true;
 
             let next = but.nextElementSibling;
             while (next != null) {
-                if(enable) {
-                    next.style.display = "";
-                }
+                next.style.display = "";
                 if (next.classList.contains("checkpoint")) {
                     break;
                 }
                 next = next.nextElementSibling;
             }
 
-            if (enable){
-                localStorage[storage_key] = true;
-                var hr = document.createElement("HR");
-                but.parentElement.replaceChild(hr, but);
-                but.remove();
-            }
+            var hr = document.createElement("HR");
+            but.parentElement.replaceChild(hr, but);
+            but.remove();
         });
     });
 
