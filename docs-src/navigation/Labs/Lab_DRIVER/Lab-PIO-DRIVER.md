@@ -13,10 +13,6 @@ Nessa aula iremos utilizar como projeto referência o LAB-1.
     
     - A entrega continua sendo feita pelo repositório que foi gerado no laboratório passado.
     
-    - ==Estou mudando o padrão do nome das pastas, eu tirei a subpasta `Labs` e adicionei
-    o número do lab no nome da pasta.==
-
-
 O objetivo desse laboratório é o do entendimento das funções utilizadas para configurar o PIO. Como um pino é configurado como saída e entrada? Como o firmware manipula o periférico PIO? Entender o que o PIO é capaz de fazer. Para isso iremos aqui implementar nossas próprias funções de interface com o PIO.
 
 Ao final do lab, deverão ter implementado as seguintes funções:
@@ -36,7 +32,8 @@ Ao final do lab, deverão ter implementado as seguintes funções:
 
 Vamos implementar uma série de funções que irão configurar o periférico PIO via a escrita em seu banco de registradores. Para isso será necessário ler o manual do uC mais especificamente a [secção do PIO](https://pt.scribd.com/document/398420674/SAME70?start_page=344).
 
-<button class="button0" id="0:comencando" onClick="progressBut(this.id);">Estou começando!</button>
+!!! progress
+    Click para continuar....
 
 ### _pio_set(...)
 
@@ -173,8 +170,19 @@ void _pio_clear(Pio *p_pio, const uint32_t ul_mask)
 }
 ```
 
-Vocês deverão descobrir pelo manual qual registrador que deve ser acessado. Releia a secção 32.5.4
+!!! question short
+    Consultando a secção 32.5.4 do manual do microcontrolador, qual é o registrador que deve ser acessado para colocar zero no pino?
 
+    !!! details ""
+        - `pio_codr`
+    
+        > The level driven on an I/O line can be determined by writing in the Set Output Data Register (PIO_SODR) and the
+        > ==Clear Output Data Register (PIO_CODR)==. These write operations, respectively, set and clear the Output Data
+        > Status Register (PIO_ODSR), which represents the data driven on the I/O lines. Writing in PIO_OER and
+        > PIO_ODR manages PIO_OSR whether the pin is configured to be controlled by the PIO Controller or assigned to
+        > a peripheral function. This enables configuration of the I/O line prior to setting it to be managed by the PIO
+        > Controller.
+    
 !!! example "Modifique e teste"
     1. Crie a função `_pio_clear()`
     1. Substitua no código toda ocorrência de `pio_clear` por `_pio_clear`
@@ -210,6 +218,20 @@ Essa função recebe o PIO que irá configurar, os pinos que serão configurados
 
 !!! info
     Leia o manual do PIO, especificamente **a secção 32.5.1**.
+
+!!! question short
+    Consultando a secção 32.5.1 do manual do microcontrolador, qual é o registrador que deve ser acessado para ativar o pullup?
+    
+    !!! details ""
+        `pio_puer`
+    
+        > Each I/O line is designed with an embedded pull-up resistor and an embedded pull-down resistor. ==The pull-up
+        > resistor can be enabled or disabled by writing to the Pull-up Enable Register (PIO_PUER)== or Pull-up Disable
+        > Register (PIO_PUDR), respectively.
+
+        Note que a função `pio_pull_up` via o parâmetro `ul_pull_up_enable` ativa e desativa o pull-up. Por conta disso você terá que usar os dois registradores: 
+    
+        - `pio_puer` / `pio_pudr`
 
 !!! example "Modifique e teste"
     1. Crie a função `_pio_pull_up`
@@ -340,11 +362,11 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
     1. Implemente
     1. Compile, programe e teste
 
+!!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScB6CJGzACLzl45C0B47WA32Ft55casTQkqrLvW5Fp3rwe__Q/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
 !!! progress
-    Próxima etapa .... 
-    
-!!! info ""
-    Até aqui é conceito C.
+    Até aqui já é C!! Lembre de preencher o forms...
     
 ### Conceito B: _pio_get(...)
 
@@ -395,5 +417,3 @@ Crie sua Própria função de `delay_ms`
 
 ----------
 
-!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScB6CJGzACLzl45C0B47WA32Ft55casTQkqrLvW5Fp3rwe__Q/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
