@@ -125,9 +125,9 @@ O que isso significa? Significa que estamos acessando o periférico passado como
     
     Onde: `O`, `I` são macros que bloqueiam os endereços para:
     
-    - `__O` : Apenas escrita
-    - `__I` : Apenas Leitura
-    - `__IO` : Apenas Leitura
+    - `__O` : Apenas escrita (output)
+    - `__I` : Apenas Leitura (input)
+    - `__IO` : Leitura e Escrita (input/output)
     
     ```c
     #ifdef __cplusplus
