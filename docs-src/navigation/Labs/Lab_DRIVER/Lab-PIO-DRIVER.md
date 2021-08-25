@@ -280,8 +280,8 @@ void _pio_set_input(Pio *p_pio, const uint32_t ul_mask,
 Para testar essa função substitua o seguinte trecho de código que configura um pino como entrada + o pull-up
 
 ``` c
-pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_DEFAULT);
-_pio_pull_up(BUT_PIO, BUT_PIN_MASK, 1);
+pio_set_input(BUT_PIO, BUT_PIO_IDX_MASK, _PIO_DEFAULT);
+_pio_pull_up(BUT_PIO, BUT_PIO_IDX_MASK, 1);
 ```
 
 Para:
