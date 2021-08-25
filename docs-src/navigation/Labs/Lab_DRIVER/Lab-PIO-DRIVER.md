@@ -287,7 +287,7 @@ _pio_pull_up(BUT_PIO, BUT_PIN_MASK, 1);
 Para:
 
 ``` c
-_pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_PULLUP | _PIO_DEBOUNCE);
+_pio_set_input(BUT_PIO, BUT_PIO_IDX_MASK, _PIO_PULLUP | _PIO_DEBOUNCE);
 ```
 
 !!! info
