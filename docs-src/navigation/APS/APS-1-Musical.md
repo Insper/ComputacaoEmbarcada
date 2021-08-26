@@ -2,7 +2,7 @@
 
 | Entrega Final |
 |---------------|
-| 19/3 |
+| 16/9 |
 
 Nesta APS vocês irão desenvolver um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony), para isso, irão utilizar um 
 buzzer conectado a um pino do microcontrolador.
@@ -27,9 +27,9 @@ Leia atentamente as regras a seguir:
     - Você não vai poder repetir dupla na próxima APS.
     - O desenvolvimento do projeto deve ser feito no repositório criado
     pelo classroom:
-        - https://classroom.github.com/g/jRtKiGWA
+        - https://classroom.github.com/g/CflLhD_L
     - Leia atentamente como trabalhar no repositório:
-         - [APS HowTo](/ComputacaoEmbarcada/APS-howto/)
+         - [APS HowTo](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-howto/)
 
 !!! tip "Entrega"
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdxK9l2RX2gRtSW5dTWMg-GmiITHVMRpgCBmcj6sxso7ygC2w/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
@@ -100,4 +100,3 @@ A rubrica a seguir será aplicada a nota da entrega:
     - Faltando um item de C
 - I
     - Mais que dois itens de C faltando
-
