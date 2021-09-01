@@ -4,9 +4,6 @@
 |----------------|
 | `Lab3-PIO-IRQ` |
 
-!!! progress
-    Click para continuar....
-
 !!! tip 
     Antes de seguir leia:
     
@@ -18,6 +15,7 @@ O código exemplo [`SAME70-exemples/Perifericos-uC/PIO-IRQ`](https://github.com/
     1. Copie o exemplo `SAME70-examples/Perifericos-uC/PIO-IRQ` para a pasta`Lab3-PIO-IRQ` do seu repositório.
     1. Estude o [README](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/README.md) desse exemplo!
     1. Execute o exemplo na placa!
+    1. Analise o código fonte.
 
 !!! warning
     Não continue sem ter feito a etapa anterior.
@@ -36,6 +34,7 @@ Vamos agora modificar o código um pouco, o exemplo está funcionando com interr
 !!! example "Modifique e teste"
     1. Mude a função que configura a interrupção do pino para operar em `PIO_IT_RISE_EDGE`. 
     1. Teste na placa.
+    1. O que mudou?
 
 !!! progress
     Click para continuar....
@@ -45,7 +44,7 @@ Vamos agora modificar o código um pouco, o exemplo está funcionando com interr
 O tempo que um firmware deve ficar na interrupção deve ser o menor possível, pelos principais motivos:
 
 1. Outras interrupções de mesma prioridade irão aguardar o retorno da interrupção. O firmware irá deixar de servir de maneira rápida a diferentes interrupções se gastar tempo nelas.
-2. Nem todas as funções são reentrantes. Funções como `printf` podem não operar corretamente dentro de interrupções (mais de uma chamada por vez).
+2. Nem todas as funções [são reentrantes](https://en.wikipedia.org/wiki/Reentrancy_(computing)). Funções como `printf` podem ==não operar== corretamente dentro de interrupções (mais de uma chamada por vez).
 3. RTOS: As tarefas devem ser executadas em tasks e não nas interrupções, possibilitando assim um maior controle do fluxo de execução do firmware (vamos ver isso mais para frente).
 
 #### FLAG
@@ -75,9 +74,8 @@ void main(void){
   
    // trata interrupção do botão
    if(but_flag){
-     // trata irq
-     // ..
-     // zera flag
+     // trata irq e  zera flag
+     
      but_flag = 0;
    }
   }
@@ -122,19 +120,40 @@ No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com
 
 - *Sleep Mode: The purpose of sleep mode is to optimize power consumption of the device versus response time. In this mode, only the core clock is stopped. The peripheral clocks can be enabled. The current consumption in this mode is application-dependent*
 
-!!! note ""
-    Mais informações na secção 6.6 do datasheet
-    
 !!! note "Informações importantes"
     - Não é qualquer interrupção que consegue tirar o uC de modos de sleep mais profundos
     - Quanto mais profundo o sleep, mais tempo o uC leva para 'acordar'
     - Alguns modos podem perder informações da memória RAM
     
     ![](imgs/lowpower-table.png)
+    
+    Mais informações na secção 6.6 do datasheet
 
-#### Adicionando lowpower mode (ASF Wizard)
+!!! question choice
+    Na tabela anterior aparece na coluna do **Potential Wake-Up Sources** um item chamado de ==WKUP0-13 pins==, o que você acha que isso sígnica?
+    
+    - [x] Pinos específicos do uc
+    - [ ] Pinos do RTT
+    - [ ] Pinos de um PIO
+    - [ ] Não faço ideia
+    
+    !!! details ""
+        WKUP (wake-up) pins: são pinos específicos do SAME70 que além de irem para o PIO vão também para o Supply Controller e que possibilita re-energizar o uC após um evento externo.
 
-Para termos acessos as funções da atmel que lidam com o `sleep mode` devemos adicionar a biblioteca **Sleep manager (service)** no Atmel Studio:
+!!! question choice
+    Quais sleep-modes podemos usar se desejamos acordar o uC com eventos do PIO (sem usar os pinos com as funções especiais de WKUP)?:
+
+    - [x] Sleep Mode 
+    - [ ] Sleep Mode / Wait Mode
+    - [ ] Sleep Mode / Wait Mode/ Deep-Power-mode
+    - [ ] Sleep Mode / Wait Mode/ Deep-Power-mode/ Backup Mode
+    
+    !!! details ""
+        Podemos usar apenas o ==Sleep Mode== pois o uC é acordado por qualquer interrupção. Para entrarmos em um modo de menor nível energéticos temos que usar um dos WKUP pins ou algum outro periférico da lista para poder acordar o uC (entrar nós podemos, mas nunca vamos sair do sono).
+
+#### Adicionando a lib de lowpower mode (ASF Wizard)
+
+Para termos acessos as funções da Microchip que lidam com o `sleep mode` devemos adicionar a biblioteca **Sleep manager (service)** no Microchip Studio:
 
 - `ASF` :arrow_right: `ASF Wizard` :arrow_right: 
 
@@ -168,6 +187,59 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
     Se tivéssemos acesso aos equipamentos do laboratório poderíamos medir a corrente
     consumida pelo microcontrolador antes e depois de chamar a função de sleep, porém
     na versão online do curso não conseguimos fazer isso.
+
+!!! progress
+    Click para continuar....
+
+## Pensando um pouco
+
+!!! question long
+    Vamos imaginar o cenário a seguir: Você está desenvolvendo uma interface na qual o usuário pode configurar o quanto ele quer de um item (contador), aqui temos duas opções:
+    
+    1. Pedir para o usuário apertar e soltar o botão para cada vez que ele quer incrementar o contador 
+    1. O contador aumenta enquanto o usuário mantiver o botão pressionado
+    
+    A solução 1 é trivial e conseguimos fazer com o que já temos, mas e a solução (2) alguma ideia de como fazer?
+    
+    !!! details ""   
+    
+        A ideia é simples: configurar a interrupção do pino para descida e subida, assim sabemos quando o usuário apertou o botão e depois quando
+        ele soltou. Mas temos um problema, ==só podemos configurar uma função de callback por o pino!==
+        
+        Uma etapa por vez, vamos primeira ativar a interrupção de borda no periférico para isso iremos usar o define:
+        
+        ```c
+        /*  Interrupt Edge detection is active. */
+        #define PIO_IT_EDGE             (1u << 6)
+        ```
+        
+        A chamada de função que configura interrupção no pino ficaria assim:
+        
+        ```diff
+        pio_handler_set(BUT_PIO,
+                        BUT_PIO_ID,
+                        BUT_IDX_MASK,
+        +               PIO_IT_EDGE,
+                        but_callback);
+        ```
+
+!!! question short
+    Legal! mas agora a função `but_callback` será chamada pelo HW quando ocorrer uma mudança de nível de qualquer tipo, como vamos saber se entramos na função `but_callback` por uma borda de descida (usuário apertou o botão) ou por uma borda de subida (usuário soltou o botão)?
+
+    !!! details ""
+        A solução é simples! Verificamos dentro da função de callback o valor atual do pino: se ele for '0' quer dizer que entramos por uma borda de descida e se for '1' por uma borda de subida!
+        
+        ```c
+        void but_callback (void) {
+            if (pio_get(BUT_PIO, PIO_INPUT, BUT_IDX_MAS)) {
+                // PINO == 1 --> Borda de subida
+            } else {
+                // PINO == 0 --> Borda de descida
+            }       
+        }
+        ```
+        
+        Sacada legal né?
 
 !!! progress
     Click para continuar....
@@ -207,6 +279,8 @@ Agora você deve adicionar o botão 1 da placa OLED para aumentar a frequência 
     - Você deve usar [sprintf](http://www.cplusplus.com/reference/cstdio/sprintf/) para formatar a string que irá exibir no OLED
     - Para exibir uma string no OLED use a função `gfx_mono_draw_string`
 
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdkaentSBXvZlMgnyHKyI77-YC67N8jyH7Z1ZJ2-K7UUKSD2w/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
 ### Conceito B
 
 Acrescente os outros dois botões do oled (2 e 3) do OLED para:
@@ -218,9 +292,3 @@ Acrescente os outros dois botões do oled (2 e 3) do OLED para:
 
 Exiba no OLED não só a frequência, mas uma barra indicando quando
 o LED irá parar de piscar (como uma barra de progresso).
-
-----------
-
-!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdkaentSBXvZlMgnyHKyI77-YC67N8jyH7Z1ZJ2-K7UUKSD2w/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-

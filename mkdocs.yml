@@ -30,7 +30,6 @@ nav:
     - navigation/Util/Util-Documentos.md
 
 - Dicas:
-    - navigation/Dicas/Lab-PIO-Dicas.md
     - navigation/Dicas/Util-lcd.md
     - navigation/Dicas/Util-freertos.md
     - navigation/Dicas/Util-FloatPrint.md
@@ -40,6 +39,7 @@ nav:
     - 'Lab 1 - PIO ':
       - 'Teoria': 'navigation/Labs/Lab_PIO/Lab-PIO-Teoria.md'
       - 'Lab': 'navigation/Labs/Lab_PIO/Lab-PIO.md'
+      - 'Dicas': navigation/Dicas/Lab-PIO-Dicas.md
  #     - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
     - 'Lab 2 - PIO - Driver':
       - 'Teoria': 'navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER-Teoria.md'
