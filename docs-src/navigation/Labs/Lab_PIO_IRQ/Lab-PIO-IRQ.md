@@ -130,7 +130,7 @@ No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com
     Mais informações na secção 6.6 do datasheet
 
 !!! question choice
-    Na tabela anterior aparece na coluna do **Potential Wake-Up Sources** um item chamado de ==WKUP0-13 pins==, o que você acha que isso sígnica?
+    Na tabela anterior aparece na coluna do **Potential Wake-Up Sources** um item chamado de ==WKUP0-13 pins==, o que você acha que isso significa?
     
     - [x] Pinos específicos do uc
     - [ ] Pinos do RTT
