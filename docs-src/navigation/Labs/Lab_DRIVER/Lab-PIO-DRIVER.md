@@ -125,9 +125,9 @@ O que isso significa? Significa que estamos acessando o periférico passado como
     
     Onde: `O`, `I` são macros que bloqueiam os endereços para:
     
-    - `__O` : Apenas escrita
-    - `__I` : Apenas Leitura
-    - `__IO` : Apenas Leitura
+    - `__O` : Apenas escrita (output)
+    - `__I` : Apenas Leitura (input)
+    - `__IO` : Leitura e Escrita (input/output)
     
     ```c
     #ifdef __cplusplus
@@ -280,14 +280,14 @@ void _pio_set_input(Pio *p_pio, const uint32_t ul_mask,
 Para testar essa função substitua o seguinte trecho de código que configura um pino como entrada + o pull-up
 
 ``` c
-pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_DEFAULT);
-_pio_pull_up(BUT_PIO, BUT_PIN_MASK, 1);
+pio_set_input(BUT_PIO, BUT_PIO_IDX_MASK, _PIO_DEFAULT);
+_pio_pull_up(BUT_PIO, BUT_PIO_IDX_MASK, 1);
 ```
 
 Para:
 
 ``` c
-_pio_set_input(BUT_PIO, BUT_PIO_MASK, _PIO_PULLUP | _PIO_DEBOUNCE);
+_pio_set_input(BUT_PIO, BUT_PIO_IDX_MASK, _PIO_PULLUP | _PIO_DEBOUNCE);
 ```
 
 !!! info
