@@ -231,7 +231,7 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
         
         ```c
         void but_callback (void) {
-            if (pio_get(BUT_PIO, PIO_INPUT, BUT_IDX_MAS)) {
+            if (pio_get(BUT_PIO, PIO_INPUT, BUT_IDX_MASK)) {
                 // PINO == 1 --> Borda de subida
             } else {
                 // PINO == 0 --> Borda de descida
@@ -262,17 +262,32 @@ A entrega final (conceito A) deve possuir três botões externos a placa que ir�
 
 ### Conceito C
 
-Agora você deve adicionar o botão 1 da placa OLED para aumentar a frequência na qual o LED irá piscar. Além disso, você precisa exibir o valor da frequência no display do OLED.
+Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência na qual o LED irá piscar. Além disso, você precisa exibir o valor da frequência no display do OLED.
 
-1. Botão OLED1: Aumentar a frequência do LED (por IRQ)
-1. Exibir o valor da frequência no OLED
+1. Botão OLED1: Modifica a frequência do LED (por IRQ)
+    - Se usuário aperta e solta: Aumenta a freq em uma unidade ( `delay -= 100` )
+    - Se usuário aperta e segura: Diminui a freq em uma unidade ( `delay += 100` )
+3. Exibir o valor da frequência no OLED
 
 !!! tip
+    Comecando:
+    
+    1. Configure o novo LED e o novo Botão
+    1. Faca o exemplo anterior funcionar (com o novo led e botão)
+    1. Crie uma variável para frequência, exiba o valor no OLED
+    1. Implemente apenas o incremento da frequência, teste.
+    1. Pense na lógica de como identificar uma perto longo
+    1. Implemente o decremento da frequência, teste.
+    
+    !!! warning ""
+        Lembre que não podemos ter delay dentro de interrupão 
+
     Pino botão:
     
-    1. Lembre de sempre usar interrupção nos botões
+    1. Lembre de sempre usar interrupção nos botões.
+        - Você vai ter que usar a ideia de borda de subida e descida.
     1. Consulte o [manual do OLED](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf) para saber os pinos
-    1. Consulte o diagrama de pinos que vocês receberam.
+       - Use pinout que vocês receberam para identificar os pino.
     
     Display Oled: 
     
