@@ -49,7 +49,7 @@ O tempo que um firmware deve ficar na interrupção deve ser o menor possível, 
 
 #### FLAG
 
-A solução a esse problema é realizar o processamento de uma interrupção no loop principal (`while(1)`), essa abordagem é muito utilizada em sistemas embarcados. E deve ser feita da forma a seguir:
+A solução para esse problema é realizar o processamento de uma interrupção no loop principal (`while(1)`), essa abordagem é muito utilizada em sistemas embarcados. E deve ser feita da forma a seguir:
 
 - Define-se uma variável global que servirá como `flag` (`true` ou `false`) (**essa variável precisa ser do tipo `volatile`**)
 - Interrupção muda status da `flag`
@@ -252,7 +252,7 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
 
 Agora vamos usar interrupção em um outro projeto.
 
-Copie o projeto localizado no repositório de exemplos: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI/OLED-Xplained-Pro-SPI) para a pasta do seu repositório da disciplina `Lab3-OLED-PIO-IRQ`.
+Copie o projeto localizado no repositório de exemplos: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro) para a pasta do seu repositório da disciplina `Lab3-OLED-PIO-IRQ`.
 
 Iremos trabalhar com esse exemplo que configura o OLED (que deve ser conectado na placa no **EXT1**) e incorporar o exemplo da interrupção aqui (vamos ampliar sua funcionalidade!).
 
