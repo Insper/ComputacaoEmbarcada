@@ -36,6 +36,24 @@ Vamos agora modificar o código um pouco, o exemplo está funcionando com interr
     1. Teste na placa.
     1. O que mudou?
 
+!!! question short   
+    Você notou que quando aperta o botão o LED pisca e quando você solta também? O comportamento teria que ser de piscar apenas quando solta o botão. Por que isso acontece?
+    
+    !!! details ""
+        Isso acontece por conta do bounce de quando apertamos o botão, o PIO deteca esse movimento e gera uma interrupćão na descida e na subida. ==Um comportamento indesejavel.==
+        
+        Para corrgir isso devemos ativar o ==debounce== no pino do botão, isso é feito através das funcões asseguir:
+        
+        ```diff
+        -pio_configure(BUT_PIO, PIO_INPUT, BUT_IDX_MASK, PIO_PULLUP);
+        +pio_configure(BUT_PIO, PIO_INPUT, BUT_IDX_MASK, PIO_PULLUP | PIO_DEBOUNCE);
+        +pio_set_debounce_filter(BUT_PIO, BUT_IDX_MASK, 60);
+        ```
+
+!!! Examples "Tarefa"
+    1. Modifique a função init com o trecho de código anterior e ative o debounce no pino.
+    1. Teste na placa
+
 !!! progress
     Click para continuar....
 
@@ -201,6 +219,8 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
     
     A solução 1 é trivial e conseguimos fazer com o que já temos, mas e a solução (2) alguma ideia de como fazer?
     
+    (solução a seguir)
+    
     !!! details ""   
     
         A ideia é simples: configurar a interrupção do pino para descida e subida, assim sabemos quando o usuário apertou o botão e depois quando
@@ -226,8 +246,10 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
 !!! question short
     Legal! mas agora a função `but_callback` será chamada pelo HW quando ocorrer uma mudança de nível de qualquer tipo, como vamos saber se entramos na função `but_callback` por uma borda de descida (usuário apertou o botão) ou por uma borda de subida (usuário soltou o botão)?
 
+    (solução a seguir)
+
     !!! details ""
-        A solução é simples! Verificamos dentro da função de callback o valor atual do pino: se ele for '0' quer dizer que entramos por uma borda de descida e se for '1' por uma borda de subida!
+        A solução é: Verificamos dentro da função de callback o valor atual do pino: se ele for '0' quer dizer que entramos por uma borda de descida e se for '1' por uma borda de subida!
         
         ```c
         void but_callback (void) {
