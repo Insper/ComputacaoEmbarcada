@@ -3,14 +3,11 @@
 Neste laboratório iremos trabalhar com os periféricos de contagem de tempo
 do nosso microcontrolador.
 
-!!! progress
-    Click para continuar....
-	
 | Pasta              |
 |--------------------|
 | `Lab4-TC-RTC-RTT` |
 
-Os periféricos trazidos neste laboratório são:
+Os periféricos apresentados neste laboratório são:
 
 - Real Time Clock - RTC
 - Timer Counter - TC
@@ -56,8 +53,50 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
     1. Programe a placa (e veja os LEDs piscando!)
     1. Entenda o código
 
+
+!!! question choice
+    Como deve ser a chamada de função para usarmos o TC2 canal 3 gerando interrupcão a 20Hz?
+    
+    ```c
+    void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
+    ```
+    
+    - [ ] `TC_init(TC2, ID_TC2, 1, 20);`
+    - [x] `TC_init(TC2, ID_TC8, 2, 20);`
+    - [ ] `TC_init(TC8, ID_TC8, 8, 20);`
+    - [ ] `TC_init(TC8, ID_TC2, 3, 20);`
+
+    !!! details ""
+        O TC funciona diferente do PIO, onde o PIO possuia apenas uma conexão com o NVIC para avisar a interrupcão em qualquer um dos 32 pinos. O TC possui um sinal de conexão com o NVIC para cada canal e esses canais possuem um ID único, conforme figura a seguir:
+
+        ![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/TC-IRQ/imgs/TC/tc.png)
+        
+!!! question choice
+    Um colega está desenhando uma solução para um sistema embarcado que precisa processar dados nas frequências: 1Hz, 2Hz e 44200Hz. Pensando em otimizar o uso energético do uC ele pensou em usar um único TC e configurar para cada canal uma frequência diferente:
+    
+    - `TC0` / `ID_TC0` @ 1Hz
+    - `TC0` / `ID_TC1` @ 2Hz
+    - `TC0` / `ID_TC2` @ 44200Hz 
+    
+    O que você faz?
+    
+    - [ ] Aprova achando uma boa ideia!
+    - [ ] Fica desconfiado e não sabe responder.
+    - [x] Reprova sabendo o porque não funciona.
+    
+    !!! details ""
+        Aqui tem uma pegadinha! Para o TC contar "tempo" ele precisa usar como base um clock gerado pelo PMC, o TC não consegue usar mais de uma base de tempo por periférico (a mesma base se aplica a todos os canais que ele controla). Para as frequêncais 1Hz e 2Hz pode ser que funcione usar o mesmo TC pois a base de tempo que a funcão tc_init vai encontrar deve ser a mesma, mas já para a frequência de 44200Hz a base deve ser outra (é ordens de grandeza maior que as outras frequências) e usar o mesmo TC não vai funcionar!
+        
+        A melhor solucão aqui seria, usar um TC para as frequências mais baixas e outro apenas para a maior frequência:
+        
+        - `TC0` / `ID_TC0` @ 1Hz
+        - `TC0` / `ID_TC1` @ 2Hz
+        - `TC1` / `ID_TC3` @ 44200Hz 
+    
+        
 !!! progress
     Click para continuar....
+
 
 ## Lab
 
@@ -77,6 +116,7 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     No código do OLED1:
     
     1. Configurar os pinos e os LEDs da placa OLED1
+    1. Faça o LED da placa piscar a 5Hz usando um TC.
     1. Fazer com que o `LED1` pisque a 4Hz usando o TC
     1. Fazer com que o `LED2` inverta seu estado a cada 4s usando o RTT
     1. Fazer com o que o `LED3` inicie apagado e pisque uma vez após 20 segundos do botão 1 ter sido pressionado, use o RTC.
@@ -97,23 +137,17 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     
     - Leia a função e entenda os seus parâmetros!! 
 
-!!! progress
-    Click para continuar....
+!!! info "Ao terminar o lab preencha:"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdqlv2DlWFJSuB4ShjY5CrkCwClt9UOuZTPVeG_kWT5qAwssQ/viewform?embedded=true" width="840" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
 
-### C+: Piscar mais um LED
-
-!!! example "Tarefa"
-    Faça o LED da placa piscar a 5Hz usando um novo TC.
 
 !!! progress
-    Click para continuar....
+    Até aqui é C ....
 
 ### B: Exibindo HH:MM:SS
 
 !!! example "Tarefa"
     Exiba a hora no formato (HH:MM:SS) no display OLED
-    
-
 
 !!! tip 
     Para executar isso você deverá ser capaz de saber quando que o segundo mudou, duas são as opções:
@@ -147,18 +181,7 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 !!! warning
     Você nunca deve atualizar display dentro de interrupção (**handler**)! Sempre no main.
     
-!!! progress
-    Click para continuar....
-
 ### A: Melhorando
 
 Quando o botão 1 da placa OLED for pressionado, após 20 segundos, faça o LED 3 piscar 
 com um novo TC.
-
-!!! progress
-    Click para continuar....
-
-----------
-
-!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdqlv2DlWFJSuB4ShjY5CrkCwClt9UOuZTPVeG_kWT5qAwssQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
