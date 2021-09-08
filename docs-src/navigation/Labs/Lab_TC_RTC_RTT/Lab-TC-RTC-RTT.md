@@ -55,7 +55,7 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
 
 
 !!! question choice
-    Como deve ser a chamada de função para usarmos o TC2 canal 3 gerando interrupcão a 20Hz?
+    Como deve ser a chamada de função para usarmos o TC2 canal 2 gerando interrupção a 20Hz?
     
     ```c
     void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
@@ -72,7 +72,21 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
         ![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/TC-IRQ/imgs/TC/tc.png)
         
 !!! question choice
-    Um colega está desenhando uma solução para um sistema embarcado que precisa processar dados nas frequências: 1Hz, 2Hz e 44200Hz. Pensando em otimizar o uso energético do uC ele pensou em usar um único TC e configurar para cada canal uma frequência diferente:
+
+    Se usarmos o TC1 canal 0 qual deve ser a funcão de handler?
+    
+    - [ ] `TC0_Handler`
+    - [ ] `TC1_Handler`
+    - [ ] `TC2_Handler`
+    - [x] `TC3_Handler`
+    - [ ] `TC4_Handler`
+    - [ ] `TC5_Handler`
+    
+    !!! details ""
+        O handler a ser usado tem realacão com o ID do canal, no caso do canal 0 do TC1 o ID é o ID_TC3 e o handler o `TC3_Handler`.
+
+!!! question choice
+    Um colega está desenhando uma solução para um sistema embarcado que precisa processar dados nas frequências: 1Hz, 2Hz e 44200Hz. Pensando em otimizar o uso energético do uC ele propôs usar um único TC e configurar para cada canal uma frequência diferente:
     
     - `TC0` / `ID_TC0` @ 1Hz
     - `TC0` / `ID_TC1` @ 2Hz
@@ -93,7 +107,14 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
         - `TC0` / `ID_TC1` @ 2Hz
         - `TC1` / `ID_TC3` @ 44200Hz 
     
+        Essa parte da escolha da frequência é realizado dentro da funćão TC_init nas linhas:
         
+        ```c
+        /** Configura o TC para operar em  freq hz e interrupçcão no RC compare */
+        tc_find_mck_divisor(freq, ul_sysclk, &ul_div, &ul_tcclks, ul_sysclk);
+        tc_init(TC, TC_CHANNEL, ul_tcclks | TC_CMR_CPCTRG);
+        ```
+    
 !!! progress
     Click para continuar....
 
