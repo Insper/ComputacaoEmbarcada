@@ -123,7 +123,7 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
 
 O lab faz uso da placa `OLED1` e de um código exemplo. Para começar você deve copiar o código exemplo: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI) para a pasta da entrega do seu repositório `Lab4-TC-RTC-RTT`.
 
-### C: TC, RTT e RTC 
+### Conceito C: TC, RTT e RTC 
 
 Com o código do OLED1 copiado, vocês devem configurar os botões e os LEDs da placa OLED e então utilizando os periféricos fazer:
 
@@ -165,7 +165,7 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 !!! progress
     Até aqui é C ....
 
-### B: Exibindo HH:MM:SS
+### Conceito B: Exibindo HH:MM:SS
 
 !!! example "Tarefa"
     Exiba a hora no formato (HH:MM:SS) no display OLED
@@ -202,7 +202,7 @@ Fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 !!! warning
     Você nunca deve atualizar display dentro de interrupção (**handler**)! Sempre no main.
     
-### A: Melhorando
+### Conceito A: Melhorando
 
 Quando o botão 1 da placa OLED for pressionado, após 20 segundos, faça o LED 3 piscar 
 com um novo TC.
