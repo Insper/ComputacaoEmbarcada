@@ -64,3 +64,12 @@ issues:
       - Remover a chamada de função `noTone`
 
       > Lembre de não fechar o issue, pedir feedback para a equipe!
+
+  issues3:
+    Title: dwdad
+    Milestone: 23/4
+    Body: |
+
+      Incoporar `for` que varre a música e chama a função tone.
+
+      awdada

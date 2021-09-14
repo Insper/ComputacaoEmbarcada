@@ -49,6 +49,7 @@ nav:
       - 'Lab' : 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ.md'
  #     - 'Lab-3-PIO-IRQ-Perguntas.md'
     - 'Lab 4 - TC - RTC - RTT': 'navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md'
+    - 'Lab 5 - HC-SR04': 'navigation/Labs/Lab_HCSR04/lab.md'
     - 'Lab 5 - RTOS':
        - 'Lab': 'navigation/Labs/Lab_RTOS/Lab-RTOS.md'
        - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
