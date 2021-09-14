@@ -60,7 +60,7 @@ Você deve seguir a montagem a seguir, sugerimos utilizar uma protoboard para is
 
 ### Interagindo
 
-Após feita a montagem você deverá escrever um programa que faz o controle do sensor ultrasonico, para iniciar uma nova leitura você deve gerar um pulso de `10us` no pino de Trig (**Pin Y**) e então aguardar pela subida do sinal do Echo (**Pin X**) e então contar o tempo (**dT**) que ele fica em alto. O valor de **dT** é proporcional ao tempo que o som levou para chegar até o obstáculo e voltar.
+Após feita a montagem você deverá escrever um programa que faz o controle do sensor ultrassônico, para iniciar uma nova leitura você deve gerar um pulso de `10us` no pino de Trig (**Pin Y**) e então aguardar pela subida do sinal do Echo (**Pin X**) e então contar o tempo (**dT**) que ele fica em alto. O valor de **dT** é proporcional ao tempo que o som levou para chegar até o obstáculo e voltar.
 
 A figura a seguir demonstra como funciona a leitura do sensor.
 
