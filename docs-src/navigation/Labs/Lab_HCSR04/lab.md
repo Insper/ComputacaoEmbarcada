@@ -109,7 +109,7 @@ Lembrem de copiar o exemplo do OLED para o seu repositório e renomear para: `La
     1. Fazer a montagem na protoboard
     1. Escolher dois pinos para Echo e Trig
     1. Configurar Trig como output e Echo como input
-    1. Configurar irq de boarda no pino Echo
+    1. Configurar irq de borda no pino Echo
         - lembre da função de callback!
     
     Trig:
