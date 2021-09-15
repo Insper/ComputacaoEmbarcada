@@ -80,8 +80,8 @@ A figura a seguir demonstra como funciona a leitura do sensor.
         
         Ou seja:
         
-        - Tempo mínimo: $2 \times 0,000058$s --> 0,116 us
-        - Tempo máximo: $2 \times 0,011764$s --> 23,4 us
+        - Tempo mínimo: $2 \times 0,000058$s 
+        - Tempo máximo: $2 \times 0,011764$s
 
 !!! question long
     Com as informações coletadas até aqui você consegue imaginar como deve ser o firmware para fazer a leitura do sensor? Não existe uma única maneira de fazer, mas algumas soluções podem não ser muito boas!
@@ -103,30 +103,64 @@ Nesse laboratório vocês devem usar o exemplo do OLED e realizando a leitura pe
 
 Lembrem de copiar o exemplo do OLED para o seu repositório e renomear para: `Lab5-HC-SR04`, ou se preferir, podem usar um dos labs passados que possui OLED e já tem os botões configurados, só lembrem de fazer uma cópia e renomear.
 
-!!! tip
-    Step: 
-    
-    1. Fazer a montagem na protoboard
-    1. Escolher dois pinos para Echo e Trig
-    1. Configurar Trig como output e Echo como input
-    1. Configurar irq de boarda no pino Echo
-        - lembre da função de callback!
-    
-    Trig:
-    
-    1. Gerar o pulso do Trig com `delay_us`
-    
-    Echo:
-    
-    1. Iniciar o RTT em borda de descida do pino Echo
-        - Qual prescale usar?
-    1. Parar o RTT em borda de subida do pino Echo
+### Dicas
 
-    Conta: 
+A seguir uma ideia de como começar:
+
+- Setup: 
+
+1. Fazer a montagem na protoboard
+1. Escolher dois pinos para Echo e Trig
+1. Configurar Trig como output e Echo como input
+1. Configurar irq de boarda no pino Echo
+    - Lembre de criar a função de callback.
+
+Trig:
+
+1. Gerar o pulso no pino de **Trig** com `delay_us`.
+
+!!! tip ""
+    Até aqui não tem nenhum truque!
+
+Echo:
+
+1. Iniciar o RTT na borda de subida do pino Echo
+    - Qual prescale usar?
+1. Ler valor do RTT em borda de descida do pino Echo
+   - Consulte [a documentaćão do ASF-RTT](https://asf.microchip.com/docs/latest/same70/html/rtt_8c.html) para saber como ler o valor atual do contador.
+
+??? tip "Dica RTT"
+    Nessa primeira etapa não precisamos de nenhuma interrupção do RTT, para desativar as interrupções modifique a função do `RTT_init` comentando as linhas a seguir:
     
-    1. Realizar o cálculo da distância usando o valor que o RTT contou
-    1. Exibir no OLED
-    
+    ```diff
+    static void RTT_init(uint16_t pllPreScale, uint32_t IrqNPulses)
+    {
+        uint32_t ul_previous_time;
+
+        /* Configure RTT for a 1 second tick interrupt */
+        rtt_sel_source(RTT, false);
+        rtt_init(RTT, pllPreScale);
+
+    +    // ul_previous_time = rtt_read_timer_value(RTT);
+    +    // while (ul_previous_time == rtt_read_timer_value(RTT));
+
+    +    // rtt_write_alarm_time(RTT, IrqNPulses+ul_previous_time);
+
+    +    // /* Enable RTT interrupt */
+    +    // NVIC_DisableIRQ(RTT_IRQn);
+    +    // NVIC_ClearPendingIRQ(RTT_IRQn);
+    +    // NVIC_SetPriority(RTT_IRQn, 4);
+    +    // NVIC_EnableIRQ(RTT_IRQn);
+    +    // rtt_enable_interrupt(RTT, RTT_MR_ALMIEN | RTT_MR_RTTINCIEN);
+    }
+    ```
+
+Conta: 
+
+1. Realizar o cálculo da distância usando o valor do RTT 
+1. Lembre de usar como base de tempo o valor que configurou no RTT.
+1. Exiba nos no OLED a distância atual em cm.
+
 !!! progress
     Até aqui é C
     
