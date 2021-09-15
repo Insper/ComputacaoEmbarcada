@@ -4,7 +4,7 @@
 |--------------------|
 | `Lab5-HC-SR04` |
 
-Neste laboratório iremos trabalhar com o sensor de distância HC-SR04, que é muito utilizado em projetos de robótica e similares. O sensor é um módulo ultrasonico e que possibilita medirmos a distância entre o sensor e um objeto.
+Neste laboratório iremos trabalhar com o sensor de distância HC-SR04, que é muito utilizado em projetos de robótica e similares. O sensor é um módulo ultrassônico e que possibilita medirmos a distância entre o sensor e um objeto.
 
 ![](http://wiki.sunfounder.cc/images/1/1f/Ultrasonic_.jpg)
 
@@ -22,7 +22,7 @@ Refs:
 - http://wiki.sunfounder.cc/index.php?title=Ultrasonic_Module
 - https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/
 
-O Sensor de Distância Ultrassônico HC-SR04 é capaz de medir distâncias de 2cm a 4m com ótima precisão e baixo preço. Este módulo possui um circuito pronto com emissor e receptor acoplados e 4 pinos (VCC, Trigger, ECHO, GND) para medição.
+O Sensor de Distância Ultrassônico HC-SR04 é capaz de medir distâncias de 2cm a 4m com ótima precisão e baixo custo. Este módulo possui um circuito pronto com emissor e receptor acoplados e 4 pinos (VCC, Trigger, ECHO, GND) para medição.
 
 Para começar a medição é necessário alimentar o módulo e colocar o pino Trigger em nível alto por mais de 10us. Assim, o sensor emitirá uma onda sonora que, ao encontrar um obstáculo, rebaterá de volta em direção ao módulo. Durante o tempo de emissão e recebimento do sinal, o pino ECHO ficará em nível alto. Logo, o cálculo da distância pode ser feito de acordo com o tempo em que o pino ECHO permaneceu em nível alto após o pino Trigger ter sido colocado em nível alto.
 
@@ -60,7 +60,7 @@ Você deve seguir a montagem a seguir, sugerimos utilizar uma protoboard para is
 
 ### Interagindo
 
-Após feita a montagem você deverá escrever um programa que faz o controle do sensor ultrasonico, para iniciar uma nova leitura você deve gerar um pulso de `10 us` no pino de Trig (**Pin Y**) e então aguardar pela subida do sinal do Echo (**Pin X**) e então contar o tempo (**dT**) que ele fica em alto. O valor de **dT** é proporcional ao tempo que o som levou para chegar até o obstáculo e voltar.
+Após feita a montagem você deverá escrever um programa que faz o controle do sensor ultrassônico, para iniciar uma nova leitura você deve gerar um pulso de `10us` no pino de Trig (**Pin Y**) e então aguardar pela subida do sinal do Echo (**Pin X**) e então contar o tempo (**dT**) que ele fica em alto. O valor de **dT** é proporcional ao tempo que o som levou para chegar até o obstáculo e voltar.
 
 A figura a seguir demonstra como funciona a leitura do sensor.
 
@@ -166,7 +166,7 @@ Conta:
     
 ### B 
 
-Estamos lidando com um sensor que pode ter falhas, o que acontece se o sensor não estiver operando direito, ou se der mal contato na ligação? ou se o som não voltar (espaçõ aberto). Identifique esse tipo de erro e exiba no OLED.
+Estamos lidando com um sensor que pode ter falhas, o que acontece se o sensor não estiver operando direito, ou se der mal contato na ligação? ou se o som não voltar (espaço aberto). Identifique esse tipo de erro e exiba no OLED.
 
 ### A
 
