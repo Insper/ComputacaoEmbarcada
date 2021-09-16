@@ -93,7 +93,7 @@ A figura a seguir demonstra como funciona a leitura do sensor.
         
         Sinal do **Echo** gerar via `pio_set(), delay_us(10), pio_clear()`. Como o sinal do pino de Echo pode ser aproximadamente 10 us, não tem muito problema em usar a função de delay para isso!
         
-        Já o sinal do Trig carrega informações importantes e devemos contar corretamente o tempo. Para isso sugerimos configurar uma interrupção de boarda no pino e inicar o RTT quando ocorrer uma borda de descida e parar a contagem do tempo quando ocorrer uma borda de subida. 
+        Já o sinal do Trig carrega informações importantes e devemos contar corretamente o tempo. Para isso sugerimos configurar uma interrupção de borda no pino e inicar o RTT quando ocorrer uma borda de descida e parar a contagem do tempo quando ocorrer uma borda de subida. 
         
         ==Um ponto importante é a configuração da frequência na qual o RTT irá operar. Pense um pouco a respeito....==
 
