@@ -40,9 +40,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="14.604255"
-     inkscape:cx="155.89208"
-     inkscape:cy="94.239523"
+     inkscape:zoom="3.6510638"
+     inkscape:cx="160.08977"
+     inkscape:cy="95.861608"
      inkscape:window-width="1920"
      inkscape:window-height="1001"
      inkscape:window-x="-9"
@@ -343,7 +343,7 @@
          id="tspan900-2"
          x="168.68347"
          y="172.90611"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.175px;font-family:Inconsolata;-inkscape-font-specification:Inconsolata;stroke-width:0.264583">510R</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.175px;font-family:Inconsolata;-inkscape-font-specification:Inconsolata;stroke-width:0.264583">560R</tspan><tspan
          sodipodi:role="line"
          x="168.68347"
          y="186.13524"
@@ -358,6 +358,11 @@
        style="fill:#ff6600;stroke:#000000;stroke-width:0.00646991"
        d="m 140.07477,92.728121 v -4.43278 l 0.42796,0.03625 c 0.23538,0.01994 0.45723,0.06323 0.49301,0.09622 0.0358,0.03298 0.50567,0.05997 1.04421,0.05997 h 0.97917 v 4.245338 4.245338 h -1.0134 c -0.55738,0 -1.04268,0.02734 -1.07846,0.06074 -0.0358,0.03341 -0.24222,0.07446 -0.45877,0.09123 l -0.39372,0.03048 z"
        id="path886"
+       transform="matrix(0.26458333,0,0,0.26458333,118.56129,150.23222)" />
+    <path
+       style="fill:#0000ff;stroke:#000000;stroke-width:0.00646991"
+       d="M 199.03522,92.709704 V 88.39578 l 0.29101,0.0563 c 0.16006,0.03096 0.80713,0.05764 1.43794,0.05928 l 1.14693,0.003 v 4.211101 4.211102 h -1.12025 c -0.61614,0 -1.26321,0.01959 -1.43794,0.04354 l -0.31769,0.04354 z"
+       id="path888"
        transform="matrix(0.26458333,0,0,0.26458333,118.56129,150.23222)" />
   </g>
 </svg>
