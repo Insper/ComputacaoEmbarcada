@@ -80,3 +80,9 @@ A seguir algumas ideias de controle:
 -->
 
 Rubricas e detalhes de projeto no [folder Controle](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf)
+
+## Começando
+
+Vamos começar pensando um pouco no controle! Para isso, faça em dupla a atividade no mural:
+
+https://app.mural.co/invitation/mural/elementos9119/1632086605145?sender=ub569a9273c6e285461187641&key=1815cea8-8e6e-4084-9be6-8b68d02a306b
