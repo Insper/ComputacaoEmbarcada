@@ -32,7 +32,7 @@ Leia atentamente as regras a seguir:
          - [APS HowTo](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-howto/)
 
 !!! tip "Entrega"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfP-whP_O45qbm32ktA7Q_wgNIuPyE7d3w1ZGVpAMnw9k2Kbg/viewform?embedded=true" width="640" height="440" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScYylnLu39sFrpdlm1yKc5dmuJ2qdnN2LxBF2Npl2V7cwJ1NQ/viewform?embedded=true" width="640" height="440" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
 
 ## Descrição
 

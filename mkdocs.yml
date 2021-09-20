@@ -67,6 +67,9 @@ nav:
         - 'Descrição': 'navigation/Projeto/Projeto-1-Descricao.md'
 #        - 'Vending Machine': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-VendingMachine.pdf'
         - 'Folder': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
+        - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/docs-src/navigation/Projeto/Emb%20-%20Controle.pdf'
+        - 'Handout 1':  'https://app.mural.co/t/elementos9119/m/elementos9119/1616424619557/3341fbe703cab0b531da459548f0124af1af1669'
+#        - 'Dicas': 'Projeto-1-Dicas.md'
         - navigation/Projeto/Projeto-1-Rubrica.md
         - navigation/Projeto/Projeto-1-Dicas.md
         - navigation/Projeto/Projeto-1-Lista.md

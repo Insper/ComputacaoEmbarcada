@@ -4,7 +4,7 @@
     - Em dupla
     - Não pode repetir dupla, mas pode fazer par com colega do outro lab.
 
-    Cria repositório via classroom: https://classroom.github.com/g/0M_7xFQT
+    Cria repositório via classroom: https://classroom.github.com/g/WZuf4ADp
 
 !!! tip
     Ao terminar preencha o forms a seguir:

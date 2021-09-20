@@ -7,7 +7,7 @@
     - Em dupla
     - Não pode repetir dupla, mas pode fazer par com colega do outro lab.
 
-    Cria repositório via classroom: https://classroom.github.com/g/0M_7xFQT
+    Cria repositório via classroom: https://classroom.github.com/g/WZuf4ADp
     
 O projeto de computação Embarcada é de escopo fechado e tem como principal objetivo fazer com que vocês passem por todo o ciclo de desenvolvimento de um protótipo de um dispositivo embarcado: especificação :arrow_right: implementação :arrow_right: problemas :arrow_right: teste :arrow_right: problemas :arrow_right: finalização.
 
