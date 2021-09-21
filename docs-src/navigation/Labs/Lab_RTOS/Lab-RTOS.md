@@ -9,11 +9,12 @@
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F321087yYy4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Neste laboratório iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciarmos três LED e três botões (vamos refazer a entrega do `tickTackTock` porém agora com o uso do SO).
+Neste laboratório iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciarmos três LED e três botões (vamos refazer a entrega do lab `TC RTT RTC` porém agora com o uso do SO).
 
 O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://freertos.org), um sistema operacional muito utilizado pela industria, sendo o segundo sistema operacional (**20%**) mais utilizado em projetos embarcados, perdendo só para o [Linux embarcado](https://m.eet.com/media/1246048/2017-embedded-market-study.pdf).
 
- <embed type="text/html" src="http://localhost:3000/pl/course_instance/2/instructor/question/114/preview" width="800" height="500"> 
+!!! progress 
+    Continuar ...
 
 ## LAB
 
@@ -38,7 +39,7 @@ O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://
 Iremos trabalhar com o exemplo do [`FreeRTOS`](https://www.freertos.org) que a Atmel disponibiliza para a placa SAME70-XPLD, esse exemplo já inclui um projeto com as configurações iniciais do OS e um código exemplo que faz o LED da placa piscar a uma frequência determinada.
 
 !!! warning "Código exemplo"
-    - Copie o código exemplo `Same70-Examples/RTOS/RTOS-LED` para a pasta da entrega do seu repositório `LAB5-RTOS-LED`
+    - Copie o código exemplo `Same70-Examples/RTOS/RTOS-LED` para a pasta da entrega do seu repositório `LAB6-RTOS-LED`
     - Vamos modificar esse código exemplo.
 
 ### Terminal
@@ -58,6 +59,9 @@ Esse exemplo faz uso da comunicação UART para debug de código (via printf), p
     1. Compile e grave o código no uC
     2. Abra o terminal e analise o output (baudrate 115200).
     1. Veja o LED piscar! Mágico
+
+!!! progress 
+    Continuar ...
 
 ### Entendendo o exemplo
 
@@ -107,6 +111,9 @@ static void task_led(void *pvParameters)
     1. Modifique o firmware com o código exemplo anterior
     1. Programe o uC.
     1. Analise o resultado.
+
+!!! progress 
+    Continuar ...
 
 O Tick de um RTOS define quantas fezes por segundo o escalonador irá executar o algoritmo de mudança de tarefas, no ARM o tick é implementado utilizando um timer do próprio CORE da ARM chamado de `system clock` ou [`systick`](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s02s08.html), criado para essa função.
 
@@ -190,6 +197,8 @@ taskName Status Priority WaterMark Task ID
     - Programe o uC com essa modificação
     - Valide
 
+!!! progress 
+    Continuar ...
 
 ### Criando tarefas
 
@@ -254,6 +263,8 @@ A cada tarefa pode ser atribuída uma prioridade que vai de **0** até `configMA
 
     A melhor solução é a de executar o programa e analisar o consumo da stack pelas tasks ao longo de sua execução, tendo assim maiores parâmetros para a sua configuração.
 
+!!! progress 
+    Continuar ...
 
 #### Piscando LED1 OLED
 
@@ -293,7 +304,6 @@ Porém ainda devemos ativar essa funcionalidade no arquivo de configuração, vi
 
 ---
 
-
 !!! example ""
     - No arquivo de configuração `FreeRTOSConfig.h` modifique:
 
@@ -309,12 +319,15 @@ Com isso podemos controlar o modo sleep na função `vApplicationIdleHook`.
 ---
 
 !!! example "Tarefa"
+    Modifique o firmware para:
+
     - Entre em sleepmode quando em idle
     - Dentro da função `vApplicationIdleHook` chame `pmc_sleep(SAM_PM_SMODE_SLEEP_WFI)`
 
----
-
 Note que devemos entrar em um modo de sleep que o timer utilizado pelo tick consiga ainda acordar a CPU executar, caso contrário o RTOS não irá operar corretamente já que o escalonador não será chamado. O timer usado pelo escalonador é o [System Timer, SysTick](http://infocenter.arm.com/help/topic/com.arm.doc.dui0552a/Babieigh.html).
+
+!!! progress 
+    Continuar ...
 
 ###  API - Comunicação entre task / IRQ
 
@@ -338,8 +351,7 @@ Iremos implementar um semáforo para comunicação entre o callback do botão 1 
 
 ![Semáforo](imgs/semaforo.png)
 
-
- - Consulta: [xSemaphoreGiveFromISR](https://www.freertos.org/a00124.html)
+- Consulta: [xSemaphoreGiveFromISR](https://www.freertos.org/a00124.html)
 
 Adicione os defines e a variável global que indica o semáforo:
 
@@ -360,7 +372,6 @@ Adicione os defines e a variável global que indica o semáforo:
         tem que ser var global! */
     SemaphoreHandle_t xSemaphore;
     ```
-
 
 Agora vamos incluir a função de callback recém criada
 para liberar o semáforo `xSemaphore` que a `task_led` está aguardando:
@@ -465,6 +476,9 @@ vermelho.
 
 ## C - Praticando
 
+!!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScQJul7O1WNc70o6EefZVeMPhELzVuxdKgagTPg_ig6kz2Epw/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
 Vamos praticar um pouco, agora faça o mesmo para o LED1 da placa OLED, para iso você deverá:
 
 - criar task que faz o LED1 piscar
@@ -511,9 +525,3 @@ Lembre de criar uma task e um semáforo para o Led3: `task_led3`
  \                                                \
   x -----> LED1 pisca -----> LED2 pisca ---------- x -----> LED3 pisca
 ```
-
-----------
-
-!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScQJul7O1WNc70o6EefZVeMPhELzVuxdKgagTPg_ig6kz2Epw/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-

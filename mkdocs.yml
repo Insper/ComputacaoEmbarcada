@@ -50,14 +50,14 @@ nav:
  #     - 'Lab-3-PIO-IRQ-Perguntas.md'
     - 'Lab 4 - TC - RTC - RTT': 'navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md'
     - 'Lab 5 - HC-SR04': 'navigation/Labs/Lab_HCSR04/lab.md'
-    - 'Lab 5 - RTOS':
+    - 'Lab 6 - RTOS':
        - 'Lab': 'navigation/Labs/Lab_RTOS/Lab-RTOS.md'
        - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
-    - 'Lab 6 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
-    - 'Lab 7 - RTOS - LCD - LVGL':
-        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
-        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'
-    - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
+    - 'Lab 7 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
+#    - 'Lab 7 - RTOS - LCD - LVGL':
+#        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
+#        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'
+#    - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
 #    - 'Lab-9-ADC-FIR.md'
 #    - 'Lab-8-RTOS-UART.md'
     - 'Lab 9 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
