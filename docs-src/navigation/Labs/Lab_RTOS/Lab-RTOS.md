@@ -20,7 +20,7 @@ O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://
 
 | Pasta           |
 |-----------------|
-| `Lab5-RTOS-LED` |
+| `LAB6-RTOS-LED` |
 
 1. Executar uma demo de RTOS
 1. Entender e modificar o exemplo
@@ -39,7 +39,7 @@ O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://
 Iremos trabalhar com o exemplo do [`FreeRTOS`](https://www.freertos.org) que a Atmel disponibiliza para a placa SAME70-XPLD, esse exemplo já inclui um projeto com as configurações iniciais do OS e um código exemplo que faz o LED da placa piscar a uma frequência determinada.
 
 !!! warning "Código exemplo"
-    - Copie o código exemplo `Same70-Examples/RTOS/RTOS-LED` para a pasta da entrega do seu repositório `LAB6-RTOS-LED`
+    - Copie o código exemplo `Same70-Examples/Perifericos/RTOS-LED` para a pasta da entrega do seu repositório `LAB6-RTOS-LED`
     - Vamos modificar esse código exemplo.
 
 ### Terminal
