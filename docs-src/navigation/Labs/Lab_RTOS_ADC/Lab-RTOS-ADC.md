@@ -155,7 +155,7 @@ Vamos criar um `queue` chamado de `xQueueADC` essa variável deve ser global (as
     1. Criei a struct `adcData` e a variável global `xQueueADC`
     1. Compile para ver se possui erros.
 
-### Modificando task_oled
+### Modificando task_oled e main
 
 Agora modifique a tarefa `task_oled` para alocar uma fila nesse "endereço", vamos também criar uma variável local da task chamada de `adc` para recebimento de dados dessa fila, e imprimir na tela o resultado:
 
@@ -165,7 +165,6 @@ void task_oled(void){
 	gfx_mono_ssd1306_init();
   gfx_mono_draw_string("Exemplo RTOS", 0, 0, &sysfont);
 
-+ xQueueADC = xQueueCreate( 5, sizeof( adcData ));
 + adcData adc;
   
   for (;;) {
@@ -179,6 +178,22 @@ void task_oled(void){
 +   }
   }
 }
+```
+
+Modifique a funcão main, criando a fila nela:
+
+```diff
+
+main(){ 
+
+....
+
++ xQueueADC = xQueueCreate( 5, sizeof( adcData ));
+
+  /* Create task to handler LCD */
+  if (xTaskCreate(task_adc, "adc", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
+    printf("Failed to create test adc task\r\n");
+  }
 ```
 
 !!! example "Tarefa"
