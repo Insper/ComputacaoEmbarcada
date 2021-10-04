@@ -85,7 +85,10 @@ nav:
     - 'navigation/APS/APS-2-Oximetro.md'
     - 'navigation/APS/APS-3-IoT.md'
 
-- Avaliações e Simulados: navigation/Avaliacoes_e_Simulados/Avaliacoes.md
+- Avaliações e Simulados:
+    - navigation/Avaliacoes_e_Simulados/Avaliacoes.md
+    - navigation/Avaliacoes_e_Simulados/21b-av1/README.md
+
 #    - 'navigation/Avaliacoes_e_Simulados/20b/AV1.md'
 #    - 'navigation/Avaliacoes_e_Simulados/AV0 Simulado': 'AV-0-Simulado.md'
 #    - 'navigation/Avaliacoes_e_Simulados/AV0 Prática': 'AV-0.md'
