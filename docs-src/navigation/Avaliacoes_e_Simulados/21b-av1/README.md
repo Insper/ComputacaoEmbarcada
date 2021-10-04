@@ -94,6 +94,9 @@ A seguir a rubrica da avaliação.
 
 Para obterem o conceito C, vocês devem entregar um firmware que:
 
+!!! info "Preencher o formulário"
+    https://docs.google.com/forms/d/e/1FAIpQLSd3oTNrgGqiqt2wiommtRfXj2Urx23XGpDZYRgxIxpJBVhi8g/viewform
+
 - Faz a leitura dos pulsos simulados da roda fônica
 - Identifica quando a roda passa pela origem. 
   - Piscar o LED 3 da placa OLED a cada pulso da roda!
