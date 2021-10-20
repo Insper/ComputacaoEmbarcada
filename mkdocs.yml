@@ -23,13 +23,12 @@ nav:
 - Sobre o curso: 'Sobre-Curso.md'
 - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
 - 'Vídeos': 'navigation/Videos/Util-Videos.md'
+- navigation/Dicas/Util-o-que-nao-pode.md
 - 'Util':
     - navigation/Util/Sobre-Ferramental.md
     - navigation/Util/Util-Startup.md
     - navigation/Util/Util-Erros.md
     - navigation/Util/Util-Documentos.md
-
-- Dicas:
     - navigation/Dicas/Util-lcd.md
     - navigation/Dicas/Util-freertos.md
     - navigation/Dicas/Util-FloatPrint.md

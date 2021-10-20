@@ -13,6 +13,8 @@
 
 ![](imgs/lab.jpeg){width=300}
 
+Corsi
+
 ------------------
 
 ## Objetivos
