@@ -9,11 +9,14 @@
 !!! tip
     Ao terminar preencha o forms a seguir:
     
-    - https://forms.gle/GuA7ZGbrERPMdGdp7
+    - https://docs.google.com/forms/d/e/1FAIpQLSfj2rqBALa6MGEMMGdy7IVt1OsZN_r7MKDSlroy0R5WREZ00w/viewform
     
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfj2rqBALa6MGEMMGdy7IVt1OsZN_r7MKDSlroy0R5WREZ00w/viewform?embedded=true" width="640" height="300" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
    
 A rubrica a seguir será aplicada a nota da entrega:
+
+!!! info
+    Para atingir conceito maior que B sera necessário fechar as issues criadas após a entrega (qualidade de código)
 
 - A+
     - Testa controle com pessoa externa ao projeto (filma interação)
