@@ -21,7 +21,7 @@ Notem que são regras gerais e podem existir exceções, mas você deve pensar b
     Você deve gastar no máximo algo entre 100-200 clocks dentro de uma interrupção.
 
 - Apenas algumas linhas de código em C
-- Evitar manipular funções (`sprintf`)
+- Evitar manipular strings (`sprintf`)
 - Evitar usar `printf`
 - Não atualizar displays (OLED/ LCD)
 - Evite loops (`while` / `for`)
