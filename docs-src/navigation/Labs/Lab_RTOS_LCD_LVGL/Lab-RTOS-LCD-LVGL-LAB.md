@@ -272,7 +272,7 @@ Um objeto pode ser alinhado com relação a um *screen* ou a um outro objetivo d
     - [ ] `lv_obj_align_to(btn1, btn2, LV_ALIGN_BOTTOM_RIGHT, 0, 0);`
     - [ ] `lv_obj_align_to(btn2, btn1, LV_ALIGN_BOTTOM_RIGHT, 0, 0);`
     - [x] `lv_obj_align_to(btn2, btn1, LV_ALIGN_RIGHT, 0, 0);`
-    - [ ] `lv_obj_align_to(btn2, btn1, LV_ALIGN_RIGHT, 0, 0);`
+    - [ ] `lv_obj_align_to(btn1, btn2, LV_ALIGN_RIGHT, 0, 0);`
 
     !!! details ""
         
