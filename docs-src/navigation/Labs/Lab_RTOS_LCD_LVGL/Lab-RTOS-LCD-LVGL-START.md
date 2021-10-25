@@ -7,7 +7,7 @@ Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RT
 
 | LAB                  |
 | -------------------- |
-| `Lab7-RTOS-LCD-LVGL` |
+| `Lab8-RTOS-LCD-LVGL` |
 
 Neste laboratório iremos:
 
@@ -38,8 +38,9 @@ Antes de começarmos será necessário realizarmos a conexão do LCD no kit e en
     
     Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de 115200.
 
+!!! progress
+    Execute os exemplos antes de continuar!
 
-​    
 ## LCD
 
 O LCD que iremos usar nas próximas atividades da disciplina é fabricado pela adafruit com o nome de: [`2.8" TFT LCD with Touchscreen Breakout Board w/MicroSD Socket - ILI9341`](https://www.adafruit.com/product/1770) ele possui um LCD de `240x320` pixels operando em RGB e com uma sensor touch resistivo. O LCD é controlado por um controlador chamado de [**ILI9341**](https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf) ele é responsável por atualizar e exibir as informações na tela. 
@@ -124,9 +125,19 @@ Iremos trabalhar com o código base: [RTOS-TFT-LCD-ILI9341-LVGL](https://github.
 - lvgl
 
 !!! warning "Entrega"
-    Você deve copiar o código RTOS-TFT-LCD-ILI9341-LVGL para o repositório de entregas de laboratório e renomear para **Lab7-RTOS-LCD-LVGL**. Vamos trabalhar nesta pasta.
+    Você deve copiar o código RTOS-TFT-LCD-ILI9341-LVGL para o repositório de entregas de laboratório e renomear para **Lab8-RTOS-LCD-LVGL**. Vamos trabalhar nesta pasta.
     
 Antes de começarmos vamos entender um pouco o código de exemplo e como o lvgl trabalha.
+
+!!! task
+    1. Faca uma cópia do código que está no repositório de exemplos para o seu repositório:
+        - `screens/RTOS-TFT-LCD-ILI9341-LVGL`
+    1. Renomei para `Lab8-RTOS-LCD-LVGL`
+    1. Execute o código na placa, você deve ver dois botões! ==Click neles.==
+    
+!!! progress
+    Só continue após ter executado a demo e ela ter funcionado.
+
 
 ### Porting lvgl
 
@@ -151,16 +162,13 @@ O [site do LVGL](https://docs.lvgl.io/latest/en/html/porting/index.html) descrev
         lv_disp_flush_ready(disp_drv);
     }
     ```
-
-
-​    
 === "my_input_read"
 ​    Esta função retorna no `*data` se um toque foi encontrado e o valor X Y lido.
-​    
-​    ```c
-​    bool my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data) {
-​        int px, py, pressed;
-​    
+   
+    ```c
+    bool my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data) {
+        int px, py, pressed;
+
         if (readPoint(&px, &py)) {
             data->state = LV_INDEV_STATE_PR;
         }
@@ -177,13 +185,14 @@ O [site do LVGL](https://docs.lvgl.io/latest/en/html/porting/index.html) descrev
 E isso é tudo o que deve ser feito para incorporar o lvgl em um novo projeto.
 
 !!! info 
-    Eu devo ter demorado umas 10h de trabalho para sair de um projeto zerado e conseguir fazer o exemplo que vocês irão utilizar hoje. São várias etapas necessárias: 
+    Eu devo ter demorado umas 10h de trabalho para sair de um projeto zerado e conseguir fazer o exemplo que vocês irão utilizar hoje. Foram necessárias várias etapas: 
     
     1. Escolher LCD
     1. Entender conexão de hardware
     1. Implementar driver ili9341
     1. Implementar driver touch
     1. Entender LVGL e como porta
+    1. Executar LVGL 
 
 ### framebuffer
 
@@ -262,7 +271,7 @@ static void task_lcd(void *pvParameters) {
 
 Note que na `task_lcd` chamamos a função `lv_ex_btn_1()` está função cria os widgets no LCD, os widgets estão listados na página: 
 
-- https://docs.lvgl.io/latest/en/html/widgets/index.html
+- https://docs.lvgl.io/master/widgets/index.html
 
 Podemos listar alguns aqui como exemplo:
 
