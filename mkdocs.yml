@@ -52,7 +52,7 @@ nav:
     - 'Lab 6 - RTOS':
        - 'Lab': 'navigation/Labs/Lab_RTOS/Lab-RTOS.md'
        - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
-    - 'Lab 8 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
+    - 'Lab 7 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
     - 'Lab 8 - RTOS - LCD - LVGL':
         - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
         - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'

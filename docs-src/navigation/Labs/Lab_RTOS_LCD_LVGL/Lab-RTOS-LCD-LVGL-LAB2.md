@@ -95,9 +95,9 @@ E então modifique a função termostato:
     // ....
     
     labelFloor = lv_label_create(lv_scr_act(), NULL);
-    lv_obj_align(labelFloor, NULL, LV_ALIGN_IN_LEFT_MID, 35 , -45);
-    lv_obj_set_style_local_text_font(labelFloor, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, &dseg70);
-    lv_obj_set_style_local_text_color(labelFloor, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+    lv_obj_align(labelFloor, LV_ALIGN_LEFT_MID, 35 , -45);
+    lv_style_set_text_font(labelFloor,  &dseg70);
+    lv_style_set_text_color(labelFloor, lv_color_white());
     lv_label_set_text_fmt(labelFloor, "%02d", 23);
    }
 ```
@@ -121,7 +121,8 @@ Antes de continuar temos que editar o começo arquivo da fonte `dseg70`, incluin
 
 !!! example "Tarefa"
     1. Crie o novo label como indicado anteriormente
-    1. Edite o arquivo `dseg70.h`
+    1. Modifique o arquivo `dseg70.h`
+    1. Declare a fonte nova no main.c: `LV_FONT_DECLARE(dseg70);`
     1. Teste na placa
 
     Resultado esperado:
@@ -130,6 +131,11 @@ Antes de continuar temos que editar o começo arquivo da fonte `dseg70`, incluin
 
 !!! progress
     Click para continuar....
+
+
+!!! info
+    Notem que nós criamos um label e então customizamos algumas propriedades dele. O jeito feito neste exemplo é diferente do que fizemos com o botão na qual criamos um estilo novo e aplicamos a ele. Vocês podem escolher qualquer um dos dois jeitos para modificar um objeto.
+
 
 #### Demais labels
 
@@ -163,20 +169,16 @@ Existem várias maneiras de fazermos com que o handler altera o valor do label, 
 
 ```c
 static void up_handler(lv_obj_t * obj, lv_event_t event) {
-  
-  char * c;
-  int temp;
-  if(event == LV_EVENT_CLICKED) {
+	if(code == LV_EVENT_CLICKED) {
       c = lv_label_get_text(labelSetValue);
       temp = atoi(c);
       lv_label_set_text_fmt(labelSetValue, "%02d", temp + 1);
-  }
+    } 
 }
 ```
 
 !!! info
     A vantagem da implementação sugerida é que não precisamos de uma variável global para armazenar o valor da temperatura, nós recuperamos o valor lendo o que estava salvo no label e convertendo para inteiro.
-    
     
 !!! example "Tarefa"
     1. Implemente o handler
@@ -184,9 +186,9 @@ static void up_handler(lv_obj_t * obj, lv_event_t event) {
        - Aperte o botão de up e verifique se a referência muda.
     
     !!! warning
-        A fonte utilizada tem um problema, o caracter vázio (espaço: ` `) não apaga 100% o último valor, por exemplo: Quando o digito muda de 2 para 1 acontece de ficar uma barra em baixo.
+        A fonte utilizada tem um problema, o carácter vazio (espaço: ` `) não apaga 100% o último valor, por exemplo: Quando o digito muda de 2 para 1 acontece de ficar uma barra em baixo.
         
-        Depois vemos como resolver isso! Eu ainda não sei =/
+        Depois vemos como resolver isso! Eu ainda não sei como fazer. =/
 
 !!! progress
     Click para continuar....
