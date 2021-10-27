@@ -32,7 +32,7 @@ Antes de começarmos será necessário realizarmos a conexão do LCD no kit e en
     - Valide o touchscreen com o código: [Screens/2.8-TFT-LCD-ILI9341-touch/](https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-touch)
 
 !!! note "Terminal"
-    Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:
+    O segundo exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:
 
     :arrow_right: View :arrow_right: Terminal Window
     
