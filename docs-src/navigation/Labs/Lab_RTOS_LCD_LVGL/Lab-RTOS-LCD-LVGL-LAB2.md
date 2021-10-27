@@ -94,10 +94,11 @@ E então modifique a função termostato:
     // ....
     // ....
     
-    labelFloor = lv_label_create(lv_scr_act(), NULL);
+    
+    labelFloor = lv_label_create(lv_scr_act());
     lv_obj_align(labelFloor, LV_ALIGN_LEFT_MID, 35 , -45);
-    lv_style_set_text_font(labelFloor,  &dseg70);
-    lv_style_set_text_color(labelFloor, lv_color_white());
+    lv_obj_set_style_text_font(labelFloor, &dseg70, LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(labelFloor, lv_color_white(), LV_STATE_DEFAULT);
     lv_label_set_text_fmt(labelFloor, "%02d", 23);
    }
 ```
