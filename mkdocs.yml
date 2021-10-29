@@ -64,27 +64,27 @@ nav:
 #    - 'Lab 9 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
 
 - Projeto:
-#    - 'Projeto 1':
         - 'Descrição': 'navigation/Projeto/Projeto-1-Descricao.md'
-#        - 'Vending Machine': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-VendingMachine.pdf'
         - 'Folder': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
         - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/docs-src/navigation/Projeto/Emb%20-%20Controle.pdf'
         - 'Handout 1': 'https://app.mural.co/invitation/mural/elementos9119/1632086605145?sender=ub569a9273c6e285461187641&key=1815cea8-8e6e-4084-9be6-8b68d02a306b'
-#        - 'Dicas': 'Projeto-1-Dicas.md'
         - navigation/Projeto/Projeto-1-Rubrica.md
         - navigation/Projeto/Projeto-1-Dicas.md
         - navigation/Projeto/Projeto-1-Lista.md
-#    - 'Projeto 2':
-#        - 'Descrição': 'navigation/Projeto-2-Descrição.md'
-#        - 'navigation/Projeto-2-Lista.md'
 
 - APS:
     - 'navigation/APS/APS-howto.md'
     - 'APS 1 - Musical':
         - 'navigation/APS/APS-1-Musical.md'
         - 'navigation/APS/APS-1-Musical-software.md'
-    - 'navigation/APS/APS-2-Oximetro.md'
-    - 'navigation/APS/APS-3-IoT.md'
+    - 'APS 2 - Ciclocomputador':
+        - 'navigation/APS/APS-2-Bike/Interface.md'
+        - 'navigation/APS/APS-2-Bike/Design.md'
+        - 'navigation/APS/APS-2-Bike/Engenharia.md'
+        - 'navigation/APS/APS-2-Bike/Rubrica.md'
+
+#    - 'navigation/APS/APS-2-Oximetro.md'
+#    - 'navigation/APS/APS-3-IoT.md'
 
 - Avaliações e Simulados:
     - navigation/Avaliacoes_e_Simulados/Avaliacoes.md
