@@ -23,11 +23,11 @@ Rubrica referente ao design da interface.
 
 - Mockup da interface:
     - Entrega um protótipo da interface
-    - Indica quais são os widgts do LVGL 
+    - Indica quais são os widgets do LVGL 
     - Indica quais são as fontes (nome e tamanho)
 
 - Grava um vídeo explicando a interface
-    - **Todos do grupo devem aparecer no vídeo (pode ser um call)**
+    - **Todos do grupo devem aparecer no vídeo (pode ser em call)**
 
 ## Firmware
 
