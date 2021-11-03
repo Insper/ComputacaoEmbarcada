@@ -58,6 +58,7 @@ nav:
         - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
         - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'
         - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md'
+    - 'Lab 9 - RTOS - HC-SR04': 'navigation/Labs/Lab_RTOS_HCSR04/lab.md'
 #    - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
 #    - 'Lab-9-ADC-FIR.md'
 #    - 'Lab-8-RTOS-UART.md'
@@ -93,8 +94,8 @@ nav:
 #    - 'navigation/Avaliacoes_e_Simulados/20b/AV1.md'
 #    - 'navigation/Avaliacoes_e_Simulados/AV0 Simulado': 'AV-0-Simulado.md'
 #    - 'navigation/Avaliacoes_e_Simulados/AV0 Prática': 'AV-0.md'
-#    - 'navigation/Avaliacoes_e_Simulados/AV1 Simulado': 'AV-1-Simulado.md'
-#    - 'navigation/Avaliacoes_e_Simulados/AV1 Prática': 'AV-1.md'
+    - 'navigation/Avaliacoes_e_Simulados/AV1 Simulado': 'AV-1-Simulado.md'
+    - 'navigation/Avaliacoes_e_Simulados/AV1 Prática': 'AV-1.md'
 
 #####################################################################
 #extra_css:
