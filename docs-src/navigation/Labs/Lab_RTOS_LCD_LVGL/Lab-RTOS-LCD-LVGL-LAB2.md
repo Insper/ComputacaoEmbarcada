@@ -169,12 +169,15 @@ Vamos implementar o código para o `up_handler`, callback do botão de aumento d
 Existem várias maneiras de fazermos com que o handler altera o valor do label, eu sugiro o código a seguir:
 
 ```c
-static void up_handler(lv_obj_t * obj, lv_event_t event) {
-	if(code == LV_EVENT_CLICKED) {
-      c = lv_label_get_text(labelSetValue);
-      temp = atoi(c);
-      lv_label_set_text_fmt(labelSetValue, "%02d", temp + 1);
-    } 
+static void up_handler(lv_event_t * e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    char *c;
+    int temp;
+    if(code == LV_EVENT_CLICKED) {
+        c = lv_label_get_text(labelSetValue);
+        temp = atoi(c);
+        lv_label_set_text_fmt(labelSetValue, "%02d", temp + 1);
+    }
 }
 ```
 
