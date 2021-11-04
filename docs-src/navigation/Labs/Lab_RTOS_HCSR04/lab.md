@@ -55,7 +55,9 @@ Agora vamos fazer melhorias no projeto.
 > Cada item vale como um conceito a mais.
 
 - Mostre um gráfico da distância
-- Permite configurar o intervalo entre as leituras (tempo entre o echo)
-
+    - pode usar o meter: https://docs.lvgl.io/master/widgets/extra/meter.html
+    - ou um gráfico no tempo 
+- Permite configurar o intervalo entre as leituras (tempo entre o pulso do echo)
+- Ou qualquer outra coisa que você achar legal (e fizer sentido)!
 
 
