@@ -79,7 +79,7 @@ nav:
         - 'navigation/APS/APS-1-Musical.md'
         - 'navigation/APS/APS-1-Musical-software.md'
     - 'APS 2 - Ciclocomputador':
-        - 'navigation/APS/APS-2-Bike/Interface.md'
+        - 'navigation/APS/APS-2-Bike/Descricao.md'
         - 'navigation/APS/APS-2-Bike/Design.md'
         - 'navigation/APS/APS-2-Bike/Engenharia.md'
         - 'navigation/APS/APS-2-Bike/Rubrica.md'
@@ -90,12 +90,6 @@ nav:
 - Avaliações e Simulados:
     - navigation/Avaliacoes_e_Simulados/Avaliacoes.md
     - navigation/Avaliacoes_e_Simulados/21b-av1/README.md
-
-#    - 'navigation/Avaliacoes_e_Simulados/20b/AV1.md'
-#    - 'navigation/Avaliacoes_e_Simulados/AV0 Simulado': 'AV-0-Simulado.md'
-#    - 'navigation/Avaliacoes_e_Simulados/AV0 Prática': 'AV-0.md'
-    - 'navigation/Avaliacoes_e_Simulados/AV1 Simulado': 'AV-1-Simulado.md'
-    - 'navigation/Avaliacoes_e_Simulados/AV1 Prática': 'AV-1.md'
 
 #####################################################################
 #extra_css:

@@ -5,31 +5,38 @@ como base de estudo.
 
 As avaliações são com proctorio, e é liberado consulta 
 local (ao seus códigos, exemplos da disciplina) e ao 
-site da matéria.
+site da matéria. 
 
-É importante vocês cronometrarem o tempo que levaram para 
+!!! tip
+    É importante vocês cronometrarem o tempo que levaram para 
 realizar o estudo, ==pois a avaliação deve ser realizada em 3h==.
 
-<!--
-## Avaliação 3
+## AV2/ AV3/ AV4 ...
 
-O mesmo conteúdo da AV2, sugerimos estudar pelos simulados e avaliações (AV1 e AV2).
+Todas as avaliações agora possuem o mesmo conteúdo:
 
-## Avaliação 2
+- APS-1, APS-2, Projeto
+- Todos os Labs
+- RTOS 
 
-Conteúdo: 
+Sugerimos que vocês estudem primeiro pelo material a seguir:
 
-- RTOS
-- Projeto 1/ APS-2
-- PIO, TC, RTT, RTC, ADC
-- LCD
-- LVGL
+- https://github.com/insper-classroom/21a-emb-av2-simulado
+- Refazer a avaliacão 21b-AV1 só que agora usando RTOS.
 
-Conforme prometido estou liberando um estudo para a AV2 (https://github.com/insper-classroom/21a-emb-av2-simulado), ficou um pouco longo... por isso estou chamando de Estudo e não simulado.
+Avaliações anteriores:
 
--->
+- [21a - AV2](https://github.com/insper-classroom/21a-emb-av2) : Data logger
+- [21a - AV3](https://github.com/insper-classroom/21a-emb-av3) : Controle de um patinete elétrico
+- [21a - AV4](https://github.com/insper-classroom/21a-emb-sub) : Controle de uma geladeira
 
-## Avaliação 1 
+Antes não usávamos o LVGL para a parte gráfica do LCD, se forem fazer vão precisar adaptar algumas coisas:
+
+- [20a - AV2](https://github.com/insper-classroom/20a-emb-av2) : RTOS Puro
+- [20a - AV3](https://github.com/insper-classroom/20a-emb-av3) : Data logger
+- [20a - Simulado](https://github.com/insper-classroom/20a-emb-av2-simulado): Osciloscópio 
+
+## AV1
 
 Conteúdo: 
 
@@ -43,5 +50,5 @@ Sugerimos realizarem o estudo a seguir antes de iniciarem os simulados:
 A seguir uma lista de simulados e avaliações dos outros semestres,
 serve como base para vocês estudarem. 
 
-- [2021-a](https://github.com/insper-classroom/21a-emb-av1)
-- [2020-a](https://github.com/Insper/2020a-AV1-Embarcados)
+- [21a - AV1](https://github.com/insper-classroom/21a-emb-av1)
+- [20a - AV1](https://github.com/Insper/2020a-AV1-Embarcados)
