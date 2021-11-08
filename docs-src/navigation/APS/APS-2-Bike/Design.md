@@ -18,7 +18,7 @@ A seguir a lista de requisitos de usabilidade e de funcionalidades para o projet
 !!! tip "req. ux. 1 - Hardware"
      O hardware a ser utilizado será o LCD de `240`x`320`px touch colorido.
      
-!!! tip "req. ux. 2 - Blanding"
+!!! tip "req. ux. 2 - Branding"
     A interface deve ser alinhada com o logo e nome da empresa que você escolheu (blanding)
      
 !!! tip "req. ux. 3 - Exibir o logo"
@@ -97,13 +97,16 @@ Rubrica referente ao design da interface.
 
 #### A
 
+- Especifica e justifica as cores a serem usadas na interface
 - Pega feedback com duas pessoas externa e incorpora na interface
     - Grava em áudio as entrevistas
 - Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
 
 #### B
 
+- Especifica e justifica quais vão ser as fontes (e tamanhos) a serem usadas na interface.
 - Pega feedback com o Luiz do Fablab e incorpora na interface
+    - Vai estar no atendimento da tarde de sexta feira.
 - Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
 
 #### C
@@ -112,7 +115,6 @@ Rubrica referente ao design da interface.
     - Satisfaz todos os requisitos do projeto
     - Protótipo da interface satisfaz todos os requisitos
     - Indica quais são os widgets do LVGL 
-    - Indica quais são as fontes (nome e tamanho)
 
 - Grava um vídeo explicando a interface
     - **Todos do grupo devem aparecer no vídeo (pode ser em call)**
