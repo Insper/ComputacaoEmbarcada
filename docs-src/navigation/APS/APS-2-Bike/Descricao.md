@@ -24,6 +24,8 @@ O marketing de uma empresa de equipamentos esportivos quer criar um novo
 ciclocomputador e você foi escolhido como desenvolvedor autônomo, dado seu
 background técnico e de UX, para criar um protótipo e validar a ideia.
 
+![](bike.jpg)
+
 ## Entregas
 
 Serão duas entregas: a especificação da interface e a
