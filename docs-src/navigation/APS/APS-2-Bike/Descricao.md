@@ -4,7 +4,6 @@
     Entrega:
     
     - Pode ser feita em dupla!! 
-    - Cada grupo deve possuir um repositório (a entrega será feita ai)
     - **Deve entregar um vídeo da entrega funcionando.**
 
 !!! warning "Direitos"   

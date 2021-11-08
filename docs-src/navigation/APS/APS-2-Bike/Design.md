@@ -1,61 +1,118 @@
-# Design 
+# Entrega 1: Design
 
-| Entrega          | Data |
-|------------------|------|
-| Design interface | 5/11 |
+| Entrega          | Data  |
+|------------------|-------|
+| Design interface | 13/11 |
 
-A equipe de novos produtos disponibilizou alguns requisitos funcionais do protótipo (requisitos mínimo). O hardware a ser utilizado será o LCD de `320`x`480`px colorido e touch, que vocês trabalharam no LAB 8.
+A equipe de novos produtos disponibilizou alguns requisitos do protótipo e vocês devem propor uma interface que satisfaca as necessidades do projeto.
 
-Na etapa de design, você deve apresentar uma versão inicial da interface que deve satisfazer os requisitos listados a seguir.
+## Requisitos
 
-Na interface, vocês devem indicar qual widget do LVGL pretendem utilizar. Lembrem de consultar sempre a página do LVGL para saber o que está disponível:
+A seguir a lista de requisitos de usabilidade e de funcionalidades para o projeto do ciclocomputador.
+
+### Usabilidade
+
+!!! tip "req. ux. 0 - Operacão"
+    A interface a ser projetada deve ser tal que o usuário consigo operar com apenas uma mão (lembre que é algo para ser usado na bike) e que as informações devem ser exibidas de forma clara, considerando uma leitura e operação em movimento.
+
+!!! tip "req. ux. 1 - Hardware"
+     O hardware a ser utilizado será o LCD de `240`x`320`px touch colorido.
+     
+!!! tip "req. ux. 2 - Blanding"
+    A interface deve ser alinhada com o logo e nome da empresa que você escolheu (blanding)
+     
+!!! tip "req. ux. 3 - Exibir o logo"
+    O logotipo da empresa deve estar presente na interface.
+     
+### Funcionalidade
+
+O ciclocomputador irá exibir a velocidade instantânea da bicicleta assim como um relógio.
+
+!!! info "req. fun. 1 - Relógio"
+    Indicação da hora atual, no formato: **HH:MM:SS** atualizada a cada segundo.
+
+!!! info "req. fun. 2 - Velocidade instantânea"
+    Exibir a velocidade em km/h.
+
+!!! info "req. fun. 3 - Indicação da aceleração"
+    Deve ser um componente gráfico que indica a aceleração atual da bicicleta (positiva/ negativa ou constante).
+
+O ciclista deve ser capaz de iniciar a contagem de um trajeto, isso irá exibir para o usuário informações referentes a distância, velocidade média e tempo no trajeto. O usuário iniciar um trajeto (informações são atualizadas), parar a contagem do trajeto (não atualiza mais as informações) ou comecar um novo trajeto.
+
+!!! info "req. fun. 4 - Trajeto: Distância"
+    Indicação em km da distância percorrida no trajeto.
+
+!!! info "req. fun. 5 - Trajeto: Velocidade média"
+    Indicação em km/h da velocidade média no trajeto.
+
+!!! info "req. fun. 6 - Trajeto: Cronometro"
+    Indicação em **HH:MM** do tempo gasto em um trajeto.
+
+!!! info "req. fun. 7 - Trajeto: Controle"
+    Deve possibilitar o usuário iniciar, parar ou reiniciar a contagem de um trajeto.
+
+    Quando o usuário parar um percurso deve exibir apenas a velocidade instantânea e não deve atualizar outras informações referentes ao percurso (velocidade média/ distância no percurso/ tempo no percurso).
+
+!!! info "req. fun. 8 - Trajeto: Indicador status"
+    A tela deve possuir um indicador se a contagem da parte referente ao percurso está ou não ativada.
+
+O ciclocomputador pode ser usado em diferentes tamanhos de bicicleta e o usuário deve poder configurar o raio de sua bicicleta.
+
+!!! info "req. fun. 9 - Configuracão"
+    Deve possibilitar o usuário configurar o diâmetro da roda.
+
+## Entrega
+
+!!! nota
+    A entrega deve ser feita no projeto do mural que pode ser acessado no link a seguir:
+    https://app.mural.co/t/elementos9119/m/elementos9119/1635464106423/6dbaa412b5111d6713484f536f014438d7ea217d?sender=ub569a9273c6e285461187641
+
+Nessa etapa de design vocês devem apresentar uma versão inicial da interface que deve satisfazer os requisitos listados anteriormente. Na interface será necessário indicar qual widget do LVGL pretendem utilizar. Lembrem de consultar sempre a página do LVGL para saber o que está disponível:
 
 - https://docs.lvgl.io/latest/en/html/widgets/index.html
 
-# Requisitos
+Além do widget vocês devem informar qual ícones pretendem usar na interface, consultem o site a seguir para ideias:
 
-Os requisitos mínimos estão listados a seguir:
+- https://thenounproject.com/term/open/
 
-!!! info "req. 0 - User"
-    A interface a ser projetada deve ser tal que o usuário consigo operar com apenas uma mão (lembre que é algo para ser usado na bike) e que as informações devem ser exibidas de forma clara, considerando uma leitura e operação em movimento.
+### Exemplo
 
-!!! info "req. 1 - Relógio"
-    Indicação da hora atual, no formato: **HH:MM:SS**. Deve ser atualizado a cada segundo.
+O exemplo a seguir é de uma interface de uma máquina de lavar roupa, vocês devem entregar algo parecido.
 
-!!! info "req. 2 - Velocidade instantânea"
-    Deve ser o componente principal da interface, medido em km/h
+![](exemplo.png)
 
-!!! info "req. 3 - Indicação da aceleração"
-    Deve ser um componente gráfico que indica a aceleração atual da bicicleta (positiva/ negativa ou constante)
+## Rubrica
 
-!!! info "req. 4 - Velocidade média"
-    Indicação em km/h da velocidade média no percurso
+Rubrica referente ao design da interface.
 
-!!! info "req. 5 - Distância do percurso"
-    Indicação em km da distância percorrida no percurso
+!!! warning ""
 
-!!! info "req. 6 - Tempo no percurso"
-    Indicação em **HH:MM** do tempo gasto em um percurso
+    Penalizacão de atraso
 
-!!! info "req. 7 - Botões: Start/ Stop/ Reset"
-    Botões (**touch**) que permitem: Iniciar a contagem de um novo percurso, parar a contagem desse percurso e reiniciar o percurso.
+    | Atraso | Nota máxima |
+    |--------|-------------|
+    | 2 dias | C           |
+    | 4 dias | D           |
+    | 6 dias | I           |
 
-    Quando o sistema estiver no modo **Stop**, o sistema deve exibir a velocidade instantânea, mas não pode atualizar outras informações referentes ao percurso (velocidade média/ distância no percurso/ tempo no percurso).
+#### A
 
-!!! info "req. 8 - Indicador status"
-    A tela deve possuir um indicador se a contagem da parte referente ao percurso está ou não ativada (Start/Stop).
+- Pega feedback com duas pessoas externa e incorpora na interface
+    - Grava em áudio as entrevistas
+- Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
 
-!!! info "req. 9 - Configuracão"
-    Deve possibilitar o usuário configurar o diâmetro da roda.
+#### B
 
-### Extras 
+- Pega feedback com o Luiz do Fablab e incorpora na interface
+- Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
 
-A equipe identificou funcionalidades extras que seriam interessante ao projeto:
+#### C
 
-- Possibilitar criar vários 'Percursos'
-- Exibir inclinação da bike (aclive/plano)
-- Elevação total do percurso 
-- Tema Light/Dark
-- Cadência do pedal
-- Batimento cardíaco/oximetria 
-- Interface com GPS e velocidade.
+- Mockup da interface:
+    - Satisfaz todos os requisitos do projeto
+    - Protótipo da interface satisfaz todos os requisitos
+    - Indica quais são os widgets do LVGL 
+    - Indica quais são as fontes (nome e tamanho)
+
+- Grava um vídeo explicando a interface
+    - **Todos do grupo devem aparecer no vídeo (pode ser em call)**
