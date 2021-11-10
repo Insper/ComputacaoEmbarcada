@@ -41,7 +41,7 @@ O ciclocomputador irá exibir a velocidade instantânea da bicicleta assim como 
     Exibir a velocidade em km/h.
 
 !!! info "req. fun. 3 - Indicação da aceleração"
-    Deve ser um componente gráfico que indica a aceleração atual da bicicleta (positiva/ negativa ou constante).
+    Indicação visual da aceleração da bicicleta (positiva/ negativa ou constante).
 
 O ciclista deve ser capaz de iniciar a contagem de um trajeto, isso irá exibir para o usuário informações referentes a distância, velocidade média e tempo no trajeto. O usuário iniciar um trajeto (informações são atualizadas), parar a contagem do trajeto (não atualiza mais as informações) ou comecar um novo trajeto.
 
