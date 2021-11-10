@@ -4,6 +4,12 @@
 |------------------|-------|
 | Design interface | 13/11 |
 
+!!! info  
+    Criar o repositório pelo classroom:
+
+    https://classroom.github.com/a/eAhMDHPo
+    
+
 A equipe de novos produtos disponibilizou alguns requisitos do protótipo e vocês devem propor uma interface que satisfaca as necessidades do projeto.
 
 ## Requisitos
