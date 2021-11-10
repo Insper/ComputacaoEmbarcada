@@ -81,6 +81,28 @@ O exemplo a seguir é de uma interface de uma máquina de lavar roupa, vocês de
 
 ![](exemplo.png)
 
+### Validando no LCD
+
+Antes de sairmos implementando a interface no LVGL iremos validar a proposta que vocês desenvolveram no LCD. Para isso iremos gerar um PNG da interface do mural e exibir no LCD como uma imagem estática. A ideia aqui é apenas validar o conceito antes de gastarmos tempo programando algo que não ficou bom.
+
+
+Para isso você deve:
+
+1. Gerar uma imagem da interface fazendo screenshot da imagem do mural nas nas dimensões: `240x320`
+1. Seguir o roteiro em `util/LVGL` para exibir a imagem no LCD: https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-lvgl/
+
+!!! info
+    Importante gerar a imagem nas dimensões `240x320`, queremos ocupar o LCD todo com nossa imagem.
+    
+!!! tip
+    Deixei a imagem desenhada no LCD e então vá construindo a interface o LVGL por cima. O LVGL trabalha com camadas e os widgets mais novos são alocados no topo:
+    
+    - https://docs.lvgl.io/master/overview/layer.html
+    
+    > By default, LVGL draws new objects on top of old objects.
+    
+    ![](https://docs.lvgl.io/master/_images/layers.png)
+
 ## Rubrica
 
 Rubrica referente ao design da interface.
@@ -95,12 +117,15 @@ Rubrica referente ao design da interface.
     | 4 dias | D           |
     | 6 dias | I           |
 
+As notas são incrementais. Por exemplo, Para atingir o B deve apresentar todos os itens do C, ou seja, os dois vídeos e as duas imagens! ==No mural vocês também devem manter as diferentes versões.==
+
 #### A
 
 - Especifica e justifica as cores a serem usadas na interface
 - Pega feedback com duas pessoas externa e incorpora na interface
     - Grava em áudio as entrevistas
 - Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
+- Apresentar uma foto da interface sendo executada no LCD (imagem estática)
 
 #### B
 
@@ -108,6 +133,7 @@ Rubrica referente ao design da interface.
 - Pega feedback com o Luiz do Fablab e incorpora na interface
     - Vai estar no atendimento da tarde de sexta feira.
 - Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
+- Apresentar uma foto da interface sendo executada no LCD (imagem estática)
 
 #### C
 
@@ -115,6 +141,6 @@ Rubrica referente ao design da interface.
     - Satisfaz todos os requisitos do projeto
     - Protótipo da interface satisfaz todos os requisitos
     - Indica quais são os widgets do LVGL 
-
+    - Apresentar uma foto da interface sendo executada no LCD (imagem estática)
 - Grava um vídeo explicando a interface
     - **Todos do grupo devem aparecer no vídeo (pode ser em call)**
