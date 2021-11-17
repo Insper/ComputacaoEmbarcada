@@ -9,6 +9,10 @@
 
     https://classroom.github.com/a/eAhMDHPo
     
+    Entregar pelo forms:
+    
+    https://docs.google.com/forms/d/e/1FAIpQLSeMlO3xIevEDdzdS6_KyRG6yRmrSB_BLsTqFooWgBHZPhnt5w/viewform?usp=sf_link
+    
 
 A equipe de novos produtos disponibilizou alguns requisitos do protótipo e vocês devem propor uma interface que satisfaca as necessidades do projeto.
 
