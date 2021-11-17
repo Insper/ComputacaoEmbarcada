@@ -46,15 +46,20 @@ Para alteramos a orientação do LCD de horizontal para vertical será necessár
 !!! tip
     Com isso o LCD passa a ter as dimensões `240x320` e para o LVGL não existe diferença nenhuma.
 
-## Lista de Widgets
+## Mudando a cor do fundo
 
-| Widget               | Example                                 |
-| ------               | -------                                 |
-| Button (`lv_btn`)    | ![](imgs/lvgl/lv_button.png){width=100} |
-| LED (`lv_led`)       | ![](imgs/lvgl/lv_leds.png){width=100}   |
-| Roller (`lv_roller`) | ![](imgs/lvgl/lv_roller.png){width=100} |
-| Bar (`lv_bar`)       | ![](imgs/lvgl/lv_bar.png){width=100}    |
+Para mudarmos a cor do background basta alterarmos a cor do background da tela principal:
 
+```c
+    // configura um fundo vermelho.
+    lv_obj_t * screen = lv_scr_act();
+	lv_obj_set_style_bg_color(screen, lv_palette_main(LV_PALETTE_RED), LV_PART_MAIN );
+```
+
+!!! info "Cores"
+    Para criar ou usar uma cor consulte:
+    
+    https://docs.lvgl.io/master/overview/color.html#palette   
 
 ## Exibindo uma imagem
 
