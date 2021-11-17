@@ -53,13 +53,23 @@ Para mudarmos a cor do background basta alterarmos a cor do background da tela p
 ```c
     // configura um fundo vermelho.
     lv_obj_t * screen = lv_scr_act();
-	lv_obj_set_style_bg_color(screen, lv_palette_main(LV_PALETTE_RED), LV_PART_MAIN );
+    lv_obj_set_style_bg_color(screen, lv_palette_main(LV_PALETTE_RED), LV_PART_MAIN );
 ```
 
 !!! info "Cores"
     Para criar ou usar uma cor consulte:
     
     https://docs.lvgl.io/master/overview/color.html#palette   
+
+## multiplas telas
+
+TODO
+
+```
+    lv_obj_t * scr2  = lv_obj_create(NULL);
+    lv_scr_load(scr2);
+    lv_ex_btn_1();
+```
 
 ## Exibindo uma imagem
 
