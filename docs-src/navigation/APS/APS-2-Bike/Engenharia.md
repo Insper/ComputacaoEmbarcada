@@ -1,6 +1,50 @@
-# Engenharia
+# Entrega 2: Engenharia
 
 Além do design com o usuário, você deve ter os seguintes cuidados com a engenharia do protótipo. 
+
+## Sobre a bicicleta
+
+Iremos validar o projeto em uma bicicleta modelo [Tilt 100](https://www.americanas.com.br/produto/3087029593?epar=bp_pl_00_go_pla_teste_b2wads&opn=YSMESP&WT.srch=1&aid=6185afd7fe31a700171587e7&sid=2314041002202&pid=3087029593&chave=vnzpla_6185afd7fe31a700171587e7_2314041002202_3087029593&gclid=Cj0KCQiAkNiMBhCxARIsAIDDKNVfVowdYU_P6cwRM0FcRJMaNN_S35yhc55RV4zygtigrtenWDL29aMaAlnwEALw_wcB&tamanho=Unico&cor=Vermelha) que compramos para essa finalidade. Na bicicleta nós plugamos uma placa e um LCD, e também colocamos um sensor magnético na roda junto com um imã (para detectar rotacão).
+
+
+| Bike | Diagrama |
+|------|----------|
+|![Placeholder](tilt120.png){width=300 } | ![](diagrama.png){width=300} |
+
+
+!!! info
+    O raio da nossa bicicleta é 20"
+
+
+Você deve assumir as conexões a seguir no seu projeto:
+
+| Item             | Conexão   |
+|------------------|-----------|
+| LCD              | EXT-2     |
+| Sensor magnético | EXT-1 PB3 |
+| LED R            | ?         |
+| LED G            | ?         |
+| LED B            | ?         |
+
+A seguir detalhes sobre cada um dos dispositivos da bicicleta.
+
+### Sensor magnético
+
+O sensor magnético gera um pulso elétrico sempre que a roda fizer uma rotacão completa, você deve tratar esse pulso como um sinal digital, o sensor foi ligado no pino ==PB3 do EXT-1==.
+
+![](sensor.png){width=500}
+
+!!! info
+    Quando for configurar o pino para realizar a leitura do sensor ==DESABILITAR== o PULL_UP
+
+### Fita NEON RGB
+
+!!! warning
+    TODO
+
+## Medicões
+
+A seguir detalhes de como podem ser realizadas a medições necessárias ao projeto:
 
 ### Velocidade instantânea 
 
