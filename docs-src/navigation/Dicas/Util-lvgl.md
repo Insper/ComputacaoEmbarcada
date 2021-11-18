@@ -25,8 +25,8 @@ Para alteramos a orientação do LCD de horizontal para vertical será necessár
     void my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data) {
       ...
       ...
-    -   data->point.y = py;
-    +   data->point.y = 320 - py;
+    -   data->point.y = px;
+    +   data->point.x = 320 - py;
     }
     ```
 === "Driver do LCD"
@@ -61,15 +61,92 @@ Para mudarmos a cor do background basta alterarmos a cor do background da tela p
     
     https://docs.lvgl.io/master/overview/color.html#palette   
 
-## multiplas telas
+## Multiplas telas
 
-TODO
+No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas podem ser exibidas conforme necessário. Os widgets são associados a uma tela, então quando a tela em questão for exibida apenas os widgets associados a ela serão ativados. 
 
+Criando as telas:
+
+```c
+// declarar a telacomo global e estática
+static lv_obj_t * scr1;  // screen 1
+static lv_obj_t * scr2;  // screen 2
+
+static void task_lcd(void *pvParameters) {
+    // Criando duas telas
+    scr1  = lv_obj_create(NULL);
+ 	scr2  = lv_obj_create(NULL);
+
+    // ....
+}
 ```
-    lv_obj_t * scr2  = lv_obj_create(NULL);
-    lv_scr_load(scr2);
-    lv_ex_btn_1();
+
+Para dizer em qual tela os widgets serão associados, basta substituir o `lv_scr_act()` usado na criação dos widgets pela tela em questão:
+
+```diff
+- lv_obj_t * btn1 = lv_btn_create(lv_scr_act());
++ lv_obj_t * btn1 = lv_btn_create(scr1);          // botao criado na primeira tela
 ```
+
+Para exibir uma das telas use a função `lv_scr_load(lv_obj_t * scr)` como demonstrado a seguir:
+
+```c
+static void task_update(void *pvParameters) {
+	for (;;)  {
+		lv_scr_load(scr1); // exibe tela 1
+		vTaskDelay(500);
+		lv_scr_load(scr2); // exibe tela 2
+		vTaskDelay(500);
+	}
+}
+```
+
+!!! tip
+    Você pode modificar as funções que criam os widgets na tela para receber como parametro o screen associado a eles:
+
+    ```diff
+    - void create_scr_1(void) {
+    + void create_scr_1(lv_obj_t * screen) {
+    -   lv_obj_t * btn1 = lv_btn_create(lv_scr_act());
+    +   lv_obj_t * btn1 = lv_btn_create(screen);
+        lv_obj_add_event_cb(btn1, event_handler, LV_EVENT_ALL, NULL);
+        lv_obj_align(btn1, LV_ALIGN_CENTER, 0, -40);
+
+        label = lv_label_create(btn1);
+        lv_label_set_text(label, "Corsi");
+        lv_obj_center(label);
+
+    -   lv_obj_t * btn2 = lv_btn_create(lv_scr_act());
+    +   lv_obj_t * btn2 = lv_btn_create(screen);
+        lv_obj_add_event_cb(btn2, event_handler, LV_EVENT_ALL, NULL);
+        lv_obj_align(btn2, LV_ALIGN_CENTER, 0, 40);
+        lv_obj_add_flag(btn2, LV_OBJ_FLAG_CHECKABLE);
+        lv_obj_set_height(btn2, LV_SIZE_CONTENT);
+
+        label = lv_label_create(btn2);
+        lv_label_set_text(label, "Toggle");
+        lv_obj_center(label);
+    }
+
+    tatic void task_lcd(void *pvParameters) {
+        scr1  = lv_obj_create(NULL);
+    +   lv_ex_btn_1(scr1);
+        lv_scr_load(scr1);
+        
+        ...
+    }
+    ```
+
+!!! tip
+    Você pode fazer a transição entre telas dado um evento de um botão!
+
+
+!!! tip
+    Se quiser usar scrol para mudar de tela tente o widget tile view, eu testei o exemplo do site aqui e funciona bem:
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/aSL4HxRbGjk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    https://docs.lvgl.io/master/widgets/extra/tileview.html#tileview-with-content
 
 ## Exibindo uma imagem
 
