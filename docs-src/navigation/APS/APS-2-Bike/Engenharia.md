@@ -31,7 +31,7 @@ A seguir detalhes sobre cada um dos dispositivos da bicicleta.
 ### Sensor magnético
 
 O sensor magnético gera um pulso elétrico sempre que a roda fizer uma rotacão completa, você deve tratar esse pulso como um sinal digital, o sensor foi ligado no pino ==PB3 do EXT-1==.
-
+![](onlysignal.png)
 ![](sensor.png){width=500}
 
 !!! info
