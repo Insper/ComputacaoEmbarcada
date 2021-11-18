@@ -151,6 +151,9 @@ No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas pode
 
 ## Exibindo uma imagem
 
+!!! warning
+    Esse procedimento não funciona com imagens no formato PNG **sem fundo**, a imagem precisa ter fundo, mesmo que branco.
+    
 Exibindo uma imagem estática no LCD, sem interação.
 
 !!! tip
