@@ -65,41 +65,42 @@ Para mudarmos a cor do background basta alterarmos a cor do background da tela p
 
 No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas podem ser exibidas conforme necessário. Os widgets são associados a uma tela, então quando a tela em questão for exibida apenas os widgets associados a ela serão ativados. 
 
-Criando as telas:
+== "Criando as telas:"
+    ```c
+    // declarar a telacomo global e estática
+    static lv_obj_t * scr1;  // screen 1
+    static lv_obj_t * scr2;  // screen 2
 
-```c
-// declarar a telacomo global e estática
-static lv_obj_t * scr1;  // screen 1
-static lv_obj_t * scr2;  // screen 2
+    static void task_lcd(void *pvParameters) {
+        // Criando duas telas
+        scr1  = lv_obj_create(NULL);
+        scr2  = lv_obj_create(NULL);
 
-static void task_lcd(void *pvParameters) {
-    // Criando duas telas
-    scr1  = lv_obj_create(NULL);
- 	scr2  = lv_obj_create(NULL);
+        // ....
+    }
+    ```
 
-    // ....
-}
-```
+== "Associando widgets"
+    Para dizer em qual tela os widgets serão associados, basta substituir o `lv_scr_act()` usado na criação dos widgets pela tela em questão:
 
-Para dizer em qual tela os widgets serão associados, basta substituir o `lv_scr_act()` usado na criação dos widgets pela tela em questão:
+    ```diff
+    - lv_obj_t * btn1 = lv_btn_create(lv_scr_act());
+    + lv_obj_t * btn1 = lv_btn_create(scr1);          // botao criado na primeira tela
+    ```
+    
+=== "Exibindo"
+    Para exibir uma das telas use a função `lv_scr_load(lv_obj_t * scr)` como demonstrado a seguir:
 
-```diff
-- lv_obj_t * btn1 = lv_btn_create(lv_scr_act());
-+ lv_obj_t * btn1 = lv_btn_create(scr1);          // botao criado na primeira tela
-```
-
-Para exibir uma das telas use a função `lv_scr_load(lv_obj_t * scr)` como demonstrado a seguir:
-
-```c
-static void task_update(void *pvParameters) {
-	for (;;)  {
-		lv_scr_load(scr1); // exibe tela 1
-		vTaskDelay(500);
-		lv_scr_load(scr2); // exibe tela 2
-		vTaskDelay(500);
-	}
-}
-```
+    ```c
+    static void task_update(void *pvParameters) {
+        for (;;)  {
+            lv_scr_load(scr1); // exibe tela 1
+            vTaskDelay(500);
+            lv_scr_load(scr2); // exibe tela 2
+            vTaskDelay(500);
+        }
+    }
+    ```
 
 !!! tip
     Você pode modificar as funções que criam os widgets na tela para receber como parametro o screen associado a eles:
