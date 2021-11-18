@@ -65,7 +65,7 @@ Para mudarmos a cor do background basta alterarmos a cor do background da tela p
 
 No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas podem ser exibidas conforme necessário. Os widgets são associados a uma tela, então quando a tela em questão for exibida apenas os widgets associados a ela serão ativados. 
 
-== "Criando as telas:"
+=== "Criando as telas:"
     ```c
     // declarar a telacomo global e estática
     static lv_obj_t * scr1;  // screen 1
@@ -80,7 +80,7 @@ No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas pode
     }
     ```
 
-== "Associando widgets"
+=== "Associando widgets"
     Para dizer em qual tela os widgets serão associados, basta substituir o `lv_scr_act()` usado na criação dos widgets pela tela em questão:
 
     ```diff
