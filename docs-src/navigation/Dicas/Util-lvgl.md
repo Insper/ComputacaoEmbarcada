@@ -106,7 +106,7 @@ No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas pode
     Você pode modificar as funções que criam os widgets na tela para receber como parametro o screen associado a eles:
 
     ```diff
-    - lv_ex_btn_1(void) {
+    - void lv_ex_btn_1(void) {
     + void create_scr(lv_obj_t * screen) {
         lv_obj_t * label;
         
