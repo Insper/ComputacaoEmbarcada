@@ -108,6 +108,8 @@ No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas pode
     ```diff
     - lv_ex_btn_1(void) {
     + void create_scr(lv_obj_t * screen) {
+        lv_obj_t * label;
+        
     -   lv_obj_t * btn1 = lv_btn_create(lv_scr_act());
     +   lv_obj_t * btn1 = lv_btn_create(screen);
         lv_obj_add_event_cb(btn1, event_handler, LV_EVENT_ALL, NULL);
