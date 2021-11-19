@@ -148,7 +148,7 @@ No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas pode
 
 
 !!! tip
-    Se quiser usar scroll para mudar de tela tente o widget tile view, eu testei o exemplo do site aqui e funciona bem:
+    Uma alternativa para mudar de tela utilizando efeito de scroll tente usar o widget [Tile view](https://docs.lvgl.io/master/widgets/extra/tileview.html), eu testei o exemplo do site aqui e funciona bem:
 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/aSL4HxRbGjk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
