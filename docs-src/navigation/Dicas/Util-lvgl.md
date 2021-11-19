@@ -131,7 +131,7 @@ No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas pode
         lv_obj_center(label);
     }
 
-    tatic void task_lcd(void *pvParameters) {
+    static void task_lcd(void *pvParameters) {
         int px, py;
         
     +    scr1  = lv_obj_create(NULL);
