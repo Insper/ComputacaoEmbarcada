@@ -67,7 +67,7 @@ No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas pode
 
 === "Criando as telas:"
     ```c
-    // declarar a telacomo global e estática
+    // declarar a tela como global e estática
     static lv_obj_t * scr1;  // screen 1
     static lv_obj_t * scr2;  // screen 2
 
@@ -106,8 +106,8 @@ No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas pode
     Você pode modificar as funções que criam os widgets na tela para receber como parametro o screen associado a eles:
 
     ```diff
-    - void create_scr_1(void) {
-    + void create_scr_1(lv_obj_t * screen) {
+    - lv_ex_btn_1(void) {
+    + void create_scr(lv_obj_t * screen) {
     -   lv_obj_t * btn1 = lv_btn_create(lv_scr_act());
     +   lv_obj_t * btn1 = lv_btn_create(screen);
         lv_obj_add_event_cb(btn1, event_handler, LV_EVENT_ALL, NULL);
@@ -131,7 +131,8 @@ No LVGL podemos criar multiplas telas e associar ao mesmo display, as telas pode
 
     tatic void task_lcd(void *pvParameters) {
         scr1  = lv_obj_create(NULL);
-    +   lv_ex_btn_1(scr1);
+    -   lv_ex_btn_1();
+    +   create_scr(scr1);
         lv_scr_load(scr1);
         
         ...
