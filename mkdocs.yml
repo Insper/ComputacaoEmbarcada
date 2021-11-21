@@ -82,7 +82,7 @@ nav:
         - 'navigation/APS/APS-2-Bike/Descricao.md'
         - 'navigation/APS/APS-2-Bike/Design.md'
         - 'navigation/APS/APS-2-Bike/Engenharia.md'
-        - 'navigation/APS/APS-2-Bike/Rubrica.md'
+#        - 'navigation/APS/APS-2-Bike/Rubrica.md'
 
 #    - 'navigation/APS/APS-2-Oximetro.md'
 #    - 'navigation/APS/APS-3-IoT.md'

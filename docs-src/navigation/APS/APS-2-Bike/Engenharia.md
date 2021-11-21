@@ -51,7 +51,7 @@ Diagrama da montagem:
 !!! warning
     TODO
 
-## Medicões
+## Medições
 
 A seguir detalhes de como podem ser realizadas a medições necessárias ao projeto:
 
@@ -100,3 +100,28 @@ Pode ser calculada por quantas revoluções a roda deu em um determinado delta d
 ### Distância
 
 A distância (`d`) percorrida pela bicicleta é: `d = 2*pi*r*N [m]`.
+
+## Rubrica
+
+A seguir um resumo dos requisitos e da rubrica da entrega associada a eles. Lembrem que vocês devem utilizar os recursos do freeRTOS sempre que possível.
+
+!!! info
+   - A interface desenvolvida deve ser similar a interface prototipada, mesmo se você não for implementar alguns dos requisitos (pode apenas omitir eles da interface).
+   - Qualidade de software? Consulte a página com regras de firmware: https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-o-que-nao-pode/
+
+
+| | | Rubrica |
+| --- | --- | --- |
+| req. ux. 0 - Operacão | A interface a ser projetada deve ser tal que o usuário consigo operar com apenas uma mão (lembre que é algo para ser usado na bike) e que as informações devem ser exibidas de forma clara, considerando uma leitura e operação em movimento. | ==C== |
+| req. ux. 1 - Hardware | O hardware a ser utilizado será o LCD de 240x320px touch colorido. | ==C== |
+| req. ux. 2 - Branding | A interface deve ser alinhada com o logo e nome da empresa que você escolheu (blanding) | ==B== |
+| req. ux. 3 - Exibir o logo | O logotipo da empresa deve estar presente na interface. | ==C== |
+| req. fun. 1 - Relógio | Indicação da hora atual, no formato: HH:MM:SS atualizada a cada segundo. | ==C== |
+| req. fun. 2 - Velocidade instantânea | Exibir a velocidade em km/h. | ==C== |
+| req. fun. 3 - Indicação da aceleração | Indicação visual da aceleração da bicicleta (positiva/ negativa ou constante). | ==C== |
+| req. fun. 4 - Trajeto: Distância | Indicação em km da distância percorrida no trajeto. | ==B== |
+| req. fun. 5 - Trajeto: Velocidade média | Indicação em km/h da velocidade média no trajeto. | ==B== |
+| req. fun. 6 - Trajeto: Cronometro | Indicação em HH:MM do tempo gasto em um trajeto. | ==B== |
+| req. fun. 7 - Trajeto: Controle | Deve possibilitar o usuário iniciar, parar ou reiniciar a contagem de um trajeto. | ==B== |
+| req. fun. 8 - Trajeto: Indicador status | A tela deve possuir um indicador se a contagem da parte referente ao percurso está ou não ativada. | ==B== |
+| req. fun. 9 - Configuracão | Deve possibilitar o usuário configurar o diâmetro da roda. | ==A== |
