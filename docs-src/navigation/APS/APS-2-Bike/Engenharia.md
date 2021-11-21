@@ -4,7 +4,7 @@ Além do design com o usuário, você deve ter os seguintes cuidados com a engen
 
 ## Sobre a bicicleta
 
-Iremos validar o projeto em uma bicicleta modelo [Tilt 100](https://www.americanas.com.br/produto/3087029593?epar=bp_pl_00_go_pla_teste_b2wads&opn=YSMESP&WT.srch=1&aid=6185afd7fe31a700171587e7&sid=2314041002202&pid=3087029593&chave=vnzpla_6185afd7fe31a700171587e7_2314041002202_3087029593&gclid=Cj0KCQiAkNiMBhCxARIsAIDDKNVfVowdYU_P6cwRM0FcRJMaNN_S35yhc55RV4zygtigrtenWDL29aMaAlnwEALw_wcB&tamanho=Unico&cor=Vermelha) que compramos para essa finalidade. Na bicicleta nós plugamos uma placa e um LCD, e também colocamos um sensor magnético na roda junto com um imã (para detectar rotacão).
+Iremos validar o projeto em uma bicicleta modelo [Tilt 100](https://www.americanas.com.br/produto/3087029593?epar=bp_pl_00_go_pla_teste_b2wads&opn=YSMESP&WT.srch=1&aid=6185afd7fe31a700171587e7&sid=2314041002202&pid=3087029593&chave=vnzpla_6185afd7fe31a700171587e7_2314041002202_3087029593&gclid=Cj0KCQiAkNiMBhCxARIsAIDDKNVfVowdYU_P6cwRM0FcRJMaNN_S35yhc55RV4zygtigrtenWDL29aMaAlnwEALw_wcB&tamanho=Unico&cor=Vermelha) que compramos para essa finalidade. Na bicicleta nós plugamos uma placa e um LCD, e também colocamos um sensor magnético na roda junto com um Imã (para detectar rotacão).
 
 
 | Bike | Diagrama |
@@ -14,7 +14,6 @@ Iremos validar o projeto em uma bicicleta modelo [Tilt 100](https://www.american
 
 !!! info
     O raio da nossa bicicleta é 20"
-
 
 Você deve assumir as conexões a seguir no seu projeto:
 
@@ -28,14 +27,24 @@ Você deve assumir as conexões a seguir no seu projeto:
 
 A seguir detalhes sobre cada um dos dispositivos da bicicleta.
 
+<!-- 
+Diagramas
+https://excalidraw.com/#room=56e123c94e7a3b16142b,cIncslpx8LYY_6RmiTx-8A
+-->
+
 ### Sensor magnético
 
-O sensor magnético gera um pulso elétrico sempre que a roda fizer uma rotacão completa, você deve tratar esse pulso como um sinal digital, o sensor foi ligado no pino ==PB3 do EXT-1==.
+O sensor magnético gera um pulso elétrico (em LOW) sempre que a roda fizer uma rotacão completa, você deve tratar esse pulso como um sinal digital. Considere que o sensor foi ligado no pino ==PB3 do EXT-1==.
+
 ![](onlysignal.png)
+
+Diagrama da montagem:
+
 ![](sensor.png){width=500}
 
 !!! info
-    Quando for configurar o pino para realizar a leitura do sensor ==DESABILITAR== o PULL_UP
+    1. Quando for configurar o pino para realizar a leitura do sensor ==DESABILITAR== o PULL_UP.
+    1. Configurar IRQ em borda de descida.
 
 ### Fita NEON RGB
 
