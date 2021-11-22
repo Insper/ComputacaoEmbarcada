@@ -112,6 +112,8 @@ um pouco de variação na leitura da velocidade.
 
 ??? note "Código"
     ```c
+    #include "arm_math.h"
+    
     #define RAIO 0.58/2
     #define VEL_MAX_KMH  5.0f
     #define VEL_MIN_KMH  1.0f
@@ -145,10 +147,10 @@ um pouco de variação na leitura da velocidade.
             pio_set(PIOC, PIO_PC31);
     #ifdef RAMP
             if (ramp_up) {
-                printf("[SIMU] ACELERANDO %d \n", (int) 10*vel);
+                printf("[SIMU] ACELERANDO %d \n", (int) (10*vel));
                 vel += 0.3;
             } else {
-                printf("[SIMU] DESACELERANDO %d \n",  (int) 10*vel);
+                printf("[SIMU] DESACELERANDO %d \n",  (int) (10*vel));
                 vel -= 0.3;
             }
 
