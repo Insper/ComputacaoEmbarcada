@@ -101,6 +101,75 @@ Pode ser calculada por quantas revoluções a roda deu em um determinado delta d
 
 A distância (`d`) percorrida pela bicicleta é: `d = 2*pi*r*N [m]`.
 
+### Testando
+
+Para facilitar o teste da leitura do pulso eu escrevi um código que gera um pulso no pino PC31 (EXT1) e que 
+simula os pulsos para uma velocidade fixa de 5km/h. O código também é capaz de ficar variando a velocidade
+em uma rampa, para isso basta descomentar a linha que possui o `#define RAMP`.
+
+Notem que estou gerando os pulsos com uma task do rtos, isso não garante uma boa precisão e pode gerar
+um pouco de variação na leitura da velocidade.
+
+??? note "Código"
+    ```c
+    #define RAIO 0.58/2
+    #define VEL_MAX_KMH  5.0f
+    #define VEL_MIN_KMH  1.0f
+    //#define RAMP 
+    
+    /**
+    * raio 20" = 50.8 cm (diametro) = 0.58m
+    * w = 2 pi f
+    * v [km/h] = w*r = 2 pi f r
+    * f = v / (2 pi r 3.8)
+    * Exemplo : 5 km / h = 1.4 m/s
+    *           f = 0.76 Hz
+    *           t = 1.3s
+    */
+    float kmh_to_hz(float vel, float raio) {
+        float f = vel / (2*PI*raio*3.8);
+        return(f);
+    }
+
+    static void task_simulador(void *pvParameters) {
+
+        pio_set_output(PIOC, PIO_PC31, 1, 0, 0);
+
+        float vel = VEL_MAX_KMH;
+        float f;
+        int ramp_up = 1;
+
+        while(1){
+            pio_clear(PIOC, PIO_PC31);
+            delay_ms(5);
+            pio_set(PIOC, PIO_PC31);
+    #ifdef RAMP
+            if (ramp_up) {
+                printf("[SIMU] ACELERANDO %d \n", (int) 10*vel);
+                vel += 0.3;
+            } else {
+                printf("[SIMU] DESACELERANDO %d \n",  (int) 10*vel);
+                vel -= 0.3;
+            }
+
+            if (vel > VEL_MAX_KMH)
+                ramp_up = 0;
+            else if (vel < VEL_MIN_KMH)
+                ramp_up = 1;
+    #endif
+            f = kmh_to_hz(vel, RAIO);
+            int t = 1000*(1.0/f);
+            delay_ms(t);
+        }
+    }
+
+    int main(void) {
+        // ...
+        // ....
+        if (xTaskCreate(task_simulador, "LCD", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
+            printf("Failed to create lcd task\r\n");
+        }
+    ```
 ## Rubrica
 
 A seguir um resumo dos requisitos e da rubrica da entrega associada a eles. Lembrem que vocês devem utilizar os recursos do freeRTOS sempre que possível.
