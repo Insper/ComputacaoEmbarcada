@@ -206,6 +206,34 @@ lv_obj_align(img, LV_ALIGN_CENTER, 0, 0);
     - No exemplo o nome da imagem utilizada no site foi `img1`
     - Alinhamos a imagem no centro da tela
 
+## Imagem .
+
+Se quiser usar um botão como imagem você pode usar o exemplo a seguir:
+
+```c
+void lv_img_button(void) {
+    LV_IMG_DECLARE(imgBtnHome);
+
+    static lv_style_t style_def;
+
+	lv_style_init(&style_def); /*Darken the button when pressed and make it wider*/
+	static lv_style_t style_pr;
+	lv_style_init(&style_pr);
+	lv_style_set_img_recolor_opa(&style_pr, LV_OPA_30);
+	lv_style_set_img_recolor(&style_pr, lv_color_black());
+	
+	lv_obj_t * btnPausePlay = lv_imgbtn_create(lv_scr_act());
+	lv_imgbtn_set_src(btnPausePlay, LV_IMGBTN_STATE_RELEASED, NULL, NULL, &imgBtnHome);
+	lv_obj_add_style(btnPausePlay, &style_def, 0);
+	lv_obj_add_style(btnPausePlay, &style_pr, LV_STATE_PRESSED);
+	lv_obj_align(btnPausePlay, LV_ALIGN_CENTER, 0, 0);	
+}
+```
+
+O `imgBtnHome` eu gerei a partir da imagem a seguir:
+
+![](imgs/lvgl/img_home.png)
+
 <!--
 ## Modificações no tema de um widget específico
 
