@@ -1,6 +1,6 @@
 # LAB - RTOS - WIFI
 
-![RTOS-WIFI](imgs/RTOS-WIFI.png)
+![RTOS-WIFI](imgs/RTOS-WIFI.png){width=200}
 
 Neste laboratório iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET em um webserver (Flask) rodando em seu computador, onde o mesmo após receber essa requisição retorna um dado `JSON`. 
 
@@ -8,11 +8,11 @@ Neste laboratório iremos modificar o exemplo RTOS-WIFI, que realiza uma requisi
 
 | Exemplo base                              | LAB                   |
 |-------------------------------------------|-----------------------|
-| `SAME70-examples/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1` :arrow_right: | `Lab9-RTOS-WIFI` |
+| `SAME70-examples/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1` :arrow_right: | `Lab10-RTOS-WIFI` |
 
 !!! warning "Código exemplo"
     - ==Atualizar o repositório do SAME70-Examples==
-    - Vamos modificar o código exemplo `Comunicacao/RTOS-WIFI-WINC1500-get-RTOS-EXT1`, faça uma cópia do seu lab para a nova pasta no seu repositório `Lab9-RTOS-WIFI`
+    - Vamos modificar o código exemplo `Comunicacao/RTOS-WIFI-WINC1500-get-RTOS-EXT1`, faça uma cópia do seu lab para a nova pasta no seu repositório `Lab10-RTOS-WIFI`
 
 ### IoT	
 
@@ -40,13 +40,13 @@ Nesse laboratório iremos explorar um pouco a comunicação WIFI em sistemas emb
 
 ### WINC1500
 
-Existem inúmeros módulos WIFI para serem utilizados em sistemas embarcados, existe até microcontroladores que possuem toda a parte WIFI integrada no chip (exemplo: [STM32](https://www.st.com/en/microcontrollers-microprocessors/stm32-wireless-mcus.html)), nesses casos não é necessário conectar um módulo externo, tudo está integrado no chip (tirando a antena)!
+Existem inúmeros módulos WIFI para serem utilizados em sistemas embarcados, você pode comprar microcontroladores que possuem toda a parte WIFI integrada no chip (exemplo: [STM32](https://www.st.com/en/microcontrollers-microprocessors/stm32-wireless-mcus.html)), nesses casos não é necessário conectar um módulo externo, tudo está integrado no chip (tirando a antena)!
 
 O módulo que iremos utilizar é desenvolvido pela Microchip e chama [Winc1500](http://ww1.microchip.com/downloads/en/DeviceDoc/70005266B.pdf)
 
 <div style="text-align: center;" class="no-print"><embed src="http://ww1.microchip.com/downloads/en/DeviceDoc/70005266B.pdf" width="650" height="500"></div>
 
-Esse módulo possui comunicação SPI (similar a UART, porém desenvolvida para comunicação entre chips), para nosso uC enviar/ receber um dado wifi, temos que nos comunicar com esse módulo. Essa parte está feita nos exemplos fornecidos, e é chamada de comunicação M2M: [Machine-to-Machine](https://en.wikipedia.org/wiki/Machine_to_machine).
+Esse módulo possui comunicação SPI (similar a UART, porém desenvolvida para comunicação entre chips) que será usada como interface de controle do uC para enviar/ receber um dado wifi, temos que nos comunicar com esse módulo. Essa parte está feita nos exemplos fornecidos, e é chamada de comunicação M2M: [Machine-to-Machine](https://en.wikipedia.org/wiki/Machine_to_machine).
 
 ## Exemplo 
 
