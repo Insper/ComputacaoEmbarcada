@@ -5,6 +5,19 @@ Dicas sobre o LVGL.
 !!! tip ""
     - https://docs.lvgl.io/latest/en/html/widgets/index.html
 
+## Dicas gerais
+
+Dicas gerais sobre o lvgl.
+
+### float
+
+Para poder usar o e exibir strings com `float` (exemplo: `lv_label_set_text_fmt(dial, "%f", freq);`) você precisa editar o arquivo de configuração `lv_conf.h` do lvgl:
+
+```diff
+-#  define LV_SPRINTF_USE_FLOAT 0
++#  define LV_SPRINTF_USE_FLOAT 1
+```
+
 ## Orientação do LCD (landscape/ portrait)
 
 Para alteramos a orientação do LCD de horizontal para vertical será necessário fazermos as seguintes mudanças no código do `main.c`:
@@ -206,7 +219,7 @@ lv_obj_align(img, LV_ALIGN_CENTER, 0, 0);
     - No exemplo o nome da imagem utilizada no site foi `img1`
     - Alinhamos a imagem no centro da tela
 
-## Imagem .
+## Imagem 
 
 Se quiser usar um botão como imagem você pode usar o exemplo a seguir:
 
@@ -263,3 +276,4 @@ v_obj_set_style_local_bg_opa(label1, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_OPA_
 
  `lv_obj_set_style_local_text_color(label1, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_YELLOW);`
  -->
+
