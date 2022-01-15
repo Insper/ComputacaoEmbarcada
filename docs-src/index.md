@@ -6,16 +6,15 @@
 - **Local:** Laboratórios de Arquitetura de Computadores e Laboratório de Informática
 - **Equipe:**
     - **Prof. Rafael Corsi**: **rafael.corsi@insper.edu.br**
-    - Prof. Aux. Flávio Batista: **flaviojbb@insper.edu.br**
     - Técnico Marco Mello: **marcoASMA@insper.edu.br**
+    - Prof. Aux. Arnaldo Jr (Tiozão)
 - **Já passou por aqui:**
-    - Prof. Aux. Eduardo Marossi
+    - (2021-2021) Prof. Aux. Flávio Batista: **flaviojbb@insper.edu.br**
+    - (2016-2020) Prof. Aux. Eduardo Marossi
 - **© Todos os direitos reservados**
 
 ![](imgs/lab.jpeg){width=300}
 
-
-teste
 ------------------
 
 ## Objetivos
