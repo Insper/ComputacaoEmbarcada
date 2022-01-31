@@ -43,7 +43,7 @@ Parte 2:
 
 Copie a pasta `SAEM70-Clear` do repositório de exemplos para dentro do repositório criado pelo classroom, renomear a pasta para `PIO-IO`. ==Vamos trabalhar nesta pasta!==
 
-!!! example "Tarefa: començando"
+!!! exercise self "Task: Començando"
     1. Clone o repositório [`SAME70-examples`](https://github.com/Insper/SAME70-examples/) para a sua máquina.
     1. Copie a pasta `SAME70-Clear` para o seu repositório.
     1. Renomei a pasta para `PIO-IO`
@@ -126,28 +126,28 @@ As seguintes bibliotecas já estão selecionadas e incluídas no projeto:
 
 Será necessário adicionar as seguintes bibliotecas (APIs/ drivers) a esse projeto:
 
-!!! example "Tarefa"
+!!! exercise sefl "Task: Incluir bibliotecas no projeto"
     Você deve inserir as bibliotecas a seguir no projeto!
 
-- **GPIO - General purpose Input/OutPut (service)**
-    - funções para configuração do PIO
-- **IOPORT - General purpose I/O service (service)**
-    - funções para controle dos pinos
-- **MPU - Memory Protect Unit (driver)**
-    - funções para gerenciamento de memória
-- **PMC - Power Management Controller (driver)**
-    - funções para configuração do periférico PMC e controle de clock dos periféricos
-- **PIO - Parallel Input/Output Controller (driver)**
-    - funções para controle do periférico PIO e controle dos pinos
-- **Delay routines**
-    - funções de delay (por software)
+    - **GPIO - General purpose Input/OutPut (service)**
+        - funções para configuração do PIO
+    - **IOPORT - General purpose I/O service (service)**
+        - funções para controle dos pinos
+    - **MPU - Memory Protect Unit (driver)**
+        - funções para gerenciamento de memória
+    - **PMC - Power Management Controller (driver)**
+        - funções para configuração do periférico PMC e controle de clock dos periféricos
+    - **PIO - Parallel Input/Output Controller (driver)**
+        - funções para controle do periférico PIO e controle dos pinos
+    - **Delay routines**
+        - funções de delay (por software)
 
-!!! info 
-    Para adicionar ou remover bibliotecas da solução utilize a barra inferior:
-    
-    ![](imgs/asf-result.png){width=500}
-    
-    ==Ao final clique em APPLY para salvar as alterações.==
+    ??? info "Dica extra"
+        Para adicionar ou remover bibliotecas da solução utilize a barra inferior:
+
+        ![](imgs/asf-result.png){width=500}
+
+        ==Ao final clique em APPLY para salvar as alterações.==
 
 !!! progress
     Click para continuar....
@@ -163,7 +163,7 @@ Antes da execução do nosso código é necessário realizarmos configurações 
 
 No nosso caso iremos começar configurando o clock do uC e desativando o `WatchDog Timer`.
 
-!!! example "Tarefa: função `init()`"
+!!! exercise self "Task: Função `init()`"
 
     Modifique a função `init()` para ficar como a seguir:
     
@@ -180,7 +180,7 @@ No nosso caso iremos começar configurando o clock do uC e desativando o `WatchD
 
 !!! progress
     Click para continuar....
-    
+   
 
 A função `sysclk_init()` é responsável por aplicar as configurações do arquivo [`config/conf_clock.h`](https://github.com/Insper/SAME70-examples/blob/master/SAME70-Clear/src/config/conf_clock.h) no gerenciador de clock do microcontrolador, que está configurado para operar em`300 MHz`.
 
@@ -224,25 +224,25 @@ Cada PIO possui um nome referenciado por uma letra: PIO **A** ; PIO **B**; PIO *
     
     ![](imgs/SAME70-LED.png)
 
-!!! question choice
+!!! exercise choice
     Qual pino e qual PIO é responsável por controlar o LED?
     
     - [ ] PIO D pino 0
     - [x] PIO C pino 8
     - [ ] PIO VCC pino 3v3
     
-    !!! details ""
+    !!! answer 
         A tabela [Table 4-16 LED Connection](https://pt.scribd.com/document/398492442/SAME70-XPLD#page=32) descreve qual o pino e qual PIO o LED do kit foi conectado, podemos a partir dos dados do manual extrair que o LED foi conectado ao pino ==PC8== do microcontrolador;
 
         "O periférico PIO C, 'bit' 8 é responsável por controlar o Liga/Desliga do LED verde da placa."
 
-!!! question choice
+!!! exercise choice
     Se colocarmos 1 (vcc/ ligado) no pino conectado ao LED, ele irá acender ou apagar
     
     - [x] Apagar
     - [ ] Acender
     
-    !!! details ""
+    !!! answer 
         O LED apaga quando o pino é acionado (pino ligado/ um no pino/ high) e acende quando aterrado (pino desligado/ zero no pino/ low)
 
 Podemos sintetizar as informações do PIO que controla o pino na tabela a seguir:
@@ -253,7 +253,7 @@ Podemos sintetizar as informações do PIO que controla o pino na tabela a segui
 
 Agora será necessário transcrever essas informações para o nosso código em C, para isso iremos usar um recurso de C chamado [`define`](https://www.pucsp.br/~so-comp/cursoc/aulas/c830.html)
 
-!!! example "Tarefa: Modifique `main.c`"
+!!! exercise self "Task: Modifique `main.c`"
     Iremos incorporar essa informação no nosso código via os `#defines` no começo do `main.c`:
 
     ```c
@@ -298,20 +298,20 @@ Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datashee
 
 ![](imgs/ID.png)
 
-!!! question choice
+!!! exercise choice
     Qual o ID que representa o PIOC?
     
     - [ ] 10
     - [ ] 11
     - [x] 12
 
-    !!! details ""
+    !!! answer 
         Pela tabela verificamos que o **PIOC** (aquele que irá controlar o LED) possui ID 12, agora precisamos transpor isso para o nosso código! Vamos editar a linha do nosso `main.c` que possuia o **???**:
 
 !!! progress
     Click para continuar....
 
-!!! example "Tarefa: Modifique `main.c`"
+!!! exercise self "Task: Modifique `main.c`"
     Insira o valor `12` no lugar do **???** no define `LED_PIO_ID`
     
     ```c
@@ -328,7 +328,7 @@ Cada periférico do uC possui um ID de identificação ([sec 13 `SAME70 Datashee
     o ASF possui esses defines que facilitam muito o desenvolvimento e
     minimizam erros.
 
-!!! example "Tarefa: Modifique `main.c`"
+!!! exercise self "Tarefa: Modifique `main.c`"
     Troque o número ==12== do define por `ID_PIOC`
 
 !!! progress
@@ -356,7 +356,7 @@ O PMC possui diversas funções, estamos agora interessado naquela que ativa um 
 
 Todo pino no PIO é inicializado em modo entrada, para usarmos como saída será necessário indicarmos ao PIO. Para isso, usaremos a seguinte função [`pio_set_output(...)`](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#gaf3727cdc71e8b6c88a4069a90b72a78d), definida no [`ASF do SAME70`]( https://asf.microchip.com/docs/latest/search.html?device=same70).
 
-!!! example "Tarefa: Modifique `init()`"
+!!! exercise self "Task: Modifique `init()`"
     Inseria a seguinte chamada de função na inicialização. Isso configura o PIOC para tratar o bit 8 (index 8) como saída.
 
     ```c
@@ -432,7 +432,7 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
     - [pio_set](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#gaff11c04817b1f7279971d1bada01184a)
     - [pio_clear](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#ga4857b3d94c0517d54eeff7da85af2518)
 
-!!! example "Tarefa: Modifique `main()`"
+!!! exercise self "Task: Modifique `main()`"
     Modifique a função `main` para fazermos o LED piscar interruptamente (1 -> delay 200 ms -> 0 -> delay 200 ms -> ....):
 
     ```c
@@ -455,12 +455,12 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
     }
     ```
 
-!!! example "Tarefa: Programe e teste"
+!!! exercise self "Task: Programe e teste"
      1. Programe o uC
      1. Verifique o resultado esperado
      1. Brinque com os valores da função `delay_ms` 
 
-!!! example "Tarefa: Modificando"
+!!! exercise self "Task: Modificando"
      Agora faça o LED ficar aceso por 3 segundos e apagado por 1 segundo.
 
      1. Programe o uC
@@ -522,7 +522,7 @@ Para configurarmos um pino como entrada será necessário:
 
 O kit de desenvolvimento SAME7-XPLD possui dois botões, um deles reservado para o reset do microcontrolador e outro de uso geral. 
 
-!!! question long
+!!! exercise long
     
     Utilizando o manual do kit de desenvolvimento ([SAME70-XPLD.pdf](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/SAME70-XPLD.pdf)) preencha a tabela a seguir:
 
@@ -532,7 +532,7 @@ O kit de desenvolvimento SAME7-XPLD possui dois botões, um deles reservado para
     
     DICA: Ver novamente como foi feito com o LED.
 
-    !!! details ""
+    !!! answer
         Solução:
         
         | Perif. SAME70-XPLD    |   PIO(A,B,C,D,...) |     INDEX       |   ID_PIO      |
@@ -546,7 +546,7 @@ O kit de desenvolvimento SAME7-XPLD possui dois botões, um deles reservado para
 
 Agora precisamos fazer a ponte entre o mundo externo e o firmware que será executado no microcontrolador, pela tabela anterior insira e complete os defines a seguir no `main.c` (perto dos defines do LED).
 
-!!! example "Tarefa: Modifique"
+!!! exercise self "Task: Modifique"
     Com a tabela preenchida, defina e inicialize novos defines para lidarmos com o botão, da mesma maneira que foi feito o LED:
 
     ```c
@@ -572,7 +572,7 @@ Agora é necessário:
 
 Com os defines "definidos" podemos ativar o clock do **PIO** que gerencia o pino, para isso insira na função de inicialização `init()` após a inicialização do LED.
 
-!!! example "Tarefa: Modifique `init`"
+!!! exercise self "Task: Modifique `init`"
     Modifique a função `init()` inserindo a inicialização do novo PIO:
 
     ```c
@@ -611,7 +611,7 @@ Para esse pino funcionar é necessário que ativemos o `pull-up` nele. `Pull-up`
 
 Para ativarmos o `pull-up` basta chamar a função: [`pio_pull_up()`](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#gaa9aa20867544ff93c6527b799b3dfcec) com os parâmetros correto. A função está detalhada na documentação do ASF.
 
-!!! example "Tarefa: Modifique: `init()`"
+!!! exercise self "Task: Modifique: `init()`"
     Você deve fazer uso da função `pio_pull_up()` na função `init()` 
 
 !!! progress
@@ -621,10 +621,10 @@ Para ativarmos o `pull-up` basta chamar a função: [`pio_pull_up()`](https://as
 
 Para lermos um valor de um pino, que já foi configurado como entrada, devemos utilizar alguma das funções fornecidas no ASF de interface com o PIO, procure por ela na documentação do PIO.
 
-!!! question short
+!!! exercise short
     Qual função pode ser utilizada para ler o valor digital do pino PA11? Consulte as funções disponíveis na documentação do [ASF PIO](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html)
     
-    !!! details ""
+    !!! answer
         A função a ser utilizada é a [pio_get()](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#ga370c08649d026fbe46cef9434526edf9)
 
 !!! progress
@@ -644,6 +644,7 @@ Para lermos um valor de um pino, que já foi configurado como entrada, devemos u
 
 !!! progress
     Click para continuar....
+
 
 ## Terminou?
 

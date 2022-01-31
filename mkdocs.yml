@@ -1,109 +1,45 @@
-site_name: 5s - Computação Embarcada
 theme:
   name: 'material'
+  custom_dir: overrides
   palette:
     primary: 'black'
     accent: 'pink'
-  font:
-    text: Roboto
-    code: Roboto Mono
 
 docs_dir: docs-src
 site_dir: docs
 
+site_name: 5s - Computação Embarcada
 repo_name: 'Insper/ComputacaoEmbarcada'
 repo_url: 'https://github.com/insper/ComputacaoEmbarcada'
 edit_uri: 'https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/'
-
-# Copyright
 copyright: 'Copyright &copy; Rafael Corsi @ insper'
 
-nav:
-- Home: 'index.md'
-- Sobre o curso: 'Sobre-Curso.md'
-- 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
-- 'Vídeos': 'navigation/Videos/Util-Videos.md'
-- navigation/Dicas/Util-o-que-nao-pode.md
-- 'Util':
-    - navigation/Util/Sobre-Ferramental.md
-    - navigation/Util/Util-Startup.md
-    - navigation/Util/Util-Erros.md
-    - navigation/Util/Util-Documentos.md
-    - navigation/Dicas/Util-lcd.md
-    - navigation/Dicas/Util-freertos.md
-    - navigation/Dicas/Util-FloatPrint.md
-    - navigation/Dicas/Util-lvgl.md
-
-
-- Labs:
-    - 'Lab 1 - PIO ':
-      - 'Teoria': 'navigation/Labs/Lab_PIO/Lab-PIO-Teoria.md'
-      - 'Lab': 'navigation/Labs/Lab_PIO/Lab-PIO.md'
-      - 'Dicas': navigation/Dicas/Lab-PIO-Dicas.md
- #     - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
-    - 'Lab 2 - PIO - Driver':
-      - 'Teoria': 'navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER-Teoria.md'
-      - 'Lab': 'navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER.md'
-    - 'Lab 3 - PIO - IRQ':
-      - 'Teoria': 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria.md'
-      - 'Lab' : 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ.md'
- #     - 'Lab-3-PIO-IRQ-Perguntas.md'
-    - 'Lab 4 - TC - RTC - RTT': 'navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md'
-    - 'Lab 5 - HC-SR04': 'navigation/Labs/Lab_HCSR04/lab.md'
-    - 'Lab 6 - RTOS':
-       - 'Lab': 'navigation/Labs/Lab_RTOS/Lab-RTOS.md'
-       - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
-    - 'Lab 7 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
-    - 'Lab 8 - RTOS - LCD - LVGL':
-        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
-        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'
-        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md'
-    - 'Lab 9 - RTOS - HC-SR04': 'navigation/Labs/Lab_RTOS_HCSR04/lab.md'
-#    - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
-#    - 'Lab-9-ADC-FIR.md'
-#    - 'Lab-8-RTOS-UART.md'
-    - 'Lab 10 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
-
-- Projeto:
-        - 'Descrição': 'navigation/Projeto/Projeto-1-Descricao.md'
-        - 'Folder': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
-        - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/docs-src/navigation/Projeto/Emb%20-%20Controle.pdf'
-        - 'Handout 1': 'https://app.mural.co/invitation/mural/elementos9119/1632086605145?sender=ub569a9273c6e285461187641&key=1815cea8-8e6e-4084-9be6-8b68d02a306b'
-        - navigation/Projeto/Projeto-1-Rubrica.md
-        - navigation/Projeto/Projeto-1-Dicas.md
-        - navigation/Projeto/Projeto-1-Lista.md
-
-- APS:
-    - 'navigation/APS/APS-howto.md'
-    - 'APS 1 - Musical':
-        - 'navigation/APS/APS-1-Musical.md'
-        - 'navigation/APS/APS-1-Musical-software.md'
-    - 'APS 2 - Ciclocomputador':
-        - 'navigation/APS/APS-2-Bike/Descricao.md'
-        - 'navigation/APS/APS-2-Bike/Design.md'
-        - 'navigation/APS/APS-2-Bike/Engenharia.md'
-#        - 'navigation/APS/APS-2-Bike/Rubrica.md'
-
-#    - 'navigation/APS/APS-2-Oximetro.md'
-#    - 'navigation/APS/APS-3-IoT.md'
-
-- Avaliações e Simulados:
-    - navigation/Avaliacoes_e_Simulados/Avaliacoes.md
-    - navigation/Avaliacoes_e_Simulados/21b-av1/README.md
-
-#####################################################################
-#extra_css:
-#  - css/printing.css
-#  - css/progress.css
+extra_css:
+  - https://cdn.jsdelivr.net/gh/insper-education/active-handout-css@main/devlife.css
 
 extra_javascript:
-  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
-  - https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js
-  - https://www.gstatic.com/firebasejs/8.4.0/firebase-database.js
   - https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js
-  - js/markdown-enhancer.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://cdn.jsdelivr.net/gh/insper-education/active-handout-plugins-js@main/package/plugin-bundle.js
+    #  - http://localhost:9000/plugin-bundle.js
 
-# Extensions
+extra:
+  ihandout_config:
+    counter:
+      - question
+      - tip
+      - exercise
+      - example
+    report:
+      api-base: https://devlife.insper-comp.com.br/api/offerings/1/
+      url: https://devlife.insper-comp.com.br/api/offerings/1/exercises/
+
+# Extensions / plugins
+plugins:
+  - git-revision-date-localized
+  - search
+
 markdown_extensions:
   - markdown.extensions.attr_list
   - markdown.extensions.admonition
@@ -137,6 +73,75 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
 
-plugins:
-  - git-revision-date-localized
-  - search
+#####################################################################
+nav:
+  - Home: 'index.md'
+  - Sobre o curso: 'Sobre-Curso.md'
+  - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
+  - 'Vídeos': 'navigation/Videos/Util-Videos.md'
+  - navigation/Dicas/Util-o-que-nao-pode.md
+  - 'Util':
+      - navigation/Util/Sobre-Ferramental.md
+      - navigation/Util/Util-Startup.md
+      - navigation/Util/Util-Erros.md
+      - navigation/Util/Util-Documentos.md
+      - navigation/Dicas/Util-lcd.md
+      - navigation/Dicas/Util-freertos.md
+      - navigation/Dicas/Util-FloatPrint.md
+      - navigation/Dicas/Util-lvgl.md
+
+  - Labs:
+      - 'Lab 1 - PIO ':
+        - 'Teoria': 'navigation/Labs/Lab_PIO/Lab-PIO-Teoria.md'
+        - 'Lab': 'navigation/Labs/Lab_PIO/Lab-PIO.md'
+        - 'Dicas': navigation/Dicas/Lab-PIO-Dicas.md
+  #     - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
+      - 'Lab 2 - PIO - Driver':
+        - 'Teoria': 'navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER-Teoria.md'
+        - 'Lab': 'navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER.md'
+      - 'Lab 3 - PIO - IRQ':
+        - 'Teoria': 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria.md'
+        - 'Lab' : 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ.md'
+  #     - 'Lab-3-PIO-IRQ-Perguntas.md'
+      - 'Lab 4 - TC - RTC - RTT': 'navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md'
+      - 'Lab 5 - HC-SR04': 'navigation/Labs/Lab_HCSR04/lab.md'
+      - 'Lab 6 - RTOS':
+        - 'Lab': 'navigation/Labs/Lab_RTOS/Lab-RTOS.md'
+        - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
+      - 'Lab 7 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
+      - 'Lab 8 - RTOS - LCD - LVGL':
+          - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
+          - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'
+          - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md'
+      - 'Lab 9 - RTOS - HC-SR04': 'navigation/Labs/Lab_RTOS_HCSR04/lab.md'
+  #    - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
+  #    - 'Lab-9-ADC-FIR.md'
+  #    - 'Lab-8-RTOS-UART.md'
+      - 'Lab 10 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
+
+  - Projeto:
+          - 'Descrição': 'navigation/Projeto/Projeto-1-Descricao.md'
+          - 'Folder': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
+          - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/docs-src/navigation/Projeto/Emb%20-%20Controle.pdf'
+          - 'Handout 1': 'https://app.mural.co/invitation/mural/elementos9119/1632086605145?sender=ub569a9273c6e285461187641&key=1815cea8-8e6e-4084-9be6-8b68d02a306b'
+          - navigation/Projeto/Projeto-1-Rubrica.md
+          - navigation/Projeto/Projeto-1-Dicas.md
+          - navigation/Projeto/Projeto-1-Lista.md
+
+  - APS:
+      - 'navigation/APS/APS-howto.md'
+      - 'APS 1 - Musical':
+          - 'navigation/APS/APS-1-Musical.md'
+          - 'navigation/APS/APS-1-Musical-software.md'
+      - 'APS 2 - Ciclocomputador':
+          - 'navigation/APS/APS-2-Bike/Descricao.md'
+          - 'navigation/APS/APS-2-Bike/Design.md'
+          - 'navigation/APS/APS-2-Bike/Engenharia.md'
+  #        - 'navigation/APS/APS-2-Bike/Rubrica.md'
+
+  #    - 'navigation/APS/APS-2-Oximetro.md'
+  #    - 'navigation/APS/APS-3-IoT.md'
+
+  - Avaliações e Simulados:
+      - navigation/Avaliacoes_e_Simulados/Avaliacoes.md
+      - navigation/Avaliacoes_e_Simulados/21b-av1/README.md
