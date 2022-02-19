@@ -1,8 +1,7 @@
 theme:
   name: active-handout
-  palette:
-    primary: 'black'
-    accent: 'pink'
+  features:
+    - content.code.annotate
 
 docs_dir: docs-src
 site_dir: docs
