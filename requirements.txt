@@ -5,4 +5,5 @@ markdown
 pymdown-extensions
 mkdocs-material
 mkdocs-git-revision-date-localized-plugin
-
+git+https://git@github.com/insper-education/active-handout-theme.git@latest
+git+https://github.com/insper-education/active-handout-plugins-py.git@latest

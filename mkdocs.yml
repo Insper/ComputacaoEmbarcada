@@ -1,6 +1,5 @@
 theme:
-  name: 'material'
-  custom_dir: overrides
+  name: active-handout
   palette:
     primary: 'black'
     accent: 'pink'
