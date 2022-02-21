@@ -421,10 +421,10 @@ Uma vez que as configurações gerais do uC já foram realizadas (clock e WDT) e
 
 ```c
 // coloca 1 no pino do LED.
-pio_set(PIOC, LED_PIO_IDX_MASK);
+pio_set(LED_PIO, LED_PIO_IDX_MASK);
 
 // coloca 0 no pino do LED
-pio_clear(PIOC, LED_PIO_IDX_MASK);
+pio_clear(LED_PIO, LED_PIO_IDX_MASK);
 ```
 
 !!! tip "Documentação das funções"
@@ -435,8 +435,8 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
 !!! exercise choice ""
     Selecione a funcão correta que faz o LED **acender**.
     
-    - [ ] `pio_set(PIOC, LED_PIO_IDX_MASK);`
-    - [x] `pio_clear(PIOC, LED_PIO_IDX_MASK);`
+    - [ ] `pio_set(LED_PIO, LED_PIO_IDX_MASK);`
+    - [x] `pio_clear(LED_PIO, LED_PIO_IDX_MASK);`
     
     !!! answer
         
@@ -463,9 +463,9 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
       // aplicacoes embarcadas não devem sair do while(1).
       while (1)
       {
-        pio_set(PIOC, LED_PIO_IDX_MASK);      // Coloca 1 no pino LED
+        pio_set(LED_PIO, LED_PIO_IDX_MASK);      // Coloca 1 no pino LED
         delay_ms(200);                        // Delay por software de 200 ms
-        pio_clear(PIOC, LED_PIO_IDX_MASK);    // Coloca 0 no pino do LED
+        pio_clear(LED_PIO, LED_PIO_IDX_MASK);    // Coloca 0 no pino do LED
         delay_ms(200);                        // Delay por software de 200 ms
       }
       return 0;
