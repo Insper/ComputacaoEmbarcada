@@ -432,13 +432,30 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
     - [pio_set](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#gaff11c04817b1f7279971d1bada01184a)
     - [pio_clear](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#ga4857b3d94c0517d54eeff7da85af2518)
 
+!!! exercise choice ""
+    Selecione a funcão correta que faz o LED **acender**.
+    
+    - [ ] `pio_set(PIOC, LED_PIO_IDX_MASK);`
+    - [x] `pio_clear(PIOC, LED_PIO_IDX_MASK);`
+    
+    !!! answer
+        
+        Lembre que para acender o LED devemos colocar nível 0 no pino, para isso
+        usamos a funcão `pio_clear()`. Já para apagar o LED devemos colocar valor `1`, 
+        usando a funcão `pio_set()`
+
 !!! exercise self "Task: Modifique `main()`"
     Modifique a função `main` para fazermos o LED piscar interruptamente (1 -> delay 200 ms -> 0 -> delay 200 ms -> ....):
-
+    
+    Lembre de:
+ 
+    1. Compilar o código e programar o uC
+    1. Verifique o resultado esperado
+    1. Brinque com os valores da função `delay_ms` 
+    
     ```c
     // Funcao principal chamada na inicalizacao do uC.
-    int main(void)
-    {
+    int main(void) {
       // inicializa sistema e IOs
       init();
     
@@ -454,11 +471,6 @@ pio_clear(PIOC, LED_PIO_IDX_MASK);
       return 0;
     }
     ```
-    
-    1. Programe o uC
-    1. Verifique o resultado esperado
-    1. Brinque com os valores da função `delay_ms` 
-
 
 !!! exercise self "Task: Praticando"
      Agora faça o LED ficar aceso por 3 segundos e ficar apagado por 1 segundo.
@@ -641,18 +653,25 @@ Vamos usar o botão para fazer alguma coisa? Agora conseguimos acionar um pino (
 
     Utilize [`PIO_INPUT`](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/pio_8h.html#a5b347a9dbe228bdc43e90cd4ac4889e0) no parâmetro `ul_type` da função. 
 
+    **Não funcionou? De uma olhada como eu implementei:**
+    
+    - https://github.com/Insper/SAME70-examples/blob/96fb17e758e7eef9273ca2ddfb8dcd33ebcb4eb7/Perifericos-uC/PIO-IO/PIO-IO/src/main.c#L66
+
 !!! progress
     Click para continuar....
 
-## Praticando
+## Praticando (entrega obrigatória)
 
 !!! exercise self "Task"
     Muito bom! Agora vamos pegar a placa OLED1 (que você recebeu no kit) e usar os LEDs e Botoẽs dela? Para isso você vai ter que entender quais pinos configurar como entrada e saída.
-    Para isso será necessário consultar os manuais a seguir e entender a relacão entre eles.
     
     A placa possui três botões e três LEDs que podem ser lidos e controlados pelo microcontrolador. A ideia da atividade é que cada botão controle o LED associado a ele (Botão 1 - Led 1/ Botão 2 - Led 2/ ...) fazendo piscar da mesma maneira como feito com o botão da placa (cada botao controla um LED).
     
-    Para isso, você deve conectar a placa OLED na entrada EXT-1 do seu kit e então consultar os manuais no link a seguir: https://insper.github.io/ComputacaoEmbarcada/navigation/Util/Util-Documentos/
+    Para isso, vocês devem conectar a placa OLED na entrada EXT-1 do seu kit e então consultar os manuais no link a seguir para saber qual pino devem configurar como saída (LEDs) e quais devem configurar como entrada (Botões)
+    
+    ==Dica: Comece pelos LEDs (fazendo piscar) e depois vá implementando os botões um a um.==
+    
+    Link para os documentos: https://insper.github.io/ComputacaoEmbarcada/navigation/Util/Util-Documentos/
 
     - OLED1 Xplained Pro User Guide: Explica a placa OLED
     - SAME70-XPLD.pdf: Explica a placa de desenvolviment

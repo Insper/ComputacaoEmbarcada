@@ -24,11 +24,11 @@ extra_javascript:
 
 extra:
   ihandout_config:
-    counter:
-      - question
-      - tip
-      - exercise
-      - example
+#    counter:
+#      - question
+#      - tip
+#      - exercise
+#      - example
     report:
       api-base: https://devlife.insper-comp.com.br/api/offerings/1/
       url: https://devlife.insper-comp.com.br/api/offerings/1/exercises/
