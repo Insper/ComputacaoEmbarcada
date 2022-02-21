@@ -628,7 +628,6 @@ Para lermos um valor de um pino, que já foi configurado como entrada, devemos u
 !!! progress
     Click para continuar....
 
-
 ### Implementando a lógica
 
 Vamos usar o botão para fazer alguma coisa? Agora conseguimos acionar um pino (LED) e ler um pino (botão). 
@@ -646,14 +645,15 @@ Vamos usar o botão para fazer alguma coisa? Agora conseguimos acionar um pino (
 ## Praticando
 
 !!! exercise self "Task"
-    Muito bom! Agora que tal pegar a placa OLED1 (que você recebeu no kit) e usar os LEDs e Botoẽs dela? Para isso você vai ter que entender quais pinos configurar como entrada e saída.
-    Para isso será necessário consultar os manuais a seguir e entender a relacão entre eles:
+    Muito bom! Agora vamos pegar a placa OLED1 (que você recebeu no kit) e usar os LEDs e Botoẽs dela? Para isso você vai ter que entender quais pinos configurar como entrada e saída.
+    Para isso será necessário consultar os manuais a seguir e entender a relacão entre eles.
+    
+    A placa possui três botões e três LEDs que podem ser lidos e controlados pelo microcontrolador. A ideia da atividade é que cada botão controle o LED associado a ele (Botão 1 - Led 1/ Botão 2 - Led 2/ ...) fazendo piscar da mesma maneira como feito com o botão da placa (cada botao controla um LED).
+    
+    Para isso, você deve conectar a placa OLED na entrada EXT-1 do seu kit e então consultar os manuais no link a seguir: https://insper.github.io/ComputacaoEmbarcada/navigation/Util/Util-Documentos/
 
-    - Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf
-    - SAME70-XPLD.pdf
-
-    A ideia é que cada botão controle o LED associado a ele (Botão 1 - Led 1/ Botão 2 - Led 2/ ...).
-
+    - [Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf]
+    - [SAME70-XPLD.pdf]
+    
 !!! note "Preencher ao finalizar o lab"
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdpyOiZmZ9WMOUrGn5RIk8kaz1JCp3jctFleM1xAougH5Vs8w/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
