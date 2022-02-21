@@ -1,30 +1,34 @@
 # LAB - PIO
 
-| Pasta      |
-|------------|
-| `1-PIO-IO` |
+| Pasta                      |
+|----------------------------|
+| `1-PIO-IO`                 |
+| **Data da entrega:** 25/01 |
 
 !!! info
-    Cada aluno deve ter um repositório de entregas de Lab, o repositório deve ser criado pelo classroom a seguir: 
+    Os laboratórios são individuais e cada aluno deve ter um repositório com todas as enteegas, o repositório deve ser criado pelo classroom usando o link a seguir: 
  
     https://classroom.github.com/a/gQetBSZA
 
+!!! progress
+    Click para continuar....
+
 ## Entrega
 
+Ao final desse laboratório você deve ser capaz de controlar e ler pinos digitais do microcontrolador a fim de podermos acionar saídas (LEDs/ Buzzers/ motores) e lermos entradas (botões/ sensores/ ...). 
 
-Ao final desse laboratório você deve ser capaz de controlar pinos digitais do microcontrolador a fim de podermos acionar saídas (LEDs/ Buzzers/ motores) e lermos entradas (botões/ sensores/ ...).
+Ao final do laboratório vocês terão: 
 
-- Ao final da aula: 
-    - Um LED piscando a cada segundo
-    - A leitura de um botão (entrada)
-    - LED acionado pelo botão
+- Um LED piscando a cada segundo
+- A leitura de um botão (entrada)
+- LED acionado pelo botão
 
 !!! note ""
     Feito esse lab já da para começar a [APS 1](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-1-Musical/) onde vocês terão que desenvolver um sistema embarcado que reproduz uma música monofonia.
 
 ## Laboratório
 
-O código exemplo que será utilizado nesse laboratório já se encontra no repostiório criado pelo classroom: `1-PIO-IO` que foi criado para ser o mais “limpo” possível, inclusive, faltando algumas bibliotecas básicas para a compilação. 
+O código exemplo que será utilizado nesse laboratório já se encontra no repositório criado pelo classroom (`1-PIO-IO`) e foi criado para ser o mais “limpo” possível, inclusive, faltando algumas bibliotecas básicas para a compilação. 
 
 O Laboratório será feito em duas partes:
 
@@ -157,7 +161,6 @@ Antes da execução do nosso código é necessário realizarmos configurações 
 No nosso caso iremos começar configurando o clock do uC e desativando o `WatchDog Timer`.
 
 !!! exercise self "Task: Função `init()`"
-
     Modifique a função `init()` para ficar como a seguir:
     
     ```c
@@ -173,7 +176,6 @@ No nosso caso iremos começar configurando o clock do uC e desativando o `WatchD
 
 !!! progress
     Click para continuar....
-   
 
 A função `sysclk_init()` é responsável por aplicar as configurações do arquivo [`config/conf_clock.h`](https://github.com/Insper/SAME70-examples/blob/master/SAME70-Clear/src/config/conf_clock.h) no gerenciador de clock do microcontrolador, que está configurado para operar em`300 MHz`.
 
@@ -652,8 +654,8 @@ Vamos usar o botão para fazer alguma coisa? Agora conseguimos acionar um pino (
     
     Para isso, você deve conectar a placa OLED na entrada EXT-1 do seu kit e então consultar os manuais no link a seguir: https://insper.github.io/ComputacaoEmbarcada/navigation/Util/Util-Documentos/
 
-    - [Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf]
-    - [SAME70-XPLD.pdf]
+    - OLED1 Xplained Pro User Guide: Explica a placa OLED
+    - SAME70-XPLD.pdf: Explica a placa de desenvolviment
     
 !!! note "Preencher ao finalizar o lab"
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSde6t3yztvnT5dMdC8EnHzwS-XIlMyYy0cDl_uvfZu6rd9Y9g/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
