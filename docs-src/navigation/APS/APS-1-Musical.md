@@ -2,10 +2,14 @@
 
 | Entrega Final |
 |---------------|
-| 16/9 |
+| 20/3/2022     |
 
-Nesta APS vocês irão desenvolver um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony), para isso, irão utilizar um 
+Nesta APS vocês irão desenvolver um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony), para isso irão utilizar um 
 buzzer conectado a um pino do microcontrolador.
+
+Veja um exemplo de entrega do semestre passado:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zIaxAw1h3vM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Regras
 
@@ -27,7 +31,7 @@ Leia atentamente as regras a seguir:
     - Você não vai poder repetir dupla na próxima APS.
     - O desenvolvimento do projeto deve ser feito no repositório criado
     pelo classroom:
-        - https://classroom.github.com/g/CflLhD_L
+        - https://classroom.github.com/a/GOKegD-O
     - Leia atentamente como trabalhar no repositório:
          - [APS HowTo](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-howto/)
 
