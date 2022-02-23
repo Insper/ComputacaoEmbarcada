@@ -7,6 +7,7 @@ Nessa aula iremos utilizar como projeto referência o LAB-1.
 | Pasta             |
 |-------------------|
 | `Lab2-PIO-Driver` |
+| **Data da entrega:** 04/03 |
 
 !!! note "Como começar:"
     - Vocês devem realizar uma cópia do LAB-1 que está no seu repositório para a pasta `Lab2-PIO-Driver`, iremos modificar o que fizemos no laboratório passado.
@@ -59,7 +60,7 @@ void _pio_set(Pio *p_pio, const uint32_t ul_mask)
 
 Na primeira etapa iremos substituir a função que a Microchip já nos disponibiliza por uma criada por nós, em todo lugar no código que você faz o uso da função `pio_set(...)` substitua a chamada por essa recém criada  `_pio_set(...)`.
 
-!!! example "Tarefa"
+!!! exercise "pio_set"
     1. Crie a função `_pio_set()`
     1. Substitua no código toda ocorrência de `pio_set()` pela `_pio_set()`. 
     1. Execute o código, **ele não deve funcionar :bangbang:.**
@@ -143,7 +144,7 @@ O que isso significa? Significa que estamos acessando o periférico passado como
     
     ![](imgs/diagrama.png){width=500}
 
-!!! example "Modifique e teste"
+!!! exercise "Teste"
     A função está pronta, agora precisamos testar. Com a modificação no código faça a gravação do uC e ele deve voltar a piscar o LED quando você aperta o botão. Agora a função implementada possui a mesma funcionalidade daquela fornecida pelo fabricante.
     
     - Embarque o código e o mesmo deve funcionar normalmente caso a função implementada esteja correta.
@@ -170,10 +171,10 @@ void _pio_clear(Pio *p_pio, const uint32_t ul_mask)
 }
 ```
 
-!!! question short
+!!! exercise text short
     Consultando a secção 32.5.4 do manual do microcontrolador, qual é o registrador que deve ser acessado para colocar zero no pino?
 
-    !!! details ""
+    !!! answer 
         - `pio_codr`
     
         > The level driven on an I/O line can be determined by writing in the Set Output Data Register (PIO_SODR) and the
@@ -183,7 +184,7 @@ void _pio_clear(Pio *p_pio, const uint32_t ul_mask)
         > a peripheral function. This enables configuration of the I/O line prior to setting it to be managed by the PIO
         > Controller.
     
-!!! example "Modifique e teste"
+!!! exercise "Modifique e teste"
     1. Crie a função `_pio_clear()`
     1. Substitua no código toda ocorrência de `pio_clear` por `_pio_clear`
     1. Implemente a função.
@@ -219,10 +220,10 @@ Essa função recebe o PIO que irá configurar, os pinos que serão configurados
 !!! info
     Leia o manual do PIO, especificamente **a secção 32.5.1**.
 
-!!! question short
+!!! exercise text short
     Consultando a secção 32.5.1 do manual do microcontrolador, qual é o registrador que deve ser acessado para ativar o pullup?
     
-    !!! details ""
+    !!! answer
         `pio_puer`
     
         > Each I/O line is designed with an embedded pull-up resistor and an embedded pull-down resistor. ==The pull-up
@@ -233,7 +234,7 @@ Essa função recebe o PIO que irá configurar, os pinos que serão configurados
     
         - `pio_puer` / `pio_pudr`
 
-!!! example "Modifique e teste"
+!!! exercise "Modifique e teste"
     1. Crie a função `_pio_pull_up`
     1. Substitua no código toda ocorrência de `pio_pull_up` por `_pio_pull_up`.
     1. Implemente
@@ -296,7 +297,7 @@ _pio_set_input(BUT_PIO, BUT_PIO_IDX_MASK, _PIO_PULLUP | _PIO_DEBOUNCE);
 !!! tip
     Utilize a função já implementada `_pio_pull_up()`
 
-!!! example "Tarefa: Modifique e teste"
+!!! exercise "Modifique e teste"
     1. Crie a função `_pio_set_input`
     1. Substitua no código toda ocorrência de `pio_set_input` por `_pio_set_input`.
     1. Implemente
@@ -356,18 +357,18 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
 !!! tip
     Utilize as funções já implementada `_pio_set()`, `_pio_clear()`, `_pio_pull_up()`
 
-!!! example "Tarefa: Modifique e teste"
+!!! exercise "Modifique e teste"
     1. Crie a função `_pio_set_output`
     1. Substitua no código toda ocorrência de `pio_set_output` por `_pio_set_output`.
     1. Implemente
     1. Compile, programe e teste
 
-!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdafsYV78DgaBet3oONddQa7CLjqEYXL1rhsQLd7Shy9ZcLZg/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
 !!! progress
     Até aqui já é C!! Lembre de preencher o forms...
-    
+
+!!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdafsYV78DgaBet3oONddQa7CLjqEYXL1rhsQLd7Shy9ZcLZg/viewform?embedded=true" width="640" height="540" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
 ### Conceito B: _pio_get(...)
 
 Implemente a função `_pio_get()`:
@@ -395,25 +396,20 @@ uint32_t pio_get(Pio *p_pio, const pio_type_t ul_type,
     - `PIO_INPUT`: quando for para ler uma `entrada`
     - `PIO_OUTPUT_0`: quando for para ler uma `saida`
 
-!!! example "Tarefa: Modifique e teste"
+!!! exercise "Tarefa: Modifique e teste"
     1. Crie a função `_pio_get()`
     1. Substitua no código todas as ocorrências de `pio_get` por `_pio_get()`
     1. Implemente
     1. Compile, programe e teste
-    
-!!! progress
-    Próxima etapa ....
-
 
 ### Conceito A: _delay_ms(...)
 
 Crie sua Própria função de `delay_ms`
 
-!!! example "Tarefa: Modifique e teste"
+!!! exercise "Tarefa: Modifique e teste"
     1. Crie a função `_delay_ms()`
     1. Substitua no código todas as ocorrências de `delay_ms` por `_delay_ms()`
     1. Implemente
     1. Compile, programe e teste
 
-----------
 

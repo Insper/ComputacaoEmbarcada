@@ -3,7 +3,7 @@
 | Pasta                      |
 |----------------------------|
 | `1-PIO-IO`                 |
-| **Data da entrega:** 25/01 |
+| **Data da entrega:** 25/02 |
 
 !!! info
     Os laboratórios são individuais e cada aluno deve ter um repositório com todas as enteegas, o repositório deve ser criado pelo classroom usando o link a seguir: 
