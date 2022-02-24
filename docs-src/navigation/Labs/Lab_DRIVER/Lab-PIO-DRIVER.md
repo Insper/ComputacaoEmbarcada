@@ -31,7 +31,7 @@ Ao final do lab, deverão ter implementado as seguintes funções:
 
 ## Driver
 
-Vamos implementar uma série de funções que irão configurar o periférico PIO via a escrita em seu banco de registradores. Para isso será necessário ler o manual do uC mais especificamente a [secção do PIO](https://pt.scribd.com/document/398420674/SAME70?start_page=344).
+Vamos implementar uma série de funções que irão configurar o periférico PIO via a escrita em seu banco de registradores. Para isso será necessário ler o manual do uC mais especificamente a [secção do PIO - pag. 344](https://raw.githubusercontent.com/Insper/ComputacaoEmbarcada/master/Manuais/SAME70.pdf).
 
 !!! progress
     Click para continuar....
