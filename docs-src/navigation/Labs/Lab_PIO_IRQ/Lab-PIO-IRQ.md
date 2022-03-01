@@ -1,48 +1,53 @@
 # LAB - PIO - IRQ
 
-| Pasta          |
-|----------------|
-| `Lab3-PIO-IRQ` |
+Esse laboratório possui duas entregas, a primeira é um passo a passo do laboratório e a segunda é parte de prática que coloca em uso o que foi visto na aula. As duas devem ser entregues até a data limite.
 
-!!! tip 
-    Antes de seguir leia:
-    
-    - [IRQ Teoria](/ComputacaoEmbarcada/navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/)
+| Pasta                      |
+|----------------------------|
+| `Lab3-PIO-IRQ`             |
+| `Led3-OLED-PIO-IRQ`        |
+| **Data da entrega:** 11/03 |
 
-O código exemplo [`SAME70-exemples/Perifericos-uC/PIO-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ) demonstra como configurar o botão da placa e utilizar a interrupção em um pino do PIO. Vamos trabalhar com esse código de base para esse laboratório.
+!!! tip "Teoria"
+    Antes de seguir leia a teoria sobre [IRQ](/ComputacaoEmbarcada/navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/)
 
-!!! example "Entenda e execute"
-    1. Copie o exemplo `SAME70-examples/Perifericos-uC/PIO-IRQ` para a pasta`Lab3-PIO-IRQ` do seu repositório.
+A disciplina possui um repositório de códigos exemplos, que será bastante utilizado ao longo do curso:
+
+- https://github.com/Insper/SAME70-examples
+
+O repositório está organizado por categorias: comunicação, demos, periféricos, screens, sensores, ... e assim por diante.
+
+Neste laboratório iremos trabalhar com o código exemplo [`SAME70-exemples/Perifericos-uC/PIO-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ) que demonstra como configurar o botão da placa utilizando interrupção. Esse código será a base do laboratório.
+
+!!! exercise self
+    1. Copie o código exemplo `SAME70-examples/Perifericos-uC/PIO-IRQ` para a pasta`Lab3-PIO-IRQ` do seu repositório.
     1. Estude o [README](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/README.md) desse exemplo!
     1. Execute o exemplo na placa!
     1. Analise o código fonte.
 
-!!! warning
-    Não continue sem ter feito a etapa anterior.
-
 !!! progress
     Click para continuar....
 
-## Melhorando o exemplo
-
 Iremos entender melhor e começar a implementar mudanças no código de exemplo.
 
-### Bordas
+## Bordas
 
-Vamos agora modificar o código um pouco, o exemplo está funcionando com interrupção em borda de descida no pino, ou seja, a função de callback e chamada quando você aperta o botão, vamos modificar para ele operar com borda de subida (o led vai piscar quando soltar o botão).
+Agora vamos modificar o código um pouco, o exemplo está funcionando com interrupção em borda de descida no pino, ou seja, a função de `callback` é chamada quando você aperta o botão (High -> Low). Iremos modificar o comportamento para operar com borda de subida, fazendo com que a função de callback seja chamada quando soltarmos o botão (Low -> High).
 
-!!! example "Modifique e teste"
+!!! exercise self 
     1. Mude a função que configura a interrupção do pino para operar em `PIO_IT_RISE_EDGE`. 
     1. Teste na placa.
-    1. O que mudou?
+    1. Percebeu a diferença?
 
-!!! question short   
+!!! exercise short   
     Você notou que quando aperta o botão o LED pisca e quando você solta também? O comportamento teria que ser de piscar apenas quando solta o botão. Por que isso acontece?
     
-    !!! details ""
-        Isso acontece por conta do bounce de quando apertamos o botão, o PIO deteca esse movimento e gera uma interrupćão na descida e na subida. ==Um comportamento indesejavel.==
+    (Não são todas as vezes que isso acontece).
+    
+    !!! answer
+        Isso acontece por conta do bounce de quando apertamos o botão, o PIO detecta esse movimento e gera uma interrupção na descida e na subida. ==Um comportamento indesejável.==
         
-        Para corrgir isso devemos ativar o ==debounce== no pino do botão, isso é feito através das funcões asseguir:
+        Para corrigir isso devemos ativar o ==debounce== no pino do botão, isso é feito através das funções a seguir:
         
         ```diff
         -pio_configure(BUT_PIO, PIO_INPUT, BUT_IDX_MASK, PIO_PULLUP);
@@ -50,57 +55,64 @@ Vamos agora modificar o código um pouco, o exemplo está funcionando com interr
         +pio_set_debounce_filter(BUT_PIO, BUT_IDX_MASK, 60);
         ```
 
-!!! Examples "Tarefa"
+!!! exercise self
     1. Modifique a função init com o trecho de código anterior e ative o debounce no pino.
     1. Teste na placa
 
 !!! progress
     Click para continuar....
 
-### IRQ - Keep it short and simple 
+## IRQ - Keep it short and simple 
 
 O tempo que um firmware deve ficar na interrupção deve ser o menor possível, pelos principais motivos:
 
 1. Outras interrupções de mesma prioridade irão aguardar o retorno da interrupção. O firmware irá deixar de servir de maneira rápida a diferentes interrupções se gastar tempo nelas.
-2. Nem todas as funções [são reentrantes](https://en.wikipedia.org/wiki/Reentrancy_(computing)). Funções como `printf` podem ==não operar== corretamente dentro de interrupções (mais de uma chamada por vez).
+2. Nem todas as funções [são reentrantes](https://en.wikipedia.org/wiki/Reentrancy_(computing)). Funções como `printf` podem ==não operar== corretamente dentro de interrupções por poderem ser chamadas mais de uma vez, sem terem terminado de executar.
 3. RTOS: As tarefas devem ser executadas em tasks e não nas interrupções, possibilitando assim um maior controle do fluxo de execução do firmware (vamos ver isso mais para frente).
 
-#### FLAG
+> Para maiores informações acesse: https://betterembsw.blogspot.com/2013/03/rules-for-using-interrupts.html
 
-A solução para esse problema é realizar o processamento de uma interrupção no loop principal (`while(1)`), essa abordagem é muito utilizada em sistemas embarcados. E deve ser feita da forma a seguir:
+Existem algumas soluções para essa questão, a mais simples delas é a de realizar o processamento de uma interrupção no loop principal (`while(1)`), essa abordagem é muito utilizada em sistemas embarcados. E deve ser feita da forma a seguir:
 
-- Define-se uma variável global que servirá como `flag` (`true` ou `false`) (**essa variável precisa ser do tipo `volatile`**)
-- Interrupção muda status da `flag`
+- Define-se uma variável global que servirá como `flag` (`true` ou `false`) [^1] e **essa variável precisa ser do tipo `volatile`**)
+- Interrupção altera o status da `flag` para True
 - `while(1)` verifica status da `flag` para realizar ação.
-- `while(1)` zera `flag` (acknowledge) 
+- `while(1)` volta a `flag` para o estado original False.
 
-Exemplo:
+Analise o exemplo a seguir que ilustra o uso de flags para tratar o evento no botão:
 
 ``` c
 /* flag */
-volatile char but_flag;
+volatile char but_flag; // (1)
 
 /* funcao de callback/ Handler */
 void but_callBack(void){
- but_flag = 1;
+  but_flag = 1;
 }
 
 void main(void){
   /* inicializacao */
+  // ....
+  // ...
 
   while(1){
   
-   // trata interrupção do botão
-   if(but_flag){
-     // trata irq e  zera flag
-     
-     but_flag = 0;
+   if (but_flag) {  // (2)
+     blink_led();
+     but_flag = 0;  // (3)
    }
   }
 }
 ```
 
-!!! note "volatile"
+1. :man_raising_hand: Notem que a variável que será utilizada como flag foi declarada como `volatile`
+2. O bloco de código dentro do `if` só será processado quando o `but_flag` for True
+3. :warning: Essa linha é muito importante pois sem ela o bloco do if seria executuado novamente sem o evento externo do botão.
+
+!!! info "True/False"
+    A linguagem C não define True/False, indicamos usar o valor 1 como verdadeiro e 0 como falso.
+
+!!! info "volatile"
     Sempre que uma interrupção alterar uma variável global, essa deve possuir o 'pragma' /modificador [`volatile`](https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword).
     
     Exemplo: `volatile int valADC;`
@@ -111,22 +123,20 @@ void main(void){
     
     - Leia mais sobre [volatile](https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword)
     
-    ==ATENÇÃO: só usar `volatile` quando necessário==
+    ==ATENÇÃO: só usar `volatile` quando necessário uma IRQ altera o valor de uma variável==.
 
-!!! example "Modifique e teste"
+!!! exercise self
+    Agora modifique o código do Lab3 para usar flag e processar o evento do botão na funcão main. Lembre que dentro do callback do botão não pode mais ter a função `pisca_led`!
+    
     1. Modifique o exemplo para piscar o led no `while(1)` utilizando `flag` vindo da interrupção. 
-        - Dentro do callback do botão não pode ter a função `pisca_led`!
     1. Programe e teste no HW
 
 !!! progress
     Click para continuar....
 
-### Low power modes
+## Low power modes
 
-Trabalhar por interrupção possui duas grandes vantagens: 
-
-1. Resposta quase imediata a um evento 
-2. Possibilitar o uC entrar em modos de operação de baixo consumo energético (`sleep modes`).
+Trabalhar por interrupção possui várias vantagens, e uma delas é a possibilidade de fazer o uC entrar em modos de operação de baixo consumo energético (`sleep modes`).
 
 No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com sua vantagem / desvantagem:
 
@@ -147,7 +157,7 @@ No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com
     
     Mais informações na secção 6.6 do datasheet
 
-!!! question choice
+!!! exercise choice
     Na tabela anterior aparece na coluna do **Potential Wake-Up Sources** um item chamado de ==WKUP0-13 pins==, o que você acha que isso significa?
     
     - [x] Pinos específicos do uc
@@ -155,10 +165,11 @@ No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com
     - [ ] Pinos de um PIO
     - [ ] Não faço ideia
     
-    !!! details ""
+    !!! answer
         WKUP (wake-up) pins: são pinos específicos do SAME70 que além de irem para o PIO vão também para o Supply Controller e que possibilita re-energizar o uC após um evento externo.
 
-!!! question choice
+
+!!! exercise choice
     Quais sleep-modes podemos usar se desejamos acordar o uC com eventos do PIO (sem usar os pinos com as funções especiais de WKUP)?:
 
     - [x] Sleep Mode 
@@ -166,16 +177,19 @@ No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com
     - [ ] Sleep Mode / Wait Mode/ Deep-Power-mode
     - [ ] Sleep Mode / Wait Mode/ Deep-Power-mode/ Backup Mode
     
-    !!! details ""
+    !!! answer
         Podemos usar apenas o ==Sleep Mode== pois o uC é acordado por qualquer interrupção. Para entrarmos em um modo de menor nível energéticos temos que usar um dos WKUP pins ou algum outro periférico da lista para poder acordar o uC (entrar nós podemos, mas nunca vamos sair do sono).
 
-#### Adicionando a lib de lowpower mode (ASF Wizard)
+### Adicionando a lib de lowpower mode (ASF Wizard)
 
 Para termos acessos as funções da Microchip que lidam com o `sleep mode` devemos adicionar a biblioteca **Sleep manager (service)** no Microchip Studio:
 
 - `ASF` :arrow_right: `ASF Wizard` :arrow_right: 
 
 Agora basta adicionar a biblioteca **Sleep manager (service)** ao projeto.
+
+!!! tip ""
+    Lembre de dar apply.
 
 #### Entrando em lowpower
 
@@ -184,56 +198,48 @@ Agora podemos usar as funções de low power, primeiramente iremos utilizar some
 ``` c
 void main(void){ 
   while(1){
-     // trata flag
-     // ...
-     // .....
+     if (but_flag) { ... }
   
      // Entra em sleep mode    
-     // Código 'trava' aqui até ser 'acordado' 
-     pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
+     pmc_sleep(SAM_PM_SMODE_SLEEP_WFI); // (1)
   }
 }
 ```
 
-Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt), essa função é do tipo "blocante" onde execução do código é interrompida nela até que uma interrupção "acorde" o uC.
+1.  Código 'trava' aqui até ser 'acordado' 
 
-!!! example "Modifique e teste"
+Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt), ou seja, o CORE para a execução do código e retoma as atividades normais somente quando uma interrupção "acordar" o CORE.
+
+!!! exercise self 
     1. Modifique o exemplo para entrar em modo sleep
     1. Programe e teste no HW
 
 !!! info "Como testar o sleepmode?"
-    Se tivéssemos acesso aos equipamentos do laboratório poderíamos medir a corrente
-    consumida pelo microcontrolador antes e depois de chamar a função de sleep, porém
-    na versão online do curso não conseguimos fazer isso.
+    No laboratório temos um equipamento que é capaz de medir com até 5 dígitos uma corrente elétrica. Podemos usar esse multímetro de bancada para medir a corrente consumida pelo uC durante os diferentes ciclos de operação.
 
 !!! progress
     Click para continuar....
 
 ## Pensando um pouco
 
-!!! question long
-    Vamos imaginar o cenário a seguir: Você está desenvolvendo uma interface na qual o usuário pode configurar o quanto ele quer de um item (contador), aqui temos duas opções:
+!!! exercise long
+    Vamos imaginar o cenário a seguir: 
     
-    1. Pedir para o usuário apertar e soltar o botão para cada vez que ele quer incrementar o contador 
+    Você está desenvolvendo uma interface na qual um usuário pode configurar via um botão o quanto ele quer de um determinado item (açúcar da máquina de café, temperatura do forno, ....). É muito comum que a interface possibilite manter o botão pressionado para alterar mais rapidamente o contador, ou seja:
+    
+    1. O usuário apertar e soltar o botão para cada vez que ele quer incrementar o contador 
     1. O contador aumenta enquanto o usuário mantiver o botão pressionado
     
-    A solução 1 é trivial e conseguimos fazer com o que já temos, mas e a solução (2) alguma ideia de como fazer?
+    A solução de código para a primeira opção é trivial e conseguimos fazer com o que já temos, mas e a solução para o outro caso (botão apertado), alguma ideia de como fazer?
     
     (solução a seguir)
     
-    !!! details ""   
+    !!! answer   
     
         A ideia é simples: configurar a interrupção do pino para descida e subida, assim sabemos quando o usuário apertou o botão e depois quando
         ele soltou. Mas temos um problema, ==só podemos configurar uma função de callback por o pino!==
         
-        Uma etapa por vez, vamos primeira ativar a interrupção de borda no periférico para isso iremos usar o define:
-        
-        ```c
-        /*  Interrupt Edge detection is active. */
-        #define PIO_IT_EDGE             (1u << 6)
-        ```
-        
-        A chamada de função que configura interrupção no pino ficaria assim:
+        Para ativarmos a interrupção nos dois casos (subida/ descida) devemos usar o `PIO_IT_EDGE`. A chamada de função que configura interrupção no pino ficaria assim:
         
         ```diff
         pio_handler_set(BUT_PIO,
@@ -243,13 +249,25 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
                         but_callback);
         ```
 
-!!! question short
-    Legal! mas agora a função `but_callback` será chamada pelo HW quando ocorrer uma mudança de nível de qualquer tipo, como vamos saber se entramos na função `but_callback` por uma borda de descida (usuário apertou o botão) ou por uma borda de subida (usuário soltou o botão)?
+        Notem que a mesma função `but_callback` será chamada para os dois casos de evento.
+
+        ```
+          ----   
+              \____ Fall-Edge
+                              ==> but_callback()    
+              _____ High-Edge
+          ___/
+        ```
+
+!!! exercise long
+    Legal! mas agora a função `but_callback` será chamada pelo HW quando ocorrer uma mudança de nível de qualquer tipo. Alguma ideia de como vamos saber se entramos na função `but_callback` pela borda de descida (usuário apertou o botão) ou plea borda de subida (usuário soltou o botão)?
 
     (solução a seguir)
 
-    !!! details ""
-        A solução é: Verificamos dentro da função de callback o valor atual do pino: se ele for '0' quer dizer que entramos por uma borda de descida e se for '1' por uma borda de subida!
+    !!! answer
+        A solução é verificamos imediatamente dentro da função de callback o valor atual do pino: se ele for '0' quer dizer que entramos por uma borda de descida e se for '1' por uma borda de subida!
+        
+        O código a seguir indica como fazer isso:
         
         ```c
         void but_callback (void) {
@@ -266,66 +284,4 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
 !!! progress
     Click para continuar....
 
-## Praticando - OLED
-
-| Pasta               |
-|---------------------|
-| `Led3-OLED-PIO-IRQ` |
-
-Agora vamos usar interrupção em um outro projeto.
-
-Copie o projeto localizado no repositório de exemplos: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro) para a pasta do seu repositório da disciplina `Lab3-OLED-PIO-IRQ`.
-
-Iremos trabalhar com esse exemplo que configura o OLED (que deve ser conectado na placa no **EXT1**) e incorporar o exemplo da interrupção aqui (vamos ampliar sua funcionalidade!).
-
-A entrega final (conceito A) deve possuir três botões externos a placa que irão configurar a frequência na qual o LED irá piscar (via interrupção é claro). Um dos botões irá aumentar a frequência do piscar do LED e o outro irá diminuir a frequência que o LED deverá piscar. O OLED deverá exibir a frequência atual do LED. 
-
-- O código deve funcionar por interrupção nos botões **e sempre que possível, entrar em sleep mode**.
-
-### Conceito C
-
-Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência na qual o LED irá piscar. Além disso, você precisa exibir o valor da frequência no display do OLED.
-
-1. Botão OLED1: Modifica a frequência do LED (por IRQ)
-    - Se usuário aperta e solta: Aumenta a freq em uma unidade ( `delay -= 100` )
-    - Se usuário aperta e segura: Diminui a freq em uma unidade ( `delay += 100` )
-3. Exibir o valor da frequência no OLED
-
-!!! tip
-    Comecando:
-    
-    1. Configure o novo LED e o novo Botão
-    1. Faca o exemplo anterior funcionar (com o novo led e botão)
-    1. Crie uma variável para frequência, exiba o valor no OLED
-    1. Implemente apenas o incremento da frequência, teste.
-    1. Pense na lógica de como identificar uma perto longo
-    1. Implemente o decremento da frequência, teste.
-    
-    !!! warning ""
-        Lembre que não podemos ter delay dentro de interrupão 
-
-    Pino botão:
-    
-    1. Lembre de sempre usar interrupção nos botões.
-        - Você vai ter que usar a ideia de borda de subida e descida.
-    1. Consulte o [manual do OLED](https://github.com/Insper/ComputacaoEmbarcada/blob/master/Manuais/Atmel-42077-OLED1-Xplained-Pro_User-Guide.pdf) para saber os pinos
-       - Use pinout que vocês receberam para identificar os pino.
-    
-    Display Oled: 
-    
-    - Você deve usar [sprintf](http://www.cplusplus.com/reference/cstdio/sprintf/) para formatar a string que irá exibir no OLED
-    - Para exibir uma string no OLED use a função `gfx_mono_draw_string`
-
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdkaentSBXvZlMgnyHKyI77-YC67N8jyH7Z1ZJ2-K7UUKSD2w/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
-### Conceito B
-
-Acrescente os outros dois botões do oled (2 e 3) do OLED para:
-
-- Botão 2: Para o pisca pisca
-- Botão 3: Diminuir a frequência
-
-### Conceito A
-
-Exiba no OLED não só a frequência, mas uma barra indicando quando
-o LED irá parar de piscar (como uma barra de progresso).
+Agora siga para a página: Praticando, que faz parte desse lab.

@@ -100,7 +100,7 @@ nav:
       - 'Lab 3 - PIO - IRQ':
         - 'Teoria': 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria.md'
         - 'Lab' : 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ.md'
-  #     - 'Lab-3-PIO-IRQ-Perguntas.md'
+        - 'Praticando' : 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica.md'
       - 'Lab 4 - TC - RTC - RTT': 'navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md'
       - 'Lab 5 - HC-SR04': 'navigation/Labs/Lab_HCSR04/lab.md'
       - 'Lab 6 - RTOS':
@@ -117,24 +117,24 @@ nav:
   #    - 'Lab-8-RTOS-UART.md'
       - 'Lab 10 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
 
-  - Projeto:
-          - 'Descrição': 'navigation/Projeto/Projeto-1-Descricao.md'
-          - 'Folder': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
-          - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/docs-src/navigation/Projeto/Emb%20-%20Controle.pdf'
-          - 'Handout 1': 'https://app.mural.co/invitation/mural/elementos9119/1632086605145?sender=ub569a9273c6e285461187641&key=1815cea8-8e6e-4084-9be6-8b68d02a306b'
-          - navigation/Projeto/Projeto-1-Rubrica.md
-          - navigation/Projeto/Projeto-1-Dicas.md
-          - navigation/Projeto/Projeto-1-Lista.md
+#  - Projeto:
+#          - 'Descrição': 'navigation/Projeto/Projeto-1-Descricao.md'
+#          - 'Folder': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
+#          - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/docs-src/navigation/Projeto/Emb%20-%20Controle.pdf'
+#          - 'Handout 1': 'https://app.mural.co/invitation/mural/elementos9119/1632086605145?sender=ub569a9273c6e285461187641&key=1815cea8-8e6e-4084-9be6-8b68d02a306b'
+#          - navigation/Projeto/Projeto-1-Rubrica.md
+#          - navigation/Projeto/Projeto-1-Dicas.md
+#          - navigation/Projeto/Projeto-1-Lista.md
 
   - APS:
       - 'navigation/APS/APS-howto.md'
       - 'APS 1 - Musical':
           - 'navigation/APS/APS-1-Musical.md'
           - 'navigation/APS/APS-1-Musical-software.md'
-      - 'APS 2 - Ciclocomputador':
-          - 'navigation/APS/APS-2-Bike/Descricao.md'
-          - 'navigation/APS/APS-2-Bike/Design.md'
-          - 'navigation/APS/APS-2-Bike/Engenharia.md'
+#      - 'APS 2 - Ciclocomputador':
+#          - 'navigation/APS/APS-2-Bike/Descricao.md'
+#          - 'navigation/APS/APS-2-Bike/Design.md'
+#          - 'navigation/APS/APS-2-Bike/Engenharia.md'
   #        - 'navigation/APS/APS-2-Bike/Rubrica.md'
 
   #    - 'navigation/APS/APS-2-Oximetro.md'

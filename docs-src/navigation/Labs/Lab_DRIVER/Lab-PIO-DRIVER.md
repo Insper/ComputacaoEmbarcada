@@ -4,9 +4,9 @@ Nessa aula iremos utilizar como projeto referência o LAB-1.
 
 ## Entrega
 
-| Pasta             |
-|-------------------|
-| `Lab2-PIO-Driver` |
+| Pasta                      |
+|----------------------------|
+| `Lab2-PIO-Driver`          |
 | **Data da entrega:** 04/03 |
 
 !!! note "Como começar:"
