@@ -74,7 +74,7 @@ O tempo que um firmware deve ficar na interrupção deve ser o menor possível, 
 
 Existem algumas soluções para essa questão, a mais simples delas é a de realizar o processamento de uma interrupção no loop principal (`while(1)`), essa abordagem é muito utilizada em sistemas embarcados. E deve ser feita da forma a seguir:
 
-- Define-se uma variável global que servirá como `flag` (`true` ou `false`) [^1] e **essa variável precisa ser do tipo `volatile`**)
+- Define-se uma variável global que servirá como `flag` (`true` ou `false`) [^1] e **importante, essa variável precisa ser do tipo `volatile`**)
 - Interrupção altera o status da `flag` para True
 - `while(1)` verifica status da `flag` para realizar ação.
 - `while(1)` volta a `flag` para o estado original False.
@@ -105,19 +105,19 @@ void main(void){
 }
 ```
 
-1. :man_raising_hand: Notem que a variável que será utilizada como flag foi declarada como `volatile`
+1. :man_raising_hand: Note que a variável que será utilizada como flag foi declarada como `volatile`
 2. O bloco de código dentro do `if` só será processado quando o `but_flag` for True
 3. :warning: Essa linha é muito importante pois sem ela o bloco do if seria executuado novamente sem o evento externo do botão.
 
 !!! info "True/False"
-    A linguagem C não define True/False, indicamos usar o valor 1 como verdadeiro e 0 como falso.
+    A linguagem C não define True/False, indicamos usando o valor 1 para verdadeiro e 0 para falso.
 
 !!! info "volatile"
-    Sempre que uma interrupção alterar uma variável global, essa deve possuir o 'pragma' /modificador [`volatile`](https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword).
+    Sempre que uma interrupção alterar uma variável global, essa deve possuir o 'pragma'/modificador [`volatile`](https://barrgroup.com/Embedded-Systems/How-To/C-Volatile-Keyword).
     
     Exemplo: `volatile int valADC;`
     
-    Esse pragma serve para informar o compilador (no nosso caso GCC) que essa variável será modificada sem que ele saiba evitando assim que ele não a implemente. 
+    Esse pragma serve para informar o compilador (no nosso caso GCC) que essa variável será modificada sem que o compilador saiba, evitando assim que a variável não seja compilada. 
     
     Compiladores são projetados para otimizar programas removendo trechos ou variáveis desnecessárias. Como a função de `Handler` (interrupção) nunca é chamada diretamente pelo programa, o compilador pode supor que essa função não vai ser executada nunca e pode optimizar a variável que nela seria atualizada (já que não é chamada diretamente, mas sim pelo hardware quando ocorre um evento). 
     
@@ -138,7 +138,7 @@ void main(void){
 
 Trabalhar por interrupção possui várias vantagens, e uma delas é a possibilidade de fazer o uC entrar em modos de operação de baixo consumo energético (`sleep modes`).
 
-No caso do uC utilizado no curso são 4 modos distintos de lowpower, cada um com sua vantagem / desvantagem:
+No caso do uC utilizado no curso, são 4 modos distintos de lowpower, cada um com sua vantagem / desvantagem:
 
 - *Active Mode: Active mode is the normal running mode with the core clock running from the fast RC oscillator, the main crystaloscillator or the PLLA. The Power Management Controller can be used to adapt the core, bus and peripheral frequencies and to enable and/or disable the peripheral clocks.*
 
@@ -215,7 +215,7 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
     1. Programe e teste no HW
 
 !!! info "Como testar o sleepmode?"
-    No laboratório temos um equipamento que é capaz de medir com até 5 dígitos uma corrente elétrica. Podemos usar esse multímetro de bancada para medir a corrente consumida pelo uC durante os diferentes ciclos de operação.
+    No laboratório temos um multímetro de bancada que é capaz de medir com até 5 dígitos uma corrente elétrica. Podemos usar esse equipamento para medir a corrente consumida pelo uC durante os diferentes ciclos de operação.
 
 !!! progress
     Click para continuar....
@@ -225,7 +225,8 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
 !!! exercise long
     Vamos imaginar o cenário a seguir: 
     
-    Você está desenvolvendo uma interface na qual um usuário pode configurar via um botão o quanto ele quer de um determinado item (açúcar da máquina de café, temperatura do forno, ....). É muito comum que a interface possibilite manter o botão pressionado para alterar mais rapidamente o contador, ou seja:
+    Você está desenvolvendo uma interface na qual um usuário pode configurar por meio de um botão, a quantidade desejada de um 
+    determinado item (açúcar da máquina de café, temperatura do forno, ....). É muito comum que a interface possibilite manter o botão pressionado para alterar mais rapidamente o contador, ou seja:
     
     1. O usuário apertar e soltar o botão para cada vez que ele quer incrementar o contador 
     1. O contador aumenta enquanto o usuário mantiver o botão pressionado
