@@ -86,11 +86,11 @@ Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência n
     Comecando:
     
     1. Configure o LED e Botão da placa OLED para operar com IRQ.
-    1. Faca o exemplo anterior funcionar (com o novo led e botão)
+    1. Faça o exemplo anterior funcionar (com o novo led e botão)
     1. Crie uma variável para frequência, exiba o valor no OLED
     1. Implemente apenas o incremento da frequência, teste.
     1. Pense na lógica de como identificar uma aperto longo
-    1. Implemente o decremento da frequência.
+    1. Implemente o decremento da frequência, pelo aperto longo.
     1. Teste sempre na placa.
     
     !!! tip ""
