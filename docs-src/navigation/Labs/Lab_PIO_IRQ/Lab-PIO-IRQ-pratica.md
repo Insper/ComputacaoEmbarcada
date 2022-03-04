@@ -10,13 +10,16 @@ Copie o projeto localizado no repositório de exemplos: [`SAME70-examples/Screen
 
 Iremos trabalhar com esse exemplo que configura o OLED (que deve ser conectado na placa no **EXT1**) e incorporar o exemplo da interrupção aqui (vamos ampliar sua funcionalidade!).
 
-A entrega final (conceito A) deve possuir três botões externos a placa que irão configurar a frequência na qual o LED irá piscar (via interrupção é claro). Um dos botões irá aumentar a frequência do piscar do LED e o outro irá diminuir a frequência que o LED deverá piscar. O OLED deverá exibir a frequência atual do LED. 
+A entrega final (conceito A) deve possuir três botões externos a placa que irão configurar a frequência na qual o LED irá piscar (via interrupção é claro). Um dos botões irá aumentar/diminuir a frequência do piscar do LED, depdendendo do modo de pressionamento (curto/longo), um outro irá parar a piscada do LED e o último terá apenas a função de diminuir (modo pressionamento curto). O OLED deverá exibir a frequência atual do LED "graficamente". 
 
 - O código deve funcionar por interrupção nos botões **e sempre que possível, entrar em sleep mode**.
 
 ### Conceito C
 
 Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência na qual o LED irá piscar. Além disso, você precisa exibir o valor da frequência no display do OLED.
+
+!!! tip
+    Utilize a função `pisca_led` para controlar a piscada, deixe como padrão o número de piscada em 30 vezes.
 
 1. Botão OLED1: Modifica a frequência do LED (por IRQ)
     - Se usuário aperta e solta: Aumenta a freq em uma unidade ( `delay -= 100` )
