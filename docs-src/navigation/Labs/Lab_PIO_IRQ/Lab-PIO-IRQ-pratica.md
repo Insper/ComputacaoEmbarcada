@@ -118,7 +118,7 @@ Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência n
     Acrescente os outros dois botões do oled (2 e 3) do OLED para:
 
     - Botão 2: Para o pisca pisca
-    - Botão 3: Diminuir a frequência
+    - Botão 3: Diminuir a frequência (aperto curto)
 
 ### Conceito A
 
