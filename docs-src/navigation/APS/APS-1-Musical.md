@@ -43,7 +43,9 @@ Leia atentamente as regras a seguir:
 A entrega final deverá ser um sistema embarcado que via a adição de um [`buzzer`](https://en.wikipedia.org/wiki/Buzzer) ao uC o mesmo deve ser capaz de reproduzir músicas 'conhecidas'. Além do buzzer deve-se adicionar dois botões ao kit, para ser usado para: 
 
 - mudar de música
-- parar / iniciar a música.
+- pause / play.
+
+> O pause deve interromper a música e o play retomar do ponto que parou.
 
 ## Materiais
 
