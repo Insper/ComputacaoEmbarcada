@@ -36,7 +36,7 @@ Nesse lab iremos trabalhar com três periféricos que lidam com 'tempo', o Timer
 - RTT: É um contador que consegue gerar praticamente qualquer frequência (vamos usar para gerar frequências lentas)
 - RTC: É um como um calendário com relógio, ele conta anos, meses, dias, horas, minutos e segundos.
 
-Cada periférico está em um exemplo diferente:
+Temos para cada periférico um exemplo diferente:
 
 | Periférico exemplos                                                                                   |
 | ----------             ----                                                                           |
@@ -46,7 +46,7 @@ Cada periférico está em um exemplo diferente:
 
 Cada exemplo possui o seu próprio `README` que explica de forma ampla os periféricos. Note que todos esses exemplos estão operando por interrupção! Onde cada periférico possui o seu `handler` para resolver a interrupção.
 
-!!! example "Tarefa"
+!!! exercise self "dawdwadaw"
     Para cada exemplo (TC,RTT e RTC):
     
     1. Leia o README
@@ -54,7 +54,7 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
     1. Entenda o código
 
 
-!!! question choice
+!!! exercise choice
     Como deve ser a chamada de função para usarmos o TC2 canal 2 gerando interrupção a 20Hz?
     
     ```c
@@ -66,12 +66,12 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
     - [ ] `TC_init(TC8, ID_TC8, 8, 20);`
     - [ ] `TC_init(TC8, ID_TC2, 3, 20);`
 
-    !!! details ""
+    !!! answer
         O TC funciona diferente do PIO, onde o PIO possuia apenas uma conexão com o NVIC para avisar a interrupcão em qualquer um dos 32 pinos. O TC possui um sinal de conexão com o NVIC para cada canal e esses canais possuem um ID único, conforme figura a seguir:
 
         ![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/TC-IRQ/imgs/TC/tc.png)
         
-!!! question choice
+!!! exercise choice
 
     Se usarmos o TC1 canal 0 qual deve ser a funcão de handler?
     
@@ -82,10 +82,10 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
     - [ ] `TC4_Handler`
     - [ ] `TC5_Handler`
     
-    !!! details ""
+    !!! answer
         O handler a ser usado tem realacão com o ID do canal, no caso do canal 0 do TC1 o ID é o ID_TC3 e o handler o `TC3_Handler`.
 
-!!! question choice
+!!! exercise choice
     Um colega está desenhando uma solução para um sistema embarcado que precisa processar dados nas frequências: 1Hz, 2Hz e 44200Hz. Pensando em otimizar o uso energético do uC ele propôs usar um único TC e configurar para cada canal uma frequência diferente:
     
     - `TC0` / `ID_TC0` @ 1Hz
@@ -98,7 +98,7 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
     - [ ] Fica desconfiado e não sabe responder.
     - [x] Reprova sabendo o porque não funciona.
     
-    !!! details ""
+    !!! answer
         Aqui tem uma pegadinha! Para o TC contar "tempo" ele precisa usar como base um clock gerado pelo PMC, o TC não consegue usar mais de uma base de tempo por periférico (a mesma base se aplica a todos os canais que ele controla). Para as frequêncais 1Hz e 2Hz pode ser que funcione usar o mesmo TC pois a base de tempo que a funcão tc_init vai encontrar deve ser a mesma, mas já para a frequência de 44200Hz a base deve ser outra (é ordens de grandeza maior que as outras frequências) e usar o mesmo TC não vai funcionar!
         
         A melhor solucão aqui seria, usar um TC para as frequências mais baixas e outro apenas para a maior frequência:
@@ -117,7 +117,6 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
     
 !!! progress
     Click para continuar....
-
 
 ## Lab
 
