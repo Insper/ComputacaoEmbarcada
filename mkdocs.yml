@@ -37,6 +37,8 @@ extra:
 plugins:
   - git-revision-date-localized
   - search
+  - active-exercises:
+      offering_id: 1
 
 markdown_extensions:
   - markdown.extensions.attr_list
