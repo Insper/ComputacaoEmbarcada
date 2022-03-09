@@ -1,5 +1,6 @@
 theme:
   name: active-handout
+  custom_dir: overrides
   features:
     - content.code.annotate
 
