@@ -29,7 +29,7 @@ O laboratório é formado por duas partes:
 ## Exemplos
 
 !!! warning "SAME70-examples"
-    Antes de continuar atualize o repositório de exemplos ele pode ter tido melhorias.
+    Antes de continuar atualize o repositório de exemplos ele foi atualizado logo antes do lab!
 
 Nesse lab iremos trabalhar com três periféricos que lidam com "tempo": o TimerCounter (TC) que temos no total de quatro unidades TC (TC0 ~ TC3) e cada um com três contadores; o Real-time Timer (RTT) que só temos um e o Real-time Clock (RTC) que também só temos um e funciona como um relógio/calendário. 
 
