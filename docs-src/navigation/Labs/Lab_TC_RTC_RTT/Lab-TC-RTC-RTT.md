@@ -31,11 +31,11 @@ O laboratório é formado por duas partes:
 !!! warning "SAME70-examples"
     Antes de continuar atualize o repositório de exemplos ele pode ter tido melhorias.
 
-Nesse lab iremos trabalhar com três periféricos que lidam com 'tempo': o TimerCounter (TC) que temos no total de quatro unidades TC (TC0 ~ TC3) e cada um com três contadores; o Real-time Timer (RTT) que só temos um e o Real-time Clock (RTC) que também só temos um e funciona como um relógio/ calendário. 
+Nesse lab iremos trabalhar com três periféricos que lidam com "tempo": o TimerCounter (TC) que temos no total de quatro unidades TC (TC0 ~ TC3) e cada um com três contadores; o Real-time Timer (RTT) que só temos um e o Real-time Clock (RTC) que também só temos um e funciona como um relógio/calendário. 
 
 Um pouco mais sobre os periféricos:
 
-- TC: Faz várias coisas, mas na disciplina iremos o utilizar para gerar interrupções de tempo maiores que 2Hz (**ele não consegue gerar tempos muito lentos!**)
+- TC: Faz várias coisas, mas na disciplina iremos utilizá-lo para gerar interrupções de tempo maiores que 2Hz (**ele não consegue gerar tempos muito lentos!**)
 - RTT: É um contador que consegue gerar praticamente qualquer frequência (vamos usar para gerar frequências lentas)
 - RTC: É um como um calendário com relógio, ele conta anos, meses, dias, horas, minutos e segundos. E possui um alarme que pode ser configurado para gerar uma interrupção em um determinado momento. 
 
