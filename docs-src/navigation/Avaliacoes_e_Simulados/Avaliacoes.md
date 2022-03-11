@@ -50,5 +50,6 @@ Sugerimos realizarem o estudo a seguir antes de iniciarem os simulados:
 A seguir uma lista de simulados e avaliações dos outros semestres,
 serve como base para vocês estudarem. 
 
+- [21b - AV1](https://insper.github.io/ComputacaoEmbarcada/navigation/Avaliacoes_e_Simulados/21b-av1/)
 - [21a - AV1](https://github.com/insper-classroom/21a-emb-av1)
 - [20a - AV1](https://github.com/Insper/2020a-AV1-Embarcados)
