@@ -8,8 +8,9 @@ local (ao seus códigos, exemplos da disciplina) e ao
 site da matéria. 
 
 !!! tip
-    É importante vocês cronometrarem o tempo que levaram para 
-realizar o estudo, ==pois a avaliação deve ser realizada em 3h==.
+    1. Será necessário configurar os periféricos do uC, sugerimos vocês criarem resumos de cada periférico, com as funções e suas configurações, assim não perdem muito tempo na prova.
+    1. É importante vocês cronometrarem o tempo que levaram para realizar o estudo, ==pois a avaliação deve ser realizada em 3h==. 
+    
 
 ## AV2/ AV3/ AV4 ...
 
