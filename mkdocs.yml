@@ -143,6 +143,4 @@ nav:
   #    - 'navigation/APS/APS-2-Oximetro.md'
   #    - 'navigation/APS/APS-3-IoT.md'
 
-  - Avaliações e Simulados:
-      - navigation/Avaliacoes_e_Simulados/Avaliacoes.md
-      - navigation/Avaliacoes_e_Simulados/21b-av1/README.md
+  - Avaliações e Simulados: navigation/Avaliacoes_e_Simulados/Avaliacoes.md
