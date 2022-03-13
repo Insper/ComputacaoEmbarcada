@@ -66,34 +66,34 @@ A figura a seguir demonstra como funciona a leitura do sensor.
 
 ![](wave.svg){width=600}
 
-!!! question short
-    Qual o tempo **mínimo** e **máximo** que o sinal de **Echo** pode ficar em '1'? Lembre de verificar o range do sensor.
+!!! exercise short
+    Calcule o tempo **mínimo** e **máximo** que o sinal de **Echo** pode ficar em '1'? Lembre de verificar o range do sensor (você vai precisar saber a velocidade do som).
     
-    !!! details ""
+    !!! answer
         
         Das informações fornecidas do sensor:
         
         - Distância mínima: 0.02 m
-        - Distância máxima: 4 m
+        - Distância máxima: 4.00 m
         
-        Sabendo que a velocidade do som é aproximadamente 340 m/s, podemos aplicar uma regra de 3 e $x [s] = dist / 340$. Lembre que o sensor fornece a distância x2!
+        Sabendo que a velocidade do som é aproximadamente 340 m/s, portanto $x [s] = dist / 340$. Lembre que o sensor fornece a distância dobrado (tempo de ir e voltar)!
         
         Ou seja:
         
         - Tempo mínimo: $2 \times 0,000058$s 
         - Tempo máximo: $2 \times 0,011764$s
 
-!!! question long
+!!! exercise long
     Com as informações coletadas até aqui você consegue imaginar como deve ser o firmware para fazer a leitura do sensor? Não existe uma única maneira de fazer, mas algumas soluções podem não ser muito boas!
     
-    Descreva aqui como você geraria o sinal do Trig e como você faria a leitura do sinal do Echo, quais periféricos usaria para isso?
+    Descreva aqui como você geraria o sinal do Trig e como você faria a leitura do sinal do Echo e quais periféricos usaria para isso?
     
-    !!! details ""
+    !!! answer
         Uma das soluções possíveis (e indicadas) é:
         
         Sinal do **Echo** gerar via `pio_set(), delay_us(10), pio_clear()`. Como o sinal do pino de Echo pode ser aproximadamente 10 us, não tem muito problema em usar a função de delay para isso!
         
-        Já o sinal do Trig carrega informações importantes e devemos contar corretamente o tempo. Para isso sugerimos configurar uma interrupção de borda no pino e inicar o RTT quando ocorrer uma borda de descida e parar a contagem do tempo quando ocorrer uma borda de subida. 
+        Já o sinal do Trig carrega informações importantes e devemos contar corretamente o tempo. Para isso sugerimos configurar uma interrupção de borda no pino do ECHO e inciar o RTT quando ocorrer uma borda de descida e parar a contagem do tempo quando ocorrer uma borda de subida, informado ao main via flag que uma nova leitura aconteceu. 
         
         ==Um ponto importante é a configuração da frequência na qual o RTT irá operar. Pense um pouco a respeito....==
 
@@ -101,26 +101,45 @@ A figura a seguir demonstra como funciona a leitura do sensor.
 
 Nesse laboratório vocês devem usar o exemplo do OLED e realizando a leitura periódica do HCSR04 exibir a distância entre o sensor e um objeto no display. Sempre que você apertar o botão da placa, uma nova leitura começa.
 
-Lembrem de copiar o exemplo do OLED para o seu repositório e renomear para: `Lab5-HC-SR04`, ou se preferir, podem usar um dos labs passados que possui OLED e já tem os botões configurados, só lembrem de fazer uma cópia e renomear.
+Comecem copiando o exemplo do OLED para o seu repositório e renomem para: `Lab5-HC-SR04`, ou se preferir, podem usar um dos labs passados que possui OLED e já tem os botões configurados, só lembrem de fazer uma cópia e renomear.
 
 ### Dicas
 
-A seguir uma ideia de como começar:
 
-- Setup: 
+```
+                  ________                                       ________
+    TRIG   ______|////////|_____________________________________|////////|_____
+                                                                     ^ 
+                    10us                                             |
+                                                                     | 
+                            _____________                            | 6.inicia nova leitura
+    ECHO  _________________|/////////////|_________                  |  
+                           |             |                           |
+                           V             V                           |
+                      1.callback_echo  3.callback_echo               |
+                             |               |                       |
+                             V               V                       |
+                       2.RTT_init        4.rtt_read_timer_value      |
+                                                |                    |
+                                                V                    |      
+                                           5.valor para main + cálculo da distância
+```
+
+
+Setup: 
 
 1. Fazer a montagem na protoboard
 1. Escolher dois pinos para Echo e Trig
 1. Configurar Trig como output e Echo como input
 1. Configurar irq de boarda no pino Echo
     - Lembre de criar a função de callback.
+    
+!!! warning
+    Não ative PULL_UP no pino do ECHO!
 
 Trig:
 
 1. Gerar o pulso no pino de **Trig** com `delay_us`.
-
-!!! tip ""
-    Até aqui não tem nenhum truque!
 
 Echo:
 
@@ -129,30 +148,23 @@ Echo:
 1. Ler valor do RTT em borda de descida do pino Echo
    - Consulte [a documentaćão do ASF-RTT](https://asf.microchip.com/docs/latest/same70/html/rtt_8c.html) para saber como ler o valor atual do contador.
 
-??? tip "Dica RTT"
-    Nessa primeira etapa não precisamos de nenhuma interrupção do RTT, para desativar as interrupções modifique a função do `RTT_init` comentando as linhas a seguir:
+!!! tip "Dicas RTT"
+    - Nessa primeira etapa não precisamos de nenhuma interrupção do RTT, ele vai funcionar apenas como um relógio. Passe 0 no último parâmetro da função `RTT_Init()`.
     
-    ```diff
-    static void RTT_init(uint16_t pllPreScale, uint32_t IrqNPulses)
-    {
-        uint32_t ul_previous_time;
+    - Para consultarmos o valor atual do RTT, utilize a funcão `rtt_read_timer_value`
+    
+    ```
+    uint32_t rtt_read_timer_value 	( 	Rtt *  	p_rtt	) 	
 
-        /* Configure RTT for a 1 second tick interrupt */
-        rtt_sel_source(RTT, false);
-        rtt_init(RTT, pllPreScale);
+    Read the current value of the RTT timer value.
 
-    +    // ul_previous_time = rtt_read_timer_value(RTT);
-    +    // while (ul_previous_time == rtt_read_timer_value(RTT));
+    Parameters
+        p_rtt	Pointer to an RTT instance.
 
-    +    // rtt_write_alarm_time(RTT, IrqNPulses+ul_previous_time);
+    Returns
+        The current Real-time Timer value. 
 
-    +    // /* Enable RTT interrupt */
-    +    // NVIC_DisableIRQ(RTT_IRQn);
-    +    // NVIC_ClearPendingIRQ(RTT_IRQn);
-    +    // NVIC_SetPriority(RTT_IRQn, 4);
-    +    // NVIC_EnableIRQ(RTT_IRQn);
-    +    // rtt_enable_interrupt(RTT, RTT_MR_ALMIEN | RTT_MR_RTTINCIEN);
-    }
+    Referenced by configure_rtt(), gpbr_test_configure_rtt(), main(), and refresh_display().
     ```
 
 Conta: 
@@ -166,8 +178,6 @@ Conta:
 
 !!! progress
     Até aqui é C
-    
-
     
 ### B 
 
