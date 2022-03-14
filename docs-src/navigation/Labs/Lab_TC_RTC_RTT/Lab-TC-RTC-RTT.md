@@ -286,7 +286,7 @@ Lembre de fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     Para executar isso você deverá ser capaz de saber quando que o segundo mudou, duas são as opções:
     
     1. Usar um novo TC configurado com 1hz
-    1. Pedir para o RTC gerar uma IRQ a cada mudança de segunda
+    1. Pedir para o RTC gerar uma IRQ a cada mudança de segundo
     
     A segunda opção você faz modificando a função de init_rtc:
     
