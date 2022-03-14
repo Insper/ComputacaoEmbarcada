@@ -28,7 +28,7 @@ Para começar a medição é necessário alimentar o módulo e colocar o pino Tr
 
 Distância = [Tempo ECHO em nível alto * Velocidade do Som] / 2
 
-A velocidade do som poder ser considerada idealmente igual a 340 m/s, logo o resultado é obtido em metros se considerado o tempo em segundos. Na fórmula, a divisão por 2 deve-se ao fato de que a onda é enviada e rebatida, ou seja, ela percorre 2 vezes a distância procurada.
+A velocidade do som pode ser considerada idealmente igual a 340 m/s, logo o resultado é obtido em metros se considerado o tempo em segundos. Na fórmula, a divisão por 2 deve-se ao fato de que a onda é enviada e rebatida, ou seja, ela percorre 2 vezes a distância procurada.
 
 Especificações:
 
@@ -41,7 +41,7 @@ Especificações:
 > Descricão extraída do site do filipflop: https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/
 
 !!! info
-    No Brasil s sensor custa em torno de R$14 (https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/)
+    No Brasil o sensor custa em torno de R$14 (https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/)
 
 ### Montagem
 
@@ -93,7 +93,7 @@ A figura a seguir demonstra como funciona a leitura do sensor.
         
         Sinal do **Echo** gerar via `pio_set(), delay_us(10), pio_clear()`. Como o sinal do pino de Echo pode ser aproximadamente 10 us, não tem muito problema em usar a função de delay para isso!
         
-        Já o sinal do Trig carrega informações importantes e devemos contar corretamente o tempo. Para isso sugerimos configurar uma interrupção de borda no pino do ECHO e inciar o RTT quando ocorrer uma borda de descida e parar a contagem do tempo quando ocorrer uma borda de subida, informado ao main via flag que uma nova leitura aconteceu. 
+        Já o sinal do Trig carrega informações importantes e devemos contar corretamente o tempo. Para isso sugerimos configurar uma interrupção de borda no pino do ECHO e inciar o RTT quando ocorrer uma borda de descida e parar a contagem do tempo quando ocorrer uma borda de subida, informando a função main via flag que uma nova leitura aconteceu. 
         
         ==Um ponto importante é a configuração da frequência na qual o RTT irá operar. Pense um pouco a respeito....==
 
