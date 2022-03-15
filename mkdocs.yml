@@ -130,7 +130,7 @@ nav:
 #          - navigation/Projeto/Projeto-1-Lista.md
 
   - APS:
-      - 'navigation/APS/APS-howto.md'
+#      - 'navigation/APS/APS-howto.md'
       - 'APS 1 - Musical':
           - 'navigation/APS/APS-1-Musical.md'
           - 'navigation/APS/APS-1-Musical-software.md'
