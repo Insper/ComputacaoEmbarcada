@@ -317,4 +317,4 @@ Lembre de fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 ### Conceito A: Melhorando
 
 !!! exercise
-    Quando o botão 1 da placa OLED for pressionado, após 20 segundos, faça o LED 3 piscar com um novo TC, **substituindo essa função que era do RTC**.
+    Quando o botão 1 da placa OLED for pressionado, após 20 segundos, faça o LED 3 piscar com um novo TC, **substituindo essa função que antes era do RTC**.
