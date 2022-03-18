@@ -36,8 +36,8 @@ Leia atentamente as regras a seguir:
          - [APS HowTo](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-howto/)
 
 !!! tip "Entrega"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScYylnLu39sFrpdlm1yKc5dmuJ2qdnN2LxBF2Npl2V7cwJ1NQ/viewform?embedded=true" width="640" height="440" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfkStwsTuXzp6LfsZWVsNskVRIVL0l7XTehNx_GsDPHE1aulA/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    
 ## Descrição
 
 A entrega final deverá ser um sistema embarcado que via a adição de um [`buzzer`](https://en.wikipedia.org/wiki/Buzzer) ao uC o mesmo deve ser capaz de reproduzir músicas 'conhecidas'. Além do buzzer deve-se adicionar dois botões ao kit, para ser usado para: 
@@ -75,6 +75,8 @@ dicas valiosas de como realizar a implementação.
 ## Rubrica
 
 A rubrica a seguir será aplicada a nota da entrega:
+
+- https://forms.gle/ycM3f82Z7YhE9w9j7
 
 - A+ 
     - Músicas organizadas em vetores de `structs` (ponteiros)
