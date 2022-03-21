@@ -1,12 +1,13 @@
 # Projeto 1 
 
- 
 | Entregas  | Data |
 |-----------|------|
-| Ideia     |      |
-| Interface |      |
-| Final     |      |
+| Entrega 1: Idealização | 25/3 |
+| Entrega 2: Interface | ??   |
+| Entrega 3: Final     | ??   |
 
+!!! video
+    ![](https://www.youtube.com/watch?v=Y8Mk-5F9A5M)
 
 !!! warning "Plágio"
     - Você não pode copiar código (parcial ou total) de outro grupo (do mesmo ou de outro semestre).
@@ -28,16 +29,13 @@
     - Leia atentamente como trabalhar no repositório:
          - [APS HowTo](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-howto/)
 
-
 O projeto de computação Embarcada é de escopo fechado e tem como principal objetivo fazer com que vocês passem por todo o ciclo de desenvolvimento de um protótipo de um dispositivo embarcado:
 
 - especificação :arrow_right: implementação :arrow_right: problemas :arrow_right: teste :arrow_right: problemas :arrow_right: finalização.
 
 Neste projeto vocês terão que criar um controle remoto bluetooth, controlado pelo kit de desenvolvimento usado na disciplina (SAME70-XPLD), com a adição de um módulo externo bluetooth HC-05.
 
-A entrega do projeto deve ser um protótipo funcional, e deve possuir todas as funcionalidades esperadas (e especificadas), descritas no folder:
-
-![](folder-controle.pdf)
+A entrega do projeto deve ser um protótipo funcional, e deve possuir todas as funcionalidades esperadas de um controle remoto bluetooth (listado a seguir).
 
 ## Descrição
 
@@ -46,27 +44,37 @@ O controle deve ser um dispositivo que permita controlar remotamente um programa
 Características principais:
 
 - Ao menos 4 entradas digitais e uma analógica
-- Deve fornecer feedback (saídas digitais) ao usuário no próprio controle
-- Customizado para a aplicação 
+- Deve fornecer feedback (ao menos duas saídas digitais) ao usuário no próprio controle
 - Interface via bluetooh 
+- Informação de controle pareado 
 
-A seguir algumas ideias de controle:
+Para ter ideias do que você pode fazer, consulte a pagina da disciplina com os projetos que já foram feitos nos outos semestres:
 
-- Vídeo (youtube/ netflix/ VLC)
-- Música (spotify)
-- ROS (robô robótica/ drone)
-- Jogos (emulador)
-    - Mario
-    - Minecraft 
-- ...
+- https://insper.github.io/ComputacaoEmbarcada/navigation/Projeto/Projeto-1-Lista/
 
-### Entregas
+Além das ideas que já foram executadas, de uma olhada  nos possíveis dispositivos que você pode usar no controle:
+
+- https://insper.github.io/ComputacaoEmbarcada/navigation/Projeto/Projeto-1-Dispositivos/
+
+### RTOS
+
+O projeto deve ser realizando usando o sistema operacional freeRTOS.
+
+## Entregas
 
 O projeto vai ter três entregas:
 
 1. Idealização e descrição do projeto (README)
 1. Estudo de usabilidade / design (README)
 1. Protótipo funcional (código/ protótipo mecânico)
+
+Cada entrega terá um peso diferente na composição final da nota:
+
+| Etapa       | Entrega | Peso |
+|-------------|---------|------|
+| Idealização | 1       | 10%  |
+| Design      | 2       | 10%  |
+| Protótipo   | 3       | 80%  |
 
 ## Começando
 

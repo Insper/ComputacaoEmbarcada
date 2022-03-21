@@ -1,29 +1,23 @@
-# Rubrica
+# Entrega 3
 
-!!! info 
-    - Em dupla
-    - Não pode repetir dupla, mas pode fazer par com colega do outro lab.
-
-    Cria repositório via classroom: https://classroom.github.com/g/WZuf4ADp
-
+<!--
 !!! tip
     Ao terminar preencha o forms a seguir:
     
     - https://docs.google.com/forms/d/e/1FAIpQLSfj2rqBALa6MGEMMGdy7IVt1OsZN_r7MKDSlroy0R5WREZ00w/viewform
     
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfj2rqBALa6MGEMMGdy7IVt1OsZN_r7MKDSlroy0R5WREZ00w/viewform?embedded=true" width="640" height="300" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-   
-A rubrica a seguir será aplicada a nota da entrega:
+-->
+
+A rubrica a seguir será aplicada para gerar a nota final:
 
 !!! info
-    Para atingir conceito maior que B sera necessário fechar as issues criadas após a entrega (qualidade de código)
+    Para atingir conceito maior que C sera necessário fechar as issues criadas após a entrega (qualidade de código)
 
 - A+
     - Testa controle com pessoa externa ao projeto (filma interação)
   
 - A (cada item = meio conceito)
-    - ~~Firmware e python suportam mais de um controle ao mesmo tempo~~
-        - Não da para fazer só com uma placa!
     - Possibilita usuário Ligar e Desligar controle (sleep mode)
         - Deve ajustar o python para reconhecer quando o controle ligar novamente
     - Programa em python envia informações ao controle e isso é exibido ao usuário.

@@ -19,7 +19,7 @@ muitas outras opções.
 | Buzzer                      | output         |                                |                                                                                                                    |
 | Vibracall                   | output         | ![vibracall]                   | Motor de vibração                                                                                                  |
 | Motores diversos            | output         |                                | Servo motor/ passo/ DC/ ..                                                                                         |
-
+   
   [rugged-metal-pushbutton]: https://cdn-shop.adafruit.com/970x728/560-00.jpg
   [mini-illuminated-pushbutton]: https://cdn-shop.adafruit.com/970x728/3105-02.jpg
   [joystick-arcade]: https://www.filipeflop.com/wp-content/uploads/2017/07/6-2.jpg
@@ -37,9 +37,13 @@ muitas outras opções.
 | Potenciômetro             | input        | ![potenciometro-linear] | Potenciometro de diversos formatos                               |
 | Microfone                 | input        | ![microphone]           | Microfone                                                        |
 | MyoWare - Sensor muscular | input        | ![myoware]              | Sensor muscular  - https://www.sparkfun.com/products/13723       |
+| Strain Gauge              | input        | ![strain-gauge]         | Extensômetro                                                     |
 | Potenciometro Motorizado  | input/output |                         | Potenciômetro porém com motor (para fazer tipo mesa de som)      |
 
   [joypad]: https://www.baudaeletronica.com.br/media/catalog/product/cache/1/image/578x/9df78eab33525d08d6e5fb8d27136e95/j/o/joystick_1.jpg
   [potenciometro-linear]: https://www.baudaeletronica.com.br/media/catalog/product/cache/1/image/578x/9df78eab33525d08d6e5fb8d27136e95/3/9/3965_1.jpg
   [microphone]: https://http2.mlstatic.com/D_NQ_NP_2X_785126-MLB45191016046_032021-F.webp
   [myoware]: https://cdn.sparkfun.com//assets/parts/1/1/2/3/3/13723-MyoWare_Muscle_Sensor-02.jpg
+  [strain-gauge]: https://cdn.awsli.com.br/600x700/78/78150/produto/16307142/3d0e1668ad.jpg
+  
+  
