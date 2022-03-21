@@ -120,14 +120,13 @@ nav:
   #    - 'Lab-8-RTOS-UART.md'
       - 'Lab 10 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
 
-#  - Projeto:
-#          - 'Descrição': 'navigation/Projeto/Projeto-1-Descricao.md'
-#          - 'Folder': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/Projeto%201/Folder-controle.pdf'
-#          - 'Controle': 'https://github.com/Insper/ComputacaoEmbarcada/blob/master/docs-src/navigation/Projeto/Emb%20-%20Controle.pdf'
-#          - 'Handout 1': 'https://app.mural.co/invitation/mural/elementos9119/1632086605145?sender=ub569a9273c6e285461187641&key=1815cea8-8e6e-4084-9be6-8b68d02a306b'
-#          - navigation/Projeto/Projeto-1-Rubrica.md
-#          - navigation/Projeto/Projeto-1-Dicas.md
-#          - navigation/Projeto/Projeto-1-Lista.md
+  - Projeto:
+          - 'Descrição': 'navigation/Projeto/Projeto-1-Descricao.md'
+          - navigation/Projeto/Projeto-1-Dispositivos.md
+          - navigation/Projeto/Projeto-1-Entrega1.md
+          - navigation/Projeto/Projeto-1-Rubrica.md
+          - navigation/Projeto/Projeto-1-Dicas.md
+          - navigation/Projeto/Projeto-1-Lista.md
 
   - APS:
 #      - 'navigation/APS/APS-howto.md'
