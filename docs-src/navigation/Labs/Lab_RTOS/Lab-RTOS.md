@@ -476,7 +476,7 @@ vermelho.
 
 ## C - Praticando
 
-Vamos praticar um pouco, agora faça o mesmo para o LED2 e LED3 da placa OLED, para iso você deverá:
+Vamos praticar um pouco, agora faça o mesmo para o LED2 e LED3 da placa OLED, para isso você deverá:
 
 - criar uma task por LED
 - criar um semáforo por task
