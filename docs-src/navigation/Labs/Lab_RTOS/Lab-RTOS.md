@@ -111,7 +111,7 @@ static void task_led(void *pvParameters) {
 !!! progress 
     Continuar ...
 
-O Tick de um RTOS define quantas fezes por segundo o escalonador irá executar o algoritmo de mudança de tarefas, no ARM o tick é implementado utilizando um timer do próprio CORE da ARM chamado de `system clock` ou [`systick`](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s02s08.html), criado para essa função.
+O Tick de um RTOS define quantas vezes por segundo o escalonador irá executar o algoritmo de mudança de tarefas, no ARM o tick é implementado utilizando um timer do próprio CORE da ARM chamado de `system clock` ou [`systick`](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dai0179b/ar01s02s08.html), criado para essa função.
 
 Por exemplo, um RTOS que opera com um tick de 10ms irá decidir pelo chaveamento de suas tarefas 100 vezes por segundo, já um tick configurado para 1ms irá executar o escalonador a uma taxa de 1000 vezes por segundo. Trechos de código que necessitam executar a uma taxa maior que 1000 vezes por segundo (tick = 1ms) não devem ser implementados em tasks do RTOS mas sim via interrupção de timer.
 
@@ -131,7 +131,7 @@ A configuração da frequência do tick assim como o mesmo é implementando est�
     
     - Quanto maior a frequência de chaveamento mais vezes/segundo o OS necessita salvar e recuperar o contexto, diminuindo assim sua eficiência.
     
-    - Frequência máxima recomendada para o freertos em uma ARM e a de 1000 Hz
+    - Frequência máxima recomendada para o freertos em uma arquitetura ARM á a de 1000 Hz
 
 #### Task Monitor 
 
@@ -197,7 +197,7 @@ taskName Status Priority WaterMark Task ID
 Criar uma tarefa é similar ao de inicializar um programa em um sistema operacional, mas no caso devemos indicar para o RTOS quais "funções" irão se comportar como pequenos programas (tarefas). Para isso devemos chamar a função `xTaskCreate` que possui a seguinte estrutura:
 
 !!! info "Leitura necess[aria]"
-    Acesse e leia a documenta;áo do freertos sobre cria;áo de tasks:
+    Acesse e leia a documentação do freertos sobre cria;áo de tasks:
     
     https://www.freertos.org/a00125.html
 
@@ -277,7 +277,7 @@ Basta de teoria! Agora vamos começar programar e praticar...
 
 ### Piscando LED1 OLED
 
-Vamos agora criar uma nova tarefa e fazer ela controlar o LED1 da placa OLED, nessa tarefa vocês devem fazer o LED1 piscar por 5 vezes e então ficar 3 segundos em piscar, depois voltar a piscar novamente!
+Vamos agora criar uma nova tarefa e fazer ela controlar o LED1 da placa OLED, nessa tarefa vocês devem fazer o LED1 piscar por 3 vezes e então ficar 3 segundos sem piscar, depois voltar a piscar novamente!
 
 !!! exercise "Tarefa"
     1. Crie uma função similar a task LED só que com nome: `task_led1`
@@ -348,7 +348,7 @@ Adicione os defines e a variável global que indica o semáforo:
     1. Inclua os defines:
     ```c
     #define BUT1_PIO			PIOD
-    #define BUT1_PIO_ID			16
+    #define BUT1_PIO_ID			ID_PIOD
     #define BUT1_PIO_IDX		28
     #define BUT1_PIO_IDX_MASK	(1u << BUT1_PIO_IDX)
     ```
@@ -482,7 +482,7 @@ Vamos praticar um pouco, agora faça o mesmo para o LED2 e LED3 da placa OLED, p
 - criar um semáforo por task
 - iniciar os leds e botões dentro de cada task
 
-==Você deve mantém o que já estava sendo feito antes: o LED da placa precisa continuar 
+==Você deve manter o que já estava sendo feito antes: o LED da placa precisa continuar 
 piscando.==
 
 !!! note "Preencher ao finalizar o lab"
