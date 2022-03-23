@@ -15,7 +15,7 @@
 !!! video
     ![Video](https://www.youtube.com/embed/F321087yYy4)
 
-Neste laboratório iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciarmos três LED e três botões (vamos refazer a entrega do lab `TC RTT RTC` porém agora com o uso do OO).
+Neste laboratório iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciarmos três LED e três botões (vamos refazer a entrega do lab `TC RTT RTC` porém agora com o uso do SO).
 
 O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://freertos.org), um sistema operacional muito utilizado pela industria, sendo o segundo sistema operacional (**20%**) mais utilizado em projetos embarcados, perdendo só para o [Linux](https://m.eet.com/media/1246048/2017-embedded-market-study.pdf).
 
@@ -291,7 +291,7 @@ Vamos agora criar uma nova tarefa e fazer ela controlar o LED1 da placa OLED, ne
     1. E então criei a task no rtos, dentro do `main(){}`
         - `xTaskCreate(task_led1, "Led1", TASK_LED1_STACK_SIZE, NULL, TASK_LED1_PRIORITY, NULL);`
     
- !!! progress 
+!!! progress 
     Continuar ...
 
 ### Power Save mode?
@@ -346,7 +346,7 @@ Adicione os defines e a variável global que indica o semáforo:
 !!! exercise "Modifique"
     
     1. Inclua os defines:
-    ```c
+    ```c	
     #define BUT1_PIO			PIOD
     #define BUT1_PIO_ID			ID_PIOD
     #define BUT1_PIO_IDX		28
