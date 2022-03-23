@@ -20,8 +20,8 @@ Pontos de cada item:
     - A APS pode ser realizada em dupla.
     - **Você não pode repetir a mesma dupla da APS1.**
     - O desenvolvimento do projeto deve ser feito no repositório criado
-    pelo classroom:
-        - https://classroom.github.com/a/5rSQSk3z
+    pelo classroom ==ATUALIZADO!!== :
+        - https://classroom.github.com/a/0Svg4qbE      
     - Leia atentamente como trabalhar no repositório:
          - [APS HowTo](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-howto/)
 
