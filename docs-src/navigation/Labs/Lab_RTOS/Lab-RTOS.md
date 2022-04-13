@@ -50,6 +50,8 @@ O laboratório consiste em:
 
 ### PIO-IRQ-RTOS
 
+- https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTOS-PIO-IRQ
+
 Vamos usar esse código exemplo para aprenderemos os principais recursos deo RTOS, nele criamos duas tasks: `task_but` e `task_led` que se comunicam via uma fila. O botão da placa é configurado para operar com interrupcão de boarda, liberando um semáforo para a `task_but`, que processa a informacão e envia um novo valor de delay para a `task_led`:
 
 ![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/RTOS-PIO-IRQ/doc/diagrama.svg)
@@ -78,6 +80,8 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     Continuar ...
 
 ### ADC-IRQ-RTOS
+
+- https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTOS-IRQ-ADC
 
 Outro exemplo que vamos usar como base é o ADC-IRQ-RTOS que faz a leitura de um valor analógico do pino do uC, você deve ler o README que possui o diagrama de ligações e uma pequena explicacão. 
 
