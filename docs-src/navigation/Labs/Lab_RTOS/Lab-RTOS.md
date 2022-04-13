@@ -76,6 +76,16 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     1. Crie um novo semáforo e libere ele quando o botão novo for apertado.
     1. Na task but processe o semáforo aumentado o valor da frequência
 
+
+!!! exercise "Praticando"
+    Agora vamos usar fila no lugar de semáforo para comunicar os botões com a task_but. 
+    
+    Tarefa:
+    
+    1. Crie uma fila a mais
+    1. Cada callback deve colocar o valor do incremento na fila (ou o id do botão)
+    1. A task_but recebe o valor, faz o cálculo e envia para a task_led
+
 !!! progress 
     Continuar ...
 
