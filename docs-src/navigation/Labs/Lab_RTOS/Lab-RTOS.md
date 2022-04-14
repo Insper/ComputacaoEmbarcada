@@ -64,7 +64,7 @@ Vamos usar esse código exemplo para aprenderemos os principais recursos deo RTO
 
 Antes de seguir analise um pouco o código e tente entender o que está acontecendo, para isso consulte a página desse lab chamada de Teoria.
 
-!!! exercise "Praticando"
+!!! exercise "Praticando - semáforo"
     Faca uma cópia desse código para `Lab6-pio-irq-rtos` e vamos mexer nele!
     
     A ideia aqui é possibilitar diminuirmos a frequência através de outro botão! Para 
@@ -82,8 +82,8 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     - As interrupções de HW devem possuir prioridade maior que 4.
 
 
-!!! exercise "Praticando"
-    Agora vamos usar fila no lugar de semáforo para comunicar os botões com a task_but. 
+!!! exercise "Praticando - queue"
+    Agora vamos usar fila no lugar de semáforo para comunicar os botões com a `task_but`. 
     
     Tarefa:
     
