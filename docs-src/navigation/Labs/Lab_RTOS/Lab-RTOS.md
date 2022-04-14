@@ -75,6 +75,11 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     1. Modifique o código adicionando um botão da placa OLED (interrupcao, callback...)
     1. Crie um novo semáforo e libere ele quando o botão novo for apertado.
     1. Na task but processe o semáforo aumentado o valor da frequência
+    
+    Dicas:
+    
+    - Você ==NÃO== deve criar outra task, tem que fazer tudo na `task_but`
+    - As interrupções de HW devem possuir prioridade maior que 4.
 
 
 !!! exercise "Praticando"
