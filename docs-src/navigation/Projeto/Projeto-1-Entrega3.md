@@ -1,13 +1,12 @@
-# Entrega 3
+# Entrega 2
 
-<!--
 !!! tip
     Ao terminar preencha o forms a seguir:
     
-    - https://docs.google.com/forms/d/e/1FAIpQLSfj2rqBALa6MGEMMGdy7IVt1OsZN_r7MKDSlroy0R5WREZ00w/viewform
+    - https://forms.gle/kSsmELV2Ty5DRD3SA
     
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfj2rqBALa6MGEMMGdy7IVt1OsZN_r7MKDSlroy0R5WREZ00w/viewform?embedded=true" width="640" height="300" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
--->
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc7hvub2uBg2vw8UJ3C_9zpjGazCf_0Al7g14pnJQr3gjiHBA/viewform?embedded=true" width="640" height="450" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    
 
 A rubrica a seguir será aplicada para gerar a nota final:
 
@@ -21,12 +20,16 @@ A rubrica a seguir será aplicada para gerar a nota final:
     - Possibilita usuário Ligar e Desligar controle (sleep mode)
         - Deve ajustar o python para reconhecer quando o controle ligar novamente
     - Programa em python envia informações ao controle e isso é exibido ao usuário.
-botão e `task_bluetooth`.
   
 - B 
     - Grupo cria um primeiro protótipo **conceitual** mecânico para o controle (pode usar papelão, massinha, modelo cad 3d, ...), não precisa ligar a parte elétrica ao mecânico, é só para termos uma ideia de como seria.
     
     - Cria uma task dedicada para receber e processar dados da comunicação (computador --> uC).
+    
+!!! info
+    A ideia aqui é que o PC se comunique com o uC, para isso vocês podem usar a funcão `self.ser.write()` que irá enviar um **char** para o bluetooth e por consequência para o uC. No uC você pode ler esse dado usando: `char status = usart_read(USART_COM, &readChar);` Se `status` for `1` isso indica que um dado válido foi salvo em `readChar`.
+        
+    Nessa comunicação vocês podem mandar qualquer coisa, já teve um grupo que enviou o nome da música do spotify que estava sendo tocada e exibiu a música no OELD. Não precisa ser algo tão complexo, podem enviar apenas um housekeeping da comunicação ou um ACK do recebimento do comando.
     
 - C+
     - No lugar de vários semáforos usa uma única fila para comunicar IRQ com `task_bluetooth`.

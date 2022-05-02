@@ -1,10 +1,9 @@
 # Projeto 1 
 
-| Entregas  | Data |
-|-----------|------|
+| Entregas               | Data |
+|------------------------|------|
 | Entrega 1: Idealização | 25/3 |
-| Entrega 2: Interface | ??   |
-| Entrega 3: Final     | ??   |
+| Entrega 2: Protótipo   | 8/3  |
 
 !!! video
     ![](https://www.youtube.com/watch?v=Y8Mk-5F9A5M)
@@ -73,11 +72,10 @@ Cada entrega terá um peso diferente na composição final da nota:
 | Etapa       | Entrega | Peso |
 |-------------|---------|------|
 | Idealização | 1       | 10%  |
-| Design      | 2       | 10%  |
-| Protótipo   | 3       | 80%  |
+| Protótipo   | 2       | 90%  |
 
 ## Começando
 
-Vamos começar pensando um pouco no controle! Para isso, faça em dupla a atividade no mural, essa etapa já vai ajudar na entrega (1) e (2):
+Vamos começar pensando um pouco no controle! Para isso, faça em dupla a atividade no mural, essa etapa já vai ajudar na entrega (1):
 
 https://app.mural.co/t/elementos9119/m/elementos9119/1647805316386/ea440968de8c0b032b081bfa8996879bb6318abd?sender=ub569a9273c6e285461187641
