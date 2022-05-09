@@ -1,19 +1,17 @@
 # Entrega 1: Design
 
-| Entrega          | Data  |
-|------------------|-------|
-| Design interface | 13/11 |
+| Entrega            | Data  |
+|--------------------|-------|
+| Design interface   | 15/05 |
+| 15 % da nota final |       |
 
 !!! info  
     Criar o repositório pelo classroom:
 
     https://classroom.github.com/a/eAhMDHPo
     
-    Entregar pelo forms:
+    A entrega dessa etapa deve ser realizada no README do repositório.
     
-    https://docs.google.com/forms/d/e/1FAIpQLSeMlO3xIevEDdzdS6_KyRG6yRmrSB_BLsTqFooWgBHZPhnt5w/viewform?usp=sf_link
-    
-
 A equipe de novos produtos disponibilizou alguns requisitos do protótipo e vocês devem propor uma interface que satisfaca as necessidades do projeto.
 
 ## Requisitos
@@ -21,6 +19,8 @@ A equipe de novos produtos disponibilizou alguns requisitos do protótipo e voc�
 A seguir a lista de requisitos de usabilidade e de funcionalidades para o projeto do ciclocomputador.
 
 ### Usabilidade
+
+Requisitos de usabilidade do produto
 
 !!! tip "req. ux. 0 - Operacão"
     A interface a ser projetada deve ser tal que o usuário consigo operar com apenas uma mão (lembre que é algo para ser usado na bike) e que as informações devem ser exibidas de forma clara, considerando uma leitura e operação em movimento.
@@ -74,8 +74,7 @@ O ciclocomputador pode ser usado em diferentes tamanhos de bicicleta e o usuári
 ## Entrega
 
 !!! nota
-    A entrega deve ser feita no projeto do mural que pode ser acessado no link a seguir:
-    https://app.mural.co/t/elementos9119/m/elementos9119/1635464106423/6dbaa412b5111d6713484f536f014438d7ea217d?sender=ub569a9273c6e285461187641
+    A entrega deve ser no README do repositório criado, mas para ajudar vocês na idealização vocês devem usar o mural a seguir: https://app.mural.co/t/elementos9119/m/elementos9119/1652116252461/f773497a764ead5f57048cedf89780811768c460?sender=ub569a9273c6e285461187641
 
 Nessa etapa de design vocês devem apresentar uma versão inicial da interface que deve satisfazer os requisitos listados anteriormente. Na interface será necessário indicar qual widget do LVGL pretendem utilizar. Lembrem de consultar sempre a página do LVGL para saber o que está disponível:
 
@@ -91,27 +90,21 @@ O exemplo a seguir é de uma interface de uma máquina de lavar roupa, vocês de
 
 ![](exemplo.png)
 
+!!! info
+    A interface de vocês pode possuir multiplas telas.
+
 ### Validando no LCD
 
 Antes de sairmos implementando a interface no LVGL iremos validar a proposta que vocês desenvolveram no LCD. Para isso iremos gerar um PNG da interface do mural e exibir no LCD como uma imagem estática. A ideia aqui é apenas validar o conceito antes de gastarmos tempo programando algo que não ficou bom.
 
-
 Para isso você deve:
 
-1. Gerar uma imagem da interface fazendo screenshot da imagem do mural nas nas dimensões: `240x320`
-1. Seguir o roteiro em `util/LVGL` para exibir a imagem no LCD: https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-lvgl/
+1. Gerar uma imagem da interface fazendo screenshot da imagem do mural nas dimensões: `240x320`
+1. Seguir o roteiro em `util/LVGL` para exibir a imagem no LCD: https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-lvgl/#exibindo-uma-imagem
 
 !!! info
     Importante gerar a imagem nas dimensões `240x320`, queremos ocupar o LCD todo com nossa imagem.
     
-!!! tip
-    Deixei a imagem desenhada no LCD e então vá construindo a interface o LVGL por cima. O LVGL trabalha com camadas e os widgets mais novos são alocados no topo:
-    
-    - https://docs.lvgl.io/master/overview/layer.html
-    
-    > By default, LVGL draws new objects on top of old objects.
-    
-    ![](https://docs.lvgl.io/master/_images/layers.png)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/aMafQWIxyCg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -119,23 +112,13 @@ Para isso você deve:
 
 Rubrica referente ao design da interface.
 
-!!! warning ""
-
-    Penalizacão de atraso
-
-    | Atraso | Nota máxima |
-    |--------|-------------|
-    | 2 dias | C           |
-    | 4 dias | D           |
-    | 6 dias | I           |
-
 As notas são incrementais. Por exemplo, Para atingir o B deve apresentar todos os itens do C, ou seja, os dois vídeos e as duas imagens! ==No mural vocês também devem manter as diferentes versões.==
 
 #### A
 
 - Especifica e justifica as cores a serem usadas na interface
-- Pega feedback com duas pessoas externa e incorpora na interface
-    - Grava em áudio as entrevistas
+- Pega feedback com mais uma pessoa externa e incorpora na interface
+    - Grava em vídeo a entrevista
 - Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
 - Apresentar uma foto da interface sendo executada no LCD (imagem estática)
 
@@ -143,7 +126,7 @@ As notas são incrementais. Por exemplo, Para atingir o B deve apresentar todos 
 
 - Especifica e justifica quais vão ser as fontes (e tamanhos) a serem usadas na interface.
 - Pega feedback com o Luiz do Fablab e incorpora na interface
-    - Vai estar no atendimento da tarde de sexta feira.
+    - Grava em vídeo a entrevista
 - Grava um vídeo atualizado explicando o que foi sugerido e o que fizeram para melhorar a interface
 - Apresentar uma foto da interface sendo executada no LCD (imagem estática)
 
@@ -151,8 +134,6 @@ As notas são incrementais. Por exemplo, Para atingir o B deve apresentar todos 
 
 - Mockup da interface:
     - Satisfaz todos os requisitos do projeto
-    - Protótipo da interface satisfaz todos os requisitos
     - Indica quais são os widgets do LVGL 
     - Apresentar uma foto da interface sendo executada no LCD (imagem estática)
 - Grava um vídeo explicando a interface
-    - **Todos do grupo devem aparecer no vídeo (pode ser em call)**

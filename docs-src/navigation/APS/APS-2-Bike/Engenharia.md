@@ -51,11 +51,6 @@ Diagrama da montagem:
     1. Quando for configurar o pino para realizar a leitura do sensor ==DESABILITAR== o PULL_UP.
     1. Configurar IRQ em borda de descida.
 
-### Fita NEON RGB
-
-!!! warning
-    TODO
-
 ## Medições
 
 A seguir detalhes de como podem ser realizadas a medições necessárias ao projeto:
@@ -177,6 +172,19 @@ um pouco de variação na leitura da velocidade.
             printf("Failed to create lcd task\r\n");
         }
     ```
+    
+    
+### Interface
+
+Nesta etapa vocês devem também implementar a interface que foi proposta na entrega de design, uma dica é a deixar a imagem desenhada no LCD e então ir construindo a interface o LVGL por cima. O LVGL trabalha com camadas e os widgets mais novos são alocados no topo:
+    
+- https://docs.lvgl.io/master/overview/layer.html
+    
+> By default, LVGL draws new objects on top of old objects.
+    
+![](https://docs.lvgl.io/master/_images/layers.png)
+
+
 ## Rubrica
 
 A seguir um resumo dos requisitos e da rubrica da entrega associada a eles. Lembrem que vocês devem utilizar os recursos do freeRTOS sempre que possível.
@@ -186,12 +194,15 @@ A seguir um resumo dos requisitos e da rubrica da entrega associada a eles. Lemb
     - Qualidade de software? Consulte a página com regras de firmware: https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-o-que-nao-pode/
 
 
-| | | Rubrica |
+| | Rubrica UX | |
 | --- | --- | --- |
-| req. ux. 0 - Operacão | A interface a ser projetada deve ser tal que o usuário consigo operar com apenas uma mão (lembre que é algo para ser usado na bike) e que as informações devem ser exibidas de forma clara, considerando uma leitura e operação em movimento. | ==C== |
-| req. ux. 1 - Hardware | O hardware a ser utilizado será o LCD de 240x320px touch colorido. | ==C== |
-| req. ux. 2 - Branding | A interface deve ser alinhada com o logo e nome da empresa que você escolheu (blanding) | ==B== |
+| req. ux. 1 - Operacão | A interface a ser projetada deve ser tal que o usuário consigo operar com apenas uma mão (lembre que é algo para ser usado na bike) e que as informações devem ser exibidas de forma clara, considerando uma leitura e operação em movimento. | ==C== |
+| req. ux. 2 - Hardware | O hardware a ser utilizado será o LCD de 240x320px touch colorido. | ==C== |
 | req. ux. 3 - Exibir o logo | O logotipo da empresa deve estar presente na interface. | ==C== |
+| req. ux. 4 - Branding | A interface deve ser alinhada com o logo e nome da empresa que você escolheu (blanding) | ==B== |
+
+| | Rubrica Funcional ||
+| --- | --- | --- |
 | req. fun. 1 - Relógio | Indicação da hora atual, no formato: HH:MM:SS atualizada a cada segundo. | ==C== |
 | req. fun. 2 - Velocidade instantânea | Exibir a velocidade em km/h. | ==C== |
 | req. fun. 3 - Indicação da aceleração | Indicação visual da aceleração da bicicleta (positiva/ negativa ou constante). | ==C== |
@@ -201,3 +212,8 @@ A seguir um resumo dos requisitos e da rubrica da entrega associada a eles. Lemb
 | req. fun. 7 - Trajeto: Controle | Deve possibilitar o usuário iniciar, parar ou reiniciar a contagem de um trajeto. | ==B== |
 | req. fun. 8 - Trajeto: Indicador status | A tela deve possuir um indicador se a contagem da parte referente ao percurso está ou não ativada. | ==B== |
 | req. fun. 9 - Configuracão | Deve possibilitar o usuário configurar o diâmetro da roda. | ==A== |
+
+
+|  | Rubrica extra | |
+| --- | --- | --- |
+| req. extra. 1 - Extra | Adicionar alguma coisa diferente na bicicleta, aqui você deve deixar a imaginação voar!! | ==B== |

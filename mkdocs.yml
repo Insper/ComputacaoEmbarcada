@@ -68,11 +68,10 @@ markdown_extensions:
       repo: mkdocs-material
   - pymdownx.mark
   - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - pymdownx.tabbed
-  - pymdownx.tasklist:
-      custom_checkbox: true
   - pymdownx.tilde
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
 #####################################################################
 nav:
@@ -111,10 +110,10 @@ nav:
         - 'Teoria':  'navigation/Labs/Lab_RTOS/Teoria.md'
  #       - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
      # - 'Lab 7 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
-#      - 'Lab 8 - RTOS - LCD - LVGL':
-#          - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
-#          - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'
-#          - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md'
+      - 'Lab 7 - RTOS - LCD - LVGL':
+        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
+        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'
+        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md'
 #      - 'Lab 9 - RTOS - HC-SR04': 'navigation/Labs/Lab_RTOS_HCSR04/lab.md'
   #    - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
   #    - 'Lab-9-ADC-FIR.md'
@@ -134,11 +133,11 @@ nav:
       - 'APS 1 - Musical':
           - 'navigation/APS/APS-1-Musical.md'
           - 'navigation/APS/APS-1-Musical-software.md'
-#      - 'APS 2 - Ciclocomputador':
-#          - 'navigation/APS/APS-2-Bike/Descricao.md'
-#          - 'navigation/APS/APS-2-Bike/Design.md'
-#          - 'navigation/APS/APS-2-Bike/Engenharia.md'
-  #        - 'navigation/APS/APS-2-Bike/Rubrica.md'
+      - 'APS 2 - Ciclocomputador':
+          - 'navigation/APS/APS-2-Bike/Descricao.md'
+          - 'navigation/APS/APS-2-Bike/Design.md'
+          - 'navigation/APS/APS-2-Bike/Engenharia.md'
+          - 'navigation/APS/APS-2-Bike/Rubrica.md'
 
   #    - 'navigation/APS/APS-2-Oximetro.md'
   #    - 'navigation/APS/APS-3-IoT.md'
