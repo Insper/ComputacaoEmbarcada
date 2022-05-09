@@ -6,9 +6,7 @@
 | 15 % da nota final |       |
 
 !!! info  
-    Criar o repositório pelo classroom:
-
-    https://classroom.github.com/a/L1D6xKR_
+    Criar o repositório pelo [classroom](https://classroom.github.com/a/L1D6xKR_):
     
     A entrega dessa etapa deve ser realizada no README do repositório.
     
