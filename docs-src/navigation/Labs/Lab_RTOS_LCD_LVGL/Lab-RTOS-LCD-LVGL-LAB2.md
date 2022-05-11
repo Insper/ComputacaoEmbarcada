@@ -18,7 +18,7 @@ https://github.com/keshikan/DSEG
 
 ![](https://raw.githubusercontent.com/keshikan/DSEG/master/sample/all_DSEG_list.png){width=500}
 
-!!! example "Tarefa"
+!!! exercise "Tarefa"
     1. Baixe a fonte para o seu computador
        - https://github.com/keshikan/DSEG/releases/download/v0.46/fonts-DSEG_v046.zip
     1. Extrai a pasta
@@ -120,7 +120,7 @@ Antes de continuar temos que editar o começo arquivo da fonte `dseg70`, incluin
 #endif
 ```
 
-!!! example "Tarefa"
+!!! exercise "Tarefa"
     1. Crie o novo label como indicado anteriormente
     1. Modifique o arquivo `dseg70.h`
     1. Declare a fonte nova no main.c: `LV_FONT_DECLARE(dseg70);`
@@ -142,7 +142,7 @@ Antes de continuar temos que editar o começo arquivo da fonte `dseg70`, incluin
 
 Agora vocês precisam criar os outros dois labels: Relógio e Temperatura configurada, para isso será necessário gerar outras duas fontes de tamanhos diferentes e criar os labels.
 
-!!! example "Tarefa"
+!!! exercise "Tarefa"
     1. Crie o label temperatura referência: `labelSetValue`
     1. Crie o label para o relógio: `labelClock`
     
@@ -184,7 +184,7 @@ static void up_handler(lv_event_t * e) {
 !!! info
     A vantagem da implementação sugerida é que não precisamos de uma variável global para armazenar o valor da temperatura, nós recuperamos o valor lendo o que estava salvo no label e convertendo para inteiro.
     
-!!! example "Tarefa"
+!!! exercise "Tarefa"
     1. Implemente o handler
     1. Teste na placa
        - Aperte o botão de up e verifique se a referência muda.
@@ -201,7 +201,7 @@ static void up_handler(lv_event_t * e) {
 
 Agora implemente a ação do botão down.
 
-!!! example "Tarefa"
+!!! exercise "Tarefa"
     1. Implemente o `down_handler`
     1. Teste na placa
 
@@ -209,7 +209,7 @@ Agora implemente a ação do botão down.
 
 Temos um relógio na interface, vamos fazer ele funcionar? Para isso terão que incluir o RTC no projeto e fazer uso dele.
 
-!!! example "Tarefa"
+!!! exercise "Tarefa"
     Inclua o RTC no projeto e faça o relógio funcionar!
     
     O relǵio deve exibir HH:MM, o **:** deve piscar uma vez por segundo.

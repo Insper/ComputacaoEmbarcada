@@ -1,10 +1,10 @@
 # Lab - Parte 1
 
+
+
 | LAB                  |
 | -------------------- |
 | `Lab8-RTOS-LCD-LVGL` |
-
-Neste laboratório iremos:
 
 Agora vamos começar mexer com o LVGL e criar nossa interface. A ideia é recriar uma interface de um termostato inspirado no produto a seguir:
 
@@ -33,7 +33,7 @@ Muitas vezes o protótipo da interface esbarra em problemas técnicos e de imple
 !!! tip
     Vamos usar muito a documentação do lvgl é importante que você tenha o site aberto e a consulte sempre:
     
-    - https://docs.lvgl.io/latest/en/html/overview/index.html
+    - https://docs.lvgl.io/8/
 
 O LVGL possui vasta documentação e muitos bons exemplos (testamos vários e todos funcionaram no embarcado), neste laboratório iremos usar alguns widgets do LVGL e aos poucos vamos customizando eles.
 
@@ -41,7 +41,7 @@ O LVGL possui vasta documentação e muitos bons exemplos (testamos vários e to
 
 Vamos criar uma nova função chamada de `void lv_termostato(void){ }` onde iremos fazer a implementação da interface do termostato. Além de criarmos esta função, teremos que modificar a `task_lcd` para chamar a nova função.
 
-!!! example "Tarefa"
+!!! exercise "Tarefa"
     Modifique o fimrware original incluindo a função `lv_termostato` e modificando a `task_lcd`:
     
     ```diff
@@ -76,7 +76,7 @@ Vamos criar uma nova função chamada de `void lv_termostato(void){ }` onde irem
 
 Notem que a interface a ser recriada possui fundo preto, para atingirmos tal objetivo com o LVGL iremos modificar a configuração padrão do LVGL que está localizada em `config/lv_conf.h`. Neste arquivo procure pelo define `LV_THEME_DEFAULT_DARK` e modifique para 1.
 
-!!! example "Tarefa"
+!!! exercise "Tarefa"
     1. Modifique o define `LV_THEME_DEFAULT_DARK` de `0` para `1`
     1. Teste no uC
     
@@ -87,7 +87,7 @@ Notem que a interface a ser recriada possui fundo preto, para atingirmos tal obj
 
 #### Tamanho da fonte
 
-Vocês notaram que a fonte padrão do LCD está meio pequena? Conseguimos ajustar isso no LVGL escolhendo uma fonte maior. O LVGL disponibiliza alguns tamanhos de fonte de uma mesma classe (MontSerrat). A lista de fontes está no arquivo de configuração `src/config/lv_conf.h`. Neste arquivo dvocê deve encontrar algo como:
+Vocês notaram que a fonte padrão do LCD está meio pequena? Conseguimos ajustar isso no LVGL escolhendo uma fonte maior. O LVGL disponibiliza alguns tamanhos de fonte de uma mesma classe (MontSerrat). A lista de fontes está no arquivo de configuração `src/config/lv_conf.h`. Neste arquivo você deve encontrar algo como:
 
 ```c linenums="289"
 /*Montserrat fonts with ASCII range and some symbols using bpp = 4
@@ -117,14 +117,14 @@ Para recriar a interface iremos usar um tamanho de fonte um pouco maior que o pa
     |  14    | Program Memory Usage : 235852 bytes   11,2 % Full |
     |  24    | Program Memory Usage : 250904 bytes   12,0 % Full |
     
-    O LVGL não lida com fontes de forma avanç©ada, cada letra da fonte é uma matriz que contém os pxs a serem assionados. Quanto maior a fonte maior precisa ser essa matrix e mais memória de programna utiliza.
+    O LVGL não lida com fontes de forma avançada, cada letra da fonte é uma matriz que contém os pixels a serem associados. Quanto maior a fonte maior precisa ser essa matriz e mais memória de programa utiliza.
     
     ==Parece pouca diferença né? Mas não é! Vamos sofrer um pouco com isso na nossa próxima APS.==
 
-!!! example "Tarefa"
+!!! exercise "Tarefa"
     Modifique o arquivo `lv_conf.h` para:
     
-    1. Incluir a a fonte tamanho 24 no projeto
+    1. Incluir a fonte tamanho 24 no projeto
     ```diff
     #define LV_FONT_MONTSERRAT_12    0
     #define LV_FONT_MONTSERRAT_14    0
@@ -145,7 +145,7 @@ Para recriar a interface iremos usar um tamanho de fonte um pouco maior que o pa
 
 A primeira etapa após ter a interface definida é identificar quais widgets podem ser utilizados para montar a interface. 
 
-!!! question short
+!!! exercise short
     Identifique quais widgets você usaria para reconstruir a imagem a seguir:
     
     ![](imgs/lab.svg){width=400}
@@ -155,13 +155,13 @@ A primeira etapa após ter a interface definida é identificar quais widgets pod
         
         - https://docs.lvgl.io/master/widgets/core/index.html
         
-    !!! details ""
+    !!! answer
         Podemos construir a tela toda usando apenas Botões e Labels.
         
         - (a): lv_label
         - (b): lv_button
         
-        Os botões de power,.... podem ser botões com "símbolos" no lugar do texto.
+        Os botões que incluem uma imagem, como o de power, memória, ...., podem ser botões com "símbolos" no lugar do texto.
 
 !!! progress
     Click para continuar....
@@ -255,11 +255,12 @@ Um objeto pode ser alinhado com relação a um *screen* ou a um outro objetivo d
     - `LV_ALIGN_OUT_RIGHT_MID`
     - `LV_ALIGN_OUT_RIGHT_BOTTOM`
 
-!!! question choice
+
+!!! exercise choice "Pergunta"
     Supondo dois objetos como ilustrado a seguir.
     Qual deve ser a função para alinharmos o obj2 ao lado do obj1?
     
-    - A ideia é usar o btn1 como referência.
+    A ideia é usar o btn1 como referência.
     
     ```
         +-------++-------+  
@@ -274,14 +275,14 @@ Um objeto pode ser alinhado com relação a um *screen* ou a um outro objetivo d
     - [x] `lv_obj_align_to(btn2, btn1, LV_ALIGN_RIGHT, 0, 0);`
     - [ ] `lv_obj_align_to(btn1, btn2, LV_ALIGN_RIGHT, 0, 0);`
 
-    !!! details ""
-        
+    !!! answer   
         - O primeiro parametro é o obj a ser alinhado: `obj2`
         - O segundo o obj a ser usado de referência: `obj1`
         - Queremos alinhas a direita e no meio.
         - Queremos o botão 2 "colado" no botão 1
 
-!!! question choice
+
+!!! exercise choice
     Supondo dois objetos como ilustrado a seguir. 
     Qual deve ser a função para alinharmos o obj2 ao lado do obj1?
     
@@ -303,14 +304,14 @@ Um objeto pode ser alinhado com relação a um *screen* ou a um outro objetivo d
     - [ ] `lv_obj_align_to(btn2, btn1, LV_ALIGN_RIGHT, 0, 0);`
     - [ ] `lv_obj_align_to(btn2, btn1, LV_ALIGN_RIGHT, 0, 0);`
 
-    !!! details ""
+    !!! answer
         Agora o truque é que queremos alinhar com o "Bottom" do botão 1. Por isso
         usamos o `LV_ALIGN_BOTTOM_RIGHT`
         
 !!! progress
     Click para continuar....
 
-!!! task
+!!! exercise
     Alinhe o botão `btn1` da função `lv_termostato` para o canto esquerdo
     inferior da tela.
     
@@ -318,6 +319,7 @@ Um objeto pode ser alinhado com relação a um *screen* ou a um outro objetivo d
     - Notem que o botão original da figura está um pouco deslocado para direita e para cima.
         - Modifiquem o X e o Y da funcão para obterem esse comportamento.
     - Teste no uC
+
 
 !!! progress
     Click para continuar....
@@ -438,7 +440,7 @@ Também podemos mudar o tamanho de um objeto, como no exemplo a seguir:
 
 ### Demais botões
 
-!!! example "Tarefa: Demais botões"
+!!! exercise "Tarefa: Demais botões"
     Agora você é capaz de recriar os demais botões da interface, para cada botão criei uma função de callback (similar ao `event_handler`). 
     
     Implemente:

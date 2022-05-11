@@ -1,35 +1,32 @@
 # Começando
 
-Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciar o LCD max Touch, o forte desse lab será a linguagem C e como estruturar um firmware.
+Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciar o LCD max Touch.
 
 !!! warning
     ==Atualizem o repositório SAME70-Examples antes de continuar==
 
 | LAB                  |
 | -------------------- |
-| `Lab8-RTOS-LCD-LVGL` |
+| `Lab7-RTOS-LCD-LVGL` |
 
 Neste laboratório iremos:
 
 1. Conectar o LCD no kit de desenvolvimento
-1. Executar demo de teste do LCD
-1. Executar demo de teste do touch
 1. Executar e modificar o exemplo do lvgl
 
 ### Início 
 
 Antes de começarmos será necessário realizarmos a conexão do LCD no kit e então validarmos a conexão do LCD e depois do touch.
 
-!!! info "Conectando LCD"
-    Primeiro faça as ligações:
+!!! exercise "Conectando LCD"
+    Primeiro faça as ligações como indicado no README a seguir:
     
     1. Plugue o LCD max Touch no ==EXT2== seguindo as instruções em: [SAME70-examples/Screens/2.8-TFT-LCD-ILI9341-Hardware](https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-Hardware)
     
     Depois valide: 
-        
-    - Execute o código exemplo que desenha uma foto no LCD: [Screens/2.8-TFT-LCD-ILI9341-image/](https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-image)
-    
-    - Valide o touchscreen com o código: [Screens/2.8-TFT-LCD-ILI9341-touch/](https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-touch)
+ 
+    1. Copie o código exemplo `SAME70-examples/Screens/RTOS-LCD-maxTouch-Switch-Toggle/` para a pasta da entrega do seu repositório: `Lab7-RTOS-LCD-LVGL`
+    1. Execute o código, você deve visualizar dois botões e eles devem ser interativos.
 
 !!! note "Terminal"
     O segundo exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:
@@ -124,20 +121,8 @@ Iremos trabalhar com o código base: [RTOS-TFT-LCD-ILI9341-LVGL](https://github.
 - Driver Touch resistivo
 - lvgl
 
-!!! warning "Entrega"
-    Você deve copiar o código RTOS-TFT-LCD-ILI9341-LVGL para o repositório de entregas de laboratório e renomear para **Lab8-RTOS-LCD-LVGL**. Vamos trabalhar nesta pasta.
-    
-Antes de começarmos vamos entender um pouco o código de exemplo e como o lvgl trabalha.
-
-!!! task
-    1. Faca uma cópia do código que está no repositório de exemplos para o seu repositório:
-        - `screens/RTOS-TFT-LCD-ILI9341-LVGL`
-    1. Renomei para `Lab8-RTOS-LCD-LVGL`
-    1. Execute o código na placa, você deve ver dois botões! ==Click neles.==
-    
 !!! progress
-    Só continue após ter executado a demo e ela ter funcionado.
-
+    Antes de começarmos a mexer com o LVGL vamos entender um pouco o código de exemplo e como o lvgl trabalha.
 
 ### Porting lvgl
 
@@ -148,10 +133,8 @@ O [site do LVGL](https://docs.lvgl.io/latest/en/html/porting/index.html) descrev
 - `my_input_read`: Função chamada pelo lvgl sempre que quer ler uma informação de touch
     - Depende do driver do touch resistivo
 
-
 === "my_flush_cp"
     Note que o LVGL apenas atualiza no LCD a região que sofreu alteração.
-    
     ```c
     void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p) {
         ili9341_set_top_left_limit(area->x1, area->y1);   ili9341_set_bottom_right_limit(area->x2, area->y2);
@@ -162,9 +145,9 @@ O [site do LVGL](https://docs.lvgl.io/latest/en/html/porting/index.html) descrev
         lv_disp_flush_ready(disp_drv);
     }
     ```
+    
 === "my_input_read"
 ​    Esta função retorna no `*data` se um toque foi encontrado e o valor X Y lido.
-   
     ```c
     bool my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data) {
         int px, py, pressed;
@@ -210,6 +193,9 @@ O LVGL irá então manter uma cópia do que será exibido no LCD nesta região c
 ### Função main
 
 Agora com tudo configurado devemos realizar as seguintes inicializações antes de podemos usar o lvgl controlando o display:
+
+!!! info
+    Tudo isso já está no código exemplo, você não precisa modificar nada.
 
 === "passos"
     1. Board e Sysclock
