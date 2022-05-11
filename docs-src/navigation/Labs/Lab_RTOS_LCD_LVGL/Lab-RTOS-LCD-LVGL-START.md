@@ -21,12 +21,11 @@ Antes de começarmos será necessário realizarmos a conexão do LCD no kit e en
 !!! exercise "Conectando LCD"
     Primeiro faça as ligações como indicado no README a seguir:
     
-    1. Plugue o LCD max Touch no ==EXT2== seguindo as instruções em: [
-SAME70-examples/Screens/2.8-TFT-LCD-ILI9341-Hardware/](https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-Hardware#conex%C3%B5es-com-o-adaptador-tft-lcd---xplained-v0)
+    1. Plugue o LCD max Touch no ==EXT2== seguindo as instruções em: [SAME70-examples/Screens/2.8-TFT-LCD-ILI9341-Hardware/](https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-Hardware#conex%C3%B5es-com-o-adaptador-tft-lcd---xplained-v0)
     
     Depois valide: 
  
-    1. Copie o código exemplo `SAME70-examples/Screens/RTOS-LCD-maxTouch-Switch-Toggle/` para a pasta da entrega do seu repositório: `Lab7-RTOS-LCD-LVGL`
+    1. Copie o código exemplo [SAME70-examples/Screens/RTOS-TFT-LCD-ILI9341-LVGL/](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-TFT-LCD-ILI9341-LVGL) para a pasta da entrega do seu repositório: `Lab7-RTOS-LCD-LVGL`
     1. Execute o código, você deve visualizar dois botões e eles devem ser interativos.
 
 !!! note "Terminal"
