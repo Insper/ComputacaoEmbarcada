@@ -100,6 +100,8 @@ Para isso você deve:
 1. Gerar uma imagem da interface fazendo screenshot da imagem do mural nas dimensões: `240x320`
 1. Seguir o roteiro em `util/LVGL` para exibir a imagem no LCD: https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-lvgl/#exibindo-uma-imagem
 
+Use como demo o código do repositório criado pelo classroom modificando a `task_lcd` para exibir a imagem.
+
 !!! info
     Importante gerar a imagem nas dimensões `240x320`, queremos ocupar o LCD todo com nossa imagem.
     
