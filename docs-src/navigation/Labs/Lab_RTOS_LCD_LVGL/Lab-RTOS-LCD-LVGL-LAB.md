@@ -441,7 +441,7 @@ Também podemos mudar o tamanho de um objeto, como no exemplo a seguir:
 ### Demais botões
 
 !!! exercise "Tarefa: Demais botões"
-    Agora você é capaz de recriar os demais botões da interface, para cada botão criei uma função de callback (similar ao `event_handler`). 
+    Agora você é capaz de recriar os demais botões da interface, para cada botão crie uma função de callback (similar ao `event_handler`). 
     
     Implemente:
     
