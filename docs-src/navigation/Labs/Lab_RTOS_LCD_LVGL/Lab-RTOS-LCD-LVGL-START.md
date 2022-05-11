@@ -21,7 +21,7 @@ Antes de começarmos será necessário realizarmos a conexão do LCD no kit e en
 !!! exercise "Conectando LCD"
     Primeiro faça as ligações como indicado no README a seguir:
     
-    1. Plugue o LCD max Touch no ==EXT2== seguindo as instruções em: [SAME70-examples/Screens/2.8-TFT-LCD-ILI9341-Hardware](https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-Hardware)
+    1. Plugue o LCD max Touch no ==EXT2== seguindo as instruções em: [SAME70-examples/Screens/RTOS-TFT-LCD-ILI9341-LVGL/](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-TFT-LCD-ILI9341-LVGL)
     
     Depois valide: 
  
