@@ -197,6 +197,10 @@ Agora vamos começar a programar, lembrem que a documentação do LVGL fala que:
     
     Execute o código e verifique que ==NADA DEVE TER MUDADO==. Estamos apenas melhorando a qualidade do nosso código e garantindo que não teremos erros futuros.
     
+!!! note "Preencher ao finalizar o lab"
+
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfeZBEEZDfJPwbbelD1uf3iBFlt1B-yS0HP4X90TwejCbcMtw/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+    
 ## APS 2
 
 Este laboratório serve para ajudar vocês com a APS2, agora podem ter mais de uma task atualizando partes diferentes do LCD via LVGL, lembrem apenas de requisitar o mutex antes e liberar depois de terem usado. 
