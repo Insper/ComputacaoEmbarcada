@@ -52,7 +52,7 @@ O laboratório consiste em:
 
 - https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTOS-PIO-IRQ
 
-Vamos usar esse código exemplo para aprenderemos os principais recursos deo RTOS, nele criamos duas tasks: `task_but` e `task_led` que se comunicam via uma fila. O botão da placa é configurado para operar com interrupcão de boarda, liberando um semáforo para a `task_but`, que processa a informacão e envia um novo valor de delay para a `task_led`:
+Vamos usar esse código exemplo para aprenderemos os principais recursos deo RTOS, nele criamos duas tasks: `task_but` e `task_led` que se comunicam via uma fila. O botão da placa é configurado para operar com interrupcão de borda, liberando um semáforo para a `task_but`, que processa a informacão e envia um novo valor de delay para a `task_led`:
 
 ![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/RTOS-PIO-IRQ/doc/diagrama.svg)
 
@@ -65,7 +65,7 @@ Vamos usar esse código exemplo para aprenderemos os principais recursos deo RTO
 Antes de seguir analise um pouco o código e tente entender o que está acontecendo, para isso consulte a página desse lab chamada de Teoria.
 
 !!! exercise "Praticando - semáforo"
-    Faca uma cópia desse código para `Lab6-pio-irq-rtos` e vamos mexer nele!
+    Faça uma cópia desse código para `Lab6-pio-irq-rtos` e vamos mexer nele!
     
     A ideia aqui é possibilitar diminuirmos a frequência através de outro botão! Para 
     isso teremos que adicionar mais um semáforo que irá se comunicar com a task but.
@@ -87,7 +87,7 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     
     Tarefa:
     
-    1. Crie uma fila a mais
+    1. Crie uma mais uma fila
     1. Cada callback deve colocar o valor do incremento na fila (ou o id do botão)
     1. A task_but recebe o valor, faz o cálculo e envia para a task_led
 
@@ -111,7 +111,7 @@ Outro exemplo que vamos usar como base é o ADC-IRQ-RTOS que faz a leitura de um
 Antes de seguir analise um pouco o código e tente entender o que está acontecendo, analise a task, as interrupções e também o uso da fila.
 
 !!! exercise "Praticando"
-    Faca uma cópia desse código para `Lab6-adc-irq-rtos` e vamos mexer nele!
+    Faça uma cópia desse código para `Lab6-adc-irq-rtos` e vamos mexer nele!
     
     A ideia agora é criarmos uma task intermediária (task_proc) que irá fazer o processamento dos dados 
     recebidos pelo ADC, conforme o diagrama atualizado a seguir:
@@ -122,10 +122,10 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     
     - Referência: https://www.analog.com/media/en/technical-documentation/dsp-book/dsp_book_ch15.pdf
     
-    Tarefas/ dicas:
+    Tarefas/dicas:
     
     1. Modifique o código adicionando a task_proc
-    1. Faca a leitura do dado do AFEC nessa nova tarefa 
+    1. Faça a leitura do dado do AFEC nessa nova tarefa 
     1. Crie uma nova fila, e envie o dado da task_proc para a task_adc (dado bruto, ainda sem processamento)
     1. Na task_adc exiba o dado via printf
     1. Agora na task proc calcule a média móvel e o envie para a task_adc.
