@@ -80,7 +80,7 @@ Inversão de prioridade é uma "consequência" que acontece quando uma tarefa de
 - Acesse o link a seguir para entender mais a respeito:  https://www.digikey.com.br/en/maker/projects/introduction-to-rtos-solution-to-part-11-priority-inversion/abf4b8f7cd4a4c70bece35678d178321
 
 !!! info
-    A inversão de prioridade quase colocou fim no Rover Pathfinder da NASA que pousou em marte em 1997, uma inversão de prioridade fazia com que o sistema parasse de funcionar, só voltando a operar quando o whatdog timmer do sistema reiniciava o robô. Engenheiros do RTOS usado no robô, o VxWorks trabalharam horas na replica em terra do mesmo a fim de identificar o problema, depois de muito depurar o projeto eles conseguiram descobrir o causador do problema, um mutex.
+    A inversão de prioridade quase colocou fim no Rover Pathfinder da NASA que pousou em marte em 1997, uma inversão de prioridade fazia com que o sistema parasse de funcionar, só voltando a operar quando o Watchdog Timer do sistema reiniciava o robô. Engenheiros do RTOS usado no robô, o VxWorks trabalharam horas na réplica em terra do mesmo a fim de identificar o problema, depois de muito depurar o projeto eles conseguiram descobrir o causador do problema, um mutex.
     
     Para saber mais a respeito, acesse: http://www.cs.cornell.edu/courses/cs614/1999sp/papers/pathfinder.html
 
