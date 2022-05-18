@@ -73,14 +73,14 @@ Os RTOS implementam um mecanismos para solucionar este problema, chamado de inve
 
 #### Inversão de prioridade
 
-Inversão de prioridade é uma "consequência" que acontece quando uma tarefa de alta prioridade está aguardando um recurso que não foi liberado por uma tarefa de menor prioridade, o RTOS vai manter a tarefa de baixa prioridade executando, impedindo a de alta de executar (o que não é muito desejado). O negócio comeca ficar mais complicado quando incluímos uma tarefa de média prioridade na jogada, que pode impedir a de baixa e a de alta de executar, travando o sistema:
+Inversão de prioridade é uma "consequência" que acontece quando uma tarefa de alta prioridade está aguardando um recurso que não foi liberado por uma tarefa de menor prioridade, o RTOS vai manter a tarefa de baixa prioridade executando, impedindo a de alta de executar (o que não é muito desejado). O negócio começa a ficar mais complicado quando incluímos uma tarefa de média prioridade na jogada, que pode impedir a de baixa e a de alta de executar, travando o sistema:
 
 ![](https://www.digikey.com.br/maker-media/92b5e015-d9fc-4940-9a48-f814d06c5f31)
 
 - Acesse o link a seguir para entender mais a respeito:  https://www.digikey.com.br/en/maker/projects/introduction-to-rtos-solution-to-part-11-priority-inversion/abf4b8f7cd4a4c70bece35678d178321
 
 !!! info
-    A inversão de prioridade quase colocou fim no Rover Pathfinder da NASA que pousou em marte em 1997, uma inversão de prioridade fazia com que o sistema parasse de funcionar, só voltando a operar quando o Watchdog Timer do sistema reiniciava o robô. Engenheiros do RTOS usado no robô, o VxWorks trabalharam horas na réplica em terra do mesmo a fim de identificar o problema, depois de muito depurar o projeto eles conseguiram descobrir o causador do problema, um mutex.
+    A inversão de prioridade quase colocou fim no Rover Pathfinder da NASA que pousou em marte em 1997, uma inversão de prioridade fazia com que o sistema parasse de funcionar, só voltando a operar quando o **Watchdog Timer** do sistema reiniciava o robô. Engenheiros do RTOS usado no robô, o VxWorks trabalharam horas na réplica em terra do mesmo a fim de identificar o problema, depois de muito depurar o projeto eles conseguiram descobrir o causador do problema, um mutex.
     
     Para saber mais a respeito, acesse: http://www.cs.cornell.edu/courses/cs614/1999sp/papers/pathfinder.html
 
@@ -184,16 +184,16 @@ void main() {
 
 ## Programando
 
-Agora vamos comecar programar, lembrem que a documentação do LVGL fala que: *If you need to use real tasks or threads, you need a mutex which should be invoked before the call of `lv_timer_handler` and released after it.*.
+Agora vamos começar a programar, lembrem que a documentação do LVGL fala que: *If you need to use real tasks or threads, you need a mutex which should be invoked before the call of `lv_timer_handler` and released after it.*.
 
 !!! info ""
     Como estamos no RTOS estamos usando a funcão `lv_task_handler` no lugar da `lv_timer_handler`.
 
-!!! exercise "Task mutex `lv_task_handler"
+!!! exercise "Task mutex `lv_task_handler`"
     
     1. Crie a variável global que irá servir de mutex chamado de `xMutexLVGL` do tipo `SemaphoreHandle_t`
     1. No main crie o mutex  com `xSemaphoreCreateMutex();`
-    1. Na `task_lcd` faća a requisição do mutex antes de chamar `lv_tick_inc` e a liberação depois do `lv_task_handler`
+    1. Na `task_lcd` faça a requisição do mutex antes de chamar `lv_tick_inc` e a liberação depois do `lv_task_handler`
     
     Execute o código e verifique que ==NADA DEVE TER MUDADO==. Estamos apenas melhorando a qualidade do nosso código e garantindo que não teremos erros futuros.
     
