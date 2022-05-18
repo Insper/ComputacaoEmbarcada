@@ -129,6 +129,9 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     1. Crie uma nova fila, e envie o dado da task_proc para a task_adc (dado bruto, ainda sem processamento)
     1. Na task_adc exiba o dado via printf
     1. Agora na task proc calcule a média móvel e o envie para a task_adc.
+    
+!!! info "Ao terminar o lab preencha:"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfVgnQZOUP5_Q-97Zwc-qpXpY_8YusUGShVlg91_hQbUPhKvA/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
 
 ## Projeto
 
