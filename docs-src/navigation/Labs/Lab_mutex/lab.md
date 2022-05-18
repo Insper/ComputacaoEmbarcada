@@ -4,13 +4,13 @@ Neste laboratório iremos trabalhar usar mutex no freertos para controlar o aces
 
 ## Lab    
 
-| Exemplo base         |               | LAB             |
-|----------------------|---------------|-----------------|
-| `Lab7-RTOS-LCD-LVGL` | :arrow_right: | `Lab8-RTOS-ECG` |
+| Exemplo base         |               | LAB               |
+|----------------------|---------------|-------------------|
+| `Lab7-RTOS-LCD-LVGL` | :arrow_right: | `Lab8-RTOS-Mutex` |
 
 
 !!! warning "Código exemplo"
-    - Vamos modificar o código exemplo do laboratório passado, tudo bem se você não terminou de implementar todas as funcionalidades. Faça uma cópia para o seu repositório de laboratórios renomeando para `Labs8-RTOS-ECG`.
+    - Vamos modificar o código exemplo do laboratório passado, tudo bem se você não terminou de implementar todas as funcionalidades. Faça uma cópia para o seu repositório de laboratórios renomeando para `Labs8-RTOS-Mutex`.
 
 ## Mutexes
 
@@ -67,9 +67,8 @@ A documentação do LVGL fala o seguinte:
 
 ### Prioridades e Mutex
 
-Imaginem o cenário a seguir: Uma tarefa de baixa prioridade (L) requisita um mutex que está livre, no meio da execução uma tarefa de alta prioridade (H) é colocada para executar pelo escalonador e esta tarefa necessita do mesmo mutex que a anterior. O que acontece? ==Pânico no sistema== tudo trava! O escalonador não vai permitir que a de baixa execute e a de alta não vai executar pois está esperando o mutex.
+Imaginem o cenário a seguir: Uma tarefa de baixa prioridade (L) requisita um mutex que está livre, no meio da execução uma tarefa de alta prioridade (H) é colocada para executar pelo escalonador e está tarefa necessita do mesmo mutex que a anterior. O que acontece? ==Pânico no sistema== tudo trava? Não! O escalonador vai permitir que a de baixa execute e a de alta não vai executar pois está esperando o mutex. Isso chama ==inversão de prioridade==.
 
-Os RTOS implementam um mecanismos para solucionar este problema, chamado de inversão de prioridade. 
 
 #### Inversão de prioridade
 
@@ -80,7 +79,7 @@ Inversão de prioridade é uma "consequência" que acontece quando uma tarefa de
 - Acesse o link a seguir para entender mais a respeito:  https://www.digikey.com.br/en/maker/projects/introduction-to-rtos-solution-to-part-11-priority-inversion/abf4b8f7cd4a4c70bece35678d178321
 
 !!! info
-    A inversão de prioridade quase colocou fim no Rover Pathfinder da NASA que pousou em marte em 1997, uma inversão de prioridade fazia com que o sistema parasse de funcionar, só voltando a operar quando o **Watchdog Timer** do sistema reiniciava o robô. Engenheiros do RTOS usado no robô, o VxWorks trabalharam horas na réplica em terra do mesmo a fim de identificar o problema, depois de muito depurar o projeto eles conseguiram descobrir o causador do problema, um mutex.
+    A inversão de prioridade quase colocou fim no *Rover Pathfinder* da NASA que pousou em marte em 1997, uma inversão de prioridade fazia com que o sistema parasse de funcionar, só voltando a operar quando o **Watchdog Timer** do sistema reiniciava o robô. Engenheiros do RTOS usado no robô, o VxWorks, trabalharam horas na réplica em terra do mesmo a fim de identificar o problema, depois de muito depurar o projeto eles conseguiram descobrir o causador do problema, um mutex.
     
     Para saber mais a respeito, acesse: http://www.cs.cornell.edu/courses/cs614/1999sp/papers/pathfinder.html
 
@@ -172,7 +171,6 @@ void main() {
         vTaskDelay(100);
       }
     }
-    
     
     void task2() {
       while(1) {
