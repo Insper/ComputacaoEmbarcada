@@ -1,19 +1,20 @@
 # LAB - ECG
 
-Neste laboratório iremos aquisitar e processar o sinal de ECG que vocês terão que usar na APS2. 
-
+Neste laboratório iremos processar e exibir o sinal de um electrocardiograma (ECG).
 
 ## Lab    
 
-| Exemplo base                              | LAB                   |
-|-------------------------------------------|-----------------------|
-| `SAME70-Examples/Demos/ECG` :arrow_right: | `Labs-8-RTOS-ADC-FIR` |
+| Exemplo base                |               | LAB             |
+|-----------------------------|---------------|-----------------|
+| `SAME70-Examples/Demos/ECG` | :arrow_right: | `Lab8-RTOS-ECG` |
+
 
 !!! warning "Código exemplo"
-    - Vamos modificar o código exemplo [SAME70-examples/Demos/ECG/](https://github.com/Insper/SAME70-examples/tree/master/Demos/ECG), faça uma cópia para o seu repositório de laboratórios renomeando para `Labs/8-RTOS-ECG`.
+    - Vamos modificar o código exemplo [SAME70-examples/Demos/ECG/](https://github.com/Insper/SAME70-examples/tree/master/Demos/ECG), faça uma cópia para o seu repositório de laboratórios renomeando para `Labs8-RTOS-ECG`.
 
-!!! info "Periféricos"
-    Iremos utilizar os seguintes periféricos diretamente:
+!!! info "Periféricos utilizados no lab"
+    
+    Por vocês:
     
     - AFEC1 (EXT1 PC31), canal 6
     - TC1 canal 1

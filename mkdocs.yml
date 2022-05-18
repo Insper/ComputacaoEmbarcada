@@ -116,8 +116,11 @@ nav:
         - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
         - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'
         - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md'
+      - 'Lab 8 - RTOS - Mutex': navigation/Labs/Lab_mutex/lab.md
+
+
 #      - 'Lab 9 - RTOS - HC-SR04': 'navigation/Labs/Lab_RTOS_HCSR04/lab.md'
-  #    - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
+#      - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
   #    - 'Lab-9-ADC-FIR.md'
   #    - 'Lab-8-RTOS-UART.md'
  #     - 'Lab 10 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
