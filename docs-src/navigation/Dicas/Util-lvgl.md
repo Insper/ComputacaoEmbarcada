@@ -38,8 +38,10 @@ Para alteramos a orientação do LCD de horizontal para vertical será necessár
     void my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data) {
       ...
       ...
-    -   data->point.y = px;
-    +   data->point.x = 320 - py;
+    -   data->point.x = px;
+    -   data->point.y = py;
+    +   data->point.x = py;
+    +   data->point.y = 320 - px;
     }
     ```
 === "Driver do LCD"
