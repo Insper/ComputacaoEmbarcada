@@ -70,7 +70,7 @@ o seguinte comando:
 lv_obj_clear_flag(lv_scr_act(), LV_OBJ_FLAG_SCROLLABLE);
 ```
 
-A ideia 
+A ideia do comando 
 
 ## Mudando a cor do fundo
 
