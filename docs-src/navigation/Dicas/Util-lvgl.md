@@ -61,6 +61,17 @@ Para alteramos a orientação do LCD de horizontal para vertical será necessár
 !!! tip
     Com isso o LCD passa a ter as dimensões `240x320` e para o LVGL não existe diferença nenhuma.
 
+## Desativando scroll
+
+Se por algum motivo na sua tela estiver aparecendo uma barra de scroll e você não quer isso, tente 
+o seguinte comando:
+
+```c
+lv_obj_clear_flag(lv_scr_act(), LV_OBJ_FLAG_SCROLLABLE);
+```
+
+A ideia 
+
 ## Mudando a cor do fundo
 
 Para mudarmos a cor do background basta alterarmos a cor do background da tela principal:
