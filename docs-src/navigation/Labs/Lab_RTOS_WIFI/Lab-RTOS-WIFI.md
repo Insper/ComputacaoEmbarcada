@@ -6,13 +6,13 @@ Neste laboratório iremos modificar o exemplo RTOS-WIFI, que realiza uma requisi
 
 ## Lab    
 
-| Exemplo base                              | LAB                   |
-|-------------------------------------------|-----------------------|
-| `SAME70-examples/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1` :arrow_right: | `Lab10-RTOS-WIFI` |
+| Exemplo base                                                            | LAB                |
+|-------------------------------------------------------------------------|--------------------|
+| `SAME70-examples/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1` :arrow_right: | `Lab-10-RTOS-WIFI` |
 
 !!! warning "Código exemplo"
     - ==Atualizar o repositório do SAME70-Examples==
-    - Vamos modificar o código exemplo `Comunicacao/RTOS-WIFI-WINC1500-get-RTOS-EXT1`, faça uma cópia do seu lab para a nova pasta no seu repositório `Lab10-RTOS-WIFI`
+    - Vamos modificar o código exemplo `Comunicacao/RTOS-WIFI-WINC1500-get-RTOS-EXT1`, faça uma cópia do seu lab para a nova pasta no seu repositório `Lab-9-RTOS-WIFI`
 
 ### IoT	
 
@@ -104,7 +104,7 @@ Para validar, conecte **seu celular** na mesma rede WIFi e acesse o ip da sua m�
     
     ==Lembre de ativar novamente após a atividade.==
     
-!!! example "Tarefas"
+!!! exercise "Tarefas"
     1. Instalar `requirements.txt`
     1. Subir o servidor Flask
     1. Validar local (`http://localhost:5000`)
@@ -298,7 +298,7 @@ A mensagem com o conteúdo (head + json) é salva no buffer `p_recvMsg->pu8Buffe
 !!! tip
     Busque no buffer a substring `"led": `.
 
-!!! example "Tarefas"
+!!! exercise "Tarefas"
     1. Inicialize o led da placa como saída
     1. Modificar o estado `MSG` para encontrar o valor do led
     1. modifique O led para:

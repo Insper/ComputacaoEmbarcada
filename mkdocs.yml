@@ -123,7 +123,7 @@ nav:
 #      - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
   #    - 'Lab-9-ADC-FIR.md'
   #    - 'Lab-8-RTOS-UART.md'
- #     - 'Lab 10 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
+      - 'Lab 9 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
 
   - Projeto:
           - 'Descrição': 'navigation/Projeto/Projeto-1-Descricao.md'
