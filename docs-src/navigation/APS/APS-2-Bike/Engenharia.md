@@ -114,6 +114,9 @@ um pouco de variação na leitura da velocidade.
     ```c
     #include "arm_math.h"
     
+    #define TASK_SIMULATOR_STACK_SIZE (4096 / sizeof(portSTACK_TYPE))
+    #define TASK_SIMULATOR_STACK_PRIORITY (tskIDLE_PRIORITY)
+    
     #define RAIO 0.58/2
     #define VEL_MAX_KMH  5.0f
     #define VEL_MIN_KMH  1.0f
@@ -169,7 +172,7 @@ um pouco de variação na leitura da velocidade.
     int main(void) {
         // ...
         // ....
-        if (xTaskCreate(task_simulador, "LCD", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
+        if (xTaskCreate(task_simulador, "LCD", TASK_SIMULATOR_STACK_SIZE, NULL, TASK_SIMULATOR_STACK_PRIORITY, NULL) != pdPASS) {
             printf("Failed to create lcd task\r\n");
         }
     ```
