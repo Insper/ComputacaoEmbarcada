@@ -134,7 +134,8 @@ um pouco de variação na leitura da velocidade.
     }
 
     static void task_simulador(void *pvParameters) {
-
+    
+        pmc_enable_periph_clk(ID_PIOC);
         pio_set_output(PIOC, PIO_PC31, 1, 0, 0);
 
         float vel = VEL_MAX_KMH;
