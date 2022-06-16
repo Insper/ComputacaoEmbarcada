@@ -123,11 +123,11 @@ um pouco de variação na leitura da velocidade.
     //#define RAMP 
     
     /**
-    * raio 20" = 50.8 cm (diametro) = 0.58m
+    * raio 20" = 58 cm (diametro) = 0.58m
     * w = 2 pi f
     * v [km/h] = w*r = 2 pi f r
     * f = v / (2 pi r 3.8)
-    * Exemplo : 5 km / h = 1.4 m/s
+    * Exemplo : 5 km / h = 1.38 m/s
     *           f = 0.76 Hz
     *           t = 1.3s
     */
