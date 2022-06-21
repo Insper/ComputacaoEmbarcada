@@ -123,13 +123,13 @@ um pouco de variação na leitura da velocidade.
     //#define RAMP 
     
     /**
-    * raio 20" = 50,8 cm (diametro) = 0.508m
-    * w = 2 pi f
+    * raio 20" => 50,8 cm (diametro) => 0.508/2 = 0.254m (raio)
+    * w = 2 pi f (m/s)
     * v [km/h] = (w*r) / 3.6 = (2 pi f r) / 3.6
     * f = v / (2 pi r 3.6)
     * Exemplo : 5 km / h = 1.38 m/s
-    *           f = 0.43Hz
-    *           t = 2,29s
+    *           f = 0.87Hz
+    *           t = 1/f => 1/0.87 = 1,149s
     */
     float kmh_to_hz(float vel, float raio) {
         float f = vel / (2*PI*raio*3.6);
