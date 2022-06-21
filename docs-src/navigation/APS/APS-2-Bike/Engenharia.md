@@ -117,7 +117,7 @@ um pouco de variação na leitura da velocidade.
     #define TASK_SIMULATOR_STACK_SIZE (4096 / sizeof(portSTACK_TYPE))
     #define TASK_SIMULATOR_STACK_PRIORITY (tskIDLE_PRIORITY)
     
-    #define RAIO 0.58/2
+    #define RAIO 0.508/2
     #define VEL_MAX_KMH  5.0f
     #define VEL_MIN_KMH  1.0f
     //#define RAMP 
