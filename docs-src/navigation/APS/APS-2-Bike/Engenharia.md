@@ -125,11 +125,11 @@ um pouco de variação na leitura da velocidade.
     /**
     * raio 20" = 50,8 cm (diametro) = 0.508m
     * w = 2 pi f
-    * v [km/h] = w*r = 2 pi f r
+    * v [km/h] = (w*r) / 3.6 = (2 pi f r) / 3.6
     * f = v / (2 pi r 3.6)
     * Exemplo : 5 km / h = 1.38 m/s
-    *           f = 0.76 Hz
-    *           t = 1.3s
+    *           f = 0.43Hz
+    *           t = 2,29s
     */
     float kmh_to_hz(float vel, float raio) {
         float f = vel / (2*PI*raio*3.6);
