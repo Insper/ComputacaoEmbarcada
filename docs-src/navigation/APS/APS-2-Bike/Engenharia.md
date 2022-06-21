@@ -123,7 +123,7 @@ um pouco de variação na leitura da velocidade.
     //#define RAMP 
     
     /**
-    * raio 20" = 58 cm (diametro) = 0.58m
+    * raio 20" = 50,8 cm (diametro) = 0.508m
     * w = 2 pi f
     * v [km/h] = w*r = 2 pi f r
     * f = v / (2 pi r 3.8)
@@ -151,10 +151,10 @@ um pouco de variação na leitura da velocidade.
             pio_set(PIOC, PIO_PC31);
     #ifdef RAMP
             if (ramp_up) {
-                printf("[SIMU] ACELERANDO %d \n", (int) (10*vel));
+                printf("[SIMU] ACELERANDO: %d \n", (int) (10*vel));
                 vel += 0.3;
             } else {
-                printf("[SIMU] DESACELERANDO %d \n",  (int) (10*vel));
+                printf("[SIMU] DESACELERANDO: %d \n",  (int) (10*vel));
                 vel -= 0.3;
             }
 
@@ -162,6 +162,8 @@ um pouco de variação na leitura da velocidade.
                 ramp_up = 0;
             else if (vel < VEL_MIN_KMH)
                 ramp_up = 1;
+    #ifndef
+            printf("[SIMU] CONSTANTE: %d \n", (int) (10*vel));
     #endif
             f = kmh_to_hz(vel, RAIO);
             int t = 1000*(1.0/f);
@@ -172,7 +174,7 @@ um pouco de variação na leitura da velocidade.
     int main(void) {
         // ...
         // ....
-        if (xTaskCreate(task_simulador, "LCD", TASK_SIMULATOR_STACK_SIZE, NULL, TASK_SIMULATOR_STACK_PRIORITY, NULL) != pdPASS) {
+        if (xTaskCreate(task_simulador, "SIMUL", TASK_SIMULATOR_STACK_SIZE, NULL, TASK_SIMULATOR_STACK_PRIORITY, NULL) != pdPASS) {
             printf("Failed to create lcd task\r\n");
         }
     ```
