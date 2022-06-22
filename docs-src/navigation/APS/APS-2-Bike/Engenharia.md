@@ -119,7 +119,7 @@ um pouco de variação na leitura da velocidade.
     
     #define RAIO 0.508/2
     #define VEL_MAX_KMH  5.0f
-    #define VEL_MIN_KMH  1.0f
+    #define VEL_MIN_KMH  0.5f
     //#define RAMP 
     
     /**
@@ -132,8 +132,8 @@ um pouco de variação na leitura da velocidade.
     *           t = 1/f => 1/0.87 = 1,149s
     */
     float kmh_to_hz(float vel, float raio) {
-        float f = vel / (2*PI*raio*3.6);
-        return(f);
+    	float f = vel / (2*PI*raio*3.6);
+    	return(f);
     }
 
     static void task_simulador(void *pvParameters) {
@@ -147,27 +147,29 @@ um pouco de variação na leitura da velocidade.
 
         while(1){
             pio_clear(PIOC, PIO_PC31);
-            delay_ms(5);
+            delay_ms(1);
             pio_set(PIOC, PIO_PC31);
-    #ifdef RAMP
+            #ifdef RAMP
             if (ramp_up) {
                 printf("[SIMU] ACELERANDO: %d \n", (int) (10*vel));
-                vel += 0.3;
+                vel += 0.5;
             } else {
                 printf("[SIMU] DESACELERANDO: %d \n",  (int) (10*vel));
-                vel -= 0.3;
+                vel -= 0.5;
             }
 
             if (vel > VEL_MAX_KMH)
                 ramp_up = 0;
             else if (vel < VEL_MIN_KMH)
                 ramp_up = 1;
-    #ifndef
+            #ifndef RAMP
+            vel = 5;
             printf("[SIMU] CONSTANTE: %d \n", (int) (10*vel));
-    #endif
+            #endif
             f = kmh_to_hz(vel, RAIO);
-            int t = 1000*(1.0/f);
-            delay_ms(t);
+		    int t = 965*(1.0/f); //UTILIZADO 965 como multiplicador ao invés de 1000
+							     //para compensar o atraso gerado pelo Escalonador do freeRTOS
+		    delay_ms(t);
         }
     }
 
