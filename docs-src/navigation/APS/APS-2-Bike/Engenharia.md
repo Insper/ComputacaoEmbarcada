@@ -149,7 +149,7 @@ um pouco de variação na leitura da velocidade.
             pio_clear(PIOC, PIO_PC31);
             delay_ms(1);
             pio_set(PIOC, PIO_PC31);
-            #ifdef RAMP
+#ifdef RAMP
             if (ramp_up) {
                 printf("[SIMU] ACELERANDO: %d \n", (int) (10*vel));
                 vel += 0.5;
@@ -158,14 +158,14 @@ um pouco de variação na leitura da velocidade.
                 vel -= 0.5;
             }
 
-            if (vel > VEL_MAX_KMH)
-                ramp_up = 0;
-            else if (vel < VEL_MIN_KMH)
-                ramp_up = 1;
-            #ifndef RAMP
+            if (vel >= VEL_MAX_KMH)
+	    	ramp_up = 0;
+	    else if (vel <= VEL_MIN_KMH)
+		ramp_up = 1;
+#ifndef RAMP
             vel = 5;
             printf("[SIMU] CONSTANTE: %d \n", (int) (10*vel));
-            #endif
+ #endif
             f = kmh_to_hz(vel, RAIO);
 		    int t = 965*(1.0/f); //UTILIZADO 965 como multiplicador ao invés de 1000
 							     //para compensar o atraso gerado pelo Escalonador do freeRTOS
