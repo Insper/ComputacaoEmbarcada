@@ -24,7 +24,9 @@ Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência n
 1. Botão OLED1: Modifica a frequência do LED (por IRQ)
     - Se usuário aperta e solta: Aumenta a freq em uma unidade ( `delay -= 100` )
     - Se usuário aperta e segura: Diminui a freq em uma unidade ( `delay += 100` )
-3. Exibir o valor da frequência no OLED
+!!! tip
+    Para testar a lógica, você pode primeiramente utilizar 2 botões, um para aumentar e outro para diminuir, e posteriormente migrar para utilizar apenas 1 botão para as duas funções.
+2. Exibir o valor da frequência no OLED
 
 !!! tip
     Para escrevermos uma string no OLED devemos usar a função:
