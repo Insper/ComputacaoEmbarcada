@@ -69,20 +69,42 @@ Pequeno histórico da evolução da disciplina:
 
 ### Alguns Projetos de turmas anteriores
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=eZfbONTxnS4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=Xs_b3izY2hg&ab_channel=FranciscoJanela" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-//
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xfCjqsRxOO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=fmUkZNA9ECc&ab_channel=JamessonLeandro)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Rtngc9UBV-k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=vy48HiP2h_8&ab_channel=FranciscoJanela)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Xk86Dx85DUg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=tVuRww94FWc&ab_channel=DaviReis)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SbB6z_b_fc8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=eZfbONTxnS4)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3MskQc6xw5s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=hSnb8Q8nyII&ab_channel=AnaCarolinaSouza)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/nDGiS4ESHzE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=Xs_b3izY2hg&ab_channel=FranciscoJanela)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/cLzB3bGji-c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/embed/xfCjqsRxOO0)
+
+!!! video
+    ![](https://www.youtube.com/embed/Rtngc9UBV-k)
+
+!!! video
+    ![](https://www.youtube.com/embed/Xk86Dx85DUg)
+
+!!! video
+    ![](https://www.youtube.com/embed/SbB6z_b_fc8)
+
+!!! video
+    ![](https://www.youtube.com/embed/3MskQc6xw5s)
+
+!!! video
+    ![](https://www.youtube.com/embed/nDGiS4ESHzE)
+
+!!! video
+    ![](https://www.youtube.com/embed/cLzB3bGji-c)
