@@ -7,9 +7,9 @@
 
 !!! info
     Os laboratórios são individuais e cada aluno deve ter um repositório com todas as enteegas, o repositório deve ser criado pelo classroom usando o link a seguir: 
+    
+    https://classroom.github.com/a/xjegYr_C
  
-    https://classroom.github.com/a/gQetBSZA
-
 !!! progress
     Click para continuar....
 
