@@ -5,6 +5,7 @@
 | `1-PIO-IO`                 |
 | **Data LIMITE para entrega, conceito C:** 22/08/22 - 23h59 |
 
+
 !!! info
     Os laboratórios são individuais e cada aluno deve ter um repositório com todas as enteegas, o repositório deve ser criado pelo classroom usando o link a seguir: 
     
@@ -678,3 +679,6 @@ Vamos usar o botão para fazer alguma coisa? Agora conseguimos acionar um pino (
     
 !!! note "Preencher ao finalizar o lab"
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdAiI2TaOgFPQXLASi_acn8R71vFAyxpuAr3bWZhmiEJW62Uw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
+
+<p>Teste <span style="color:red">some <em>red</em> text</span>.</p>
