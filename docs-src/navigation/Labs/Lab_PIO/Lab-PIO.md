@@ -3,7 +3,7 @@
 | Pasta                      |
 |----------------------------|
 | `1-PIO-IO`                 |
-| **Data LIMITE para entrega, conceito C:** 22/08/22 - 23h59 |
+| **Data LIMITE para entrega:** 23/08/22 - 23h59 |
 
 
 !!! info
