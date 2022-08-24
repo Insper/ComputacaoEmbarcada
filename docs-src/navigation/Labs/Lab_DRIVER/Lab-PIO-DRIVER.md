@@ -4,10 +4,9 @@ Nessa aula iremos utilizar como projeto referência o LAB-1.
 
 ## Entrega
 
-| Pasta                      |
-|----------------------------|
-| `Lab2-PIO-Driver`          |
-| **Data da entrega:** 04/03 |
+| **Pasta:**   `/Lab2-PIO-Driver` |
+|---------------------------- |
+| **Data <span style="color:red">LIMITE</span>. para entrega:** `28/08/22 - 23h59` |
 
 !!! note "Como começar:"
     - Vocês devem realizar uma cópia do LAB-1 que está no seu repositório para a pasta `Lab2-PIO-Driver`, iremos modificar o que fizemos no laboratório passado.
