@@ -1,9 +1,8 @@
 # LAB - PIO
 
-| Pasta                      |
-|----------------------------|
-| `1-PIO-IO`                 |
-| **Data LIMITE para entrega:** 23/08/22 - 23h59 |
+| **Pasta:**   `/1-PIO-IO` |
+|---------------------------- |
+| **Data <span style="color:red">LIMITE</span>. para entrega:** `23/08/22 - 23h59` |
 
 
 !!! info
@@ -679,6 +678,3 @@ Vamos usar o botão para fazer alguma coisa? Agora conseguimos acionar um pino (
     
 !!! note "Preencher ao finalizar o lab"
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdAiI2TaOgFPQXLASi_acn8R71vFAyxpuAr3bWZhmiEJW62Uw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
-
-<p>Teste <span style="color:red">some <em>red</em> text</span>.</p>
