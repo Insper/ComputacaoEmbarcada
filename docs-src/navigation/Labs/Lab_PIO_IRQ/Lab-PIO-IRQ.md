@@ -40,7 +40,7 @@ Agora vamos modificar o código um pouco, o exemplo está funcionando com interr
     1. Percebeu a diferença?
 
 !!! exercise short   
-    Você notou que quando aperta o botão o LED pisca e quando você solta também? O comportamento teria que ser de piscar apenas quando solta o botão. Por que isso acontece?
+    As vezes pode acontecer que quando voc aperta o botão o LED pisca e quando você solta também? O comportamento teria que ser de piscar apenas quando solta o botão. Por que isso acontece?
     
     (Não são todas as vezes que isso acontece).
     
@@ -98,8 +98,8 @@ void main(void){
   while(1){
   
    if (but_flag) {  // (2)
-     blink_led();
-     but_flag = 0;  // (3)
+       pisca_led(5, 200);    
+       but_flag = 0; // (3)
    }
   }
 }
