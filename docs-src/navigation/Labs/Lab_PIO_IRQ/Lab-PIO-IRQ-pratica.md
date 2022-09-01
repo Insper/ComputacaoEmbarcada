@@ -1,8 +1,11 @@
 ## Praticando - OLED
 
-| Pasta               |
-|---------------------|
-| `Led3-OLED-PIO-IRQ` |
+## Entrega
+
+| **Pasta:**   `/Led3-OLED-PIO-IRQ` |
+|---------------------------- |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `04/09/22 - 23h59` |
+
 
 Agora vamos praticar um pouco o uso de interrupção, para isso vocês deverão abrir/ criar um novo projeto.
 
