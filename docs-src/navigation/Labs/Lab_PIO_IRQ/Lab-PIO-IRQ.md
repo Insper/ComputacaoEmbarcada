@@ -2,11 +2,7 @@
 
 Esse laboratório possui duas entregas, a primeira é um passo a passo do laboratório e a segunda é parte de prática que coloca em uso o que foi visto na aula. As duas devem ser entregues até a data limite.
 
-| Pasta                      |
-|----------------------------|
-| `Lab3-PIO-IRQ`             |
-| `Led3-OLED-PIO-IRQ`        |
-| **Data da entrega:** 11/03 |
+## Entrega
 
 | **Pastas:**   `/Lab3-PIO-IRQ` |
 |               `/Led3-OLED-PIO-IRQ` |
