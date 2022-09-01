@@ -6,6 +6,8 @@ Esse laboratório possui duas entregas, a primeira é um passo a passo do labora
 
 |   **Pastas:** `/Lab3-PIO-IRQ` |
 |   ----------------------------   |
+|   `/Led3-OLED-PIO-IRQ`    |
+|   ----------------------------   |
 |   **Data <span style="color:red">LIMITE</span> para entrega:** `04/09/22 - 23h59` |
 
 !!! tip "Teoria"
