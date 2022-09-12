@@ -8,10 +8,10 @@ docs_dir: docs-src
 site_dir: docs
 
 site_name: 5s - Computação Embarcada
-repo_name: 'Insper/ComputacaoEmbarcada'
-repo_url: 'https://github.com/insper/ComputacaoEmbarcada'
-edit_uri: 'https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/'
-copyright: 'Copyright &copy; Rafael Corsi @ insper'
+repo_name: "Insper/ComputacaoEmbarcada"
+repo_url: "https://github.com/insper/ComputacaoEmbarcada"
+edit_uri: "https://github.com/Insper/ComputacaoEmbarcada/edit/master/docs-src/"
+copyright: "Copyright &copy; Rafael Corsi @ insper"
 
 extra_css:
   - https://cdn.jsdelivr.net/gh/insper-education/active-handout-css@main/devlife.css
@@ -25,11 +25,11 @@ extra_javascript:
 
 extra:
   ihandout_config:
-#    counter:
-#      - question
-#      - tip
-#      - exercise
-#      - example
+    #    counter:
+    #      - question
+    #      - tip
+    #      - exercise
+    #      - example
     report:
       api-base: https://devlife.insper-comp.com.br/api/offerings/1/
       url: https://devlife.insper-comp.com.br/api/offerings/1/exercises/
@@ -42,47 +42,33 @@ plugins:
       offering_id: 1
 
 markdown_extensions:
-  - markdown.extensions.attr_list
   - markdown.extensions.admonition
-  - markdown.extensions.codehilite:
-      guess_lang: false
-  - markdown.extensions.def_list
-  - markdown.extensions.footnotes
-  - markdown.extensions.meta
-  - markdown.extensions.toc:
-      permalink: true
-  - pymdownx.arithmatex
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.details
+  - pymdownx.tabbed
+  - pymdownx.superfences
+  - pymdownx.magiclink
+  - pymdownx.critic:
+      mode: view
   - pymdownx.betterem:
       smart_enable: all
   - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
-  - pymdownx.inlinehilite
-  - pymdownx.keys
-  - pymdownx.magiclink:
-      repo_url_shorthand: true
-      user: squidfunk
-      repo: mkdocs-material
   - pymdownx.mark
-  - pymdownx.smartsymbols
   - pymdownx.tilde
-  - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true
-  - pymdownx.tasklist:
-      custom_checkbox: true
+  - pymdownx.smartsymbols
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - attr_list
 
 #####################################################################
 nav:
-  - Home: 'index.md'
-  - Sobre o curso: 'Sobre-Curso.md'
-  - 'SAME70-Examples': 'https://github.com/Insper/SAME70-examples'
-  - 'Vídeos': 'navigation/Videos/Util-Videos.md'
+  - Home: "index.md"
+  - Sobre o curso: "Sobre-Curso.md"
+  - "SAME70-Examples": "https://github.com/Insper/SAME70-examples"
+  - "Vídeos": "navigation/Videos/Util-Videos.md"
   - navigation/Dicas/Util-o-que-nao-pode.md
-  - 'Util':
+  - "Util":
       - navigation/Util/Sobre-Ferramental.md
       - navigation/Util/Util-Startup.md
       - navigation/Util/Util-Erros.md
@@ -93,56 +79,56 @@ nav:
       - navigation/Dicas/Util-lvgl.md
 
   - Labs:
-      - 'Lab 1 - PIO ':
-        - 'Teoria': 'navigation/Labs/Lab_PIO/Lab-PIO-Teoria.md'
-        - 'Lab': 'navigation/Labs/Lab_PIO/Lab-PIO.md'
-        - 'Dicas': navigation/Dicas/Lab-PIO-Dicas.md
-  #     - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
-      - 'Lab 2 - PIO - Driver':
-        - 'Teoria': 'navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER-Teoria.md'
-        - 'Lab': 'navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER.md'
-      - 'Lab 3 - PIO - IRQ':
-        - 'Teoria': 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria.md'
-        - 'Lab' : 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ.md'
-        - 'Praticando' : 'navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica.md'
-      - 'Lab 4 - TC - RTC - RTT': 'navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md'
-      - 'Lab 5 - HC-SR04': 'navigation/Labs/Lab_HCSR04/lab.md'
-      - 'Lab 6 - RTOS':
-        - 'Lab': 'navigation/Labs/Lab_RTOS/Lab-RTOS.md'
-        - 'Teoria':  'navigation/Labs/Lab_RTOS/Teoria.md'
- #       - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
-     # - 'Lab 7 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
-      - 'Lab 7 - RTOS - LCD - LVGL':
-        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md'
-        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md'
-        - 'navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md'
-      - 'Lab 8 - RTOS - Mutex': navigation/Labs/Lab_mutex/lab.md
+      - "Lab 1 - PIO ":
+          - "Teoria": "navigation/Labs/Lab_PIO/Lab-PIO-Teoria.md"
+          - "Lab": "navigation/Labs/Lab_PIO/Lab-PIO.md"
+          - "Dicas": navigation/Dicas/Lab-PIO-Dicas.md
+      #     - 'PIO - Perguntas': 'Lab-1-IOs-Perguntas.md'
+      - "Lab 2 - PIO - Driver":
+          - "Teoria": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER-Teoria.md"
+          - "Lab": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER.md"
+      - "Lab 3 - PIO - IRQ":
+          - "Teoria": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria.md"
+          - "Lab": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ.md"
+          - "Praticando": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica.md"
+      - "Lab 4 - TC - RTC - RTT": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md"
+      - "Lab 5 - HC-SR04": "navigation/Labs/Lab_HCSR04/lab.md"
+      - "Lab 6 - RTOS":
+          - "Lab": "navigation/Labs/Lab_RTOS/Lab-RTOS.md"
+          - "Teoria": "navigation/Labs/Lab_RTOS/Teoria.md"
+      #       - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
+      # - 'Lab 7 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
+      - "Lab 7 - RTOS - LCD - LVGL":
+          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md"
+          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md"
+          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md"
+      - "Lab 8 - RTOS - Mutex": navigation/Labs/Lab_mutex/lab.md
 
-
-#      - 'Lab 9 - RTOS - HC-SR04': 'navigation/Labs/Lab_RTOS_HCSR04/lab.md'
-#      - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
-  #    - 'Lab-9-ADC-FIR.md'
-  #    - 'Lab-8-RTOS-UART.md'
-      - 'Lab 9 - WIFI': 'navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md'
+      #      - 'Lab 9 - RTOS - HC-SR04': 'navigation/Labs/Lab_RTOS_HCSR04/lab.md'
+      #      - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
+      #    - 'Lab-9-ADC-FIR.md'
+      #    - 'Lab-8-RTOS-UART.md'
+      - "Lab 9 - WIFI": "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md"
 
   - Projeto:
-          - 'Descrição': 'navigation/Projeto/Projeto-1-Descricao.md'
-          - navigation/Projeto/Projeto-1-Dispositivos.md
-          - navigation/Projeto/Projeto-1-Entrega1.md
-          - navigation/Projeto/Projeto-1-Entrega3.md
-          - navigation/Projeto/Projeto-1-Dicas.md
-          - navigation/Projeto/Projeto-1-Lista.md
+      - "Descrição": "navigation/Projeto/Projeto-1-Descricao.md"
+      - navigation/Projeto/Projeto-1-Dispositivos.md
+      - navigation/Projeto/Projeto-1-Entrega1.md
+      - navigation/Projeto/Projeto-1-Entrega3.md
+      - navigation/Projeto/Projeto-1-Dicas.md
+      - navigation/Projeto/vjoy.md
+      - navigation/Projeto/Projeto-1-Lista.md
 
   - APS:
-#      - 'navigation/APS/APS-howto.md'
-      - 'APS 1 - Musical':
-          - 'navigation/APS/APS-1-Musical.md'
-          - 'navigation/APS/APS-1-Musical-software.md'
-      - 'APS 2 - Ciclocomputador':
-          - 'navigation/APS/APS-2-Bike/Descricao.md'
-          - 'navigation/APS/APS-2-Bike/Design.md'
-          - 'navigation/APS/APS-2-Bike/Engenharia.md'
-          - 'navigation/APS/APS-2-Bike/Rubrica.md'
+      #      - 'navigation/APS/APS-howto.md'
+      - "APS 1 - Musical":
+          - "navigation/APS/APS-1-Musical.md"
+          - "navigation/APS/APS-1-Musical-software.md"
+      - "APS 2 - Ciclocomputador":
+          - "navigation/APS/APS-2-Bike/Descricao.md"
+          - "navigation/APS/APS-2-Bike/Design.md"
+          - "navigation/APS/APS-2-Bike/Engenharia.md"
+          - "navigation/APS/APS-2-Bike/Rubrica.md"
 
   #    - 'navigation/APS/APS-2-Oximetro.md'
   #    - 'navigation/APS/APS-3-IoT.md'

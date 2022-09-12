@@ -11,7 +11,6 @@ muitas outras opções.
 | Teclado Matricial           | input               | ![teclado-matricial]           | https://www.filipeflop.com/blog/teclado-matricial-4x4-arduino/                                                     |
 | Joystick arcade             | input          | ![joystick-arcade]             | São quatro botões um em cada canto. https://www.filipeflop.com/produto/kit-fliperama-arcade-com-joystick-e-botoes/ |
 | reed switch                 | input          | ![reed-switch]                 | Sensor magnético                                                                                                   |
-| IMU MCU6050                 | input          | ![imu-6050]                    | Acelerômetro e giroscópio. https://www.robocore.net/sensor-robo/acelerometro-e-giroscopio-mpu6050                  |
 | Rugged Metal Pushbutton     | input / output | ![rugged-metal-pushbutton]     | É um botão com LED, então conta como uma entrada e uma saída.  https://www.adafruit.com/product/560                |
 | Mini illuminated pushbutton | input / output | ![mini-illuminated-pushbutton] | Similar ao Rugged Metal. https://www.adafruit.com/product/3105                                                     |
 | LED                         | output         |                                | Leds de diferentes cores ou RGB                                                                                    |
@@ -24,7 +23,6 @@ muitas outras opções.
   [mini-illuminated-pushbutton]: https://cdn-shop.adafruit.com/970x728/3105-02.jpg
   [joystick-arcade]: https://www.filipeflop.com/wp-content/uploads/2017/07/6-2.jpg
   [reed-switch]: https://http2.mlstatic.com/D_NQ_NP_2X_989923-MLB47181158538_082021-F.webp
-  [imu-6050]: https://d229kd5ey79jzj.cloudfront.net/974/images/974_3_H.png?20220304092715
   [fita-led-neon]: https://http2.mlstatic.com/D_NQ_NP_2X_843229-MLB49006608846_022022-F.webp
   [vibracall]: https://http2.mlstatic.com/D_NQ_NP_2X_681188-MLB45655111933_042021-F.webp
   [teclado-matricial]: https://www.filipeflop.com/wp-content/uploads/2014/07/Teclado_Matricial_Membrana.png
@@ -46,4 +44,17 @@ muitas outras opções.
   [myoware]: https://cdn.sparkfun.com//assets/parts/1/1/2/3/3/13723-MyoWare_Muscle_Sensor-02.jpg
   [strain-gauge]: https://cdn.awsli.com.br/600x700/78/78150/produto/16307142/3d0e1668ad.jpg
   
+## Extras
+
+Alguns dispositivos que não são considerados "digitais" como `1` ou `0` e nem analógicos. ==Você pode substituir uma entrada analógica por um módulo desta lista.==
+
+| Nome        | Tipo  | Imagem      | Detalhes                                                                                          |
+|-------------|-------|-------------|---------------------------------------------------------------------------------------------------|
+| IMU MCU6050 | input | ![imu-6050] | Acelerômetro e giroscópio. https://www.robocore.net/sensor-robo/acelerometro-e-giroscopio-mpu6050 |
+| Qwiic Flex Glove | input | ![flex] | Módulo com dois strain grage para ser usado nos dedos. https://learn.sparkfun.com/tutorials/qwiic-flex-glove-controller-hookup-guide/all |
+
+  [imu-6050]: https://d229kd5ey79jzj.cloudfront.net/974/images/974_3_H.png?20220304092715
+  [flex]: https://cdn.sparkfun.com/r/500-500/assets/parts/1/2/8/6/2/14666-SparkFun_Qwiic_Flex_Glove_Controller-01.jpg
+  
+  :w
   

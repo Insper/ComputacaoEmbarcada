@@ -2,7 +2,7 @@
 
 | data entrega |
 |--------------|
-| 25/3         |
+| 17/9         |
 
   * [ ] Essa entrega representa 10% da nota final do projeto. Se entregar atrasado, nota fica em 5%.
 
@@ -15,17 +15,6 @@ Pontos de cada item:
 | In/ Out            | 3 pts  |
 | Design             | 2 pts  |
 
-
-!!! tip "Dupla"
-    - A APS pode ser realizada em dupla.
-    - **Você não pode repetir a mesma dupla da APS1.**
-    - O desenvolvimento do projeto deve ser feito no repositório criado
-    pelo classroom ==ATUALIZADO!!== :
-        - https://classroom.github.com/a/0Svg4qbE      
-    - Leia atentamente como trabalhar no repositório:
-         - [APS HowTo](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-howto/)
-
-
 Nessa etapa vocês devem entregar o README do projeto com uma descrição detalhada da ideia do projeto de vocês. Não façam de qualquer jeito, queremos capricho e um pouco de dedicação.
 
 A ideia aqui é vocês pensarem no software que vão controlar e o como um controle poderia funcionar com ele. Acontece que normalmente os softwares não foram pensados para serem utilizadas com um controle remoto, ou fora da interface de um computador/ celular. Vocês terão que fazer a adequação.
@@ -33,6 +22,8 @@ A ideia aqui é vocês pensarem no software que vão controlar e o como um contr
 !!! info
     O README do projeto de vocês já possui o template, basta adicionar as informações.
 
+!!! tip
+    O README deve ser resultado do que foi planejado no Mural.
 
 #### Ideia
 
