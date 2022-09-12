@@ -27,10 +27,9 @@
 | LUIZA VALEZIM AUGUSTO PINTO;ELLEN BEATRIZ SHEN | O BlueTiles é um teclado bluetooth que, com apenas uma oitava, permite de você tocar piano. Ele possui 13 botoões (contando com o de desligar e ligar), além do mixer de volume analógico. | https://photos.app.goo.gl/qG2aSzBmn8NUd6JP7 |
 | BRUNO BOLDRIM SABOYA;MATHEUS KWON | Nosso projeto serve para aqueles aspirantes em música e Dj, ele serve como um LaunchPad que simula o teclado do nosso aplicativo para tocarmos as musicas ou samples, ou os beats. Sua portabilidade e praticidade facilita a vida daqueles que estejam sempre em movimentam e não podem levar todos os equipamentos que eles tenham. | https://youtu.be/QAn-dmwzwRM |
 
-
 ## 2021-a
 
-| Integrante | Descrição |
+| Integrantes | Descrição |
 | --- | --- |
 | andrevt1@al.insper.edu.br <br>antoniovf@al.insper.edu.br | Nosso projeto é um controle de spotify, onde é possível pausar, pular, voltar uma música, além de colocar no aleatorio. Também é possível diminuir o volume com o potenciometro. Existem 2 feedbacks no controle, o primeiro para mostrar que ele esta funcionando, e o segundo para mostrar que a musica esta tocando<br><br>https://youtu.be/S1r84FI3KBc |
 | carlosed3@al.insper.edu.br <br>joaopga1@al.insper.edu.br | Streamer Deck abre e controla Spotify e discord<br><br>https://drive.google.com/file/d/1kfur3mRJsDKVAodVRDUrgFhxTD39MrOp/view?usp=sharing |

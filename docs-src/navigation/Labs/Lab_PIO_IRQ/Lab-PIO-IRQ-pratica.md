@@ -1,8 +1,11 @@
 ## Praticando - OLED
 
-| Pasta               |
-|---------------------|
-| `Led3-OLED-PIO-IRQ` |
+## Entrega
+
+| **Pasta:**   `/Led3-OLED-PIO-IRQ` |
+|---------------------------- |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `04/09/22 - 23h59` |
+
 
 Agora vamos praticar um pouco o uso de interrupção, para isso vocês deverão abrir/ criar um novo projeto.
 
@@ -21,10 +24,13 @@ Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência n
 !!! tip
     Utilize a função `pisca_led` para controlar a piscada, deixe como padrão o número de piscada em 30 vezes.
 
-1. Botão OLED1: Modifica a frequência do LED (por IRQ)
+1 - Botão OLED1: Modifica a frequência do LED (por IRQ)
     - Se usuário aperta e solta: Aumenta a freq em uma unidade ( `delay -= 100` )
     - Se usuário aperta e segura: Diminui a freq em uma unidade ( `delay += 100` )
-3. Exibir o valor da frequência no OLED
+!!! tip
+    Para testar a lógica, você pode primeiramente utilizar 2 botões, um para aumentar e outro para diminuir, e posteriormente migrar para utilizar apenas 1 botão para as duas funções.
+    
+2 - Exibir o valor da frequência no OLED
 
 !!! tip
     Para escrevermos uma string no OLED devemos usar a função:
@@ -110,7 +116,7 @@ Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência n
     - Você deve usar [sprintf](http://www.cplusplus.com/reference/cstdio/sprintf/) para formatar a string que irá exibir no OLED
     - Para exibir uma string no OLED use a função `gfx_mono_draw_string`
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdaPKrhWydKDa1rbwZatfvXAsJkeFxvVJqIBEBlwaPjbqVmSQ/viewform?embedded=true" width="640" height="400" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdhAcBzuJ2qEQw0MevjOxyALQyHdGF_wHwccewcVS5SI0B6yg/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
 
 ### Conceito B
 

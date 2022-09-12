@@ -7,9 +7,9 @@
 - **Equipe:**
     - **Prof. Rafael Corsi**: **rafael.corsi@insper.edu.br**
     - Técnico Marco Mello: **marcoASMA@insper.edu.br**
-    - Prof. Aux. Arnaldo Jr (Tiozão)
+    - Prof. Aux. Arnaldo Jr (Tiozão): **arnaldoavj@insper.edu.br**
 - **Já passou por aqui:**
-    - (2021-2021) Prof. Aux. Flávio Batista: **flaviojbb@insper.edu.br**
+    - (2021-2021) Prof. Aux. Flávio Batista 
     - (2016-2020) Prof. Aux. Eduardo Marossi
 - **© Todos os direitos reservados**
 
@@ -39,10 +39,13 @@ Leia mais sobre o curso e a infra necessária em: [Sobre](Sobre-Curso.md)
 
 Pequeno histórico da evolução da disciplina:
 
-- 2021-1:
-    - Microchip parou de fabricar o módulo de LCD que usávamos, por conta disso migramos para um display da Adafruit, aproveitamos para inserir a biblioteca gráfica LVGL. A APS gráfica foi com no desenvolvimento de um oxímetro. 
+- 2022-1:
+    - Aulas 100% presenciais, criamos um grupo no whatsapp para comunicados rápidos com a turma, reformulamos os requisitos de alguns de labs e montamos um mini estúdio para gravação de videos onde o estudante demonstra o funcionamento dos projetos. 
 
-- 2020-1:
+- 2021-1:
+    - Microchip parou de fabricar o módulo de LCD que usávamos, por conta disso migramos para um display da Adafruit, aproveitamos para inserir a biblioteca gráfica LVGL. A APS gráfica focou no desenvolvimento de um oxímetro. 
+
+- 2021-1:
     - Aulas de segunda online e labs no modelo híbrido. APS-1 musical/ Projeto 1 (controle) / APS-2 IHM oxímetro / APS-3 Wifi. A ideia da APS-2 virar o oxímetro é para trazer um tema atual para dentro da 
     disciplina.
 
@@ -64,18 +67,44 @@ Pequeno histórico da evolução da disciplina:
 - 2017-1 (primeira turma):
     - Um único projeto ao longo do semestre todo.
 
-### Alguns Projetos de 2019
+### Alguns Projetos de turmas anteriores
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xfCjqsRxOO0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Rtngc9UBV-k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=fmUkZNA9ECc&ab_channel=JamessonLeandro)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Xk86Dx85DUg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=vy48HiP2h_8&ab_channel=FranciscoJanela)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SbB6z_b_fc8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=tVuRww94FWc&ab_channel=DaviReis)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3MskQc6xw5s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=eZfbONTxnS4)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/nDGiS4ESHzE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=hSnb8Q8nyII&ab_channel=AnaCarolinaSouza)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/cLzB3bGji-c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+!!! video
+    ![](https://www.youtube.com/watch?v=Xs_b3izY2hg&ab_channel=FranciscoJanela)
+
+!!! video
+    ![](https://www.youtube.com/embed/xfCjqsRxOO0)
+
+!!! video
+    ![](https://www.youtube.com/embed/Rtngc9UBV-k)
+
+!!! video
+    ![](https://www.youtube.com/embed/Xk86Dx85DUg)
+
+!!! video
+    ![](https://www.youtube.com/embed/SbB6z_b_fc8)
+
+!!! video
+    ![](https://www.youtube.com/embed/3MskQc6xw5s)
+
+!!! video
+    ![](https://www.youtube.com/embed/nDGiS4ESHzE)
+
+!!! video
+    ![](https://www.youtube.com/embed/cLzB3bGji-c)

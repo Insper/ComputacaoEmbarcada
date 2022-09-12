@@ -2,11 +2,17 @@
 
 Esse laboratório possui duas entregas, a primeira é um passo a passo do laboratório e a segunda é parte de prática que coloca em uso o que foi visto na aula. As duas devem ser entregues até a data limite.
 
-| Pasta                      |
+## Entrega
+
+|**Pastas:**    `/Lab3-PIO-IRQ`|
 |----------------------------|
-| `Lab3-PIO-IRQ`             |
-| `Led3-OLED-PIO-IRQ`        |
-| **Data da entrega:** 11/03 |
+|               `/Led3-OLED-PIO-IRQ`|
+|**Data <span style="color:red">LIMITE</span> para entrega:** `04/09/22 - 23h59`|
+
+| **Pasta:**   `/Lab2-PIO-Driver` |
+|---------------------------- |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `28/08/22 - 23h59` |
+
 
 !!! tip "Teoria"
     Antes de seguir leia a teoria sobre [IRQ](/ComputacaoEmbarcada/navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/)
@@ -40,7 +46,7 @@ Agora vamos modificar o código um pouco, o exemplo está funcionando com interr
     1. Percebeu a diferença?
 
 !!! exercise short   
-    Você notou que quando aperta o botão o LED pisca e quando você solta também? O comportamento teria que ser de piscar apenas quando solta o botão. Por que isso acontece?
+    As vezes pode acontecer que quando voc aperta o botão o LED pisca e quando você solta também? O comportamento teria que ser de piscar apenas quando solta o botão. Por que isso acontece?
     
     (Não são todas as vezes que isso acontece).
     
@@ -98,8 +104,8 @@ void main(void){
   while(1){
   
    if (but_flag) {  // (2)
-     blink_led();
-     but_flag = 0;  // (3)
+       pisca_led(5, 200);    
+       but_flag = 0; // (3)
    }
   }
 }

@@ -5,7 +5,7 @@ executarem esta APS.
 
 !!! info
     1. Lembrem de trabalhar no repositório criado pelo classroom:
-        - https://classroom.github.com/a/GOKegD-O
+        - https://classroom.github.com/a/myFZ2tpa
         
     1. Leia atentamente como trabalhar no repositório:
     

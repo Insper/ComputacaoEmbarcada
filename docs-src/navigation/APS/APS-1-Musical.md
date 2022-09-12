@@ -31,12 +31,12 @@ Leia atentamente as regras a seguir:
     - Você não vai poder repetir dupla na próxima APS.
     - O desenvolvimento do projeto deve ser feito no repositório criado
     pelo classroom:
-        - https://classroom.github.com/a/GOKegD-O
+        - https://classroom.github.com/a/myFZ2tpa
     - Leia atentamente como trabalhar no repositório:
          - [APS HowTo](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-howto/)
 
 !!! tip "Entrega"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfkStwsTuXzp6LfsZWVsNskVRIVL0l7XTehNx_GsDPHE1aulA/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfRKP3PZscmKeCbvszLrujQHKzIC04ymne3Tvl-N-mCq6CvPg/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
     
 ## Descrição
 
