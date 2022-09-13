@@ -45,7 +45,7 @@ O sensor magnético gera um pulso elétrico (em LOW) sempre que a roda fizer uma
 
 Diagrama da montagem:
 
-![](sensor.png){width=500}
+![](sensor2.png){width=500}
 
 !!! info
     1. Quando for configurar o pino para realizar a leitura do sensor ==DESABILITAR== o PULL_UP.
