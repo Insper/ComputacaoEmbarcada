@@ -25,7 +25,7 @@ Você deve assumir as conexões a seguir no seu projeto:
 | Item             | Conexão   |
 |------------------|-----------|
 | LCD              | EXT-2     |
-| Sensor magnético | EXT-1 PB3 |
+| Sensor magnético | EXT-1 PA19 |
 | LED R            | ?         |
 | LED G            | ?         |
 | LED B            | ?         |
@@ -39,7 +39,7 @@ https://excalidraw.com/#room=56e123c94e7a3b16142b,cIncslpx8LYY_6RmiTx-8A
 
 ### Sensor magnético
 
-O sensor magnético gera um pulso elétrico (em LOW) sempre que a roda fizer uma rotacão completa, você deve tratar esse pulso como um sinal digital. Considere que o sensor foi ligado no pino ==PB3 do EXT-1==.
+O sensor magnético gera um pulso elétrico (em LOW) sempre que a roda fizer uma rotacão completa, você deve tratar esse pulso como um sinal digital. Considere que o sensor foi ligado no pino ==PA19 do EXT-1==.
 
 ![](onlysignal.png)
 
