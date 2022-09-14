@@ -1,10 +1,10 @@
 # LAB - RTOS (freeRTOS)
 
-| Pasta                      |
-|----------------------------|
-| `Lab6-pio-irq-rtos`        |
-| `Lab6-adc-irq-rtos`        |
-| **Data da entrega:** 15/04 |
+| Pasta                     |
+|---------------------------|
+| `Lab4-pio-irq-rtos`       |
+| `Lab4-adc-irq-rtos`       |
+| **Data da entrega:** 18/9 |
 
 !!! warning
     Atualize o repositório de exemplos: `same70-examples` antes de continuar.
@@ -32,7 +32,7 @@ O laboratório consiste em:
 1. Entender e modificar o exemplo
 1. Praticar
 
-### setup
+### Setup
 
 !!! exercise "OLED1"
     Plugue a placa OLED1 no EXT1, vamos usar seus botões e LEDs.
@@ -48,11 +48,17 @@ O laboratório consiste em:
 !!! progress 
     Continuar ...
 
+## RTOS
+
+Para dicas de como usar o RTOS acesse:
+
+[Util/Freertos](https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-freertos/)
+
 ### PIO-IRQ-RTOS
 
 - https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTOS-PIO-IRQ
 
-Vamos usar esse código exemplo para aprenderemos os principais recursos deo RTOS, nele criamos duas tasks: `task_but` e `task_led` que se comunicam via uma fila. O botão da placa é configurado para operar com interrupcão de borda, liberando um semáforo para a `task_but`, que processa a informacão e envia um novo valor de delay para a `task_led`:
+Vamos usar esse código exemplo para aprenderemos os principais recursos do RTOS, nele criamos duas tasks: `task_but` e `task_led` que se comunicam via uma fila. O botão da placa é configurado para operar com interrupção de borda, liberando um semáforo para a `task_but`, que processa a informação e envia um novo valor de delay para a `task_led`:
 
 ![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/RTOS-PIO-IRQ/doc/diagrama.svg)
 
@@ -65,7 +71,7 @@ Vamos usar esse código exemplo para aprenderemos os principais recursos deo RTO
 Antes de seguir analise um pouco o código e tente entender o que está acontecendo, para isso consulte a página desse lab chamada de Teoria.
 
 !!! exercise "Praticando - semáforo"
-    Faça uma cópia desse código para `Lab6-pio-irq-rtos` e vamos mexer nele!
+    Faça uma cópia desse código para `Lab4-pio-irq-rtos` e vamos mexer nele!
     
     A ideia aqui é possibilitar diminuirmos a frequência através de outro botão! Para 
     isso teremos que adicionar mais um semáforo que irá se comunicar com a task but.
@@ -98,9 +104,9 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
 
 - https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTOS-IRQ-ADC
 
-Outro exemplo que vamos usar como base é o ADC-IRQ-RTOS que faz a leitura de um valor analógico do pino do uC, você deve ler o README que possui o diagrama de ligações e uma pequena explicacão. 
+Outro exemplo que vamos usar como base é o ADC-IRQ-RTOS que faz a leitura de um valor analógico do pino do uC, você deve ler o README que possui o diagrama de ligações e uma pequena explicação. 
 
-![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/RTOS-IRQ-ADC/diagrama.svg
+![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/RTOS-IRQ-ADC/diagrama.svg)
 
 !!! exercise "Executando"
     1. Leia o README do exemplo e ligue conforme indicado
@@ -111,7 +117,7 @@ Outro exemplo que vamos usar como base é o ADC-IRQ-RTOS que faz a leitura de um
 Antes de seguir analise um pouco o código e tente entender o que está acontecendo, analise a task, as interrupções e também o uso da fila.
 
 !!! exercise "Praticando"
-    Faça uma cópia desse código para `Lab6-adc-irq-rtos` e vamos mexer nele!
+    Faça uma cópia desse código para `Lab4-adc-irq-rtos` e vamos mexer nele!
     
     A ideia agora é criarmos uma task intermediária (task_proc) que irá fazer o processamento dos dados 
     recebidos pelo ADC, conforme o diagrama atualizado a seguir:
@@ -136,4 +142,3 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
 ## Projeto
 
 Agora que vocês já entendem um pouco melhor os recursos do RTOS podem e ==devem== aplicar esses conceitos no projeto. Por exemplo, para os botões vocês podem usar semáforos ou filas, para a leitura do valor analógico uma fila.
-

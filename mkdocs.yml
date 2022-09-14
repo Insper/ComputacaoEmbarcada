@@ -91,24 +91,24 @@ nav:
           - "Teoria": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria.md"
           - "Lab": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ.md"
           - "Praticando": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica.md"
-      - "Lab 4 - TC - RTC - RTT": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md"
-      - "Lab 5 - HC-SR04": "navigation/Labs/Lab_HCSR04/lab.md"
-      - "Lab 6 - RTOS":
+      - "Lab 4 - RTOS":
           - "Lab": "navigation/Labs/Lab_RTOS/Lab-RTOS.md"
           - "Teoria": "navigation/Labs/Lab_RTOS/Teoria.md"
-      #       - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
-      # - 'Lab 7 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
-      - "Lab 7 - RTOS - LCD - LVGL":
-          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md"
-          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md"
-          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md"
-      - "Lab 8 - RTOS - Mutex": navigation/Labs/Lab_mutex/lab.md
-
-      #      - 'Lab 9 - RTOS - HC-SR04': 'navigation/Labs/Lab_RTOS_HCSR04/lab.md'
-      #      - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
-      #    - 'Lab-9-ADC-FIR.md'
-      #    - 'Lab-8-RTOS-UART.md'
-      - "Lab 9 - WIFI": "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md"
+  #      - "Lab 4 - TC - RTC - RTT": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md"
+  #      - "Lab 5 - HC-SR04": "navigation/Labs/Lab_HCSR04/lab.md"
+  #      #       - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
+  #      # - 'Lab 7 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
+  #      - "Lab 7 - RTOS - LCD - LVGL":
+  #          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md"
+  #          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md"
+  #          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md"
+  #      - "Lab 8 - RTOS - Mutex": navigation/Labs/Lab_mutex/lab.md
+  #
+  #      #      - 'Lab 9 - RTOS - HC-SR04': 'navigation/Labs/Lab_RTOS_HCSR04/lab.md'
+  #      #      - 'Lab 8 - ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
+  #      #    - 'Lab-9-ADC-FIR.md'
+  #      #    - 'Lab-8-RTOS-UART.md'
+  #      - "Lab 9 - WIFI": "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md"
 
   - Projeto:
       - "Descrição": "navigation/Projeto/Projeto-1-Descricao.md"
