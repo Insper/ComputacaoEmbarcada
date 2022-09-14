@@ -1,10 +1,10 @@
 # LAB - RTOS (freeRTOS)
 
-| Pasta                     |
-|---------------------------|
-| `Lab4-pio-irq-rtos`       |
-| `Lab4-adc-irq-rtos`       |
-| **Data da entrega:** 18/9 |
+| Pasta                                          |
+|------------------------------------------------|
+| `Lab4-pio-irq-rtos`                            |
+| `Lab4-adc-irq-rtos`                            |
+| **Data da entrega:** Quarta 21/9 e Quinta 22/9 |
 
 !!! warning
     Atualize o repositório de exemplos: `same70-examples` antes de continuar.
@@ -121,6 +121,7 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     
     A ideia agora é criarmos uma task intermediária (task_proc) que irá fazer o processamento dos dados 
     recebidos pelo ADC, conforme o diagrama atualizado a seguir:
+    
     
     ![](imgs/diagrama2.svg)
     
