@@ -64,7 +64,7 @@ Vamos usar esse código exemplo para aprenderemos os principais recursos do RTOS
 
 !!! exercise "Executando"
     1. Compile e grave o código no uC
-    2. Abra o terminal e configure a UART (baudrate 115200).
+    2. Abra o ![terminal](https://insper.github.io/ComputacaoEmbarcada/navigation/Util/Util-Erros/#instalando-terminal-window-no-atmel-studio) e configure a UART (baudrate 115200).
     1. Veja o LED piscar! 
     1. Aperte o botão da placa e veja a frequência mudar.
 
