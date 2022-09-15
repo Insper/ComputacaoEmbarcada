@@ -2,8 +2,8 @@
 
 | **Pastas:**                                    |
 |------------------------------------------------|
-| `Lab4-PIO-IRQ-RTOS`                            |
-| `Lab4-ADC-IRQ-RTOS`                            |
+| `Lab4-RTOS-PIO-IRQ`                            |
+| `Lab4-RTOS-IRQ-ADC`                            |
 |------------------------------------------------|
 | **Data <span style="color:red">LIMITE</span> para entrega:** `21/09/22 - 23h59` |
 
