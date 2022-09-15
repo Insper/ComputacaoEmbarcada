@@ -1,10 +1,11 @@
 # LAB - RTOS (freeRTOS)
 
-| Pasta                                          |
+| **Pastas:**                                    |
 |------------------------------------------------|
-| `Lab4-pio-irq-rtos`                            |
-| `Lab4-adc-irq-rtos`                            |
-| **Data da entrega:** Quarta 21/9 e Quinta 22/9 |
+| `Lab4-PIO-IRQ-RTOS`                            |
+| `Lab4-ADC-IRQ-RTOS`                            |
+|------------------------------------------------|
+| **Data <span style="color:red">LIMITE</span> para entrega:** `21/09/22 - 23h59` |
 
 !!! warning
     Atualize o repositório de exemplos: `same70-examples` antes de continuar.
