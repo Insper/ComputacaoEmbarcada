@@ -81,7 +81,7 @@ Dentro do AtmelStudio clique no menubar: `Build` :arrow_right: `Clean Solution`.
 
 ![image-20200330153918599](imgs/same70-xpld_erros/build_clean_solution.png)
 
-## Instalando Terminal Window no Atmel Studio
+## Instalando Terminal Window no Microchip Studio
 
 ??? example "Instalando"
       1. Clique em `Tools` :arrow_right: `Extensions and Update`
