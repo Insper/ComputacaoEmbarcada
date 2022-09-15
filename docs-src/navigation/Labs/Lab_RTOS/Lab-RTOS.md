@@ -9,6 +9,13 @@
 
 !!! warning
     Atualize o repositório de exemplos: `same70-examples` antes de continuar.
+    
+O repositório está organizado por categorias: comunicação, demos, periféricos, screens, sensores, ... e assim por diante.
+
+Na primeira parte deste laboratório iremos trabalhar com o código exemplo [`SAME70-examples/Perifericos-uC/RTOS-PIO-IRQ/`]([https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ]). Esse código será a base da primeira parte do laboratório.
+
+Na segunda parte, iremos trabalhar com o código exemplo [`SAME70-examples/Perifericos-uC/RTOS-IRQ-ADC/`]([[https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ]). Esse código será a base da segunda parte do laboratório.
+
 
 !!! tip "Embedded FM - episódio 175"
     **How Hard Could It Be?**
