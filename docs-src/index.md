@@ -39,11 +39,14 @@ Leia mais sobre o curso e a infra necessária em: [Sobre](Sobre-Curso.md)
 
 Pequeno histórico da evolução da disciplina:
 
+- 2022-2:
+    - Sequência dos laboratórios alterada, introduzi o RTOS antes dos timers (PIO, DRIVER, PIO-IRQ, RTOS, HCSR04 com RTT). As notas das prova práticas são binárias e não fazem mais parte da nota final.
+    
 - 2022-1:
-    - Aulas 100% presenciais, criamos um grupo no whatsapp para comunicados rápidos com a turma, reformulamos os requisitos de alguns de labs e montamos um mini estúdio para gravação de videos onde o estudante demonstra o funcionamento dos projetos. 
+    - Aulas 100% presenciais, criamos um grupo no whatsapp para comunicados rápidos com a turma, reformulamos os requisitos de alguns de labs e montamos um mini estúdio para gravação de vídeos onde o estudante demonstra o funcionamento dos projetos, a APS do IoT virou laboratório. Arnaldo começou como professor auxiliar.
 
-- 2021-1:
-    - Microchip parou de fabricar o módulo de LCD que usávamos, por conta disso migramos para um display da Adafruit, aproveitamos para inserir a biblioteca gráfica LVGL. A APS gráfica focou no desenvolvimento de um oxímetro. 
+- 2021-2:
+    - Microchip parou de fabricar o módulo de LCD que usávamos, por conta disso migramos para um display da Adafruit, aproveitamos para inserir a biblioteca gráfica LVGL. A APS gráfica focou no desenvolvimento de um oxímetro. O Fabrício foi professor auxiliar.
 
 - 2021-1:
     - Aulas de segunda online e labs no modelo híbrido. APS-1 musical/ Projeto 1 (controle) / APS-2 IHM oxímetro / APS-3 Wifi. A ideia da APS-2 virar o oxímetro é para trazer um tema atual para dentro da 
@@ -53,13 +56,13 @@ Pequeno histórico da evolução da disciplina:
     - Aula 100% online por conta da pandemia: sai APS-1 e entra projeto 1, mantém APS-2 e APS-3.
     
 - 2020-1: 
-    - Devido ao corona o projeto foi cancelado, os alunos receberam um complemento do kit para trabalharem de casa. As APS foram: Musica, LCD bike e WIFI. As avaliaçòes individuais foram aprimoradas. A parte de UX foi bem trabalhada nesse semestre.
+    - Devido ao pandemia do corona vírus o projeto foi cancelado, os alunos receberam um complemento do kit para trabalharem de casa. As APS foram: Musica, LCD bike e WIFI. As avaliações individuais foram aprimoradas. A parte de UX foi bem trabalhada nesse semestre.
     
 - 2019-2 (DP):
     - Troquei a APS 2 da máquina de lavar para a Bike. Como só tinha um aluno, as APS viraram projetos.
 
 - 2019-1:
-    - Introduzi as APS: Musical; Máquina de Lavar e Wifi (tinha uma de sensores também), os alunos tiveram que entregar 2 projetos: controle/ vending machine e projeto livre. Primeira vez que aparece o projeto fechado do começo de semestre. **Estreia do lab de Arq.**
+    - Introduzi as APS: Musical; Máquina de Lavar e Wifi (tinha uma de sensores também), os alunos tiveram que entregar 2 projetos: controle/ vending machine e projeto livre. Primeira vez que aparece o projeto fechado do começo de semestre. **Estreia do lab de Arquitetura**
     
 - 2018-1:
     - Um projeto ao longo do semestre todo. Introduzi avaliação prática individual.
