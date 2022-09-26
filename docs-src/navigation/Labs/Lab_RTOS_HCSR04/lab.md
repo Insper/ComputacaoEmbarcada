@@ -1,4 +1,4 @@
-# LAB - RTOS HC-SR04
+# LAB - RTOS - HC-SR04
 
 | Pasta          |
 |----------------|
