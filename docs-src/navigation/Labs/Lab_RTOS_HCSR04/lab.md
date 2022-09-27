@@ -1,8 +1,8 @@
 # LAB - RTOS - HC-SR04
 
-| **Pastas:**                                    |
+| **Pasta:**                                    |
 |------------------------------------------------|
-| `Lab5--RTOS-HC-SR04`                            |
+| `Lab5-RTOS-HC-SR04`                            |
 |------------------------------------------------|
 | **Data <span style="color:red">LIMITE</span> para entrega:** `25/09/22 - 23h59` |
 
