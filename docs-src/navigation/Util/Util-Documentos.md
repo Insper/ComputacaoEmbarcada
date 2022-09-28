@@ -10,5 +10,5 @@ Documentos utilizados na disciplina:
 
 :
 
-| Cartilhas                                                                                                                        | Descrição                        |
-| [Cartilhas - Computação Embarcada (INSPER)](https://github.com/Insper/ComputacaoEmbarcada/tree/master/docs-src/navigation/Util/imgs/Cartilhas)                                                                                                                    |  Cartilhas dos Kit de CompEmb; PINOUT; Tabela ASCII; Esquemas de conexões da placa.           |
+| Cartilhas                                                                                                                                       | Descrição                        |
+| [Cartilhas - Computação Embarcada (INSPER)](https://github.com/Insper/ComputacaoEmbarcada/tree/master/docs-src/navigation/Util/imgs/Cartilhas)  |  Cartilhas dos Kit de CompEmb; PINOUT; Tabela ASCII; Esquemas de conexões da placa.           |
