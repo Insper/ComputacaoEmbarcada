@@ -30,7 +30,7 @@ Para criarmos uma tarefa é necessário:
  
 Código exemplo:
 
-```c
+``` c
 static void task_led(void *pvParameters){
   for (;;) {
     LED_Toggle(LED0);
@@ -84,7 +84,7 @@ Esse método possui avantagem de 'não ocupar' processamento do CORE. O tempo es
 
 Código exemplo:
 
-```c
+``` c
 void vTaskFunction( void * pvParameters ){
   
   // inicializa LED1
@@ -133,7 +133,7 @@ A função possui os seguintes argumentos: `xTimerCreate(pcTimerName, xTimerPeri
 
 Código exemplo:
 
-```
+``` c
 TimerHandle_t xTimer;
 
 void vTimerCallback(TimerHandle_t xTimer) {
@@ -172,7 +172,7 @@ Para criarmos e usarmos um semáforo é necessário:
 
 Código exemplo:
 
-```c
+``` c
 
 // variável global que é o endereço 
 // do semáforo  
@@ -265,9 +265,9 @@ static void task_led(void *pvParameters){
       if( xQueueReceive( xQueueButId, &id, ( TickType_t ) 500 )){
         
         if(id == '1')
-          LED_Toggle(LED1);
+          pin_toggle(LED1_PIO, LED1_PIO_IDX_MASK);
         else if(id == '2')
-          LED_Toggle(LED2);
+          pin_toggle(LED2_PIO, LED2_PIO_IDX_MASK);
       }
     }
 }
