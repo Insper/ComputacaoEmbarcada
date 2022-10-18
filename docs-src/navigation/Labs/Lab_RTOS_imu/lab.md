@@ -453,7 +453,7 @@ Agora com tudo configurado podemos fazer a leitura do sensor (acelerômetro e im
 !!! exercise
     Você sabia que no nosso terminal não conseguimos imprimir números floats por padrão? Mas da para habilitar:  
 
-    - https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-freertos/
+    - https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-FloatPrint/
     
     ==HABILITE==
 
