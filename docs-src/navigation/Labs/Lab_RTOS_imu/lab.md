@@ -13,7 +13,7 @@ Neste laboratório iremos realizar uma comunicação I2C com um sensor inercial,
 
 ![](i2c.png)
 
-I2C (*eye-squared-C*) é um protocolo de comunicação do tipo Machine-to-machine muito utilizado para comunicação entre microcontrolador e um dispositivo (sensor ou atuador) externo, criado pela Philips Semiconductor em **1982** e liberado para uso sem licenca em **2006**. O i2c é uma comunicação síncrona e utiliza duas vias: **serial data line** (SDA) e **serial clock line (SCL)** SDA, a comunicação é sempre inicializada pelo Controlador (o microcontrolador) e respondida pelo Target (componente).
+I2C (*eye-squared-C*) é um protocolo de comunicação do tipo Machine-to-machine muito utilizado para comunicação entre microcontrolador e um dispositivo (sensor ou atuador) externo, criado pela Philips Semiconductor em **1982** e liberado para uso sem licença em **2006**. O i2c é uma comunicação síncrona e utiliza duas vias: **serial data line** (SDA) e **serial clock line** (SCL), a comunicação é sempre inicializada pelo Controlador (o microcontrolador) e respondida pelo Target (componente).
 
 A imagem a seguir é um exemplo de como utilizar o i2c para conectar múltiplos dispositivos em um controlador:
 
@@ -29,9 +29,9 @@ Existem no mercado vários sensores que possuem comunicação i2c, no lab temos 
 - temperatura
 - pressão
 - batimento cardíaco 
-- De uma olhada nos sensores da adafruit i2c: https://www.adafruit.com/?q=i2c+sensor&sort=BestMatch
+- Dê uma olhada nos sensores da adafruit i2c: https://www.adafruit.com/?q=i2c+sensor&sort=BestMatch
 
-### protocolo
+### Protocolo
 
 !!! info
     Apenas uma breve apresentação, o I2C é um protocolo mais complicado do que aparenta ser:
