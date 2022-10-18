@@ -78,7 +78,7 @@ O nosso microcontrolador possui um periférico chamado de **TWIHS** que implemen
 
 No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré definido:
 
-![](twihs-pins.png)
+![](twihs-pins_2.svg)
 
 ### MPU-6050
 
