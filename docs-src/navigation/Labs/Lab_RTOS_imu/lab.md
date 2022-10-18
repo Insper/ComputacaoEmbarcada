@@ -493,7 +493,7 @@ A biblioteca implementa o filtro de orientação chamado [Madgwick](https://ahrs
     Existem diversos algoritmos diferentes que fazem isso, se quiserem se aprofundar eu indico a eletiva de Drones do Fábio Bobrow que trabalha mais a fundo com isso.
     
 !!! exercise
-    1. Faća o download da última versão da biblioteca:
+    1. Faça o download da última versão da biblioteca:
     
     - https://github.com/xioTechnologies/Fusion/tags
     
@@ -556,7 +556,7 @@ Agora que já temos a biblioteca no nosso projeto, temos que preparar o dados pa
 ### Trabalhando com os dados - parte 2
 
 
-Vamos detectar para onde o sistema está apontando, a ideia é o acender os LEDs da placa OLED da seguinte maneira:
+Vamos detectar para onde o sistema está apontando, a ideia é acender os LEDs da placa OLED da seguinte maneira:
     
 - LED1: Apontando para esquerda
 - LED2: Apontando para frente
@@ -568,4 +568,4 @@ Vamos detectar para onde o sistema está apontando, a ideia é o acender os LEDs
     1. Crie uma task (`task_orientacao`) que possui uma fila e que recebe um dado do tipo `orientacao` e que dependendo do valor recebido, acende o LED conforme descrição anterior.
     1. Na task da IMU, detecta a orientação e envie o dado para a fila.
     
-    ==A referencia da orientação é a posićão de quando a placa liga!==
+    ==A referência da orientação é a posição de quando a placa liga!==
