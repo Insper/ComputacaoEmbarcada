@@ -120,7 +120,7 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 - i2c wizard
 - configurar pio mux 
 - configurar TWIHS
-- ler manual do MPU6050 e achar enderećo I2C
+- ler manual do MPU6050 e achar endereço I2C
 - usar valor para ler **MPU6050_RA_WHO_AM_I**
     - explicar 
 - dar código pronto que configura e lê giro e accel
@@ -134,13 +134,13 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 Vamos criar uma `task` para realizar a leitura da IMU.
 
 !!! exercise
-    Crie uma task chamda de `task_imu`, lembre de:
+    Crie uma task chamada de `task_imu`, lembre de:
     
     1. Inicializar na main
     1. Task devem possuir while(1) e nunca retornar
 
 
-#### TWHIHS
+#### TWIHS
 
 Para fazermos uso periférico TWIHS será necessário adicionarmos ele no asf wizard:
 
@@ -171,7 +171,7 @@ Com a biblioteca adicionada agora devemos criar uma função para configurar o p
     ```
     
 !!! exercise
-    Agora temos que configurar para que o PIO permita que o TWIHS acesse os pinos, adicione as duas linhas de código a seguir na funcão `mcu6050_i2c_bus_init`
+    Agora temos que configurar para que o PIO permita que o TWIHS acesse os pinos, adicione as duas linhas de código a seguir na função `mcu6050_i2c_bus_init`
 
     ```c
 	ioport_set_pin_peripheral_mode(TWIHS0_DATA_GPIO, TWIHS0_DATA_FLAGS);
@@ -186,7 +186,7 @@ Com a biblioteca adicionada agora devemos criar uma função para configurar o p
         mcu6050_i2c_bus_init();
     ```
 
-#### MCU6050
+#### Biblioteca MCU6050
 
 Para facilitar o controle da IMU iremos importar um arquivo `mcu6050.h` que possui dados extraídos do manual e que irá facilitar o acesso ao sensor:
 
@@ -194,7 +194,7 @@ Para facilitar o controle da IMU iremos importar um arquivo `mcu6050.h` que poss
 !!! exercise
     Inclua o arquivo `mcu6050.h` no projeto:
     
-    1. Faca o download para a pasta Downloads [muc6050](https://gist.githubusercontent.com/rafaelcorsi/0a5cbb23db50a9828bee4a5781717d0e/raw/c2fed1e12a4b61561508d604a2228eba30f1fcbd/mcu6050.h)
+    1. Faça o [download](https://gist.githubusercontent.com/rafaelcorsi/0a5cbb23db50a9828bee4a5781717d0e/raw/c2fed1e12a4b61561508d604a2228eba30f1fcbd/mcu6050.h) de [muc6050.h](https://gist.githubusercontent.com/rafaelcorsi/0a5cbb23db50a9828bee4a5781717d0e/raw/c2fed1e12a4b61561508d604a2228eba30f1fcbd/mcu6050.h) para a pasta Downloads 
     1. Arraste o arquivo para dentro do `src/` 
     1. Abra e de uma olhada no arquivo
     1. Lembre de incluir no `main.c`
