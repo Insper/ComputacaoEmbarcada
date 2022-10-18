@@ -80,6 +80,10 @@ No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré
 
 ![](twihs-pins_2.svg)
 
+
+!!! warning
+    Na placa que utilizamos (SAME70-XPLD), nem todos os pinos do uC que tem acesso ao perífico TWIHS estão disponíveis. Na coluna **XPLD-CONN** da tabela acima está indicado quais e onde os pinos estão disponíveis.
+
 ### MPU-6050
 
 !!! todo
