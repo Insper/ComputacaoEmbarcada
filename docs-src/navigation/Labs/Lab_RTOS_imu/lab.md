@@ -100,15 +100,15 @@ No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré
     - fusão de dados?
 
 
-### Sparkfun breakout board
+### Módulo GY-521
 
-![](https://cdn.sparkfun.com//assets/parts/6/3/5/5/11028-04.jpg){width=300}
+![](https://www.filipeflop.com/wp-content/uploads/2014/09/GY-521-MPU-6050-Pinos1.jpg){width=300}
 
-Para termos acesso ao `MPU6050` iremos usar uma placa da adafruit [SparkFun Triple Axis Accelerometer and Gyro Breakout - MPU-6050](https://www.sparkfun.com/products/11028). A placa custa $32.50 no site da adafruit, mas no Brasil é possível achar similares por [R$24](https://www.filipeflop.com/produto/acelerometro-e-giroscopio-3-eixos-6-dof-mpu-6050/), porém o controle de qualidade é bem inferior.
+Para termos acesso ao `MPU6050` iremos usar um módulo GY-521, no Brasil é possível achar por [R$24](https://www.filipeflop.com/produto/acelerometro-e-giroscopio-3-eixos-6-dof-mpu-6050/).
+
+Um módulo com maior precisão pode ser comprado e importado pela [sparkfun](https://www.sparkfun.com/products/11028):
 
 > "Our breakout board for the MPU-6050 makes this tiny QFN package easy to work into your project. Every pin you need to get up and running is broken out to 0.1" headers, including the auxiliary master I2C bus which allows the MPU-6050 to access external magnetometers and other sensors."
-> 
-> Site do fabricante
 
 ## LAB
 
