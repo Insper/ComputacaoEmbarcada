@@ -214,12 +214,12 @@ Onde:
 
 - `dev_addr`: Endereço do dispositivo que pretendemos manipular
 - `reg_addr`: Endereço do registrador que pretendemos escrever/ler
-- `reg_data`: Vetor com os valores que serão escritos/lido
-- `cnt`: Quantidade de dados que será escrito/lido
+- `reg_data`: Vetor com os valores que serão escritos/lidos
+- `cnt`: Quantidade de dados que serão escritos/lidos
 
 !!! exercise
     Declare as funções a seguir no código, lembre
-    de fazer o prototype para evitar erros de compilação.
+    de fazer os **protótipos** das funções para evitar erros de compilação.
 
     ```c
     int8_t mcu6050_i2c_bus_write(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t cnt)
@@ -260,7 +260,7 @@ Onde:
     }
     ```
     
-Para usar as funções será necessário utilizarmos ois buffers (para recebimento e envio de dados) além de uma variável para armazenarmos o valor do retorno da função, que informa se o comando no i2c foi bem sucedido ou não.
+Para usar as funções será necessário utilizarmos dois buffers (um para recebimento e outro para envio de dados) além de uma variável para armazenarmos o valor do retorno da função, que informa se o comando no i2c foi bem sucedido ou não.
 
 !!! exercise
     Declare os buffers a seguir na `task_imu`
@@ -282,7 +282,7 @@ A maioria dos módulos que operam por algum tipo de comunicação (uart, i2c, sp
 1. Garantir que o controlador está acessando o periférico certo
 
 !!! exercise short
-    Acesse o documento que descreve os registradores do IMU e procure pelo endereço do registrador **WHO AM I**, e responda:
+    Acesse o documento que descreve os registradores do IMU e procure pelo endereço do registrador **WHO_AM_I**, e responda:
     
     1. Qual endereço deve ser lido
     1. Qual valor esperado da leitura
@@ -307,7 +307,7 @@ Para facilitar a nossa vida, importamos o arquivo `mcu6050.h` no nosso projeto, 
 Com isso conseguirmos usar a função que realiza uma leitura no I2C (`mcu6050_i2c_bus_read`) e validar a comunicação.
 
 !!! exercise
-    Na `task_imu` faca a leitura do registrador `WHO AM I`:
+    Na `task_imu` faça a leitura do registrador `WHO_AM_I`:
 
     ```c
 	// Lê registrador WHO AM I
@@ -346,12 +346,12 @@ Com a leitura realizada, agora temos que analisar o conteúdo do buffer RX e ver
 
 ### Configurando IMU e lendo informações
 
-Agora temos que configurar a IMU para fornecer as informações necessárias: **Giro** e **Acelerometro**, isso é tudo está na documentação do sensor.
+Agora temos que configurar a IMU para fornecer as informações necessárias: **Giroscópio** e **Acelerômetro**, isso tudo está na documentação do sensor.
 
-O código configura o acelerômetro para operar com escala máxima de 2G (o que é ok para nossa aplicação, mas se estivessem desenvolvendo alguma coisa para uma montanha russa, um carro ou um míssil poderia não funcionar.), ai poderiam escolher entre: `± 2G, ± 4G, ± 8G, ± 16G`.
+O código configura o acelerômetro para operar com escala máxima de 2G (o que é ok para nossa aplicação, mas se estivessem desenvolvendo alguma aplicação para uma montanha russa, um carro ou um míssil poderia não funcionar.), mas também poderiamos escolher entre: `± 2G, ± 4G, ± 8G e ± 16G`.
 
 !!! tip
-    Ler a documentação pode ser muito difícil e trabalhoso, uma outra opção é a de ver como outras pessoas usam o sensor, e uma boa referencia são códigos de arduino ou biblioteca de fabricantes de placa de desenvolvimento.
+    Ler a documentação pode ser muito difícil e trabalhoso, uma outra opção é a de ver como outras pessoas usam o sensor, e uma boa referencia são códigos de arduino ou bibliotecas de fabricantes de placa de desenvolvimento.
 
 !!! exercise
     Inclua o código a seguir na `task_imu` ainda fora do `while`, mas apenas depois de ter validado a comunicacão com o sensor:
@@ -369,7 +369,7 @@ O código configura o acelerômetro para operar com escala máxima de 2G (o que 
 	if(rtn != TWIHS_SUCCESS)
 		printf("[ERRO] [i2c] [write] \n");
         
-    // Configura range gyroscopio para operar com 250 °/s
+    // Configura range giroscopio para operar com 250 °/s
     bufferTX[0] = 0x00; // 250 °/s
     rtn = mcu6050_i2c_bus_write(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_CONFIG, bufferTX, 1);
 	if(rtn != TWIHS_SUCCESS)
