@@ -104,7 +104,7 @@ No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré
 
 ![](https://www.filipeflop.com/wp-content/uploads/2014/09/GY-521-MPU-6050-Pinos1.jpg){width=300}
 
-Para termos acesso ao `MPU6050` iremos usar um módulo GY-521, no Brasil é possível achar por [R$24](https://www.filipeflop.com/produto/acelerometro-e-giroscopio-3-eixos-6-dof-mpu-6050/).
+Para termos acesso ao `MPU6050` iremos usar um módulo GY-521, no Brasil é possível achar por [R$25](https://www.filipeflop.com/produto/acelerometro-e-giroscopio-3-eixos-6-dof-mpu-6050/).
 
 Um módulo com maior precisão pode ser comprado e importado pela [sparkfun](https://www.sparkfun.com/products/11028):
 
