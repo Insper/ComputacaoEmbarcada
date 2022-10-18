@@ -94,7 +94,7 @@ nav:
           - "Lab": "navigation/Labs/Lab_RTOS/Lab-RTOS.md"
           - "Teoria": "navigation/Labs/Lab_RTOS/Teoria.md"
       - "Lab 5 - RTOS HC-SR04": "navigation/Labs/Lab_RTOS_HCSR04/lab.md"
-  #      - "Lab 6 - RTOS IMU": "navigation/Labs/Lab_RTOS_imu/lab.md"
+      - "Lab 6 - RTOS IMU": "navigation/Labs/Lab_RTOS_imu/lab.md"
   #      - "Lab 4 - TC - RTC - RTT": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md"
   #      - "Lab 5 - HC-SR04": "navigation/Labs/Lab_HCSR04/lab.md"
   #      #       - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'

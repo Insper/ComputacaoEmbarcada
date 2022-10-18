@@ -255,7 +255,6 @@ Onde:
         return (int8_t)ierror;
     }
     ```
-
     
 Para usar as funções será necessário utilizarmos ois buffers (para recebimento e envio de dados) além de uma variável para armazenarmos o valor do retorno da função, que informa se o comando no i2c foi bem sucedido ou não.
 
@@ -314,6 +313,11 @@ Com isso conseguirmos usar a função que realiza uma leitura no I2C (`mcu6050_i
 	} else {
         printf("[DADO] [i2c] %x:%x", MPU6050_RA_WHO_AM_I, bufferRX[0]);
     }
+    
+    
+    while(1) {
+    
+    }
     ```
 
 Vamos analisar os parâmetros do comando anterior:
@@ -366,6 +370,10 @@ O código configura o acelerômetro para operar com escala máxima de 2G (o que 
     rtn = mcu6050_i2c_bus_write(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_CONFIG, bufferTX, 1);
 	if(rtn != TWIHS_SUCCESS)
 		printf("[ERRO] [i2c] [write] \n");
+        
+    while(1) {
+    
+    }
     ```
     
 Agora com tudo configurado podemos fazer a leitura do sensor (acelerômetro e imu):
