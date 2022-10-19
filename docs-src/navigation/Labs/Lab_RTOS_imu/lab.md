@@ -6,8 +6,6 @@
 
 Neste laboratório iremos realizar uma comunicação I2C com um sensor inercial, e aplicar um processamento de fusão de dados para obtermos a localização no espaço do sensor.
 
-!!! info
-    Usar como base o código do OLED com RTOS.
 
 ## Teoria
 
@@ -87,6 +85,8 @@ No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré
 !!! exercise choice 
     Localize os pinos do TWIHS-2 na placa, para isso busque no manual do SAME70-XPLD. 
     
+    ![](twihs-pins-xpld.png){width=300}
+    
     - [ ] (1) EXT-1
     - [ ] (2) EXT-2
     - [ ] (3) J507 Header IOs
@@ -95,7 +95,7 @@ No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré
 
 
     !!! answer
-        O TWIHS2 usa ospinos PD28 e PD27 que estão localizados no "Camera interface":
+        O TWIHS2 usa os pinos PD28 e PD27 que estão localizados no "Camera interface":
         
         Manual da placa, pg 27.
         
@@ -120,35 +120,36 @@ No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré
         - talvez uma ou duas perguntas para eles terem que abrir o manual e buscar informacoes.
     - fusão de dados?
 
-
 ### Módulo GY-521
 
 ![](https://www.filipeflop.com/wp-content/uploads/2014/09/GY-521-MPU-6050-Pinos1.jpg){width=300}
 
-Para termos acesso ao `MPU6050` iremos usar um módulo GY-521, no Brasil é possível achar por [R$25](https://www.filipeflop.com/produto/acelerometro-e-giroscopio-3-eixos-6-dof-mpu-6050/).
-
-Um módulo com maior precisão pode ser comprado e importado pela [sparkfun](https://www.sparkfun.com/products/11028):
+Para termos acesso ao `MPU6050` iremos usar um módulo GY-521, no Brasil é possível achar por [R$25](https://www.filipeflop.com/produto/acelerometro-e-giroscopio-3-eixos-6-dof-mpu-6050/). Um módulo com maior qualidade pode ser comprado e importado pela [sparkfun](https://www.sparkfun.com/products/11028):
 
 > "Our breakout board for the MPU-6050 makes this tiny QFN package easy to work into your project. Every pin you need to get up and running is broken out to 0.1" headers, including the auxiliary master I2C bus which allows the MPU-6050 to access external magnetometers and other sensors."
+
+!!! exercise
+    Conecte o módulo na placa (camera interface), considere os pinos do TWISH 2:
+    
+    - PD27: SDA
+    - PD28: SCL
+    - ==Alimente o módulo com 3v3 e GND==
+    
+    Lembre de conectar o ==OLED==.
 
 ## LAB
 
 Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, podemos começar o lab.
 
-> Lab usar apenas printf
+!!! info
+    Usar como base o código do OLED com RTOS
+    
+    - Fazer uma cópia do RTOS-OLED para Lab6-RTOS-imu
 
-- conectar sensor placa
-- i2c wizard
-- configurar pio mux 
-- configurar TWIHS
-- ler manual do MPU6050 e achar endereço I2C
-- usar valor para ler **MPU6050_RA_WHO_AM_I**
-    - explicar 
-- dar código pronto que configura e lê giro e accel
-- importar código fusão de dados
-- implementar fusão de dados
-
-> manual:  https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf
+!!! tip "Manual"
+    Consultar o manual:
+    
+    - https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf
 
 ### task imu
 
@@ -159,7 +160,6 @@ Vamos criar uma `task` para realizar a leitura da IMU.
     
     1. Inicializar na main
     1. Task devem possuir while(1) e nunca retornar
-
 
 #### TWIHS
 
@@ -182,12 +182,12 @@ Com a biblioteca adicionada agora devemos criar uma função para configurar o p
     void mcu6050_i2c_bus_init(void)
     {
         twihs_options_t mcu6050_option;
-        pmc_enable_periph_clk(TWIHS_MCU6050_ID);
+        pmc_enable_periph_clk(ID_TWIHS2);
 
         /* Configure the options of TWI driver */
         mcu6050_option.master_clk = sysclk_get_cpu_hz();
         mcu6050_option.speed      = 40000;
-        twihs_master_init(TWIHS_MCU6050, &mcu6050_option);
+        twihs_master_init(TWIHS2, &mcu6050_option);
     }
     ```
     
@@ -195,8 +195,10 @@ Com a biblioteca adicionada agora devemos criar uma função para configurar o p
     Agora temos que configurar para que o PIO permita que o TWIHS acesse os pinos, adicione as duas linhas de código a seguir na função `mcu6050_i2c_bus_init`
 
     ```c
-	ioport_set_pin_peripheral_mode(TWIHS0_DATA_GPIO, TWIHS0_DATA_FLAGS);
-	ioport_set_pin_peripheral_mode(TWIHS0_CLK_GPIO, TWIHS0_CLK_FLAGS);
+    /** Enable TWIHS port to control PIO pins */
+	pmc_enable_periph_clk(ID_PIOD);
+	pio_set_peripheral(PIOD, PIO_TYPE_PIO_PERIPH_C, 1 << 28);
+	pio_set_peripheral(PIOD, PIO_TYPE_PIO_PERIPH_C, 1 << 27);
     ```
   
 !!! exercise
@@ -254,7 +256,7 @@ Onde:
         p_packet.buffer       = reg_data;
         p_packet.length       = cnt;
 
-        ierror = twihs_master_write(TWIHS_MCU6050, &p_packet);
+        ierror = twihs_master_write(TWIHS2, &p_packet);
 
         return (int8_t)ierror;
     }
@@ -274,8 +276,7 @@ Onde:
 
     // TODO: Algum problema no SPI faz com que devemos ler duas vezes o registrador para
     //       conseguirmos pegar o valor correto.
-        ierror = twihs_master_read(TWIHS_MCU6050, &p_packet);
-        ierror = twihs_master_read(TWIHS_MCU6050, &p_packet);
+        ierror = twihs_master_read(TWIHS2, &p_packet);
 
         return (int8_t)ierror;
     }
@@ -295,11 +296,31 @@ Para usar as funções será necessário utilizarmos dois buffers (um para receb
 	uint8_t rtn;
     ```
 
+### Probe
+
+Uma das formas de verificarmos se o sensor está conectado corretamente e se o básico do I2C funciona é realizarmos uma "verificaćão" na linha e verificar se o periférico responde com um ACK a um acesso. Isso é chamado de **probe**.
+
+!!! exercise
+    Antes do `while(1)` realize um *probe* na linha para certificarmos que a conexão i2c está ok:
+
+    ```c 
+        rtn = twihs_probe(TWIHS2, MPU6050_DEFAULT_ADDRESS);
+        if(rtn != TWIHS_SUCCESS){
+            printf("[ERRO] [i2c] [probe] \n");
+        } else {
+            printf("[DADO] [i2c] probe OK\n" );
+        }
+        
+        while(1){
+        
+        }
+    ```
+    
 ### Lendo ID sensor
 
 A maioria dos módulos que operam por algum tipo de comunicação (uart, i2c, spi) possuem um registrador que tem um ID único que referencia o módulo, a ideia deste registrador é a de:
 
-1. Confirmar que a comunicação i2c está funcionando
+1. Confirmar que a comunicação i2c está funcionando e que consegue ler do periférico
 1. Garantir que o controlador está acessando o periférico certo
 
 !!! exercise short
@@ -401,6 +422,9 @@ O código configura o acelerômetro para operar com escala máxima de 2G (o que 
     }
     ```
     
+!!! exercise
+    Execute o código e análise se os comandos foram executados com sucesso.
+    
 Agora com tudo configurado podemos fazer a leitura do sensor (acelerômetro e imu):
 
 !!! exercise
@@ -472,7 +496,7 @@ Agora com tudo configurado podemos fazer a leitura do sensor (acelerômetro e im
     ```
 
 !!! exercise
-    Você sabia que no nosso terminal não conseguimos imprimir números floats por padrão? Mas da para habilitar:  
+    Você sabia que no nosso terminal não conseguimos imprimir números formatados em floats por padrão? Mas da para habilitar:  
 
     - https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-FloatPrint/
     
