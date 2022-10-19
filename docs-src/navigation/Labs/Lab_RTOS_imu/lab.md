@@ -117,7 +117,11 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 > Lab usar apenas printf
 	
  # Conexões com a SAME70-XPLD:
- 
+
+<p>
+	
+![](montagemMPU6050.jpeg){align=right width=300}
+
 | MCU  | PIN  | SAME70-XPLD |
 | :--: | :--: | :---------: |
 | SDA  | PA3  |   EXT2-11   |
@@ -125,7 +129,7 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 | GND  | GND  |   EXT2-19   |
 | VCC  | VCC  |   EXT2-20   |
 	
-![](montagemMPU6050.jpeg){align=right width=300}
+</p>
 
  
 - i2c wizard
