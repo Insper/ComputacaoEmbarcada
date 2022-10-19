@@ -116,10 +116,10 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 
 > Lab usar apenas printf
 
-# Conectar sensor placa:
+ Conectar sensor placa:
  
 MCU    |    PIN    |    SAME70-XPLD
-------------------------------------
+- - - - - - - - - - - - - - - - - - 
 SDA    |    PA3    |    EXT2-11   
 SCL    |    PA4    |    EXT2-12    	
 GND    |    GND    |    EXT2-19    
