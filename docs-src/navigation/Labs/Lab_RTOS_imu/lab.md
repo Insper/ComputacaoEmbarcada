@@ -115,7 +115,7 @@ Um módulo com maior precisão pode ser comprado e importado pela [sparkfun](htt
 Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, podemos começar o lab.
 
 > Lab usar apenas printf
-<p align="center" width="100%">
+<p align="right" width="100%">
 	
  Conectar sensor placa:
  
