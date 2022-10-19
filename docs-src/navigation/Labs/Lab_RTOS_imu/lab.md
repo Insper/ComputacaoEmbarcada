@@ -131,8 +131,8 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 | VCC  | VCC  |   EXT2-20   |
 	
 
-> datasheet:  https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf
-> register map: http://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf
+[datasheet](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf)
+[register map](http://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf)
 
 #### task_imu
 
