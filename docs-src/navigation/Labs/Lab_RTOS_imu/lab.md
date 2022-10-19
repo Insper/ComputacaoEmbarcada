@@ -80,6 +80,27 @@ No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré
 
 ![](twihs-pins.png)
 
+!!! exercise choice 
+    Localize os pinos do TWIHS-2 na placa, para isso busque no manual do SAME70-XPLD. 
+    
+    - [ ] (1) EXT-1
+    - [ ] (2) EXT-2
+    - [ ] (3) J507 Header IOs
+    - [ ] (4) J406 Header IOs
+    - [x] (5) J400 - Camera Connector
+
+
+    !!! answer
+        O TWIHS2 usa ospinos PD28 e PD27 que estão localizados no "Camera interface":
+        
+        Manual da placa, pg 27.
+        
+        - PD27: PINO 26
+        - PD28: PINO 27
+        
+        ![](caminterface.png)
+    
+
 ### MPU-6050
 
 !!! todo
