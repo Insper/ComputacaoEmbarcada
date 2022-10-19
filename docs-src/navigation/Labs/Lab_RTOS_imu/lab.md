@@ -115,7 +115,8 @@ Um módulo com maior precisão pode ser comprado e importado pela [sparkfun](htt
 Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, podemos começar o lab.
 
 > Lab usar apenas printf
-
+<p align="center" width="100%">
+	
  Conectar sensor placa:
  
 | MCU  | PIN  | SAME70-XPLD |
@@ -124,10 +125,10 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 | SCL  | PA4  |   EXT2-12   |
 | GND  | GND  |   EXT2-19   |
 | VCC  | VCC  |   EXT2-20   |
+	
+<img width="25%" src="montagemMPU6050.jpeg">
 
-
-<p align="right" width="25%">
-  <img src="montagemMPU6050.jpeg" />
+  
 </p>
 
  
