@@ -1,8 +1,11 @@
 # LAB - RTOS - IMU
 
-| Pasta           |
-|-----------------|
-| `Lab6-RTOS-IMU` |
+
+| **Pastas:**                                    |
+|------------------------------------------------|
+| `Lab6-RTOS-IMU`                                |
+|------------------------------------------------|
+| **Data <span style="color:red">LIMITE</span> para entrega:** `25/10/22 - 23h59` |
 
 Neste laboratório iremos realizar uma comunicação I2C com um sensor inercial, e aplicar um processamento de fusão de dados para obtermos a localização no espaço do sensor.
 
@@ -149,9 +152,10 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 !!! tip "Manual"
     Consultar o manual:
     
-    - https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf
+    - [datasheet](https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf)
+    - [register map](http://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf)
 
-### task imu
+#### task_imu
 
 Vamos criar uma `task` para realizar a leitura da IMU.
 
@@ -165,8 +169,11 @@ Vamos criar uma `task` para realizar a leitura da IMU.
 
 Para fazermos uso periférico TWIHS será necessário adicionarmos ele no asf wizard:
 
-!!! exercise
+!!! exercise                                                    
+    ![](ASFtwihs.png.png){align=right width=300}
     Adicione o TWIHS no ASF Wizard
+
+    
     
 Com a biblioteca adicionada agora devemos criar uma função para configurar o periférico:
 
@@ -324,7 +331,7 @@ A maioria dos módulos que operam por algum tipo de comunicação (uart, i2c, sp
 1. Garantir que o controlador está acessando o periférico certo
 
 !!! exercise short
-    Acesse o documento que descreve os registradores do IMU e procure pelo endereço do registrador **WHO_AM_I**, e responda:
+    Acesse o [documento](http://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf) que descreve os registradores do IMU e procure pelo endereço do registrador **WHO_AM_I**, e responda:
     
     1. Qual endereço deve ser lido
     1. Qual valor esperado da leitura
@@ -386,7 +393,7 @@ Com a leitura realizada, agora temos que analisar o conteúdo do buffer RX e ver
     - Se for incorreto, exiba uma msg de erro
     - Se for correto, exiba uma msg de sucesso
 
-### Configurando IMU e lendo informações
+#### Configurando IMU e lendo informações
 
 Agora temos que configurar a IMU para fornecer as informações necessárias: **Giroscópio** e **Acelerômetro**, isso tudo está na documentação do sensor.
 
@@ -511,7 +518,7 @@ Agora com tudo configurado podemos fazer a leitura do sensor (acelerômetro e im
         - da para entender alguma coisa?
     1. Incline a placa, o valor do acc muda?
         
-### Trabalhando com os dados
+### Trabalhando com os dados - Parte 1
 
 Legal, teoricamente agora temos tudo pronto e funcionado. Mas como usar esses dados para fazer alguma coisa útil? Conseguimos estimar a orientação da placa no espaço? Para isso existem algorítimos de processamento de sinais, isso foi uma área muito fértil em meados de 2010, quando este tipo de sensor se popularizou, e agora tem ganhado mais estudos sendo utilizado com redes neurais.
 
@@ -526,7 +533,7 @@ Legal, teoricamente agora temos tudo pronto e funcionado. Mas como usar esses da
     - A IMU sempre mede o valor da gravidade, em uma queda esse valor deve se aproximar de zero (queda anula a gravidade)
     - Você pode calcular o módulo de todos os eixos e verificar a condição.
     
-### Fusão de dados
+#### Fusão de dados
     
 Agora vamos fazer algo mais valioso, que inclui realizarmos uma fusão de dados e obter a orientação no espaço 3D do acelerômetro, para isso iremos utilizar uma biblioteca em C desenvolvida pela https://x-io.co.uk/ chamada de **FUSION**:
 
