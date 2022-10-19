@@ -5,7 +5,7 @@
 | `Lab4-RTOS-PIO-IRQ`                            |
 | `Lab4-RTOS-IRQ-ADC`                            |
 |------------------------------------------------|
-| **Data <span style="color:red">LIMITE</span> para entrega:** `21/09/22 - 23h59` |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `20/09/22 - 23h59` |
 
 !!! warning
     Atualize o repositório de exemplos: `same70-examples` antes de continuar.

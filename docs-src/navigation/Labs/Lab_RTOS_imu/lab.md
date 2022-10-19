@@ -13,7 +13,7 @@ Neste laboratório iremos realizar uma comunicação I2C com um sensor inercial,
 
 ![](i2c.png)
 
-I2C (*eye-squared-C*) é um protocolo de comunicação do tipo Machine-to-machine muito utilizado para comunicação entre microcontrolador e um dispositivo (sensor ou atuador) externo, criado pela Philips Semiconductor em **1982** e liberado para uso sem licenca em **2006**. O i2c é uma comunicação síncrona e utiliza duas vias: **serial data line** (SDA) e **serial clock line (SCL)** SDA, a comunicação é sempre inicializada pelo Controlador (o microcontrolador) e respondida pelo Target (componente).
+I2C (*eye-squared-C*) é um protocolo de comunicação do tipo Machine-to-machine muito utilizado para comunicação entre microcontrolador e um dispositivo (sensor ou atuador) externo, criado pela Philips Semiconductor em **1982** e liberado para uso sem licença em **2006**. O i2c é uma comunicação síncrona e utiliza duas vias: **serial data line** (SDA) e **serial clock line** (SCL), a comunicação é sempre inicializada pelo Controlador (o microcontrolador) e respondida pelo Target (componente).
 
 A imagem a seguir é um exemplo de como utilizar o i2c para conectar múltiplos dispositivos em um controlador:
 
@@ -29,9 +29,9 @@ Existem no mercado vários sensores que possuem comunicação i2c, no lab temos 
 - temperatura
 - pressão
 - batimento cardíaco 
-- De uma olhada nos sensores da adafruit i2c: https://www.adafruit.com/?q=i2c+sensor&sort=BestMatch
+- Dê uma olhada nos sensores da adafruit i2c: https://www.adafruit.com/?q=i2c+sensor&sort=BestMatch
 
-### protocolo
+### Protocolo
 
 !!! info
     Apenas uma breve apresentação, o I2C é um protocolo mais complicado do que aparenta ser:
@@ -78,7 +78,11 @@ O nosso microcontrolador possui um periférico chamado de **TWIHS** que implemen
 
 No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré definido:
 
-![](twihs-pins.png)
+![](twihs-pins_2.svg)
+
+
+!!! warning
+    Na placa que utilizamos (SAME70-XPLD), nem todos os pinos do uC que tem acesso ao perífico TWIHS estão disponíveis. Na coluna **XPLD-CONN** da tabela acima está indicado quais e onde os pinos estão disponíveis.
 
 !!! exercise choice 
     Localize os pinos do TWIHS-2 na placa, para isso busque no manual do SAME70-XPLD. 
@@ -117,15 +121,15 @@ No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré
     - fusão de dados?
 
 
-### Sparkfun breakout board
+### Módulo GY-521
 
-![](https://cdn.sparkfun.com//assets/parts/6/3/5/5/11028-04.jpg){width=300}
+![](https://www.filipeflop.com/wp-content/uploads/2014/09/GY-521-MPU-6050-Pinos1.jpg){width=300}
 
-Para termos acesso ao `MPU6050` iremos usar uma placa da adafruit [SparkFun Triple Axis Accelerometer and Gyro Breakout - MPU-6050](https://www.sparkfun.com/products/11028). A placa custa $32.50 no site da adafruit, mas no Brasil é possível achar similares por [R$24](https://www.filipeflop.com/produto/acelerometro-e-giroscopio-3-eixos-6-dof-mpu-6050/), porém o controle de qualidade é bem inferior.
+Para termos acesso ao `MPU6050` iremos usar um módulo GY-521, no Brasil é possível achar por [R$25](https://www.filipeflop.com/produto/acelerometro-e-giroscopio-3-eixos-6-dof-mpu-6050/).
+
+Um módulo com maior precisão pode ser comprado e importado pela [sparkfun](https://www.sparkfun.com/products/11028):
 
 > "Our breakout board for the MPU-6050 makes this tiny QFN package easy to work into your project. Every pin you need to get up and running is broken out to 0.1" headers, including the auxiliary master I2C bus which allows the MPU-6050 to access external magnetometers and other sensors."
-> 
-> Site do fabricante
 
 ## LAB
 
@@ -137,7 +141,7 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 - i2c wizard
 - configurar pio mux 
 - configurar TWIHS
-- ler manual do MPU6050 e achar enderećo I2C
+- ler manual do MPU6050 e achar endereço I2C
 - usar valor para ler **MPU6050_RA_WHO_AM_I**
     - explicar 
 - dar código pronto que configura e lê giro e accel
@@ -151,13 +155,13 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 Vamos criar uma `task` para realizar a leitura da IMU.
 
 !!! exercise
-    Crie uma task chamda de `task_imu`, lembre de:
+    Crie uma task chamada de `task_imu`, lembre de:
     
     1. Inicializar na main
     1. Task devem possuir while(1) e nunca retornar
 
 
-#### TWHIHS
+#### TWIHS
 
 Para fazermos uso periférico TWIHS será necessário adicionarmos ele no asf wizard:
 
@@ -188,7 +192,7 @@ Com a biblioteca adicionada agora devemos criar uma função para configurar o p
     ```
     
 !!! exercise
-    Agora temos que configurar para que o PIO permita que o TWIHS acesse os pinos, adicione as duas linhas de código a seguir na funcão `mcu6050_i2c_bus_init`
+    Agora temos que configurar para que o PIO permita que o TWIHS acesse os pinos, adicione as duas linhas de código a seguir na função `mcu6050_i2c_bus_init`
 
     ```c
 	ioport_set_pin_peripheral_mode(TWIHS0_DATA_GPIO, TWIHS0_DATA_FLAGS);
@@ -203,7 +207,7 @@ Com a biblioteca adicionada agora devemos criar uma função para configurar o p
         mcu6050_i2c_bus_init();
     ```
 
-#### MCU6050
+#### Biblioteca MCU6050
 
 Para facilitar o controle da IMU iremos importar um arquivo `mcu6050.h` que possui dados extraídos do manual e que irá facilitar o acesso ao sensor:
 
@@ -211,7 +215,7 @@ Para facilitar o controle da IMU iremos importar um arquivo `mcu6050.h` que poss
 !!! exercise
     Inclua o arquivo `mcu6050.h` no projeto:
     
-    1. Faca o download para a pasta Downloads [muc6050](https://gist.githubusercontent.com/rafaelcorsi/0a5cbb23db50a9828bee4a5781717d0e/raw/c2fed1e12a4b61561508d604a2228eba30f1fcbd/mcu6050.h)
+    1. Faça o [download](https://gist.githubusercontent.com/rafaelcorsi/0a5cbb23db50a9828bee4a5781717d0e/raw/c2fed1e12a4b61561508d604a2228eba30f1fcbd/mcu6050.h) de [muc6050.h](https://gist.githubusercontent.com/rafaelcorsi/0a5cbb23db50a9828bee4a5781717d0e/raw/c2fed1e12a4b61561508d604a2228eba30f1fcbd/mcu6050.h) para a pasta Downloads 
     1. Arraste o arquivo para dentro do `src/` 
     1. Abra e de uma olhada no arquivo
     1. Lembre de incluir no `main.c`
@@ -231,12 +235,12 @@ Onde:
 
 - `dev_addr`: Endereço do dispositivo que pretendemos manipular
 - `reg_addr`: Endereço do registrador que pretendemos escrever/ler
-- `reg_data`: Vetor com os valores que serão escritos/lido
-- `cnt`: Quantidade de dados que será escrito/lido
+- `reg_data`: Vetor com os valores que serão escritos/lidos
+- `cnt`: Quantidade de dados que serão escritos/lidos
 
 !!! exercise
     Declare as funções a seguir no código, lembre
-    de fazer o prototype para evitar erros de compilação.
+    de fazer os **protótipos** das funções para evitar erros de compilação.
 
     ```c
     int8_t mcu6050_i2c_bus_write(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t cnt)
@@ -277,7 +281,7 @@ Onde:
     }
     ```
     
-Para usar as funções será necessário utilizarmos ois buffers (para recebimento e envio de dados) além de uma variável para armazenarmos o valor do retorno da função, que informa se o comando no i2c foi bem sucedido ou não.
+Para usar as funções será necessário utilizarmos dois buffers (um para recebimento e outro para envio de dados) além de uma variável para armazenarmos o valor do retorno da função, que informa se o comando no i2c foi bem sucedido ou não.
 
 !!! exercise
     Declare os buffers a seguir na `task_imu`
@@ -299,7 +303,7 @@ A maioria dos módulos que operam por algum tipo de comunicação (uart, i2c, sp
 1. Garantir que o controlador está acessando o periférico certo
 
 !!! exercise short
-    Acesse o documento que descreve os registradores do IMU e procure pelo endereço do registrador **WHO AM I**, e responda:
+    Acesse o documento que descreve os registradores do IMU e procure pelo endereço do registrador **WHO_AM_I**, e responda:
     
     1. Qual endereço deve ser lido
     1. Qual valor esperado da leitura
@@ -324,7 +328,7 @@ Para facilitar a nossa vida, importamos o arquivo `mcu6050.h` no nosso projeto, 
 Com isso conseguirmos usar a função que realiza uma leitura no I2C (`mcu6050_i2c_bus_read`) e validar a comunicação.
 
 !!! exercise
-    Na `task_imu` faca a leitura do registrador `WHO AM I`:
+    Na `task_imu` faça a leitura do registrador `WHO_AM_I`:
 
     ```c
 	// Lê registrador WHO AM I
@@ -363,12 +367,12 @@ Com a leitura realizada, agora temos que analisar o conteúdo do buffer RX e ver
 
 ### Configurando IMU e lendo informações
 
-Agora temos que configurar a IMU para fornecer as informações necessárias: **Giro** e **Acelerometro**, isso é tudo está na documentação do sensor.
+Agora temos que configurar a IMU para fornecer as informações necessárias: **Giroscópio** e **Acelerômetro**, isso tudo está na documentação do sensor.
 
-O código configura o acelerômetro para operar com escala máxima de 2G (o que é ok para nossa aplicação, mas se estivessem desenvolvendo alguma coisa para uma montanha russa, um carro ou um míssil poderia não funcionar.), ai poderiam escolher entre: `± 2G, ± 4G, ± 8G, ± 16G`.
+O código configura o acelerômetro para operar com escala máxima de 2G (o que é ok para nossa aplicação, mas se estivessem desenvolvendo alguma aplicação para uma montanha russa, um carro ou um míssil poderia não funcionar.), mas também poderiamos escolher entre: `± 2G, ± 4G, ± 8G e ± 16G`.
 
 !!! tip
-    Ler a documentação pode ser muito difícil e trabalhoso, uma outra opção é a de ver como outras pessoas usam o sensor, e uma boa referencia são códigos de arduino ou biblioteca de fabricantes de placa de desenvolvimento.
+    Ler a documentação pode ser muito difícil e trabalhoso, uma outra opção é a de ver como outras pessoas usam o sensor, e uma boa referencia são códigos de arduino ou bibliotecas de fabricantes de placa de desenvolvimento.
 
 !!! exercise
     Inclua o código a seguir na `task_imu` ainda fora do `while`, mas apenas depois de ter validado a comunicacão com o sensor:
@@ -386,7 +390,7 @@ O código configura o acelerômetro para operar com escala máxima de 2G (o que 
 	if(rtn != TWIHS_SUCCESS)
 		printf("[ERRO] [i2c] [write] \n");
         
-    // Configura range gyroscopio para operar com 250 °/s
+    // Configura range giroscopio para operar com 250 °/s
     bufferTX[0] = 0x00; // 250 °/s
     rtn = mcu6050_i2c_bus_write(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_CONFIG, bufferTX, 1);
 	if(rtn != TWIHS_SUCCESS)
@@ -470,7 +474,7 @@ Agora com tudo configurado podemos fazer a leitura do sensor (acelerômetro e im
 !!! exercise
     Você sabia que no nosso terminal não conseguimos imprimir números floats por padrão? Mas da para habilitar:  
 
-    - https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-freertos/
+    - https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-FloatPrint/
     
     ==HABILITE==
 
@@ -510,7 +514,7 @@ A biblioteca implementa o filtro de orientação chamado [Madgwick](https://ahrs
     Existem diversos algoritmos diferentes que fazem isso, se quiserem se aprofundar eu indico a eletiva de Drones do Fábio Bobrow que trabalha mais a fundo com isso.
     
 !!! exercise
-    1. Faća o download da última versão da biblioteca:
+    1. Faça o download da última versão da biblioteca:
     
     - https://github.com/xioTechnologies/Fusion/tags
     
@@ -573,7 +577,7 @@ Agora que já temos a biblioteca no nosso projeto, temos que preparar o dados pa
 ### Trabalhando com os dados - parte 2
 
 
-Vamos detectar para onde o sistema está apontando, a ideia é o acender os LEDs da placa OLED da seguinte maneira:
+Vamos detectar para onde o sistema está apontando, a ideia é acender os LEDs da placa OLED da seguinte maneira:
     
 - LED1: Apontando para esquerda
 - LED2: Apontando para frente
@@ -585,4 +589,4 @@ Vamos detectar para onde o sistema está apontando, a ideia é o acender os LEDs
     1. Crie uma task (`task_orientacao`) que possui uma fila e que recebe um dado do tipo `orientacao` e que dependendo do valor recebido, acende o LED conforme descrição anterior.
     1. Na task da IMU, detecta a orientação e envie o dado para a fila.
     
-    ==A referencia da orientação é a posićão de quando a placa liga!==
+    ==A referência da orientação é a posição de quando a placa liga!==
