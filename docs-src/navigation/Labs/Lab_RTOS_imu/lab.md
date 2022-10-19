@@ -118,14 +118,15 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 
  Conectar sensor placa:
  
-MCU    |    PIN    |    SAME70-XPLD
--  -  -  -  -  -  -  -  -  -  -  -  - 
-SDA    |    PA3    |    EXT2-11   
-SCL    |    PA4    |    EXT2-12    	
-GND    |    GND    |    EXT2-19    
-VCC    |    VCC    |    EXT2-20     
+| MCU  | PIN  | SAME70-XPLD |
+| :--: | :--: | :---------: |
+| SDA  | PA3  |   EXT2-11   |
+| SCL  | PA4  |   EXT2-12   |
+| GND  | GND  |   EXT2-19   |
+| VCC  | VCC  |   EXT2-20   |
 
-<p align="right">
+
+<p align="right" width="25%">
   <img src="montagemMPU6050.jpeg" />
 </p>
 
@@ -159,7 +160,9 @@ Para fazermos uso periférico TWIHS será necessário adicionarmos ele no asf wi
 
 !!! exercise
     Adicione o TWIHS no ASF Wizard
-    <p align="right"> <img src="ASFtwihs.png" /> </p>
+    <p align="right" width="25%">
+	<img src="ASFtwihs.png" />
+    </p>
     
     
 Com a biblioteca adicionada agora devemos criar uma função para configurar o periférico:
