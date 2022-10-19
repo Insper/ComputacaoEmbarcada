@@ -66,6 +66,11 @@ j.set_axis(pyvjoy.HID_USAGE_X, 32768)
 
 O pyautogui é um lib que permite emularmos ações do teclado e mouse via python.
 
+!!! tip
+    Se o pyautogui não funcionar no seu jogo, substitua o pyautogui por pydirectinput.
+    !!! video
+           ![](https://www.youtube.com/watch?v=LFDGgFRqVIs)
+
 ### Manter tecla pressionada
 
 Por padrão a lib não permite manter uma tecla pressionada (e ficar repetitivamente enviando o mesmo valor), para desativar basta remover o delay:
