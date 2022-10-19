@@ -82,18 +82,25 @@ No nosso uC possuímos um total de 3 **TWIHS** e cada um possui pino do PIO pré
 
 ### MPU-6050
 
-!!! todo
-    Arnaldo (um parágrafo por item)
-    
-    - o que é IMU e como ela funciona
-    - a onde é usado
-    - MEMS
-    - Explicar um pouco o sensor 
-        - accelerometro e para que serve
-        - imu e para que serve
-        - bussola e para que serve 
-        - talvez uma ou duas perguntas para eles terem que abrir o manual e buscar informacoes.
-    - fusão de dados?
+Antes de falar do chip que vamos usar, o MPU-6050, vamos entender o que é uma IMU. Um **sensor IMU**(Inercial Measurement Unit ou, em português, unidade de medida de inércia), trata-se de um sensor que pode ser composto por acelerômetro, giroscópio e magnetômetro. Esses sensores fazem parte do grupo de **sensores inerciais** com tecnologia **MEMS** (Micro Electro Mechanical Systems – sistemas microeletromecânicos) que basicamente são dispositivos com a capacidade de sentir de forma direta ou indireta as forças inerciais e converte em sinal eletrico que será microprocessado. O uso da tecnologia MEMS está inserida em nosso dia-a-dia em equipamentos embarcados como celulares, tablets, carros, drones, video game, Smart Watch, biomedicina e etc.
+
+
+Os **acelerômetro** são sensores com a capacidade de medir a acelaração linear, ou seja, capta a variação da velociade no tempo, nos eixos de translação, coordenadas X,Y e Z. 
+
+O sensor **giroscópio** consegue medir a velocidade angular em torno dos eixos X, Y e Z.  
+  
+Já o sensor **magnetômetro** é capaz de medir o sentido e a intensidade de campos magnéticos.
+
+Uma IMU com acelerômetro e giroscópio possui 6 eixos DOF (Degrees of Freedom – graus de liberdade) e uma IMU com acelerômetro, giroscópio e magnetometro possui 9 DOF.
+
+O MPU-6050 é uma IMU do tipo MEMS com 6DOF, realiza medições independentes com precisão de 16bits (ADC) por canal e prcessadas no proprio chip na DMP (Digital Motion Processor) responsável por e comunicação com protocolo I2C. A faixa do Acelerômetro é ±2, ±4, ±8, ±16g e a faixa do giroscópio é ±250, 500, 1000, 2000°/s;
+
+!!! exercise
+    As IMU não são todas iguais, cada sensor possui uma sensibilidade e precisão distintos. Pesquise o significado da faixa de operação do acelerômetro. O que significa ±2g e ±4g ?
+
+!!! exercise
+    Pesquise o significado da faixa de operação do giroscópio. O que significa ±250 e 2000°/s ?
+
 
 
 ### Sparkfun breakout board
