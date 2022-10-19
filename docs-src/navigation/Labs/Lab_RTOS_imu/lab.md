@@ -115,7 +115,6 @@ Um módulo com maior precisão pode ser comprado e importado pela [sparkfun](htt
 Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, podemos começar o lab.
 
 > Lab usar apenas printf
-<p align="right" width="100%">
 	
  Conectar sensor placa:
  
@@ -126,10 +125,7 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 | GND  | GND  |   EXT2-19   |
 | VCC  | VCC  |   EXT2-20   |
 	
-<img width="25%" src="montagemMPU6050.jpeg">
-
-  
-</p>
+![](montagemMPU6050.jpeg){align=right width=300}
 
  
 - i2c wizard
@@ -161,9 +157,7 @@ Para fazermos uso periférico TWIHS será necessário adicionarmos ele no asf wi
 
 !!! exercise
     Adicione o TWIHS no ASF Wizard
-    <p align="right" width="25%">
-	<img src="ASFtwihs.png.png" />
-    </p>
+    ![](ASFtwihs.png.png){width=300}
     
     
 Com a biblioteca adicionada agora devemos criar uma função para configurar o periférico:
