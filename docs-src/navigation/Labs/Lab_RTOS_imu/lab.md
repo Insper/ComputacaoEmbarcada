@@ -116,7 +116,17 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 
 > Lab usar apenas printf
 
-- conectar sensor placa
+# Conectar sensor placa:
+ 
+MCU    |    PIN    |    SAME70-XPLD
+------------------------------------
+SDA    |    PA3    |    EXT2-11   
+SCL    |    PA4    |    EXT2-12    	
+GND    |    GND    |    EXT2-19    
+VCC    |    VCC    |    EXT2-20     
+
+<img align="right" width="300" height="300" src="montagemMPU6050">
+ 
 - i2c wizard
 - configurar pio mux 
 - configurar TWIHS
