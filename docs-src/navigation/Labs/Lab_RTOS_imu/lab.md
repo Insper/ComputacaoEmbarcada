@@ -159,10 +159,7 @@ Para fazermos uso periférico TWIHS será necessário adicionarmos ele no asf wi
 
 !!! exercise
     Adicione o TWIHS no ASF Wizard
-    
-	<p align="right">
-  		<img src="ASFtwihs.png" />
-	</p>
+    <p align="right"> <img src="ASFtwihs.png" /> </p>
     
     
 Com a biblioteca adicionada agora devemos criar uma função para configurar o periférico:
