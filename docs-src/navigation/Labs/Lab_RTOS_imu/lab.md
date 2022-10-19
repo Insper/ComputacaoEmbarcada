@@ -116,7 +116,7 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 
 > Lab usar apenas printf
 	
- Conectar sensor placa:
+ # Conexões com a SAME70-XPLD:
  
 | MCU  | PIN  | SAME70-XPLD |
 | :--: | :--: | :---------: |
@@ -156,8 +156,9 @@ Vamos criar uma `task` para realizar a leitura da IMU.
 Para fazermos uso periférico TWIHS será necessário adicionarmos ele no asf wizard:
 
 !!! exercise
-    Adicione o TWIHS no ASF Wizard
-    ![](ASFtwihs.png.png){width=300}
+    | Adicione o TWIHS no ASF Wizard | ![](ASFtwihs.png.png){width=300} |
+    | ------------------------------ | -------------------------------- |
+    
     
     
 Com a biblioteca adicionada agora devemos criar uma função para configurar o periférico:
