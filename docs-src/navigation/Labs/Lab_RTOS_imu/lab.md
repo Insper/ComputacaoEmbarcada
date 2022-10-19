@@ -628,3 +628,7 @@ Vamos detectar para onde o sistema está apontando, a ideia é acender os LEDs d
     1. Na task da IMU, detecta a orientação e envie o dado para a fila.
     
     ==A referência da orientação é a posição de quando a placa liga!==
+    
+    
+!!! info "Ao terminar o lab preencha:"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSemQvTQe82m7Q_OaVXsFqho65YHM70K7EwL4xZfUAwASJXagA/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
