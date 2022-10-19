@@ -294,7 +294,7 @@ A maioria dos módulos que operam por algum tipo de comunicação (uart, i2c, sp
 1. Garantir que o controlador está acessando o periférico certo
 
 !!! exercise short
-    Acesse o ![documento](http://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf) que descreve os registradores do IMU e procure pelo endereço do registrador **WHO_AM_I**, e responda:
+    Acesse o [documento](http://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf) que descreve os registradores do IMU e procure pelo endereço do registrador **WHO_AM_I**, e responda:
     
     1. Qual endereço deve ser lido
     1. Qual valor esperado da leitura
