@@ -118,7 +118,7 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 	
  # Conexões com a SAME70-XPLD:
 
-<p>
+
 	
 ![](montagemMPU6050.jpeg){align=right width=300}
 
@@ -129,7 +129,7 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 | GND  | GND  |   EXT2-19   |
 | VCC  | VCC  |   EXT2-20   |
 	
-</p>
+
 
  
 - i2c wizard
