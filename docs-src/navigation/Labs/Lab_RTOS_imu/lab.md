@@ -125,7 +125,7 @@ SCL    |    PA4    |    EXT2-12
 GND    |    GND    |    EXT2-19    
 VCC    |    VCC    |    EXT2-20     
 
-<img align="right" width="300" height="300" src="montagemMPU6050">
+<img align="right" width="300" height="300" src="montagemMPU6050.jpeg">
  
 - i2c wizard
 - configurar pio mux 
