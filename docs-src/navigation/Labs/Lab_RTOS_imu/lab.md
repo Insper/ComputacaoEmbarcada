@@ -159,9 +159,12 @@ Vamos criar uma `task` para realizar a leitura da IMU.
 
 Para fazermos uso periférico TWIHS será necessário adicionarmos ele no asf wizard:
 
-!!! exercise
+!!! exercise                                                    
+    | :----------------------------: | :------------------------------: |
     | Adicione o TWIHS no ASF Wizard | ![](ASFtwihs.png.png){width=300} |
-    | ------------------------------ | -------------------------------- |
+    |                                |                                  |
+
+
     
     
     
