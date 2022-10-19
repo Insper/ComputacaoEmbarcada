@@ -116,7 +116,7 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 
 > Lab usar apenas printf
 	
- # Conexões com a SAME70-XPLD:
+ ### Conexões com a SAME70-XPLD:
 
 
 	
@@ -130,21 +130,10 @@ Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, po
 | VCC  | VCC  |   EXT2-20   |
 	
 
+> datasheet:  https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf
+> register map: http://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf
 
- 
-- i2c wizard
-- configurar pio mux 
-- configurar TWIHS
-- ler manual do MPU6050 e achar endereço I2C
-- usar valor para ler **MPU6050_RA_WHO_AM_I**
-    - explicar 
-- dar código pronto que configura e lê giro e accel
-- importar código fusão de dados
-- implementar fusão de dados
-
-> manual:  https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf
-
-### task imu
+#### task imu
 
 Vamos criar uma `task` para realizar a leitura da IMU.
 
@@ -294,7 +283,7 @@ Para usar as funções será necessário utilizarmos dois buffers (um para receb
 	uint8_t rtn;
     ```
 
-### Lendo ID sensor
+#### Lendo ID sensor
 
 A maioria dos módulos que operam por algum tipo de comunicação (uart, i2c, spi) possuem um registrador que tem um ID único que referencia o módulo, a ideia deste registrador é a de:
 
@@ -302,7 +291,7 @@ A maioria dos módulos que operam por algum tipo de comunicação (uart, i2c, sp
 1. Garantir que o controlador está acessando o periférico certo
 
 !!! exercise short
-    Acesse o documento que descreve os registradores do IMU e procure pelo endereço do registrador **WHO_AM_I**, e responda:
+    Acesse o ![documento](http://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf) que descreve os registradores do IMU e procure pelo endereço do registrador **WHO_AM_I**, e responda:
     
     1. Qual endereço deve ser lido
     1. Qual valor esperado da leitura
