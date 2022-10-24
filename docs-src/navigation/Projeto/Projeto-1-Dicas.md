@@ -7,7 +7,7 @@ Dicas referente ao projeto 1
 Umas das rubricas da entrega pede que o computador envie dados para o microcontrolador,
 esse envio é feito da mesma maneira do recebimento dos dados, via a porta virtual COM gerado na comunicação com o bluetooth. 
 
-### python
+### **python**
 
 Para enviar um dado do python para a porta COM e então para o bluetooth utilize a função [self.ser.write()](https://pyserial.readthedocs.io/en/latest/pyserial_api.html#serial.Serial.write)
 
@@ -16,7 +16,19 @@ Para enviar um dado do python para a porta COM e então para o bluetooth utilize
 !!! tip
     Codifique em ASCII o dado a ser enviado pela serial em ASCII:`'hello'.encode('ascii')` ou em byte: `b'h'`.
 
-### microcontrolador
+
+
+### **Potenciômetro Logaritmico** (0% ~ 100%)
+
+x = round(((data0 * (-65.25) - 255*65.25) /255)+65.25,2)
+
+100 -> 4095
+
+0 -> 0
+
+
+
+### **microcontrolador**
 
 Para receber um byte no firmware devemos usar a função `usart_read(USART_COM, &rx)` onde o primeiro parâmetro é a USART a ser lida e o segundo uma variável para salvar o valor, a função retorna `0` caso tenha lido um byte, conforme descrição da documentação a seguir:
 
