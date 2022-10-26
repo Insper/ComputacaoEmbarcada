@@ -560,13 +560,13 @@ A biblioteca implementa o filtro de orientação chamado [Madgwick](https://ahrs
     1. Inclua no projeto a pasta `Fusion-1.0.6/Fusion` (arrastando para dentro da solução `src/`)
 
 !!! exercise
-    Inclua o `Fusion.h` no `main`:
+    Inclua o `Fusion.h` no `main.c`:
     
     ```c
     #include "Fusion/Fusion.h"
     ```
 
-    E na `main` antes do loop inicialize a biblioteca de fusão:
+    E na `task_imu` antes do loop inicialize a biblioteca de fusão:
     
     ```c
     /* Inicializa Função de fusão */
@@ -577,13 +577,12 @@ A biblioteca implementa o filtro de orientação chamado [Madgwick](https://ahrs
 Agora que já temos a biblioteca no nosso projeto, temos que preparar o dados para utilizarmos nela.
 
 !!! exercise
-    Adicione o código a seguir no final da função `loop`:
+    Adicione o código a seguir no final do `while` da task:
     
     ```c
     const FusionVector gyroscope = {proc_gyr_x, proc_gyr_y, proc_gyr_z}; 
     const FusionVector accelerometer = {proc_acc_x, proc_acc_y, proc_acc_z};    
     ```
-
 
 !!! exercise
     Agora podemos realizar o processamento e obter a orientação:
