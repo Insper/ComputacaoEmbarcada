@@ -5,7 +5,7 @@
 |------------------------------------------------|
 | `Lab6-RTOS-IMU`                                |
 |------------------------------------------------|
-| **Data <span style="color:red">LIMITE</span> para entrega:** `25/10/22 - 23h59` |
+| ==para entrega:== `26/10/22` e `27/10/22`|
 
 Neste laboratório iremos realizar uma comunicação I2C com um sensor inercial, e aplicar um processamento de fusão de dados para obtermos a localização no espaço do sensor.
 
@@ -560,13 +560,13 @@ A biblioteca implementa o filtro de orientação chamado [Madgwick](https://ahrs
     1. Inclua no projeto a pasta `Fusion-1.0.6/Fusion` (arrastando para dentro da solução `src/`)
 
 !!! exercise
-    Inclua o `Fusion.h` no `main`:
+    Inclua o `Fusion.h` no `main.c`:
     
     ```c
     #include "Fusion/Fusion.h"
     ```
 
-    E na `main` antes do loop inicialize a biblioteca de fusão:
+    E na `task_imu` antes do loop inicialize a biblioteca de fusão:
     
     ```c
     /* Inicializa Função de fusão */
@@ -577,13 +577,12 @@ A biblioteca implementa o filtro de orientação chamado [Madgwick](https://ahrs
 Agora que já temos a biblioteca no nosso projeto, temos que preparar o dados para utilizarmos nela.
 
 !!! exercise
-    Adicione o código a seguir no final da função `loop`:
+    Adicione o código a seguir no final do `while` da task:
     
     ```c
     const FusionVector gyroscope = {proc_gyr_x, proc_gyr_y, proc_gyr_z}; 
     const FusionVector accelerometer = {proc_acc_x, proc_acc_y, proc_acc_z};    
     ```
-
 
 !!! exercise
     Agora podemos realizar o processamento e obter a orientação:
@@ -628,3 +627,7 @@ Vamos detectar para onde o sistema está apontando, a ideia é acender os LEDs d
     1. Na task da IMU, detecta a orientação e envie o dado para a fila.
     
     ==A referência da orientação é a posição de quando a placa liga!==
+    
+    
+!!! info "Ao terminar o lab preencha:"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSemQvTQe82m7Q_OaVXsFqho65YHM70K7EwL4xZfUAwASJXagA/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
