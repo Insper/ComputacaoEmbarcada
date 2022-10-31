@@ -99,10 +99,10 @@ nav:
   #      - "Lab 5 - HC-SR04": "navigation/Labs/Lab_HCSR04/lab.md"
   #      #       - 'Dicas': 'navigation/Labs/Lab_RTOS/Lab-RTOS-dicas.md'
   #      # - 'Lab 7 - RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
-  #      - "Lab 7 - RTOS - LCD - LVGL":
-  #          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md"
-  #          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md"
-  #          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md"
+      - "Lab 7 - RTOS - LCD - LVGL":
+          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md"
+          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md"
+          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md"
   #      - "Lab 8 - RTOS - Mutex": navigation/Labs/Lab_mutex/lab.md
   #
   #      #      - 'Lab 9 - RTOS - HC-SR04': 'navigation/Labs/Lab_RTOS_HCSR04/lab.md'

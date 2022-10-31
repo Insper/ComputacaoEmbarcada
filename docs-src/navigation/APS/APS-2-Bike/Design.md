@@ -1,12 +1,12 @@
 # Entrega 1: Design
 
-| Entrega            | Data  |
-|--------------------|-------|
-| Design interface   | 15/05 |
-| 15 % da nota final |       |
+| Entrega            | Data |
+|--------------------|------|
+| Design interface   | 7/11 |
+| 15 % da nota final |      |
 
 !!! info  
-    Criar o repositório pelo [classroom](https://classroom.github.com/a/L1D6xKR_):
+    Criar o repositório pelo [classroom](https://classroom.github.com/a/sbdsdvhv):
     
     A entrega dessa etapa deve ser realizada no README do repositório.
     
@@ -18,7 +18,7 @@ A seguir a lista de requisitos de usabilidade e de funcionalidades para o projet
 
 ### Usabilidade
 
-Requisitos de usabilidade do produto
+Requisitos de usabilidade do produto:
 
 !!! tip "req. ux. 0 - Operacão"
     A interface a ser projetada deve ser tal que o usuário consigo operar com apenas uma mão (lembre que é algo para ser usado na bike) e que as informações devem ser exibidas de forma clara, considerando uma leitura e operação em movimento.
@@ -32,6 +32,11 @@ Requisitos de usabilidade do produto
 !!! tip "req. ux. 3 - Exibir o logo"
     O logotipo da empresa deve estar presente na interface.
      
+!!! exercise
+    O seu design segue as 10 heurísticas de Nielsen? 
+    
+    - https://brasil.uxdesign.cc/10-heur%C3%ADsticas-de-nielsen-para-o-design-de-interface-58d782821840
+ 
 ### Funcionalidade
 
 O ciclocomputador irá exibir a velocidade instantânea da bicicleta assim como um relógio.
@@ -71,8 +76,9 @@ O ciclocomputador pode ser usado em diferentes tamanhos de bicicleta e o usuári
 
 ## Entrega
 
-!!! nota
-    A entrega deve ser no README do repositório criado, mas para ajudar vocês na idealização vocês devem usar o mural a seguir: https://app.mural.co/t/elementos9119/m/elementos9119/1652116252461/f773497a764ead5f57048cedf89780811768c460?sender=ub569a9273c6e285461187641
+!!! exercise
+    A entrega deve ser no README do repositório criado, mas para ajudar vocês na idealização vocês devem usar o mural a seguir: 
+     - https://app.mural.co/t/elementos9119/m/elementos9119/1667235687917/3f8bd861be517222390240d3b949be1fcf0a9fb7?sender=ub569a9273c6e285461187641
 
 Nessa etapa de design vocês devem apresentar uma versão inicial da interface que deve satisfazer os requisitos listados anteriormente. Na interface será necessário indicar qual widget do LVGL pretendem utilizar. Lembrem de consultar sempre a página do LVGL para saber o que está disponível:
 
@@ -104,7 +110,6 @@ Use como demo o código do repositório criado pelo classroom modificando a `tas
 
 !!! info
     Importante gerar a imagem nas dimensões `240x320`, queremos ocupar o LCD todo com nossa imagem.
-    
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/aMafQWIxyCg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
