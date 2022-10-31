@@ -8,9 +8,10 @@
     - **Prof. Rafael Corsi**: **rafael.corsi@insper.edu.br**
     - Técnico Marco Mello: **marcoASMA@insper.edu.br**
     - Prof. Aux. Arnaldo Jr (Tiozão): **arnaldoavj@insper.edu.br**
+    - Ninja: Ana Carolina Souza (6s) 
 - **Já passou por aqui:**
-    - (2021-2021) Prof. Aux. Flávio Batista 
-    - (2016-2020) Prof. Aux. Eduardo Marossi
+    - (2021-2021) Prof. Aux. [Flávio Batista](https://www.linkedin.com/in/fl%C3%A1vio-batista-5846b674/)
+    - (2016-2020) Prof. Aux. [Eduardo Marossi](https://www.linkedin.com/in/eduardo-marossi/)
 - **© Todos os direitos reservados**
 
 ![](imgs/lab.jpeg){width=300}
