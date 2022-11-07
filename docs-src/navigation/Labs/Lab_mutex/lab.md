@@ -6,11 +6,11 @@ Neste laboratório iremos trabalhar usar mutex no freertos para controlar o aces
 
 | Exemplo base         |               | LAB               |
 |----------------------|---------------|-------------------|
-| `Lab7-RTOS-LCD-LVGL` | :arrow_right: | `Lab8-RTOS-Mutex` |
+| `Lab8-RTOS-LCD-LVGL` | :arrow_right: | `Lab9-RTOS-Mutex` |
 
 
 !!! warning "Código exemplo"
-    - Vamos modificar o código exemplo do laboratório passado, tudo bem se você não terminou de implementar todas as funcionalidades. Faça uma cópia para o seu repositório de laboratórios renomeando para `Labs8-RTOS-Mutex`.
+    - Vamos modificar o código exemplo do laboratório passado, tudo bem se você não terminou de implementar todas as funcionalidades. Faça uma cópia para o seu repositório de laboratórios renomeando para `Lab9-RTOS-Mutex`.
 
 ## Mutexes
 

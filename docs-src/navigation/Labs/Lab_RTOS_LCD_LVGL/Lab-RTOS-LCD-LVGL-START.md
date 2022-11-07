@@ -7,7 +7,7 @@ Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RT
 
 | LAB                  |
 | -------------------- |
-| `Lab7-RTOS-LCD-LVGL` |
+| `Lab8-RTOS-LCD-LVGL` |
 
 Neste laboratório iremos:
 

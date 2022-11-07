@@ -3,10 +3,10 @@
 Neste laboratório iremos trabalhar com os periféricos de contagem de tempo
 do nosso microcontrolador.
 
-| Pasta                      |
-|----------------------------|
-| `Lab4-TC-RTC-RTT`          |
-| **Data da entrega:** 18/03 |
+| Pasta                                                |
+|------------------------------------------------------|
+| `Lab8-RTOS-TC-RTC-RTT`                               |
+| **Data da entrega:** 17/11 (quarta) e 18/11 (quinta) |
 
 Os periféricos apresentados neste laboratório são:
 
@@ -103,7 +103,6 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
 
     !!! answer
         O TC funciona diferente do PIO, onde o PIO possuia apenas uma conexão com o NVIC para avisar a interrupcão em qualquer um dos 32 pinos. O TC possui um sinal de conexão com o NVIC para cada canal e esses canais possuem um ID único, conforme figura a seguir:
-
         ![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/TC-IRQ/imgs/TC/tc.png)
         
 !!! exercise choice
@@ -230,13 +229,12 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
     
     - https://www.eetimes.com/anti-tamper-real-time-clock-rtc-make-your-embedded-system-secure/
 
-
-
-
-
 ## Lab
 
-O lab faz uso da placa `OLED1` e de um código exemplo. Para começar você deve copiar o código exemplo: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro-SPI) para a pasta da entrega do seu repositório `Lab4-TC-RTC-RTT`.
+O lab faz uso da placa `OLED1` e de um código exemplo. Para começar você deve copiar o código exemplo: [`SAME70-examples/Screens/RTOS-OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-OLED-Xplained-Pro-SPI) para a pasta da entrega do seu repositório `Lab7-TC-RTC-RTT`.
+
+!!! info
+    Lembre de sempre utilizar fila ou semáforo para comunicar **IRQ** e **TASK**
 
 ### Conceito C
 
@@ -252,9 +250,9 @@ Lembre de fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     Abrir o código atual e o exemplo e ir trazendo as funções e defines que precisa usar, não esqueça de chamar as funções no `main`.
 
 !!! tip
-    Você vai precisar incluir no `ASF WIZARD` os drivers do ~~TC~~, RTT e RTT
+    Você vai precisar incluir no `ASF WIZARD` os drivers do: RTT e RTT
     
-    ==O TC já foi adicionado no código exemplo (OLED-Xplained-Pro-SPI), não adicone o outro que vai dar problema!!!!==
+    ==O TC já foi adicionado no código exemplo, não adicone o outro que vai dar problema!!!!==
     
     ![](imgs/ASF.png)
 
@@ -272,12 +270,6 @@ Lembre de fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     1. Fazer com que o `LED2` inverta seu estado a cada 4s usando o RTT
     1. Fazer com o que o `LED3` inicie apagado e pisque uma vez após 20 segundos do botão 1 ter sido pressionado, use o RTC.
     1. Entrar em sleepmode sempre que possível
-
-
-!!! info "Ao terminar o lab preencha:"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLNBnwsHY6NGCnJqAfeoEgDq5n5ZySeu0x9NUeSQWiQV43xQ/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
-### Conceito B
 
 !!! exercise
     Exiba a hora no formato (HH:MM:SS) no display OLED, a hora deve ser atualizada a todo segundo!
@@ -307,14 +299,22 @@ Lembre de fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
         //    
         //  Entrou por segundo! 
         // 
-    	rtc_clear_status(RTC, RTC_SCCR_SECCLR);
+        rtc_clear_status(RTC, RTC_SCCR_SECCLR);
     }
     ```
 
 !!! warning
     Você nunca deve atualizar display dentro de interrupção (**handler**)! Sempre no main.
-    
-### Conceito A: Melhorando
+
+
+
+### Conceito B: Melhorando
 
 !!! exercise
     Quando o botão 1 da placa OLED for pressionado, após 20 segundos, faça o LED 3 piscar com um novo TC, **substituindo essa função que antes era do RTC**.
+
+### Conceito A: 
+    TODO: talvez: ajustar alarme via botoes?
+
+!!! info "Ao terminar o lab preencha:"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLNBnwsHY6NGCnJqAfeoEgDq5n5ZySeu0x9NUeSQWiQV43xQ/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>

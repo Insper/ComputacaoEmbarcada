@@ -1,7 +1,5 @@
 # Lab - Parte 1
 
-
-
 | LAB                  |
 | -------------------- |
 | `Lab8-RTOS-LCD-LVGL` |
