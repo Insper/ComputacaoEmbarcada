@@ -8,6 +8,7 @@ Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RT
 | LAB                  |
 | -------------------- |
 | `Lab8-RTOS-LCD-LVGL` |
+| Data: 16/11 e 17/11 |
 
 Neste laboratório iremos:
 
