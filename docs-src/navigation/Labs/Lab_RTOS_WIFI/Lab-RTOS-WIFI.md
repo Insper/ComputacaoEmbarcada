@@ -187,8 +187,8 @@ A configuração da rede:
 
 ``` C
 /** Wi-Fi Settings */
-#define MAIN_WLAN_SSID    "LabArqComp" /**< Destination SSID */
-#define MAIN_WLAN_PSK     "s4m370xpld" /**< Password for Destination SSID */
+#define MAIN_WLAN_SSID    "Corsi" /**< Destination SSID */
+#define MAIN_WLAN_PSK     "corsiEmarco" /**< Password for Destination SSID */
 ```
 
 IP e porta do servidor (seu computador):
