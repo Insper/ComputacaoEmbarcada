@@ -28,9 +28,9 @@ A maioria dos módulos deve possuir exemplos de uso com Arduino, sua missão ser
 !!! info
     A lista dos módulos que contam como entrega individual estão no link:
     
-    ==Não pode repetir entre alunos!! O primeira a colocar o nome é o que fica com o módulo==
+    - https://docs.google.com/spreadsheets/d/1u3MfM3-nsBaw0BG_65PCFICRx94Vvh4OTLsNB9MEAiM/edit?usp=sharing
     
-    - google forms:  https://docs.google.com/spreadsheets/d/1u3MfM3-nsBaw0BG_65PCFICRx94Vvh4OTLsNB9MEAiM/edit?usp=sharing
+    ==Não pode repetir entre alunos!! O primeira a colocar o nome é o que fica com o módulo==
     
      Para ajudar escolher você deve:
      
