@@ -101,6 +101,7 @@ nav:
       - "Lab 8 - TC - RTC - RTT": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md"
       - "Lab 9 - RTOS - Mutex": navigation/Labs/Lab_mutex/lab.md
       - "Lab 10 - WIFI": "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md"
+
   - Labs extras:
       - 'RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
       - 'ECG': 'navigation/Labs/Lab_ECG/Lab-ECG.md'
@@ -131,4 +132,6 @@ nav:
   #    - 'navigation/APS/APS-2-Oximetro.md'
   #    - 'navigation/APS/APS-3-IoT.md'
 
-  - Avaliações e Simulados: navigation/Avaliacoes_e_Simulados/Avaliacoes.md
+  - Avaliações e Simulados:
+      - "Avaliação síncrona": navigation/Avaliacoes_e_Simulados/Avaliacoes.md
+      - "Avaliação assíncrona": navigation/Prova_assincrona/index.md

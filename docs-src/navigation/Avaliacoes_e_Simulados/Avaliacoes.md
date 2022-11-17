@@ -1,4 +1,4 @@
-# Avaliações e Simulados
+# Avaliações síncrona
 
 Aqui um resumo das avaliações e simulados para vocês usarem
 como base de estudo.
@@ -13,9 +13,9 @@ site da matéria.
  
 As avaliações práticas são binárias (A ou I), possuem um requisito mínimo que se atingido o aluno ganha **A**, caso contrário **I**. Como critério de barreira, vocês precisam de 2 notas **A** nas avaliações práticas.
  
-## AV1
+# Síncrona
 
-Conteúdo: 
+A avaliação síncrona possui o mesmo conteúdo em todas as 4 provas. Que é:
 
 - APS-1
 - Lab1-PIO, Lab2-Driver, Lab3-PIO-IRQ, Lab4-RTOS, Lab5_RTOS_HC_SR04
