@@ -7,6 +7,7 @@ Neste laboratório iremos trabalhar usar mutex no freertos para controlar o aces
 | Exemplo base         |               | LAB               |
 |----------------------|---------------|-------------------|
 | `Lab8-RTOS-LCD-LVGL` | :arrow_right: | `Lab9-RTOS-Mutex` |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `24/11/22 - 23h59`|
 
 
 !!! warning "Código exemplo"
@@ -197,7 +198,7 @@ Agora vamos começar a programar, lembrem que a documentação do LVGL fala que:
     
 !!! note "Preencher ao finalizar o lab"
 
-   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfeZBEEZDfJPwbbelD1uf3iBFlt1B-yS0HP4X90TwejCbcMtw/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsDgoVIJ_1WyqqxUccDrux7WATpsiNnGgQf8ire5XCa3JP8Q/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
     
 ## APS 2
 

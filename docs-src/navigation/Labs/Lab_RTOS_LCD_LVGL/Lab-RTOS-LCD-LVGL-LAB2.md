@@ -122,7 +122,7 @@ Antes de continuar temos que editar o começo arquivo da fonte `dseg70`, incluin
 
 !!! exercise "Tarefa"
     1. Crie o novo label como indicado anteriormente
-    1. Modifique o arquivo `dseg70.h`
+    1. Modifique o arquivo `dseg70.c`
     1. Declare a fonte nova no main.c: `LV_FONT_DECLARE(dseg70);`
     1. Teste na placa
 

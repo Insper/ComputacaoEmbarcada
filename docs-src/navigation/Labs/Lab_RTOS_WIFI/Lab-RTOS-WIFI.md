@@ -187,8 +187,8 @@ A configuração da rede:
 
 ``` C
 /** Wi-Fi Settings */
-#define MAIN_WLAN_SSID    "LabArqComp" /**< Destination SSID */
-#define MAIN_WLAN_PSK     "s4m370xpld" /**< Password for Destination SSID */
+#define MAIN_WLAN_SSID    "Corsi" /**< Destination SSID */
+#define MAIN_WLAN_PSK     "corsiEmarco" /**< Password for Destination SSID */
 ```
 
 IP e porta do servidor (seu computador):
@@ -297,6 +297,8 @@ A mensagem com o conteúdo (head + json) é salva no buffer `p_recvMsg->pu8Buffe
 
 !!! tip
     Busque no buffer a substring `"led": `.
+    
+    - Use [strstr](https://www.tutorialspoint.com/c_standard_library/c_function_strstr.htm)
 
 !!! exercise "Tarefas"
     1. Inicialize o led da placa como saída
@@ -344,4 +346,4 @@ Podemos melhorar várias coisas nesse projeto, mas vamos por partes. A primeira 
 ------------
 
 !!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfHnR-M5euBy3VAPvksW5CIPLcAWjGwaIfyxIyLD47SSBCSnQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfY9xsKEamY63GcXNAeXnh1S2uJ5ZrX-jmziieLvZAA0U2O5w/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
