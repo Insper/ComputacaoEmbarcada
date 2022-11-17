@@ -3,8 +3,8 @@
 | Data  | Entrega                                                     |
 |-------|-------------------------------------------------------------|
 | 10/12 | (aluno) Data limite para o pullRequest com exemplo completo |
-| 14/10 | (corsi) Revisão da entrega, análise do PR pelo professor    |
-| 16/10 | (aluno) Entrega do PR revisado                              |
+| 14/12 | (corsi) Revisão da entrega, análise do PR pelo professor    |
+| 16/12 | (aluno) Entrega do PR revisado                              |
 
 !!! warning
     Não vou adiar a data da entrega, já liberei no limite e com praticamente 1 mês de antecedência. Note que a entrega precisa passar por uma revisão e possível refatoramento do código.
