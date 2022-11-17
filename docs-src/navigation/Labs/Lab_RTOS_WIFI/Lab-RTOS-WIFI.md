@@ -297,6 +297,8 @@ A mensagem com o conteúdo (head + json) é salva no buffer `p_recvMsg->pu8Buffe
 
 !!! tip
     Busque no buffer a substring `"led": `.
+    
+    - Use [strstr](https://www.tutorialspoint.com/c_standard_library/c_function_strstr.htm)
 
 !!! exercise "Tarefas"
     1. Inicialize o led da placa como saída
