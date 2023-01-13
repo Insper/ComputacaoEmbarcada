@@ -18,15 +18,15 @@
 
 ------------------
 
-## Objetivos
+## Objetivos da matéria
 
 Ao final da disciplina o estudante deve ser capaz de:
 
-1.	Criar softwares para microcontroladores utilizando suas especificidades;
-2.	Avaliar e melhorar soluções embarcadas integrando hardware/software levando em conta adequação a uma aplicação;
-3.	Integrar em um protótipo hardware, software básico, sistema operacional de tempo real e módulos de interfaceamento com usuários, de comunicação e de alimentação.
-4.	Compreender as limitações de microcontroladores e seus periféricos;
-5.	Buscar e analisar documentação (datasheet) e extrair informações relevantes.
+1. Criar softwares para microcontroladores utilizando suas especificidades;
+2. Avaliar e melhorar soluções embarcadas integrando hardware/software levando em conta adequação a uma aplicação;
+3. Integrar em um protótipo hardware, software básico, sistema operacional de tempo real e módulos de interfaceamento com usuários, de comunicação e de alimentação.
+4. Compreender as limitações de microcontroladores e seus periféricos;
+5. Buscar e analisar documentação (datasheet) e extrair informações relevantes.
 
 ## Motivação
 
@@ -73,24 +73,23 @@ Pequeno histórico da evolução da disciplina:
 
 ### Alguns Projetos de turmas anteriores
 
+!!! video
+    ![](https://www.youtube.com/embed/xfCjqsRxOO0)
 
 !!! video
-    ![](https://www.youtube.com/watch?v=fmUkZNA9ECc&ab_channel=JamessonLeandro)
+    ![oi](https://youtu.be/fmUkZNA9ECc)
+    
+!!! video
+    ![](https://youtube.com/tVuRww94FWc)
 
 !!! video
-    ![](https://www.youtube.com/watch?v=vy48HiP2h_8&ab_channel=FranciscoJanela)
+    ![](https://youtube.com/eZfbONTxnS4)
 
 !!! video
-    ![](https://www.youtube.com/watch?v=tVuRww94FWc&ab_channel=DaviReis)
+    ![](https://youtube.com/hSnb8Q8nyII)
 
 !!! video
-    ![](https://www.youtube.com/watch?v=eZfbONTxnS4)
-
-!!! video
-    ![](https://www.youtube.com/watch?v=hSnb8Q8nyII&ab_channel=AnaCarolinaSouza)
-
-!!! video
-    ![](https://www.youtube.com/watch?v=Xs_b3izY2hg&ab_channel=FranciscoJanela)
+    ![](https://youtube.com/Xs_b3izY2hg)
 
 !!! video
     ![](https://www.youtube.com/embed/xfCjqsRxOO0)
