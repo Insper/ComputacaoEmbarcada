@@ -7,7 +7,7 @@ Notem que são regras gerais e podem existir exceções, mas você deve pensar b
 ## Linguagem C
 
 !!! warning ""
-    Com grandes poderes vem grandes responsabilidades
+    With great power comes great responsibility
 
 - Usar variáveis globais apenas quando estritamente necessárias, como regra de ouro só é necessário aquelas que são modificadas de dentro de uma interrupção. 
 - Se uma função for alterar uma variável global, você deve passar o ponteiro da variável como argumento da função.
