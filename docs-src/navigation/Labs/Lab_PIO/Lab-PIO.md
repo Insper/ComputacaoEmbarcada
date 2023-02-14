@@ -676,5 +676,5 @@ Vamos usar o botão para fazer alguma coisa? Agora conseguimos acionar um pino (
     - OLED1 Xplained Pro User Guide: Explica a placa OLED
     - SAME70-XPLD.pdf: Explica a placa de desenvolviment
     
-<span style="color:red">!!! note "Preencher ao finalizar o lab"
+<span style="color:white">!!! note "Preencher ao finalizar o lab"
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdAiI2TaOgFPQXLASi_acn8R71vFAyxpuAr3bWZhmiEJW62Uw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe></span>
