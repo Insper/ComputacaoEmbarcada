@@ -1,8 +1,8 @@
 # APS 1 - Musical
 
-| Entrega Final |
-|---------------|
-| 20/3/2022     |
+| Entrega Final     |
+|-------------------|
+| {{aps1_deadline}} |
 
 Nesta APS vocês irão desenvolver um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony), para isso irão utilizar um 
 buzzer conectado a um pino do microcontrolador.
@@ -31,13 +31,13 @@ Leia atentamente as regras a seguir:
     - Você não vai poder repetir dupla na próxima APS.
     - O desenvolvimento do projeto deve ser feito no repositório criado
     pelo classroom:
-        - https://classroom.github.com/a/myFZ2tpa
+        - {{aps1_classroom}}
     - Leia atentamente como trabalhar no repositório:
          - [APS HowTo](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-howto/)
 
 !!! tip "Entrega"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfRKP3PZscmKeCbvszLrujQHKzIC04ymne3Tvl-N-mCq6CvPg/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-    
+    {{aps1_entrega}}
+
 ## Descrição
 
 A entrega final deverá ser um sistema embarcado que via a adição de um [`buzzer`](https://en.wikipedia.org/wiki/Buzzer) ao uC o mesmo deve ser capaz de reproduzir músicas 'conhecidas'. Além do buzzer deve-se adicionar dois botões ao kit, para ser usado para: 
@@ -75,8 +75,6 @@ dicas valiosas de como realizar a implementação.
 ## Rubrica
 
 A rubrica a seguir será aplicada a nota da entrega:
-
-- https://forms.gle/ycM3f82Z7YhE9w9j7
 
 - A+ 
     - Músicas organizadas em vetores de `structs` (ponteiros)

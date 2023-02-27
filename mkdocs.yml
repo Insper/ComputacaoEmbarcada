@@ -14,8 +14,8 @@ extra_javascript:
 
 plugins:
   - active-handout:
-#      telemetry: true
-#      backend_url: https://example-backend.com.br/api/
+      telemetry: true
+      backend_url: http://localhost:8080/api/
       course_slug: 22b Embarcados
 
 markdown_extensions:
@@ -106,3 +106,9 @@ nav:
   - Avaliações e Simulados:
       - "Avaliação síncrona": navigation/Avaliacoes_e_Simulados/Avaliacoes.md
       - "Avaliação assíncrona": navigation/Prova_assincrona/index.md
+
+extra:
+  custom_variables:
+    aps1_deadline: "11/03/2023"
+    aps1_classroom: https://classroom.github.com/a/DR7U66AC
+    aps1_entrega: "Via blackboard"
