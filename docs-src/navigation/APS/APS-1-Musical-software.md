@@ -5,12 +5,12 @@ executarem esta APS.
 
 !!! info
     1. Lembrem de trabalhar no repositório criado pelo classroom:
-        - https://classroom.github.com/a/myFZ2tpa
+        - {{aps1_classroom}}
         
     1. Leia atentamente como trabalhar no repositório:
     
         - [APS HowTo](/ComputacaoEmbarcada/APS-howto/)
-        
+
 ## Músicas monofonica
 
 Músicas monofonicas[^1] são aquelas que só possuem uma única nota tocada por vez, como indicado na partitura a seguir:
@@ -80,9 +80,9 @@ Podemos fazer com que o buzzer oscile em uma determinada frequência, para isso 
     Sendo a componente principal (de maior energia) centrada na frequência da onda quadrada (no nosso caso):
     
     ![](https://mathworld.wolfram.com/images/equations/FourierSeriesSquareWave/NumberedEquation3.gif)
-
+    
     Portanto o som que iremos escutar será composto da frequência principal mais as harmónicas.
-
+    
     > ref: https://mathworld.wolfram.com/images/eps-gif/FourierSeriesSquareWave_800.gif
     
     <iframe width="560" height="315" src="https://www.youtube.com/embed/3IAMpH4xF9Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -136,7 +136,7 @@ Nesta APS é para utilizarem as músicas fornecidas no repositório a seguir:
     Lembre de referenciar o repositório quando utilizar as músicas por ele fornecido. Como descrito no próprio README.
     
     > Every sketch here has been written by myself, although based on scores I found online or books I own. These scores are linked in each file when possible. You can use the sketches for anything, I only kindly ask that you give credit if you use these codes on a tutorial, video, example, etc.
- 
+
 ## Analisando firmware 
 
 O desenvolvedor disponibiliza diversas músicas de vários temas diferentes: Filmes, Jogos, Clássicas, ... . Vamos analisar como as músicas são disponibilizadas. Para isso iremos pegar como exemplo a música tema do Mário:
@@ -201,7 +201,7 @@ int tempo = 200;
 
 // this calculates the duration of a whole note in ms
 int wholenote = (60000 * 4) / tempo;
-``` 
+```
 
 Valores negativos de tempo (**-4**, **-8**, ... ) representam que a nota tem a duração dela mais meio tempo.  
 
@@ -234,7 +234,7 @@ if (divider > 0) {
       noteDuration *= 1.5; // increases the duration in half for dotted notes
     }
     ```
-    
+
 ### Reproduzindo
 
 Agora já temos tudo para reproduzir a música, precisamos varrer o vetor `melody` e para cada nota (index par) gerar a onda quadrada no pino pelo tempo determinado em: `noteDuration`, para isso definem o tamanho do vetor:
@@ -280,7 +280,7 @@ int notes = sizeof(melody) / sizeof(melody[0]) / 2;
     int *foo = malloc(32);
     printf("Tamanho bar em bytes: %d \n", sizeof(foo))
     ```
-    
+
 E então interage no vetor e reproduz a nota usando a função `tone`
 
 ```c

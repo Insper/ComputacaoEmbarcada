@@ -1,0 +1,610 @@
+{
+  "course": "22b Embarcados",
+  "exercises": {
+    "navigation/APS/APS-2-Bike/Design/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/APS/APS-2-Bike/Design/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/APS/APS-2-Bike/Design/exercise_2"
+      }
+    },
+    "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_2"
+      },
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/short_1"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_3"
+      },
+      "short_2": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/short_2"
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_4"
+      },
+      "exercise_5": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_5"
+      },
+      "exercise_6": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_6"
+      },
+      "exercise_7": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_7"
+      },
+      "exercise_8": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_8"
+      }
+    },
+    "navigation/Labs/Lab_HCSR04/lab/": {
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_HCSR04/lab/short_1"
+      },
+      "long_2": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_HCSR04/lab/long_2"
+      }
+    },
+    "navigation/Labs/Lab_PIO/Lab-PIO/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_2"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_3"
+      },
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/choice_1",
+        "answer_idx": 1
+      },
+      "choice_2": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/choice_2",
+        "answer_idx": 0
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_4"
+      },
+      "choice_3": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/choice_3",
+        "answer_idx": 2
+      },
+      "exercise_5": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_5"
+      },
+      "exercise_6": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_6"
+      },
+      "exercise_7": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_7"
+      },
+      "exercise_8": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_8"
+      },
+      "exercise_9": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_9"
+      },
+      "exercise_10": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_10"
+      },
+      "long_1": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/long_1"
+      },
+      "exercise_11": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_11"
+      },
+      "exercise_12": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_12"
+      },
+      "exercise_13": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_13"
+      },
+      "exercise_14": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_14"
+      },
+      "short_2": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/short_2"
+      },
+      "exercise_15": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_15"
+      },
+      "exercise_16": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_16"
+      }
+    },
+    "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/": {
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/choice_1",
+        "answer_idx": 0
+      },
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/exercise_2"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/exercise_3"
+      }
+    },
+    "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/exercise_2"
+      },
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/short_1"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/exercise_3"
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/exercise_4"
+      },
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/choice_1",
+        "answer_idx": 0
+      },
+      "choice_2": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/choice_2",
+        "answer_idx": 0
+      },
+      "exercise_5": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/exercise_5"
+      },
+      "long_2": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/long_2"
+      },
+      "long_3": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/long_3"
+      }
+    },
+    "navigation/Labs/Lab_RTOS/Lab-RTOS/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS/Lab-RTOS/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS/Lab-RTOS/exercise_2"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS/Lab-RTOS/exercise_3"
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS/Lab-RTOS/exercise_4"
+      },
+      "exercise_5": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS/Lab-RTOS/exercise_5"
+      },
+      "exercise_6": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS/Lab-RTOS/exercise_6"
+      },
+      "exercise_7": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS/Lab-RTOS/exercise_7"
+      }
+    },
+    "navigation/Labs/Lab_RTOS/Teoria/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS/Teoria/exercise_1"
+      }
+    },
+    "navigation/Labs/Lab_RTOS_HCSR04/lab/": {
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_HCSR04/lab/short_1"
+      },
+      "long_2": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_HCSR04/lab/long_2"
+      },
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_HCSR04/lab/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_HCSR04/lab/exercise_2"
+      }
+    },
+    "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/exercise_2"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/exercise_3"
+      },
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/short_1"
+      },
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/choice_1",
+        "answer_idx": 2
+      },
+      "choice_2": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/choice_2",
+        "answer_idx": 1
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/exercise_4"
+      },
+      "exercise_5": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/exercise_5"
+      }
+    },
+    "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_2"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_3"
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_4"
+      },
+      "exercise_5": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_5"
+      },
+      "exercise_6": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_6"
+      }
+    },
+    "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/exercise_1"
+      }
+    },
+    "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/exercise_2"
+      }
+    },
+    "navigation/Labs/Lab_RTOS_imu/lab/": {
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/choice_1",
+        "answer_idx": 4
+      },
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_2"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_3"
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_4"
+      },
+      "exercise_5": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_5"
+      },
+      "exercise_6": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_6"
+      },
+      "exercise_7": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_7"
+      },
+      "exercise_8": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_8"
+      },
+      "exercise_9": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_9"
+      },
+      "exercise_10": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_10"
+      },
+      "exercise_11": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_11"
+      },
+      "exercise_12": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_12"
+      },
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/short_1"
+      },
+      "exercise_13": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_13"
+      },
+      "exercise_14": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_14"
+      },
+      "exercise_15": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_15"
+      },
+      "exercise_16": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_16"
+      },
+      "exercise_17": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_17"
+      },
+      "exercise_18": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_18"
+      },
+      "exercise_19": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_19"
+      },
+      "exercise_20": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_20"
+      },
+      "exercise_21": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_21"
+      },
+      "exercise_22": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_22"
+      },
+      "exercise_23": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_23"
+      },
+      "exercise_24": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_24"
+      },
+      "exercise_25": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_25"
+      },
+      "exercise_26": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_26"
+      },
+      "long_2": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/long_2"
+      },
+      "exercise_27": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_27"
+      },
+      "exercise_28": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_28"
+      }
+    },
+    "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/exercise_1"
+      },
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/choice_1",
+        "answer_idx": 4
+      },
+      "choice_2": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/choice_2",
+        "answer_idx": 1
+      },
+      "choice_3": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/choice_3",
+        "answer_idx": 3
+      },
+      "choice_4": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/choice_4",
+        "answer_idx": 2
+      },
+      "choice_5": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/choice_5",
+        "answer_idx": 3
+      },
+      "long_1": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/long_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/exercise_2"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/exercise_3"
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/exercise_4"
+      }
+    },
+    "navigation/Labs/Lab_mutex/lab/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_mutex/lab/exercise_1"
+      }
+    }
+  },
+  "tags": {
+    "short-text": "short-text",
+    "choice-exercise": "choice-exercise",
+    "long-text": "long-text",
+    "text-exercise": "text-exercise"
+  }
+}
