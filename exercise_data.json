@@ -11,54 +11,6 @@
         "slug": "navigation/APS/APS-2-Bike/Design/exercise_2"
       }
     },
-    "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/": {
-      "exercise_1": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_1"
-      },
-      "exercise_2": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_2"
-      },
-      "short_1": {
-        "tags": [
-          "short-text",
-          "text-exercise"
-        ],
-        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/short_1"
-      },
-      "exercise_3": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_3"
-      },
-      "short_2": {
-        "tags": [
-          "short-text",
-          "text-exercise"
-        ],
-        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/short_2"
-      },
-      "exercise_4": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_4"
-      },
-      "exercise_5": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_5"
-      },
-      "exercise_6": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_6"
-      },
-      "exercise_7": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_7"
-      },
-      "exercise_8": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER/exercise_8"
-      }
-    },
     "navigation/Labs/Lab_HCSR04/lab/": {
       "short_1": {
         "tags": [
@@ -174,6 +126,54 @@
       "exercise_16": {
         "tags": [],
         "slug": "navigation/Labs/Lab_PIO/Lab-PIO/exercise_16"
+      }
+    },
+    "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/exercise_2"
+      },
+      "short_1": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/short_1"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/exercise_3"
+      },
+      "short_2": {
+        "tags": [
+          "short-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/short_2"
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/exercise_4"
+      },
+      "exercise_5": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/exercise_5"
+      },
+      "exercise_6": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/exercise_6"
+      },
+      "exercise_7": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/exercise_7"
+      },
+      "exercise_8": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/exercise_8"
       }
     },
     "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/": {
@@ -602,9 +602,9 @@
     }
   },
   "tags": {
+    "long-text": "long-text",
     "short-text": "short-text",
     "choice-exercise": "choice-exercise",
-    "long-text": "long-text",
     "text-exercise": "text-exercise"
   }
 }

@@ -61,8 +61,8 @@ nav:
           - "Lab": "navigation/Labs/Lab_PIO/Lab-PIO.md"
           - "Dicas": navigation/Dicas/Lab-PIO-Dicas.md
       - "Lab 2 - PIO - Driver":
-          - "Teoria": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER-Teoria.md"
-          - "Lab": "navigation/Labs/Lab_DRIVER/Lab-PIO-DRIVER.md"
+          - "Teoria": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria.md"
+          - "Lab": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER.md"
       - "Lab 3 - PIO - IRQ":
           - "Teoria": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria.md"
           - "Lab": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ.md"
@@ -109,6 +109,16 @@ nav:
 
 extra:
   custom_variables:
-    aps1_deadline: "11/03/2023"
+    lab01_deadline: "15/02/2023 - 23h59"
+    lab02_deadline: "22/02/2023 - 23h59"
+    lab03_deadline: "08/03/2023 - 23h59"
+    lab04_deadline: "15/03/2023 - 23h59"
+    lab05_deadline: "22/03/2023 - 23h59"
+    lab06_deadline: "29/03/2023 - 23h59"
+    lab07_deadline: "26/04/2023 - 23h59"
+    lab08_deadline: "03/05/2023 - 23h59"
+    lab09_deadline: "10/05/2023 - 23h59"
+    lab10_deadline: "17/05/2023 - 23h59"
+    aps1_deadline: "11/03/2023 - 23h59"
     aps1_classroom: https://classroom.github.com/a/DR7U66AC
     aps1_entrega: "Via blackboard"
