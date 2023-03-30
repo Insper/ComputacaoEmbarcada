@@ -70,7 +70,7 @@ nav:
       - "Lab 4 - RTOS":
           - "Lab": "navigation/Labs/Lab_RTOS/Lab-RTOS.md"
           - "Teoria": "navigation/Labs/Lab_RTOS/Teoria.md"
-      - "Lab 5 - RTOS HC-SR04": "navigation/Labs/Lab_RTOS_HCSR04/lab.md"
+      - "Lab 5 - RTOS HC-SR04": "navigation/Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04.md"
       - "Lab 6 - RTOS IMU": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU.md"
       - "Lab 7 - RTOS - LCD - LVGL":
           - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md"

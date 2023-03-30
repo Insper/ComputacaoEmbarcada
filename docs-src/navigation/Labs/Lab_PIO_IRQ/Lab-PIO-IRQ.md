@@ -4,9 +4,9 @@ Esse laboratório possui duas entregas, a primeira é um passo a passo do labora
 
 ## Entrega
 
-|                       Pastas: | `/Lab3-PIO-IRQ`        | `/Lab3-OLED-PIO-IRQ` |
-|------------------------------:|:-----------------------|:-------------|
-| **Data <span style="color:red">LIMITE</span> para entrega:**  | `{{lab03_deadline}}` |              |
+| Pastas: | `/Lab3-PIO-IRQ` | `/Lab3-OLED-PIO-IRQ` |
+| :--- | :---: | :---: |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab03_deadline}}` |
 
 !!! tip "Teoria"
     Antes de seguir leia a teoria sobre [IRQ](/ComputacaoEmbarcada/navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/)

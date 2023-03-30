@@ -1,9 +1,7 @@
 # LAB - RTOS - HC-SR04
 
-| **Pasta:**                                    |
-|------------------------------------------------|
-| `/Lab5-RTOS-HC-SR04`                            |
-|------------------------------------------------|
+| **Pastas:** `/Lab5-RTOS-HC-SR04` |
+| :---: |
 | **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab05_deadline}}` |
 
 Neste laboratório iremos trabalhar com o sensor de distância HC-SR04, que é muito utilizado em projetos de robótica e similares. O sensor é um módulo ultrassônico e que possibilita medirmos a distância entre o sensor e um objeto.
