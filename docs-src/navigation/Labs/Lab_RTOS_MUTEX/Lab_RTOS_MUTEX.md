@@ -6,8 +6,8 @@ Neste laboratório iremos trabalhar usar mutex no freertos para controlar o aces
 
 | Exemplo base         |               | LAB               |
 |----------------------|---------------|-------------------|
-| `Lab8-RTOS-LCD-LVGL` | :arrow_right: | `Lab9-RTOS-Mutex` |
-| **Data <span style="color:red">LIMITE</span> para entrega:** `24/11/22 - 23h59`|
+| `/Lab8-RTOS-LCD-LVGL` | ----> | `/Lab9-RTOS-Mutex` |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab09_deadline}}`|
 
 
 !!! warning "Código exemplo"

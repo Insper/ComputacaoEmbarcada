@@ -3,10 +3,9 @@
 Neste laboratório iremos trabalhar com os periféricos de contagem de tempo
 do nosso microcontrolador.
 
-| Pasta                                                |
+| **Pastas:** `Lab8-RTOS-TC-RTC-RTT`                                                 |
 |------------------------------------------------------|
-| `Lab8-RTOS-TC-RTC-RTT`                               |
-| **Data da entrega:** 17/11 (quarta) e 18/11 (quinta) |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab08_deadline}}`|
 
 Os periféricos apresentados neste laboratório são:
 

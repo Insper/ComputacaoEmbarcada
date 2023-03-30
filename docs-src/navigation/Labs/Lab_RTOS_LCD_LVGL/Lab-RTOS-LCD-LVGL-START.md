@@ -5,10 +5,9 @@ Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RT
 !!! warning
     ==Atualizem o repositório SAME70-Examples antes de continuar==
 
-| LAB                  |
-| -------------------- |
-| `Lab8-RTOS-LCD-LVGL` |
-| Data: 16/11 e 17/11 |
+| **Pastas:** `/Lab7-RTOS-LCD-LVGL`                                    |
+|------------------------------------------------|
+| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab07_deadline}}`|
 
 Neste laboratório iremos:
 

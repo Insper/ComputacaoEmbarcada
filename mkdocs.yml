@@ -71,13 +71,13 @@ nav:
           - "Lab": "navigation/Labs/Lab_RTOS/Lab-RTOS.md"
           - "Teoria": "navigation/Labs/Lab_RTOS/Teoria.md"
       - "Lab 5 - RTOS HC-SR04": "navigation/Labs/Lab_RTOS_HCSR04/lab.md"
-      - "Lab 6 - RTOS IMU": "navigation/Labs/Lab_RTOS_imu/lab.md"
+      - "Lab 6 - RTOS IMU": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU.md"
       - "Lab 7 - RTOS - LCD - LVGL":
           - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md"
           - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md"
           - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md"
       - "Lab 8 - TC - RTC - RTT": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md"
-      - "Lab 9 - RTOS - Mutex": navigation/Labs/Lab_mutex/lab.md
+      - "Lab 9 - RTOS - Mutex": navigation/Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX.md
       - "Lab 10 - WIFI": "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md"
   - Labs extras:
       - 'RTOS - ADC': 'navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC.md'
