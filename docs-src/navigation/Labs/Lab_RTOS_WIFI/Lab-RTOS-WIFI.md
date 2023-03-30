@@ -6,10 +6,10 @@ Neste laboratório iremos modificar o exemplo RTOS-WIFI, que realiza uma requisi
 
 ## Lab    
 
-|:Exemplo base:|::|:LAB:|
-|:-------------------------------------------------------------------------:|::|:--------------------:|
-|:`/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1`:|: ----> :|:`Lab-10-RTOS-WIFI`:|
-|**Data <span style="color:red">LIMITE</span> para entrega:** `{{lab10_deadline}}`|
+| Exemplo base | | LAB |
+| :--- | :---: | ---: |
+| `/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1` | ----> | `Lab-10-RTOS-WIFI` |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab10_deadline}}`|
 
 !!! warning "Código exemplo"
     - ==Atualizar o repositório do SAME70-Examples==
