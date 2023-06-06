@@ -1,5 +1,9 @@
 # Lab - Parte 2
 
+| **Pastas:** `/Lab7-RTOS-LCD-LVGL`                                    |
+|------------------------------------------------|
+| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab07_deadline}}`|
+
 !!! info
     Não podemos esquecer nossa referencia!
  

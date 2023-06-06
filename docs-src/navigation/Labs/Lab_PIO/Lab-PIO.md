@@ -1,8 +1,8 @@
 # LAB - PIO
 
-| **Pasta:**   `/1-PIO-IO` |
-|---------------------------- |
-| **Data <span style="color:red">LIMITE</span> para entrega:** `23/08/22 - 23h59` |
+| **Pasta:**   `/Lab1-PIO-IO` |
+| :---: |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab01_deadline}}` |
 
 
 !!! info

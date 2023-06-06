@@ -1,11 +1,9 @@
 # LAB - RTOS (freeRTOS)
 
-| **Pastas:**                                    |
-|------------------------------------------------|
-| `Lab4-RTOS-PIO-IRQ`                            |
-| `Lab4-RTOS-IRQ-ADC`                            |
-|------------------------------------------------|
-| **Data <span style="color:red">LIMITE</span> para entrega:** `20/09/22 - 23h59` |
+
+|                       Pastas: | `/Lab4-RTOS-PIO-IRQ`        | `/Lab4-RTOS-IRQ-ADC` |
+|------------------------------:|:-----------------------|:-------------|
+| **Data <span style="color:red">LIMITE</span> para entrega:**  | `{{lab04_deadline}}` |              |
 
 !!! warning
     Atualize o repositório de exemplos: `same70-examples` antes de continuar.

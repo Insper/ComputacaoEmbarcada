@@ -6,12 +6,24 @@ Nessa aula iremos utilizar como projeto referência o LAB-1.
 
 | **Pasta:**   `/Lab2-PIO-Driver` |
 |---------------------------- |
-| **Data <span style="color:red">LIMITE</span> para entrega:** `28/08/22 - 23h59` |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab02_deadline}}` |
 
 !!! note "Como começar:"
     - Vocês devem realizar uma cópia do LAB-1 que está no seu repositório para a pasta `Lab2-PIO-Driver`, iremos modificar o que fizemos no laboratório passado.
     
     - A entrega continua sendo feita pelo repositório que foi gerado no laboratório passado.
+
+
+```
+!!! pdf
+	![](slides.pdf)
+```
+
+!!! pdf
+    ![](slides.pdf)
+	
+!!! pdf "Lab_2"
+    ![](slides/Lab_2.pdf)
     
 O objetivo desse laboratório é o do entendimento das funções utilizadas para configurar o PIO. Como um pino é configurado como saída e entrada? Como o firmware manipula o periférico PIO? Entender o que o PIO é capaz de fazer. Para isso iremos aqui implementar nossas próprias funções de interface com o PIO.
 

@@ -1,11 +1,9 @@
 # LAB - RTOS - IMU
 
 
-| **Pastas:**                                    |
-|------------------------------------------------|
-| `Lab6-RTOS-IMU`                                |
-|------------------------------------------------|
-| **Data <span style="color:red">LIMITE</span> para entrega:** `27/10/22 - 23h59`|
+| **Pastas:** `/Lab6-RTOS-IMU` |
+| :---: |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab06_deadline}}` |
 
 Neste laboratório iremos realizar uma comunicação I2C com um sensor inercial, e aplicar um processamento de fusão de dados para obtermos a localização no espaço do sensor.
 

@@ -1,8 +1,8 @@
 # Lab - Parte 1
 
-| LAB                  |
-| -------------------- |
-| `Lab8-RTOS-LCD-LVGL` |
+| **Pastas:** `/Lab7-RTOS-LCD-LVGL` |
+| :---: |
+| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab07_deadline}}` |
 
 Agora vamos começar mexer com o LVGL e criar nossa interface. A ideia é recriar uma interface de um termostato inspirado no produto a seguir:
 

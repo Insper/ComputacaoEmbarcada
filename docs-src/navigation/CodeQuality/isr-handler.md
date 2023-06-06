@@ -14,7 +14,7 @@ Esses conjuntos de regra dizem respeito a que a execução de uma ISR deve ser a
 !!! info "RULE 2.3"
     Não pode executar laços de código (`while`, `for`) de dentro de uma ISR 
 
-Essa regra pode ser flexibilizada se mitigado o impacto do uso desses recursos dentro de uma ISR, as vezes por exemplo queremos modificar um vetor pequeno para armazenar mais um valor nele, então poderíamos usar um laço, mas de forma geral iremos evitar isso.
+lizada se mitigado o impacto do uso desses recursos dentro de uma ISR, as vezes por exemplo queremos modificar um vetor pequeno para armazenar mais um valor nele, então poderíamos usar um laço, mas de forma geral iremos evitar isso.
 
 !!! info
     Alguns microcontroladores possuem tamanho de memória de código limitado para interrupção, fique atento a isso quando for desenvolver um firmware para uC mais simples (os do tipo 8/16 bits)!
