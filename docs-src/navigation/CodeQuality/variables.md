@@ -26,7 +26,6 @@ Vamos aprender e praticar as regras básicas de qualidade de código e boas prá
 !!! warning "Rule 1.1"
     Somente usar variáveis globais para passar informacoes de uma interrupcão (ISR) para a funcão `main`. 
 
-
 Em projetos reais, essa regra pode ser flexibilizada, mas isso deve ser abordada com cautela e planejamento. Devido ao tempo limitado disponível para desenvolvermos boas práticas com vocês, estamos  o uso de variáveis globais apenas nessas situações. 
 
 ### Exemplo

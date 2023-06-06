@@ -20,13 +20,9 @@ Devemos seguir algumas regras básicas quando desenvolvemos código que faz uso 
 !!! warning "Rule 1.1"
     Somente as variáveis globais e modificadas durante a ISR devem ser globais.
     
-**Racional: Devemos deixar o compilador fazer o papel dele e otimizar as variáveis que devem ser otimizadas.**
-
 !!! warning "Rule 1.2"
     Todas as variáveis globais acessadas de uma interrupção (ISR) devem possuir a keyword: `volatile`
     
-**Racional: O `volatile` indica para o compilador não otimizar a variável em questão que está sendo modificada por um evento gerado pelo hardware e que o compilador não tem conhecimento.**
-
 Essas regras pode ser flexibilizada quando desejamos acessar periféricos e memórias externas, os valores desses endereços de memória são alterados sem o conhecimento do compilador.
 
 ### Exemplo
