@@ -15,7 +15,7 @@ Nessa aula iremos utilizar como projeto referência o LAB-1.
 
 
 !!! pdf "Lab_2"
-    ![](slids/Lab_2.pdf)
+    ![](slides/Lab_2.pdf)
     
 O objetivo desse laboratório é o do entendimento das funções utilizadas para configurar o PIO. Como um pino é configurado como saída e entrada? Como o firmware manipula o periférico PIO? Entender o que o PIO é capaz de fazer. Para isso iremos aqui implementar nossas próprias funções de interface com o PIO.
 
