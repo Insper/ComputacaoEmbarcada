@@ -1,8 +1,6 @@
-# ⚡ Regras de firmware
+# ⚡ Visão geral
 
-Regras de desenvolvimento de firmware para entregas de laboratórios, aps, projetos e avaliações. 
-
-Notem que são regras gerais e podem existir exceções, mas você deve pensar bem e talvez discutir com algum membro da equipe antes de querer quebrar alguma delas.
+Regras de desenvolvimento de firmware para entregas de laboratórios, aps, projetos e avaliações. Notem que são regras gerais e podem existir exceções, mas você deve pensar bem e talvez discutir com algum membro da equipe antes de querer quebrar alguma delas.
 
 ## Linguagem C
 

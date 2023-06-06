@@ -17,6 +17,7 @@ plugins:
       telemetry: true
       backend_url: http://localhost:8080/api/
       course_slug: 22b Embarcados
+      plugin_exercise_counter: false
 
 markdown_extensions:
   - markdown.extensions.admonition
@@ -45,7 +46,6 @@ nav:
   - Sobre o curso: "Sobre-Curso.md"
   - SAME70-Examples: "https://github.com/Insper/SAME70-examples"
   - Vídeos: "navigation/Videos/Util-Videos.md"
-  - navigation/Dicas/Util-o-que-nao-pode.md
   - Util:
       - navigation/Util/Sobre-Ferramental.md
       - navigation/Util/Util-Startup.md
@@ -107,8 +107,19 @@ nav:
       - "Avaliação síncrona": navigation/Avaliacoes_e_Simulados/Avaliacoes.md
       - "Avaliação assíncrona": navigation/Prova_assincrona/index.md
 
+  - Code quality:
+      - navigation/CodeQuality/topview.md
+      - navigation/CodeQuality/rules.md
+      - navigation/CodeQuality/cppcheck.md
+      - navigation/CodeQuality/variables.md
+      - navigation/CodeQuality/isr-variables.md
+      - navigation/CodeQuality/isr-handler.md
+
 extra:
   custom_variables:
     aps1_deadline: "11/03/2023"
     aps1_classroom: https://classroom.github.com/a/DR7U66AC
     aps1_entrega: "Via blackboard"
+    rules_variables_classroom: https://classroom.github.com/a/_abubHkm
+    rules_isr_classroom: https://classroom.github.com/a/VfTjqXBK
+    rules_cppcheck_classroom: https://classroom.github.com/a/iFm3FeF8
