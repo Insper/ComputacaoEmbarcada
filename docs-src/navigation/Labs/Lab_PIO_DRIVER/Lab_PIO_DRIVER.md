@@ -14,6 +14,14 @@ Nessa aula iremos utilizar como projeto referência o LAB-1.
     - A entrega continua sendo feita pelo repositório que foi gerado no laboratório passado.
 
 
+```
+!!! pdf
+	![](slides.pdf)
+```
+
+!!! pdf
+    ![](slides.pdf)
+	
 !!! pdf "Lab_2"
     ![](slides/Lab_2.pdf)
     
