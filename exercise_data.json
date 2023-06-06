@@ -14,8 +14,8 @@
     "navigation/Labs/Lab_HCSR04/lab/": {
       "short_1": {
         "tags": [
-          "short-text",
-          "text-exercise"
+          "text-exercise",
+          "short-text"
         ],
         "slug": "navigation/Labs/Lab_HCSR04/lab/short_1"
       },
@@ -114,8 +114,8 @@
       },
       "short_2": {
         "tags": [
-          "short-text",
-          "text-exercise"
+          "text-exercise",
+          "short-text"
         ],
         "slug": "navigation/Labs/Lab_PIO/Lab-PIO/short_2"
       },
@@ -139,8 +139,8 @@
       },
       "short_1": {
         "tags": [
-          "short-text",
-          "text-exercise"
+          "text-exercise",
+          "short-text"
         ],
         "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/short_1"
       },
@@ -150,8 +150,8 @@
       },
       "short_2": {
         "tags": [
-          "short-text",
-          "text-exercise"
+          "text-exercise",
+          "short-text"
         ],
         "slug": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/short_2"
       },
@@ -208,8 +208,8 @@
       },
       "short_1": {
         "tags": [
-          "short-text",
-          "text-exercise"
+          "text-exercise",
+          "short-text"
         ],
         "slug": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/short_1"
       },
@@ -290,28 +290,163 @@
         "slug": "navigation/Labs/Lab_RTOS/Teoria/exercise_1"
       }
     },
-    "navigation/Labs/Lab_RTOS_HCSR04/lab/": {
+    "navigation/Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/": {
       "short_1": {
         "tags": [
-          "short-text",
-          "text-exercise"
+          "text-exercise",
+          "short-text"
         ],
-        "slug": "navigation/Labs/Lab_RTOS_HCSR04/lab/short_1"
+        "slug": "navigation/Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/short_1"
       },
       "long_2": {
         "tags": [
           "long-text",
           "text-exercise"
         ],
-        "slug": "navigation/Labs/Lab_RTOS_HCSR04/lab/long_2"
+        "slug": "navigation/Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/long_2"
       },
       "exercise_1": {
         "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_HCSR04/lab/exercise_1"
+        "slug": "navigation/Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/exercise_1"
       },
       "exercise_2": {
         "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_HCSR04/lab/exercise_2"
+        "slug": "navigation/Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/exercise_2"
+      }
+    },
+    "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/": {
+      "choice_1": {
+        "tags": [
+          "choice-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/choice_1",
+        "answer_idx": 4
+      },
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_1"
+      },
+      "exercise_2": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_2"
+      },
+      "exercise_3": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_3"
+      },
+      "exercise_4": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_4"
+      },
+      "exercise_5": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_5"
+      },
+      "exercise_6": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_6"
+      },
+      "exercise_7": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_7"
+      },
+      "exercise_8": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_8"
+      },
+      "exercise_9": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_9"
+      },
+      "exercise_10": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_10"
+      },
+      "exercise_11": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_11"
+      },
+      "exercise_12": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_12"
+      },
+      "short_1": {
+        "tags": [
+          "text-exercise",
+          "short-text"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/short_1"
+      },
+      "exercise_13": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_13"
+      },
+      "exercise_14": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_14"
+      },
+      "exercise_15": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_15"
+      },
+      "exercise_16": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_16"
+      },
+      "exercise_17": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_17"
+      },
+      "exercise_18": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_18"
+      },
+      "exercise_19": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_19"
+      },
+      "exercise_20": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_20"
+      },
+      "exercise_21": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_21"
+      },
+      "exercise_22": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_22"
+      },
+      "exercise_23": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_23"
+      },
+      "exercise_24": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_24"
+      },
+      "exercise_25": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_25"
+      },
+      "exercise_26": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_26"
+      },
+      "long_2": {
+        "tags": [
+          "long-text",
+          "text-exercise"
+        ],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/long_2"
+      },
+      "exercise_27": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_27"
+      },
+      "exercise_28": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_28"
       }
     },
     "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/": {
@@ -329,8 +464,8 @@
       },
       "short_1": {
         "tags": [
-          "short-text",
-          "text-exercise"
+          "text-exercise",
+          "short-text"
         ],
         "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/short_1"
       },
@@ -389,6 +524,12 @@
         "slug": "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/exercise_1"
       }
     },
+    "navigation/Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/": {
+      "exercise_1": {
+        "tags": [],
+        "slug": "navigation/Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/exercise_1"
+      }
+    },
     "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/": {
       "exercise_1": {
         "tags": [],
@@ -397,141 +538,6 @@
       "exercise_2": {
         "tags": [],
         "slug": "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/exercise_2"
-      }
-    },
-    "navigation/Labs/Lab_RTOS_imu/lab/": {
-      "choice_1": {
-        "tags": [
-          "choice-exercise"
-        ],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/choice_1",
-        "answer_idx": 4
-      },
-      "exercise_1": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_1"
-      },
-      "exercise_2": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_2"
-      },
-      "exercise_3": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_3"
-      },
-      "exercise_4": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_4"
-      },
-      "exercise_5": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_5"
-      },
-      "exercise_6": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_6"
-      },
-      "exercise_7": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_7"
-      },
-      "exercise_8": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_8"
-      },
-      "exercise_9": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_9"
-      },
-      "exercise_10": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_10"
-      },
-      "exercise_11": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_11"
-      },
-      "exercise_12": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_12"
-      },
-      "short_1": {
-        "tags": [
-          "short-text",
-          "text-exercise"
-        ],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/short_1"
-      },
-      "exercise_13": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_13"
-      },
-      "exercise_14": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_14"
-      },
-      "exercise_15": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_15"
-      },
-      "exercise_16": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_16"
-      },
-      "exercise_17": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_17"
-      },
-      "exercise_18": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_18"
-      },
-      "exercise_19": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_19"
-      },
-      "exercise_20": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_20"
-      },
-      "exercise_21": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_21"
-      },
-      "exercise_22": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_22"
-      },
-      "exercise_23": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_23"
-      },
-      "exercise_24": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_24"
-      },
-      "exercise_25": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_25"
-      },
-      "exercise_26": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_26"
-      },
-      "long_2": {
-        "tags": [
-          "long-text",
-          "text-exercise"
-        ],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/long_2"
-      },
-      "exercise_27": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_27"
-      },
-      "exercise_28": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_RTOS_imu/lab/exercise_28"
       }
     },
     "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/": {
@@ -593,18 +599,12 @@
         "tags": [],
         "slug": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/exercise_4"
       }
-    },
-    "navigation/Labs/Lab_mutex/lab/": {
-      "exercise_1": {
-        "tags": [],
-        "slug": "navigation/Labs/Lab_mutex/lab/exercise_1"
-      }
     }
   },
   "tags": {
     "long-text": "long-text",
-    "short-text": "short-text",
     "choice-exercise": "choice-exercise",
-    "text-exercise": "text-exercise"
+    "text-exercise": "text-exercise",
+    "short-text": "short-text"
   }
 }
