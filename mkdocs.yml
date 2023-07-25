@@ -117,19 +117,19 @@ nav:
 
 extra:
   custom_variables:
-    lab01_deadline: "15/02/2023 - 23h59"
-    lab02_deadline: "22/02/2023 - 23h59"
-    lab03_deadline: "08/03/2023 - 23h59"
-    lab04_deadline: "15/03/2023 - 23h59"
-    lab05_deadline: "22/03/2023 - 23h59"
-    lab06_deadline: "29/03/2023 - 23h59"
-    lab07_deadline: "26/04/2023 - 23h59"
-    lab08_deadline: "03/05/2023 - 23h59"
-    lab09_deadline: "10/05/2023 - 23h59"
-    lab10_deadline: "17/05/2023 - 23h59"
-    aps1_deadline: "11/03/2023 - 23h59"
-    aps1_classroom: https://classroom.github.com/a/DR7U66AC
-    aps1_entrega: "Via blackboard"
+    lab01_deadline: TBD
+    lab02_deadline: TBD
+    lab03_deadline: TBD
+    lab04_deadline: TBD
+    lab05_deadline: TBD
+    lab06_deadline: TBD
+    lab07_deadline: TBD
+    lab08_deadline: TBD
+    lab09_deadline: TBD
+    lab10_deadline: TBD
+    aps1_deadline: TBD
+    aps1_classroom: TBD
+    aps1_entrega: TBD
     rules_variables_classroom: https://classroom.github.com/a/_abubHkm
     rules_isr_classroom: https://classroom.github.com/a/VfTjqXBK
     rules_cppcheck_classroom: https://classroom.github.com/a/iFm3FeF8
