@@ -1,17 +1,17 @@
 # ⚡ Visão geral
 
-Regras de desenvolvimento de firmware para entregas de laboratórios, aps, projetos e avaliações. Notem que são regras gerais e podem existir exceções, mas você deve pensar bem e talvez discutir com algum membro da equipe antes de querer quebrar alguma delas.
+Regras de desenvolvimento de firmware para entregas de laboratórios, aps, projetos e avaliações. É importante ressaltar que estas são regras gerais e podem existir exceções, mas você deve pensar bem e talvez discutir com algum membro da equipe antes de querer quebrar alguma delas.
 
 ## Linguagem C
 
 !!! warning ""
     With great power comes great responsibility
 
-- Usar variáveis globais apenas quando estritamente necessárias, como regra de ouro só é necessário aquelas que são modificadas de dentro de uma interrupção. 
+- Usar variáveis globais apenas quando estritamente necessárias, como `regra de ouro` só é necessário aquelas que são modificadas de dentro de uma interrupção. Pois as variáveis globais podem ser alteradas em qualquer lugar do código, tornando-o menos previsível.
 - Se uma função for alterar uma variável global, você deve passar o ponteiro da variável como argumento da função.
 - Sempre que possível deixe o código genérico e sem [`magic numbers`](https://en.wikipedia.org/wiki/Magic_number_(programming)), utilize `#define` ou `const`.
 - Usar `inline` no lugar de `macros`
-- Não implementar funções dentro do `.h`, fazer no `.c`.
+- Não implementar funções dentro do `.h`, faça isso no `.c`.
 
 ## Interrupção / Callback
 
