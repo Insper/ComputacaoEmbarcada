@@ -56,6 +56,10 @@ void main(void) {
 }
 ```
 
+O código anterior viola gera os seguintes erros:
+
+![](figs/checker-rule-isr-kiss.png)
+
 ## Praticando
 
 Vamos praticar um pouco e corrigir as regras básicas de qualidade de código e boas práticas em sistemas embarcados, para isso crie um repositório pelo *github classroom* e então modifique os arquivos conforme indicado.
