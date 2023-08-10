@@ -119,12 +119,9 @@ Iremos usar o `cppcheck` para realizar verificações em todas as entregas de em
 Vamos praticar e ver como isso vai funcionar na prática durante a disciplina!
 
 !!! exercise 
-    1. Crie um repositório com o código exemplo acessando o github classroom [emb-rules-cppcheck]({{rules_basic_cppcheck_classroom}})
+    1. Crie um repositório com o código exemplo acessando o github classroom [emb-rules-cppcheck]({{rules_cppcheck_classroom}})
     1. Analise o log do actions e verifique que o cppcheck executou e encontrou alguns erros: 
     
     ![](figs/cppcheck-erro.png)
     
     1. Corrigir o código e verificar se ainda continuamos com erros.
-
-
-
