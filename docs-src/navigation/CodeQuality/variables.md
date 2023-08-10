@@ -9,21 +9,9 @@ Diversas normas foram criadas a fim de ajudar os desenvolvedores a criar firmwar
     
 Neste roteiro não vamos nos atentar a formatacão do código (nomenclatura, estilo). 
 
-## Praticando
-
-Vamos aprender e praticar as regras básicas de qualidade de código e boas práticas em sistemas embarcados, para isso crie um repositório pelo *github classroom* e então modifique os arquivos conforme indicado.
-
-!!! exercise
-    Acesse e crie um repositório a partir do link a seguir:
-    
-    - {{rules_variables_classroom}}
-
-!!! progress 
-    Comecar
-
 ## Variáveis Globais
 
-!!! warning "Rule 1.1"
+!!! tip "Rule 1.1"
     Somente usar variáveis globais para passar informacoes de uma interrupcão (ISR) para a funcão `main`. 
 
 Em projetos reais, essa regra pode ser flexibilizada, mas isso deve ser abordada com cautela e planejamento. Devido ao tempo limitado disponível para desenvolvermos boas práticas com vocês, estamos  o uso de variáveis globais apenas nessas situações. 
@@ -54,12 +42,95 @@ void main(void) {
 }
 ```
 
-!!! exercise "Variáveis globais"
-    Agora você deve corrigir o código anterior para não usar variáveis globais:
-  
-    - https://github.com/insper-classroom/emb-rules-variables/blob/main/rules_basic_variable.c
+O código anterior viola a regra **1.1** nas duas variáveis ( `a` e `b` ) gerando o seguinte erro:
 
+![](figs/checker-rule1-1.png)
+
+!!! exercise choice two-cols
+    Qual alternativa a seguir seria uma solucão válida para corrigir o código?
+    
+    === "Item (a)"
+        - Declara `a` e `b` local e acessa `a` como global
+        - Declara `foo` dentro da funcão `main` 
+        
+        ``` c 
+        void main(void) {
+            int a = 0;
+            int b = 0;
+
+            void foo(void) {
+                a = a + 1; // acessa variavel global
+            }
+
+            while (1) {
+                foo();
+
+                if (a > 5) {
+                    b = 1;
+                }
+            }
+        }
+        ```
+    
+    === "Item (b)"
+        - Declara `a` e `b` local e acessa `a` como global
+
+        ``` c 
+        void foo(void) {
+            global a;  // apenas a é global
+            a = a + 1;
+        }
+        
+        void main(void) {
+            global int a = 0;
+            int b = 0;
+
+            while (1) {
+                foo();
+
+                if (a > 5) {
+                    b = 1;
+                }
+            }
+        }
+        ```
+     
+    === "Item (c)"
+        - Declara `a` e `b` local, e acessa `a` com ponteiro
+
+        ``` c 
+        void foo(int &a) {
+            *a = *a + 1; // acessa ponteiro
+        }
+        
+        void main(void) {
+            int a = 0;
+            int b = 0;
+
+            while (1) {
+                a = foo(&a);
+
+                if (a > 5) {
+                    b = 1;
+                }
+            }
+        }
+        ```
+    
+    - [ ] Declarar `foo` dentro da funcão `main`.
+    - [ ] Declarar a variável `a` como `global`.
+    - [x] Declara `a` e `b` local, e acessa `a` com ponteiro
+
+### Praticando
+
+Vamos praticar um pouco e corrigir as regras básicas de qualidade de código e boas práticas em sistemas embarcados, para isso crie um repositório pelo *github classroom* e então modifique os arquivos conforme indicado.
+
+!!! exercise "Variáveis globais"
+    1. Crie um repositório com o código exemplo acessando o github classroom [emb-rules-basic-variables]({{rules_variables_classroom}})
+    1. Analise o log do actions e verifique que o cppcheck executou e encontrou alguns erros.
+    1. Corrigir o código e verificar se ainda continuamos com erros.
+ 
     Dica: reescreva a funcão `foo` para um dos casos a seguir:
     
-    1. `int foo(int a)`
-    1. `void foo(int *a)`
+    - `int foo(int a)`
+    - `void foo(int *a)`

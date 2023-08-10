@@ -2,16 +2,16 @@
 
 Esses conjuntos de regra dizem respeito a que a execução de uma ISR deve ser a mais rápida possível e curta em tamanho de código. 
 
-!!! info "RULE 2.0"
+!!! info "RULE 3.0"
     Não pode usar / gerar `delay` de software dentro de uma ISR.
 
-!!! info "RULE 2.1"
+!!! info "RULE 3.1"
     Não pode acessar o OLED ou qualquer outro display de dentro de uma ISR.
    
-!!! info "RULE 2.2"
+!!! info "RULE 3.2"
     Não pode usar `printf` ou `sprintf` de dentro de uma ISR 
     
-!!! info "RULE 2.3"
+!!! info "RULE 3.3"
     Não pode executar laços de código (`while`, `for`) de dentro de uma ISR 
 
 Pode ser flexibilizada se mitigado o impacto do uso desses recursos dentro de uma ISR, as vezes por exemplo queremos modificar um vetor pequeno para armazenar mais um valor nele, então poderíamos usar um laço, mas de forma geral iremos evitar isso.
@@ -21,7 +21,7 @@ Pode ser flexibilizada se mitigado o impacto do uso desses recursos dentro de um
     
     Alguns desenvolvedores de software usam o principio de: *Keep it simple, stupid!* [**KISS**](https://en.wikipedia.org/wiki/KISS_principle) nos seus projetos, isso tem alguma semelhança com o que estamos propondo aqui.
 
-### Example
+## Exemplo
 
 A seguir um exemplo ==errado== de uso de interrupção.
 
@@ -56,9 +56,17 @@ void main(void) {
 }
 ```
 
+## Praticando
+
+Vamos praticar um pouco e corrigir as regras básicas de qualidade de código e boas práticas em sistemas embarcados, para isso crie um repositório pelo *github classroom* e então modifique os arquivos conforme indicado.
+
 !!! exercise "Simple and short"
-    Agora você deve corrigir o código anterior usando corretamente ISR:
+    1. Crie um repositório com o código exemplo acessando o github classroom [emb-rules-isr]({{rules_isr_classroom}})
+    1. Analise o log do actions e verifique que o checker executou e encontrou alguns erros.
+
+    Agora vamos corrigir os códigos com erro, execute na ordem:
     
-    - https://github.com/insper-classroom/emb-rules-variables/blob/main/rules_basic_isr.c 
+    1. `main_isr_kiss.c`
+    1. `main_isr_practice.c`
     
     Dica: Crie uma `flag` para indicando que o btn foi pressionado e então reescreva o código na função `main`.

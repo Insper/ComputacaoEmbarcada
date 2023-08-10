@@ -1,6 +1,6 @@
 # Cppcheck
 
-!!! info "Rule 1.0"
+!!! tip "Rule 1.0"
     O código não deve possuir erros detectados pelo `cppcheck`.
 
 O [Cppcheck](cppcheck.sourceforge.io/) é um analizador de código estático que é capaz de fazer algumas verificações básicas em um código escrito em C/C++. Essas verificações vão além do que o compilador foi feito para fazer, e pode ajudar identificarmos erros antes de executarmos um código. Por exemplo o cppcheck pode verificar se existe uma situação na qual um loop por um array passa do tamanho de memória (*overflow*). Como o cppcheck faz uma análise estática, ele possui limitações no que ele consegue prever do código, mas já é um bom começo para escrevermos códigos que funcionam e com menos erros.Como
@@ -18,10 +18,6 @@ Para vocês terem uma ideia, os erros mais comuns cometidos por alunos de embarc
 !!! progress 
     Começar
 
-!!! exercise
-    Está atividade requer que você crie um repositório a partir do link a seguir:
-    
-    - {{rules_cppcheck_classroom}}
     
 ## Praticando
 
@@ -120,7 +116,7 @@ nofile:0:0: information: Cppcheck cannot find all the include files (use --check
 
 Iremos usar o `cppcheck` para realizar verificações em todas as entregas de embarcado de vocês, o analizador vai executar automaticamente no repositório do github de cada um, cada novo código submetido vai ser verificado. Para a atividade valer nota é necessário não ter erros no código. 
 
-Vamos praticar e ver como isso vai funcionar na prática durante a disciplina?
+Vamos praticar e ver como isso vai funcionar na prática durante a disciplina!
 
 !!! exercise 
     1. Crie um repositório com o código exemplo acessando o github classroom [emb-rules-cppcheck]({{rules_basic_cppcheck_classroom}})
