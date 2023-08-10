@@ -1,7 +1,7 @@
 # LAB - PIO
 
-| **Classroom:** {{lab01_classroom}}                                                                     |
-|:---------------------------------------------------------------------------------:|
+| **Classroom:** {{lab01_classroom}}               |
+|:------------------------------------------------:|
 | **Data limite para entrega:** {{lab01_deadline}} |
 
 ## Entrega
@@ -14,7 +14,7 @@ Ao final do laboratório vocês terão:
 - A leitura de um botão (entrada)
 - LED acionado pelo botão
 
-
+    
 ## Laboratório
 
 !!! note ""
@@ -668,5 +668,11 @@ Vamos usar o botão para fazer alguma coisa? Agora conseguimos acionar um pino (
     - OLED1 Xplained Pro User Guide: Explica a placa OLED
     - SAME70-XPLD.pdf: Explica a placa de desenvolviment
     
-<span style="color:white">!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdAiI2TaOgFPQXLASi_acn8R71vFAyxpuAr3bWZhmiEJW62Uw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe></span>
+    
+!!! info "Qualidade de código"
+    Os laboratórios possuem verificação de qualidade de código e a entrega só sera aceito se não possuir erro em nenhuma das duas verificações (cppcheck e code_quality).  
+
+    ![](/imgs/ci-code-quality.png)
+
+!!! Entrega
+    {{lab01_forms}}
