@@ -1,23 +1,38 @@
 # IRS - Handler/ Callback 
 
-Esses conjuntos de regra dizem respeito a que a execução de uma ISR deve ser a mais rápida possível e curta em tamanho de código. 
+Essas regras dizem respeito que a execução de uma ISR deve ser: a mais rápida possível e curta em tamanho de código. 
 
 !!! info "RULE 3.0"
     Não pode usar / gerar `delay` de software dentro de uma ISR.
 
+<<<<<<< HEAD
+!!! info "RULE 2.1"
+    Não pode acessar o OLED ou qualquer outro display a partir de uma ISR.
+=======
 !!! info "RULE 3.1"
     Não pode acessar o OLED ou qualquer outro display de dentro de uma ISR.
+>>>>>>> 726aca14f933d9946816f24bf1616220f5fa708a
    
+<<<<<<< HEAD
+!!! info "RULE 2.2"
+    Não pode usar `printf` ou `sprintf` de dentro de uma ISR. 
+=======
 !!! info "RULE 3.2"
     Não pode usar `printf` ou `sprintf` de dentro de uma ISR 
+>>>>>>> 726aca14f933d9946816f24bf1616220f5fa708a
     
+<<<<<<< HEAD
+!!! info "RULE 2.3"
+    Não pode executar laços de código (`while`, `for`) de dentro de uma ISR.
+=======
 !!! info "RULE 3.3"
     Não pode executar laços de código (`while`, `for`) de dentro de uma ISR 
+>>>>>>> 726aca14f933d9946816f24bf1616220f5fa708a
 
-Pode ser flexibilizada se mitigado o impacto do uso desses recursos dentro de uma ISR, as vezes por exemplo queremos modificar um vetor pequeno para armazenar mais um valor nele, então poderíamos usar um laço, mas de forma geral iremos evitar isso.
+Embora estas regras sejam padrão, elas podem ser flexibilizadas se for mitigado o impacto do uso desses recursos dentro de uma ISR. Por exemplo, se queremos modificar um vetor pequeno para armazenar mais um valor nele, então poderíamos usar um laço. No entanto, é melhor evitar tais práticas.
 
 !!! info
-    Alguns microcontroladores possuem tamanho de memória de código limitado para interrupção, fique atento a isso quando for desenvolver um firmware para uC mais simples (os do tipo 8/16 bits)!
+    Alguns microcontroladores possuem tamanho de memória de código limitado para interrupção, fique atento a isso quando for desenvolver um firmware para uC mais simples ( com arquiteturas de 8/16 bits)!
     
     Alguns desenvolvedores de software usam o principio de: *Keep it simple, stupid!* [**KISS**](https://en.wikipedia.org/wiki/KISS_principle) nos seus projetos, isso tem alguma semelhança com o que estamos propondo aqui.
 
@@ -42,7 +57,7 @@ void btn_callback(void) {
   int i = 0;
   for (i = 0; i < g_cnt; i++) { // for dentro de ISR
     g_str[i] = '*';
-    g_str[i + 1] = NULLL;
+    g_str[i + 1] = NULL;
     delay_ms(50); // delay dentro de ISR
     gfx_mono_draw_string(g_str, 0, 0, &sysfont); // oled dentro de ISR
   }
