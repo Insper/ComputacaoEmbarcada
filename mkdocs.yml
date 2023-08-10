@@ -119,6 +119,7 @@ nav:
 extra:
   custom_variables:
     lab01_deadline: "15/02/2023 - 23h59"
+    lab01_classroom: "https://classroom.github.com/a/xzPCYyFH"
     lab02_deadline: "22/02/2023 - 23h59"
     lab03_deadline: "08/03/2023 - 23h59"
     lab04_deadline: "15/03/2023 - 23h59"
@@ -132,5 +133,6 @@ extra:
     aps1_classroom: https://classroom.github.com/a/DR7U66AC
     aps1_entrega: "Via blackboard"
     rules_variables_classroom: https://classroom.github.com/a/_abubHkm
+    rules_isr_volatile_classroom: https://classroom.github.com/a/_wYWDjs0
     rules_isr_classroom: https://classroom.github.com/a/VfTjqXBK
     rules_cppcheck_classroom: https://classroom.github.com/a/iFm3FeF8

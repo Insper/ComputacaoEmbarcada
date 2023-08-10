@@ -1,17 +1,8 @@
 # LAB - PIO
 
-| **Pasta:**   `/Lab1-PIO-IO` |
-| :---: |
-| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab01_deadline}}` |
-
-
-!!! info
-    Os laboratórios são individuais e cada aluno deve ter um repositório com todas as enteegas, o repositório deve ser criado pelo classroom usando o link a seguir: 
-    
-    https://classroom.github.com/a/xjegYr_C
- 
-!!! progress
-    Click para continuar....
+| **Classroom:** {{lab01_classroom}}                                                                     |
+|:---------------------------------------------------------------------------------:|
+| **Data limite para entrega:** {{lab01_deadline}} |
 
 ## Entrega
 
@@ -23,10 +14,11 @@ Ao final do laboratório vocês terão:
 - A leitura de um botão (entrada)
 - LED acionado pelo botão
 
-!!! note ""
-    Feito esse lab já da para começar a [APS 1](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-1-Musical/) onde vocês terão que desenvolver um sistema embarcado que reproduz uma música monofonia.
 
 ## Laboratório
+
+!!! note ""
+    Feito esse lab já da para começar a [APS 1](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-1-Musical/) onde vocês terão que desenvolver um sistema embarcado que reproduz uma música monofonia.
 
 O código exemplo que será utilizado nesse laboratório já se encontra no repositório criado pelo classroom (`1-PIO-IO`) e foi criado para ser o mais “limpo” possível, inclusive, faltando algumas bibliotecas básicas para a compilação. 
 

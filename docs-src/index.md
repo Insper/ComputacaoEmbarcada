@@ -1,10 +1,5 @@
 # Bem vindo a disciplina de Computação Embarcada
 
-|                       Pastas: | `/Lab3-PIO-IRQ`        | `/Lab4-....` |
-|------------------------------:|:-----------------------|:-------------|
-| ==Data Limite para entrega:== | `03/03/2023` - `23h59` |              |
-
-
 - **Curso:** Engenharia Da Computação - Quinto Semestre - [Insper](https://www.insper.edu.br/)
 - **Disciplina:** Computação Embarcada 
 - **Repositório:** [http:/github.com/Insper/ComputacaoEmbarcada](http:/github.com/Insper/ComputacaoEmbarcada)
@@ -14,6 +9,7 @@
     - Técnico Marco Mello: **marcoASMA@insper.edu.br**
     - Prof. Aux. Arnaldo Jr (Tiozão): **arnaldoavj@insper.edu.br**
 - **Já passou por aqui:**
+    - (2023b) Prof. Rodrigo Carareto 
     - (2022b) Ninja Ana Carolina Souza 
     - (2021-2021) Prof. Aux. [Flávio Batista](https://www.linkedin.com/in/fl%C3%A1vio-batista-5846b674/)
     - (2016-2020) Prof. Aux. [Eduardo Marossi](https://www.linkedin.com/in/eduardo-marossi/)
