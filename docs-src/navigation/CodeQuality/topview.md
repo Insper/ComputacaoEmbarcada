@@ -7,7 +7,7 @@ Regras de desenvolvimento de firmware para entregas de laboratórios, aps, proje
 !!! warning ""
     _"With great power comes great responsibility"_
 
-​													- Ben, Uncle.
+Ben, Uncle.
 
 
 
