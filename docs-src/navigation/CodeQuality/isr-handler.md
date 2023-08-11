@@ -5,29 +5,14 @@ Essas regras dizem respeito que a execução de uma ISR deve ser: a mais rápida
 !!! info "RULE 3.0"
     Não pode usar / gerar `delay` de software dentro de uma ISR.
 
-<<<<<<< HEAD
-!!! info "RULE 2.1"
-    Não pode acessar o OLED ou qualquer outro display a partir de uma ISR.
-=======
 !!! info "RULE 3.1"
     Não pode acessar o OLED ou qualquer outro display de dentro de uma ISR.
->>>>>>> 726aca14f933d9946816f24bf1616220f5fa708a
    
-<<<<<<< HEAD
 !!! info "RULE 2.2"
     Não pode usar `printf` ou `sprintf` de dentro de uma ISR. 
-=======
-!!! info "RULE 3.2"
-    Não pode usar `printf` ou `sprintf` de dentro de uma ISR 
->>>>>>> 726aca14f933d9946816f24bf1616220f5fa708a
     
-<<<<<<< HEAD
 !!! info "RULE 2.3"
     Não pode executar laços de código (`while`, `for`) de dentro de uma ISR.
-=======
-!!! info "RULE 3.3"
-    Não pode executar laços de código (`while`, `for`) de dentro de uma ISR 
->>>>>>> 726aca14f933d9946816f24bf1616220f5fa708a
 
 Embora estas regras sejam padrão, elas podem ser flexibilizadas se for mitigado o impacto do uso desses recursos dentro de uma ISR. Por exemplo, se queremos modificar um vetor pequeno para armazenar mais um valor nele, então poderíamos usar um laço. No entanto, é melhor evitar tais práticas.
 

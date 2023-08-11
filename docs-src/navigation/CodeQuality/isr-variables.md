@@ -9,26 +9,15 @@ Devemos seguir algumas regras básicas quando desenvolvemos código que faz uso 
 
 ## Variáveis volatile
 
-<<<<<<< HEAD
-!!! warning "Rule 1.1"
-    Somente as variáveis globais e modificadas durante a interrupção (ISR) devem ser declaradas como globais.
-    
-!!! warning "Rule 1.2"
-=======
 Interrupção é normalmente um evento gerado pelo hardware e que por consequência executa uma função de `Handler` sem que o compilador tenha conhecimento disso (por ser um evento externo ao software). Por conta dessa caracteristica temos que tomar um cuidado especial com as variáveis que são acessadas dessa função que é chamada pelo hardware.
 
 !!! tip "Rule 1.2"
->>>>>>> 726aca14f933d9946816f24bf1616220f5fa708a
     Todas as variáveis globais acessadas de uma interrupção (ISR) devem possuir a keyword: `volatile`
     
-<<<<<<< HEAD
-Essas regras podem ser flexibilizadas quando desejamos acessar periféricos e memórias externas. Os valores desses endereços de memória são alterados sem o conhecimento do compilador.
-=======
 !!! tip "Rule 1.3"
     Somente as variáveis globais e modificadas durante a ISR devem ser globais.
     
 Essas regras pode ser flexibilizada quando desejamos acessar periféricos e memórias externas, os valores desses endereços de memória são alterados sem o conhecimento do compilador.
->>>>>>> 726aca14f933d9946816f24bf1616220f5fa708a
 
 ## Exemplo
 
@@ -60,17 +49,12 @@ void main(void) {
 }
 ```
 
-<<<<<<< HEAD
-!!! exercise "Variáveis `volatile`"
-    Agora, corrija o código anterior utilizando corretamente variáveis `volatiles` :
-=======
 O exemplo viola as regra **1.1** e **1.2** nas duas variáveis ( `f_bnt` e `cnt` ) gerando o seguinte erro:
 
 ![](figs/checker-rule-isr-volatile.png)
 
 !!! exercise choice two-cols
     Qual alternativa a seguir seria uma solucão válida para corrigir o código exemplo?
->>>>>>> 726aca14f933d9946816f24bf1616220f5fa708a
     
     - [ ] `volatile int f_btn = 0;` `volatile int cnt = 0;`
     - [ ] `int f_btn = 0;` `volatile int cnt = 0;`
