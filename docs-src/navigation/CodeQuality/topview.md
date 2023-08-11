@@ -14,7 +14,6 @@ Ben, Uncle.
 - Usar variáveis globais apenas quando estritamente necessárias, como `regra de ouro` só é necessário aquelas que são modificadas de dentro de uma interrupção. Pois as variáveis globais podem ser alteradas em qualquer lugar do código, tornando-o menos previsível.
 - Se uma função for alterar uma variável global, você deve passar o ponteiro da variável como argumento da função.
 - Sempre que possível deixe o código genérico e sem [`magic numbers`](https://en.wikipedia.org/wiki/Magic_number_(programming)), utilize `#define` ou `const`.
-- Usar `inline` no lugar de `macros`
 - Não implementar funções dentro do `.h`, faça isso no `.c`.
 
 ## Interrupção / Callback
@@ -32,7 +31,7 @@ Ben, Uncle.
     A interrupção é um evento de hardware na qual o compilador não tem conhecimento.
 
 - Lembre de dar o **ACK** da interrupção (exe: `tc_get_status`)
-- Declare as variáveis compartilhadas (globais) como [`volatile`](https://www.embedded.com/introduction-to-the-volatile-keyword/)
+- Declare as variáveis compartilhadas ( entre interrupções e a main(); ) como [`volatile`](https://www.embedded.com/introduction-to-the-volatile-keyword/)
 - No ARM para ativar interrupção é necessário configurar o periférico e o NVIC!
 
 ## freeRTOS
