@@ -3,7 +3,7 @@
 !!! tip "Rule 1.0"
     O código não deve possuir erros detectados pelo `cppcheck`.
 
-O [Cppcheck](cppcheck.sourceforge.io/) é um analizador de código estático capaz de fazer algumas verificações básicas em um código escrito em C/C++. Essas verificações vão além das que o compilador é capaz de realizar, e podem ajudar a identificar erros antes de executarmos um código. Por exemplo o cppcheck pode verificar se existe uma situação na qual um loop por um array passa do tamanho de memória (*overflow*). Embora o cppcheck faça uma análise estática e tenha limitações no que consegue prever do código, mas já é um bom começo para escrevermos códigos mais confiáveis e com menos erros.
+O [Cppcheck](cppcheck.sourceforge.io/) é um analizador de código estático capaz de fazer algumas verificações básicas em um código escrito em C/C++. Essas verificações vão além das que o compilador é capaz de realizar, e podem ajudar a identificar erros antes de executarmos um código. Por exemplo, o cppcheck pode verificar se existe uma situação na qual um loop por um array passa do tamanho de memória (*overflow*). Embora o cppcheck faça uma análise estática e tenha limitações no que consegue prever do código, já é um bom começo para escrevermos códigos mais confiáveis e com menos erros.
 
 Para ter uma ideia, os erros mais comuns cometidos por alunos de embarcados nos semestres anteriores (análise de 22a e 22b) foram:
 
@@ -89,7 +89,7 @@ nofile:0:0: information: Cppcheck cannot find all the include files (use --check
     E o erro da seguinte linha?
     
     ```c
-    int a, b = 5;
+    int result = multiplyNumbers(a, b);
     ```
     
     - [ ] `missingreturn`
@@ -114,7 +114,7 @@ nofile:0:0: information: Cppcheck cannot find all the include files (use --check
 
 ## Feedback contínuo
 
-Utilizaremos o `cppcheck` para verificar todas as entregas de sistemas embarcados de vocês. O analizador será executado automaticamente no repositório do github de cada aluno. Cada novo código submetido será verificado. Para a atividade valer nota é `obrigatório` que não haja erros no código. 
+Utilizaremos o `cppcheck` para verificar todas as entregas de sistemas embarcados de vocês. O analisador será executado automaticamente no repositório do github de cada aluno. Cada novo código submetido será verificado. Para a atividade valer nota é `obrigatório` que não haja erros no código. 
 
 Vamos praticar e ver como isso vai funcionar na prática durante a disciplina!
 
@@ -124,4 +124,4 @@ Vamos praticar e ver como isso vai funcionar na prática durante a disciplina!
     
     ![](figs/cppcheck-erro.png)
     
-    3. Corrigir o código e verificar se ainda continuamos com erros.
+    1. Corrija o código (main.c) e verifique se os erros ainda continuam.

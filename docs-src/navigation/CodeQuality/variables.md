@@ -128,7 +128,7 @@ Vamos praticar um pouco e corrigir as regras básicas de qualidade de código e 
 !!! exercise "Variáveis globais"
     1. Crie um repositório com o código exemplo acessando o github classroom [emb-rules-basic-variables]({{rules_variables_classroom}})
     1. Analise o log do actions e verifique que o cppcheck executou e encontrou alguns erros.
-    1. Corrigir o código e verificar se ainda continuamos com erros.
+    1. Corrija o código (rules_basic_variable.c) e verifique se os erros ainda continuam.
  
     Dica: reescreva a funcão `foo` para um dos casos a seguir:
     
