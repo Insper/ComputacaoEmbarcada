@@ -1,8 +1,11 @@
 # LAB - PIO
 
-| **Classroom:** {{lab01_classroom}}               |
-|:------------------------------------------------:|
-| **Data limite para entrega:** {{lab01_deadline}} |
+
+| Lab 1                                                      |
+|------------------------------------------------------------|
+| **Data limite para entrega**: =={{lab01_deadline}}==       |
+| Usar o repositório do ==[Classroom]({{lab01_classroom}})== |
+| Preencher o ==[forms]({{lab01_forms}})==                   |
 
 ## Entrega
 
@@ -424,7 +427,7 @@ pio_clear(LED_PIO, LED_PIO_IDX_MASK);
     - [pio_set](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#gaff11c04817b1f7279971d1bada01184a)
     - [pio_clear](https://asf.microchip.com/docs/latest/sam.drivers.spi.spi_dmac_slave_example.sam3x_ek/html/group__sam__drivers__pio__group.html#ga4857b3d94c0517d54eeff7da85af2518)
 
-!!! exercise choice ""
+!!! exercise choice
     Selecione a funcão correta que faz o LED **acender**.
     
     - [ ] `pio_set(LED_PIO, LED_PIO_IDX_MASK);`
