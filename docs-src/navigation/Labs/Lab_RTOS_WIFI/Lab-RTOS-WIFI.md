@@ -346,5 +346,5 @@ Podemos melhorar várias coisas nesse projeto, mas vamos por partes. A primeira 
 
 ------------
 
-!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfY9xsKEamY63GcXNAeXnh1S2uJ5ZrX-jmziieLvZAA0U2O5w/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+<!-- !!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfY9xsKEamY63GcXNAeXnh1S2uJ5ZrX-jmziieLvZAA0U2O5w/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->

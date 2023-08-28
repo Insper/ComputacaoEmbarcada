@@ -315,5 +315,5 @@ Lembre de fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 ### Conceito A: 
     TODO: talvez: ajustar alarme via botoes?
 
-!!! info "Ao terminar o lab preencha:"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLNBnwsHY6NGCnJqAfeoEgDq5n5ZySeu0x9NUeSQWiQV43xQ/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+<!-- !!! info "Ao terminar o lab preencha:"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLNBnwsHY6NGCnJqAfeoEgDq5n5ZySeu0x9NUeSQWiQV43xQ/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
