@@ -21,6 +21,7 @@ plugins:
       plugin_exercise_counter: false
 
 markdown_extensions:
+  - footnotes
   - markdown.extensions.admonition
   - pymdownx.tasklist:
       custom_checkbox: true
@@ -114,6 +115,7 @@ nav:
       - navigation/CodeQuality/rules.md
       - navigation/CodeQuality/cppcheck.md
       - navigation/CodeQuality/variables.md
+      - navigation/CodeQuality/head-file.md
       - navigation/CodeQuality/isr-variables.md
       - navigation/CodeQuality/isr-handler.md
 
@@ -123,6 +125,7 @@ extra:
     rules_isr_volatile_classroom: https://classroom.github.com/a/_wYWDjs0
     rules_isr_classroom: https://classroom.github.com/a/VfTjqXBK
     rules_cppcheck_classroom: https://classroom.github.com/a/iFm3FeF8
+    rules_head_classroom: https://classroom.github.com/a/OryPvQ6Z
 
     lab01_deadline: 23/08/2023
     lab01_classroom: https://classroom.github.com/a/xzPCYyFH
