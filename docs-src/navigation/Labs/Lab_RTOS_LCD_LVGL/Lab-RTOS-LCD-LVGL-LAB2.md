@@ -240,6 +240,6 @@ Temos muito o que fazer na interface, vou sugerir algumas coisas que irão dar n
 - [ ] Implementar o botão de `Power` que desliga a tela
 - [ ] Colocar um potenciômetro que altera o valor da temperatura atual.
 
-!!! note "Preencher ao finalizar o lab"
-   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfB9u2g8koXaYcQWhOqlkNTKPDppRGJq9p30ZYMQp0sd-OuUw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+<!-- !!! note "Preencher ao finalizar o lab"
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfB9u2g8koXaYcQWhOqlkNTKPDppRGJq9p30ZYMQp0sd-OuUw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
 

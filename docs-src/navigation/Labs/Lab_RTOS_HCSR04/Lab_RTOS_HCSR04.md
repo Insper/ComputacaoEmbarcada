@@ -122,8 +122,8 @@ A entrega do Lab deve ser um sistema que possui um HC-SR04 e faz periodicamente 
 - Mostre um gráfico da distância no tempo!.
 - Ler dois sensores em paralelo (exibe dois pontos no gráfico)
 
-!!! info "Ao terminar o lab preencha:"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe83MJuGEAFSF113AfeHpgYZjt1-eBFrBBOQ_DNW6MPdWn9oA/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+<!-- !!! info "Ao terminar o lab preencha:"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe83MJuGEAFSF113AfeHpgYZjt1-eBFrBBOQ_DNW6MPdWn9oA/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
 
 ### Dicas
 

@@ -196,9 +196,9 @@ Agora vamos começar a programar, lembrem que a documentação do LVGL fala que:
     
     Execute o código e verifique que ==NADA DEVE TER MUDADO==. Estamos apenas melhorando a qualidade do nosso código e garantindo que não teremos erros futuros.
     
-!!! note "Preencher ao finalizar o lab"
+<!-- !!! note "Preencher ao finalizar o lab"
 
-   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsDgoVIJ_1WyqqxUccDrux7WATpsiNnGgQf8ire5XCa3JP8Q/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsDgoVIJ_1WyqqxUccDrux7WATpsiNnGgQf8ire5XCa3JP8Q/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
     
 ## APS 2
 
