@@ -1,8 +1,10 @@
 # APS 1 - Musical
 
-| Entrega Final     |
-|-------------------|
-| {{aps1_deadline}} |
+| APS 1                                                                          |
+|--------------------------------------------------------------------------------|
+| **Data limite para entrega**: =={{aps1_deadline}}==                            |
+| Usar o repositório do ==[Classroom]({{aps1_classroom}})== (pode ser em dupla!) |
+| Preencher o ==[forms]({{aps1_forms}})== na data da entrega                     |
 
 Nesta APS vocês irão desenvolver um sistema embarcado que reproduz uma [música monofonia](https://en.wikipedia.org/wiki/Monophony), para isso irão utilizar um 
 buzzer conectado a um pino do microcontrolador.

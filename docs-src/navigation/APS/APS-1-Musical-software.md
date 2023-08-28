@@ -1,15 +1,13 @@
 # APS 1 - Musical - Firmware
 
+| APS 1                                                                          |
+|--------------------------------------------------------------------------------|
+| **Data limite para entrega**: =={{aps1_deadline}}==                            |
+| Usar o repositório do ==[Classroom]({{aps1_classroom}})== (pode ser em dupla!) |
+| Preencher o ==[forms]({{aps1_forms}})==                                        |
+
 A seguir iremos explicar os conceitos e dicas de como vocês deverem prosseguir para
 executarem esta APS.
-
-!!! info
-    1. Lembrem de trabalhar no repositório criado pelo classroom:
-        - {{aps1_classroom}}
-        
-    1. Leia atentamente como trabalhar no repositório:
-    
-        - [APS HowTo](/ComputacaoEmbarcada/APS-howto/)
 
 ## Músicas monofonica
 
