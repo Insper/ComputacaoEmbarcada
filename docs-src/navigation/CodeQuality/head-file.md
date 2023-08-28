@@ -72,7 +72,7 @@ void main(){...}
 
 int bar(int b);
 
-#ENDIF
+#endif
 ```
 
 ```c
@@ -103,8 +103,7 @@ int bar(int b){
         
         #include "pisca.h"
         
-        #define pisca_H
-        
+        #endif        
         ```
         
     === "(b)"
@@ -116,7 +115,7 @@ int bar(int b){
         
         #include "pisca.h"
         
-        #define pisca_H
+        #endif
         ```
         
         `pisca.c`
@@ -139,7 +138,7 @@ int bar(int b){
         
         void led(coid);
         
-        #define pisca_H
+        #endif
         ```
         
         `pisca.c`
