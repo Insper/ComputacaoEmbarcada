@@ -2,21 +2,20 @@
 
 ## Avaliação
 
-A avaliação é composta de: Projeto, APS, Avaliação Prática e Auto avaliação.
+A avaliação é composta de: Projeto, APS, Avaliação Prática e Laboratórios
 
-- APS: são realizadas em duplas, no total são 3 APS.
+- APS: são realizadas em duplas, no total são 2 APS.
 - Projeto: realizado em grupos, no total 1 projeto.
-- Avaliação prática: individual, no total são 4 avaliações.
-- Auto avaliação: individual, inclui participação em aula, desenvolvimento dos laboratórios e mapeia os objetivos de aprendizagem.
+- Avaliação prática: individual, no total são 3 avaliações (sem substitutiva).
+- Laboratórios: entrega individual semana de atividades de laboratório
 
 Critérios para o estudante ser aprovado no curso, é necessário:
 
-1. Todas as APS com conceito igual ou superior a C.
-2. Possuir nota satisfatória em pelo menos 2 avaliações práticas.
-3. Projeto com nota igual ou superior a C.
-4. Possuir participação em aula satisfatória.
+- Todas as APS e Projetos com conceito igual ou superior a C.
+- Possuir uma avaliação prática individual com nota A (as notas são binárias: I ou A)
+- Média dos Laboratórios superior a C
 
-A nota final se dará pela Avaliação Prática (pelo menos 2 avaliações satisfatória) e média simples entre APS e Projeto.
+==Pelo formato alternativo de avaliação individual, onde o aluno possui três chances e precisa apenas ter nota efetiva em uma delas, esta disciplina não possui prova substitutiva, mesmo em caso de falta por doença ou qualquer outra razão!=
 
 ## Objetivos de aprendizagem 
 
