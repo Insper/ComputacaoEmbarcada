@@ -360,8 +360,8 @@ Essa função é um pouco mais complexa, e deve executar as seguintes configura�
 !!! progress
     Até aqui já é C!! Lembre de preencher o forms...
 
-!!! note "Preencher ao finalizar o lab"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe1zqCluXRBgfXm1BWrFeQB2R19JgqNpiuypleSiaF_GJTKpw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+<!-- !!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe1zqCluXRBgfXm1BWrFeQB2R19JgqNpiuypleSiaF_GJTKpw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
 
 ### Conceito B: _pio_get(...)
 
