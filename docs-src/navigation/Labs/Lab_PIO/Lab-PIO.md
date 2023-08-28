@@ -676,6 +676,3 @@ Vamos usar o botão para fazer alguma coisa? Agora conseguimos acionar um pino (
     Os laboratórios possuem verificação de qualidade de código e a entrega só sera aceito se não possuir erro em nenhuma das duas verificações (cppcheck e code_quality).  
 
     ![](/imgs/ci-code-quality.png)
-
-!!! Entrega
-    {{lab01_forms}}
