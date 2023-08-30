@@ -50,14 +50,14 @@ nav:
   - SAME70-Examples: "https://github.com/Insper/SAME70-examples"
   - Vídeos: "navigation/Videos/Util-Videos.md"
   - Util:
-      - navigation/Util/Sobre-Ferramental.md
-      - navigation/Util/Util-Startup.md
-      - navigation/Util/Util-Erros.md
-      - navigation/Util/Util-Documentos.md
-      - navigation/Dicas/Util-lcd.md
-      - navigation/Dicas/Util-freertos.md
-      - navigation/Dicas/Util-FloatPrint.md
-      - navigation/Dicas/Util-lvgl.md
+      - Ferramental: navigation/Util/Sobre-Ferramental.md
+      - Bring up: navigation/Util/Util-Startup.md
+      - Erros comum: navigation/Util/Util-Erros.md
+      - Manuais: navigation/Util/Util-Documentos.md
+      - LCD max Touch: navigation/Dicas/Util-lcd.md
+      - Freertos: navigation/Dicas/Util-freertos.md
+      - Float Point (SAM): navigation/Dicas/Util-FloatPrint.md
+      - LVGL: navigation/Dicas/Util-lvgl.md
   - Labs:
       - "Lab 1 - PIO ":
           - "Teoria": "navigation/Labs/Lab_PIO/Lab-PIO-Teoria.md"
@@ -97,8 +97,8 @@ nav:
       - navigation/Projeto/Projeto-1-Lista.md
   - APS:
       - "APS 1 - Musical":
-          - "navigation/APS/APS-1-Musical.md"
-          - "navigation/APS/APS-1-Musical-software.md"
+          - Descritivo: "navigation/APS/APS-1-Musical.md"
+          - Firmware: "navigation/APS/APS-1-Musical-software.md"
       - "APS 2 - Ciclocomputador":
           - "navigation/APS/APS-2-Bike/Descricao.md"
           - "navigation/APS/APS-2-Bike/Design.md"
