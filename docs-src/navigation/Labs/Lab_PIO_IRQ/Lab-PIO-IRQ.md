@@ -294,4 +294,4 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
 !!! exercise "Parte 2"
     Agora siga para a página: Praticando, que faz parte desse lab.
 
-    - [Praticando](/navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/)
+    - [Praticando](/navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/)
