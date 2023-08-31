@@ -39,7 +39,7 @@ Existe para isso as interrupções de hardware,
 que são chamadas de funções (eventos)
 realizados pelo uC para eventos detectados pelos periféricos (no computador também tem, mas o OS toma conta de tudo).
 
-Podemos por exemplo configurar o uC para que toda vez que um botão for pressionado (no nosso caso, mudança de HIGI par LOW) uma função (`handler`) seja
+Podemos por exemplo configurar o uC para que toda vez que um botão for pressionado (no nosso caso, mudança de HIGH para LOW) uma função (`handler`) seja
 executada. Evitando a necessidade de verificarmos pela mudança de estado do pino no `while(1)` (técnica conhecida como polling). Isso abre portas para uma série de otimizações sendo uma da principal a questão energética.
 
 O estilo de programação que fica checando por uma mudança é chamado de
