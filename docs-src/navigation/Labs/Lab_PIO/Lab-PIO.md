@@ -1,6 +1,5 @@
 # LAB - PIO
 
-
 | Lab 1                                                      |
 |------------------------------------------------------------|
 | **Data limite para entrega**: =={{lab01_deadline}}==       |
@@ -17,7 +16,6 @@ Ao final do laboratório vocês terão:
 - A leitura de um botão (entrada)
 - LED acionado pelo botão
 
-    
 ## Laboratório
 
 !!! note ""

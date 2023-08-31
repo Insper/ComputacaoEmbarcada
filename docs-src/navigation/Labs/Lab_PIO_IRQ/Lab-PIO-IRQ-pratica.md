@@ -1,84 +1,91 @@
-## Praticando - OLED
+# LAB - PIO - IRQ - Parte 2
 
-## Entrega
+| Lab - Parte 2                                                                      |
+|------------------------------------------------------------------------------------|
+| **Data limite para entrega**: =={{lab03_deadline}}==                               |
+| Entregue o código pelo repositório do ==[Classroom]({{lab03_parte_2_classroom}})== |
 
-| **Pasta:**   `/Led3-OLED-PIO-IRQ` |
-|---------------------------- |
-| **Data <span style="color:red">LIMITE</span> para entrega:** `04/09/22 - 23h59` |
 
+!!! warning
+    Use o mesmo repositório criado na parte 1, só que aqui iremos usar a outra pasta.
+    
+|   Pasta do classroom    |
+    |-----------------------|
+    | OLED-Xplained-Pro-SPI |
 
-Agora vamos praticar um pouco o uso de interrupção, para isso vocês deverão abrir/ criar um novo projeto.
+    Nesta pasta temos um projeto que permite escrevermos na telinha da placa OLED!
 
-Copie o projeto localizado no repositório de exemplos: [`SAME70-examples/Screens/OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/OLED-Xplained-Pro) para a pasta do seu repositório de laboratórios da disciplina `Lab3-OLED-PIO-IRQ`.
+Agora vamos praticar um pouco o uso de interrupção, para isso foi fornecido um exemplo que configura o OLED (que deve ser conectado na placa no [**EXT1**]()[^1]). 
 
-Iremos trabalhar com esse exemplo que configura o OLED (que deve ser conectado na placa no **EXT1**) e incorporar o exemplo da interrupção aqui (vamos ampliar sua funcionalidade!).
+[^1]: ![](https://github.com/Insper/SAME70-examples/raw/master/Screens/OLED-Xplained-Pro-SPI/final.jpeg)
 
-A entrega final (conceito A) deve possuir três botões externos a placa que irão configurar a frequência na qual o LED irá piscar (via interrupção é claro). Um dos botões irá aumentar/diminuir a frequência do piscar do LED, depdendendo do modo de pressionamento (curto/longo), um outro irá parar a piscada do LED e o último terá apenas a função de diminuir (modo pressionamento curto). O OLED deverá exibir a frequência atual do LED "graficamente". 
+A entrega final (conceito A) deve usar os três botões da placa OLED para configurar a frequência na qual o LED irá piscar (via interrupção é claro). Um dos botões irá aumentar/diminuir a frequência do piscar do LED, depdendendo do modo de pressionamento (curto/longo), um outro irá parar a piscada do LED e o último terá apenas a função de diminuir (modo pressionamento curto). O OLED deverá exibir a frequência atual do LED "graficamente". 
 
 - O código deve funcionar por interrupção nos botões **e sempre que possível, entrar em sleep mode**.
 
-### Conceito C
+## Conceito C
 
 Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência na qual o LED irá piscar. Além disso, você precisa exibir o valor da frequência no display do OLED.
 
 !!! tip
     Utilize a função `pisca_led` para controlar a piscada, deixe como padrão o número de piscada em 30 vezes.
 
-1 - Botão OLED1: Modifica a frequência do LED (por IRQ)
+!!! exercise
+    - Botão OLED1: Modifica a frequência do LED (por IRQ)
     - Se usuário aperta e solta: Aumenta a freq em uma unidade ( `delay -= 100` )
     - Se usuário aperta e segura: Diminui a freq em uma unidade ( `delay += 100` )
-!!! tip
-    Para testar a lógica, você pode primeiramente utilizar 2 botões, um para aumentar e outro para diminuir, e posteriormente migrar para utilizar apenas 1 botão para as duas funções.
-    
-2 - Exibir o valor da frequência no OLED
 
-!!! tip
-    Para escrevermos uma string no OLED devemos usar a função:
-    
-    ```c
-    void gfx_mono_draw_string(const char *str, const gfx_coord_t x, const gfx_coord_t y, const struct font *font);
-    ```
-    
-    Que recebe como parâmetro:
-    
-    - `cont char str`: String com o texto a ser escrito no OLED
-    - `gfx_coord_t x`: Coordenada pixel **X** de onde a string irá ser escrita
-    - `gfx_coord_t y`: Coordenada pixel **Y** de onde a string irá ser escrita
-    - `const struct font *font`: Fonte a ser utilizada, a configuração dela está em `src/config/conf_sysfont.h`
-    
-    Notem que a função recebe uma string e não um inteiro, então vocês ==NÃO PODEM== fazer isso:
-    
-    ```c
-    // ------------------
-    // - ATENCÃO ERRADO -
-    // ------------------
-    int cnt = 5;
-    gfx_mono_draw_string(cnt, 0, 0, &sysfont);
-    //                   (1)
-    ```
-    
-    1. :warning: Não pode pois não é uma string!!
-    
-    Lembrem que em C uma string é um vetor de char em ASCII terminado em NULL, então precisamos converter o valor inteiro 5 em uma string.
-    
-    Existe uma função muito interessante em C que é a `sprintf`, que funciona de forma similar ao `printf` só que no lugar de enviar a string formatada para o terminal a `sprintf` formata a string em um vetor. Veja o exemplo a seguir:
-    
-    ```c
-    int cnt = 5;
-    char str[128]; // (1)
-    
-    sprintf(str, "%d", cnt); // (2)
-    gfx_mono_draw_string(str, 0, 0, &sysfont);
-    ```
-    
-    1. Declaramos um vetor (`str`) para armazenar a string formatada. 
-    2. Agora usamos a função `sprintf` para formatar uma string no vetor `str`. Podemos formatar a string como de forma similar ao printf, exe: `sprintf(str, "O cnt é: %d", cnt);`
-    
-    Alguns detalhes:
+    !!! tip ""
+        Para testar a lógica, você pode primeiramente utilizar 2 botões, um para aumentar e outro para diminuir, e posteriormente migrar para utilizar apenas 1 botão para as duas funções.
  
-    - O OLED possui dimensões de 128x32 pixels, o texto não pode passar desse tamanho!
-    - Tome cuidado com o tamanho da string pois ele deve ser capaz de armazenar toda o texto formatado.
-    
+### Oled
+ 
+Para escrevermos uma string no OLED devemos usar a função:
+
+```c
+void gfx_mono_draw_string(const char *str, const gfx_coord_t x, const gfx_coord_t y, const struct font *font);
+```
+
+Que recebe como parâmetro:
+
+- `cont char str`: String com o texto a ser escrito no OLED
+- `gfx_coord_t x`: Coordenada pixel **X** de onde a string irá ser escrita
+- `gfx_coord_t y`: Coordenada pixel **Y** de onde a string irá ser escrita
+- `const struct font *font`: Fonte a ser utilizada, a configuração dela está em `src/config/conf_sysfont.h`
+
+Notem que a função recebe uma string e não um inteiro, então vocês ==NÃO PODEM== fazer isso:
+
+```c
+// ------------------
+// - ATENCÃO ERRADO -
+// ------------------
+int cnt = 5;
+gfx_mono_draw_string(cnt, 0, 0, &sysfont);
+//                   (1)
+```
+
+1. :warning: Não pode pois não é uma string!!
+
+Lembrem que em C uma string é um vetor de char em ASCII terminado em NULL, então precisamos converter o valor inteiro 5 em uma string.
+
+Existe uma função muito interessante em C que é a `sprintf`, que funciona de forma similar ao `printf` só que no lugar de enviar a string formatada para o terminal a `sprintf` formata a string em um vetor. Veja o exemplo a seguir:
+
+```c
+int cnt = 5;
+char str[128]; // (1)
+
+sprintf(str, "%d", cnt); // (2)
+gfx_mono_draw_string(str, 0, 0, &sysfont);
+```
+
+1. Declaramos um vetor (`str`) para armazenar a string formatada. 
+2. Agora usamos a função `sprintf` para formatar uma string no vetor `str`. Podemos formatar a string como de forma similar ao printf, exe: `sprintf(str, "O cnt é: %d", cnt);`
+
+Alguns detalhes:
+
+- O OLED possui dimensões de 128x32 pixels, o texto não pode passar desse tamanho!
+- Tome cuidado com o tamanho da string pois ele deve ser capaz de armazenar toda o texto formatado.
+
     
 !!! exercise choice 
     Podemos chamar as funções que manipulam o OLED dentro de interrupção/ callback do botão?
@@ -91,7 +98,13 @@ Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência n
         
         A solução é atualizar o display no main via uso de flags.
 
-!!! exercise self
+!!! exercise
+    Exibir o valor da frequência no OLED
+    
+    > Não sabe como fazer? Olhe a dica a seguir...
+
+
+!!! exercise 
     Comecando:
     
     1. Configure o LED e Botão da placa OLED para operar com IRQ.
@@ -116,9 +129,7 @@ Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência n
     - Você deve usar [sprintf](http://www.cplusplus.com/reference/cstdio/sprintf/) para formatar a string que irá exibir no OLED
     - Para exibir uma string no OLED use a função `gfx_mono_draw_string`
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdhAcBzuJ2qEQw0MevjOxyALQyHdGF_wHwccewcVS5SI0B6yg/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
-### Conceito B
+## Conceito B
 
 !!! exercise self
     Acrescente os outros dois botões do oled (2 e 3) do OLED para:
@@ -126,7 +137,7 @@ Agora você deve adicionar o botão 1 da placa OLED para alterar a frequência n
     - Botão 2: Para o pisca pisca
     - Botão 3: Diminuir a frequência (aperto curto)
 
-### Conceito A
+## Conceito A
 
 !!! exercise self
     Exiba no OLED não só a frequência, mas uma barra indicando quando o LED irá parar de piscar (como uma barra de progresso).

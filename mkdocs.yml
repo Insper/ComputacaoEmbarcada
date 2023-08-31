@@ -68,8 +68,8 @@ nav:
           - "Lab": "navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER.md"
       - "Lab 3 - PIO - IRQ":
           - "Teoria": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria.md"
-          - "Lab": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ.md"
-          - "Praticando": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica.md"
+          - "Lab - Parte 1": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ.md"
+          - "Lab - Parte 2": "navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica.md"
       - "Lab 4 - RTOS":
           - "Lab": "navigation/Labs/Lab_RTOS/Lab-RTOS.md"
           - "Teoria": "navigation/Labs/Lab_RTOS/Teoria.md"
@@ -136,7 +136,8 @@ extra:
     lab02_forms: https://docs.google.com/forms/d/e/1FAIpQLSen3YNQLkLTwOyIrDlb9rFiedmzGJT__-PMCz56R_zIsXVGxg/viewform?usp=sf_link
     
     lab03_deadline: 04/09/2023
-    lab03_classroom: TBD
+    lab03_parte_1_classroom: https://classroom.github.com/a/piGR02zw
+    lab03_parte_2_classroom: https://classroom.github.com/a/fS0CVR5G
     lab03_forms: https://docs.google.com/forms/d/e/1FAIpQLSe68Mm0pKsKaHZ2xG2Qudt6-cGh9uANtetEFiAaQYZT72wJKA/viewform?usp=sf_link
     
     lab04_deadline: 18/09/2023

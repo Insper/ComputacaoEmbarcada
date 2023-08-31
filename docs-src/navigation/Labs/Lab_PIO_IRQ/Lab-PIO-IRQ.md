@@ -1,15 +1,15 @@
-# LAB - PIO - IRQ
+# LAB - PIO - IRQ - Parte 1
+
+| Lab 3                                                                              |
+|------------------------------------------------------------------------------------|
+| **Data limite para entrega**: =={{lab03_deadline}}==                               |
+| Entregue o código pelo repositório do ==[Classroom]({{lab03_parte_1_classroom}})== |
+| Preencha o ==[forms]({{lab03_forms}})== para entregar (parte 1 e parte 2)          |
 
 Esse laboratório possui duas entregas, a primeira é um passo a passo do laboratório e a segunda é parte de prática que coloca em uso o que foi visto na aula. As duas devem ser entregues até a data limite.
 
-## Entrega
-
-| Pastas: | `/Lab3-PIO-IRQ` | `/Lab3-OLED-PIO-IRQ` |
-| :--- | :---: | :---: |
-| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab03_deadline}}` |
-
 !!! tip "Teoria"
-    Antes de seguir leia a teoria sobre [IRQ](/ComputacaoEmbarcada/navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/)
+    Antes de seguir tenha a teroria clara na sua mente, se preciar leia mais em [IRQ](/navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/)
 
 A disciplina possui um repositório de códigos exemplos, que será bastante utilizado ao longo do curso:
 
@@ -17,12 +17,11 @@ A disciplina possui um repositório de códigos exemplos, que será bastante uti
 
 O repositório está organizado por categorias: comunicação, demos, periféricos, screens, sensores, ... e assim por diante.
 
-Neste laboratório iremos trabalhar com o código exemplo [`SAME70-exemples/Perifericos-uC/PIO-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ) que demonstra como configurar o botão da placa utilizando interrupção. Esse código será a base do laboratório.
+Para entender o IRQ no PIO vamos  trabalhar com o código exemplo [`SAME70-exemples/Perifericos-uC/PIO-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ) que demonstra como configurar o botão da placa utilizando interrupção. Esse código será a base do laboratório. Para facilitar eu já disponibilizei o código dentro do repositório do classroom.
 
 !!! exercise self
-    1. Copie o código exemplo `SAME70-examples/Perifericos-uC/PIO-IRQ` para a pasta`Lab3-PIO-IRQ` do seu repositório.
     1. Estude o [README](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/README.md) desse exemplo!
-    1. Execute o exemplo na placa!
+    1. Execute o código na placa!
     1. Analise o código fonte.
 
 !!! progress
@@ -31,6 +30,10 @@ Neste laboratório iremos trabalhar com o código exemplo [`SAME70-exemples/Peri
 Iremos entender melhor e começar a implementar mudanças no código de exemplo.
 
 ## Bordas
+
+| Pasta do classroom |
+|--------------------|
+| PIO-IRQ            |
 
 Agora vamos modificar o código um pouco, o exemplo está funcionando com interrupção em borda de descida no pino, ou seja, a função de `callback` é chamada quando você aperta o botão (High -> Low). Iremos modificar o comportamento para operar com borda de subida, fazendo com que a função de callback seja chamada quando soltarmos o botão (Low -> High).
 
@@ -285,4 +288,10 @@ Uma vez chamada essa função o uC entrará em modo sleep WFI (WaitForInterrupt)
 !!! progress
     Click para continuar....
 
-Agora siga para a página: Praticando, que faz parte desse lab.
+!!! tip
+    Lembrem de dar commit e push para o repositório criado, e verificar se existe alguma violacão da qualidade de código.
+
+!!! exercise "Parte 2"
+    Agora siga para a página: Praticando, que faz parte desse lab.
+
+    - [Praticando](/navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/)
