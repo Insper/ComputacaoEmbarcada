@@ -3,8 +3,6 @@
 | Lab - Parte 2                                                                      |
 |------------------------------------------------------------------------------------|
 | **Data limite para entrega**: =={{lab03_deadline}}==                               |
-| Entregue o código pelo repositório do ==[Classroom]({{lab03_parte_2_classroom}})== |
-
 
 !!! warning
     Use o mesmo repositório criado na parte 1, só que aqui iremos usar a outra pasta.
