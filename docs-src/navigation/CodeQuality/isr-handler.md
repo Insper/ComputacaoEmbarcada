@@ -1,4 +1,4 @@
-# IRS - Handler/ Callback 
+# ISR - Handler/ Callback 
 
 Essas regras dizem respeito que a execução de uma ISR deve ser: a mais rápida possível e curta em tamanho de código. 
 

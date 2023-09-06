@@ -1,4 +1,4 @@
-# IRS - Variáveis
+# ISR - Variáveis
 
 Devemos seguir algumas regras básicas quando desenvolvemos código que faz uso de interrupção, devemos tratar essa secção do programa como algo especial e que possui algumas regras básicas para operar corretamente. 
 
