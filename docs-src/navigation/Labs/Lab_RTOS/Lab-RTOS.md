@@ -6,7 +6,7 @@
 | Entregue o código pelo repositório do ==[Classroom]({{lab04_classroom}})== |
 | ^^Procurando o link para FORMS?^^ Leia o box a seguir                      |
 
-  * [ ] !!! info "Forms ???"
+!!! info "Forms ???"
     Vamos testar um novo formato nesta entrega, issues foram criadas no seu repositório, você deve fechar as issues de acordo com o que realizou nesta entrega, iremos verificar os códigos com as issues que foram fechadas.
     
     - Você só deve fechar as issues do que foi concluido.
