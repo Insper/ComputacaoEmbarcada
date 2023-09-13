@@ -1,19 +1,14 @@
 # LAB - RTOS (freeRTOS)
 
+| Lab 4                                                                              |
+|------------------------------------------------------------------------------------|
+| **Data limite para entrega**: =={{lab04_deadline}}==                               |
+| Entregue o código pelo repositório do ==[Classroom]({{lab04_classroom}})== |
 
-|                       Pastas: | `/Lab4-RTOS-PIO-IRQ`        | `/Lab4-RTOS-IRQ-ADC` |
-|------------------------------:|:-----------------------|:-------------|
-| **Data <span style="color:red">LIMITE</span> para entrega:**  | `{{lab04_deadline}}` |              |
+Neste laboratório iremos trabalhar com os seguintes códigos exemplos que foram fornecidos no repositório do classroom (você também pode encontrar eles no repositório SAME70-examples):
 
-!!! warning
-    Atualize o repositório de exemplos: `same70-examples` antes de continuar.
-    
-O repositório está organizado por categorias: comunicação, demos, periféricos, screens, sensores, ... e assim por diante.
-
-Na primeira parte deste laboratório iremos trabalhar com o código exemplo [`SAME70-examples/Perifericos-uC/RTOS-PIO-IRQ/`]([https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ]). Esse código será a base da primeira parte do laboratório.
-
-Na segunda parte, iremos trabalhar com o código exemplo [`SAME70-examples/Perifericos-uC/RTOS-IRQ-ADC/`]([[https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/PIO-IRQ]). Esse código será a base da segunda parte do laboratório.
-
+1. `RTOS-PIO-IRQ`
+2. `RTOS-AFEC-IRQ`
 
 !!! tip "Embedded FM - episódio 175"
     **How Hard Could It Be?**
@@ -27,14 +22,16 @@ Na segunda parte, iremos trabalhar com o código exemplo [`SAME70-examples/Perif
 
 Neste laboratório iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS). O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://freertos.org), um sistema operacional muito utilizado pela industria, sendo o segundo sistema operacional (**20%**) mais utilizado em projetos embarcados, perdendo só para o [Linux](https://m.eet.com/media/1246048/2017-embedded-market-study.pdf).
 
-!!! progress 
-    Continuar ...
+!!! tip
+    Para dicas de como usar o RTOS acesse:
 
-## LAB
+    [Util/Freertos](https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-freertos/)
 
-O laboratório consiste em:
+## Parte 1: RTOS-PIO-IRQ
 
-1. Executar uma demo de RTOS
+Nesta etapa iremos
+
+1. Executar uma demo de RTOS (`RTOS-PIO-IRQ`)
 1. Entender e modificar o exemplo
 1. Praticar
 
@@ -51,24 +48,11 @@ O laboratório consiste em:
 
     Caso não tenha essa opção, instale o [pacote extra do microchip studio](https://gallery.microchip.com/packages/EFC4C002-63A3-4BB9-981F-0C1ACAF81E03/2.8.4)
 
-!!! progress 
-    Continuar ...
+Iremos usar o código exemplo `RTOS-PIO-IRQ` para aprenderemos os principais recursos do RTOS, neste exemplo criamos duas tasks: `task_but` e `task_led` que se comunicam via uma fila. O botão da placa é configurado para operar com interrupção de borda, liberando um semáforo para a `task_but`, que processa a informação e envia um novo valor de delay para a `task_led`:
 
-## RTOS
-
-Para dicas de como usar o RTOS acesse:
-
-[Util/Freertos](https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-freertos/)
-
-### PIO-IRQ-RTOS
-
-- https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTOS-PIO-IRQ
-
-Vamos usar esse código exemplo para aprenderemos os principais recursos do RTOS, nele criamos duas tasks: `task_but` e `task_led` que se comunicam via uma fila. O botão da placa é configurado para operar com interrupção de borda, liberando um semáforo para a `task_but`, que processa a informação e envia um novo valor de delay para a `task_led`:
-
-![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/RTOS-PIO-IRQ/doc/diagrama.svg)
 
 !!! exercise "Executando"
+    1. Abra o código `RTOS-PIO-IRQ` no microchip studio
     1. Compile e grave o código no uC
     2. Abra o ![terminal](https://insper.github.io/ComputacaoEmbarcada/navigation/Util/Util-Erros/#instalando-terminal-window-no-atmel-studio) e configure a UART (baudrate 115200).
     1. Veja o LED piscar! 
@@ -77,45 +61,60 @@ Vamos usar esse código exemplo para aprenderemos os principais recursos do RTOS
 Antes de seguir analise um pouco o código e tente entender o que está acontecendo, para isso consulte a página desse lab chamada de Teoria.
 
 !!! exercise "Praticando - semáforo"
-    Faça uma cópia desse código para `Lab4-pio-irq-rtos` e vamos mexer nele!
-    
     A ideia aqui é possibilitar diminuirmos a frequência através de outro botão! Para 
-    isso teremos que adicionar mais um semáforo que irá se comunicar com a task but.
-    
-    Tarefa:
-    
-    1. Modifique o código adicionando um botão da placa OLED (interrupcao, callback...)
-    1. Crie um novo semáforo e libere ele quando o botão novo for apertado.
-    1. Na task but processe o semáforo aumentado o valor da frequência
-    
+    isso teremos que adicionar mais um semáforo que irá se comunicar com a `task_but`.
+ 
     Dicas:
     
     - Você ==NÃO== deve criar outra task, tem que fazer tudo na `task_but`
-    - As interrupções de HW devem possuir prioridade maior que 4.
+    - ==Por conta do FreeRTOS as interrupções de HW devem possuir prioridade maior que 4.==
+    - Temos um resumo de como usar os recursos do RTOS:
+        - Util/Freertos ^^CONSULTE ESSE MATERIAL^^
 
+    Tarefa:
+    
+    1. Modifique o código adicionando um botão da placa OLED:
+       - interrupcao e callback
+    1. Crie um novo semáforo e libere ele quando o botão novo for apertado.
+    1. Na task but processe o semáforo aumentado o valor da frequência
+    
+    Esperado:
+    
+    ![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/RTOS-PIO-IRQ/doc/diagrama.svg)
 
-!!! exercise "Praticando - queue"
-    Agora vamos usar fila no lugar de semáforo para comunicar os botões com a `task_but`. 
+!!! exercise
+    Agora vamos usar os outros dois botões da placa OLED, cada botão vai decrementar a frequência por uma constante diferente:
+    
+    - BTN1: 10
+    - BTN2: 5
+    - BTN3: 1
+      
+    Para isso você deverá:
+    
+    1. configurar o callback para cada botão novo
+    1. Criar um novo semáforo para cada botão
+    1. Ler os semáforos na `task_but` e processar os valores
     
     Tarefa:
     
-    1. Crie uma mais uma fila
-    1. Cada callback deve colocar o valor do incremento na fila (ou o id do botão)
-    1. A task_but recebe o valor, faz o cálculo e envia para a task_led
+    1. Agora faca o mesmo para os outros dois botões da placa OLED que faltaram, cada um modificando a frequência com um valor diferente.
+
+    Esperado:
+    
+    ![](imgs/pio-btns.svg)
 
 !!! progress 
     Continuar ...
 
-### ADC-IRQ-RTOS
+## Parte 2: ADC-IRQ-RTOS
 
-- https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTOS-IRQ-ADC
-
-Outro exemplo que vamos usar como base é o ADC-IRQ-RTOS que faz a leitura de um valor analógico do pino do uC, você deve ler o README que possui o diagrama de ligações e uma pequena explicação. 
+Outro exemplo que vamos usar como base é o `RTOS-AFEC-IRQ` que faz a leitura de um valor analógico do pino do uC, você deve ler o README que possui o diagrama de ligações e uma pequena explicação do código. 
 
 ![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/RTOS-IRQ-ADC/diagrama.svg)
 
 !!! exercise "Executando"
     1. Leia o README do exemplo e ligue conforme indicado
+    1. Abra o código no microchip studio
     1. Compile e grave o código no uC
     2. Abra o terminal e configure a UART (baudrate 115200).
     1. Aperte o botão da placa e veja a frequência mudar.
@@ -123,11 +122,8 @@ Outro exemplo que vamos usar como base é o ADC-IRQ-RTOS que faz a leitura de um
 Antes de seguir analise um pouco o código e tente entender o que está acontecendo, analise a task, as interrupções e também o uso da fila.
 
 !!! exercise "Praticando"
-    Faça uma cópia desse código para `Lab4-adc-irq-rtos` e vamos mexer nele!
-    
-    A ideia agora é criarmos uma task intermediária (task_proc) que irá fazer o processamento dos dados 
+    A ideia agora é criarmos uma task intermediária (`task_proc`) que irá fazer o processamento dos dados 
     recebidos pelo ADC, conforme o diagrama atualizado a seguir:
-    
     
     ![](imgs/diagrama2.svg)
     
@@ -142,10 +138,50 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     1. Crie uma nova fila, e envie o dado da task_proc para a task_adc (dado bruto, ainda sem processamento)
     1. Na task_adc exiba o dado via printf
     1. Agora na task proc calcule a média móvel e o envie para a task_adc.
+
+### Conceito C
+
+Até aqui é C, você deve fechar as issues que foram abertas no seu repositório (não vamos usar mais o google forms!) referentes ao que foi feito.
+
+### Conceito B
+
+!!! exercise "Praticando - queue"
+
+    | Projeto |
+    | ------| 
+    | `RTOS-PIO-IRQ`|       
     
-!!! info "Ao terminar o lab preencha:"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdGoa5m16sRpQoNlXlTbvxKjyGFp0hHgSuRKQ43AG5W3aL0XA/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+    No código dos botões, no lugar de usar um semáforo para cada botão, vamos usar uma única fila que irá realizar a comunicação entre os callbacks dos botões e a task `task_but`. 
+    
+    Tarefa:
+    
+    1. Crie mais uma uma fila
+    1. Cada callback deve colocar o valor referente ao ID do botão que foi apertado
+    1. A `task_but` recebe o valor e repassa para a `task_led`
 
-## Projeto
+    Esperado:
+    
+    ![](imgs/pio-btns-B.svg)
 
-Agora que vocês já entendem um pouco melhor os recursos do RTOS podem e ==devem== aplicar esses conceitos no projeto. Por exemplo, para os botões vocês podem usar semáforos ou filas, para a leitura do valor analógico uma fila.
+    ==Você saberia informar na fila se o botão foi apertado ou liberado?==
+    
+    
+### Conceito A
+
+!!! exercise "Praticando - queue"
+
+    | Projeto |
+    | ------| 
+    | `RTOS-AFEC-IRQ`|       
+    
+    No código do AFEC, vamos adicionar mais um potênciometro e para isso vamos precisar de mais uma entrada analógica. 
+    
+    Tarefa:
+    
+    1. Configure um novo pino para funcionar com AFEC (No README do exemplo tem uma explicação)
+    1. Crie um novo [`Timer`](https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-freertos/#software-timer)
+    1. Envio de dados: 
+       - Você pode criar uma nova fila para enviar os dados do novo AFEC
+       - Você pode modificar o tipo da fila e enviar os dados usando uma única fila
+    1. A `task_process` recebe o valor dos dois afecs e faz uma média com eles:
+       - $valor = (AFEC1 + AFEC0)/2$

@@ -116,8 +116,8 @@ nav:
       - Cppcheck: navigation/CodeQuality/cppcheck.md
       - Variáveis: navigation/CodeQuality/variables.md
       - Head File: navigation/CodeQuality/head-file.md
-      - ISR variáveis: navigation/CodeQuality/isr-variables.md
-      - ISR handler: navigation/CodeQuality/isr-handler.md
+      - ISR - variáveis: navigation/CodeQuality/isr-variables.md
+      - ISR - handler: navigation/CodeQuality/isr-handler.md
 
 extra:
   custom_variables:
@@ -141,7 +141,7 @@ extra:
     lab03_forms: https://docs.google.com/forms/d/e/1FAIpQLSe68Mm0pKsKaHZ2xG2Qudt6-cGh9uANtetEFiAaQYZT72wJKA/viewform?usp=sf_link
     
     lab04_deadline: 18/09/2023
-    lab04_classroom: TBD
+    lab04_classroom: https://classroom.github.com/a/NWVEQ7qy
     lab04_forms: https://docs.google.com/forms/d/e/1FAIpQLSf2g5mffnCr-oKitRwtReG-T4sotSslGx0Bi9O8spNya8HYKw/viewform?usp=sf_link
     
     lab05_deadline: 25/09/2023
