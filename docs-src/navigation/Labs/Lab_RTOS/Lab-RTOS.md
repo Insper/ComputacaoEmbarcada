@@ -1,24 +1,23 @@
 # LAB - RTOS (freeRTOS)
 
-| Lab 4                                                                              |
-|------------------------------------------------------------------------------------|
-| **Data limite para entrega**: =={{lab04_deadline}}==                               |
+| Lab 4                                                                      |
+|----------------------------------------------------------------------------|
+| **Data limite para entrega**: =={{lab04_deadline}}==                       |
 | Entregue o código pelo repositório do ==[Classroom]({{lab04_classroom}})== |
+| ^^Procurando o link para FORMS?^^ Leia o box a seguir                      |
+
+  * [ ] !!! info "Forms ???"
+    Vamos testar um novo formato nesta entrega, issues foram criadas no seu repositório, você deve fechar as issues de acordo com o que realizou nesta entrega, iremos verificar os códigos com as issues que foram fechadas.
+    
+    - Você só deve fechar as issues do que foi concluido.
+    - Se não concluiu 100% a issues, você pode fazer um comentário que ireimos analisar!
+
 
 Neste laboratório iremos trabalhar com os seguintes códigos exemplos que foram fornecidos no repositório do classroom (você também pode encontrar eles no repositório SAME70-examples):
 
 1. `RTOS-PIO-IRQ`
 2. `RTOS-AFEC-IRQ`
 
-!!! tip "Embedded FM - episódio 175"
-    **How Hard Could It Be?**
-    
-    Jean Labrosse of Micrium (@Micrium) spoke with us about writing a real time operating system (uC/OS), building a business, and caring about code quality.
-    
-    - https://embedded.fm/episodes/175
-
-!!! video
-    ![Video](https://www.youtube.com/embed/F321087yYy4)
 
 Neste laboratório iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS). O sistema operacional a ser utilizado é o [FreeRtos (www.freertos.org)](http://freertos.org), um sistema operacional muito utilizado pela industria, sendo o segundo sistema operacional (**20%**) mais utilizado em projetos embarcados, perdendo só para o [Linux](https://m.eet.com/media/1246048/2017-embedded-market-study.pdf).
 
@@ -61,6 +60,11 @@ Iremos usar o código exemplo `RTOS-PIO-IRQ` para aprenderemos os principais rec
 Antes de seguir analise um pouco o código e tente entender o que está acontecendo, para isso consulte a página desse lab chamada de Teoria.
 
 !!! exercise "Praticando - semáforo"
+
+    | Projeto |
+    | ------| 
+    | `RTOS-PIO-IRQ`|   
+    
     A ideia aqui é possibilitar diminuirmos a frequência através de outro botão! Para 
     isso teremos que adicionar mais um semáforo que irá se comunicar com a `task_but`.
  
@@ -78,11 +82,20 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     1. Crie um novo semáforo e libere ele quando o botão novo for apertado.
     1. Na task but processe o semáforo aumentado o valor da frequência
     
+    Qualidade de Código:
+
+    - Lembre de verificar se os testes de qualidade de código estão passando (push para o repositório).
+
     Esperado:
     
     ![](https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/RTOS-PIO-IRQ/doc/diagrama.svg)
 
 !!! exercise
+
+    | Projeto |
+    | ------| 
+    | `RTOS-PIO-IRQ`|   
+    
     Agora vamos usar os outros dois botões da placa OLED, cada botão vai decrementar a frequência por uma constante diferente:
     
     - BTN1: 10
@@ -98,6 +111,10 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     Tarefa:
     
     1. Agora faca o mesmo para os outros dois botões da placa OLED que faltaram, cada um modificando a frequência com um valor diferente.
+    
+    Qualidade de Código:
+
+    - Lembre de verificar se os testes de qualidade de código estão passando.
 
     Esperado:
     
@@ -122,10 +139,12 @@ Outro exemplo que vamos usar como base é o `RTOS-AFEC-IRQ` que faz a leitura de
 Antes de seguir analise um pouco o código e tente entender o que está acontecendo, analise a task, as interrupções e também o uso da fila.
 
 !!! exercise "Praticando"
+    | Projeto |
+    | ------| 
+    | `RTOS-AFEC-IRQ`|    
+
     A ideia agora é criarmos uma task intermediária (`task_proc`) que irá fazer o processamento dos dados 
-    recebidos pelo ADC, conforme o diagrama atualizado a seguir:
-    
-    ![](imgs/diagrama2.svg)
+    recebidos pelo ADC.
     
     A `task_proc` deverá calcular a média móvel (N=10) dos dados do ADC e então enviar esses dados para para a task `task_adc` via uma nova fila, com o objetivo de ser exibido. A ideia da média móvel é aplicar um filtro passa baixas para remover ruídos do sinal.
     
@@ -139,9 +158,20 @@ Antes de seguir analise um pouco o código e tente entender o que está acontece
     1. Na task_adc exiba o dado via printf
     1. Agora na task proc calcule a média móvel e o envie para a task_adc.
 
+    Qualidade de Código:
+
+    - Lembre de verificar se os testes de qualidade de código estão passando.
+
+    Esperado:
+    
+    ![](imgs/diagrama2.svg)
+
 ### Conceito C
 
 Até aqui é C, você deve fechar as issues que foram abertas no seu repositório (não vamos usar mais o google forms!) referentes ao que foi feito.
+
+!!! info
+    Lembre de verificar se os testes de qualidade de código estão passando.
 
 ### Conceito B
 
@@ -158,6 +188,10 @@ Até aqui é C, você deve fechar as issues que foram abertas no seu repositóri
     1. Crie mais uma uma fila
     1. Cada callback deve colocar o valor referente ao ID do botão que foi apertado
     1. A `task_but` recebe o valor e repassa para a `task_led`
+
+    Qualidade de Código:
+
+    - Lembre de verificar se os testes de qualidade de código estão passando.
 
     Esperado:
     
@@ -185,3 +219,7 @@ Até aqui é C, você deve fechar as issues que foram abertas no seu repositóri
        - Você pode modificar o tipo da fila e enviar os dados usando uma única fila
     1. A `task_process` recebe o valor dos dois afecs e faz uma média com eles:
        - $valor = (AFEC1 + AFEC0)/2$
+
+    Qualidade de Código:
+
+    - Lembre de verificar se os testes de qualidade de código estão passando.

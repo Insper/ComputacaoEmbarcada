@@ -232,3 +232,18 @@ No nosso exemplo usamos a queue para comunicar a t`task_but` com a `task_led` pa
 ![Semáforo](imgs/queue.png)
 
 Uma fila pode ser de diversos tamanhos e largura, a ser definida na criacão! Isso permite o envio de mais de um dado por ela, como por exemplo um struct, ou um array.
+
+
+## Material externos
+
+Deixo aqui materiais externos a matéria para você que está curioso ou com dúvidas. Não precisa assistir agora antes de comećar o lab. 
+
+!!! tip "Embedded FM - episódio 175"
+    **How Hard Could It Be?**
+    
+    Jean Labrosse of Micrium (@Micrium) spoke with us about writing a real time operating system (uC/OS), building a business, and caring about code quality.
+    
+    - https://embedded.fm/episodes/175
+
+!!! video
+    ![Video](https://www.youtube.com/embed/F321087yYy4)
