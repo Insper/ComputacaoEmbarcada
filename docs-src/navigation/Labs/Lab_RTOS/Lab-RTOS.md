@@ -38,6 +38,9 @@ Nesta etapa iremos
 
 !!! exercise "OLED1"
     Plugue a placa OLED1 no EXT1, vamos usar seus botões e LEDs.
+	
+!!! info "Grave o Firmware"
+    Grave o firmware do exemplo "RTOS-PIO-IRQ" na placa.
 
 !!! exercise "Terminal" 
     Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no microchip estúdio clique em:
