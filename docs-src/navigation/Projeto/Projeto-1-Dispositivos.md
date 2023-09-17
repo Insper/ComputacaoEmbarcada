@@ -8,16 +8,16 @@ muitas outras opções.
 | Nome                        | Tipo           | Imagem                         | Detalhes                                                                                                           |
 |-----------------------------|----------------|--------------------------------|--------------------------------------------------------------------------------------------------------------------|
 | push buttons                | input          |                                | Várias opcões de tamanho e de cores                                                                                |
-| Teclado Matricial           | input               | ![teclado-matricial]           | https://www.filipeflop.com/blog/teclado-matricial-4x4-arduino/                                                     |
+| Teclado Matricial           | input          | ![teclado-matricial]           | https://www.filipeflop.com/blog/teclado-matricial-4x4-arduino/                                                     |
 | Joystick arcade             | input          | ![joystick-arcade]             | São quatro botões um em cada canto. https://www.filipeflop.com/produto/kit-fliperama-arcade-com-joystick-e-botoes/ |
 | reed switch                 | input          | ![reed-switch]                 | Sensor magnético                                                                                                   |
 | Rugged Metal Pushbutton     | input / output | ![rugged-metal-pushbutton]     | É um botão com LED, então conta como uma entrada e uma saída.  https://www.adafruit.com/product/560                |
 | Mini illuminated pushbutton | input / output | ![mini-illuminated-pushbutton] | Similar ao Rugged Metal. https://www.adafruit.com/product/3105                                                     |
-| LED                         | output         |                                | Leds de diferentes cores ou RGB                                                                                    |
+| LED                         | output         | ![LED]                         | Leds de diferentes cores ou RGB                                                                                    |
 | Fita de LED                 | output         | ![fita-led-neon]               | Fita de LED endereçável ou não                                                                                     |
-| Buzzer                      | output         |                                |                                                                                                                    |
+| Buzzer                      | output         | ![buzzer]                               |                                                                                                                    |
 | Vibracall                   | output         | ![vibracall]                   | Motor de vibração                                                                                                  |
-| Motores diversos            | output         |                                | Servo motor/ passo/ DC/ ..                                                                                         |
+| Motores diversos            | output         | ![motor]                       | Servo motor/ passo/ DC/ ..                                                                                         |
    
   [rugged-metal-pushbutton]: https://cdn-shop.adafruit.com/970x728/560-00.jpg
   [mini-illuminated-pushbutton]: https://cdn-shop.adafruit.com/970x728/3105-02.jpg
@@ -26,6 +26,9 @@ muitas outras opções.
   [fita-led-neon]: https://http2.mlstatic.com/D_NQ_NP_2X_843229-MLB49006608846_022022-F.webp
   [vibracall]: https://http2.mlstatic.com/D_NQ_NP_2X_681188-MLB45655111933_042021-F.webp
   [teclado-matricial]: https://www.filipeflop.com/wp-content/uploads/2014/07/Teclado_Matricial_Membrana.png
+  [LED]: https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Verschiedene_LEDs.jpg/1125px-Verschiedene_LEDs.jpg
+  [motor]: https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Nema_17_Stepper_Motor.jpg/330px-Nema_17_Stepper_Motor.jpg
+  [buzzer]: https://www.vidadesilicio.com.br/wp-content/uploads/63d2d4bd7cffce9e31bfba1ce961d4d9-jpg.webp
   
 ## Analógicos
 
@@ -38,8 +41,8 @@ muitas outras opções.
 | Strain Gauge              | input        | ![strain-gauge]         | Extensômetro                                                     |
 | Potenciometro Motorizado  | input/output |                         | Potenciômetro porém com motor (para fazer tipo mesa de som)      |
 
-  [joypad]: https://www.baudaeletronica.com.br/media/catalog/product/cache/1/image/578x/9df78eab33525d08d6e5fb8d27136e95/j/o/joystick_1.jpg
-  [potenciometro-linear]: https://www.baudaeletronica.com.br/media/catalog/product/cache/1/image/578x/9df78eab33525d08d6e5fb8d27136e95/3/9/3965_1.jpg
+  [joypad]: https://m.media-amazon.com/images/I/31aD2lguyFL._AC_UF1000,1000_QL80_.jpg
+  [potenciometro-linear]: https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Electronic-Component-Potentiometer.jpg/330px-Electronic-Component-Potentiometer.jpg
   [microphone]: https://http2.mlstatic.com/D_NQ_NP_2X_785126-MLB45191016046_032021-F.webp
   [myoware]: https://cdn.sparkfun.com//assets/parts/1/1/2/3/3/13723-MyoWare_Muscle_Sensor-02.jpg
   [strain-gauge]: https://cdn.awsli.com.br/600x700/78/78150/produto/16307142/3d0e1668ad.jpg
@@ -56,5 +59,4 @@ Alguns dispositivos que não são considerados "digitais" como `1` ou `0` e nem 
   [imu-6050]: https://d229kd5ey79jzj.cloudfront.net/974/images/974_3_H.png?20220304092715
   [flex]: https://cdn.sparkfun.com/r/500-500/assets/parts/1/2/8/6/2/14666-SparkFun_Qwiic_Flex_Glove_Controller-01.jpg
   
-  :w
   

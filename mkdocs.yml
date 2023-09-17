@@ -88,13 +88,13 @@ nav:
       - 'navigation/Labs/Lab_ADC_FIR/Lab-ADC-FIR.md'
       - 'navigation/Labs/Lab_RTOS_UART/Lab-RTOS-UART.md'
   - Projeto:
-      - "Descrição": "navigation/Projeto/Projeto-1-Descricao.md"
-      - navigation/Projeto/Projeto-1-Dispositivos.md
-      - navigation/Projeto/Projeto-1-Entrega1.md
-      - navigation/Projeto/Projeto-1-Entrega3.md
-      - navigation/Projeto/Projeto-1-Dicas.md
-      - navigation/Projeto/vjoy.md
-      - navigation/Projeto/Projeto-1-Lista.md
+      - Descrição: "navigation/Projeto/Projeto-1-Descricao.md"
+      - Dispositivos: navigation/Projeto/Projeto-1-Dispositivos.md
+      - Entrega 1: navigation/Projeto/Projeto-1-Entrega1.md
+      - Entrega 2: navigation/Projeto/Projeto-1-Entrega3.md
+      - Dicas: navigation/Projeto/Projeto-1-Dicas.md
+      - Vjoy: navigation/Projeto/vjoy.md
+      - Anteriores: navigation/Projeto/Projeto-1-Lista.md
   - APS:
       - "APS 1 - Musical":
           - Descritivo: "navigation/APS/APS-1-Musical.md"
@@ -171,3 +171,9 @@ extra:
     aps1_deadline: 09/09/2023
     aps1_classroom: https://classroom.github.com/a/VFRkr4Ac
     aps1_forms: https://docs.google.com/forms/d/e/1FAIpQLSds7AUasDkBcZ3ykMfivzMwWqzPFscJXPiZcZ0B_0FBElYNHw/viewform?usp=sf_link
+
+    proj_idealizacao_deadline: 29/09/2023
+    proj_deadline: TBD
+    proj_mural: https://app.mural.co/t/elementos9119/m/elementos9119/1694982355553/181c6f198f54bc2884c19440965d09789dd6478e?sender=ub569a9273c6e285461187641
+    proj_classroom: TBD
+    proj_forms: TBD

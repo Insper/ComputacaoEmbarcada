@@ -2,8 +2,8 @@
 
 | Entregas               | Data |
 |------------------------|------|
-| Entrega 1: Idealização | 17/9 |
-| Entrega 2: Protótipo   | 8/10  |
+| Entrega 1: Idealização | {{proj_idealizacao_deadline}} |
+| Entrega 2: Protótipo   | {{proj_deadline}}  |
 
 !!! video
     ![](https://www.youtube.com/watch?v=Y8Mk-5F9A5M)
@@ -23,8 +23,7 @@
     - A APS pode ser realizada em dupla.
     - **Você não pode repetir a mesma dupla da APS1.**
     - O desenvolvimento do projeto deve ser feito no repositório criado
-    pelo classroom:
-        -https://classroom.github.com/a/ouItgqe6
+    pelo [classroom]({{proj_classroom}})
     - Leia atentamente como trabalhar no repositório:
          - [APS HowTo](https://insper.github.io/ComputacaoEmbarcada/navigation/APS/APS-howto/)
 
@@ -78,4 +77,4 @@ Cada entrega terá um peso diferente na composição final da nota:
 
 Vamos começar pensando um pouco no controle! Para isso, faça em dupla a atividade no mural, essa etapa já vai ajudar na entrega (1):
 
-https://app.mural.co/t/elementos9119/m/elementos9119/1662992049747/bf8d978481f9680d806e1a4f21f776a6bb6e57d6?sender=ub569a9273c6e285461187641
+- [MURAL Idealização]({{proj_mural}})

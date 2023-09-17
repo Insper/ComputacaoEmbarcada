@@ -1,12 +1,9 @@
-# Entrega 2
+# Entrega 2 - Protótipo
 
-!!! tip
-    Ao terminar preencha o forms a seguir:
-    
-    - https://forms.gle/XqF71gagQS1ttAe4A
-    
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeZ-opsFcJZjKz-npQqCUQflKuNx-AHI8YX2e69MoLoEA2MEw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-    
+| data entrega                                     |
+|--------------------------------------------------|
+| {{proj_deadline}}                                |
+| ^^Um por grupo^^: [Google forms]({{proj_forms}}) |
 
 A rubrica a seguir será aplicada para gerar a nota final:
 

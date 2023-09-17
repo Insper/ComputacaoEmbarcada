@@ -1,11 +1,13 @@
-# Entrega 1
+# Entrega 1 - Idealização
 
-| data entrega |
-|--------------|
-| 17/9         |
+| data entrega                        |
+|-------------------------------------|
+| {{proj_idealizacao_deadline}}       |
+| [MURAL Idealização]({{proj_mural}}) |
 
-  * [ ] Essa entrega representa 10% da nota final do projeto. Se entregar atrasado, nota fica em 5%.
-
+!!! info ""
+    - Essa entrega representa 10% da nota final do projeto. Se entregar atrasado, nota fica em 5%.
+    
 Pontos de cada item:
 
 | Item               | Pontos |
@@ -15,7 +17,7 @@ Pontos de cada item:
 | In/ Out            | 3 pts  |
 | Design             | 2 pts  |
 
-Nessa etapa vocês devem entregar o README do projeto com uma descrição detalhada da ideia do projeto de vocês. Não façam de qualquer jeito, queremos capricho e um pouco de dedicação.
+Nessa etapa vocês devem entregar o README do projeto com uma descrição detalhada da ideia do projeto de vocês. Não façam de qualquer jeito, queremos capricho e um pouco de dedicação. 
 
 A ideia aqui é vocês pensarem no software que vão controlar e o como um controle poderia funcionar com ele. Acontece que normalmente os softwares não foram pensados para serem utilizadas com um controle remoto, ou fora da interface de um computador/ celular. Vocês terão que fazer a adequação.
 
