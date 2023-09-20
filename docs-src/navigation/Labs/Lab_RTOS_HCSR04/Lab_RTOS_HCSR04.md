@@ -114,13 +114,31 @@ A entrega do Lab deve ser um sistema que possui um HC-SR04 e faz periodicamente 
 
 ### Extras:
 
-> Cada item vale como um conceito a mais.
+> Cada item vale como um conceito a mais, você pode escolher qual fazer... Se fizer apenas um recebe B e se fizer os dois fica com A.
 
-- Mostre um gráfico da distância no tempo!.
-- Ler dois sensores em paralelo (exibe dois pontos no gráfico)
+#### Extra 1 
 
-<!-- !!! info "Ao terminar o lab preencha:"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe83MJuGEAFSF113AfeHpgYZjt1-eBFrBBOQ_DNW6MPdWn9oA/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
+Não seria legar exibir no OLED um gráfico que mostra a distância do objeto? Podemos fazer gráficos de várias formas diferentes, aqui vai algumas ideias:
+
+- Um gráfico no tempo da distância, use a função do OLED que exibe 
+- Um gráfico que é uma barra e ela varia conforme a distância:
+
+```
+-------------->
+```
+
+- Use a criatividade...
+
+#### Extra 2
+
+Vamos agora criar um sistema de emergência que aciona um alarme se o valor da distância passar de 2m.
+
+Para isso iremos criar uma nova `task_alarm` que deve ser acionada por um semáforo e ela irá reproduzir um som (tenebroso) enquanto o valor da disância tiver maior que 2m. 
+
+1. `task_oled` Libera semáforo para a `task_alarm` soar o alarme, quando a distância for maior que 2m.
+
+Agora pense em como fazer para a `task_oled` desligar o alame se a distância dimininuir de 2m.
+
 
 ### Dicas
 
