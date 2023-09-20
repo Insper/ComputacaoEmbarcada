@@ -90,9 +90,6 @@ Para fazermos a leitura correta do sensor, será necessário conseguirmos contar
     - Leia o REAME do código exemplo: [SAME70-examples/Perifericos-uC/RTC-IRQ/](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTC-IRQ)
     - Abra o código no microchip studio, análise e rode o código na placa.
 
-## Lab
-
-Comecem copiando o exemplo do OLED-RTOS para o seu repositório e renomeiem para: `Lab5-HC-SR04`, ou se preferir, podem usar um dos labs passados que possui OLED-RTOS e já tem os botões configurados, só lembrem de fazer uma cópia e renomear.
 
 ### Montagem
 
