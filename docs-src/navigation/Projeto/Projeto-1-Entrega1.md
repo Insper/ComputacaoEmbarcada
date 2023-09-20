@@ -4,9 +4,12 @@
 |-------------------------------------|
 | {{proj_idealizacao_deadline}}       |
 | [MURAL Idealização]({{proj_mural}}) |
+| [Classroom]({{proj_classroom}})
 
 !!! info ""
     - Essa entrega representa 10% da nota final do projeto. Se entregar atrasado, nota fica em 5%.
+    
+    Preencher o README criado no classroom
     
 Pontos de cada item:
 

@@ -3,12 +3,16 @@
 | data entrega                                     |
 |--------------------------------------------------|
 | {{proj_deadline}}                                |
+| [Classroom]({{proj_classroom}})                  |
 | ^^Um por grupo^^: [Google forms]({{proj_forms}}) |
 
-A rubrica a seguir será aplicada para gerar a nota final:
+!!! tip 
+    Para começar siga as isseus do seu repositório!
 
 !!! info
     Para atingir conceito maior que C sera necessário fechar as issues criadas após a entrega (qualidade de código)
+
+A rubrica a seguir será aplicada para gerar a nota final:
 
 - A+
     - Testa controle com pessoa externa ao projeto (filma interação)
@@ -24,7 +28,7 @@ A rubrica a seguir será aplicada para gerar a nota final:
     - Cria uma task dedicada para receber e processar dados da comunicação (computador --> uC).
     
 !!! info
-    A ideia aqui é que o PC se comunique com o uC, para isso vocês podem usar a funcão `self.ser.write()` que irá enviar um **char** para o bluetooth e por consequência para o uC. No uC você pode ler esse dado usando: `char status = usart_read(USART_COM, &readChar);` Se `status` for `1` isso indica que um dado válido foi salvo em `readChar`.
+    A ideia aqui é que o PC se comunique com o uC, para isso vocês podem usar a função `self.ser.write()` que irá enviar um **char** para o bluetooth e por consequência para o uC. No uC você pode ler esse dado usando: `char status = usart_read(USART_COM, &readChar);` Se `status` for `1` isso indica que um dado válido foi salvo em `readChar`.
         
     Nessa comunicação vocês podem mandar qualquer coisa, já teve um grupo que enviou o nome da música do spotify que estava sendo tocada e exibiu a música no OELD. Não precisa ser algo tão complexo, podem enviar apenas um housekeeping da comunicação ou um ACK do recebimento do comando.
     
