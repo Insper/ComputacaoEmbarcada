@@ -1,5 +1,7 @@
 #  LAB - RTOS - ADC
 
+
+
 Neste laboratório iremos trabalhar com conversão analógica digital, vamos aprender como usar um recurso do rtos chamado de fila.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EnfjYwe2A0w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
