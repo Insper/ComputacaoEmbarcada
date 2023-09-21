@@ -5,10 +5,10 @@ Regras de desenvolvimento de firmware para entregas de laboratórios, APS, proje
 ## Linguagem C
 
 !!! warning ""
+	```
     _"With great power comes great responsibility"_
-
-Ben, Uncle.
-
+										Ben, Uncle.
+	```
 
 
 - Usar variáveis globais apenas quando estritamente necessárias, como `"regra de ouro"`, só é necessário aquelas que são modificadas de dentro de uma interrupção. Pois as variáveis globais podem ser alteradas em qualquer lugar do código, tornando-o menos previsível.
