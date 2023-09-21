@@ -50,6 +50,7 @@ nav:
   - SAME70-Examples: "https://github.com/Insper/SAME70-examples"
   - Vídeos: "navigation/Videos/Util-Videos.md"
   - Util:
+      - Notas: navigation/Util/Util-Notas.md
       - Ferramental: navigation/Util/Sobre-Ferramental.md
       - Bring up: navigation/Util/Util-Startup.md
       - Erros comum: navigation/Util/Util-Erros.md
