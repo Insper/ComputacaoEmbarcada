@@ -1,18 +1,19 @@
 # LAB - RTOS - IMU
 
 
-| **Pastas:** `/Lab6-RTOS-IMU` |
-| :---: |
-| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab06_deadline}}` |
+| Lab 6                                                                      |
+|----------------------------------------------------------------------------|
+| **Data limite para entrega**: =={{lab06_deadline}}==                       |
+| Entregue o código pelo repositório do ==[Classroom]({{lab06_classroom}})== |
+| - Fechar issues pertinentes ao conceito atingido na entrega                  |
 
 Neste laboratório iremos realizar uma comunicação I2C com um sensor inercial, e aplicar um processamento de fusão de dados para obtermos a localização no espaço do sensor.
-
 
 ## Teoria
 
 ![](i2c.png)
 
-I2C (*eye-squared-C*) é um protocolo de comunicação do tipo Machine-to-machine muito utilizado para comunicação entre microcontrolador e um dispositivo (sensor ou atuador) externo, criado pela Philips Semiconductor em **1982** e liberado para uso sem licença em **2006**. O i2c é uma comunicação síncrona e utiliza duas vias: **serial data line** (SDA) e **serial clock line** (SCL), a comunicação é sempre inicializada pelo Controlador (o microcontrolador) e respondida pelo Target (componente).
+I2C (*eye-squared-C*) é um protocolo de comunicação do tipo machine-to-machine (m2m) muito utilizado para comunicação entre microcontrolador e um dispositivo (sensor ou atuador) externo, criado pela Philips Semiconductor em **1982** e liberado para uso sem licença em **2006**. O i2c é uma comunicação síncrona e utiliza duas vias: **serial data line** (SDA) e **serial clock line** (SCL), a comunicação é sempre inicializada pelo Controlador (o microcontrolador) e respondida pelo Target (componente).
 
 A imagem a seguir é um exemplo de como utilizar o i2c para conectar múltiplos dispositivos em um controlador:
 
@@ -20,6 +21,8 @@ A imagem a seguir é um exemplo de como utilizar o i2c para conectar múltiplos 
 
 !!! tip
     Cuidado, usaremos o termo periférico não só para referenciar os componentes do microcontrolador, da placa, mas agora também novos componentes plugados no kit.
+    
+    - i2c é diferenre de SPI (outro protocolo muito popular)!
  
 Existem no mercado vários sensores que possuem comunicação i2c, no lab temos vários:
 
@@ -523,22 +526,23 @@ Agora com tudo configurado podemos fazer a leitura do sensor (acelerômetro e im
         - da para entender alguma coisa?
     1. Incline a placa, o valor do acc muda?
         
-### Trabalhando com os dados - Parte 1
-
-Legal, teoricamente agora temos tudo pronto e funcionado. Mas como usar esses dados para fazer alguma coisa útil? Conseguimos estimar a orientação da placa no espaço? Para isso existem algorítimos de processamento de sinais, isso foi uma área muito fértil em meados de 2010, quando este tipo de sensor se popularizou, e agora tem ganhado mais estudos sendo utilizado com redes neurais.
+### Entrega parte 1
 
 !!! exercise
-    ==Detectando queda==
+    ==Detectando batida==
     
     - Crie uma tarefa `task_house_down` que possui um semáforo, e que quando liberado a task pisca o led da placa
-    - Utilizando os dados do acelerômetro, libere o semáforo quando uma queda for detectada. 
+    - Utilizando os dados do acelerômetro, libere o semáforo quando uma batidada for detectada. 
     
     Dica: 
     
-    - A IMU sempre mede o valor da gravidade, em uma queda esse valor deve se aproximar de zero (queda anula a gravidade)
-    - Você pode calcular o módulo de todos os eixos e verificar a condição.
+    - Você pode calcular o módulo $\srqt{x,y,z}$ de todos os eixos e verificar a condição, só saiba que o acelerometro mede a gravidade, então vocês sempre vão possuir um resultado próximo de 9.0 quando a IMU estiver parada.
     
-#### Fusão de dados
+    ![](diagram-1.svg)
+    
+### Fusão de dados
+
+Legal, teoricamente agora temos tudo pronto e funcionado. Mas como usar esses dados para fazer alguma coisa útil? Conseguimos estimar a orientação da placa no espaço? Para isso existem algorítimos de processamento de sinais, isso foi uma área muito fértil em meados de 2010, quando este tipo de sensor se popularizou, e agora tem ganhado mais estudos sendo utilizado com redes neurais.
     
 Agora vamos fazer algo mais valioso, que inclui realizarmos uma fusão de dados e obter a orientação no espaço 3D do acelerômetro, para isso iremos utilizar uma biblioteca em C desenvolvida pela https://x-io.co.uk/ chamada de **FUSION**:
 
@@ -608,24 +612,39 @@ Agora que já temos a biblioteca no nosso projeto, temos que preparar o dados pa
     1. Execute o código
     1. Abra o terminal e analise o resultado
 
-
 ### Trabalhando com os dados - parte 2
-
 
 Vamos detectar para onde o sistema está apontando, a ideia é acender os LEDs da placa OLED da seguinte maneira:
     
-- LED1: Apontando para esquerda
-- LED2: Apontando para frente
-- LED3: Apontando para direita
-
 !!! exercise
+    Usando os LEDs da placa oled, o sistema deve:
+    
+    - LED1: Apontando para esquerda
+    - LED2: Apontando para frente
+    - LED3: Apontando para direita
+ 
+    Para isso:
  
     1. Crie um `enum` chamado `orientacao` com os seguintes itens: `ESQUERDA, FRENTE, DIREITA`
-    1. Crie uma task (`task_orientacao`) que possui uma fila e que recebe um dado do tipo `orientacao` e que dependendo do valor recebido, acende o LED conforme descrição anterior.
+    printf("Roll %0.1f, Pitch %0.1f, Yaw %0.1f\n", euler.angle.roll, euler.angle.pitch, 
+    1. Crie uma task (`task_orientacao`) que possui uma fila e que recebe os dados  `euler.angle.yaw`. 
+       - Lembre de enivar os dados que foram calculados na `task_imu`.
+    1. Usando o dado calcule a `orientacao` acende o LED conforme descrição anterior.
     1. Na task da IMU, detecta a orientação e envie o dado para a fila.
     
     ==A referência da orientação é a posição de quando a placa liga!==
     
+    ![](diagram-2.svg)
     
-<!-- !!! info "Ao terminar o lab preencha:"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSemQvTQe82m7Q_OaVXsFqho65YHM70K7EwL4xZfUAwASJXagA/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
+!!! info
+    Até aqui é C
+
+### B - IRQ
+
+!!! warning
+    TBD
+    
+### A - RTT
+
+!!! warning
+    TBD
