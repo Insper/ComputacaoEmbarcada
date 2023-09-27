@@ -152,11 +152,6 @@ Para termos acesso ao `MPU6050` iremos usar um módulo GY-521, no Brasil é poss
 
 Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, podemos começar o lab.
 
-!!! info
-    Usar como base o código do OLED com RTOS
-    
-    - Fazer uma cópia do RTOS-OLED para Lab6-RTOS-imu
-
 !!! tip "Manual"
     Consultar o manual:
     
