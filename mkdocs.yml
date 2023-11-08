@@ -77,9 +77,9 @@ nav:
       - "Lab 5 - RTOS HC-SR04": "navigation/Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04.md"
       - "Lab 6 - RTOS IMU": "navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU.md"
       - "Lab 7 - RTOS - LCD - LVGL":
-          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md"
-          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md"
-          - "navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md"
+          - "Entendendo": navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START.md"
+          - "Parte 1": navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB.md"
+          - "Parte 2": navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2.md"
       - "Lab 8 - TC - RTC - RTT": "navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT.md"
       - "Lab 9 - RTOS - Mutex": navigation/Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX.md
       - "Lab 10 - WIFI": "navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI.md"
@@ -152,15 +152,15 @@ extra:
     lab06_classroom: https://classroom.github.com/a/SZy1p43k
     lab06_forms: https://docs.google.com/forms/d/e/1FAIpQLSfP17TGajFhBJKYbc1evZQb3IWQCRP2k33caTekqjqNdJThCg/viewform?usp=sf_link
     
-    lab07_deadline: 30/10/2023
-    lab07_classroom: TBD
+    lab07_deadline: 16/11/2023
+    lab07_classroom: https://classroom.github.com/a/Rl7NKjIh
     lab07_forms: https://docs.google.com/forms/d/e/1FAIpQLSdaItc1IebfgUT0CikaDpcl88EmF9WpkJmYE4ZTr63R7Vbzzw/viewform?usp=sf_link
     
     lab08_deadline: 13/11/2023
     lab08_classroom: TBD
     lab08_forms: https://docs.google.com/forms/d/e/1FAIpQLScx-alJICVPLDiV9tf_gAUZCRmYkU5XC5L0kH5MUq3jnFMGAQ/viewform?usp=sf_link
     
-    lab09_deadline: 13/11/2023
+    lab09_deadline: 16/11/2023
     lab09_classroom: TBD
     lab09_forms: https://docs.google.com/forms/d/e/1FAIpQLSfOJ6DV4S0LzTYYHppSZgqKTulsjRJZYK7cGtg2YBefDcWbig/viewform?usp=sf_link
     

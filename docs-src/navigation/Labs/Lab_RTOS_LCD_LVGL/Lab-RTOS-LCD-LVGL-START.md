@@ -1,13 +1,12 @@
 # Começando
 
+| Lab 7                                                                      |
+|----------------------------------------------------------------------------|
+| **Data limite para entrega**: =={{lab07_deadline}}==                       |
+| Entregue o código pelo repositório do ==[Classroom]({{lab07_classroom}})== |
+| - Fechar issues pertinentes ao conceito atingido na entrega                  |
+
 Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciar o LCD max Touch.
-
-!!! warning
-    ==Atualizem o repositório SAME70-Examples antes de continuar==
-
-| **Pastas:** `/Lab7-RTOS-LCD-LVGL`                                    |
-|------------------------------------------------|
-| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab07_deadline}}`|
 
 Neste laboratório iremos:
 
@@ -21,12 +20,11 @@ Antes de começarmos será necessário realizarmos a conexão do LCD no kit e en
 !!! exercise "Conectando LCD"
     Primeiro faça as ligações como indicado no README a seguir:
     
-    1. Plugue o LCD max Touch no ==EXT2== seguindo as instruções em: [SAME70-examples/Screens/2.8-TFT-LCD-ILI9341-Hardware/](https://github.com/Insper/SAME70-examples/tree/master/Screens/2.8-TFT-LCD-ILI9341-Hardware#conex%C3%B5es-com-o-adaptador-tft-lcd---xplained-v0)
+    Plugue o LCD max Touch no ==EXT2==:   
+    ![](https://github.com/Insper/SAME70-examples/raw/master/Screens/2.8-TFT-LCD-ILI9341-Hardware/TFF_LCD_Conexoes.svg)
     
-    Depois valide: 
- 
-    1. Copie o código exemplo [SAME70-examples/Screens/RTOS-TFT-LCD-ILI9341-LVGL/](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-TFT-LCD-ILI9341-LVGL) para a pasta da entrega do seu repositório: `Lab7-RTOS-LCD-LVGL`
-    1. Execute o código, você deve visualizar dois botões e eles devem ser interativos.
+!!! exercise
+    Execute o código, você deve visualizar dois botões e eles devem ser interativos.
 
 !!! note "Terminal"
     O segundo exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:
@@ -34,9 +32,6 @@ Antes de começarmos será necessário realizarmos a conexão do LCD no kit e en
     :arrow_right: View :arrow_right: Terminal Window
     
     Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de 115200.
-
-!!! progress
-    Execute os exemplos antes de continuar!
 
 ## LCD
 
