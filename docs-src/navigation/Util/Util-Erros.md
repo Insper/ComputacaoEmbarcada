@@ -130,3 +130,11 @@ Caso o driver EDGB (gravador) não tenha sido reconhecido (imagem abaixo) será 
 
 ![7_2](imgs/same70-xpld_erros/7_2.png)
 
+
+## Windows não encontra módulo bluetooth
+
+Tente a solução a seguir, também disponível [nesse link](https://support.microsoft.com/pt-br/windows/corrigir-problemas-de-bluetooth-no-windows-723e092f-03fa-858b-5c80-131ec3fba75c):
+
+![bluetooth](imgs/same70-xpld_erros/bluetoothSolucao.png)
+
+

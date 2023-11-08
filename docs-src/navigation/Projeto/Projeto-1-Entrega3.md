@@ -1,10 +1,10 @@
 # Entrega 2 - Protótipo
 
-| data entrega                                     |
-|--------------------------------------------------|
-| {{proj_deadline}}                                |
-| [Classroom]({{proj_classroom}})                  |
-| ^^Um por grupo^^: [Google forms]({{proj_forms}}) |
+| Projeto 1 - Entrega (Protótipo)                                                     |
+|------------------------------------------------------------|
+| **Data limite para entrega**: =={{proj_entrega2_prototipo_deadline}}==       |
+| Usar o repositório do ==[Classroom]({{proj_entrega2_prototipo_classroom}})== |
+| Preencher o ==[forms]({{proj_entrega2_forms}})==                   |
 
 !!! tip 
     Para começar siga as isseus do seu repositório!
