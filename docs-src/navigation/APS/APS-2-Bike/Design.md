@@ -1,15 +1,19 @@
 # Entrega 1: Design
 
-| Entrega            | Data |
-|--------------------|------|
-| Design interface   | 7/11 |
-| 15 % da nota final |      |
+| Entrega            | Data  |
+|--------------------|-------|
+| Design interface   | {{aps2_deadline_design}} |
+| 15 % da nota final |       |
 
 !!! info  
-    Criar o repositório pelo [classroom](https://classroom.github.com/a/sbdsdvhv):
+    A entrega dessa etapa deve ser realizada no README do repositório criado pelo classroom:
     
-    A entrega dessa etapa deve ser realizada no README do repositório.
+    - {{aps2_classroom}}
     
+    Prototipar no Mural antes:
+    
+    - {{aps2_mural}}
+
 A equipe de novos produtos disponibilizou alguns requisitos do protótipo e vocês devem propor uma interface que satisfaca as necessidades do projeto.
 
 ## Requisitos
@@ -75,10 +79,6 @@ O ciclocomputador pode ser usado em diferentes tamanhos de bicicleta e o usuári
     Deve possibilitar o usuário configurar o diâmetro da roda.
 
 ## Entrega
-
-!!! exercise
-    A entrega deve ser no README do repositório criado, mas para ajudar vocês na idealização vocês devem usar o mural a seguir: 
-     - https://app.mural.co/t/elementos9119/m/elementos9119/1667235687917/3f8bd861be517222390240d3b949be1fcf0a9fb7?sender=ub569a9273c6e285461187641
 
 Nessa etapa de design vocês devem apresentar uma versão inicial da interface que deve satisfazer os requisitos listados anteriormente. Na interface será necessário indicar qual widget do LVGL pretendem utilizar. Lembrem de consultar sempre a página do LVGL para saber o que está disponível:
 

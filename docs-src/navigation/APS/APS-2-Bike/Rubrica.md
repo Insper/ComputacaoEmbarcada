@@ -3,7 +3,6 @@
 !!! warning "Conceito > C"
     Para conceito maior que C deve-se corrigir os **issues** que serão abertos após a entrega no repositório do grupo.
    
-   
 ## Design
 
 Rubrica referente ao design da interface.
@@ -28,12 +27,3 @@ Rubrica referente ao design da interface.
 
 - Grava um vídeo explicando a interface
     - **Todos do grupo devem aparecer no vídeo (pode ser em call)**
-
-## Firmware
-
-### A
-
-### B
-
-### C
-

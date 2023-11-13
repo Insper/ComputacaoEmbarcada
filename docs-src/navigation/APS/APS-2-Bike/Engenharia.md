@@ -5,8 +5,8 @@ Além do design com o usuário, você deve ter os seguintes cuidados com a engen
 !!! info     
     Entregar pelo forms:
     
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdlUVBNecc2zOBrhPzEFDWpxLH2xGw3lBdgqmRHOLR7HRN_hQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-
+    - {{aps2_forms}}
+    
 ## Sobre a bicicleta
 
 Iremos validar o projeto em uma bicicleta modelo [Tilt 100](https://www.americanas.com.br/produto/3087029593?epar=bp_pl_00_go_pla_teste_b2wads&opn=YSMESP&WT.srch=1&aid=6185afd7fe31a700171587e7&sid=2314041002202&pid=3087029593&chave=vnzpla_6185afd7fe31a700171587e7_2314041002202_3087029593&gclid=Cj0KCQiAkNiMBhCxARIsAIDDKNVfVowdYU_P6cwRM0FcRJMaNN_S35yhc55RV4zygtigrtenWDL29aMaAlnwEALw_wcB&tamanho=Unico&cor=Vermelha) que compramos para essa finalidade. Na bicicleta nós plugamos uma placa e um LCD, e também colocamos um sensor magnético na roda junto com um Imã (para detectar rotacão).
