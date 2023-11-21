@@ -214,18 +214,18 @@ Agora implemente a ação do botão down.
 
 ### relógio 
 
-Temos um relógio na interface, vamos fazer ele funcionar? Para isso terão que incluir o RTC no projeto e fazer uso dele.
+Temos um relógio na interface, vamos fazer ele funcionar? Para isso terão que incluir o RTT no projeto e fazer uso dele.
 
 !!! exercise "Tarefa"
-    Inclua o RTC no projeto e faça o relógio funcionar!
+    Inclua o RTT no projeto e faça o relógio funcionar!
     
-    O relǵio deve exibir HH:MM, o **:** deve piscar uma vez por segundo.
+    O relǵio deve exibir HH:MM, o caractere **:** deve piscar uma vez por segundo.
     
     Dicas:
     
-    1. Incluir RTC
-    1. Criar task dedicada para atualizar o RTC
-    1. Inicializar RTC na task
+    1. Incluir RTT
+    1. Criar task dedicada para atualizar o RTT
+    1. Inicializar RTT (com frequência de 1Hz) na task
     1. Task fica esperando semáforo do tick de segundos e atualiza o label do relógio.
 
 !!! progress
@@ -242,7 +242,4 @@ Temos muito o que fazer na interface, vou sugerir algumas coisas que irão dar n
 - [ ] Gerar um logo para o relógio e usar no lugar do de `settings`
 - [ ] Implementar o botão de `Power` que desliga a tela
 - [ ] Colocar um potenciômetro que altera o valor da temperatura atual.
-
-<!-- !!! note "Preencher ao finalizar o lab"
-   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfB9u2g8koXaYcQWhOqlkNTKPDppRGJq9p30ZYMQp0sd-OuUw/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
 
