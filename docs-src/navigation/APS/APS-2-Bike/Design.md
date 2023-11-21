@@ -1,9 +1,9 @@
 # Entrega 1: Design
 
-| Entrega            | Data  |
-|--------------------|-------|
-| Design interface   | {{aps2_deadline_design}} |
-| 15 % da nota final |       |
+| Entrega                         | Data                     |
+|---------------------------------|--------------------------|
+| [Classroom]({{aps2_classroom}}) | {{aps2_deadline_design}} |
+| 15 % da nota final              |                          |
 
 !!! info  
     A entrega dessa etapa deve ser realizada no README do repositório criado pelo classroom:
