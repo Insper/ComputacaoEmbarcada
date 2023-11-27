@@ -234,7 +234,7 @@ Use o código fornecido no repositório: `RTOS-OLED-Xplained-Pro`.
 
 ### Conceito C
 
-Com o código do OLED1 copiado, vocês devem configurar os botões e os LEDs da placa OLED e então utilizando os periféricos fazer:
+No código do `RTOS-OLED`, vocês devem configurar os botões e os LEDs da placa OLED e então utilizando os periféricos fazer:
 
 - Que o `LED1` pisque na frequência de 4Hz, para isso utilize o **TC**;
 - Fazer com que o `LED2` pisque a uma frequência de 0.25Hz, para isso utilize o **RTT**;
