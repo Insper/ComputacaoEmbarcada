@@ -1,22 +1,23 @@
-# LAB - TC - RTC - RTT  
+# Lab 8 - TC - RTC - RTT  
 
 Neste laboratório iremos trabalhar com os periféricos de contagem de tempo
 do nosso microcontrolador.
 
-| **Pastas:** `/Lab8-RTOS-TC-RTC-RTT`                                                 |
-|------------------------------------------------------|
-| **Data <span style="color:red">LIMITE</span> para entrega:** `{{lab08_deadline}}`|
+| Lab 5                                                                              |
+|------------------------------------------------------------------------------------|
+| **Data limite para entrega**: =={{lab08_deadline}}==                               |
+| Entregue o código pelo repositório do ==[Classroom]({{lab08_classroom}})== |
+| Preencha para entregar ==[Google forms]({{lab08_forms}})== |
 
 Os periféricos apresentados neste laboratório são:
 
 - Real Time Clock - RTC
 - Timer Counter - TC
-- Real Time Timer - RTT
 
 O laboratório é formado por duas partes:
 
 - Parte 1 (mínimo): 
-    1. Entender os exemplos (TC/RTT/RTC)
+    1. Entender os exemplos (TC/RTC)
     1. Incorporar todos os exemplos em um único projeto
     1. Pisca pisca 
     
@@ -26,9 +27,6 @@ O laboratório é formado por duas partes:
     - **A** : Usar IRQ do segundos do RTC
 
 ## Exemplos
-
-!!! warning "SAME70-examples"
-    Antes de continuar atualize o repositório de exemplos ele foi atualizado logo antes do lab!
 
 Nesse lab iremos trabalhar com três periféricos que lidam com "tempo": o TimerCounter (TC) que temos no total de quatro unidades TC (TC0 ~ TC3) e cada um com três contadores; o Real-time Timer (RTT) que só temos um e o Real-time Clock (RTC) que também só temos um e funciona como um relógio/calendário. 
 
@@ -43,13 +41,12 @@ Nós fornecemos para cada periférico um exemplo diferente:
 | Periférico exemplos                                                                                   |
 | ----------             ----                                                                           |
 | [`Perifericos/TC-IRQ `](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/TC-IRQ)  |
-| [`Perifericos/RTT-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTT-IRQ) |
 | [`Perifericos/RTC-IRQ`](https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTC-IRQ) |
 
 Cada exemplo possui o seu próprio `README` que explica de forma ampla os periféricos. Note que todos esses exemplos estão operando por interrupção! Onde cada periférico possui o seu `handler` para resolver a interrupção.
 
 !!! exercise self 
-    Para cada exemplo (TC, RTT e RTC):
+    Para cada exemplo (TC, RTC):
     
     1. Leia o README
     1. Programe a placa (e veja os LEDs piscando!)
@@ -230,10 +227,10 @@ Cada exemplo possui o seu próprio `README` que explica de forma ampla os perif�
 
 ## Lab
 
-O lab faz uso da placa `OLED1` e de um código exemplo. Para começar você deve copiar o código exemplo: [`SAME70-examples/Screens/RTOS-OLED-Xplained-Pro-SPI/`](https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-OLED-Xplained-Pro-SPI) para a pasta da entrega do seu repositório `Lab7-TC-RTC-RTT`.
-
 !!! info
     Lembre de sempre utilizar fila ou semáforo para comunicar **IRQ** e **TASK**
+
+Use o código fornecido no repositório: `RTOS-OLED-Xplained-Pro`. 
 
 ### Conceito C
 
@@ -242,8 +239,6 @@ Com o código do OLED1 copiado, vocês devem configurar os botões e os LEDs da 
 - Que o `LED1` pisque na frequência de 4Hz, para isso utilize o **TC**;
 - Fazer com que o `LED2` pisque a uma frequência de 0.25Hz, para isso utilize o **RTT**;
 - Piscar o `LED3` depois de 20 segundos do botão 1 da placa OLED ter sido pressionado, para isso utilize o alarme do RTC.
-
-Lembre de fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
 
 !!! tip
     Abrir o código atual e o exemplo e ir trazendo as funções e defines que precisa usar, não esqueça de chamar as funções no `main`.
@@ -303,9 +298,7 @@ Lembre de fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     ```
 
 !!! warning
-    Você nunca deve atualizar display dentro de interrupção (**handler**)! Sempre no main.
-
-
+    Você nunca deve atualizar display dentro de interrupção (**handler**)! Sempre na task!.
 
 ### Conceito B: Melhorando
 
@@ -313,7 +306,6 @@ Lembre de fazer o uC entrar em sleepmode sempre que não tiver nada para fazer.
     Quando o botão 1 da placa OLED for pressionado, após 20 segundos, faça o LED 3 piscar com um novo TC, **substituindo essa função que antes era do RTC**.
 
 ### Conceito A: 
-    TODO: talvez: ajustar alarme via botoes?
-
-<!-- !!! info "Ao terminar o lab preencha:"
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfLNBnwsHY6NGCnJqAfeoEgDq5n5ZySeu0x9NUeSQWiQV43xQ/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
+    
+!!! exercise
+    Usando os botões do OLED, permita ajustar a hora e o minuto!
