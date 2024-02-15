@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab RTOS LCD - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="rtos-lcd">RTOS - LCD</h1>
+<p>Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciar o LCD max Touch, o forte desse lab será a linguagem C e como estruturar um firmware.</p>
+<div class="admonition note">
+<p class="admonition-title">Preencher ao finalizar o lab</p>
+<p><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfZNzzwcY__zmi7JeQV8hfEYT_Y1WaYgVp9tHCH0KUQW8aCdQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe></p>
+</div>
+<h2 id="lab">LAB</h2>
+<table>
+<thead>
+<tr>
+<th>LAB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Labs/RTOS-LCD-maxTouch-Switch</code></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Executar demo do LCD com RTOS</li>
+<li>Trabalha com dados de touch e LCD</li>
+</ol>
+<h3 id="inicio">Início</h3>
+<div class="admonition info">
+<p class="admonition-title">LCD max Touch</p>
+<p>Plugue o LCD max Touch no EXT2.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Código exemplo</p>
+<ul>
+<li>Copie o código exemplo <code>SAME70-examples/Screens/RTOS-LCD-maxTouch-Switch-Toggle/</code> para a pasta da entrega do seu repositório <code>Labs/RTOS-LCD-maxTouch-Switch</code><ul>
+<li>Vamos modificar esse código exemplo.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Terminal</p>
+<p>Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:</p>
+<p><img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> View <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> Terminal Window</p>
+<p>Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de 115200.</p>
+</div>
+<h2 id="entendendo-o-exemplo">Entendendo o exemplo</h2>
+<p>Vamos entender o exemplo e como ele funciona! Nesse projeto temos duas tasks:</p>
+<ul>
+<li><code>task_mxt</code>: Gerencia o touch do LCD</li>
+<li><code>task_lcd</code>: Gerencia a escrita de informação no LCD</li>
+</ul>
+<p>Essas tarefas se comunicam por uma fila chamada: <code>xQueueTouch</code>, onde a task <code>mxt</code> envia dados relativos ao touch (<code>x</code>, <code>y</code>) e a tarefa <code>lcd</code> coleta esses dados e processa o evento.</p>
+<p>Os dados da fila são um struct do tipo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">uint</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="n">uint</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">touchData</span><span class="p">;</span>
+</code></pre></div>
+<p>O diagrama a seguir ilustra o firmware:</p>
+<p><a class="glightbox" href="../imgs/diagrama.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/diagrama.svg" /></a></p>
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<ol>
+<li>Programe o uC com o firmware exemplo</li>
+<li>Analise o resultado</li>
+<li>Entenda o código</li>
+</ol>
+</div>
+<h2 id="modificando">Modificando</h2>
+<p>Vamos modificar esse código, ele não foi implementando de uma forma que suporta expansão.</p>
+<h3 id="struct">struct</h3>
+<p>Vamos organiza os botões em uma struct, para ficar mais fácil de criarmos novos botões, ou modificar os que já existem. Para isso, crie uma struct como a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w">     </span><span class="c1">// largura (px)</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w">    </span><span class="c1">// altura  (px)</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">colorOn</span><span class="p">;</span><span class="w">   </span><span class="c1">// cor do botão acionado</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">colorOff</span><span class="p">;</span><span class="w">  </span><span class="c1">// cor do botão desligado</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">         </span><span class="c1">// posicao x </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w">         </span><span class="c1">// posicao y</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">t_but</span><span class="p">;</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Estamos assumindo que o botão é um retângulo.</p>
+</div>
+<p>Na <code>task_lcd</code> vamos criar o primeiro botão (<code>but0</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="n">t_but</span><span class="w"> </span><span class="n">but0</span><span class="o">=</span><span class="w"> </span><span class="p">{.</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                </span><span class="p">.</span><span class="n">colorOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLOR_TOMATO</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">colorOff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLOR_BLACK</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                </span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ILI9488_LCD_WIDTH</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="p">};</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Esses dados foram copiados da configuração dos botões já existentes no código.</p>
+</div>
+<h3 id="draw_button_new">draw_button_new</h3>
+<p>E agora vamos criar uma função que recebe o tipo <code>t_but</code> e desenha o botão na tela:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">draw_button_new</span><span class="p">(</span><span class="n">t_but</span><span class="w"> </span><span class="n">but</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">){</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="w"> </span>
+<span class="w">      </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">but</span><span class="p">.</span><span class="n">colorOn</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">      </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">but</span><span class="p">.</span><span class="n">colorOff</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">ili9488_set_foreground_color</span><span class="p">(</span><span class="n">COLOR_CONVERT</span><span class="p">(</span><span class="n">color</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ili9488_draw_filled_rectangle</span><span class="p">(</span><span class="n">but</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="n">but</span><span class="p">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="p">.</span><span class="n">y</span><span class="o">-</span><span class="n">but</span><span class="p">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                                  </span><span class="n">but</span><span class="p">.</span><span class="n">x</span><span class="o">+</span><span class="n">but</span><span class="p">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">but</span><span class="p">.</span><span class="n">y</span><span class="o">+</span><span class="n">but</span><span class="p">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span><span class="w">    </span>
+<span class="p">}</span><span class="w"> </span>
+</code></pre></div>
+<p>Vamos editar a <code>task_lcd</code> para chamar essa função recém criada com o <code>but0</code>, ela deve ficar:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">task_lcd</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="w">  </span><span class="n">xQueueTouch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xQueueCreate</span><span class="p">(</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="w"> </span><span class="n">touchData</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="n">configure_lcd</span><span class="p">();</span>
+<span class="w">  </span><span class="n">draw_screen</span><span class="p">();</span>
+<span class="w">  </span><span class="n">font_draw_text</span><span class="p">(</span><span class="o">&amp;</span><span class="n">digital52</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DEMO - BUT&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">t_but</span><span class="w"> </span><span class="n">but0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{.</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w">  </span>
+<span class="w">                </span><span class="p">.</span><span class="n">colorOn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLOR_TOMATO</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">colorOff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLOR_BLACK</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                </span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ILI9488_LCD_WIDTH</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="p">};</span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">but0_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="n">draw_button_new</span><span class="p">(</span><span class="n">but0</span><span class="p">,</span><span class="w"> </span><span class="n">but0_status</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// struct local para armazenar msg enviada pela task do mxt</span>
+<span class="w">  </span><span class="n">touchData</span><span class="w"> </span><span class="n">touch</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xQueueReceive</span><span class="p">(</span><span class="w"> </span><span class="n">xQueueTouch</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">touch</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="p">)</span><span class="w">  </span><span class="mi">500</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">portTICK_PERIOD_MS</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">//update_screen(touch.x, touch.y);</span>
+<span class="w">      </span><span class="n">but0_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="n">but0_status</span><span class="p">;</span>
+<span class="w">      </span><span class="n">draw_button_new</span><span class="p">(</span><span class="n">but0</span><span class="p">,</span><span class="w"> </span><span class="n">but0_status</span><span class="p">);</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;x:%d y:%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">touch</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">touch</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<ol>
+<li>Faça as alterações no código<ul>
+<li>crie a struct <code>t_but</code></li>
+<li>crie o <code>but0</code></li>
+<li>crie a função <code>draw_button_new</code></li>
+<li>modifique a tarefa <code>task_lcd</code></li>
+<li>Compile e programe o código</li>
+<li>Verifique a funcionalidade do programa</li>
+<li>toque na tela, o botão deve mudar!</li>
+</ul>
+</li>
+</ol>
+</div>
+<h4 id="melhorando-a-draw_button_new">melhorando a <code>draw_button_new</code></h4>
+<p>Já que possuímos uma struct que guarda a informação do botão, porque não guardar nela o status (<code>but0_status</code>)? Vamos fazer, modificar a <code>t_but</code> inserindo um campo a mais <code>uint8_t status</code> e modificar a função que desenha o botão para não termos mais que passar o argumento <code>on</code>.</p>
+<div class="highlight"><pre><span></span><code>void draw_button_new(t_but but){}
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<ol>
+<li>Faça as alterações no código<ul>
+<li>modifique <code>t_but</code></li>
+<li>modifique a função <code>draw_button_new()</code></li>
+<li>modifique a <code>task_lcd</code> para usar esse novo campo</li>
+</ul>
+</li>
+<li>Programe e teste</li>
+</ol>
+</div>
+<h3 id="novos-botoes">Novos botões</h3>
+<p>Vamos criar dois novos botões (<code>but1</code>, <code>but2</code>), com as seguintes propriedades:</p>
+<ul>
+<li>
+<p><code>but1</code>: </p>
+<ul>
+<li>colorOn: <a href="https://github.com/Insper/SAME70-examples/blob/0819e835bcc9b29c841c97f848002d01ea2bbe37/Demos/Fita%20de%20LED%20-%20WS2812%20-%20(SAMe70)/src/ASF/sam/components/display/ili9488/ili9488.h#L247">Escolher uma</a></li>
+<li>posição y <code>140</code></li>
+</ul>
+</li>
+<li>
+<p><code>but2</code>:  </p>
+<ul>
+<li>colorOn: <a href="https://github.com/Insper/SAME70-examples/blob/0819e835bcc9b29c841c97f848002d01ea2bbe37/Demos/Fita%20de%20LED%20-%20WS2812%20-%20(SAMe70)/src/ASF/sam/components/display/ili9488/ili9488.h#L247">Escolher uma</a></li>
+<li>posição y <code>240</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>o que não foi definido, copiar do botão 0 (<code>but0</code>)</p>
+</blockquote>
+<p>Agora exiba os novos botões, e faça com que eles mudem o status quando toque na região deles na tela!</p>
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<ol>
+<li>Faça as alterações no código<ul>
+<li>crie <code>but1</code> e <code>but2</code></li>
+<li>exiba os botões e faça eles mudarem o status</li>
+</ul>
+</li>
+<li>Programe e teste</li>
+</ol>
+</div>
+<h3 id="detectando-botao">Detectando botão</h3>
+<p>Vamos agora criar uma função que detecta qual botão foi pressionado, para isso, vamos criar um vetor de structs (cada index representa um botão) e passar para essa função o vetor e também o valor recebido pela fila do toque referente a <code>x</code> e <code>y</code>.</p>
+<blockquote>
+<p>na <code>task_lcd</code></p>
+</blockquote>
+<p>Para criar o vetor de structs:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">t_but</span><span class="w"> </span><span class="n">botoes</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">but0</span><span class="p">,</span><span class="w"> </span><span class="n">but1</span><span class="p">,</span><span class="w"> </span><span class="n">but2</span><span class="p">};</span>
+</code></pre></div>
+<details class="tip">
+<summary>Tip</summary>
+<p>Você tem no seu código algo como isso:</p>
+<div class="highlight"><pre><span></span><code>  draw_button_new(but0);
+  draw_button_new(but1);
+  draw_button_new(but2);
+</code></pre></div>
+<p>Pode mudar para um for varrendo o nosso novo vetor <code>botoes</code>. O código vai ficar mais clean.</p>
+</details>
+<p>Com o vetor criado, vamos criar a função que processa o touch, ela será chamada de <code>processa_touch</code> e terá a seguinte implementação:</p>
+<div class="highlight"><pre><span></span><code>int process_touch(t_but botoes[], touchData touch, uint32_t n){
+
+}
+</code></pre></div>
+<p>Essa função recebe o vetor de structs e também a posição na tela de onde ocorreu o toque (<code>touch.x</code>, <code>touch.y</code>). A função deve retornar (<code>int</code>) um valor (<code>0</code>, <code>1</code>, <code>2</code>, ...) que indica qual botão que foi pressionado <strong>ou</strong> -1, indicando que nenhum botão satisfez o toque. </p>
+<ul>
+<li><code>n</code> é o tamanho do vetor <code>botoes</code>.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A função tem que ser genérica, suportando quantidade diferentes de botões e configurações diferentes de botões! </p>
+<ul>
+<li>Não pode isso:</li>
+</ul>
+<p><a class="glightbox" href="../imgs/naopode.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/naopode.png" width="400" /></a></p>
+</div>
+<p>​    </p>
+<details class="tip">
+<summary>Tip</summary>
+<p>Abra o terminal uart do atmel, lá você consegue ver os dados do touch:</p>
+<p><a class="glightbox" href="../imgs/touch.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/touch.gif" width="400" /></a></p>
+</details>
+<p>Com a função vamos agora alterar somente o status do botão que foi pressionado, para isso, vocês devem alterar o  <code>while(1)</code> da função <code>task_lcd</code>, para chamar a <code>process_touch</code>. Uma sugestão de  como implementar isso a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xQueueReceive</span><span class="p">(</span><span class="w"> </span><span class="n">xQueueTouch</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">touch</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="p">)</span><span class="w">  </span><span class="mi">500</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">portTICK_PERIOD_MS</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">process_touch</span><span class="p">(</span><span class="n">botoes</span><span class="p">,</span><span class="w"> </span><span class="n">touch</span><span class="p">);</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+<span class="w">        </span><span class="n">botoes</span><span class="p">[</span><span class="n">b</span><span class="p">].</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">botoes</span><span class="p">[</span><span class="n">b</span><span class="p">].</span><span class="n">status</span><span class="p">;</span>
+<span class="w">        </span><span class="n">draw_button_new</span><span class="p">(</span><span class="n">botoes</span><span class="p">[</span><span class="n">b</span><span class="p">]);</span>
+<span class="w">      </span><span class="p">}</span>
+
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;x:%d y:%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">touch</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">touch</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Execute</p>
+<ol>
+<li>Crie o vetor de botões</li>
+<li>Declare a função <code>process_touch</code></li>
+<li>Implemente a função <code>process_touch</code></li>
+<li>Programe e teste<ul>
+<li>Só o botão que for tocado deve mudar de status</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Chegou até aqui? Não esqueça de <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZNzzwcY__zmi7JeQV8hfEYT_Y1WaYgVp9tHCH0KUQW8aCdQ/viewform?embedded=true%22">preencher o forms</a> com a entrega!</p>
+</div>
+<h2 id="extras-c">Extras (C+)</h2>
+<ul>
+<li>Adicione 2 novos botões!</li>
+</ul>
+<h2 id="extras-b">Extras (B)</h2>
+<p>Que tal que para cada botão associar uma função de <code>callback</code>, toda vez que o botão for encontrado, a função de <code>callback</code> pode ser executada!</p>
+<ul>
+<li>Modificar struct</li>
+<li>Criar uma função de <code>callback</code> por botão</li>
+<li>Modificar inicialização associando essa função<ul>
+<li>ponteiro de função</li>
+</ul>
+</li>
+<li>Validar</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+</div>
+<p><a href="https://www.geeksforgeeks.org/function-pointer-in-c/">Function Pointer in C</a></p>
+<h2 id="extras-a">Extras (A)</h2>
+<p>No lugar dos botões terem cor podemos fazer com que eles tenham uma imagem associada! Que tal fazer isso?</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-LCD-maxTouch-Images">SAME70-examples/Screens/RTOS-LCD-maxTouch-Images/</a></p>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

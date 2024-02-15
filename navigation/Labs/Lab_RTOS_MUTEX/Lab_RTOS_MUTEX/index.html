@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab 9 - RTOS - Mutex - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Lab 9 - RTOS - Mutex</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#lab">Lab</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#mutexes">Mutexes</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#programando">Programando</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#aps-2">APS 2</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-mutex">LAB - Mutex</h1>
+<p>Neste laboratório iremos trabalhar usar mutex no freertos para controlar o acesso ao LVGL entre múltiplas tasks. </p>
+<h2 id="lab">Lab</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Exemplo base</th>
+<th style="text-align: center;"></th>
+<th style="text-align: right;">LAB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>/Lab8-RTOS-LCD-LVGL</code></td>
+<td style="text-align: center;">----&gt;</td>
+<td style="text-align: right;"><code>/Lab9-RTOS-Mutex</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data <span style="color:red">LIMITE</span> para entrega:</strong> <code>16/11/2023</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Código exemplo</p>
+<ul>
+<li>Vamos modificar o código exemplo do laboratório passado, tudo bem se você não terminou de implementar todas as funcionalidades. Faça uma cópia para o seu repositório de laboratórios renomeando para <code>Lab9-RTOS-Mutex</code>.</li>
+</ul>
+</div>
+<h2 id="mutexes">Mutexes</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Sim... sim.. o mesmo mutex de sistema hardware software (<code>lock</code> e <code>unlock</code>): <a href="https://insper.github.io/SistemasHardwareSoftware/aulas/20-sincronizacao/">https://insper.github.io/SistemasHardwareSoftware/aulas/20-sincronizacao/</a></p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Mutex vem de 'MUT'ual 'EX'clusion ou exclusão mútua, a ideia é para ser usado como um bastão, que indica que o recurso está em uso por outra parte do programa.</p>
+</div>
+<p>O LVGL <strong>não é thread-safe by default</strong>, como indicado na página:</p>
+<ul>
+<li><a href="https://docs.lvgl.io/master/porting/os.html">https://docs.lvgl.io/master/porting/os.html</a></li>
+</ul>
+<p>Isso significa que não podemos chamar uma função do LVGL enquanto a anterior não tiver terminado de executar, e caso implementemos o acesso ao LCD em várias partes do nosso programa corremos grande risco disso acontecer (lembrem que o RTOS interrompe uma tarefa para permitir que outra execute, e isso pode ser no meio da função por exemplo de mudar o valor do label).</p>
+<p>A documentação do LVGL fala o seguinte:</p>
+<blockquote>
+<p>If you need to use real tasks or threads, you need a mutex which should be invoked before the call of <code>lv_timer_handler</code> and released after it. Also, you have to use the same mutex in other tasks and threads around every LVGL (<code>lv_...</code>) related function call and code. This way you can use LVGL in a real multitasking environment. Just make use of a mutex to avoid the concurrent calling of LVGL functions.</p>
+<p>Here is some pseudocode to illustrate the concept:
+  <div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="n">mutex_t</span><span class="w"> </span><span class="n">lvgl_mutex</span><span class="p">;</span><span class="w"> </span><span class="c1">// (1)</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">lvgl_thread</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lvgl_mutex</span><span class="p">);</span><span class="w"> </span><span class="c1">// (2)</span>
+<span class="w">        </span><span class="n">lv_task_handler</span><span class="p">();</span>
+<span class="w">        </span><span class="n">mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lvgl_mutex</span><span class="p">);</span><span class="w"> </span><span class="c1">// (3)</span>
+<span class="w">        </span><span class="n">thread_sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="cm">/* sleep for 10 ms */</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">other_thread</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* You must always hold the mutex while using LVGL APIs */</span>
+<span class="w">    </span><span class="n">mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lvgl_mutex</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="n">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_img_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">());</span>
+<span class="w">    </span><span class="n">mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lvgl_mutex</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lvgl_mutex</span><span class="p">);</span>
+<span class="w">        </span><span class="cm">/* change to the next image */</span>
+<span class="w">        </span><span class="n">lv_img_set_src</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="w"> </span><span class="n">next_image</span><span class="p">);</span>
+<span class="w">        </span><span class="n">mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lvgl_mutex</span><span class="p">);</span>
+<span class="w">        </span><span class="n">thread_sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<ol>
+<li>Cria mutex, vamos ter que usar o do freertos</li>
+<li>Indica que o recurso está em uso</li>
+<li>Indica a liberacão do recurso</li>
+</ol>
+</blockquote>
+<h3 id="prioridades-e-mutex">Prioridades e Mutex</h3>
+<p>Imaginem o cenário a seguir: Uma tarefa de baixa prioridade (L) requisita um mutex que está livre, no meio da execução uma tarefa de alta prioridade (H) é colocada para executar pelo escalonador e está tarefa necessita do mesmo mutex que a anterior. O que acontece? <mark>Pânico no sistema</mark> tudo trava? Não! O escalonador vai permitir que a de baixa execute e a de alta não vai executar pois está esperando o mutex. Isso chama <mark>inversão de prioridade</mark>.</p>
+<h4 id="inversao-de-prioridade">Inversão de prioridade</h4>
+<p>Inversão de prioridade é uma "consequência" que acontece quando uma tarefa de alta prioridade está aguardando um recurso que não foi liberado por uma tarefa de menor prioridade, o RTOS vai manter a tarefa de baixa prioridade executando, impedindo a de alta de executar (o que não é muito desejado). O negócio começa a ficar mais complicado quando incluímos uma tarefa de média prioridade na jogada, que pode impedir a de baixa e a de alta de executar, travando o sistema:</p>
+<p><a class="glightbox" href="https://www.digikey.com.br/maker-media/92b5e015-d9fc-4940-9a48-f814d06c5f31" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://www.digikey.com.br/maker-media/92b5e015-d9fc-4940-9a48-f814d06c5f31" /></a></p>
+<ul>
+<li>Acesse o link a seguir para entender mais a respeito:  <a href="https://www.digikey.com.br/en/maker/projects/introduction-to-rtos-solution-to-part-11-priority-inversion/abf4b8f7cd4a4c70bece35678d178321">https://www.digikey.com.br/en/maker/projects/introduction-to-rtos-solution-to-part-11-priority-inversion/abf4b8f7cd4a4c70bece35678d178321</a></li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A inversão de prioridade quase colocou fim no <em>Rover Pathfinder</em> da NASA que pousou em marte em 1997, uma inversão de prioridade fazia com que o sistema parasse de funcionar, só voltando a operar quando o <strong>Watchdog Timer</strong> do sistema reiniciava o robô. Engenheiros do RTOS usado no robô, o VxWorks, trabalharam horas na réplica em terra do mesmo a fim de identificar o problema, depois de muito depurar o projeto eles conseguiram descobrir o causador do problema, um mutex.</p>
+<p>Para saber mais a respeito, acesse: <a href="http://www.cs.cornell.edu/courses/cs614/1999sp/papers/pathfinder.html">http://www.cs.cornell.edu/courses/cs614/1999sp/papers/pathfinder.html</a></p>
+</div>
+<h3 id="mutex-no-freertos">mutex no freeRtos</h3>
+<p>O mutex no FreeRTOS é como um semáforo binário, com uma única diferença: implementa herança prioritária (<em>priority inheritance</em>), que tenta minimizar os efeitos da inversão de prioridade. Este mecanismo faz com que a tarefa de baixa prioridade herde temporariamente a prioridade da tarefa de alta que necessita do recurso, ou seja, a tarefa de prioridade baixa, passa a ter alta prioridade até liberar o recurso.</p>
+<p><a class="glightbox" href="https://www.freertos.org/fr-content-src/uploads/2018/07/mutexes.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://www.freertos.org/fr-content-src/uploads/2018/07/mutexes.gif" /></a></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A solução para o Rover que foi para Marte foi a de ativar o mecanismo de herança prioritária no mutex que estava dando o problema.</p>
+<blockquote>
+<p>When created, a VxWorks mutex object accepts a boolean parameter that indicates whether priority inheritance should be performed by the mutex. The mutex in question had been initialized with the parameter off; had it been on, the low-priority meteorological thread would have inherited the priority of the high-priority data bus thread blocked on it while it held the mutex, causing it be scheduled with higher priority than the medium-priority communications task, thus preventing the priority inversion. Once diagnosed, it was clear to the JPL engineers that using priority inheritance would prevent the resets they were seeing. </p>
+</blockquote>
+</div>
+<h3 id="exemplo">Exemplo</h3>
+<p>A seguir um exemplo de mutex adaptado do livro do freertos. No caso a task1 necessita utilizar o printf e para isso requisita o mutex, após o uso a task libera o mutex permitindo que outra task utilize o printf.</p>
+<div class="highlight"><pre><span></span><code><span class="n">SemaphoreHandle_t</span><span class="w"> </span><span class="n">xMutex</span><span class="p">;</span>
+
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">task1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/* Attempt to take the mutex, blocking indefinitely to wait for the mutex if</span>
+<span class="cm">    it is not available straight away. The call to xSemaphoreTake() will only</span>
+<span class="cm">    return when the mutex has been successfully obtained, so there is no need</span>
+<span class="cm">    to check the function return value. If any other delay period was used then</span>
+<span class="cm">    the code must check that xSemaphoreTake() returns pdTRUE before accessing</span>
+<span class="cm">    the shared resource (which in this case is standard out). As noted earlier</span>
+<span class="cm">    in this book, indefinite time outs are not recommended for production code. */</span>
+<span class="w">    </span><span class="n">xSemaphoreTake</span><span class="p">(</span><span class="w"> </span><span class="n">xMutex</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* The following line will only execute once the mutex has been successfully</span>
+<span class="cm">    obtained. Standard out can be accessed freely now as only one task can</span>
+<span class="cm">    have the mutex at any one time. */</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ola 1&quot;</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="c1">// (1)</span>
+<span class="w">    </span><span class="n">fflush</span><span class="p">(</span><span class="w"> </span><span class="n">stdout</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* The mutex MUST be given back! */</span>
+<span class="w">    </span><span class="n">xSemaphoreGive</span><span class="p">(</span><span class="w"> </span><span class="n">xMutex</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">task2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">xSemaphoreTake</span><span class="p">(</span><span class="w"> </span><span class="n">xMutex</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ola 2&quot;</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="c1">// (2)</span>
+<span class="w">    </span><span class="n">fflush</span><span class="p">(</span><span class="w"> </span><span class="n">stdout</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="n">xSemaphoreGive</span><span class="p">(</span><span class="w"> </span><span class="n">xMutex</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">   </span><span class="n">xMutex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xSemaphoreCreateMutex</span><span class="p">();</span>
+
+<span class="w">   </span><span class="c1">// ....</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>Região crítica de compartilhamento de recursos.</li>
+<li>Região crítica de compartilhamento de recursos.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Meio ruim ter que ficar utilizando o mutex toda hora que for realizar um printf, a solução para isso é encapsularmos em uma função o uso do mutex e usamos essa função no lugar do printf:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">printfMutex</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">xSemaphoreTake</span><span class="p">(</span><span class="w"> </span><span class="n">xMutex</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pcString</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="n">fflush</span><span class="p">(</span><span class="w"> </span><span class="n">stdout</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="n">xSemaphoreGive</span><span class="p">(</span><span class="w"> </span><span class="n">xMutex</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">task1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printfMutex</span><span class="p">(</span><span class="s">&quot;olá 1&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">task2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printfMutex</span><span class="p">(</span><span class="s">&quot;olá 2&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h2 id="programando">Programando</h2>
+<p>Agora vamos começar a programar, lembrem que a documentação do LVGL fala que: <em>If you need to use real tasks or threads, you need a mutex which should be invoked before the call of <code>lv_timer_handler</code> and released after it.</em>.</p>
+<div class="admonition info">
+<p>Como estamos no RTOS estamos usando a funcão <code>lv_task_handler</code> no lugar da <code>lv_timer_handler</code>.</p>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Task mutex <code>lv_task_handler</code></p>
+<form class="exercise-form">
+<ol>
+<li>Crie a variável global que irá servir de mutex chamado de <code>xMutexLVGL</code> do tipo <code>SemaphoreHandle_t</code></li>
+<li>No main crie o mutex  com <code>xSemaphoreCreateMutex();</code></li>
+<li>Na <code>task_lcd</code> faça a requisição do mutex antes de chamar <code>lv_tick_inc</code> e a liberação depois do <code>lv_task_handler</code></li>
+</ol>
+<p>Execute o código e verifique que <mark>NADA DEVE TER MUDADO</mark>. Estamos apenas melhorando a qualidade do nosso código e garantindo que não teremos erros futuros.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<!-- !!! note "Preencher ao finalizar o lab"
+
+   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsDgoVIJ_1WyqqxUccDrux7WATpsiNnGgQf8ire5XCa3JP8Q/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
+
+<h2 id="aps-2">APS 2</h2>
+<p>Este laboratório serve para ajudar vocês com a APS2, agora podem ter mais de uma task atualizando partes diferentes do LCD via LVGL, lembrem apenas de requisitar o mutex antes e liberar depois de terem usado. </p>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/"
+               class="ah-prev"
+               title="Lab 8 - TC - RTC - RTT">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Lab 8 - TC - RTC - RTT</span>
+            </a>
+          
+          
+            <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/"
+               class="ah-next"
+               title="Lab 10 - WIFI">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Lab 10 - WIFI</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Vídeos - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Vídeos</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#conectando-coisas">Conectando coisas</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#debugando">Debugando</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#modulo-bluetooth-hc-05">Modulo Bluetooth HC-05</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="videos-tutoriais">Vídeos / Tutoriais</h1>
+<p>Vídeos de suporte a disciplina</p>
+<h2 id="conectando-coisas">Conectando coisas</h2>
+<p>Estou começando agora, pode me ajudar?? Assista as dicas para conectar o módulo OLED e a utilização da protoboard para conectar botão e LED na sua placa de desenvolvimento e como programar e gravar o código utilizando o Microchip Studio.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/S8EZiBuvH7o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="debugando">Debugando</h2>
+<p>Seu código não está funcionando como deveria? não sabe por onde começar para tentar resolver?? Assista as Dicas de como debugar o seu código utilizando os recursos da Microchip Studio. </p>
+<p>Básico:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dMm4CmQkqPI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>Avançado:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yvHXwSoXeiE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="modulo-bluetooth-hc-05">Modulo Bluetooth HC-05</h2>
+<p>Está com dificuldades para conectar o módulo Bluetooth com a placa de desenvolvimento? Calma, assiste o video, fique atento nas dicas que você vai conseguir resolver.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6pVfTrPW-gQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../../Sobre-Curso/"
+               class="ah-prev"
+               title="Sobre o curso">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Sobre o curso</span>
+            </a>
+          
+          
+            <a href="../../Util/Util-Notas/"
+               class="ah-next"
+               title="Notas">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Notas</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

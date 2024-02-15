@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab ADC FIR - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Lab ADC FIR</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#lab">Lab</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#filtros-digitais">Filtros digitais</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#b">B</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#a">A</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs extras</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-8-fir">Lab 8 - FIR</h1>
+<p><a class="glightbox" href="https://www.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/53983/versions/5/previews/html/ExampleECGBitalino_02.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://www.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/53983/versions/5/previews/html/ExampleECGBitalino_02.png" /></a></p>
+<blockquote>
+<p>Fonte: <a href="https://www.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/53983/versions/5/previews/html/ExampleECGBitalino.html">https://www.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/53983/versions/5/previews/html/ExampleECGBitalino.html</a></p>
+</blockquote>
+<p>Neste laboratório iremos processar o sinal de ECG que vocês precisam processar na APS2. Vocês podem e devem usar o código do laboratório na APS.</p>
+<div class="admonition note">
+<p class="admonition-title">Preencher ao finalizar o lab</p>
+<ul>
+<li>TODO: MARCO </li>
+</ul>
+</div>
+<h2 id="lab">Lab</h2>
+<table>
+<thead>
+<tr>
+<th>Exemplo base</th>
+<th>LAB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SAME70-Examples/ TODO: CODIGO EXEMPLO</code> <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /></td>
+<td><code>Labs-8-RTOS-ADC-FIR</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Código exemplo</p>
+<ul>
+<li>Vamos modificar o código exemplo <code>TODO: CODIGO EXEMPLO</code>, faça uma cópia do seu lab para a nova pasta no seu repositório <code>Labs/9-RTOS-ADC-FIR</code></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Terminal</p>
+<p>Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:  <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> View <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> Terminal Window</p>
+<p>Configure o terminal para a porta que (COM) correta (verificar no windows) e configure para operar com um BaudRate de <code>115200</code>.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Iremos utilizar os seguintes periféricos diretamente:</p>
+<ul>
+<li>AFEC1 (EXT1 PC31)</li>
+<li>TC1 canal 1</li>
+</ul>
+<p>Indiretamente (o projeto já usa):</p>
+<ul>
+<li>DAC0 (PB13)</li>
+<li>TC0 canal 0</li>
+</ul>
+</div>
+<h3 id="conectando">Conectando</h3>
+<p>Vamos conectar o pino PB13 que gera o sinal o sinal analógico do batimento cardíaco ao pino PC31 do EXT1 que possui o AFEC1 conforme imagem e diagrama a baixo:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Imagem</label><label for="__tabbed_1_2">Diagrama</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>TODO INSERIR IMAGEM</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>┌───────────────────┐
+│           ┌─────┐ │
+│           │afec │◄├────┐
+│           └─────┘ │    │
+│                   │    │ ecg 
+│  ┌─────┐  ┌─────┐ │    │
+│  │ tc0 ├─►│dac  ├─x────┘
+│  └─────┘  └─────┘ │ PB13
+└───────────────────┘
+</code></pre></div>
+</div>
+</div>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-0"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="ecg">ECG</h3>
+<p>O sinal ECG gerado no pino PB13 possui a forma de onda a seguir:</p>
+<p><a class="glightbox" href="../imgs/ecg1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/ecg1.png" width="300" /></a></p>
+<p>E se analisarmos o espectro do sinal via transformada de fourier, obtemos a seguinte composição espectral:</p>
+<p><a class="glightbox" href="../imgs/ecg-fft.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/ecg-fft.png" width="300" /></a></p>
+<div class="admonition question short">
+<p class="admonition-title">Question</p>
+<p>O que você consegue extrair de informações dos gráficos anteriores?</p>
+<div class="admonition details">
+<p>No primeiro (ecg no tempo) podemos ver claramente que existe uma
+alta frequência no sinal, mas que o envelope é a informação do ecg.</p>
+<p>Já no fourier somos capazes se distinguir que existem duas regiões 
+com bastante informações, uma de baixa frquência (0..25)Hz e outra
+de 60Hz.</p>
+<p><a class="glightbox" href="../imgs/ecg-fft2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/ecg-fft2.png" width="300" /></a></p>
+</div>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-1"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h4 id="60-hz">60 Hz</h4>
+<p>Notamos claramente que existe um sinal centrada em 60Hz, isso é muito comum quando trabalhamos com eletrônica e reflete o 60Hz da rede elétrica que é propagada de diversas formas para o transdutor responsável em amostrar o dado do pulso elétrico do corpo humano, causando um ruído no sinal não desejável. </p>
+<p>Para trarmos o dado corretamente teremos que filtar o ruído. <mark>Lembre que em alguns paises a frequência da rede elétrica é de 50Hz e não de 60Hz como no Brasil.</mark></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>O som desse ruído em 60hz é chamado de <a href="https://pt.wikipedia.org/wiki/Zumbido_el%C3%A9trico">Zumbido elétrico</a> soa como:</p>
+<p><audio controls>
+<source src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Mains_hum_60_Hz.ogg" type="audio/ogg">
+</audio></p>
+<blockquote>
+<p>ref: wiki</p>
+</blockquote>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-2"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="filtros-digitais">Filtros digitais</h2>
+<p>Filtragem de sinal pertence a uma grande área do conhecimento que é processamento de sinais, nesse laboratório iremos tratar do tema de forma superficial. Mas exemplos de aplicação de filtragem digital são:</p>
+<ul>
+<li>Remoção de ruído</li>
+<li>Processamento de Áudio</li>
+<li>Extração de parâmetros </li>
+<li>...</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Para saber mais leia: <a href="http://www.dspguide.com/">The Scientist and Engineer's Guide to Digital Signal Processing</a></p>
+</div>
+<h3 id="fir">FIR</h3>
+<p>O <a href="https://en.wikipedia.org/wiki/Finite_impulse_response"><code>Finite Impulse Response</code> (FIR)</a> é uma técnica de processamento digital de sinais (DSP) que é capaz de realizar filtragens em um sinal. Com o FIR somos capazes de aplicar um filtro do tipo: </p>
+<ul>
+<li>passa baixas: Elimina as altas frequências</li>
+<li>passa altas: Elimina as baixas frequências</li>
+<li>mata faixa: Elimina uma faixa de frequências do sinal</li>
+</ul>
+<p>Filtros digitais do tipo FIR possuem as seguintes vantagens:</p>
+<ol>
+<li>São estáveis por natureza (não importa o  parâmetro do filtro, o sinal de saída vai ser estável)</li>
+<li>Podem ser projetados para ter fase linear</li>
+<li>Possuem flexibilidade no seu projeto</li>
+<li>São fáceis de implementar </li>
+</ol>
+<p>O filtro possui a seguinte estrutura:</p>
+<p>$$y[n] = b_0*x[n] + b_1*x[n-1] + .... b_n*x[n-N]$$</p>
+<p>Onde:</p>
+<ul>
+<li>$y[n]$: Valor filtrado</li>
+<li>$x[n-N]$: Valor do dado não filtrado, atrasado de N amostras</li>
+<li>$b_n$: Coeficiente do filtro</li>
+<li>$N$: Ordem do filtro</li>
+</ul>
+<p>Podemos representar a equação graficamente:</p>
+<p><a class="glightbox" href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/FIR_Filter.svg/600px-FIR_Filter.svg.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/FIR_Filter.svg/600px-FIR_Filter.svg.png" /></a></p>
+<blockquote>
+<p>Fonte: <a href="https://en.wikipedia.org/wiki/Finite_impulse_response">https://en.wikipedia.org/wiki/Finite_impulse_response</a></p>
+</blockquote>
+<ul>
+<li>$Z^{-1}$: Significa um atraso na amostra</li>
+</ul>
+<h4 id="projeto-do-filtro">Projeto do filtro</h4>
+<p>Podemos realizar o projeto do filtro FIR (achar a ordem N e os coeficientes B) de diversas maneiras diferentes, cada um possui uma vantagem sobre a outra. Vamos utilizar o <a href="https://www.weisang.com/en/documentation/firfilterremezalgorithm_en/#"><code>Equiripple Algorithm</code></a> que possui <code>ripples</code> em torno da frequência de corte (<code>fc</code>).</p>
+<p><a class="glightbox" href="https://www.recordingblogs.com/rbdocs/wiki/equiripplefilter-initialmagnituderesponse.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://www.recordingblogs.com/rbdocs/wiki/equiripplefilter-initialmagnituderesponse.png" /></a></p>
+<blockquote>
+<p>Fonte: <a href="https://www.recordingblogs.com/wiki/equiripple-filter">https://www.recordingblogs.com/wiki/equiripple-filter</a></p>
+</blockquote>
+<p>O projeto do filtro envolve vários parâmetros e diversas escolhas, vamos verificarmos os mais importantes:</p>
+<ul>
+<li>$f_s$: Frequência de amostragem do sinal </li>
+<li>$f_c$: Frequência de corte, quando a componente espectral já possui um ganho baixo e não influencia 'tanto' no sinal. Na $f_c$ o ganho do sinal é geralmente -3dB, o que significa em volts, que o sinal possui $sqrt(&frac12;)=0.707$ do seu valor inicial.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A filtragem não só altera o valor absoluto de um sinal, como também afeta sua frequência! Dependendo do que estiver analisando isso pode afetar o resultado final.</p>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-3"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h4 id="pyfda">pyfda</h4>
+<p>Para o projeto do filtro vamos utilizar uma ferramenta em python <a href="https://github.com/chipmuenk/pyFDA/"><code>pyfda</code></a> que vai nos ajudar encontrar os coeficientes <code>b</code> e <code>N</code> do filtro. Para isso siga os passos de instalação a seguir:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/chipmuenk/pyFDA/
+<span class="nb">cd</span><span class="w"> </span>pyFDA
+pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w"> </span>--user
+python3<span class="w"> </span>-m<span class="w"> </span>pyfda.pyfdax
+</code></pre></div>
+<p>Configure o filtro para:</p>
+<p><a class="glightbox" href="../imgs/config.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/config.png" width="300" /></a></p>
+<p>E agora clique em <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> <strong>DESIGN FILTER</strong>. Vá na aba <strong>b,a</strong> e <mark>salve os valores de b em um txt, vamos usar mais tarde !</mark></p>
+<p><a class="glightbox" href="../imgs/taps.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/taps.png" width="200" /></a></p>
+<h3 id="firmware">firmware</h3>
+<p>Esse exemplo possui:</p>
+<ul>
+<li><code>task_mxt</code>: Leitura do touch</li>
+<li><code>task_lcd</code>: Para exibição dos dados no LCD</li>
+<li><code>task_adc</code>: Inicia um TC para fazer a conversão do ADC, recebe o dado e envia por uma fila.</li>
+<li><code>TC1</code>: Timer configurado em 50Hz para fazer gerar o trigger da conversão analógica</li>
+<li><code>AFEC</code>: Para realizar a leitura do potenciometro </li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Iremos usar o TC como trigger do AFEC (no lugar da task_adc fazer isso como no lab RTOS-ADC) pelos seguinte motivos:</p>
+<ol>
+<li>Garantir que a aquisição ocorra na taxa especificada</li>
+<li>Permitir uma taxa de aquisição maior que o tick do RTOS</li>
+</ol>
+</div>
+<h4 id="plotando-adc-no-tempo">Plotando ADC no tempo</h4>
+<p>Vamos modificar a <code>task_lcd</code> para exibir o valor da leitura do potenciometro no tempo. O resultado esperado é o seguinte:</p>
+<video controls width="450">
+    <source src="http://54.162.111.146/shared/embarcados/lab9-lcd.mp4"
+            type="video/mp4">
+    Sorry, your browser doesn't support embedded videos.
+</video>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ol>
+<li>Você deve fazer essa implementação dentro do <code>if</code> que pega um dado da fila <code>xQueuePlot</code>:
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xQueueReceive</span><span class="p">(</span><span class="w"> </span><span class="n">xQueuePlot</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">plot</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="p">)</span><span class="w">  </span><span class="mi">100</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">portTICK_PERIOD_MS</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// aqui dentro!!</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>O dado que deve ser plotado é o <code>plot.raw</code></li>
+<li>Crie um contador que fará o incremento do eixo <code>x</code></li>
+<li>dica: use <code>x = x + 5</code>;</li>
+<li>Incremente esse contador até chegar no final do LCD (<code>ILI9488_LCD_WIDTH</code>)</li>
+<li>zere o contador quando chegar no final</li>
+<li>apague a tela quando chegar no final <code>draw_screen()</code></li>
+<li>Plote um circulo no lcd para cada ponto, exemplo:
+<div class="highlight"><pre><span></span><code><span class="n">ili9488_set_foreground_color</span><span class="p">(</span><span class="n">COLOR_CONVERT</span><span class="p">(</span><span class="n">COLOR_BLACK</span><span class="p">));</span>
+<span class="n">ili9488_draw_filled_circle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">ILI9488_LCD_HEIGHT</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">plot</span><span class="p">.</span><span class="n">raw</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">);</span>
+</code></pre></div></li>
+</ol>
+</div>
+<p>Agora você deve modificar o plot, para plotar além do <code>plot.raw</code> exibir o <code>plot.filtrado</code> que mais para frente no lab será o nosso dado do ADC filtrado com o filtro projetado anteriormente. Atualmente ele é o valor <code>plot.raw</code> deslocado de 100.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Utilize outra cor para mostrar esse dado:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ili9488_set_foreground_color</span><span class="p">(</span><span class="n">COLOR_CONVERT</span><span class="p">(</span><span class="n">COLOR_RED</span><span class="p">));</span>
+</code></pre></div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Resumo Tarefas</p>
+<ol>
+<li>Exibir o valor <code>plot.raw</code> graficamente no lcd <ol>
+<li>Exibir o valor <code>plot.filtrado</code> graficamente no lcd </li>
+</ol>
+</li>
+</ol>
+</div>
+<h4 id="filtrando-dado">Filtrando dado</h4>
+<p>Vamos agora aplicar o filtro projetado anteriormente no dado <code>adc</code>, iremos utilizar uma biblioteca da ARM chamada de <a href="http://www.keil.com/pack/doc/CMSIS/DSP/html/index.html">CMSIS DSP 4</a> que possui uma série de funções matemáticas e de processamento de sinais. Dentro dessa biblioteca, iremos utilizar a função <a href="http://www.keil.com/pack/doc/CMSIS/DSP/html/group__FIR.html#ga5afaa7b8e6735bbc19e582aa9755b0e1"><code>arm_fir_init_f32</code></a> e <a href="http://www.keil.com/pack/doc/CMSIS/DSP/html/group__FIR.html#ga0cf008f650a75f5e2cf82d10691b64d9"><code>arm_fir_f32</code></a> que respectivamente: inicializa o filtro FIR do tipo <code>float_32</code> e aplica o filtro (convolução) ao sinal.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>De uma olhada como essas funções são implementadas, elas abusam bastante da topologia interna do ARM (bem sistema hardware software) para entregarem uma função bem otimizada:</p>
+<ul>
+<li><a href="https://github.com/ARM-software/CMSIS_5/blob/9a825ef26043a0648894f5bf155edc0219b8212f/CMSIS/DSP/Source/FilteringFunctions/arm_fir_f32.c">https://github.com/ARM-software/CMSIS_5/blob/9a825ef26043a0648894f5bf155edc0219b8212f/CMSIS/DSP/Source/FilteringFunctions/arm_fir_f32.c</a> </li>
+</ul>
+</div>
+<h4 id="inicializando-filtro">Inicializando filtro</h4>
+<p>Crie os defines a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define NUM_TAPS   8  </span><span class="c1">// ordem do filtro (quantos coefientes)</span>
+<span class="cp">#define BLOCK_SIZE 1   </span><span class="c1">// se será processado por blocos, no caso não.</span>
+</code></pre></div>
+<p>Agora vamos copiar os coeficientes do filtro que foram gerados na etapa do projeto do filtro para a variável <code>firCoeffs32</code>: </p>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="n">float32_t</span><span class="w"> </span><span class="n">firCoeffs32</span><span class="p">[</span><span class="n">NUM_TAPS</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="p">{</span><span class="mf">0.12269166637219883</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0.12466396327768503</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0.1259892807712678</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0.12665508957884833</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0.12665508957884833</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0.1259892807712678</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0.12466396327768503</span><span class="p">,</span>
+<span class="w">  </span><span class="mf">0.12269166637219883</span><span class="p">};</span>
+</code></pre></div>
+<p>Agora dentro da <code>task_adc</code> (apos o <code>TC_ini</code>), vamos iniciar o filtro:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* Cria buffers para filtragem e faz a inicializacao do filtro. */</span>
+<span class="n">float32_t</span><span class="w"> </span><span class="n">firStateF32</span><span class="p">[</span><span class="n">BLOCK_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NUM_TAPS</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="n">float32_t</span><span class="w"> </span><span class="n">inputF32</span><span class="p">[</span><span class="n">BLOCK_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NUM_TAPS</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="n">float32_t</span><span class="w"> </span><span class="n">outputF32</span><span class="p">[</span><span class="n">BLOCK_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">NUM_TAPS</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="n">arm_fir_instance_f32</span><span class="w"> </span><span class="n">S</span><span class="p">;</span>
+<span class="n">arm_fir_init_f32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">NUM_TAPS</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">float32_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">firCoeffs32</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">firStateF32</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">BLOCK_SIZE</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Resumo Tarefas</p>
+<ol>
+<li>Criar define <code>NUM_TAPS</code></li>
+<li>Criar define <code>BLOCK_SIZE</code></li>
+<li>Criar constant com coefientes do filtro <code>firCoeffs32</code></li>
+<li>Modificar <code>task_adc</code> e inicializar filtro</li>
+</ol>
+</div>
+<h4 id="processando">Processando</h4>
+<p>Modifique o while da task adc para realizar a filtragem e enviar para o LCD exibir.</p>
+<div class="highlight"><pre><span></span><code>int i = 0;
+
+while(1){
+
+if (xQueueReceive( xQueueADC, &amp;(adc), 100)) {
+        if(i &lt;= NUM_TAPS){
+          inputF32[i++] = (float) adc.value;
+        } else{
+          arm_fir_f32(&amp;S, &amp;inputF32[0], &amp;outputF32[0], BLOCK_SIZE);
+          plot.raw = (int) inputF32[0];
+          plot.filtrado = (int) outputF32[0];
+          xQueueSend(xQueuePlot, &amp;plot, 0);
+          i = 0;
+        }
+</code></pre></div>
+<p>Resultado esperado:</p>
+<video controls width="450">
+    <source src="http://54.162.111.146/shared/embarcados/lab9-lcd2.mp4"
+            type="video/mp4">
+    Sorry, your browser doesn't support embedded videos.
+</video>
+
+<h2 id="b">B</h2>
+<ul>
+<li>Criar um novo filtro de ordem 12 e trocar o atual</li>
+</ul>
+<h2 id="a">A</h2>
+<p>No lugar de mostrar uma linha no tempo, fazer um ponto em um circulo </p>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../Lab_ECG/Lab-ECG/"
+               class="ah-prev"
+               title="ECG">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">ECG</span>
+            </a>
+          
+          
+            <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/"
+               class="ah-next"
+               title="Lab RTOS UART">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Lab RTOS UART</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

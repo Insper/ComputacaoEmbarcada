@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab 10 - WIFI - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Lab 10 - WIFI</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#lab">Lab</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#exemplo">Exemplo</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#lab_1">Lab</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-rtos-wifi">LAB - RTOS - WIFI</h1>
+<p><a class="glightbox" href="../imgs/RTOS-WIFI.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="RTOS-WIFI" src="../imgs/RTOS-WIFI.png" width="800" /></a></p>
+<p>Neste laboratório iremos modificar o exemplo RTOS-WIFI, que realiza uma requisição GET em um webserver (Flask) rodando em seu computador, onde o mesmo após receber essa requisição retorna um dado <code>JSON</code>. </p>
+<h2 id="lab">Lab</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Exemplo base</th>
+<th style="text-align: center;"></th>
+<th style="text-align: right;">LAB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>/Comunicacao/RTOS-WIFI-WINC1500-get-EXT1</code></td>
+<td style="text-align: center;">----&gt;</td>
+<td style="text-align: right;"><code>Lab-10-RTOS-WIFI</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data <span style="color:red">LIMITE</span> para entrega:</strong> <code>20/11/2023</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Código exemplo</p>
+<ul>
+<li><mark>Atualizar o repositório do SAME70-Examples</mark></li>
+<li>Vamos modificar o código exemplo <code>Comunicacao/RTOS-WIFI-WINC1500-get-RTOS-EXT1</code>, faça uma cópia do seu lab para a nova pasta no seu repositório <code>Lab-9-RTOS-WIFI</code></li>
+</ul>
+</div>
+<h3 id="iot">IoT</h3>
+<p>IoT (Internet of Things) é um conceito que tem como objetivo a conexão entre objetos e a internet, ela faz parte da revolução da Industria 4.0 e está cada vez mais presentes em nossas vidas. Desenvolver sistemas embarcados muitas vezes envolvem conectar esses sistemas na internet, e isso pode se dar atráves de diversos meios:</p>
+<ol>
+<li>Cabo de rede (Ethernet)</li>
+<li>Conexão WIFI</li>
+<li>3G/4G/GSM</li>
+<li>Sistemas de comunicação de baixa energia:<ul>
+<li>LoRa/ ...</li>
+</ul>
+</li>
+<li>Sistema de comunicação proprietário <ul>
+<li>AM/FM/...</li>
+</ul>
+</li>
+</ol>
+<p>Para cada aplicação existe uma forma de comunicação ideal, e vocês como engenheiros de computação devem estar cientes dessas formas e saber interagir com elas.</p>
+<p>Nesse laboratório iremos explorar um pouco a comunicação WIFI em sistemas embarcados, para isso iremos conectar um módulo externo a nossa placa que servirá como 'placa de rede' do nosso microcontrolador, esse módulo é o WINC 1500.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Ao desenvolver sistemas IoT você é responsável pela segurança dos dados que estão sendo enviados/recebidos. E não só na ponta do embarcado, como também no armazenamento de dados no servidor.</p>
+<ul>
+<li><a href="https://www.iotforall.com/5-worst-iot-hacking-vulnerabilities/">https://www.iotforall.com/5-worst-iot-hacking-vulnerabilities/</a></li>
+<li><a href="https://observer.com/2015/07/eight-internet-of-things-security-fails/">https://observer.com/2015/07/eight-internet-of-things-security-fails/</a></li>
+<li><a href="https://medium.com/iot-security-review/5-internet-of-things-security-fails-fae2fb2bb871">https://medium.com/iot-security-review/5-internet-of-things-security-fails-fae2fb2bb871</a></li>
+<li><a href="https://securityintelligence.com/organizations-continue-to-fail-at-iot-security-and-the-consequences-are-growing/">https://securityintelligence.com/organizations-continue-to-fail-at-iot-security-and-the-consequences-are-growing/</a></li>
+</ul>
+</div>
+<h3 id="winc1500">WINC1500</h3>
+<p>Existem inúmeros módulos WIFI para serem utilizados em sistemas embarcados, você pode comprar microcontroladores que possuem toda a parte WIFI integrada no chip (exemplo: <a href="https://www.st.com/en/microcontrollers-microprocessors/stm32-wireless-mcus.html">STM32</a>), nesses casos não é necessário conectar um módulo externo, tudo está integrado no chip (tirando a antena)!</p>
+<p>O módulo que iremos utilizar é desenvolvido pela Microchip e chama <a href="http://ww1.microchip.com/downloads/en/DeviceDoc/70005266B.pdf">Winc1500</a></p>
+<div style="text-align: center;" class="no-print"><embed src="http://ww1.microchip.com/downloads/en/DeviceDoc/70005266B.pdf" width="650" height="500"></div>
+
+<p>Esse módulo possui comunicação SPI (similar a UART, porém desenvolvida para comunicação entre chips) que será usada como interface de controle do uC para enviar/ receber um dado wifi, temos que nos comunicar com esse módulo. Essa parte está feita nos exemplos fornecidos, e é chamada de comunicação M2M: <a href="https://en.wikipedia.org/wiki/Machine_to_machine">Machine-to-Machine</a>.</p>
+<h2 id="exemplo">Exemplo</h2>
+<p>Esse laboratório faz uso do exemplo disponível no repositório <code>SAME70-Examples/RTOS/WIFI-WINC1500-get-RTOS-EXT1</code> que possui duas partes:</p>
+<ul>
+<li><code>python-server</code>: servidor em flask que possui um forms e uma página de status que retorna um valor em json </li>
+<li><code>WIFI-RTOS-get</code>: firmware a ser executado na nossa placa.</li>
+</ul>
+<h3 id="python-server">python-server</h3>
+<p>Acesse a pasta <code>python-server</code> que contém o script <code>server.py</code>, instale o flask via pip e execute o programa:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w"> </span>--user
+python<span class="w"> </span>server.py<span class="w"> </span>--host<span class="o">=</span><span class="m">0</span>.0.0.0
+</code></pre></div>
+<p>O resultado esperado deve ser o seguinte:</p>
+<div class="highlight"><pre><span></span><code>➜<span class="w">  </span>python-server<span class="w"> </span>git:<span class="o">(</span>master<span class="o">)</span><span class="w"> </span>✗<span class="w"> </span>python<span class="w"> </span>server.py
+<span class="w"> </span>*<span class="w"> </span>Serving<span class="w"> </span>Flask<span class="w"> </span>app<span class="w"> </span><span class="s2">&quot;server&quot;</span><span class="w"> </span><span class="o">(</span>lazy<span class="w"> </span>loading<span class="o">)</span>
+<span class="w"> </span>*<span class="w"> </span>Environment:<span class="w"> </span>production
+<span class="w">   </span>WARNING:<span class="w"> </span>This<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>development<span class="w"> </span>server.<span class="w"> </span>Do<span class="w"> </span>not<span class="w"> </span>use<span class="w"> </span>it<span class="w"> </span><span class="k">in</span><span class="w"> </span>a<span class="w"> </span>production<span class="w"> </span>deployment.
+<span class="w">   </span>Use<span class="w"> </span>a<span class="w"> </span>production<span class="w"> </span>WSGI<span class="w"> </span>server<span class="w"> </span>instead.
+<span class="w"> </span>*<span class="w"> </span>Debug<span class="w"> </span>mode:<span class="w"> </span>on
+<span class="w"> </span>*<span class="w"> </span>Running<span class="w"> </span>on<span class="w"> </span>http://0.0.0.0:5000/<span class="w"> </span><span class="o">(</span>Press<span class="w"> </span>CTRL+C<span class="w"> </span>to<span class="w"> </span>quit<span class="o">)</span>
+<span class="w"> </span>*<span class="w"> </span>Restarting<span class="w"> </span>with<span class="w"> </span>stat
+<span class="w"> </span>*<span class="w"> </span>Debugger<span class="w"> </span>is<span class="w"> </span>active!
+<span class="w"> </span>*<span class="w"> </span>Debugger<span class="w"> </span>PIN:<span class="w"> </span><span class="m">278</span>-674-158
+</code></pre></div>
+<p>O servidor em Flask é simples e permite que alteremos uma variável <code>led</code> via um form e lermos o status via um get:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://localhost:5000">http://localhost:5000</a></td>
+<td><a href="http://localhost:5000/status">http://localhost:5000/status</a></td>
+</tr>
+<tr>
+<td><a class="glightbox" href="../imgs/form.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/form.png" width="300" /></a></td>
+<td><a class="glightbox" href="../imgs/status.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/status.png" width="300" /></a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="preparando-o-webserver">Preparando o WebServer</h4>
+<p>Para validar, conecte <strong>seu celular</strong> na mesma rede WIFi e acesse o ip da sua máquina na porta 5000 e valide se o webserver está funcionando.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Deixe o servidor rodando, vamos fazer o embarcado se conectar nele.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Para descobrir seu IP abra outro terminal e execute o comando <code>ipconfig</code>, nos exemplos iremos usar:  <a href="http://192.168.0.138:5000">http://192.168.0.138:5000</a>, mas <mark>você deve adequar o IP ao seu</mark>.</p>
+<p><strong>Anote o seu IP, iremos usar mais para frente</strong></p>
+<p>Se não funcionar, talvez seja necessário desativar o firewall do windows:</p>
+<ul>
+<li><a href="https://support.microsoft.com/en-us/windows/turn-microsoft-defender-firewall-on-or-off-ec0844f7-aebd-0583-67fe-601ecf5d774f">https://support.microsoft.com/en-us/windows/turn-microsoft-defender-firewall-on-or-off-ec0844f7-aebd-0583-67fe-601ecf5d774f</a></li>
+</ul>
+<p><mark>Lembre de ativar novamente após a atividade.</mark></p>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Tarefas</p>
+<form class="exercise-form">
+<ol>
+<li>Instalar <code>requirements.txt</code></li>
+<li>Subir o servidor Flask</li>
+<li>Validar local (<code>http://localhost:5000</code>)</li>
+<li>Validar de outro dispositivo (exemplo: <code>http://192.168.0.138:5000</code>)<ul>
+<li>isso testa se o seu Windows está permitindo acesso externo ao seu server, precisamos disso já que queremos que o embarcado se conecte a esse servidor.</li>
+</ul>
+</li>
+<li>Mantenha o servidor em execução.
+<mark>NÃO SIGA SEM QUE TODOS OS PASSOS ANTERIORES ESTIVEREM FUNCIONANDO</mark></li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h3 id="wifi-rtos-get"><code>WIFI-RTOS-get</code></h3>
+<p>Vamos agora explorar e executar o nosso firmware.</p>
+<h4 id="conectando-o-hardware">Conectando o hardware</h4>
+<p>Conecte o módulo <code>WINC1500</code> no EXT-1 do kit de desenvolvimento.</p>
+<table>
+<thead>
+<tr>
+<th>Diagrama</th>
+<th>Conexão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="glightbox" href="../imgs/diagrama.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/diagrama.svg" width="300" /></a></td>
+<td><a class="glightbox" href="../imgs/HW.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/HW.png" width="300" /></a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="entendendo-o-firmware">Entendendo o firmware</h4>
+<p>Vamos relembrar um pouco de camada física e Tecweb agora, toda vez que você acessa uma página da internet um socket é criado, este socket é um canal de comunicação TCP/UDP entre dois pontos via comunicação internet. Uma vez estabelecido o socket o client (no nosso caso o embarcado) pode fazer uma requisição (get) ou um envio de informação (post). Nesse exemplo iremos fazer um <code>get</code> no servidor que está rodando no seu computador.</p>
+<p><a class="glightbox" href="../imgs/socket.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/socket.svg" /></a></p>
+<p>Nosso firmware irá seguindo os seguintes passos a seguir:</p>
+<ol>
+<li>
+<p>WIFI (camadas: <code>network access</code> e <code>internet</code>)</p>
+<ol>
+<li>Conecta no roteador</li>
+<li>Busca IP no DCHP</li>
+</ol>
+</li>
+<li>
+<p>Socket (camadas: <code>application</code> e <code>transport</code>)</p>
+<ol>
+<li>Cria novo socket</li>
+<li>Realiza get</li>
+<li>Lê ack</li>
+<li>Lê mensagem</li>
+</ol>
+</li>
+</ol>
+<h4 id="tasks">tasks</h4>
+<p>O firmware exemplo possui duas tarefas: <code>task_wifi</code> e <code>task_process</code>, a primeira é responsável por realizar toda a comunicação com o módulo WINC1500 e fazer a inicialização da comunicação socket com o webserver em Python, a segunda é responsável por gerenciar as mensagens que serão enviadas para o servidor.</p>
+<p><a class="glightbox" href="../imgs/firmware.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/firmware.svg" /></a></p>
+<p>A <code>task_wifi</code> gerencia alguns <code>callbacks</code> de software, que são eventos gerados do módulo WIFI, existem vários callbacks que podem ser utilizados, nesse exemplo usamos:</p>
+<ul>
+<li><code>wifi_cb</code>: callback de eventos relacionado a camada física do WIFI ( conexão, ssid list, ...)</li>
+<li><code>resolve_cb</code>: callback relacionado a resolução de nome no DNS, se quisermos acessar um HOST_NAME e não um ip (google.com -&gt; 10.21.3.12).</li>
+<li><code>socket_cb</code>: eventos de socket (conexão/ nova mensagem/ erro/ ...)</li>
+</ul>
+<p>A <code>task_process</code> aguarda um socket ter sido criado na <code>task_wifi</code> e quando isso for verdadeiro faz um envio de um comando do tipo <code>get</code> e aguarda por dois pacotes de retorno, o <code>ack</code> e a <code>msg</code>, que contém o payload requisitado (no nosso caso um json).</p>
+<p>Essa tarefa foi implementada com a máquina de estados a seguir em mente, usando o operador <a href="https://blogs.itemis.com/en/how-to-use-state-machines-for-your-modelling-part-3-the-big-switch-statement"><code>switch case</code></a></p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">states</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">WAIT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">GET</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ACK</span><span class="p">,</span>
+<span class="w">    </span><span class="n">MSG</span><span class="p">,</span>
+<span class="w">    </span><span class="n">TIMEOUT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">DONE</span><span class="p">,</span>
+<span class="w">  </span><span class="p">};</span>
+</code></pre></div>
+<p><a class="glightbox" href="../imgs/state.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/state.png" width="400" /></a></p>
+<h2 id="lab_1">Lab</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Abra o projeto no Atmel Studio</p>
+</div>
+<p>Vamos agora começar o lab para valer, primeiro vamos executar o exemplo. Mas para isso é necessários configurarmos o módulo WIFI para acessar a rede que está disponível da sua casa.</p>
+<h3 id="preparando-o-firmware">Preparando o firmware</h3>
+<p>Devemos configurar o <code>main.h</code> do exemplo adicionando as informações do roteador na qual ele deve se conectar, edite o arquivo com as configurações da sua rede:</p>
+<p>A configuração da rede:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/** Wi-Fi Settings */</span>
+<span class="cp">#define MAIN_WLAN_SSID    &quot;Corsi&quot; </span><span class="cm">/**&lt; Destination SSID */</span>
+<span class="cp">#define MAIN_WLAN_PSK     &quot;corsiEmarco&quot; </span><span class="cm">/**&lt; Password for Destination SSID */</span>
+</code></pre></div>
+<p>IP e porta do servidor (seu computador):</p>
+<div class="highlight"><pre><span></span><code>#define MAIN_SERVER_PORT  5000
+#define MAIN_SERVER_NAME  &quot;192.168.42.42&quot;
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>O sistema embarcado e o webserver devem estar na mesma rede!</li>
+<li>O modulo winc1500 só se conecta em rede de 2.4Ghz<ul>
+<li><mark>Sugestão: faça seu celular virar um acesspoint, conecte o embarcado e o computador nele!</mark></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ul>
+<li>Conecte o WINC1500 no EXT1</li>
+<li>Adicione informações do SSID da sua rede</li>
+<li>Modifique o IP do servidor com o IP da sua máquina</li>
+<li>Programe o uC</li>
+</ul>
+</div>
+<h4 id="resultados-esperados">Resultados esperados</h4>
+<p>Terminal Window (Atmel Studio):</p>
+<p><a class="glightbox" href="../imgs/term.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="printWIFI" src="../imgs/term.jpeg" width="300" /></a></p>
+<p>Terminal do flask:</p>
+<div class="highlight"><pre><span></span><code><span class="m">192</span>.168.0.107<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span><span class="o">[</span><span class="m">26</span>/May/2020<span class="w"> </span><span class="m">16</span>:51:07<span class="o">]</span><span class="w"> </span><span class="s2">&quot;GET /status HTTP/1.1&quot;</span><span class="w"> </span><span class="m">200</span><span class="w"> </span>-
+<span class="m">192</span>.168.0.107<span class="w"> </span>-<span class="w"> </span>-<span class="w"> </span><span class="o">[</span><span class="m">26</span>/May/2020<span class="w"> </span><span class="m">16</span>:51:17<span class="o">]</span><span class="w"> </span><span class="s2">&quot;GET /status HTTP/1.1&quot;</span><span class="w"> </span><span class="m">200</span><span class="w"> </span>-
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Breve descrição do funcionamento</p>
+<p>Nosso embarcado envia uma requisição GET através do <code>MAIN_PREFIX_BUFFER</code> definido dentro do <code>main.h</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/** Send buffer of TCP socket. */</span>
+<span class="cp">#define MAIN_PREFIX_BUFFER                  &quot;GET /status HTTP/1.1\r\n Accept: */*\r\n\r\n&quot;</span>
+</code></pre></div>
+<p>Nosso webserver (Flask) recebe essa requisição e verifica o que foi recebido, nesse caso ele recebe o "/status" após o GET e responde com o seguinte JSON <code>{led' : '1'}</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/status&#39;</span><span class="p">,</span> <span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">status</span><span class="p">():</span>
+  <span class="k">global</span> <span class="n">led</span>
+  <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+      <span class="n">status</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span>
+      <span class="n">led</span> <span class="o">=</span> <span class="n">status</span><span class="p">[</span><span class="s1">&#39;LED&#39;</span><span class="p">]</span>
+      <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;status.html&quot;</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="n">status</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;led&#39;</span> <span class="p">:</span> <span class="n">led</span><span class="p">}),</span> <span class="mi">200</span>
+</code></pre></div>
+</div>
+<h3 id="acionando-led-conforme-ledstatus">Acionando LED conforme <code>led:status</code></h3>
+<p>Vamos agora acionar o LED da placa conforme o status recebido no comando <code>get</code>, se valor igual a <code>0</code> apagamos o LED da placa e se valor igual a <code>1</code> acendemos o LED da placa.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Você deve inicializar o pino do LED da placa como saída! Isso não está feito.</p>
+</div>
+<p>Para isso, será necessário realizar o parse da mensagem HTML que é enviada pelo servidor, isso deve ser feito dentro da <code>task_process</code>. Lembre que nessa tarefa implementamos uma máquina de estados, e é no estado <code>msg</code> que possuímos a mensagem com o status do nosso LED.</p>
+<div class="admonition info">
+<p class="admonition-title">case msg</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="no">MSG</span><span class="p">:</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;STATE: MSG </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">memset</span><span class="p">(</span><span class="n">g_receivedBuffer</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">MAIN_WIFI_M2M_BUFFER_SIZE</span><span class="p">);</span>
+<span class="w">  </span><span class="n">recv</span><span class="p">(</span><span class="n">tcp_client_socket</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g_receivedBuffer</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">MAIN_WIFI_M2M_BUFFER_SIZE</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">xQueueReceive</span><span class="p">(</span><span class="n">xQueueMsg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_recvMsg</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">){</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="n">STRING_LINE</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="n">p_recvMsg</span><span class="o">-&gt;</span><span class="n">pu8Buffer</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="n">STRING_EOL</span><span class="p">);</span><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="n">STRING_LINE</span><span class="p">);</span>
+<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DONE</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMEOUT</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="w">  </span><span class="k">break</span><span class="p">;</span>
+</code></pre></div>
+</div>
+<p>A mensagem com o conteúdo (head + json) é salva no buffer <code>p_recvMsg-&gt;pu8Buffer)</code>. </p>
+<div class="admonition info">
+<p class="admonition-title">Exemplo do conteúdo do buffer</p>
+<div class="highlight"><pre><span></span><code>Content-Type: application/json
+Content-Length: 15
+Server: Werkzeug/1.0.1 Python/3.6.9
+Date: Tue, 26 May 2020 20:23:04 GMT
+
+{
+  &quot;led&quot;: 0
+}
+</code></pre></div>
+</div>
+<p>É necessário processar esse buffer e encontrar o valor que está associado ao <code>led</code>. A forma mais 'fácil' de se fazer isso com C é utilizando a função <a href="https://www.tutorialspoint.com/c_standard_library/c_function_strstr.htm"><code>strstr</code></a>, que retorna um ponteiro para o local de onde foi encontrado a substring.</p>
+<blockquote>
+<p>The C library function char *strstr(const char *haystack, const char *needle) function finds the first occurrence of the substring needle in the string haystack. The terminating '\0' characters are not compared.</p>
+<p>Fonte: <a href="https://www.tutorialspoint.com/c_standard_library/c_function_strstr.htm">https://www.tutorialspoint.com/c_standard_library/c_function_strstr.htm</a></p>
+</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Busque no buffer a substring <code>"led":</code>.</p>
+<ul>
+<li>Use <a href="https://www.tutorialspoint.com/c_standard_library/c_function_strstr.htm">strstr</a></li>
+</ul>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/exercise_2" id="exercise_2_0">
+<p class="admonition-title">Tarefas</p>
+<form class="exercise-form">
+<ol>
+<li>Inicialize o led da placa como saída</li>
+<li>Modificar o estado <code>MSG</code> para encontrar o valor do led</li>
+<li>modifique O led para:</li>
+<li>status = 1: acende</li>
+<li>status = 0: apaga</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-0"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="b-melhorando-o-firmware">B - melhorando o firmware</h3>
+<p>Vamos alterar como o get é realizado, da forma atual temos um chamado de <code>#define MAIN_PREFIX_BUFFER</code> que define a string da mensagem que será enviada no <code>get</code>, que é copiada para o buffer global <code>g_sendBuffer</code>:</p>
+<div class="highlight"><pre><span></span><code>    case GET:
+      printf(&quot;STATE: GET \n&quot;);
+      sprintf((char *)g_sendBuffer, MAIN_PREFIX_BUFFER);
+      send(tcp_client_socket, g_sendBuffer, strlen((char *)g_sendBuffer), 0);
+      state = ACK;
+      break;
+</code></pre></div>
+<p>Muito melhor seria termos uma função que recebe como parâmetro o <code>g_sendBuffer</code> e o path do commando get (<code>/status</code>).</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Crie uma função que formate o comando get </li>
+<li>Use a função no estado GET</li>
+<li>Teste!</li>
+</ol>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ol>
+<li>Mude o valor no servidor flask e veja o led mudando o status</li>
+<li><a href="http://localhost:5000">http://localhost:5000</a></li>
+<li>Tem muito atraso? Quanto tempo leva essa atualização? pq?</li>
+</ol>
+</div>
+<h3 id="a">A</h3>
+<p>Podemos melhorar várias coisas nesse projeto, mas vamos por partes. A primeira coisa que podemos fazer é adicionar o botão da placa e fazer ele também controlar o LED.</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ul>
+<li>Adicione o botão da placa  -&gt; callback -&gt; semáforo </li>
+<li>O LED é controlado ou pelo botão da placa ou pelo servidor flask</li>
+</ul>
+</div>
+<hr />
+<!-- !!! note "Preencher ao finalizar o lab"
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfY9xsKEamY63GcXNAeXnh1S2uJ5ZrX-jmziieLvZAA0U2O5w/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe> -->
+
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/"
+               class="ah-prev"
+               title="Lab 9 - RTOS - Mutex">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Lab 9 - RTOS - Mutex</span>
+            </a>
+          
+          
+            <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/"
+               class="ah-next"
+               title="RTOS - ADC">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">RTOS - ADC</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

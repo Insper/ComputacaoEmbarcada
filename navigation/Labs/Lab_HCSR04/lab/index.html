@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-hc-sr04">LAB - HC-SR04</h1>
+<table>
+<thead>
+<tr>
+<th>Pasta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Lab5-HC-SR04</code></td>
+</tr>
+<tr>
+<td><strong>Data da entrega:</strong> 29/03</td>
+</tr>
+</tbody>
+</table>
+<p>Neste laboratório iremos trabalhar com o sensor de distância HC-SR04, que é muito utilizado em projetos de robótica e similares. O sensor é um módulo ultrassônico e que possibilita medirmos a distância entre o sensor e um objeto.</p>
+<p><a class="glightbox" href="http://wiki.sunfounder.cc/images/1/1f/Ultrasonic_.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="http://wiki.sunfounder.cc/images/1/1f/Ultrasonic_.jpg" /></a></p>
+<p>Para realizarmos a leitura correta do sensor, iremos utilizar os seguintes periféricos (com interrupção):</p>
+<ul>
+<li>PIO: Acionamento do sensor (pino TRIG) e leitura do pulso de echo (pino ECHO)</li>
+<li>TC: Contarmos o tempo do pulso de echo</li>
+<li>TC/ RTT: Determinar a cadência de coleta de dados</li>
+<li>RTC: Fornecendo o data log</li>
+</ul>
+<h2 id="hc-sr04">HC-SR04</h2>
+<p>Refs:</p>
+<ul>
+<li><a href="http://wiki.sunfounder.cc/index.php?title=Ultrasonic_Module">http://wiki.sunfounder.cc/index.php?title=Ultrasonic_Module</a></li>
+<li><a href="https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/">https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/</a></li>
+</ul>
+<p>O Sensor de Distância Ultrassônico HC-SR04 é capaz de medir distâncias de 2cm a 4m com ótima precisão e baixo custo. Este módulo possui um circuito pronto com emissor e receptor acoplados e 4 pinos (VCC, Trigger, ECHO, GND) para medição.</p>
+<p>Para começar a medição é necessário alimentar o módulo e colocar o pino Trigger em nível alto por mais de 10us. Assim, o sensor emitirá uma onda sonora que, ao encontrar um obstáculo, rebaterá de volta em direção ao módulo. Durante o tempo de emissão e recebimento do sinal, o pino ECHO ficará em nível alto. Logo, o cálculo da distância pode ser feito de acordo com o tempo em que o pino ECHO permaneceu em nível alto após o pino Trigger ter sido colocado em nível alto.</p>
+<p>Distância = [Tempo ECHO em nível alto * Velocidade do Som] / 2</p>
+<p>A velocidade do som pode ser considerada idealmente igual a 340 m/s, logo o resultado é obtido em metros se considerado o tempo em segundos. Na fórmula, a divisão por 2 deve-se ao fato de que a onda é enviada e rebatida, ou seja, ela percorre 2 vezes a distância procurada.</p>
+<p>Especificações:</p>
+<ul>
+<li>Alimentação: 5V DC</li>
+<li>Corrente de Operação: 2mA</li>
+<li>Ângulo de efeito: 15°</li>
+<li>Alcance.: 2cm ~ 4m</li>
+<li>Precisão.: 3mm</li>
+</ul>
+<blockquote>
+<p>Descricão extraída do site do filipflop: <a href="https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/">https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/</a></p>
+</blockquote>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>No Brasil o sensor custa em torno de R$14 (<a href="https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/">https://www.filipeflop.com/produto/sensor-de-distancia-ultrassonico-hc-sr04/</a>)</p>
+</div>
+<h3 id="montagem">Montagem</h3>
+<p>O sensor possui dois pinos (TRIG e ECHO) que devem ser ligados no uC os outros são para alimentacão (GND e VCC), como o módulo opera com 5V teremos que fazer um divisor de tensão no pino do ECHO para não danificar o nosso uC que possui tensão máxima nos pinos de 3v3.</p>
+<p>Você deve seguir a montagem a seguir, sugerimos utilizar uma protoboard para isso. Os pinos X e Y podem ser qualquer um do EXT-2.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Esquemático</label><label for="__tabbed_1_2">Protoboard</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><a class="glightbox" href="../montagem.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../montagem.svg" width="600" /></a></p>
+</div>
+<div class="tabbed-block">
+<p><a class="glightbox" href="../proto.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../proto.jpg" width="600" /></a></p>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Você deve escolher os pinos X e Y que irão ligar no uC.</p>
+</div>
+<h3 id="interagindo">Interagindo</h3>
+<p>Após feita a montagem você deverá escrever um programa que faz o controle do sensor ultrassônico, para iniciar uma nova leitura você deve gerar um pulso de <code>10us</code> no pino de Trig (<strong>Pin Y</strong>) e então aguardar pela subida do sinal do Echo (<strong>Pin X</strong>) e então contar o tempo (<strong>dT</strong>) que ele fica em alto. O valor de <strong>dT</strong> é proporcional ao tempo que o som levou para chegar até o obstáculo e voltar.</p>
+<p>A figura a seguir demonstra como funciona a leitura do sensor.</p>
+<p><a class="glightbox" href="../wave.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../wave.svg" width="600" /></a></p>
+<div class="admonition exercise short tag-short-text tag-text-exercise editable" data-slug="navigation/Labs/Lab_HCSR04/lab/short_1" id="short_1_0">
+<p class="admonition-title">Exercise<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Calcule o tempo <strong>mínimo</strong> e <strong>máximo</strong> que o sinal de <strong>Echo</strong> pode ficar em '1'? Lembre de verificar o range do sensor (você vai precisar saber a velocidade do som).</p>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Das informações fornecidas do sensor:</p>
+<ul>
+<li>Distância mínima: 0.02 m</li>
+<li>Distância máxima: 4.00 m</li>
+</ul>
+<p>Sabendo que a velocidade do som é aproximadamente 340 m/s, portanto $x [s] = dist / 340$. Lembre que o sensor fornece a distância dobrado (tempo de ir e voltar)!</p>
+<p>Ou seja:</p>
+<ul>
+<li>Tempo mínimo: $2 \times 0,000058$s </li>
+<li>Tempo máximo: $2 \times 0,011764$s</li>
+</ul>
+</div>
+</div>
+<div class="admonition exercise long tag-long-text tag-text-exercise editable" data-slug="navigation/Labs/Lab_HCSR04/lab/long_2" id="long_2_0">
+<p class="admonition-title">Exercise<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Com as informações coletadas até aqui você consegue imaginar como deve ser o firmware para fazer a leitura do sensor? Não existe uma única maneira de fazer, mas algumas soluções podem não ser muito boas!</p>
+<p>Descreva aqui como você geraria o sinal do Trig e como você faria a leitura do sinal do Echo e quais periféricos usaria para isso?</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Uma das soluções possíveis (e indicadas) é:</p>
+<p>Sinal do <strong>Trigger</strong> gerar via <code>pio_set(), delay_us(10), pio_clear()</code>. Como o sinal do pino de Trigger pode ser aproximadamente 10 us, não tem muito problema em usar a função de delay para isso!</p>
+<p>Já o sinal do <strong>Echo</strong> carrega informações importantes e devemos contar corretamente o tempo. Para isso sugerimos configurar uma interrupção de borda no pino do ECHO e inciar o RTT quando ocorrer uma borda de descida e parar a contagem do tempo quando ocorrer uma borda de subida, informando a função main via flag que uma nova leitura aconteceu. </p>
+<p><mark>Um ponto importante é a configuração da frequência na qual o RTT irá operar. Pense um pouco a respeito....</mark></p>
+</div>
+</div>
+<h2 id="lab">Lab</h2>
+<p>Nesse laboratório vocês devem usar o exemplo do OLED e realizando a leitura periódica do HCSR04 exibir a distância entre o sensor e um objeto no display. Sempre que você apertar o botão da placa, uma nova leitura começa.</p>
+<p>Comecem copiando o exemplo do OLED para o seu repositório e renomem para: <code>Lab5-HC-SR04</code>, ou se preferir, podem usar um dos labs passados que possui OLED e já tem os botões configurados, só lembrem de fazer uma cópia e renomear.</p>
+<h3 id="dicas">Dicas</h3>
+<div class="highlight"><pre><span></span><code>                  ________                                       ________
+    TRIG   ______|////////|_____________________________________|////////|_____
+                                                                     ^ 
+                    10us                                             |
+                                                                     | 
+                            _____________                            | 6.inicia nova leitura
+    ECHO  _________________|/////////////|_________                  |  
+                           |             |                           |
+                           V             V                           |
+                      1.callback_echo  3.callback_echo               |
+                             |               |                       |
+                             V               V                       |
+                       2.RTT_init        4.rtt_read_timer_value      |
+                                                |                    |
+                                                V                    |      
+                                           5.valor para main + cálculo da distância
+</code></pre></div>
+<p>Setup: </p>
+<ol>
+<li>Fazer a montagem na protoboard</li>
+<li>Escolher dois pinos para Echo e Trig</li>
+<li>Configurar Trig como output e Echo como input</li>
+<li>Configurar irq de boarda no pino Echo<ul>
+<li>Lembre de criar a função de callback.</li>
+</ul>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Não ative PULL_UP no pino do ECHO!</p>
+</div>
+<p>Trig:</p>
+<ol>
+<li>Gerar o pulso no pino de <strong>Trig</strong> com <code>delay_us</code>.</li>
+</ol>
+<p>Echo:</p>
+<ol>
+<li>Iniciar o RTT na borda de subida do pino Echo<ul>
+<li>Qual prescale usar?</li>
+</ul>
+</li>
+<li>Ler valor do RTT em borda de descida do pino Echo</li>
+<li>Consulte <a href="https://asf.microchip.com/docs/latest/same70/html/rtt_8c.html">a documentaćão do ASF-RTT</a> para saber como ler o valor atual do contador.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Dicas RTT</p>
+<ul>
+<li>
+<p>Nessa primeira etapa não precisamos de nenhuma interrupção do RTT, ele vai funcionar apenas como um relógio. Passe 0 no último parâmetro da função <code>RTT_Init()</code>.</p>
+</li>
+<li>
+<p>Para consultarmos o valor atual do RTT, utilize a funcão <code>rtt_read_timer_value</code></p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>uint32_t rtt_read_timer_value   (   Rtt *   p_rtt   )   
+
+Read the current value of the RTT timer value.
+
+Parameters
+    p_rtt   Pointer to an RTT instance.
+
+Returns
+    The current Real-time Timer value. 
+
+Referenced by configure_rtt(), gpbr_test_configure_rtt(), main(), and refresh_display().
+</code></pre></div>
+</div>
+<p>Conta: </p>
+<ol>
+<li>Realizar o cálculo da distância usando o valor do RTT </li>
+<li>Lembre de usar como base de tempo o valor que configurou no RTT.</li>
+<li>Exiba nos no OLED a distância atual em cm.</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Ao terminar o lab preencha:</p>
+<p><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe83MJuGEAFSF113AfeHpgYZjt1-eBFrBBOQ_DNW6MPdWn9oA/viewform?embedded=true" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe></p>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-0"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="b">B</h3>
+<p>Estamos lidando com um sensor que pode ter falhas, o que acontece se o sensor não estiver operando direito, ou se der mal contato na ligação? ou se o som não voltar (espaço aberto). Identifique esse tipo de erro e exiba no OLED.</p>
+<h3 id="a">A</h3>
+<p>Exibir gráfico com últimos valores da distância.</p>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

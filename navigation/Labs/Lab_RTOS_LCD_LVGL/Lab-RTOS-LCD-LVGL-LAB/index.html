@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab RTOS LCD LVGL LAB - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Lab RTOS LCD LVGL LAB</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#etapas">Etapas</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#implementando">Implementando</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#identificando-widgets">Identificando widgets</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#botoes">Botões</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs</li>
+                  
+                
+                  
+                    <li>Lab 7 - RTOS - LCD - LVGL</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-parte-1">Lab - Parte 1</h1>
+<table>
+<thead>
+<tr>
+<th>Lab 7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data limite para entrega</strong>: <mark>16/11/2023</mark></td>
+</tr>
+<tr>
+<td>Entregue o código pelo repositório do <mark><a href="https://classroom.github.com/a/Rl7NKjIh">Classroom</a></mark></td>
+</tr>
+<tr>
+<td>- Fechar issues pertinentes ao conceito atingido na entrega</td>
+</tr>
+</tbody>
+</table>
+<p>Agora vamos começar mexer com o LVGL e criar nossa interface. A ideia é recriar uma interface de um termostato inspirado no produto a seguir:</p>
+<div class="admonition info">
+<p>KKmoon LCD Touch Screen Termostato Sistema de Aquecimento de Piso Elétrico Aquecimento de Água Termorregulador AC85-240 V Controlador de Temperatura Preto </p>
+<ul>
+<li><a href="https://www.amazon.com.br/KKmoon-Aquecimento-Termorregulador-Controlador-Temperatura/dp/B07X3CDM83">https://www.amazon.com.br/KKmoon-Aquecimento-Termorregulador-Controlador-Temperatura/dp/B07X3CDM83</a></li>
+</ul>
+</div>
+<p><a class="glightbox" href="https://images-na.ssl-images-amazon.com/images/I/51iNUfjxJDL._AC_SL1000_.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/51iNUfjxJDL._AC_SL1000_.jpg" width="500" /></a></p>
+<h2 id="etapas">Etapas</h2>
+<p>Quando começamos projetar uma <a href="https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction">interface homem máquina (IHM)</a> é necessário analisarmos várias frentes:</p>
+<ul>
+<li>Usabilidade</li>
+<li>Acessibilidade</li>
+<li>Branding</li>
+<li>Implementação</li>
+</ul>
+<p>A usabilidade irá indicar como as funções do produto estarão disponíveis e serão exibidas aos usuários, isso deve estar atrelada aos conceitos da marca do produto. O público alvo deve ser analisado e o produto deve ser acessível, para isso, muitos testes de usabilidade devem ser feitos para validar o conceito.</p>
+<p>Muitas vezes o protótipo da interface esbarra em problemas técnicos e de implementação, muitas imagens e fontes impactam no tamanho total do firmware que pode impossibilitar a implementação da interface proposta, ou necessitar a adição de formas alternativas de armazenamento de dados. Microcontroladores de forma geral não possuem GPU (alguns sim, exemplo: <a href="https://www.st.com/en/microcontrollers-microprocessors/stm32mp157.html">STM32MP157</a> ) e isso impacta na performance da interface e muito provavelmente no gasto energético.</p>
+<h2 id="implementando">Implementando</h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Vamos usar muito a documentação do lvgl é importante que você tenha o site aberto e a consulte sempre:</p>
+<ul>
+<li><a href="https://docs.lvgl.io/8/">https://docs.lvgl.io/8/</a></li>
+</ul>
+</div>
+<p>O LVGL possui vasta documentação e muitos bons exemplos (testamos vários e todos funcionaram no embarcado), neste laboratório iremos usar alguns widgets do LVGL e aos poucos vamos customizando eles.</p>
+<h3 id="preparando-firmware">Preparando firmware</h3>
+<p>Vamos criar uma nova função chamada de <code>void lv_termostato(void){ }</code> onde iremos fazer a implementação da interface do termostato. Além de criarmos esta função, teremos que modificar a <code>task_lcd</code> para chamar a nova função.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Tarefa</p>
+<form class="exercise-form">
+<p>Modifique o fimrware original incluindo a função <code>lv_termostato</code> e modificando a <code>task_lcd</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="gi">+void lv_termostato(void) {</span>
+<span class="gi">+    lv_obj_t * labelBtn1;</span>
+
+<span class="gi">+    lv_obj_t * btn1 = lv_btn_create(lv_scr_act());</span>
+<span class="gi">+    lv_obj_add_event_cb(btn1, event_handler, LV_EVENT_ALL, NULL);</span>
+<span class="gi">+    lv_obj_align(btn1, LV_ALIGN_CENTER, 0, -40);</span>
+
+<span class="gi">+    labelBtn1 = lv_label_create(btn1);</span>
+<span class="gi">+    lv_label_set_text(labelBtn1, &quot;Teste&quot;);</span>
+<span class="gi">+    lv_obj_center(labelBtn1);</span>
+<span class="gi">+</span>
+<span class="gi">+}</span>
+
+static void task_lcd(void *pvParameters) {
+
+<span class="gd">-  lv_ex_btn_1();</span>
+<span class="gi">+  lv_termostato();</span>
+
+<span class="w"> </span> ....
+<span class="w"> </span> ....
+}
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-0"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h4 id="background">Background</h4>
+<p>Notem que a interface a ser recriada possui fundo preto, para atingirmos tal objetivo com o LVGL iremos modificar a configuração padrão do LVGL que está localizada em <code>config/lv_conf.h</code>. Neste arquivo procure pelo define <code>LV_THEME_DEFAULT_DARK</code> e modifique para 1.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/exercise_2" id="exercise_2_0">
+<p class="admonition-title">Tarefa</p>
+<form class="exercise-form">
+<ol>
+<li>Modifique o define <code>LV_THEME_DEFAULT_DARK</code> de <code>0</code> para <code>1</code></li>
+<li>Teste no uC</li>
+</ol>
+<p>Agora deve estar mostrando um fundo preto.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-1"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h4 id="tamanho-da-fonte">Tamanho da fonte</h4>
+<p>Vocês notaram que a fonte padrão do LCD está meio pequena? Conseguimos ajustar isso no LVGL escolhendo uma fonte maior. O LVGL disponibiliza alguns tamanhos de fonte de uma mesma classe (MontSerrat). A lista de fontes está no arquivo de configuração <code>src/config/lv_conf.h</code>. Neste arquivo você deve encontrar algo como:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/*Montserrat fonts with ASCII range and some symbols using bpp = 4</span>
+<span class="cm"> *https://fonts.google.com/specimen/Montserrat*/</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_8  0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_10 0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_12 0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_14 1</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_16 0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_18 0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_20 0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_22 0</span>
+<span class="cp">#define LV_FONT_MONTSERRAT_24 0</span>
+<span class="p">...</span>
+</code></pre></div></td></tr></table></div>
+<p>Para recriar a interface iremos usar um tamanho de fonte um pouco maior que o padrão (14) do LVGL, para isso iremos utilizar a fonte de tamanho 24. Isso é feito em duas etapas:</p>
+<ol>
+<li>Ativando a fonte no arquivo de configuração</li>
+<li>Configurando a nova fonte como padrão</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Sistemas Embarcados</p>
+<p>O LVGL não inclui todas as fontes por padrão (para o código não ficar muito grande). Sistemas embarcados sofrem com falta de memória. </p>
+<table>
+<thead>
+<tr>
+<th>Fonte padrão</th>
+<th>Program Memory Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>14</td>
+<td>Program Memory Usage : 235852 bytes   11,2 % Full</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Program Memory Usage : 250904 bytes   12,0 % Full</td>
+</tr>
+</tbody>
+</table>
+<p>O LVGL não lida com fontes de forma avançada, cada letra da fonte é uma matriz que contém os pixels a serem associados. Quanto maior a fonte maior precisa ser essa matriz e mais memória de programa utiliza.</p>
+<p><mark>Parece pouca diferença né? Mas não é! Vamos sofrer um pouco com isso na nossa próxima APS.</mark></p>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/exercise_3" id="exercise_3_0">
+<p class="admonition-title">Tarefa</p>
+<form class="exercise-form">
+<p>Modifique o arquivo <code>lv_conf.h</code> para:</p>
+<ol>
+<li>Incluir a fonte tamanho 24 no projeto
+<div class="highlight"><pre><span></span><code>#define LV_FONT_MONTSERRAT_12    0
+#define LV_FONT_MONTSERRAT_14    0
+...
+<span class="gi">+#define LV_FONT_MONTSERRAT_24   1</span>
+</code></pre></div></li>
+<li>Torne a fonte tamanho 24 padrão
+<div class="highlight"><pre><span></span><code>/*Always set a default font*/
+<span class="gi">+#define LV_FONT_DEFAULT &amp;lv_font_montserrat_24</span>
+</code></pre></div></li>
+<li>Teste no uC.</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-2"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="identificando-widgets">Identificando widgets</h2>
+<p>A primeira etapa após ter a interface definida é identificar quais widgets podem ser utilizados para montar a interface. </p>
+<div class="admonition exercise short tag-short-text tag-text-exercise editable" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/short_1" id="short_1_0">
+<p class="admonition-title">Exercise<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Identifique quais widgets você usaria para reconstruir a imagem a seguir:</p>
+<p><a class="glightbox" href="../imgs/lab.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/lab.svg" width="400" /></a></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Acesse a página do LVGL e de uma explorada nos widths que estão disponíveis:</p>
+<ul>
+<li><a href="https://docs.lvgl.io/master/widgets/core/index.html">https://docs.lvgl.io/master/widgets/core/index.html</a></li>
+</ul>
+</div>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Podemos construir a tela toda usando apenas Botões e Labels.</p>
+<ul>
+<li>(a): lv_label</li>
+<li>(b): lv_button</li>
+</ul>
+<p>Os botões que incluem uma imagem, como o de power, memória, ...., podem ser botões com "símbolos" no lugar do texto.</p>
+</div>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-3"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="botoes">Botões</h2>
+<div class="admonition info">
+<p><a href="https://docs.lvgl.io/master/widgets/btn.html">https://docs.lvgl.io/master/widgets/btn.html</a></p>
+</div>
+<p>O <code>lv_button</code> permite que criemos um ou mais botões, os botões podem ou não ter um label associado a ele. Podemos associar para cada botão uma função de handler que será chamada assim que um evento neste botão for detectado, a seguir alguns eventos que podem ser gerados por um objeto:</p>
+<ul>
+<li><code>LV_EVENT_PRESSED</code> An object has been pressed</li>
+<li><code>LV_EVENT_PRESSING</code> An object is being pressed (called continuously while pressing)</li>
+<li><code>LV_EVENT_PRESS_LOST</code> An object is still being pressed but slid cursor/finger off of the object</li>
+<li><code>LV_EVENT_SHORT_CLICKED</code> An object was pressed for a short period of time, then released. Not called if scrolled.</li>
+<li><code>LV_EVENT_LONG_PRESSED</code> An object has been pressed for at least the long_press_time specified in the input device driver. Not called if scrolled.</li>
+<li>A lista completa pode ser acessada na página de Events: <a href="https://docs.lvgl.io/master/overview/event.html">https://docs.lvgl.io/master/overview/event.html</a></li>
+</ul>
+<p>O exemplo fornecido na função (<code>lv_ex_btn_1</code>) cria um botão chamado <code>btn1</code> e o alinha no centro da tela, a função <code>event_handler</code> foi associada como callback deste widget, assim que um evento ocorrer a mesma será executada.</p>
+<div class="highlight"><pre><span></span><code><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">btn1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">());</span>
+<span class="n">lv_obj_add_event_cb</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span><span class="w"> </span><span class="n">event_handler</span><span class="p">,</span><span class="w"> </span><span class="n">LV_EVENT_ALL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span><span class="w"> </span><span class="n">LV_ALIGN_CENTER</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">-40</span><span class="p">);</span>
+</code></pre></div>
+<p>Depois cria um <code>label</code> e o associa ao botão:</p>
+<div class="highlight"><pre><span></span><code><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn1</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Teste&quot;</span><span class="p">);</span>
+<span class="n">lv_obj_center</span><span class="p">(</span><span class="n">label</span><span class="p">);</span>
+</code></pre></div>
+<p>Conforme a <a href="https://docs.lvgl.io/master/widgets/obj.html">documentação do lvgl para objetos</a> Podemos alinhar um objeto em vários locais diferentes na tela. Isso é feito pela função <code>lv_obj_align(obj, obj_ref, LV_ALIGN_________, x_ofs, y_ofs)</code> que recebe como parâmetro:</p>
+<ul>
+<li><code>obj</code> is the object to align.</li>
+<li><code>obj_ref</code> is a reference object. obj will be aligned to it. If <code>obj_ref = NULL</code>, then the parent of <code>obj</code> will be used.</li>
+<li>The third argument is the type of alignment. These are the possible options: </li>
+</ul>
+<p><a class="glightbox" href="https://docs.lvgl.io/master/_images/align.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://docs.lvgl.io/master/_images/align.png" width="500" /></a></p>
+<blockquote>
+<p>Extraído da documentação.</p>
+</blockquote>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-4"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="botao-de-power">Botão de power</h3>
+<p>Agora vamos criar os botões da interface proposta, primeiro iremos criar o botão de <strong>power</strong> modificando o botão atual de teste.</p>
+<h4 id="1-posicao">1. Posição</h4>
+<p>Na primeira etapa iremos alinhar o botão no canto inferior esquerdo conforme figura a seguir:</p>
+<p><a class="glightbox" href="../imgs/lab-botoes.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/lab-botoes.svg" width="500" /></a></p>
+<p>Um objeto pode ser alinhado com relação a um <em>screen</em> ou a um outro objetivo de referência. Nesse caso vamos usar o botão de power alinhado ao canto inferior da tela.</p>
+<ul>
+<li>Para alinhar com relação a tela usar: <code>lv_obj_align(obj, align, x, y);</code></li>
+<li>Para alinhar com relação a outro objeto usar: <code>lv_obj_align_to(obj_to_align, reference_obj, align, x, y);</code></li>
+</ul>
+<p>Os parâmetros X e Y são um deslocamento do alinhamento e o argumento <em>aling</em> pode ser qualquer uma dos itens a seguir:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Interno</label><label for="__tabbed_1_2">Externo</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Utilizando a referência interna de um objeto:</p>
+<ul>
+<li><code>LV_ALIGN_TOP_LEFT</code></li>
+<li><code>LV_ALIGN_TOP_MID</code></li>
+<li><code>LV_ALIGN_TOP_RIGHT</code></li>
+<li><code>LV_ALIGN_BOTTOM_LEFT</code></li>
+<li><code>LV_ALIGN_BOTTOM_MID</code></li>
+<li><code>LV_ALIGN_BOTTOM_RIGHT</code></li>
+<li><code>LV_ALIGN_LEFT_MID</code></li>
+<li><code>LV_ALIGN_RIGHT_MID</code></li>
+<li><code>LV_ALIGN_CENTER</code></li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>Utilizando a referência externa de um objeto:</p>
+<ul>
+<li><code>LV_ALIGN_OUT_TOP_LEFT</code></li>
+<li><code>LV_ALIGN_OUT_TOP_MID</code></li>
+<li><code>LV_ALIGN_OUT_TOP_RIGHT</code></li>
+<li><code>LV_ALIGN_OUT_BOTTOM_LEFT</code></li>
+<li><code>LV_ALIGN_OUT_BOTTOM_MID</code></li>
+<li><code>LV_ALIGN_OUT_BOTTOM_RIGHT</code></li>
+<li><code>LV_ALIGN_OUT_LEFT_TOP</code></li>
+<li><code>LV_ALIGN_OUT_LEFT_MID</code></li>
+<li><code>LV_ALIGN_OUT_LEFT_BOTTOM</code></li>
+<li><code>LV_ALIGN_OUT_RIGHT_TOP</code></li>
+<li><code>LV_ALIGN_OUT_RIGHT_MID</code></li>
+<li><code>LV_ALIGN_OUT_RIGHT_BOTTOM</code></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="admonition exercise choice tag-choice-exercise" data-answer-idx="2" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/choice_1" id="choice_1_0">
+<p class="admonition-title">Pergunta</p>
+<form class="exercise-form">
+<p>Supondo dois objetos como ilustrado a seguir.
+Qual deve ser a função para alinharmos o obj2 ao lado do obj1?</p>
+<p>A ideia é usar o btn1 como referência.</p>
+<div class="highlight"><pre><span></span><code>    +-------++-------+  
+    |  btn1 ||  btn2 | 
+    |       ||       | 
+    +-------++-------+ 
+</code></pre></div>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>lv_obj_align_to(btn2, btn1, LV_ALIGN_BOTTOM_RIGHT, 0, 0);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>lv_obj_align_to(btn1, btn2, LV_ALIGN_BOTTOM_RIGHT, 0, 0);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="3" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>lv_obj_align_to(btn1, btn2, LV_ALIGN_RIGHT, 0, 0);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>lv_obj_align_to(btn2, btn1, LV_ALIGN_RIGHT, 0, 0);</code>
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<ul>
+<li>O primeiro parametro é o obj a ser alinhado: <code>obj2</code></li>
+<li>O segundo o obj a ser usado de referência: <code>obj1</code></li>
+<li>Queremos alinhas a direita e no meio.</li>
+<li>Queremos o botão 2 "colado" no botão 1</li>
+</ul>
+</div>
+</div>
+<div class="admonition exercise choice tag-choice-exercise" data-answer-idx="1" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/choice_2" id="choice_2_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Supondo dois objetos como ilustrado a seguir. 
+Qual deve ser a função para alinharmos o obj2 ao lado do obj1?</p>
+<ul>
+<li>A ideia é usar o btn1 como referência.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>    +-------+ 
+    |  btn1 | 
+    |       | 
+    +-------+ +-------+
+              |  btn2 |
+              |       |
+              +-------+
+</code></pre></div>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>lv_obj_align_to(btn1, btn2, LV_ALIGN_BOTTOM_RIGHT, 0, 0);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="3" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>lv_obj_align_to(btn2, btn1, LV_ALIGN_RIGHT, 0, 0);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>lv_obj_align_to(btn2, btn1, LV_ALIGN_RIGHT, 0, 0);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>lv_obj_align_to(btn2, btn1, LV_ALIGN_BOTTOM_RIGHT, 0, 0);</code>
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Agora o truque é que queremos alinhar com o "Bottom" do botão 1. Por isso
+usamos o <code>LV_ALIGN_BOTTOM_RIGHT</code></p>
+</div>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-5"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/exercise_4" id="exercise_4_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Alinhe o botão <code>btn1</code> da função <code>lv_termostato</code> para o canto esquerdo
+inferior da tela.</p>
+<ul>
+<li>Use a funcão <code>lv_obj_align</code> (a referência vai ser a tela).</li>
+<li>Notem que o botão original da figura está um pouco deslocado para direita e para cima.<ul>
+<li>Modifiquem o X e o Y da funcão para obterem esse comportamento.</li>
+</ul>
+</li>
+<li>Teste no uC</li>
+</ul>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-6"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h4 id="2-label-simbolo">2. Label/ Símbolo</h4>
+<p>No nosso código colocamos um "Label" dentro do objeto do botão, é por isso que aparecer o texto "Teste" no botão:</p>
+<div class="highlight"><pre><span></span><code><span class="n">labelBtn1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn1</span><span class="p">);</span>
+<span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">labelBtn1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[  &quot;</span><span class="w"> </span><span class="n">LV_SYMBOL_POWER</span><span class="p">);</span>
+<span class="n">lv_obj_center</span><span class="p">(</span><span class="n">labelBtn1</span><span class="p">);</span>
+</code></pre></div>
+<p>Notem que utilizamos o <code>lv_lavel_create</code> e passamos o <code>btn1</code> para a funcão. Isso faz com que o label pertenća ao objeto btn1.</p>
+<p>Agora vamos trocar o label do btn1 para ser mais condizente com o do nosso modelo de referência. No LVGL podemos utilizar alguns símbolos já pré definidos, os detalhes estão na <a href="https://docs.lvgl.io/master/overview/font.html">documentação de fonts</a> e listados aqui:</p>
+<p><a class="glightbox" href="https://docs.lvgl.io/master/_images/symbols.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://docs.lvgl.io/master/_images/symbols.png" width="300" /></a></p>
+<p>Notem que podemos usar o símbolo <code>LV_SYMBOL_POWER</code> para recriar o botão da interface planejada, para isso é necessário alterar a linha que estamos escrevendo <code>Teste</code> para usar o símbolo em questão. Por exemplo, para adicionarmos o [ seguido do símbolo de power:</p>
+<div class="highlight"><pre><span></span><code><span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">labelBtn1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[  &quot;</span><span class="w"> </span><span class="n">LV_SYMBOL_POWER</span><span class="p">);</span>
+</code></pre></div>
+<p>Vocês podem definir o label como variável global, permitindo assim que outra parte do código altera o valor escrito.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// global</span>
+<span class="k">static</span><span class="w">  </span><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">labelBtn1</span><span class="p">;</span>
+</code></pre></div>
+<div class="admonition task">
+<p class="admonition-title">Task</p>
+<ol>
+<li>Altere o label para ser global</li>
+<li>Modifique o label do botão para mostrar o [ ⏻</li>
+<li>Teste na placa</li>
+</ol>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>O truque aqui foi juntar o [ e o power no mesmo botão, </p>
+<div class="highlight"><pre><span></span><code>    +--------+  
+    |        | 
+    | [   ⏻ | 
+    |        | 
+    +--------+ 
+       ^        
+       | Botão
+</code></pre></div>
+<p>Poderíamos ter feito diferente:</p>
+<div class="highlight"><pre><span></span><code>    +-------++-------+  
+    |       ||       | 
+    |   [   ||   ⏻  | 
+    |       ||       | 
+    +-------++-------+ 
+       ^         ^
+       |         | Botão
+       | Apenas um label 
+</code></pre></div>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-7"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h4 id="3-formatando">3. Formatando</h4>
+<p>Iremos agora criar um estilo próprio e aplicar no botão, um estilo pode conter várias configurações de Tema para um objeto (ou para vários). O exemplo a seguir cria um <code>style</code> com um fundo ROXO e uma borda VERDE.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">lv_termostato</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="n">lv_style_t</span><span class="w"> </span><span class="n">style</span><span class="p">;</span>
+<span class="w">    </span><span class="n">lv_style_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_style_set_bg_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span><span class="w"> </span><span class="n">lv_palette_main</span><span class="p">(</span><span class="n">LV_PALETTE_PURPLE</span><span class="p">));</span>
+<span class="w">    </span><span class="n">lv_style_set_border_color</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span><span class="w"> </span><span class="n">lv_palette_main</span><span class="p">(</span><span class="n">LV_PALETTE_GREEN</span><span class="p">));</span>
+<span class="w">    </span><span class="n">lv_style_set_border_width</span><span class="p">(</span><span class="o">&amp;</span><span class="n">style</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+</code></pre></div>
+<p>E então aplicamos o novo estilo ao botão:</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>   lv_obj_t * btn1 = lv_btn_create(lv_scr_act());
+<span class="w"> </span>   lv_obj_add_event_cb(btn1, event_handler, LV_EVENT_ALL, NULL);
+<span class="w"> </span>   lv_obj_align(btn1, LV_ALIGN_BOTTOM_LEFT, 0, 0);
+<span class="gi">+   lv_obj_add_style(btn1, &amp;style, 0);</span>
+</code></pre></div>
+<p>Também podemos mudar o tamanho de um objeto, como no exemplo a seguir:</p>
+<div class="highlight"><pre><span></span><code>    lv_obj_set_width(btn1, 60);  lv_obj_set_height(btn1, 60);
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Cores</p>
+<p>Existem cores pré definidas no LVGL e para cada cor uma plate entre no link a seguir para acessar a paleta:</p>
+<ul>
+<li><a href="https://docs.lvgl.io/master/overview/color.html#palette">https://docs.lvgl.io/master/overview/color.html#palette</a></li>
+</ul>
+<p>Para usar branco ou preto existe uma função:</p>
+<ul>
+<li>lv_color_white() </li>
+<li>lv_color_black()</li>
+</ul>
+<p>Se quiser, pode formatar a sua própria cor em RGB, usando: <code>lv_color_make(red, green, blue);</code></p>
+</div>
+<div class="admonition task">
+<p class="admonition-title">Task</p>
+<p>Crie um novo tema para o botão faca sentido para o nosso termostato. Precisamos de fundo preto e sem borda!</p>
+<ol>
+<li>Crie o novo estilo</li>
+<li>Aplique ao botão</li>
+<li>Teste e verifique o resultado</li>
+</ol>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-8"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="demais-botoes">Demais botões</h3>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/exercise_5" id="exercise_5_0">
+<p class="admonition-title">Tarefa: Demais botões</p>
+<form class="exercise-form">
+<p>Agora você é capaz de recriar os demais botões da interface, para cada botão crie uma função de callback (similar ao <code>event_handler</code>). </p>
+<p>Implemente:</p>
+<ul>
+<li><code>M</code> (<code>btnMenu</code>/ <code>menu_handler</code>): Menu </li>
+<li><code>Clock</code> (<code>btnClk</code>/ <code>clk_handler</code>): Relógio </li>
+<li><code>^</code> (<code>btnUp</code>/ <code>up_handler</code>): Aumentar (temperatura/ alarme): </li>
+<li><code>v</code> (<code>btnDown</code>/ <code>down_handler</code>): Baixar (temperatura/ alarme)</li>
+</ul>
+<p><mark>Lembre de testar na placa! Vai precisar de ajustes.</mark></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Handlers:</p>
+<ul>
+<li><mark>Crie um handler diferente por botão.</mark></li>
+</ul>
+<p>Alinhamento:</p>
+<ul>
+<li>Pense em como usar o alinhamento a seu favor.</li>
+</ul>
+<p>Símbolos:</p>
+<ul>
+<li>Relógio: Você pode usar um outro símbolo no lugar.</li>
+<li>v, ^: Tem símbolos prontos para isso</li>
+</ul>
+</div>
+<p>Resultado esperado:</p>
+<blockquote>
+<p>O seu pode ficar diferente, mas lembre que a ideia é chegar o mais perto do que da nossa referencia!</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Meu</th>
+<th>Referencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="glightbox" href="../imgs/btn_all.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/btn_all.jpeg" width="300" /></a></td>
+<td><a class="glightbox" href="https://images-na.ssl-images-amazon.com/images/I/51iNUfjxJDL._AC_SL1000_.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://images-na.ssl-images-amazon.com/images/I/51iNUfjxJDL._AC_SL1000_.jpg" width="300" /></a></td>
+</tr>
+</tbody>
+</table>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../Lab-RTOS-LCD-LVGL-START/"
+               class="ah-prev"
+               title="Lab RTOS LCD LVGL START">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Lab RTOS LCD LVGL START</span>
+            </a>
+          
+          
+            <a href="../Lab-RTOS-LCD-LVGL-LAB2/"
+               class="ah-next"
+               title="Lab RTOS LCD LVGL LAB2">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Lab RTOS LCD LVGL LAB2</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

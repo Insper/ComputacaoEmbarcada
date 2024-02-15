@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab 8 - TC - RTC - RTT - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Lab 8 - TC - RTC - RTT</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#exemplos">Exemplos</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#lab">Lab</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-8-tc-rtc-rtt">Lab 8 - TC - RTC - RTT</h1>
+<p>Neste laboratório iremos trabalhar com os periféricos de contagem de tempo
+do nosso microcontrolador.</p>
+<table>
+<thead>
+<tr>
+<th>Lab 5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data limite para entrega</strong>: <mark>01/12/2023</mark></td>
+</tr>
+<tr>
+<td>Entregue o código pelo repositório do <mark><a href="https://classroom.github.com/a/gQhBw8O9">Classroom</a></mark></td>
+</tr>
+<tr>
+<td>Preencha para entregar <mark><a href="https://docs.google.com/forms/d/e/1FAIpQLScx-alJICVPLDiV9tf_gAUZCRmYkU5XC5L0kH5MUq3jnFMGAQ/viewform?usp=sf_link">Google forms</a></mark></td>
+</tr>
+</tbody>
+</table>
+<p>Os periféricos apresentados neste laboratório são:</p>
+<ul>
+<li>Real Time Clock - RTC</li>
+<li>Timer Counter - TC</li>
+</ul>
+<p>O laboratório é formado por duas partes:</p>
+<ul>
+<li>
+<p>Parte 1 (mínimo): </p>
+<ol>
+<li>Entender os exemplos (TC/RTC)</li>
+<li>Incorporar todos os exemplos em um único projeto</li>
+<li>Pisca pisca </li>
+</ol>
+</li>
+<li>
+<p>Parte 2:</p>
+<ul>
+<li><strong>C+</strong>: fazer outro LED piscar com TC</li>
+<li><strong>B</strong> : Exibir a hora atual no OLED </li>
+<li><strong>A</strong> : Usar IRQ do segundos do RTC</li>
+</ul>
+</li>
+</ul>
+<h2 id="exemplos">Exemplos</h2>
+<p>Nesse lab iremos trabalhar com três periféricos que lidam com "tempo": o TimerCounter (TC) que temos no total de quatro unidades TC (TC0 ~ TC3) e cada um com três contadores; o Real-time Timer (RTT) que só temos um e o Real-time Clock (RTC) que também só temos um e funciona como um relógio/calendário. </p>
+<p>Um pouco mais sobre os periféricos:</p>
+<ul>
+<li>TC: Faz várias coisas, mas na disciplina iremos utilizá-lo para gerar interrupções de tempo maiores que 2Hz (<strong>ele não consegue gerar tempos muito lentos!</strong>)</li>
+<li>RTT: É um contador que consegue gerar praticamente qualquer frequência (vamos usar para gerar frequências lentas)</li>
+<li>RTC: É um como um calendário com relógio, ele conta anos, meses, dias, horas, minutos e segundos. E possui um alarme que pode ser configurado para gerar uma interrupção em um determinado momento. </li>
+</ul>
+<p>Nós fornecemos para cada periférico um exemplo diferente:</p>
+<table>
+<thead>
+<tr>
+<th>Periférico exemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/TC-IRQ"><code>Perifericos/TC-IRQ</code></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/RTC-IRQ"><code>Perifericos/RTC-IRQ</code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Cada exemplo possui o seu próprio <code>README</code> que explica de forma ampla os periféricos. Note que todos esses exemplos estão operando por interrupção! Onde cada periférico possui o seu <code>handler</code> para resolver a interrupção.</p>
+<div class="admonition exercise self self-progress" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Para cada exemplo (TC, RTC):</p>
+<ol>
+<li>Leia o README</li>
+<li>Programe a placa (e veja os LEDs piscando!)</li>
+<li>Entenda o código</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-0"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<div class="admonition exercise choice tag-choice-exercise" data-answer-idx="4" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/choice_1" id="choice_1_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Qual frase a seguir é <strong>Correta</strong>?</p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    O RTC tem resolucão de ms
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    O TC pode ser configurado para gerar uma frequência de 10s
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="3" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    Cada RTT possui três canais
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    O nosso microcontrolador possui até 3 RTT
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="4" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    O RTT pode gerar duas interrupcões: incremento e alarme.
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<ol>
+<li><img alt="❌" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/274c.svg" title=":x:" /> O TC pode ser configurado para gerar uma frequência de 10s</li>
+</ol>
+<p>O tempo mínimo que ele pode contar é 1s.</p>
+<ol>
+<li><img alt="❌" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/274c.svg" title=":x:" /> O RTC tem resolucão de ms</li>
+</ol>
+<p>O RTC conta segundos!</p>
+<ol>
+<li><img alt="❌" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/274c.svg" title=":x:" /> O nosso microcontrolador possui até 3 RTT</li>
+</ol>
+<p>Não só possui um. Quem tem 3 é o TC</p>
+<ol>
+<li><img alt="❌" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/274c.svg" title=":x:" /> Cada RTT possui três canais</li>
+</ol>
+<p>Não! Quem possui três canais é o TC</p>
+<ol>
+<li><img alt="✅" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/2705.svg" title=":white_check_mark:" /> O RTT pode gerar duas interrupcões: incremento e alarme.</li>
+</ol>
+<p>Sim!! Podemos configurar no RTT dois modos de IRQ</p>
+</div>
+</div>
+<div class="admonition exercise choice tag-choice-exercise" data-answer-idx="1" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/choice_2" id="choice_2_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Como deve ser a chamada de função para usarmos o TC2 canal 2 gerando interrupção a 20Hz?</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">TC_init</span><span class="p">(</span><span class="n">Tc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TC</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ID_TC</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TC_CHANNEL</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">freq</span><span class="p">){</span>
+</code></pre></div>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>TC_init(TC2, ID_TC2, 1, 20);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="3" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>TC_init(TC8, ID_TC2, 3, 20);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>TC_init(TC8, ID_TC8, 8, 20);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>TC_init(TC2, ID_TC8, 2, 20);</code>
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>O TC funciona diferente do PIO, onde o PIO possuia apenas uma conexão com o NVIC para avisar a interrupcão em qualquer um dos 32 pinos. O TC possui um sinal de conexão com o NVIC para cada canal e esses canais possuem um ID único, conforme figura a seguir:
+<a class="glightbox" href="https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/TC-IRQ/imgs/TC/tc.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://raw.githubusercontent.com/Insper/SAME70-examples/master/Perifericos-uC/TC-IRQ/imgs/TC/tc.png" /></a></p>
+</div>
+</div>
+<div class="admonition exercise choice tag-choice-exercise" data-answer-idx="3" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/choice_3" id="choice_3_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Se usarmos o TC1 canal 0 qual deve ser a funcão de handler?</p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>TC0_Handler</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="5" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>TC5_Handler</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>TC1_Handler</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="3" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>TC3_Handler</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>TC2_Handler</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="4" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>TC4_Handler</code>
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>O handler a ser usado tem realacão com o ID do canal, no caso do canal 0 do TC1 o ID é o ID_TC3 e o handler o <code>TC3_Handler</code>.</p>
+</div>
+</div>
+<div class="admonition exercise choice tag-choice-exercise" data-answer-idx="2" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/choice_4" id="choice_4_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Um colega está desenhando uma solução para um sistema embarcado que precisa processar dados nas frequências: 1Hz, 2Hz e 44200Hz. Pensando em otimizar o uso energético do uC ele propôs usar um único TC e configurar para cada canal uma frequência diferente:</p>
+<ul>
+<li><code>TC0</code> / <code>ID_TC0</code> @ 1Hz</li>
+<li><code>TC0</code> / <code>ID_TC1</code> @ 2Hz</li>
+<li><code>TC0</code> / <code>ID_TC2</code> @ 44200Hz </li>
+</ul>
+<p>O que você faz?</p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    Reprova sabendo o porque não funciona.
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    Fica desconfiado e não sabe responder.
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    Aprova achando uma boa ideia!
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Aqui tem uma pegadinha! Para o TC contar "tempo" ele precisa usar como base um clock gerado pelo PMC, o TC não consegue usar mais de uma base de tempo por periférico (a mesma base se aplica a todos os canais que ele controla). Para as frequências 1Hz e 2Hz pode ser que funcione usar o mesmo TC pois a base de tempo que a função tc_init vai encontrar deve ser a mesma, mas já para a frequência de 44200Hz a base deve ser outra (é ordens de grandeza maior que as outras frequências) e usar o mesmo TC não vai funcionar!</p>
+<p>A melhor solução aqui seria, usar um TC para as frequências mais baixas e outro apenas para a maior frequência:</p>
+<ul>
+<li><code>TC0</code> / <code>ID_TC0</code> @ 1Hz</li>
+<li><code>TC0</code> / <code>ID_TC1</code> @ 2Hz</li>
+<li><code>TC1</code> / <code>ID_TC3</code> @ 44200Hz </li>
+</ul>
+<p>Essa parte da escolha da frequência é realizado dentro da função <code>TC_init</code> nas linhas:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/** Configura o TC para operar em  freq hz e interrupçcão no RC compare */</span>
+<span class="n">tc_find_mck_divisor</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="n">ul_sysclk</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ul_div</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ul_tcclks</span><span class="p">,</span><span class="w"> </span><span class="n">ul_sysclk</span><span class="p">);</span>
+<span class="n">tc_init</span><span class="p">(</span><span class="n">TC</span><span class="p">,</span><span class="w"> </span><span class="n">TC_CHANNEL</span><span class="p">,</span><span class="w"> </span><span class="n">ul_tcclks</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TC_CMR_CPCTRG</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+<div class="admonition exercise choice tag-choice-exercise" data-answer-idx="3" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/choice_5" id="choice_5_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Qual item configura o RTT para gerar uma interrupção de alarme em 13s. Lembre dos argumentos da funcão:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/** </span>
+<span class="cm">* Configura RTT</span>
+<span class="cm">*</span>
+<span class="cm">* arg0 pllPreScale  : Frequência na qual o contador irá incrementar</span>
+<span class="cm">* arg1 IrqNPulses   : Valor do alarme </span>
+<span class="cm">* arg2 rttIRQSource : Pode ser uma </span>
+<span class="cm">*     - 0: </span>
+<span class="cm">*     - RTT_MR_RTTINCIEN: Interrupção por incremento (pllPreScale)</span>
+<span class="cm">*     - RTT_MR_ALMIEN : Interrupção por alarme</span>
+<span class="cm">*/</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">RTT_init</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">freqPrescale</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">IrqNPulses</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">rttIRQSource</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="3" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>RTT_init(1, 13, RTT_MR_ALMIEN);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>RTT_init(10, 130, RTT_MR_ALMIEN);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>RTT_init(13, 1, RTT_MR_ALMIEN);</code>
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    <code>RTT_init(4, 13, RTT_MR_ALMIEN);</code>
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Vamos recapitular o que a função <code>RTT_init</code> recebe de argumentos:</p>
+<ul>
+<li>arg0: define a frequência na qual o contador interno do RTT irá operar.</li>
+<li>arg1: se configurado a interrupção de alarme, qual o seu valor</li>
+<li>arg2: quais modos de IRQ vão estar ativados.</li>
+</ul>
+<p>Agora vamos analisar as respostas:</p>
+<ol>
+<li><img alt="❌" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/274c.svg" title=":x:" /> <code>RTT_init(4, 13, RTT_MR_ALMIEN)</code></li>
+</ol>
+<p>Configura o RTT para operar a 4hz (0.25s) e configuramos o alarme para quando o contador chegar em 13, ou seja: <code>13*0.25 = 3.25s*</code>. Poderíamos ter colocado 52 no lugar de 13, assim o alarme estaria certo: <code>0.25*52 = 13s*</code>.</p>
+<ol>
+<li><img alt="❌" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/274c.svg" title=":x:" /> <code>RTT_init(13, 1, RTT_MR_ALMIEN);</code></li>
+</ol>
+<p>Configura o RTT para operar com 13 incrementos por segundo, mas o alarme foi configurado para <code>1</code>, ou seja: <code>1/13 * 1 = 0.078s</code>.</p>
+<ol>
+<li><img alt="✅" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/2705.svg" title=":white_check_mark:" />  <code>RTT_init(10, 130, RTT_MR_ALMIEN);</code></li>
+</ol>
+<p>Essa aqui é uma opção de resposta correta. Incremento de 10x por segundo e alarme configurado para 130, ou seja: <code>130/10 = 13s</code></p>
+<ol>
+<li><img alt="✅" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/2705.svg" title=":white_check_mark:" />  <code>RTT_init(1, 13, RTT_MR_ALMIEN);</code></li>
+</ol>
+<p>Outra opção de resposta correta. Incremento de 1x por segundo e alarme configurado para 13, ou seja: <code>13/1= 13s</code></p>
+<p><strong>Notem que temos duas respostas corretas, mas elas possuem uma sutil e importante diferença: O valor que o contador do RTT atinge antes do alarme.</strong></p>
+</div>
+</div>
+<div class="admonition exercise long tag-long-text tag-text-exercise editable" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/long_1" id="long_1_0">
+<p class="admonition-title">Exercise<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Imagine que você está fazendo um datalogger que armazena Valores e <a href="https://en.wikipedia.org/wiki/Timestamp">TimeStamp</a>(TS), como você faz para:</p>
+<ol>
+<li>Fazer com que o RTC sincronize com o horário/ calendário real?</li>
+<li>O que acontece se acabar a bateria do equipamento? Vamos perder a configuracão do RTC?</li>
+</ol>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>Bom.... não tem uma única resposta para essas perguntas, tudo vai depender um pouco de como é o sistema embarcado que você está desenvolvendo/ projetando, mas vamos analisar algumas alternativas aqui.</p>
+<p><strong>Fazer com que o RTC sincronize com o horário/ calendário real?</strong></p>
+<p>O sistema embarcado tem conexão com a internet? Se tiver facilita um pouco a solução. Com a internet podemos consutlar um dos servidor de relógio disponível, existe até um protocolo chamado de <a href="https://pt.wikipedia.org/wiki/Network_Time_Protocol">Network Time Protocol</a> (NTP) criado para esse fim de sincronizacão de relógios e vários servidores são públicos e estão espalhados pelo globo: </p>
+<p><a class="glightbox" href="http://www.pi-time.ca/wp-content/uploads/2018/01/Pi-Time-Clients-Jan-11-2018.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="http://www.pi-time.ca/wp-content/uploads/2018/01/Pi-Time-Clients-Jan-11-2018.jpg" /></a></p>
+<blockquote>
+<p>Alguns servidores, fonte: <a href="http://www.pi-time.ca/">http://www.pi-time.ca/</a></p>
+</blockquote>
+<p>Se não tiver conexão com a internet, a solucão é configurar o relógio no próprio dispositivo (via botões e displays) ou conectar o dispositivo em algum outro device via bluetooth/usb/... e fazer a configuracão por um programa/aplicativo próprio.</p>
+<p><strong>O que acontece se acabar a bateria do equipamento? Vamos perder a configuracão do RTC?</strong></p>
+<p>Muitas vezes o RTC usa uma bateria auxiliar para que ele não se desconfigure quando o sistema principal fica sem energia. Pegue como exemplo o seu notebook, mesmo quando acaba a bateria ele volta com a hora correta. A vida útil dessa bateria depende de vários fatores, mas é comum durar anos.</p>
+</div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Anti tamper RTC</p>
+<p>O RTC é um dos itens de um sistema embarcado que os hackers gostam de atacar, deem uma olhada nisso:</p>
+<ul>
+<li><a href="https://www.eetimes.com/anti-tamper-real-time-clock-rtc-make-your-embedded-system-secure/">https://www.eetimes.com/anti-tamper-real-time-clock-rtc-make-your-embedded-system-secure/</a></li>
+</ul>
+</div>
+<h2 id="lab">Lab</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Lembre de sempre utilizar fila ou semáforo para comunicar <strong>IRQ</strong> e <strong>TASK</strong></p>
+</div>
+<p>Use o código fornecido no repositório: <code>RTOS-OLED-Xplained-Pro</code>. </p>
+<h3 id="conceito-c">Conceito C</h3>
+<p>No código do <code>RTOS-OLED</code>, vocês devem configurar os botões e os LEDs da placa OLED e então utilizando os periféricos fazer:</p>
+<ul>
+<li>Que o <code>LED1</code> pisque na frequência de 4Hz, para isso utilize o <strong>TC</strong>;</li>
+<li>Fazer com que o <code>LED2</code> pisque a uma frequência de 0.25Hz, para isso utilize o <strong>RTT</strong>;</li>
+<li>Piscar o <code>LED3</code> depois de 20 segundos do botão 1 da placa OLED ter sido pressionado, para isso utilize o alarme do RTC.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Abrir o código atual e o exemplo e ir trazendo as funções e defines que precisa usar, não esqueça de chamar as funções no <code>main</code>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Você vai precisar incluir no <code>ASF WIZARD</code> os drivers do: RTT e RTT</p>
+<p><mark>O TC já foi adicionado no código exemplo, não adicone o outro que vai dar problema!!!!</mark></p>
+<p><a class="glightbox" href="../imgs/ASF.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/ASF.png" /></a></p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>O RTC tem uma função que você consegue buscar no periférico a hora atual: <a href="https://asf.microchip.com/docs/latest/same70/html/group__sam__drivers__rtc__group.html#ga91b1a1ac85e5bb5effefe275b824fe6a"><code>rtc_get_time()</code></a>, você pode então configurar um alarme para daqui 20s. </p>
+<ul>
+<li>Leia a função e entenda os seus parâmetros!! </li>
+</ul>
+</div>
+<div class="admonition exercise self self-progress" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/exercise_2" id="exercise_2_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>No código do OLED1:</p>
+<ol>
+<li>Configurar os pinos e os LEDs da placa OLED1</li>
+<li>Faça o LED da placa piscar a 5Hz usando um TC.</li>
+<li>Fazer com que o <code>LED1</code> pisque a 4Hz usando o TC</li>
+<li>Fazer com que o <code>LED2</code> inverta seu estado a cada 4s usando o RTT</li>
+<li>Fazer com o que o <code>LED3</code> inicie apagado e pisque uma vez após 20 segundos do botão 1 ter sido pressionado, use o RTC.</li>
+<li>Entrar em sleepmode sempre que possível</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/exercise_3" id="exercise_3_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Exiba a hora no formato (HH:MM:SS) no display OLED, a hora deve ser atualizada a todo segundo!</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Para executar isso você deverá ser capaz de saber quando que o segundo mudou, duas são as opções:</p>
+<ol>
+<li>Usar um novo TC configurado com 1hz</li>
+<li>Pedir para o RTC gerar uma IRQ a cada mudança de segundo</li>
+</ol>
+<p>A segunda opção você faz modificando a função de init_rtc:</p>
+<div class="highlight"><pre><span></span><code><span class="n">RTC_init</span><span class="p">(</span><span class="n">RTC</span><span class="p">,</span><span class="w"> </span><span class="n">ID_RTC</span><span class="p">,</span><span class="w"> </span><span class="n">rtc_initial</span><span class="p">,</span><span class="w"> </span><span class="n">RTC_IER_ALREN</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">RTC_IER_SECEN</span><span class="p">);</span>
+</code></pre></div>
+<p>E agora você consegue dentro do <code>RTC_handler</code> saber quando você entrou
+na IRQ pelo segundo:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/*  Verifica por qual motivo entrou</span>
+<span class="cm">*  na interrupcao, se foi por segundo</span>
+<span class="cm">*  ou Alarm</span>
+<span class="cm">*/</span>
+<span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">ul_status</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">RTC_SR_SEC</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RTC_SR_SEC</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">//    </span>
+<span class="w">    </span><span class="c1">//  Entrou por segundo! </span>
+<span class="w">    </span><span class="c1">// </span>
+<span class="w">    </span><span class="n">rtc_clear_status</span><span class="p">(</span><span class="n">RTC</span><span class="p">,</span><span class="w"> </span><span class="n">RTC_SCCR_SECCLR</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Você nunca deve atualizar display dentro de interrupção (<strong>handler</strong>)! Sempre na task!.</p>
+</div>
+<h3 id="conceito-b-melhorando">Conceito B: Melhorando</h3>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/exercise_4" id="exercise_4_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Quando o botão 1 da placa OLED for pressionado, após 20 segundos, faça o LED 3 piscar com um novo TC, <strong>substituindo essa função que antes era do RTC</strong>.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h3 id="conceito-a">Conceito A:</h3>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/exercise_5" id="exercise_5_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Usando os botões do OLED, permita ajustar a hora e o minuto!</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/"
+               class="ah-prev"
+               title="Lab RTOS LCD LVGL LAB2">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Lab RTOS LCD LVGL LAB2</span>
+            </a>
+          
+          
+            <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/"
+               class="ah-next"
+               title="Lab 9 - RTOS - Mutex">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Lab 9 - RTOS - Mutex</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

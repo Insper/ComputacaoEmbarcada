@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>APS 2 Oximetro - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="apa-2-oximetro">APA 2 - Oxímetro</h1>
+<div class="admonition warning">
+<p>Não estamos desenvolvendo um equipamento médico, mas sim um protótipo acadêmico.</p>
+</div>
+<p>Desenvolver um protótipo de um oxímetro, dispositivo médico para medir indiretamente a quantidade de oxigênio no sangue. O dispositivo será composto por um display de LCD colorido sensível ao toque (touchscreen), a interface com o usuário será através do display.</p>
+<p><a class="glightbox" href="https://pfarma.com.br/images/noticias/oximetro.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://pfarma.com.br/images/noticias/oximetro.jpg" width="300" /></a></p>
+<blockquote>
+<p>fonte: <a href="https://pt.wikipedia.org/wiki/Ox%C3%ADmetro_de_pulso">https://pt.wikipedia.org/wiki/Ox%C3%ADmetro_de_pulso</a></p>
+</blockquote>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Para começar crie o repositório no classroom:</p>
+<ul>
+<li><a href="https://classroom.github.com/g/Sp5pYx1p">https://classroom.github.com/g/Sp5pYx1p</a></li>
+</ul>
+<p>Você deve utilizar como base o código disponível no repositório! </p>
+</div>
+<h2 id="firmware">firmware</h2>
+<p>O projeto deve ser desenvolvido usando um <a href="https://www.mddionline.com/software/rtos-medical-devices-101"> RTOS</a>, no desenvolvimento devem isolar as tarefas de processamento de dados das de exibicão (LCD).</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>O freeRTOS não possui certificação na FDA, neste caso deveríamos optar por um RTOS que possui a aprovacão, na maioria dos casos são sistemas com licença comercial, tal como:</p>
+<ul>
+<li><a href="http://www.highintegritysystems.com/safertos/">SafeRTOS</a></li>
+<li><a href="https://lp.windriver.com/">vxworks</a></li>
+</ul>
+</div>
+<p>O plano original era utilizar o sensor <a href="https://www.filipeflop.com/produto/sensor-de-batimento-cardiaco-e-oximetro-max30100/">max30100</a> (incluso no kit de vocês), mas após muito tempo tentando não conseguimos fazer o sensor funcionar com nossa placa, acreditamos que o mesmo veio com problema de hardware que impossibilitou o seu uso. </p>
+<p>Por conta disso iremos simular os dados que seriam lidos pelo sensor (oxigenação e batimento cardíaco). Os dados serão gerados como indicado a seguir.</p>
+<h3 id="task_aps2">task_aps2</h3>
+<p>A <code>task_aps2</code> é a tarefa responsável gerenciar e gerar os sinais de batimento cardíaco e oximetria. </p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">task_aps2</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{...}</span>
+</code></pre></div>
+<p><mark>Vocês não devem mexer nesta tarefa.</mark></p>
+<h3 id="ecg">ECG</h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>Para ter acesso ao batimento cardíaco leia o valor analógico que sai do pino PB13</li>
+<li>Range do dado: 0..4095</li>
+<li>Faça a leitura analógica em uma frequência de 250Hz</li>
+</ul>
+</div>
+<p>O electrocardiograma (ECG) será um valor analógico gerado pelo próprio microcontrolador, uma tabela do pulso elétrico foi gerado usando o pacote <a href="https://pypi.org/project/neurokit2/">neurokit2</a>, trado e exportado para um vetor (<code>aps2/ecg.h</code>). </p>
+<p><a class="glightbox" href="../imgs/APS-2/ecg.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/APS-2/ecg.png" width="300" /></a></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Se tiver curiosidade de como o dado foi gerado consulte o jupyter notebook na pasta <code>APS2</code> do repositório da disciplina.</p>
+</div>
+<p>O TC0 foi configurado para operar a 1kHz onde a cada interrupção gera no pino um novo dado referente ao batimento.</p>
+<div class="highlight"><pre><span></span><code>┌───────────────────┐
+│           ┌─────┐ │
+│           │afec │◄├────┐
+│           └─────┘ │    │
+│                   │    │ ecg 
+│  ┌─────┐  ┌─────┐ │    │
+│  │ tc0 ├─►│dac  ├─x────┘
+│  └─────┘  └─────┘ │ PB13
+└───────────────────┘
+</code></pre></div>
+<p>Tudo acontece na interrupção do TCO:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">TC0_Handler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="p">...</span>
+
+<span class="w">    </span><span class="n">dacc_write_conversion_data</span><span class="p">(</span><span class="n">DACC_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">ecg</span><span class="p">[</span><span class="n">ecgCnt</span><span class="p">],</span><span class="w"> </span><span class="n">DACC_CHANNEL</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Não utilizar o TC0</p>
+<p>O TC0 está sendo utilizado para gerar os valores, então não utilize-o</p>
+</div>
+<h3 id="oximometria">Oximometria</h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>Para ter acesso ao dado de oxiometria leia o dado na fila 'xQueueOx'.</li>
+<li>Range do dado: 88-99</li>
+<li>Um dado a cada 2s</li>
+</ul>
+</div>
+<p>A oxiometria é gerada na tarefa <code>task_aps2</code> de forma artificial o dado gerado é enviado para a fila <code>xQueueOx</code> como um char. O valor gerado está dentro do range <code>85 .. 100</code> e é enviada para uma fila a cada 1 segundo, inserimos erros artificialmente no dado, se o valor não estiver no range correto vocês devem desconsiderar.</p>
+<h2 id="rubrica">Rubrica</h2>
+<p>A interface deve possuir identidade visual com o logo da empresa que escolheram, os recursos mínimos e extras do projeto estão listados a seguir.</p>
+<div class="admonition info">
+<p class="admonition-title">Ao finalizar preencher</p>
+<p><mark>Vai precisar gravar um vídeo.</mark></p>
+<p><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe4OIkTlMoCxRAMqoH082zfQ1ibnrcfldery7pKzva5hYCeKg/viewform?embedded=true" width="640" height="340" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe></p>
+<ul>
+<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSe4OIkTlMoCxRAMqoH082zfQ1ibnrcfldery7pKzva5hYCeKg/viewform?usp=sf_link">https://docs.google.com/forms/d/e/1FAIpQLSe4OIkTlMoCxRAMqoH082zfQ1ibnrcfldery7pKzva5hYCeKg/viewform?usp=sf_link</a></li>
+</ul>
+</div>
+<h3 id="c">C</h3>
+<p>Deve exibir:</p>
+<ul>
+<li>Logo da empresa</li>
+<li>Valalor instantâneo da Oximetria</li>
+<li>Valor instantâneo do batimento cardíaco (bpm)</li>
+<li>Gráfico batimento cardíaco</li>
+<li>Valor salvo de oxigenação/batimento</li>
+<li>Alarme caso o valor de oximetria abaixe de 90</li>
+<li>Relógio (HH:MM)</li>
+</ul>
+<p>O usuário deve ser capaz de:</p>
+<ul>
+<li>Iniciar/Parar coleta de dados</li>
+<li>Salvar o valor em um instante de oxigenação e batimento</li>
+<li>Desligar alarme</li>
+</ul>
+<h3 id="extras">Extras</h3>
+<ul>
+<li>Possibilita ajustar relógio</li>
+<li>Permite que o usuário escolha novo nível de alarme para a oxigenação</li>
+<li>Possibilita alterar o gráfico temporal entre oxigenação e batimento cardíaco</li>
+<li>Salva e exibir mais de um valor (histórico)</li>
+<li>Indicação visual da tendência da oxigenação (seta, cor, ...).</li>
+<li>Animações</li>
+<li>Modo simplificado: Aumenta fonte e mostra apenas valores instantâneos.</li>
+</ul>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

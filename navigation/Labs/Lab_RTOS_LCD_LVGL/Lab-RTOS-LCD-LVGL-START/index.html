@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab RTOS LCD LVGL START - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Lab RTOS LCD LVGL START</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#inicio">Início</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#lcd">LCD</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#lvgl">LVGL</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs</li>
+                  
+                
+                  
+                    <li>Lab 7 - RTOS - LCD - LVGL</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="comecando">Começando</h1>
+<table>
+<thead>
+<tr>
+<th>Lab 7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data limite para entrega</strong>: <mark>16/11/2023</mark></td>
+</tr>
+<tr>
+<td>Entregue o código pelo repositório do <mark><a href="https://classroom.github.com/a/Rl7NKjIh">Classroom</a></mark></td>
+</tr>
+<tr>
+<td>- Fechar issues pertinentes ao conceito atingido na entrega</td>
+</tr>
+</tbody>
+</table>
+<p>Nesse lab iremos trabalhar com o uso de um sistema operacional de tempo real (RTOS) para gerenciar o LCD max Touch.</p>
+<p>Neste laboratório iremos:</p>
+<ol>
+<li>Conectar o LCD no kit de desenvolvimento</li>
+<li>Executar e modificar o exemplo do lvgl</li>
+</ol>
+<h3 id="inicio">Início</h3>
+<p>Antes de começarmos será necessário realizarmos a conexão do LCD no kit e então validarmos a conexão do LCD e depois do touch.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Conectando LCD</p>
+<form class="exercise-form">
+<p>Primeiro faça as ligações como indicado no README a seguir:</p>
+<p>Plugue o LCD max Touch no <mark>EXT2</mark>: <br />
+<a class="glightbox" href="https://github.com/Insper/SAME70-examples/raw/master/Screens/2.8-TFT-LCD-ILI9341-Hardware/TFF_LCD_Conexoes.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://github.com/Insper/SAME70-examples/raw/master/Screens/2.8-TFT-LCD-ILI9341-Hardware/TFF_LCD_Conexoes.svg" /></a></p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/exercise_2" id="exercise_2_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Execute o código, você deve visualizar dois botões e eles devem ser interativos.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Terminal</p>
+<p>O segundo exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:</p>
+<p><img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> View <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> Terminal Window</p>
+<p>Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de 115200.</p>
+</div>
+<h2 id="lcd">LCD</h2>
+<p>O LCD que iremos usar nas próximas atividades da disciplina é fabricado pela adafruit com o nome de: <a href="https://www.adafruit.com/product/1770"><code>2.8" TFT LCD with Touchscreen Breakout Board w/MicroSD Socket - ILI9341</code></a> ele possui um LCD de <code>240x320</code> pixels operando em RGB e com uma sensor touch resistivo. O LCD é controlado por um controlador chamado de <a href="https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf"><strong>ILI9341</strong></a> ele é responsável por atualizar e exibir as informações na tela. </p>
+<p><a class="glightbox" href="https://cdn-shop.adafruit.com/970x728/1770-01.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cdn-shop.adafruit.com/970x728/1770-01.jpg" width="500" /></a></p>
+<h3 id="ili9341">ILI9341</h3>
+<p>O LCD utiliza o circuito integrado <a href="https://cdn-shop.adafruit.com/datasheets/ILI9341.pdf">ILI9341</a> como controlador do display, este CI é responsável por toda parte de baixo nível de acesso ao LCD, este chip possui duas formas de interface com o uC: Paralelo e SPI. Iremos utilizar ele operando via SPI como ilustrado a seguir:</p>
+<div class="highlight"><pre><span></span><code>  x---------x           x---------x
+  |         |           |         |
+  | uc      |           | LCD     |
+  |   ------|    spi    |-------  |
+  |   | spi | &lt;---/---&gt; | ili  |  |
+  x---------x           x---------x
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Para realizar a interface com o LCD portei o código de referência da ATMEL <br />
+<a href="https://asf.microchip.com/docs/latest/xmegaa/html/group__ili9341__group.html">ILI9341 Display Controller Component Driver</a> para o SAME70.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">ILI9341</p>
+<p><strong>a-Si TFT LCD Single Chip Driver 240RGBx320 Resolution and 262K color</strong></p>
+<p>LI9341 is a 262,144-color single-chip SOC driver for a-TFT liquid crystal display with resolution of 240RGBx320 dots,  comprising  a  720-channel  source  driver,  a  320-channel  gate  driver,  172,800 bytes  GRAM  for  graphic display data of 240RGBx320 dots, and power supply circuit.</p>
+<p>ILI9341  supports  parallel  8-/9-/16-/18-bit  data  bus  MCU  interface,  6-/16-/18-bit  data  bus  RGB  interface  and 3-/4-line serial peripheral interface (SPI). The moving picture area can be specified in internal GRAM by window address  function.  The  specified  window  area  can  be updated  selectively,  so  that  moving  picture  can  be displayed simultaneously independent of still picture area. </p>
+<p>ILI9341  can  operate  with  1.65V  ~  3.3V  I/O  interface  voltage  and  an  incorporated  voltage  follower  circuit  to generate voltage levels for driving an LCD. ILI9341 supports full color, 8-color display mode and sleep mode for precise power control by software and these features make the ILI9341 an ideal LCD driver for medium or small size portable products such as digital cellular phones, smart phone, MP3 and PMP where long battery life is a major concern.  </p>
+<blockquote>
+<p>Extraído do manual.</p>
+</blockquote>
+</div>
+<h3 id="touch">Touch</h3>
+<p>O LCD possui um "película" de <a href="https://en.wikipedia.org/wiki/Resistive_touchscreen">touchscreen resistivo</a> que possibilita detectarmos toques na tela.</p>
+<p><a class="glightbox" href="../imgs/resistive.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/resistive.png" width="300" /></a> 
+<a class="glightbox" href="../imgs/resistive2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/resistive2.png" width="300" /></a></p>
+<p>A película fornece dois valores de resistência: X e Y e via duas leituras analógicas conseguimos estimar onde aconteceu o toque na tela, e inclusive a pressão do toque.</p>
+<blockquote>
+<p>Fonte das figuras: <a href="https://www.ti.com/lit/an/slyt209a/slyt209a.pdf">https://www.ti.com/lit/an/slyt209a/slyt209a.pdf</a></p>
+</blockquote>
+<p>A Conexão do touch resistivo com o uC acontece da seguinte maneira:</p>
+<div class="highlight"><pre><span></span><code>  x---------x          x----------- x
+  |     dx  | -------&gt; |  t  | LCD |
+  | uc  dy  | -------&gt; |  o  |     |
+  |    AFEC | &lt;------- |  u  |     |
+  |    AFEC | &lt;------- |  c  |     |
+  x---------x          x-----------x
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Para realizar a leitura do touch resistivo portei o código da <a href="https://github.com/adafruit/Adafruit_TouchScreen">adafruit TouchScreen</a> para o SAME70.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Telas resistivas não são tão boas quanto as capacitivas que apenas com o toque na tela o contato já é detectado, nas resistivas é necessário um pouco mais de pressão.</p>
+</div>
+<h2 id="lvgl">LVGL</h2>
+<p>Uma coisa é conseguir acessar o LCD e transmitir pixels outra é ter uma biblioteca capaz de desenhar coisas no LCD (botões, imagens, textos, gráficos, ...). Existem várias bibliotecas gráficas para sistemas embarcados, o site a seguir possui uma lista e um comparativo entre elas: </p>
+<ul>
+<li><a href="https://itnext.io/top-five-libraries-for-creating-gui-on-embedded-linux-5ce03903be32">https://itnext.io/top-five-libraries-for-creating-gui-on-embedded-linux-5ce03903be32</a></li>
+</ul>
+<p>Nós iremos usar o <a href="https://lvgl.io/">LVGL -  LVGL - Light and Versatile Graphics Library</a>, uma biblioteca livre liberada na licença MIT feita para sistemas embarcados, 100% em C, bastante customizável de boa documentação e com suporte a vários tipos de displays e interface com usuário (touch screen, mouse, ...).</p>
+<p>Com esse software seremos capazes de desenvolver interfaces similares ao exemplo a seguir:</p>
+<p><a class="glightbox" href="https://camo.githubusercontent.com/4052401b2c5594c76c20e97dc8e2567d8ec49cc85e2c6779770524e9c239b872/68747470733a2f2f6c76676c2e696f2f6173736574732f696d616765732f696d675f312e706e67" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://camo.githubusercontent.com/4052401b2c5594c76c20e97dc8e2567d8ec49cc85e2c6779770524e9c239b872/68747470733a2f2f6c76676c2e696f2f6173736574732f696d616765732f696d675f312e706e67" width="500" /></a></p>
+<h3 id="base">Base</h3>
+<p>Iremos trabalhar com o código base: <a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-TFT-LCD-ILI9341-LVGL">RTOS-TFT-LCD-ILI9341-LVGL</a> que já possui configurado:</p>
+<ul>
+<li>FreeRTOS v8</li>
+<li>Driver ili9341</li>
+<li>Driver Touch resistivo</li>
+<li>lvgl</li>
+</ul>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-0"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="porting-lvgl">Porting lvgl</h3>
+<p>O <a href="https://docs.lvgl.io/latest/en/html/porting/index.html">site do LVGL</a> descreve o passo a passo de como incorporar a biblioteca em um novo projeto/ microcontrolador, além de criar um arquivo de configuração <code>lv_conf.h</code> com as propriedades do LCD e com configurações de como a biblioteca irá trabalhar, temos que implementar duas funções:</p>
+<ul>
+<li><code>my_flush_cb</code>  : Função chamada pelo lvgl sempre que necessita atualizar a tela<ul>
+<li>Depende do driver ili9341</li>
+</ul>
+</li>
+<li><code>my_input_read</code>: Função chamada pelo lvgl sempre que quer ler uma informação de touch<ul>
+<li>Depende do driver do touch resistivo</li>
+</ul>
+</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">my_flush_cp</label><label for="__tabbed_1_2">my_input_read</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Note que o LVGL apenas atualiza no LCD a região que sofreu alteração.
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">my_flush_cb</span><span class="p">(</span><span class="n">lv_disp_drv_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">disp_drv</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">lv_area_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">area</span><span class="p">,</span><span class="w"> </span><span class="n">lv_color_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">color_p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ili9341_set_top_left_limit</span><span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span><span class="p">);</span><span class="w">   </span><span class="n">ili9341_set_bottom_right_limit</span><span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ili9341_copy_pixels_to_screen</span><span class="p">(</span><span class="n">color_p</span><span class="p">,</span><span class="w">  </span><span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">x2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">area</span><span class="o">-&gt;</span><span class="n">x1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">area</span><span class="o">-&gt;</span><span class="n">y2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">area</span><span class="o">-&gt;</span><span class="n">y1</span><span class="p">));</span>
+
+<span class="w">    </span><span class="cm">/* IMPORTANT!!!</span>
+<span class="cm">    * Inform the graphics library that you are ready with the flushing*/</span>
+<span class="w">    </span><span class="n">lv_disp_flush_ready</span><span class="p">(</span><span class="n">disp_drv</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</div>
+<div class="tabbed-block"></div>
+</div>
+</div>
+<p>​    Esta função retorna no <code>*data</code> se um toque foi encontrado e o valor X Y lido.
+    <div class="highlight"><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="nf">my_input_read</span><span class="p">(</span><span class="n">lv_indev_drv_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">drv</span><span class="p">,</span><span class="w"> </span><span class="n">lv_indev_data_t</span><span class="o">*</span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">px</span><span class="p">,</span><span class="w"> </span><span class="n">py</span><span class="p">,</span><span class="w"> </span><span class="n">pressed</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">readPoint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">px</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">py</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LV_INDEV_STATE_PR</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LV_INDEV_STATE_REL</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">px</span><span class="p">;</span>
+<span class="w">    </span><span class="n">data</span><span class="o">-&gt;</span><span class="n">point</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">py</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span><span class="cm">/*No buffering now so no more data read*/</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>E isso é tudo o que deve ser feito para incorporar o lvgl em um novo projeto.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Eu devo ter demorado umas 10h de trabalho para sair de um projeto zerado e conseguir fazer o exemplo que vocês irão utilizar hoje. Foram necessárias várias etapas: </p>
+<ol>
+<li>Escolher LCD</li>
+<li>Entender conexão de hardware</li>
+<li>Implementar driver ili9341</li>
+<li>Implementar driver touch</li>
+<li>Entender LVGL e como porta</li>
+<li>Executar LVGL </li>
+</ol>
+</div>
+<h3 id="framebuffer">framebuffer</h3>
+<p>O LVGL opera com no mínimo um framebuffer, <a href="https://en.wikipedia.org/wiki/Framebuffer">framebuffer</a> é uma região contínua de memória usada para armazenar a imagem que será exibida na tela, essa tecnologia é usado em vários lugares, inclusive no <a href="https://en.wikipedia.org/wiki/Linux_framebuffer">linux</a>. Em alguns casos é necessário dois framebuffers operando no modo <a href="https://embedded.fm/blog/2017/3/21/ping-pong-buffers">ping pong buffer</a></p>
+<p>No LVGL devemos declarar esse frame buffer como global ou estático:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/*Static or global buffer(s). The second buffer is optional*/</span>
+<span class="k">static</span><span class="w"> </span><span class="n">lv_color_t</span><span class="w"> </span><span class="n">buf_1</span><span class="p">[</span><span class="n">LV_HOR_RES_MAX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LV_VER_RES_MAX</span><span class="p">];</span>
+</code></pre></div>
+<p>O LVGL irá então manter uma cópia do que será exibido no LCD nesta região continua de memória e de tempos em tempos atualizar o LCD chamando a função <code>my_flush_cb</code>.</p>
+<h3 id="funcao-main">Função main</h3>
+<p>Agora com tudo configurado devemos realizar as seguintes inicializações antes de podemos usar o lvgl controlando o display:</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Tudo isso já está no código exemplo, você não precisa modificar nada.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">passos</label><label for="__tabbed_2_2">Código</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ol>
+<li>Board e Sysclock</li>
+<li>LCD e driver ili9341</li>
+<li>Touch</li>
+<li>lvgl buffer e display</li>
+<li>lvgl input</li>
+</ol>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="cm">/* board and sys init */</span>
+<span class="n">board_init</span><span class="p">();</span>
+<span class="n">sysclk_init</span><span class="p">();</span>
+<span class="n">configure_console</span><span class="p">();</span>
+
+<span class="cm">/* LCd int */</span>
+<span class="n">configure_lcd</span><span class="p">();</span>
+<span class="n">ili9341_init</span><span class="p">();</span>
+<span class="n">configure_touch</span><span class="p">();</span>
+<span class="n">ili9341_backlight_on</span><span class="p">();</span>
+
+<span class="cm">/*LittlevGL init*/</span>
+<span class="n">lv_init</span><span class="p">();</span>
+<span class="n">lv_disp_drv_t</span><span class="w"> </span><span class="n">disp_drv</span><span class="p">;</span><span class="w">                 </span><span class="cm">/*A variable to hold the drivers. Can be local variable*/</span>
+<span class="n">lv_disp_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span><span class="w">            </span><span class="cm">/*Basic initialization*/</span>
+<span class="n">lv_disp_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">,</span><span class="w"> </span><span class="n">buf_1</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">LV_HOR_RES_MAX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">LV_VER_RES_MAX</span><span class="p">);</span><span class="w">  </span><span class="cm">/*Initialize `disp_buf` with the buffer(s) */</span>
+<span class="n">disp_drv</span><span class="p">.</span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">disp_buf</span><span class="p">;</span><span class="w">            </span><span class="cm">/*Set an initialized buffer*/</span>
+<span class="n">disp_drv</span><span class="p">.</span><span class="n">flush_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_flush_cb</span><span class="p">;</span><span class="w">        </span><span class="cm">/*Set a flush callback to draw to the display*/</span>
+<span class="n">lv_disp_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">disp</span><span class="p">;</span>
+<span class="n">disp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_disp_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">disp_drv</span><span class="p">);</span><span class="w"> </span><span class="cm">/*Register the driver and save the created display objects*/</span>
+
+<span class="cm">/* Init input on LVGL */</span>
+<span class="n">lv_indev_drv_t</span><span class="w"> </span><span class="n">indev_drv</span><span class="p">;</span>
+<span class="n">lv_indev_drv_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span><span class="w">      </span><span class="cm">/*Basic initialization*/</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LV_INDEV_TYPE_POINTER</span><span class="p">;</span>
+<span class="n">indev_drv</span><span class="p">.</span><span class="n">read_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_input_read</span><span class="p">;</span>
+<span class="cm">/*Register the driver in LVGL and save the created input device object*/</span>
+<span class="n">lv_indev_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">my_indev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_indev_drv_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">indev_drv</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="task_lcd">task_lcd</h3>
+<p>Com o lvlg configurado devemos chamar periodicamente a função que atualiza o lvgl (<code>lv_task_handler</code>), no exemplo criamos uma task dedicada a isso:</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">task_lcd</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="n">lv_ex_btn_1</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="n">lv_tick_inc</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_task_handler</span><span class="p">();</span>
+<span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="criando-tela">Criando tela</h3>
+<p>Note que na <code>task_lcd</code> chamamos a função <code>lv_ex_btn_1()</code> está função cria os widgets no LCD, os widgets estão listados na página: </p>
+<ul>
+<li><a href="https://docs.lvgl.io/master/widgets/index.html">https://docs.lvgl.io/master/widgets/index.html</a></li>
+</ul>
+<p>Podemos listar alguns aqui como exemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Widget</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Button (<code>lv_btn</code>)</td>
+<td><a class="glightbox" href="../imgs/lv_button.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/lv_button.png" width="100" /></a></td>
+</tr>
+<tr>
+<td>LED (<code>lv_led</code>)</td>
+<td><a class="glightbox" href="../imgs/lv_leds.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/lv_leds.png" width="100" /></a></td>
+</tr>
+<tr>
+<td>Roller (<code>lv_roller</code>)</td>
+<td><a class="glightbox" href="../imgs/lv_roller.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/lv_roller.png" width="100" /></a></td>
+</tr>
+<tr>
+<td>Bar (<code>lv_bar</code>)</td>
+<td><a class="glightbox" href="../imgs/lv_bar.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/lv_bar.png" width="100" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>O exemplo fornecido cria dois tipos de botões diferentes um do push button e outro do tipo toggle, notem que tudo é realizado pela API do lvgl. Podemos associar um handler (<code>event_handler</code>) ao botão, este handler sera chamado (pela <code>lv_task_handler</code>) sempre que acontecer um evento neste widget (botão aprtado, botão liberado, ...).</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">lv_ex_btn_1</label><label for="__tabbed_3_2">event_handler(...)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">lv_ex_btn_1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">label</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">btn1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span><span class="w"> </span><span class="n">event_handler</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">LV_ALIGN_CENTER</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">-40</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn1</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Button&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">btn2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_btn_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_obj_set_event_cb</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span><span class="w"> </span><span class="n">event_handler</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_obj_align</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">LV_ALIGN_CENTER</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_btn_set_checkable</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_btn_toggle</span><span class="p">(</span><span class="n">btn2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_btn_set_fit2</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span><span class="w"> </span><span class="n">LV_FIT_NONE</span><span class="p">,</span><span class="w"> </span><span class="n">LV_FIT_TIGHT</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_create</span><span class="p">(</span><span class="n">btn2</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_label_set_text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Toggled&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">event_handler</span><span class="p">(</span><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">lv_event_t</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">event</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">LV_EVENT_CLICKED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Clicked</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">event</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">LV_EVENT_VALUE_CHANGED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Toggled</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/"
+               class="ah-prev"
+               title="Lab 6 - RTOS IMU">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Lab 6 - RTOS IMU</span>
+            </a>
+          
+          
+            <a href="../Lab-RTOS-LCD-LVGL-LAB/"
+               class="ah-next"
+               title="Lab RTOS LCD LVGL LAB">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Lab RTOS LCD LVGL LAB</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

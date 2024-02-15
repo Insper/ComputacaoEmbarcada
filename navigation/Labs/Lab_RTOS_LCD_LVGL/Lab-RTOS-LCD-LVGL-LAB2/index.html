@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab RTOS LCD LVGL LAB2 - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Lab RTOS LCD LVGL LAB2</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#floor-temp">Floor Temp</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#handlers">Handlers</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#extras">Extras</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs</li>
+                  
+                
+                  
+                    <li>Lab 7 - RTOS - LCD - LVGL</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-parte-2">Lab - Parte 2</h1>
+<table>
+<thead>
+<tr>
+<th>Lab 7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data limite para entrega</strong>: <mark>16/11/2023</mark></td>
+</tr>
+<tr>
+<td>Entregue o código pelo repositório do <mark><a href="https://classroom.github.com/a/Rl7NKjIh">Classroom</a></mark></td>
+</tr>
+<tr>
+<td>- Fechar issues pertinentes ao conceito atingido na entrega</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Não podemos esquecer nossa referencia!</p>
+<p><a class="glightbox" href="../imgs/lab.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/lab.svg" width="400" /></a></p>
+</div>
+<p>Vamos implementar os itens que são apenas "Labels (a)": Temperatura atual, relório, set-point. Mas antes será preciso escolhermos a fonte que iremos usar na interface, o lvgl possui algumas fontes disponíveis por padrão, mas nem sempre atendem a necessidade da interface. As fontes padrões do LVGL estão no link a seguir:</p>
+<ul>
+<li><a href="https://docs.lvgl.io/master/overview/font.html">https://docs.lvgl.io/master/overview/font.html</a></li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Lembre que para usar as fontes padrões do LVGL é necessário editar o arquivo: <code>config/lv_conf.h</code></p>
+</div>
+<p>Para a interface proposta sugiro usarmos a fonte DSEG (open source) e que lembra um display de sete segmentos:</p>
+<p><a href="https://github.com/keshikan/DSEG">https://github.com/keshikan/DSEG</a></p>
+<p><a class="glightbox" href="https://raw.githubusercontent.com/keshikan/DSEG/master/sample/all_DSEG_list.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://raw.githubusercontent.com/keshikan/DSEG/master/sample/all_DSEG_list.png" width="500" /></a></p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Tarefa</p>
+<form class="exercise-form">
+<ol>
+<li>Baixe a fonte para o seu computador</li>
+<li><a href="https://github.com/keshikan/DSEG/releases/download/v0.46/fonts-DSEG_v046.zip">https://github.com/keshikan/DSEG/releases/download/v0.46/fonts-DSEG_v046.zip</a></li>
+<li>Extrai a pasta</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-0"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="floor-temp">Floor Temp</h3>
+<p>Vamos agora implementar o label da temperatura atual do piso, e iremos seguir os passos a seguir:</p>
+<ol>
+<li>Converter fonte para uso no lvgl</li>
+<li>Adicionar no lvgl/ Microchip studio</li>
+<li>Criando label e usando fonte</li>
+</ol>
+<h4 id="1-convertendo">1. Convertendo</h4>
+<p>Com a fonte escolhida precisamos agora converter para o formato que o LVGL consegue interpretar (bitmap), para isso usaremos a ferramenta online do LVGL. Acesse o site:</p>
+<ul>
+<li><a href="https://lvgl.io/tools/fontconverter">https://lvgl.io/tools/fontconverter</a></li>
+</ul>
+<p>Vamos criar uma fonte de <strong>tamanho 70</strong> -&gt; <strong>DSEG7-Modern/DSEG7Modern-Regular.ttf</strong>, esse arquivo será usada no site e foi extraído na etapa anterior. Configure a interface como no exemplo a seguir:</p>
+<ul>
+<li>Name: <code>dseg70</code></li>
+<li>Size: <code>70</code></li>
+<li>Bpp: <code>1 bit-per-pixel</code></li>
+<li>TTF: <code>DSEG7-Modern/DSEG7Modern-Regular.ttf</code></li>
+<li>Symbols: <code>-./0123456789 :</code> (o espaço  é necessário pq ele é um caráter)</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Symbols</p>
+<p>A fonte gerada terá somente esses símbolos, se você quiser usar por exemplo a letra C não vai poder. Gerar somente os símbolos que vai usar é importante porque o uC possui pouca memória e não seria possível ter várias fontes diferentes com todos os símbolos.</p>
+</div>
+<p>O site irá gerar um arquivo <code>dseg70.c</code> salve o mesmo dentro da pasta <code>src/</code> do projeto (a mesma que contém o arquivo main.c) que estamos trabalhando.</p>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-1"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h4 id="2-adicionando-no-microchip-studio">2. Adicionando no Microchip Studio</h4>
+<p>Agora é necessário adicionar o arquivo ao MS:</p>
+<ol>
+<li>Clique com o botão direito em src e clique em Add &gt; Existing Item...</li>
+<li>Encontre o arquivo dseg120.c que foi baixado e clique em Add</li>
+<li>Verifique se o arquivo dseg120.c foi adicionado</li>
+</ol>
+<p><a class="glightbox" href="../imgs/add_file.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/add_file.png" width="400" /></a></p>
+<p><a class="glightbox" href="../imgs/add_file_2.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/add_file_2.PNG" width="400" /></a></p>
+<p><a class="glightbox" href="../imgs/add_file_3.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/add_file_3.PNG" width="300" /></a></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>O exemplo foi feito para a fonte de tamanho 120, mas depois resolvemos trocar por uma menor, note que onde na imagem tem dseg120 você deve colocar a dseg70.</p>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-2"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h4 id="3-criando-label-e-usando-fonte">3. Criando label e usando fonte</h4>
+<p>Agora podemos utilizar a nova fonte no nosso projeto, ainda dentro da <code>lv_termostato</code> vamos criar um novo label que irá exibir o valor da temperatura atual. Fazemos isso similar ao botão, porém agora iremos associar o label a tela e não ao botão e também iremos customizar a fonte para usarmos o <code>dseg70</code>.</p>
+<p>Crei a variável global que irá apontar para o label:</p>
+<div class="highlight"><pre><span></span><code><span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">labelFloor</span><span class="p">;</span>
+</code></pre></div>
+<p>E então modifique a função termostato:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">lv_termostato</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="c1">// ....</span>
+
+
+<span class="w">    </span><span class="n">labelFloor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">());</span>
+<span class="w">    </span><span class="n">lv_obj_align</span><span class="p">(</span><span class="n">labelFloor</span><span class="p">,</span><span class="w"> </span><span class="n">LV_ALIGN_LEFT_MID</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">-45</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_obj_set_style_text_font</span><span class="p">(</span><span class="n">labelFloor</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dseg70</span><span class="p">,</span><span class="w"> </span><span class="n">LV_STATE_DEFAULT</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_obj_set_style_text_color</span><span class="p">(</span><span class="n">labelFloor</span><span class="p">,</span><span class="w"> </span><span class="n">lv_color_white</span><span class="p">(),</span><span class="w"> </span><span class="n">LV_STATE_DEFAULT</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lv_label_set_text_fmt</span><span class="p">(</span><span class="n">labelFloor</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%02d&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+</code></pre></div>
+<p>Para usarmos a fonte devemos indicar ao LVGL que a fonte existe, para isso adicione a linha a seguir no topo (após os #include) do arquivo <code>main.c</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">LV_FONT_DECLARE</span><span class="p">(</span><span class="n">dseg70</span><span class="p">);</span>
+</code></pre></div>
+<p>Antes de continuar temos que editar o começo arquivo da fonte <code>dseg70</code>, incluindo o define a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="gi">+#define LV_LVGL_H_INCLUDE_SIMPLE</span>
+#ifdef LV_LVGL_H_INCLUDE_SIMPLE
+#include &quot;lvgl.h&quot;
+#else
+#include &quot;lvgl/lvgl.h&quot;
+#endif
+</code></pre></div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_2" id="exercise_2_0">
+<p class="admonition-title">Tarefa</p>
+<form class="exercise-form">
+<ol>
+<li>Crie o novo label como indicado anteriormente</li>
+<li>Modifique o arquivo <code>dseg70.c</code></li>
+<li>Declare a fonte nova no main.c: <code>LV_FONT_DECLARE(dseg70);</code></li>
+<li>Teste na placa</li>
+</ol>
+<p>Resultado esperado:</p>
+<p><a class="glightbox" href="../imgs/label-floor.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/label-floor.jpeg" width="300" /></a></p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-3"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Notem que nós criamos um label e então customizamos algumas propriedades dele. O jeito feito neste exemplo é diferente do que fizemos com o botão na qual criamos um estilo novo e aplicamos a ele. Vocês podem escolher qualquer um dos dois jeitos para modificar um objeto.</p>
+</div>
+<h4 id="demais-labels">Demais labels</h4>
+<p>Agora vocês precisam criar os outros dois labels: Relógio e Temperatura configurada, para isso será necessário gerar outras duas fontes de tamanhos diferentes e criar os labels.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_3" id="exercise_3_0">
+<p class="admonition-title">Tarefa</p>
+<form class="exercise-form">
+<ol>
+<li>Crie o label temperatura referência: <code>labelSetValue</code></li>
+<li>Crie o label para o relógio: <code>labelClock</code></li>
+</ol>
+<p><mark>Para cada label você terá que converter uma nova fonte de tamanho diferente, consulte os passos anteriores.</mark></p>
+<p>Resultado esperado:</p>
+<p><a class="glightbox" href="../imgs/labels-all.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/labels-all.jpeg" width="300" /></a></p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-4"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="handlers">Handlers</h2>
+<p>Até agora estávamos apenas criando a interface no LCD, agora precisamos adicionar inteligência a ela. Isso será feito pelos callbacks dos botões. Vamos focar apenas nos botões UP e DOWN que configuram a temperatura de referência (da direita).</p>
+<p>Vamos implementar o código para o <code>up_handler</code>, callback do botão de aumento de temperatura.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Eu dei o nome de <code>up_handler</code> você pode ter dado outro nome, precisa ficar atento a isso.</p>
+</div>
+<h3 id="up_handler">up_handler</h3>
+<p>Existem várias maneiras de fazermos com que o handler altera o valor do label, eu sugiro o código a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">up_handler</span><span class="p">(</span><span class="n">lv_event_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">lv_event_code_t</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_event_get_code</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">code</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">LV_EVENT_CLICKED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_label_get_text</span><span class="p">(</span><span class="n">labelSetValue</span><span class="p">);</span>
+<span class="w">        </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">        </span><span class="n">lv_label_set_text_fmt</span><span class="p">(</span><span class="n">labelSetValue</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%02d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A vantagem da implementação sugerida é que não precisamos de uma variável global para armazenar o valor da temperatura, nós recuperamos o valor lendo o que estava salvo no label e convertendo para inteiro.</p>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_4" id="exercise_4_0">
+<p class="admonition-title">Tarefa</p>
+<form class="exercise-form">
+<ol>
+<li>Implemente o handler</li>
+<li>Teste na placa</li>
+<li>Aperte o botão de up e verifique se a referência muda.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A fonte utilizada tem um problema, o carácter vazio (espaço: <code></code>) não apaga 100% o último valor, por exemplo: Quando o digito muda de 2 para 1 acontece de ficar uma barra em baixo.</p>
+<p>Depois vemos como resolver isso! Eu ainda não sei como fazer. =/</p>
+</div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-5"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="down_handler">down_handler</h3>
+<p>Agora implemente a ação do botão down.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_5" id="exercise_5_0">
+<p class="admonition-title">Tarefa</p>
+<form class="exercise-form">
+<ol>
+<li>Implemente o <code>down_handler</code></li>
+<li>Teste na placa</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h3 id="relogio">relógio</h3>
+<p>Temos um relógio na interface, vamos fazer ele funcionar? Para isso terão que incluir o RTT no projeto e fazer uso dele.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/exercise_6" id="exercise_6_0">
+<p class="admonition-title">Tarefa</p>
+<form class="exercise-form">
+<p>Inclua o RTT no projeto e faça o relógio funcionar!</p>
+<p>O relǵio deve exibir HH:MM, o caractere <strong>:</strong> deve piscar uma vez por segundo.</p>
+<p>Dicas:</p>
+<ol>
+<li>Incluir RTT</li>
+<li>Criar task dedicada para atualizar o RTT</li>
+<li>Inicializar RTT (com frequência de 1Hz) na task</li>
+<li>Task fica esperando semáforo do tick de segundos e atualiza o label do relógio.</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-6"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="extras">Extras</h2>
+<p>Temos muito o que fazer na interface, vou sugerir algumas coisas que irão dar nota a mais para vocês neste lab, <mark>cada item é meio conceito a mais.</mark></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implementar o digito da Temperatura: 23 <strong>.4</strong><ul>
+<li>Dica: use uma das fontes menores para isso</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> O botão de <code>settings</code> deve possibilitar o usuário configurar a hora certa (usando as setas v e ^).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Incluir demais labels e logos</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Gerar um logo para o relógio e usar no lugar do de <code>settings</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implementar o botão de <code>Power</code> que desliga a tela</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Colocar um potenciômetro que altera o valor da temperatura atual.</li>
+</ul>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../Lab-RTOS-LCD-LVGL-LAB/"
+               class="ah-prev"
+               title="Lab RTOS LCD LVGL LAB">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Lab RTOS LCD LVGL LAB</span>
+            </a>
+          
+          
+            <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/"
+               class="ah-next"
+               title="Lab 8 - TC - RTC - RTT">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Lab 8 - TC - RTC - RTT</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

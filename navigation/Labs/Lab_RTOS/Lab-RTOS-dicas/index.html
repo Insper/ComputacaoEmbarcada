@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab RTOS dicas - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-rtos-dicas">Lab - RTOS - Dicas</h1>
+<p>Notei alguns erros e dificuldades neste laboratório que
+pretendo retomar aqui. Vale notar que este exemplo foi extraído dos exemplos fornecidos pelo fabricante do microcontrolador e possui algumas coisas diferentes do que estamos acostumados.</p>
+<h2 id="unusedpvparameters"><code>UNUSED(pvParameters)</code></h2>
+<p>Isso aparece na função que define a tarefa <code>task_led</code> e
+serve apenas para remover warning do gcc que indica que um argumento da função não foi usado na sua implementação.</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/3599160/how-to-suppress-unused-parameter-warnings-in-c/12891181">https://stackoverflow.com/questions/3599160/how-to-suppress-unused-parameter-warnings-in-c/12891181</a></li>
+</ul>
+<p>Mas professor não podemos remover esse argumento já que não estamos usando? <strong>NÃO</strong> pois o freeRTOS espera que a função que implementa uma tarefa tenha um argumento, da documentação:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// A task should have the following structure:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">vATaskFunction</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="o">--</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="n">application</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">here</span><span class="p">.</span><span class="w"> </span><span class="o">--</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="cm">/* Tasks must not attempt to return from their implementing</span>
+<span class="cm">        function or otherwise exit.  In newer FreeRTOS port</span>
+<span class="cm">        attempting to do so will result in an configASSERT() being</span>
+<span class="cm">        called if it is defined.  If it is necessary for a task to</span>
+<span class="cm">        exit then have the task call vTaskDelete( NULL ) to ensure</span>
+<span class="cm">        its exit is clean. */</span>
+<span class="w">        </span><span class="n">vTaskDelete</span><span class="p">(</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><a href="https://www.freertos.org/implementing-a-FreeRTOS-task.html">https://www.freertos.org/implementing-a-FreeRTOS-task.html</a> </li>
+</ul>
+<h2 id="led_toggleled0"><code>LED_Toggle(LED0)</code></h2>
+<p>Muitas pessoas empacaram aqui ou não entenderam
+essa função, o código exemplo é original do fabricante
+do microcontrolador e é comum aparecerem coisas que 
+não conhecemos, mas sem muito alarde né? O próprio 
+nome da função diz o que faz: <strong>LED TOGGLE</strong> ou: 
+<strong>INVERTE LED</strong>.</p>
+<p>A função não faz o LED piscar, ela apenas inverte o 
+estado do LED toda vez que for chamada, o uso dessa
+função com o <code>vTaskDelay(1000)</code> faz o LED piscar.</p>
+<p>Essa função é muito específica e não ajuda muito porque não podemos usar em outros pinos (LEDs), só funciona para o LED0 que foi definido em um include muito específico do projeto. </p>
+<p><a class="glightbox" href="../imgs/led-toggle-LED0.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/led-toggle-LED0.png" /></a></p>
+<p>Podemos no lugar ousar esta outra implementação que faz a mesma coisa, mas recebe como parâmetro o PIO e a máscara e inverte o valor do pino (1 &rarr; 0 &rarr; 1) toda vez que a função for chamada, a função a seguir implementa isso:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">pin_toggle</span><span class="p">(</span><span class="n">Pio</span><span class="w"> </span><span class="o">*</span><span class="n">pio</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">mask</span><span class="p">){</span>
+<span class="w">   </span><span class="k">if</span><span class="p">(</span><span class="n">pio_get_output_data_status</span><span class="p">(</span><span class="n">pio</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="p">))</span>
+<span class="w">    </span><span class="n">pio_clear</span><span class="p">(</span><span class="n">pio</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="p">);</span>
+<span class="w">   </span><span class="k">else</span>
+<span class="w">    </span><span class="n">pio_set</span><span class="p">(</span><span class="n">pio</span><span class="p">,</span><span class="n">mask</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Mas professor daria para fazer de outra forma, sem usar esse <code>pin_toggle</code> ou a <code>LED_Toggle</code>? Da sim, mas temos que usar uma variável local para isso (no lugar de acessar o PIO):</p>
+<p>```c
+static void task_led(void *pvParameters) {
+    UNUSED(pvParameters);
+    char f_led = 0
+    for (;;) {
+        f_led = !f_led;
+        if (f_led)
+            pio_set(LED_PIO, LED_IDX_MASK);
+        else
+            pio_clear(LED_PIO, LED_IDX_MASK);</p>
+</div>
+<p>​          <br />
+            vTaskDelay(1000);
+        }
+    }
+    ```</p>
+<h2 id="task_led1"><code>task_led1</code></h2>
+<div class="admonition tip">
+<p class="admonition-title">Códigos originais</p>
+<p>Vamos ter que ter esses trechos de código em mente:</p>
+<ol>
+<li>Callback do botão 1</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">but1_callback</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;but_callback </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">xHigherPriorityTaskWoken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdFALSE</span><span class="p">;</span>
+<span class="w">    </span><span class="n">xSemaphoreGiveFromISR</span><span class="p">(</span><span class="n">xSemaphore</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">xHigherPriorityTaskWoken</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+2. task led</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">task_led</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">xSemaphore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xSemaphoreCreateBinary</span><span class="p">();</span>
+
+<span class="w">    </span><span class="cm">/* ... init but1 .... */</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xSemaphoreTake</span><span class="p">(</span><span class="n">xSemaphore</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">portTICK_PERIOD_MS</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdTRUE</span><span class="w"> </span><span class="p">){</span>
+<span class="w">            </span><span class="n">LED_Toggle</span><span class="p">(</span><span class="n">LED0</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<p>Essa tarefa deveria ser executada sempre que o botão 1 da placa OLED fosse pressionado, mas isso não deveria impedir que a <code>task_led</code> de também ser executada, o que muitos fizeram foi usar o mesmo semáforo que já estava sendo usado pela <code>task_led</code> nesta task, da seguinte maneira:</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">task_led1</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xSemaphoreTake</span><span class="p">(</span><span class="n">xSemaphore</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="o">/</span><span class="n">portTICK_PERIOD_MS</span><span class="p">)){</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">                </span><span class="n">pio_clear</span><span class="p">(</span><span class="n">LED1_PIO</span><span class="p">,</span><span class="w"> </span><span class="n">LED1_IDX_MASK</span><span class="p">);</span>
+<span class="w">                </span><span class="n">vtaskDelay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">                </span><span class="n">pio_set</span><span class="p">(</span><span class="n">LED1_PIO</span><span class="p">,</span><span class="w"> </span><span class="n">LED1_IDX_MASK</span><span class="p">);</span>
+<span class="w">                </span><span class="n">vtaskDelay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O problema disso é que tanto a <code>task_led</code> quanto a <code>task_led1</code> estão compartilhando o mesmo semáforo, e o semáforo usado aqui é do tipo binário, ou seja, pode ser <code>0</code> ou <code>1</code> a primeira tarefa que <strong>consumir</strong> o semáforo vai o tornar <code>0</code> e a segunda tarefa não vai ser executada corretamente, conforme diagrama a baixo:</p>
+<p><a class="glightbox" href="../imgs/task-led1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/task-led1.png" width="500" /></a></p>
+<p>Existem duas soluções para esse problemas, a primeira seria a de usar um <a href="https://www.freertos.org/Real-time-embedded-RTOS-Counting-Semaphores.html">Counting Semaphores</a> a outra é a de usar um outro semáforo para indicar para a nova tarefa que ela deve ser executada, para isso:</p>
+<ol>
+<li>Definir uma variável global para o novo semáforo:</li>
+<li>Fazer a função <code>but1_callback</code> liberar dois semáforos</li>
+<li>Criar o semáforo dentro da <code>task_led1</code></li>
+<li>Usar o semáforo novo na <code>task_led1</code></li>
+</ol>
+<p><a class="glightbox" href="../imgs/task-led1b.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/task-led1b.png" width="500" /></a></p>
+<div class="highlight"><pre><span></span><code>SemaphoreHandle_t xSemaphore;
+<span class="gi">+SemaphoreHandle_t xSemaphore1;</span>
+
+void but1_callback(void){
+<span class="w"> </span>   printf(&quot;but_callback \n&quot;);
+<span class="w"> </span>   BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+<span class="w"> </span>   xSemaphoreGiveFromISR(xSemaphore, &amp;xHigherPriorityTaskWoken);
+<span class="gi">+   xSemaphoreGiveFromISR(xSemaphore1, &amp;xHigherPriorityTaskWoken);</span>
+}
+
+static void task_led1(void *pvParameters) {
+
+<span class="gi">+   xSemaphore1 = xSemaphoreCreateBinary();</span>
+
+<span class="w"> </span>   for (;;) {
+<span class="gi">+       if( xSemaphoreTake(xSemaphore1, 500/portTICK_PERIOD_MS)){</span>
+<span class="w"> </span>           for (int i=0;i&lt;n;i++){
+<span class="w"> </span>               pio_clear(LED1_PIO, LED1_IDX_MASK);
+<span class="w"> </span>               vtaskDelay(500);
+<span class="w"> </span>               pio_set(LED1_PIO, LED1_IDX_MASK);
+<span class="w"> </span>               vtaskDelay(500);
+<span class="w"> </span>           }
+<span class="w"> </span>       }
+<span class="w"> </span>   }
+}
+</code></pre></div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

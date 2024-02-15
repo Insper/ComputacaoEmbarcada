@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Anteriores - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Anteriores</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#2022-a">2022-a</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#2021-a">2021-a</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#2020-1">2020-1</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#2019">2019</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Projeto</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="anos-passados">Anos passados</h1>
+<h2 id="2022-a">2022-a</h2>
+<table>
+<thead>
+<tr>
+<th>Integrantes</th>
+<th>Descrição</th>
+<th>Vídeo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CESAR EZRA ADES;KEIYA NISHIO</td>
+<td>Nosso projeto é um controle para youtube, com diversas funcionalidades, sendo elas:<br>Ligar o controle, Mute, Pause/Play, Full screen, Passa/Volta o tempo(10 seg), Passa o para o próximo vídeo<br>Ele foi feito para que os usuários possam controlar o youtube remotamente, deitados em suas camas e sofás sem ter o trabalho de se mover.<br>Ao abrir nosso repositório poderá encontrar mais informações sobre nosso projeto.</td>
+<td><a href="https://www.youtube.com/watch?v=UQKn9XYL6Q0&amp;t=1s">https://www.youtube.com/watch?v=UQKn9XYL6Q0&amp;t=1s</a></td>
+</tr>
+<tr>
+<td>BRUNO FREITAS DO NASCIMENTO RODRIGUES;NICOLAS BYUNG KWAN CHO</td>
+<td>Contralar um jogo com ativação por som</td>
+<td><a href="https://youtu.be/lWeQFMWuBXA">https://youtu.be/lWeQFMWuBXA</a></td>
+</tr>
+<tr>
+<td>CAROLINA HIRSCHHEIMER;PAULO WOOK KIM</td>
+<td>Fizemos um teclado matricial com um controle de volume. Ao apertar as teclas do teclado matricial, são emuladas as teclas como um numpad, conforme descrito no readme.md. Além disso, usamos um potenciômetro como controle de volume. Também temos uma resposta do LED quando recebe o handshake é feito.</td>
+<td><a href="https://youtu.be/eSaDR4vKHcA">https://youtu.be/eSaDR4vKHcA</a></td>
+</tr>
+<tr>
+<td>RODRIGO NIGRI GRINER;NATÁLIA QUEIROZ MENEZES CARRERAS</td>
+<td>A nossa ideia consiste em fazer uma mesa de efeitos especiais (sonoros e luminosos) para enfeitar a casa na época de Halloween.</td>
+<td><a href="https://drive.google.com/file/d/134OgbOIbWBsuOg77UYchF803UxvCDvJB/view?usp=sharing">https://drive.google.com/file/d/134OgbOIbWBsuOg77UYchF803UxvCDvJB/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td>HENRIQUE MARTINELLI FREZZATTI;LÍVIA SAYURI MAKUTA</td>
+<td>O projeto simula um controle de PS4 com os quatro botões de uso (Quadrado, triângulo, X e bola) e os dois analógicos, tanto o da esquerda para movimentação geral, como o da direita para mover a câmera nos jogos. Tendo em vista esse intuito, construímos esse controle para testá-lo em jogos e verificar sua funcionalidade.</td>
+<td><a href="https://youtu.be/MFPypHldZAY">https://youtu.be/MFPypHldZAY</a></td>
+</tr>
+<tr>
+<td>JOSÉ RAFAEL MARTINS FERNANDES;LUCCA BARUFATTI VELINI SANCHES</td>
+<td>O projeto é um controle bluetooth para o jogo que nós desenvolvemos na disciplina de Design de Software, o Foxer. O controle tem 4 botões que emulam as setas do teclado e um potenciômetro responsável por aumentar e diminuir o volume do computador. Além disso, existem 2 leds, 1 indicando que o handshake foi feito e o controle está pronto para uso e outro responsável por avisar ao usuário que o PC está mutado. Por fim, existe um buzzer que emite um som toda vez que um botão é apertado.</td>
+<td><a href="https://youtu.be/j4WElf03OTk">https://youtu.be/j4WElf03OTk</a></td>
+</tr>
+<tr>
+<td>FRANCISCO AUGUSTO BUZOLIN VASCONCELLOS DA COSTA;FERNANDO PERES MARQUES GAMEIRO FRANÇA</td>
+<td>Controlador para o aplicativo Spotify. O diferencial do projeto é o fato do controle interagir com a API do software e não com o software em si. Isso permite que o usuário possa controlar seu player do Spotify em qualquer dispositivo.</td>
+<td><a href="https://youtu.be/_FJskPKnLcA">https://youtu.be/_FJskPKnLcA</a></td>
+</tr>
+<tr>
+<td>RODRIGO GUIMARÃES COELHO;RAPHAEL LAHIRY CABILIO MAMMANA DE BARROS</td>
+<td>O objetivo do nosso projeto era criar um controle de pinball online, mais especificamente para esse site: <a href="http://letsplay.ouigo.com/">http://letsplay.ouigo.com/</a>. Nosso controle possui dois controles para os dois lados do batedor no jogo e um sensor de pressão que é responsável por lançar a bola. Quanto mais força no sensor mais forte a bola é lançada. Além disso, temos 2 indicadores para o usuário. Um deles para mostrar que o handshake foi feito e outro para mostrar o quanto de força foi aplicada no sensor de pressão numa escala de 0 a 10.</td>
+<td><a href="https://www.youtube.com/watch?v=vKhJ2k98Hrs">https://www.youtube.com/watch?v=vKhJ2k98Hrs</a></td>
+</tr>
+<tr>
+<td>Davi Reis Vieira de Souza;GUILHERME ROSADA</td>
+<td>Controlador de Multimídia para o Spotify. Destinado para pessoas que queiram controlar sua música sem estar próxima do PC ou que queiram dar esse poder a terceiros, como filhos, por exemplo.<br><br></td>
+<td><a href="https://youtu.be/tVuRww94FWc">https://youtu.be/tVuRww94FWc</a></td>
+</tr>
+<tr>
+<td>FABRICIO NERI LIMA;JEAN SILAS FERREIRA SANANDREZ</td>
+<td>A ideia consiste em criar um controle para o jogo CS (Counter Strike). Por meio de sistemas embarcados, pretendemos criar um controle mais imersivo, em que o jogador não precisa do teclado para jogar, podendo atirar, agachar, trocar de arma, e se locomover através do novo controle.</td>
+<td><a href="https://www.youtube.com/watch?v=3tfhDoeAuwk">https://www.youtube.com/watch?v=3tfhDoeAuwk</a></td>
+</tr>
+<tr>
+<td>ARTHUR GOMES CHIEPPE;VINICIUS GRANDO ELLER</td>
+<td>O projeto consiste em um controle para o jogo Golf It!. Usamos o potenciômetro para controlar a tacada, o encoder para ajustar a direção e botões para usos diversos.</td>
+<td><a href="https://youtu.be/MCCGAc4vXvg">https://youtu.be/MCCGAc4vXvg</a></td>
+</tr>
+<tr>
+<td>RAFAEL EVANGELISTA MONTEIRO;ESTHER GALLO DAGIR</td>
+<td>Esse projeto é um controle bluetooth para o Spotify e tem as seguintes funcionalidades:<br>4 Botões: 1 de play/pause, 1 de avançar, 1 de retornar e 1 de shuffle<br>1 Potenciometro para mudar o volume<br>1 led para sinalizar quando está no mudo<br>1 buzzer para sinalizar que o controle está funcionando (fez o handshake)</td>
+<td><a href="https://www.youtube.com/watch?v=scw-tIG19hs">https://www.youtube.com/watch?v=scw-tIG19hs</a></td>
+</tr>
+<tr>
+<td>FRANCISCO PINHEIRO JANELA;NICOLAS MACIEL QUEIROGA</td>
+<td>O projeto foi desenvolvido para criar um controle bluetooth para o robô turtlebot, capaz de controlar a direção e receber feedback de distância.</td>
+<td><a href="https://youtu.be/vy48HiP2h_8">https://youtu.be/vy48HiP2h_8</a></td>
+</tr>
+<tr>
+<td>LUCA COUTINHO MELÃO;PAULO SOUZA CHADE</td>
+<td>A nossa aplicação consiste em um programa que recebe uma melodia e consegue traduzir isso para os pinos que devem ser tocados. No caso, tais pinos correspondem às teclas de um piano, os quais vão acender um LED no tempo em que devem ser tocados.</td>
+<td><a href="https://youtu.be/_KdAMJ1dxks">https://youtu.be/_KdAMJ1dxks</a></td>
+</tr>
+<tr>
+<td>GUILHERME CARNEIRO LUNETTA;JOAO ZSIGMOND</td>
+<td>O nosso controle serve para jogar Counter Strike, um jogo famoso no computador. Utiliza alguns botões e tem os feedbacks com LED e Buzzer.</td>
+<td><a href="https://youtu.be/Y3TvsveXXT0">https://youtu.be/Y3TvsveXXT0</a></td>
+</tr>
+<tr>
+<td>JOÃO VITOR MENEZES DE MAGALHÃES;FELIPE BANZATO PINTO DE LEMOS</td>
+<td>Nosso projeto é um controle utilizado para mexer no youtube</td>
+<td><a href="https://drive.google.com/file/d/13C9wXUb-MhIjcAD1htUl9d2xwCZRJF8B/view?usp=sharing">https://drive.google.com/file/d/13C9wXUb-MhIjcAD1htUl9d2xwCZRJF8B/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td>JAMESSON LEANDRO PAIVA SANTOS;IVAN DE ALCANTARA BARBOSA BARROS</td>
+<td>O projeto consiste em um controle bluetooth voltado para gamers de jogos de guerra de avião.</td>
+<td><a href="https://youtu.be/fmUkZNA9ECc">https://youtu.be/fmUkZNA9ECc</a></td>
+</tr>
+<tr>
+<td>ANA CAROLINA LEAL GARCIA DE SOUZA;JOÃO PEDRO FARIAS DE ARAUJO</td>
+<td>Um controle via VJoy para jogar Tennis no Wii Sports emulado no computador</td>
+<td><a href="https://youtu.be/hSnb8Q8nyII">https://youtu.be/hSnb8Q8nyII</a></td>
+</tr>
+<tr>
+<td>CAROLINE CHAIM DE LIMA CARNEIRO;TIAGO VITORINO SEIXAS</td>
+<td>Um controle para jogar PokeMMO, um emulador multiplayer de pokemon clássico (Nintendo DS e Game Boy) para computador</td>
+<td><a href="https://www.youtube.com/watch?v=apzu8N4fvoo">https://www.youtube.com/watch?v=apzu8N4fvoo</a></td>
+</tr>
+<tr>
+<td>BERNARDO CUNHA CAPOFERRI;GUILHERME DANTAS RAMEH</td>
+<td>Um MPU que controla o pitch e roll de um avião de um jogo, com um flexômetro que controla a aceleração e desaceleração, quatro botões para simular um gamepad.</td>
+<td><a href="https://youtu.be/ggW0K9r1OmY">https://youtu.be/ggW0K9r1OmY</a></td>
+</tr>
+<tr>
+<td>LUIZA VALEZIM AUGUSTO PINTO;ELLEN BEATRIZ SHEN</td>
+<td>O BlueTiles é um teclado bluetooth que, com apenas uma oitava, permite de você tocar piano. Ele possui 13 botoões (contando com o de desligar e ligar), além do mixer de volume analógico.</td>
+<td><a href="https://photos.app.goo.gl/qG2aSzBmn8NUd6JP7">https://photos.app.goo.gl/qG2aSzBmn8NUd6JP7</a></td>
+</tr>
+<tr>
+<td>BRUNO BOLDRIM SABOYA;MATHEUS KWON</td>
+<td>Nosso projeto serve para aqueles aspirantes em música e Dj, ele serve como um LaunchPad que simula o teclado do nosso aplicativo para tocarmos as musicas ou samples, ou os beats. Sua portabilidade e praticidade facilita a vida daqueles que estejam sempre em movimentam e não podem levar todos os equipamentos que eles tenham.</td>
+<td><a href="https://youtu.be/QAn-dmwzwRM">https://youtu.be/QAn-dmwzwRM</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="2021-a">2021-a</h2>
+<table>
+<thead>
+<tr>
+<th>Integrantes</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#110;&#100;&#114;&#101;&#118;&#116;&#49;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#97;&#110;&#100;&#114;&#101;&#118;&#116;&#49;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#110;&#116;&#111;&#110;&#105;&#111;&#118;&#102;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#97;&#110;&#116;&#111;&#110;&#105;&#111;&#118;&#102;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>Nosso projeto é um controle de spotify, onde é possível pausar, pular, voltar uma música, além de colocar no aleatorio. Também é possível diminuir o volume com o potenciometro. Existem 2 feedbacks no controle, o primeiro para mostrar que ele esta funcionando, e o segundo para mostrar que a musica esta tocando<br><br><a href="https://youtu.be/S1r84FI3KBc">https://youtu.be/S1r84FI3KBc</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#97;&#114;&#108;&#111;&#115;&#101;&#100;&#51;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#99;&#97;&#114;&#108;&#111;&#115;&#101;&#100;&#51;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#111;&#97;&#111;&#112;&#103;&#97;&#49;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#106;&#111;&#97;&#111;&#112;&#103;&#97;&#49;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>Streamer Deck abre e controla Spotify e discord<br><br><a href="https://drive.google.com/file/d/1kfur3mRJsDKVAodVRDUrgFhxTD39MrOp/view?usp=sharing">https://drive.google.com/file/d/1kfur3mRJsDKVAodVRDUrgFhxTD39MrOp/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#102;&#101;&#114;&#110;&#97;&#110;&#100;&#111;&#99;&#102;&#98;&#102;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#102;&#101;&#114;&#110;&#97;&#110;&#100;&#111;&#99;&#102;&#98;&#102;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#97;&#105;&#115;&#110;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#108;&#97;&#105;&#115;&#110;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>É um controle que simula teclas do computador, especificamente para jogar mario forever, um jogo 2D da franquia Mario Bros<br><br><a href="https://drive.google.com/file/d/1Hqs_8FaSw8498iqNCPvv2qaeIVWyDXeG/view">https://drive.google.com/file/d/1Hqs_8FaSw8498iqNCPvv2qaeIVWyDXeG/view</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#97;&#98;&#114;&#105;&#101;&#108;&#97;&#109;&#98;&#50;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#103;&#97;&#98;&#114;&#105;&#101;&#108;&#97;&#109;&#98;&#50;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#116;&#104;&#101;&#111;&#98;&#114;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#116;&#104;&#101;&#111;&#98;&#114;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>O projeto é um controle pra quando você estiver deitado ou longe do computador você poder avancar, pausar, voltar, e navegar pelo netflix.<br><br><a href="https://drive.google.com/drive/folders/1rrGf4iEp__eRmZ5b_8DClmLhRHW1VDCK?usp=sharing">https://drive.google.com/drive/folders/1rrGf4iEp__eRmZ5b_8DClmLhRHW1VDCK?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#101;&#100;&#103;&#97;&#114;&#100;&#97;&#111;&#110;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#101;&#100;&#103;&#97;&#114;&#100;&#97;&#111;&#110;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#101;&#100;&#103;&#97;&#114;&#100;&#97;&#111;&#110;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#101;&#100;&#103;&#97;&#114;&#100;&#97;&#111;&#110;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>O meu projeto é um controle remoto para youtube, que pode controlar comandos como avançar 10 sec, voltar 10 sec, pausar/play, "mutar" e controlar o volume.<br><br><a href="https://drive.google.com/file/d/1uTgitwNWOPgxl38o9NRJORxXXD4T1KzW/view?usp=sharing">https://drive.google.com/file/d/1uTgitwNWOPgxl38o9NRJORxXXD4T1KzW/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#97;&#110;&#117;&#101;&#108;&#99;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#109;&#97;&#110;&#117;&#101;&#108;&#99;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#110;&#100;&#114;&#101;&#98;&#114;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#97;&#110;&#100;&#114;&#101;&#98;&#114;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>O projeto serve como um controle para o jogo Pokemon. Os botões representam os botões do gameboy tradicional. O joystick é utilizado para substituir as setinhas do gameboy. Assim, é possível usar esse controle para jogar Pokemon no emulador, de uma maneira mais confortável. O controle também tem sinais que indicam quando o handshake já aconteceu e também um sinal para quando algum botão é apertado.<br><br><a href="https://youtu.be/Y8Mk-5F9A5M">https://youtu.be/Y8Mk-5F9A5M</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#98;&#101;&#97;&#116;&#114;&#105;&#122;&#114;&#98;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#98;&#101;&#97;&#116;&#114;&#105;&#122;&#114;&#98;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#111;&#97;&#111;&#103;&#99;&#102;&#97;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#106;&#111;&#97;&#111;&#103;&#99;&#102;&#97;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>Para controlar um filme que está passando na netflix, aumentando o volume do computador, fazendo ele adiantar 10s, voltar 10s, pausar e ficar em full screen.<br><br><a href="https://drive.google.com/file/d/1zT3H6ElKJmXK1VDe5W1cP9J_WdPgVJEF/view?usp=sharing">https://drive.google.com/file/d/1zT3H6ElKJmXK1VDe5W1cP9J_WdPgVJEF/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#97;&#114;&#99;&#111;&#109;&#112;&#112;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#109;&#97;&#114;&#99;&#111;&#109;&#112;&#112;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#97;&#98;&#114;&#105;&#101;&#108;&#97;&#121;&#109;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#103;&#97;&#98;&#114;&#105;&#101;&#108;&#97;&#121;&#109;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>Controle para jogos com quatro botões na placa e joystick analógico. Manda os inputs da placa para o computador atravez do bluetooth. O computador recebe e coloca o comando no vjoy.<br><br><a href="https://user-images.githubusercontent.com/49621844/116785879-4543d880-aa72-11eb-8608-d7a31734fa36.mp4">https://user-images.githubusercontent.com/49621844/116785879-4543d880-aa72-11eb-8608-d7a31734fa36.mp4</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#117;&#99;&#97;&#115;&#107;&#102;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#108;&#117;&#99;&#97;&#115;&#107;&#102;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#117;&#99;&#97;&#115;&#107;&#102;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#108;&#117;&#99;&#97;&#115;&#107;&#102;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>controle para jogar mario kart (funciona para a maioria dos titulos)<br><br><a href="https://drive.google.com/file/d/1zDWovRPSyZkq9ojfmIOqJn2uUqmInrfc/view?usp=sharing">https://drive.google.com/file/d/1zDWovRPSyZkq9ojfmIOqJn2uUqmInrfc/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#114;&#116;&#104;&#117;&#114;&#102;&#99;&#50;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#97;&#114;&#116;&#104;&#117;&#114;&#102;&#99;&#50;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#118;&#105;&#99;&#116;&#111;&#114;&#118;&#97;&#97;&#99;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#118;&#105;&#99;&#116;&#111;&#114;&#118;&#97;&#97;&#99;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>Controle para tinder<br><br><a href="https://youtu.be/WOtw07sDUcE">https://youtu.be/WOtw07sDUcE</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#117;&#105;&#115;&#102;&#109;&#108;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#108;&#117;&#105;&#115;&#102;&#109;&#108;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#117;&#105;&#115;&#102;&#115;&#99;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#108;&#117;&#105;&#115;&#102;&#115;&#99;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>Nosso projeto consiste em um controle para o Netflix. Assim o usuário poderá mutar, avançar/retornar, aumentar/diminuir volume, pausar/iniciar o filme por meio do controle bluetooth. É crescente o acesso ao Netflix por meio de laptop/PC em detrimento da televisão, assim, criamos um controle que deixa mais cômodo para o usuário realizar alguma ação na aplicação.<br><br><a href="https://drive.google.com/file/d/1nZ7k6wScidorKgvy9_6jWWmS4qFRsXmu/view?usp=sharing">https://drive.google.com/file/d/1nZ7k6wScidorKgvy9_6jWWmS4qFRsXmu/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#97;&#98;&#114;&#105;&#101;&#108;&#108;&#97;&#101;&#99;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#103;&#97;&#98;&#114;&#105;&#101;&#108;&#108;&#97;&#101;&#99;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#97;&#98;&#114;&#105;&#101;&#108;&#108;&#97;&#101;&#99;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#103;&#97;&#98;&#114;&#105;&#101;&#108;&#108;&#97;&#101;&#99;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>Controle para Spotify. Pode ser usado para atividades ao ar livre ou indoors. O usuário pode selecionar as músicas (next, previous), dar play/pause, controlar o volume e ver o nome da música na tela<br><br><a href="https://drive.google.com/file/d/1a_VB78qZptOJtcHlvJKCefFXe7hSUKM6/view?usp=sharing">https://drive.google.com/file/d/1a_VB78qZptOJtcHlvJKCefFXe7hSUKM6/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#110;&#97;&#99;&#99;&#102;&#53;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#97;&#110;&#97;&#99;&#99;&#102;&#53;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#97;&#116;&#104;&#101;&#117;&#115;&#102;&#115;&#50;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#109;&#97;&#116;&#104;&#101;&#117;&#115;&#102;&#115;&#50;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>O projeto simula 4 teclas de um teclado e também possibilita que se mude o volume por meio de um potenciômetro. Ele foi feito pensando na Netflix, mas também é possível usá-lo no Youtube por exemplo. Por ser Bluetooth, é legal que conseguimos usar ele enquanto deitado na cama, sem precisar ficar levantando para mexer no teclado (para quem vê Netflix no Note, que é o meu caso :) ).<br><br><a href="https://drive.google.com/file/d/1c-v-JKd7TPEW6tCwFvmUv1Fmi8MrmOCf/view?usp=sharing">https://drive.google.com/file/d/1c-v-JKd7TPEW6tCwFvmUv1Fmi8MrmOCf/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#97;&#114;&#99;&#101;&#108;&#111;&#99;&#109;&#56;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#109;&#97;&#114;&#99;&#101;&#108;&#111;&#99;&#109;&#56;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#101;&#105;&#107;&#105;&#108;&#121;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#101;&#105;&#107;&#105;&#108;&#121;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>O nosso projeto foi feito para o Game Boy Advanced (GBA), um videogame portátil que muitos de nós quando criança costumavam jogar. A única diferença está nos botões, onde foi trocado as setas do GBA pelo analógico. O botão do microchip desliga o controle e os 3 botões do oled mais o analógico são para o GBA. <br><br><a href="https://drive.google.com/file/d/1F8L-5CndQH_tv9GsXUg2ffL10yzaO8ez/view?usp=sharing">https://drive.google.com/file/d/1F8L-5CndQH_tv9GsXUg2ffL10yzaO8ez/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#116;&#104;&#97;&#108;&#105;&#97;&#108;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#116;&#104;&#97;&#108;&#105;&#97;&#108;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#119;&#105;&#108;&#108;&#105;&#97;&#109;&#97;&#114;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#119;&#105;&#108;&#108;&#105;&#97;&#109;&#97;&#114;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>É um controle de Spotify, que tem 5 botões digitais - pause/play, voltar música, passar música, desligar/ligar controle e fechar aplicativo. Além disso, tem-se um potenciômetro, que controla o volume do aplicativo.<br><br><a href="https://youtu.be/yAgvNxoVyQY">https://youtu.be/yAgvNxoVyQY</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#110;&#114;&#105;&#113;&#117;&#101;&#114;&#116;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#104;&#101;&#110;&#114;&#105;&#113;&#117;&#101;&#114;&#116;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#118;&#105;&#99;&#116;&#111;&#114;&#97;&#110;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#118;&#105;&#99;&#116;&#111;&#114;&#97;&#110;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>O projeto serve para o usuario poder controlar seu spotify pelo controle. Muitas vezes conectamos o computador na caixa de som em uma festa, porem ficar indo ate o computador é muitas vezes cansativo. Para isso, o usuario agora pode controlar a musica de qualquer lugar da festa. Podendo pular, voltar, pausar, dar mute ou mudar o volume.<br><br><a href="https://drive.google.com/file/d/1f2u5uk4MmlBQwN7ZCqfsWvSLBX3D3PXu/view?usp=sharing">https://drive.google.com/file/d/1f2u5uk4MmlBQwN7ZCqfsWvSLBX3D3PXu/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#110;&#114;&#105;&#113;&#117;&#101;&#109;&#109;&#51;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#104;&#101;&#110;&#114;&#105;&#113;&#117;&#101;&#109;&#109;&#51;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#110;&#114;&#105;&#113;&#117;&#101;&#109;&#109;&#51;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#104;&#101;&#110;&#114;&#105;&#113;&#117;&#101;&#109;&#109;&#51;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>Controlar a distancia a netflix e outros programas possivelmente já que vc tem um mouse!<br><br><a href="https://youtu.be/FiB4-OAT5q8">https://youtu.be/FiB4-OAT5q8</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#97;&#98;&#114;&#105;&#101;&#108;&#109;&#107;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#103;&#97;&#98;&#114;&#105;&#101;&#108;&#109;&#107;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#117;&#114;&#105;&#108;&#111;&#108;&#99;&#109;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#109;&#117;&#114;&#105;&#108;&#111;&#108;&#99;&#109;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>O objetivo do nosso projeto era fazer um controle para Counter Strike, que permitisse o jogador a conduzir uma sessão de treino. Para isso, fizemos quatro botões (atirar, recarregar, pular, e agachar), e um joystick que permita o movimento básico do jogador. Dessa forma, conseguimos fazer uma sessão de prática com feedback ao usuário, ao que o LED da placa pisca quando a arma está recarregando, e para de piscar quando o jogador pode atirar de novo. Além disso, fizemos o handshake para indicar que o controle está pronto para uso.<br><br><a href="https://drive.google.com/file/d/1OEcru01oLmWyqU2K_WWS6g8ndwnVfwtG/view?usp=sharing">https://drive.google.com/file/d/1OEcru01oLmWyqU2K_WWS6g8ndwnVfwtG/view?usp=sharing</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#97;&#102;&#97;&#101;&#108;&#108;&#97;&#50;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#114;&#97;&#102;&#97;&#101;&#108;&#108;&#97;&#50;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#103;&#105;&#111;&#118;&#97;&#110;&#110;&#105;&#99;&#112;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#103;&#105;&#111;&#118;&#97;&#110;&#110;&#105;&#99;&#112;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>Um controle de netflix para utilizar enquanto esta sentado no sofa com o laptop ligado na tv para funçoes simples de controle de midia.<br><br><a href="https://youtu.be/eedJblbAScE">https://youtu.be/eedJblbAScE</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#98;&#101;&#97;&#116;&#114;&#105;&#122;&#109;&#99;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#98;&#101;&#97;&#116;&#114;&#105;&#122;&#109;&#99;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#111;&#112;&#104;&#105;&#97;&#107;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#115;&#111;&#112;&#104;&#105;&#97;&#107;&#115;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>O projeto é basicamente um controle de OSU. A ideia é deixar esse jogo mais difícil que já é. Têm botões de ajustar o volume, de clicar e segurar (duas features específicas do OSU) e entrada analógica para mover o mouse.<br><br><a href="https://www.dropbox.com/s/tinff55p06xjqhc/20210502_225334.mp4?dl=0">https://www.dropbox.com/s/tinff55p06xjqhc/20210502_225334.mp4?dl=0</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#105;&#99;&#101;&#114;&#111;&#116;&#99;&#118;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#99;&#105;&#99;&#101;&#114;&#111;&#116;&#99;&#118;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#105;&#99;&#101;&#114;&#111;&#116;&#99;&#118;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#99;&#105;&#99;&#101;&#114;&#111;&#116;&#99;&#118;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>Com o controle, é possível interagir com videos do youtube, avançando, voltando, ativando o mudo, desativando o mudo e possivelmente aumentando e diminuindo o volume.<br><br><a href="https://studio.youtube.com/video/Iibz1snDbgs/edit">https://studio.youtube.com/video/Iibz1snDbgs/edit</a></td>
+</tr>
+<tr>
+<td><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#116;&#104;&#105;&#97;&#103;&#111;&#108;&#109;&#109;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#116;&#104;&#105;&#97;&#103;&#111;&#108;&#109;&#109;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a> <br><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#116;&#104;&#105;&#97;&#103;&#111;&#108;&#109;&#109;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#116;&#104;&#105;&#97;&#103;&#111;&#108;&#109;&#109;&#64;&#97;&#108;&#46;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></td>
+<td>controle para netflix, conseuge pausar o vídeo, colocar e sair do fullscreen, adiantar e voltar 10s<br><br><a href="https://drive.google.com/file/d/1EcPOi22NdXx_5S6Y9EV7QhaZU5aEm-k4/view?usp=sharing">https://drive.google.com/file/d/1EcPOi22NdXx_5S6Y9EV7QhaZU5aEm-k4/view?usp=sharing</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="2020-1">2020-1</h2>
+<p>Devido ao corona cancelamos o projeto. Mas as ideias eram:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Tipo</strong></th>
+<th><strong>Nome</strong></th>
+<th><strong>Descrição</strong></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Controle</td>
+<td>BoomBox</td>
+<td>Controle de Som</td>
+<td>GABRIEL ZANETTI TRAUMULLER KAWALL</td>
+<td>HENRY FURQUIM ROCHA</td>
+<td>MATHEUS PELLIZZON</td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>Control Craft</td>
+<td>Controle do minecraft com sensor de batida</td>
+<td>JOSÉ HÉLIO PAIVA NETO</td>
+<td>LUCAS LEAL VALE</td>
+<td>RAFAEL ALVES DE MELLO ALMADA</td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>Controle Pausa para Pipoca (PPP)</td>
+<td></td>
+<td>EVANDRO FONTANA ROMEIRO</td>
+<td>MICHEL JOSÉ HANOCH VIEIRA DE MORAES</td>
+<td></td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>ContRos</td>
+<td>Controle do robô de robôtica</td>
+<td>ROGER RIBEIRO FAVA PINA</td>
+<td>SAMUEL NAASSOM DO NASCIMENTO PORTO</td>
+<td></td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>Dance Mat</td>
+<td>Tapete de dança</td>
+<td>BEATRIZ MIE KOTSUBO KUWABARA</td>
+<td>GABRIELA IANNINI CARUSO</td>
+<td>LUIZA RODRIGUES SILVEIRA</td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>HandShooter</td>
+<td>Controle jogo tiro, que parece uma luva</td>
+<td>ANDRÉ ELIMELEK DE WEBER</td>
+<td>GUILHERME TEIXEIRA BATISTA</td>
+<td>GUSTAVO BELTRÃO BRAGA</td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>Joystick Invisible</td>
+<td>Controle de jogo com 2 luvas</td>
+<td>JOÃO PEDRO MONTEFELTRO JUNQUEIRA MEIRELLES</td>
+<td>PEDRO VERO FONTES</td>
+<td>RAFAEL DOS SANTOS</td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>One Hand Controller</td>
+<td>Controle para megaman</td>
+<td>ABEL CAVALCANTE DE ANDRADE NETO</td>
+<td>RODRIGO DE JESUS OLIVEIRA JUNIOR</td>
+<td></td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>PC Control</td>
+<td>Macros para executar no PC</td>
+<td>BRUNO SIGNORELLI DOMINGUES</td>
+<td>GABRIEL MAGALHÃES DUARTE</td>
+<td>THOMAS DE QUEIROZ BARROS SCHNEIDER</td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>SPOTIFAR</td>
+<td>Controle Spotify</td>
+<td>MANUELA CASTILLA RUSSO CORREA</td>
+<td>THIAGO VERARDO COSTA DOS SANTOS</td>
+<td>VITOR CALCETE MARQUES</td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>TraderScan</td>
+<td>Controle que mostra dados da bolsa de valores</td>
+<td>CAIO HORSCHUTZ FAUZA</td>
+<td>LUIZ VITOR GERMANOS TEIXEIRA</td>
+<td>PEDRO PAULO MENDONÇA TELHO</td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>UmDrone</td>
+<td>Controle para drones - ROS</td>
+<td>GABRIEL FRIGO ZEZZE</td>
+<td>PEDRO LUIZ DA COSTA BRAGA</td>
+<td>VITOR GRANDO ELLER</td>
+</tr>
+<tr>
+<td>Controle</td>
+<td>YouControl</td>
+<td>Controle para youtube</td>
+<td>ERIC FERNANDO OTOFUJI ABRANTES</td>
+<td>JOÃO VICTOR RODRIGUES SILVA</td>
+<td></td>
+</tr>
+<tr>
+<td>Vending Machine</td>
+<td>4Tune</td>
+<td>Roleta de m&amp;m</td>
+<td>GIOVANNA SARDELLA CABRAL</td>
+<td>LUCAS MUCHALUAT MOREIRA</td>
+<td>MAYRA PETER DA ROCHA LOURES</td>
+</tr>
+<tr>
+<td>Vending Machine</td>
+<td>Camisinhas??</td>
+<td>Máquina de venda de camisinhas</td>
+<td>MATHEUS PELLIZZON</td>
+<td>PEDRO TEÓFILO RAMOS</td>
+<td></td>
+</tr>
+<tr>
+<td>Vending Machine</td>
+<td>Coffe?</td>
+<td>Venda de cápsulas de nespresso</td>
+<td>EMANUELLE SILVA MOÇO</td>
+<td>LEONARDO MENDES DE MORAES</td>
+<td>PEDRO HENRIQUE CARVALHO DAHER</td>
+</tr>
+<tr>
+<td>Vending Machine</td>
+<td>Quick Dray</td>
+<td>Venda de refil de cigarros eletrônicos</td>
+<td>GABRIEL NOAL OLIVA</td>
+<td>GUSTAVO MOLINA FRENEDA BENITES</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="2019">2019</h2>
+<h3 id="vending-machine">Vending Machine</h3>
+<table>
+<thead>
+<tr>
+<th>Descrição</th>
+<th>---</th>
+<th>---</th>
+<th>---</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maquina caca niquel, com M&amp;M de recompensa</td>
+<td>Vinicius Lima</td>
+<td>Gabriel Francato</td>
+<td>Samuel Granato</td>
+</tr>
+<tr>
+<td>Vending machine de drinks (alcoólicos ou não).</td>
+<td>Alessandra Blucher</td>
+<td>Giulia Passarelli</td>
+<td>Warlen Rodrigues</td>
+</tr>
+<tr>
+<td>Imprima a qualquer momento suas notas favoritas</td>
+<td>Andre Ejzenmesser</td>
+<td>David Fogelman</td>
+<td>Wesley Silva</td>
+</tr>
+</tbody>
+</table>
+<h3 id="controle">Controle</h3>
+<table>
+<thead>
+<tr>
+<th>Descrição</th>
+<th>---</th>
+<th>---</th>
+<th>---</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interface de controle que cria atalhos para utilizar com Google Docs (Docs, Sheets, Apresentações) em um navegador. Por ser ferramenta de produtividade que fica dentro de outro app (navegador), diversos comandos ficam de mais difícil acesso por conflitarem com os do próprio navegador. O teclado especial tem por objetivo facilitar e agilizar o uso daqueles que usam as ferramentas de produtividade do Google.</td>
+<td>Eric Fernando Otofuji Abrantes</td>
+<td>Francisco Ciol Rodrigues Aveiro</td>
+<td>José Fernando Melo Cruz</td>
+</tr>
+<tr>
+<td>controle para o jogo GuitarHero</td>
+<td>Jorge Augusto</td>
+<td>Iago Mendes</td>
+<td></td>
+</tr>
+<tr>
+<td>Faremos um controle bluetooth para o VLC usando conceitos de computação embarcada. Teremos botões de volume, um motor slider para o time do filme e um start/stop.</td>
+<td>Sabrina Machado</td>
+<td>Matteo Iannoni</td>
+<td>Manoela Campos</td>
+</tr>
+<tr>
+<td>um teclado musical embarcado</td>
+<td>Guilherme de Moraes</td>
+<td>Lucas Vaz</td>
+<td>Felippe Teracini</td>
+</tr>
+<tr>
+<td>Luva para controle de um drone</td>
+<td>Lucca Delchiaro Costabile</td>
+<td>Antonio Andraues</td>
+<td>Raphael Azevedo</td>
+</tr>
+<tr>
+<td>Controle remoto universal para funções domésticas</td>
+<td>Gabriel Monteiro</td>
+<td>Hugo Carl</td>
+<td>Bruno Arthur</td>
+</tr>
+<tr>
+<td>Controle bluetooth de Netflix para computador</td>
+<td>Juan Jorge Garcia</td>
+<td>Vitor Liu</td>
+<td>Vitor Satyro</td>
+</tr>
+<tr>
+<td>Usando um ARM SAME70 para criar uma versão de um stream deck , amplamente utilizado por streamers e editores de vídeo para tornar ações como o uso de shortcuts mais simples de serem realizadas com botões dedicados para algumas funções e uma maior visualização de dados.</td>
+<td>Gustavo Gobetti</td>
+<td>Guilherme Leite</td>
+<td>Rafael Vieira</td>
+</tr>
+<tr>
+<td>Joystick de Arcade com 8 botoes</td>
+<td>Arthur Olga</td>
+<td>Bruno Costa</td>
+<td></td>
+</tr>
+<tr>
+<td>Uma caixa a prova de água para controlar a música que está tocando no computador enquanto a pessoa está tomando banho.</td>
+<td>Eli jose abi ghosn</td>
+<td>Maria eduarda bicalho</td>
+<td>Gabriel moura</td>
+</tr>
+<tr>
+<td>Um teclado controlador que remixa diferentes sons</td>
+<td>Gabriel Monteiro</td>
+<td>Hugo Carl</td>
+<td>Bruno Arthur</td>
+</tr>
+<tr>
+<td>Controle para jogar Super Mario World (super nintendo)</td>
+<td>Alexandre Almeida Edington</td>
+<td>Victor Moura</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../vjoy/"
+               class="ah-prev"
+               title="Vjoy">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Vjoy</span>
+            </a>
+          
+          
+            <a href="../../APS/APS-1-Musical/"
+               class="ah-next"
+               title="Descritivo">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Descritivo</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

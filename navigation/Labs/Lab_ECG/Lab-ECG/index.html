@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>ECG - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">ECG</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#lab">Lab</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#task-process">Task process</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#leitura-analogica">Leitura analógica</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#retransmitindo-o-dado">Retransmitindo o dado</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#exibindo-grafico">Exibindo gráfico</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#frequencia-cardiaca">Frequência cardiaca</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#ba">B/A</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs extras</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-ecg">LAB - ECG</h1>
+<p>Neste laboratório iremos processar e exibir o sinal de um electrocardiograma (ECG).</p>
+<h2 id="lab">Lab</h2>
+<table>
+<thead>
+<tr>
+<th>Exemplo base</th>
+<th></th>
+<th>LAB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SAME70-Examples/Demos/ECG</code></td>
+<td><img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /></td>
+<td><code>Lab8-RTOS-ECG</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Código exemplo</p>
+<ul>
+<li>Vamos modificar o código exemplo <a href="https://github.com/Insper/SAME70-examples/tree/master/Demos/ECG">SAME70-examples/Demos/ECG/</a>, faça uma cópia para o seu repositório de laboratórios renomeando para <code>Labs8-RTOS-ECG</code>.</li>
+</ul>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Periféricos utilizados no lab</p>
+<p>Por vocês:</p>
+<ul>
+<li>AFEC1 (EXT1 PC31), canal 6</li>
+<li>TC1 canal 1</li>
+<li>RTT</li>
+</ul>
+<p>Indiretamente (o projeto já usa para gerar o ECG):</p>
+<ul>
+<li>DAC0 (PB13)</li>
+<li>TC0 canal 0</li>
+</ul>
+</div>
+<h3 id="conectando">Conectando</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Você deve ter o LCD conectado na placa.</p>
+</div>
+<p>Vamos conectar o pino PB13 que gera o sinal o sinal analógico do batimento cardíaco ao pino PC31 do EXT1 que possui o AFEC1 conforme imagem e diagrama a baixo:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Imagem</label><label for="__tabbed_1_2">Manual</label><label for="__tabbed_1_3">Diagrama</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><a class="glightbox" href="../imgs/jmp_pb13.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/jmp_pb13.jpg" width="400" /></a></p>
+</div>
+<div class="tabbed-block">
+<p><a class="glightbox" href="../imgs/afec1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/afec1.png" width="500" /></a></p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>┌───────────────────┐
+│           ┌─────┐ │
+│           │afec │◄├────┐
+│           └─────┘ │    │
+│                   │    │ ecg 
+│  ┌─────┐  ┌─────┐ │    │
+│  │ tc0 ├─►│dac  ├─x────┘
+│  └─────┘  └─────┘ │ PB13
+└───────────────────┘
+</code></pre></div>
+</div>
+</div>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-0"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="ecg">ECG</h3>
+<p>O sinal ECG gerado no pino PB13 possui a forma de onda a seguir:</p>
+<p><a class="glightbox" href="../imgs/ecg1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/ecg1.png" width="300" /></a></p>
+<p>E se analisarmos o espectro do sinal via transformada de fourier, obtemos a seguinte composição espectral:</p>
+<p><a class="glightbox" href="../imgs/ecg-fft.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/ecg-fft.png" width="300" /></a></p>
+<div class="admonition question short">
+<p class="admonition-title">Question</p>
+<p>O que você consegue extrair de informações dos gráficos anteriores?</p>
+<div class="admonition details">
+<p>No primeiro (ecg no tempo) podemos ver claramente que existe uma
+alta frequência no sinal, mas que o envelope é a informação do ecg.</p>
+<p>Já no fourier somos capazes se distinguir que existem duas regiões 
+com bastante informações, uma de baixa frquência (0..25)Hz e outra
+de 60Hz.</p>
+<p><a class="glightbox" href="../imgs/ecg-fft2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/ecg-fft2.png" width="300" /></a></p>
+</div>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-1"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h4 id="60-hz">60 Hz</h4>
+<p>Notamos claramente que existe um sinal centrada em 60Hz, isso é muito comum quando trabalhamos com eletrônica e reflete o 60Hz da rede elétrica que é propagada de diversas formas para o transdutor responsável em amostrar o dado do pulso elétrico do corpo humano, causando um ruído no sinal não desejável. </p>
+<p>Para tararmos o dado corretamente teremos que filtra o ruído. <mark>Lembre que em alguns países a frequência da rede elétrica é de 50Hz e não de 60Hz como no Brasil.</mark></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>O som desse ruído em 60hz é chamado de <a href="https://pt.wikipedia.org/wiki/Zumbido_el%C3%A9trico">Zumbido elétrico</a> soa como:</p>
+<p><audio controls>
+<source src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Mains_hum_60_Hz.ogg" type="audio/ogg">
+</audio></p>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-2"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="task-process">Task process</h2>
+<p>Vamos criar uma tarefa no RTOS que será responsável por processar os dados do ECG, iremos chamar a tarefa de <code>task_process</code>. Essa tarefa irá receber os dados da conversão analógica, processar e extrair informações e retornar enviar os dados para a <code>task_main</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: task_process</p>
+<ol>
+<li>Crie uma tarefa chamada de <code>task_process</code>, ela pode estar vazia por hora. Não esqueça do while(1) e de criar ela na função main (<code>xTaskCreate</code>).</li>
+</ol>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-3"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="leitura-analogica">Leitura analógica</h2>
+<p>Para começarmos precisamos ler o valor do ECG que está sendo gerado no pino PB13, para isso iremos configurar a leitura analógica no AFEC1 canal 6. A leitura anlógica deve ser executada a 250 Hz, para garantirmos que estaremos lendo a uma taxa de amostragem fixa, vamos configurar um TC para fazer a conversão do sinal. O valor convertido deve ser colocado em uma fila para processamento futuro, como indicado a seguir:</p>
+<p><a class="glightbox" href="../imgs/afec-tc3.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/afec-tc3.png" width="600" /></a></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Taxa de amostragem fixa simplifica muito o processamento de sinais digitais, muitas técnicas assumem que o valor é constante.</p>
+<p>A forma como fizemos no laboratório do AFEC não é boa aqui, porque lá usávamos uma tarefa do RTOS para gerar a taxa de amostragem (<code>vtaskDelay</code>) e isso não garante que tenhamos uma taxa fixa, pois não é garantido que a tarefá vá executar exatamente no delay proposto (outras taréfas de prioridade superior podem estar executando).</p>
+<p>Além disso, o uso de uma task para gerar a taxa de amostragem limita a taxa que podemos usar, o RTOS executa no máximo a 1000Hz.</p>
+</div>
+<div class="admonition question choice">
+<p class="admonition-title">Question</p>
+<p>Qual handler é referente ao TC1 canal 0?</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>TC6_Handler</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>TC1_Handler</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>TC3_Handler</code></li>
+</ul>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: Lendo dados</p>
+<p>No começo da <code>task_process</code>:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Criar uma fila de inteiros <code>xQueueECG</code> de tamanho 250</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Configurar TC1 canal 0 para gerar uma interrupção a cada 250Hz</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Configurar leitura no AFEC 1 canal 6</li>
+</ul>
+<p>Handlers/Callbacks:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> No TC3_Handler inicializar a conversão do AFEC1 canal 6<ul>
+<li>Isso vai fazer que com que tenhamos 250 amostras por segundo do ECG.</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> No callback do AFEC ler o dado e colocar na fila <code>xQueueECG</code></li>
+</ul>
+<p>Dentro do while da <code>task_process</code>:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Ler o dado da fila <code>xQueueECG</code> e imprimir no terminal.</li>
+</ul>
+<p><mark>Validar:</mark></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Executar o programar, abrir o terminal e obter dados que variam no tempo (entre 0 e 3000).</li>
+</ul>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-4"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="retransmitindo-o-dado">Retransmitindo o dado</h2>
+<p>Uma boa prática é atualizar o LCD apenas em uma tarefa, o LVGL <strong>não é thread-safe by default</strong>, como o site indica na página página:</p>
+<ul>
+<li><a href="https://docs.lvgl.io/latest/en/html/porting/os.html">https://docs.lvgl.io/latest/en/html/porting/os.html</a></li>
+</ul>
+<p>Isso significa que não podemos chamar uma função do LVGL enquanto a anterior não tenha terminado de executar, e caso implementemos o acesso ao LCD em várias partes do nosso programa corremos grande risco disso acontecer (lembrem que o RTOS interrompe uma tarefa para permitir que outra execute, e isso pode ser no meio da função por exemplo de mudar o valor do label).</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>O site indica o uso de mutex para solucionar este problema, vocês terão isso em Sistemas Hw Sw.</p>
+</div>
+<p>Para não termos que usar mutex, vamos atualizar o LCD apenas em uma das tasks, eu sugiro fazermos isso na <code>task_main</code>.</p>
+<p>Por conta disso iremos retransmitir o dado da fila do ECG para a <code>task_main</code> por outra fila: <code>xQueueEcgInfo</code> que será do uma struct contendo dois inteiros: <code>ecg</code> e <code>bpm</code>. </p>
+<p>A ideia aqui é que a <code>task_process</code> irá pegar os dados do ECG, processar e extrair o valor da frequência cardiaca (em batimentos por minuto) e retransmitir para a <code>task_main</code> exibir no LCD.</p>
+<p><a class="glightbox" href="../imgs/retransmitindo.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/retransmitindo.png" width="500" /></a></p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: Retransmitindo</p>
+<p>Vamos restransmitir o dado do ecg da <code>task_process</code> para a <code>task_main</code>.</p>
+<p><code>task_process</code>:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cirei uma struct <code>ecgInfo</code> com dois parâmetros inteiros: ecg, bpm.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Crie uma fila <code>xQueueEcgInfo</code> capaz de armazenar até 32 valores do <code>ecgInfo</code><ul>
+<li><mark>Dica: Sugerirmos criar na função main, antes de iniciarem as tasks.</mark>   </li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Faça o envio do dado do Ecg da <code>task_process</code> para a <code>task_main</code>, coloque qualquer valor no bpm.</li>
+</ul>
+<p><code>task_main</code>:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Faça a leitura da fila <code>xQueueEcgInfo</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Altere o printf da <code>task_process</code> para <code>task_main</code> para validar a transmissão dos dados.</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Cuidado para não usar funções que terminam com <strong>FromISR</strong> quando estiver interagindo com o RTOS de dentro de tarefas. </p>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-5"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="exibindo-grafico">Exibindo gráfico</h2>
+<p>Agora que já temos o caminho do dado pronto vamos exibir no LCD usando o widget <a href="https://docs.lvgl.io/latest/en/html/widgets/chart.html#overview">lv_chart</a>. O site explica vários modos de fazer isso, eu irei sugerir um que fiz e funcionou bem.</p>
+<p>Primeiro teremos que criar um vetor global (<code>int ser1_data[250]</code>) que irá armazenar os pontos do gráfico, o vetor precisa ter o tamanho da quantidade de pontos que queremos exibir. Vamos começar com 250, depois vocês podem ajustar até encontrarem um valor adequado. </p>
+<p>Depois precisamos criar o ponteiro para o gráfico (<code>lv_obj_t * chart;</code>) e para a série do (<code>ser1</code>) também global (assim como fazermos para os labels e botões). E então inicializar o gráfico. Aqui eu irei fazer na função <code>lv_screen_chart</code> que deve ser chamada no começo da <code>task_LCD</code>, como demonstrado a seguir:</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: chart</p>
+<p>Insira o código a seguir (variáveis globais e função):</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// globais</span>
+<span class="cp">#define CHAR_DATA_LEN 250</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">ser1_data</span><span class="p">[</span><span class="n">CHAR_DATA_LEN</span><span class="p">];</span>
+<span class="n">lv_obj_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">chart</span><span class="p">;</span>
+<span class="n">lv_chart_series_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ser1</span><span class="p">;</span>
+
+<span class="c1">// Desenha gráfico no LCD</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">lv_screen_chart</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="n">chart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_chart_create</span><span class="p">(</span><span class="n">lv_scr_act</span><span class="p">(),</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="n">lv_obj_set_size</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">);</span>
+<span class="n">lv_obj_align</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">LV_ALIGN_IN_BOTTOM_MID</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="n">lv_chart_set_type</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="n">LV_CHART_TYPE_LINE</span><span class="p">);</span><span class="w">   </span>
+<span class="n">lv_chart_set_range</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4095</span><span class="p">);</span>
+<span class="n">lv_chart_set_point_count</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="n">CHAR_DATA_LEN</span><span class="p">);</span>
+<span class="n">lv_chart_set_div_line_count</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="n">lv_chart_set_update_mode</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="n">LV_CHART_UPDATE_MODE_SHIFT</span><span class="p">);</span>
+
+<span class="n">ser1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lv_chart_add_series</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="n">LV_COLOR_BLUE</span><span class="p">);</span>
+<span class="n">lv_chart_set_ext_array</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="n">ser1</span><span class="p">,</span><span class="w"> </span><span class="n">ser1_data</span><span class="p">,</span><span class="w"> </span><span class="n">CHAR_DATA_LEN</span><span class="p">);</span>
+<span class="n">lv_obj_set_style_local_line_width</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="n">LV_CHART_PART_SERIES</span><span class="p">,</span><span class="w"> </span><span class="n">LV_STATE_DEFAULT</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Faça as modificações como indicado a seguir:</p>
+<div class="highlight"><pre><span></span><code>static void task_lcd(void *pvParameters) {
+<span class="gi">+ lv_screen_chart();</span>
+
+for (;;)  {
+<span class="w"> </span>   lv_tick_inc(50);
+<span class="w"> </span>   lv_task_handler();
+<span class="w"> </span>   vTaskDelay(50);
+}
+}
+</code></pre></div>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-6"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<p>Agora temos que modificar a função <code>task_main</code> para toda hora que receber um novo valor na fila <code>xQueueEcgInfo</code> ela atualizar o gráfico. Para isso iremos usar a função <code>lv_chart_set_next(chart, ser1, value)</code>, após termos atualizado a série precisamos indicar ao LVGL que é para atualizar o gráfico, isso é feito pela função <code>lv_chart_refresh(chart)</code>.</p>
+<ul>
+<li>Mais informções na página do widget: <a href="https://docs.lvgl.io/latest/en/html/widgets/chart.html#overview">https://docs.lvgl.io/latest/en/html/widgets/chart.html#overview</a></li>
+</ul>
+<p>Com isso vocês devem obter algo como:</p>
+<p><a class="glightbox" href="../imgs/grafico.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/grafico.jpg" width="300" /></a></p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: Exibindo</p>
+<p>Agora modifique o firmware para atualizar o dado da série e exibir o dado toda vez que receber um dado novo na fila <code>xQueueEcgInfo</code>. Para isso vão precisar usar as duas funções a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//                    novo valor | </span>
+<span class="c1">//                               v</span>
+<span class="n">lv_chart_set_next</span><span class="p">(</span><span class="n">chart</span><span class="p">,</span><span class="w"> </span><span class="n">ser1</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="n">lv_chart_refresh</span><span class="p">(</span><span class="n">chart</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>Programe e teste na placa</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Dica do Carlos Dip.</p>
+<p>Para tirar os pontos do gráfico execute: <code>lv_obj_set_style_local_size(chart, LV_CHART_PART_SERIES, LV_STATE_DEFAULT, LV_DPI/150);</code></p>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-7"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="frequencia-cardiaca">Frequência cardiaca</h2>
+<p>Agora vamos modificar a <code>task_process</code> para detectar a frequência cardiaca, na literatura existem várias maneiras (bem mais correta da qual eu irei propor) o artigo a seguir explora algumas das maneiras:</p>
+<ul>
+<li><a href="https://www2.humusoft.cz/www/papers/tcp11/091_parak.pdf">Parák, Jakub, and Jan Havlík. "ECG signal processing and heart rate frequency detection methods." Proceedings of Technical Computing Prague 8 (2011): 2011. </a></li>
+</ul>
+<p>A ideia principal é detectar o intervalo de tempo entre cada pico:</p>
+<p><a class="glightbox" href="../imgs/frequencia.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/frequencia.png" width="300" /></a></p>
+<p>A implementação que iremos fazer aqui envolve aplicar um threshold no valor e esperar até o próximo pico, calculando o tempo entre os dois sinais.</p>
+<p><a class="glightbox" href="../imgs/frequencia2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/frequencia2.png" width="400" /></a></p>
+<div class="admonition question choice">
+<p class="admonition-title">Question</p>
+<p>No exemplo anterior qual o valor da frequência cardiaca em batimento por minuto?</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 80</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 0.75</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 75</li>
+</ul>
+<div class="admonition details">
+<p>A conta a ser feita é</p>
+<ol>
+<li>Econtra <strong>dT = 0.75s</strong></li>
+<li>Do dT calcula a frequência em Hz -&gt; 1/dT: <strong>1.33</strong></li>
+<li>Hz = 1/s, multiplica por 60 para encontrar a frequência em minuto: <strong>1.33*60 = 80 bpm</strong></li>
+</ol>
+</div>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-8"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="rtt">RTT</h3>
+<p>Para calcularmos o <strong>dT</strong> iremos usar o periférico RTT, que ficará gerando pulsos e depois iremos verificar quantos pulsos aconteceram no intervalo entre um pico e outro e então estimar o valor do <strong>dT</strong>. O RTT será configurado para operar a uma taxa de 1000Hz, ou seja, 1000 pulsos por segundo, isso nos dará uma boa resolução.</p>
+<p>Neste caso não iremos usar a interrupção do RTT de alarme, mas sim a de tempo (que vai ocorrer 1000x por segundo). Sempre que ela ocorrer, iremos incrementar um contador global que será nosso dT. Esse contador será zerado a cada pulso.</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: Inicialize o RTT</p>
+<p>O RTT deve ser inicializado na <code>task_process</code>.</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Crie uma variável global g_dT</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Inicialize o RTT para operar a 1000Hz<ul>
+<li>não vamos usar o alarme, coloque qualquer valor.</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> A cada interrupção de tick do RTT, incremente a variável <code>g_dT</code></li>
+</ul>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-9"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="threshold">Threshold</h3>
+<p>Iremos aplicar o threshold e procurar por valores que nos ajudem a encontra o pico, isso será feito sempre que um novo dado chegar na fila <code>xQueueEcg</code>. </p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: threshold</p>
+<p>Para cada dado recebido na fila do ecg aplique o threshold e imprima o valor encontrado e seu dT, lembre de zerar o dT.</p>
+<p>Sugerimos aplicar <strong>3280</strong> como threshold.</p>
+<details class="info">
+<summary>Exemplo</summary>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xQueueReceive</span><span class="p">(</span><span class="w"> </span><span class="n">xQueueAdc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">adc</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">adc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3280</span><span class="w"> </span><span class="p">){</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d: %d ms</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">adc</span><span class="p">,</span><span class="w"> </span><span class="n">g_dT</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// começamos a contar novamente</span>
+<span class="w">        </span><span class="n">g_dT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-10"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="melhorando">Melhorando</h3>
+<p>A implementação anterior não funciona muito bem, as vezes encontramos mais de um valor no mesmo pico dentro do range estipulado:</p>
+<p><a class="glightbox" href="../imgs/threshold.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/threshold.png" width="500" /></a></p>
+<div class="admonition example">
+<p class="admonition-title">Melhorando</p>
+<p>Faça alguma mágica para desconsiderar mais de um ponto no mesmo pico.</p>
+<ul>
+<li>Lembre de validar com os dados no terminal, seus dT devem ser no mínimo maior que 20 ms.</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Para valorizar os picos do sinal vocês poderiam usar a energia dele (E(t) = ecg(t)^2), a energia de um sinal valoriza seus picos. </p>
+<p>Se for usar energia lembre de ajustar o valor do threshold.</p>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-11"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="calculando-bpm">Calculando bpm</h3>
+<p>Agora com o dT correto conseguimos converter a informação para bpm.</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: bpm</p>
+<p>Calcule o bpm do ecg e imprima no terminal. Verifique se está dentro do range válido.</p>
+<ul>
+<li>O valor deve variar ligeramente no tempo e ficar entre 60 bpm e 80.</li>
+</ul>
+</div>
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-12"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h3 id="exibindo">Exibindo</h3>
+<p>Agora que temos o valor do bpm, vamos enviar essa informação junto com o ecg para a <code>task_main</code> via a fila <code>xQueueEcgInfo</code> (lembra que criamos uma struct?). Com a informação na tarefa que atualiza o LCD, conseguimos criar um label e exibir o valor na tela junto com o gráfico.</p>
+<p>O resultado esperado é algo como:</p>
+<p><a class="glightbox" href="../imgs/fim.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/fim.jpg" width="400" /></a></p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa: Exibindo</p>
+<p>Execute:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Envie o dado do bpm para a task_main via a fila</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Crie um label novo para exibir a informação</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> A cada novo dado na fila atualize o valor do label.</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Caso queira que o valor da frequência mude com maior periodicidade, altera o define <code>ECG_CHANGE_TIME</code> que está no arquivo <code>aps2/aps2.h</code>, este define especifica (em ms) a cada quanto tempo o valor do delay entre um pulso e outro será atualizado.</p>
+<p>Sugestão de valor: 1000 (1 segundo)</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Até aqui é C.</p>
+<div class="admonition note">
+<p class="admonition-title">Preencher ao finalizar o lab</p>
+</div>
+</div>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd_MJvkFWEtgMhBF5g9st3sLwGsVSEfy9aPH-WhFXUUiCoX9w/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
+<div>
+<div class="ah-progress-container"><button class="ah-button ah-button--primary progress" id="prog-13"> Progress </button></div>
+</div>
+</section>
+<section class="progress-section">
+<h2 id="ba">B/A</h2>
+<ul>
+<li>Adicionar beep com o buzzer, conforme frequência.</li>
+<li>Procurar pico usando a energia do sinal do sinal no lugar do valor no tempo.</li>
+</ul>
+<hr />
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>O que mais poderiamos fazer?</p>
+<ul>
+<li>Filtrar o sinal</li>
+<li>Fazer o threshold ser dinâmico (o valor que detecta pico)</li>
+<li>Deixar gráfico mais bonito</li>
+</ul>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/"
+               class="ah-prev"
+               title="RTOS - ADC">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">RTOS - ADC</span>
+            </a>
+          
+          
+            <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/"
+               class="ah-next"
+               title="Lab ADC FIR">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Lab ADC FIR</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

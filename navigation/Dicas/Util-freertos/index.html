@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Freertos - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Freertos</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#dicas-gerais">Dicas gerais</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#interrupcao">Interrupção</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#criando-uma-tarefa">Criando uma tarefa</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#vtaskdelay">vTaskDelay</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#software-timer">Software Timer</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#semaforo-binario-semaphore">Semáforo binário - Semaphore</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#fila-queue">Fila - Queue</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Util</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="freertos">Freertos</h1>
+<p>Resumo dos principais recursos do freertos utilizados no curso de computação embarcada.</p>
+<blockquote>
+<p>Referência extra consultar a API do freeRtos: <a href="https://www.freertos.org/a00106.html">https://www.freertos.org/a00106.html</a></p>
+</blockquote>
+<h2 id="dicas-gerais">Dicas gerais</h2>
+<ol>
+<li>Faça o código por partes e DEBUG!! Não tente implementar tudo de uma única vez.</li>
+<li>Leia a documentação!!</li>
+<li>Antes de "sair fazendo" desenho no papel um diagrama do que pretende implementar.</li>
+</ol>
+<h2 id="interrupcao">Interrupção</h2>
+<ol>
+<li>Toda interrupção de HW deve interagir com as tarefas via um dos recursos do RTOS (semáforo, fila, ...)</li>
+<li>Todo recurso que for usado na interrupção (semáforo, fila) deve ser iniciado antes do uso!</li>
+<li>Para interagir com o freeRTOS da interrupção, você deve usar as funcoes especificas que possuem <code>FromISR</code>.</li>
+</ol>
+<h2 id="criando-uma-tarefa">Criando uma tarefa</h2>
+<p>Método de como indicamos ao freertos de que uma tarefa deve ser criada (alocar memória, alocar no escalonador, ...).</p>
+<ul>
+<li>API: <a href="https://www.freertos.org/a00019.html">https://www.freertos.org/a00019.html</a></li>
+</ul>
+<p>Para criarmos uma tarefa é necessário:</p>
+<ol>
+<li>Criar uma função que será a task<ul>
+<li>Essa função não deve retornar <code>while(1)</code></li>
+</ul>
+</li>
+<li>Chamar a função <a href="https://www.freertos.org/a00125.html"><code>xTaskCreate</code></a></li>
+</ol>
+<p>Código exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">task_led</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">){</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">LED_Toggle</span><span class="p">(</span><span class="n">LED0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">){</span><span class="w"> </span>
+
+<span class="w">  </span><span class="c1">// ---- hiden code block ---- //</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xTaskCreate</span><span class="p">(</span><span class="n">task_led</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Led&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pdPASS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed to create test led task</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">xTaskCreate</p>
+<div class="highlight"><pre><span></span><code>BaseType_t xTaskCreate(TaskFunction_t pvTaskCode,
+                    const char * const pcName
+                    configSTACK_DEPTH_TYPE usStackDepth,
+                    void *pvParameters,
+                    UBaseType_t uxPriority,
+                    TaskHandle_t *pxCreatedTask
+                   );
+</code></pre></div>
+<ul>
+<li>par0: ponteiro para a função que será uma task</li>
+<li>par1: uma string para nomear a task</li>
+<li>par2: tamanho da stack reservado para a task</li>
+<li>par3: se desejar passar alguma informação na criação da task </li>
+<li>par4: prioridade </li>
+<li>par5: um handler da tarefa, normalmente <code>NULL</code></li>
+</ul>
+</div>
+<h2 id="vtaskdelay">vTaskDelay</h2>
+<p>É uma função de delay do próprio RTOS que faz a tarefa em questão entrar em estado <code>bloqueada</code>, ou seja, não será chamada pelo escalonador do sistema operacional. </p>
+<ul>
+<li>API: <a href="https://www.freertos.org/a00127.html">https://www.freertos.org/a00127.html</a></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">vTaskDelay</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xTicksToDelay</span><span class="w"> </span><span class="p">);</span>
+</code></pre></div>
+<p>Esse método possui avantagem de 'não ocupar' processamento do CORE. O tempo especificado para a função é a quantidade em ticks na qual a task ficara bloqueada. </p>
+<ul>
+<li>DOC: <a href="https://freertos.org/RTOS-software-timer.html">https://freertos.org/RTOS-software-timer.html</a></li>
+<li>API: <a href="https://www.freertos.org/a00127.html">https://www.freertos.org/a00127.html</a> </li>
+</ul>
+<p>Código exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">vTaskFunction</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pvParameters</span><span class="w"> </span><span class="p">){</span>
+
+<span class="w">  </span><span class="c1">// inicializa LED1</span>
+<span class="w">  </span><span class="n">init_led1</span><span class="p">();</span>
+
+<span class="w">  </span><span class="cm">/* Block for 500ms. */</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xDelay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">portTICK_PERIOD_MS</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="p">;;</span><span class="w"> </span><span class="p">){</span>
+<span class="w">      </span><span class="cm">/* Simply toggle the LED every 500ms, blocking between each toggle. */</span>
+<span class="w">      </span><span class="n">vToggleLED</span><span class="p">();</span>
+<span class="w">      </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="w"> </span><span class="n">xDelay</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>const TickType_t xDelay = 500 / portTICK_PERIOD_MS;</code> converte ticks para ms.</p>
+</div>
+<h2 id="software-timer">Software Timer</h2>
+<p>Relógios de software são funções de <code>callbacks</code> que são executados pelo RTOS, os <code>callbacks</code> podem ser executados de forma recorrente ou uma única vez (quando o tempo tiver passado).</p>
+<ul>
+<li>API: <a href="https://www.freertos.org/FreeRTOS-Software-Timer-API-Functions.html">https://www.freertos.org/FreeRTOS-Software-Timer-API-Functions.html</a> </li>
+</ul>
+<p>Para usarmos um timer de software é necessário:</p>
+<ol>
+<li>Criar a variável global que representará o timer<ul>
+<li><code>TimerHandle_t xTimer</code></li>
+</ul>
+</li>
+<li>Criar a função de <code>callback</code>:
+    <code>void vTimerCallback(TimerHandle_t xTimer) { ... }</code></li>
+<li>Na task, criar o timer:<ul>
+<li><code>xTimer = xTimerCreate("Timer", 100, pdTRUE, 0, vTimerCallback);</code></li>
+</ul>
+</li>
+<li>E então ativar o timer:<ul>
+<li><code>xTimerStart(xTimer, 0);</code></li>
+</ul>
+</li>
+</ol>
+<p>A função possui os seguintes argumentos: <code>xTimerCreate(pcTimerName, xTimerPeriod, uxAutoReload, pvTimerID, pxCallbackFunction)</code>. </p>
+<ul>
+<li><code>pcTimerName</code>: É um nome único para o Timer (string).</li>
+<li><code>xTimerPeriod</code>: É o período em ticks que o timer vai executar. Ex: <code>100</code> executa a aproximadamente 100ms</li>
+<li><code>uxAutoReload</code>: <code>pdTRUE</code> se o timer for recorrente e <code>pdFALSE</code> se for executar uma única vez</li>
+<li><code>pvTimerID</code>: Não faco ideia.. =)</li>
+<li><code>pxCallbackFunction</code>: Função que será chamada quando o timer estourar.</li>
+</ul>
+<p>Código exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">vTimerCallback</span><span class="p">(</span><span class="n">TimerHandle_t</span><span class="w"> </span><span class="n">xTimer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;estourou </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">task_foo</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">xTimer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xTimerCreate</span><span class="p">(</span><span class="s">&quot;Timer&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">vTimerCallback</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">vtaskDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="semaforo-binario-semaphore">Semáforo binário - Semaphore</h2>
+<p><a class="glightbox" href="https://www.freertos.org/fr-content-src/uploads/2018/07/binary-semaphore.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://www.freertos.org/fr-content-src/uploads/2018/07/binary-semaphore.gif" /></a></p>
+<p>Semáforos são utilizados para sincronização de tarefas, eles podem ser 'liberados' por outra tarefa ou de uma interrupção. Eles devem ser utilizados como substituto a flag.</p>
+<ul>
+<li>Descrição: <a href="https://www.freertos.org/Embedded-RTOS-Binary-Semaphores.html">https://www.freertos.org/Embedded-RTOS-Binary-Semaphores.html</a></li>
+<li>API: <a href="https://www.freertos.org/a00113.html">https://www.freertos.org/a00113.html</a></li>
+</ul>
+<p>Para criarmos e usarmos um semáforo é necessário:</p>
+<ol>
+<li>Criar a variável global que representará o semáforo<ul>
+<li><code>SemaphoreHandle_t xSemaphore;</code></li>
+</ul>
+</li>
+<li>Criar o semáforo (na função <code>main</code>)<ul>
+<li><a href="https://www.freertos.org/xSemaphoreCreateBinary.html"><code>xSemaphoreCreateBinary();</code></a></li>
+</ul>
+</li>
+<li>Liberar o semáforo<ul>
+<li><a href="https://www.freertos.org/a00124.html"><code>xSemaphoreGiveFromISR(xSemaphore, 0);</code></a> (se for liberado de uma ISR)</li>
+<li><a href="https://www.freertos.org/a00123.html"><code>xSemaphoreGive(xSemaphore);</code></a> (se for liberado de outra task)</li>
+</ul>
+</li>
+<li>Esperar pelo semáforo<ul>
+<li><a href="https://www.freertos.org/a00122.html"><code>xSemaphoreTake(xSemaphore, 500)</code></a></li>
+</ul>
+</li>
+</ol>
+<p>Código exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// variável global que é o endereço </span>
+<span class="c1">// do semáforo  </span>
+<span class="n">SemaphoreHandle_t</span><span class="w"> </span><span class="n">xSemaphore</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">but_callback</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="w">  </span><span class="c1">// libera semáforo </span>
+<span class="w">  </span><span class="n">xSemaphoreGiveFromISR</span><span class="p">(</span><span class="n">xSemaphore</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">task_led</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">){</span>
+<span class="w">  </span><span class="n">init_led1</span><span class="p">();</span><span class="w">   </span><span class="c1">// inicializa LED1</span>
+<span class="w">  </span><span class="n">init_but1</span><span class="p">();</span><span class="w">   </span><span class="c1">// inicializa botao 1, com callback</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// aguarda por até 500 ms pelo se for liberado entra no if</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xSemaphoreTake</span><span class="p">(</span><span class="n">xSemaphore</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">portTICK_PERIOD_MS</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdTRUE</span><span class="w"> </span><span class="p">){</span>
+<span class="w">        </span><span class="n">LED_Toggle</span><span class="p">(</span><span class="n">LED0</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// .... //</span>
+
+<span class="w">   </span><span class="c1">// cria semáforo binário</span>
+<span class="w">  </span><span class="n">xSemaphore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xSemaphoreCreateBinary</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// verifica se semáforo foi criado corretamente</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xSemaphore</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;falha em criar o semaforo </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ol>
+<li>O semáforo deve ser sempre alocado antes do seu uso, caso alguma parte do firmware tente liberar o semáforo antes dele ser criado (<code>xSemaphoreCreateBinary()</code>) o código irá travar.</li>
+<li>Você deve usar <code>fromISR</code> SEMPRE que liberar um semáforo de uma interrupção, caso contrário usar a função <code>xSemaphoreGive()</code></li>
+</ol>
+</div>
+<h2 id="fila-queue">Fila - Queue</h2>
+<p><a class="glightbox" href="https://www.freertos.org/fr-content-src/uploads/2018/07/queue_animation.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://www.freertos.org/fr-content-src/uploads/2018/07/queue_animation.gif" /></a></p>
+<p>Fila é um recurso do freertos que permite troca de mensagens (qualquer tipo de dado) entre tarefas e entre IRQ e tarefas.</p>
+<ul>
+<li>Descrição: <a href="https://www.freertos.org/Embedded-RTOS-Queues.html">https://www.freertos.org/Embedded-RTOS-Queues.html</a></li>
+<li>API: <a href="https://freertos.org/a00018.html">https://freertos.org/a00018.html</a></li>
+</ul>
+<p>Para criarmos e usarmos um semáforo é necessário:</p>
+<ol>
+<li>Criar a variável global que representará a fila<ul>
+<li><code>QueueHandle_t xQueueButId;</code></li>
+</ul>
+</li>
+<li>Criar a fila (na função <code>main</code>)<ul>
+<li><code>xQueueButId = xQueueCreate(32, sizeof(char) );</code></li>
+<li>Ao criar a fila você deve informar a quantidade de itens (<code>32</code>) nessa fila e o tipo dos itens (<code>sizeof(char)</code>).</li>
+</ul>
+</li>
+<li>Colocar dados na fila:<ul>
+<li><code>xQueueSendFromISR(xQueueButId, &amp;id, 0);</code> (se for de uma ISR)</li>
+<li><code>xQueueSend(xQueueButId, &amp;id);</code> (se for de uma outra task)</li>
+</ul>
+</li>
+<li>Receber dados da fila:<ul>
+<li><code>xQueueReceive( xQueueButId, &amp;id, ( TickType_t ) 500 )</code></li>
+</ul>
+</li>
+</ol>
+<p>Código exemplo que: Cria uma fila de chars, e cada botão envia para essa fila uma informação referente ao seu id. Uma task fica lendo essa fila e aciona o LED referente ao ID do botão.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// fila</span>
+<span class="n">QueueHandle_t</span><span class="w"> </span><span class="n">xQueueButId</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">but1_callback</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="w">  </span><span class="c1">// envia o char `1` na fila</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">xQueueSendFromISR</span><span class="p">(</span><span class="n">xQueueButId</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">but2_callback</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="w">  </span><span class="c1">// envia o char `2` na fila</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;2&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">xQueueSendFromISR</span><span class="p">(</span><span class="n">xQueueButId</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">task_led</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvParameters</span><span class="p">){</span>
+<span class="w">  </span><span class="n">init_led1</span><span class="p">();</span><span class="w">   </span><span class="c1">// inicializa LED1</span>
+<span class="w">  </span><span class="n">init_but1</span><span class="p">();</span><span class="w">   </span><span class="c1">// inicializa botao 1, com callback</span>
+<span class="w">  </span><span class="n">init_but2</span><span class="p">();</span><span class="w">   </span><span class="c1">// inicializa botao 2, com callback</span>
+
+<span class="w">  </span><span class="c1">// variável local para leitura do dado da fila</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// aguarda por até 500 ms pelo se for liberado entra no if</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">xQueueReceive</span><span class="p">(</span><span class="w"> </span><span class="n">xQueueButId</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="p">)){</span>
+
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;1&#39;</span><span class="p">)</span>
+<span class="w">          </span><span class="n">pin_toggle</span><span class="p">(</span><span class="n">LED1_PIO</span><span class="p">,</span><span class="w"> </span><span class="n">LED1_PIO_IDX_MASK</span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;2&#39;</span><span class="p">)</span>
+<span class="w">          </span><span class="n">pin_toggle</span><span class="p">(</span><span class="n">LED2_PIO</span><span class="p">,</span><span class="w"> </span><span class="n">LED2_PIO_IDX_MASK</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// .... //</span>
+
+<span class="w">  </span><span class="c1">// cria fila de 32 slots de char</span>
+<span class="w">  </span><span class="n">xQueueButId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xQueueCreate</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// verifica se fila foi criada corretamente</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xQueueButId</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;falha em criar a fila </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../Util-lcd/"
+               class="ah-prev"
+               title="LCD max Touch">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">LCD max Touch</span>
+            </a>
+          
+          
+            <a href="../Util-FloatPrint/"
+               class="ah-next"
+               title="Float Point (SAM)">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Float Point (SAM)</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

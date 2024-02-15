@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Firmware - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Firmware</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#musicas-monofonica">Músicas monofonica</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#buzzer">Buzzer</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#gerando-som">Gerando som</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#musica">Música</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#referencia">Referência</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#analisando-firmware">Analisando firmware</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>APS</li>
+                  
+                
+                  
+                    <li>APS 1 - Musical</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="aps-1-musical-firmware">APS 1 - Musical - Firmware</h1>
+<table>
+<thead>
+<tr>
+<th>APS 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data limite para entrega</strong>: <mark>09/09/2023</mark></td>
+</tr>
+<tr>
+<td>Usar o repositório do <mark><a href="https://classroom.github.com/a/VFRkr4Ac">Classroom</a></mark> (pode ser em dupla!)</td>
+</tr>
+<tr>
+<td>Preencher o <mark><a href="https://docs.google.com/forms/d/e/1FAIpQLSds7AUasDkBcZ3ykMfivzMwWqzPFscJXPiZcZ0B_0FBElYNHw/viewform?usp=sf_link">forms</a></mark></td>
+</tr>
+</tbody>
+</table>
+<p>A seguir iremos explicar os conceitos e dicas de como vocês deverem prosseguir para
+executarem esta APS.</p>
+<h2 id="musicas-monofonica">Músicas monofonica</h2>
+<p>Músicas monofonicas<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> são aquelas que só possuem uma única nota tocada por vez, como indicado na partitura a seguir:</p>
+<p><a class="glightbox" href="https://upload.wikimedia.org/wikipedia/commons/4/4a/Pop_Goes_the_Weasel_updated.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Pop_Goes_the_Weasel_updated.png" width="400" /></a></p>
+<blockquote>
+<p>ref: wikipidia</p>
+</blockquote>
+<p>A música monofonica tem o som como a seguir:</p>
+<figure>
+    <figcaption>Pop Goes the Weasel.ogg (wiki)</figcaption>
+    <audio
+        controls
+        src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Pop_Goes_the_Weasel.ogg">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
+</figure>
+
+<p>Esse tipo de música foi muito utilizada nos primeiros videogames, quando a sintetização de músicas ainda estava no começo.  Veja como era feito nos Nintendo, aqui já era possível gerar mais de um tom por vez:</p>
+<iframe width="520" height="320" src="https://www.youtube.com/embed/jvIzIAgRWV0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="buzzer">Buzzer</h2>
+<p>Para gerarmos o som é necessário termos algum dispositivo capaz de gerar movimentação no ar, o buzzer é um dispositivo simples que a partir de uma bobina (controlada por um terminal) conseguimos movimentar um disco que por sua vez movimentar o ar. Os buzzers podem ser de duas categorias (piezoelétricos):</p>
+<ul>
+<li><strong>Ativo:</strong> basta energizar o terminal que o dispositivo vibra automaticamente em uma determinada frequência, muito usado para alarmes.</li>
+<li><strong>Passivo:</strong> Um circuito externo (ou microcontrolador) deve gerar a frequência de vibração, usado para gerar som.</li>
+</ul>
+<p>Buzzers são diferentes de altofalantes<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> em vários aspectos (mecânico, eletromecânico): não necessitam de tensão negativa; possuem um espectro de operação menor; baixa resistência; baixa potência ... .</p>
+<p>A conexão do buzzer com um microcontrolador se da por dois pinos: Um conectado no terra (gnd) e outro conectado
+em um pino que o microcontrolador possui controle, conforme ilustração a seguir:</p>
+<p><a class="glightbox" href="https://user-images.githubusercontent.com/1039615/109496798-e660e380-7a6f-11eb-831d-604cce45f5f6.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image" src="https://user-images.githubusercontent.com/1039615/109496798-e660e380-7a6f-11eb-831d-604cce45f5f6.png" width="500" /></a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/77h1JhD9Syw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="gerando-som">Gerando som</h2>
+<p>Podemos fazer com que o buzzer oscile em uma determinada frequência, para isso basta gerarmos um sinal de onda quadrada  no terminal positivo do dispositivo, isso irá fazer com que o piezo movimente na mesma frequência, gerando o tom desejado.</p>
+<div class="admonition tip">
+<p class="admonition-title">Notas</p>
+<p>As notas musicais são definidas pela frequência principal que elas emitem, um Dó-4 é definido por 262 Hz, um Lá-4 por 440Hz e assim por diante (o 4 se refere ao meio do piano). Além da frequência principal, cada instrumento musical emite outras frequências que compõem o som, gerando um som único para cada instrumento.</p>
+<p>Iremos usar a notacao americana para as notas:</p>
+<table>
+<thead>
+<tr>
+<th>Dó</th>
+<th>Ré</th>
+<th>Mi</th>
+<th>Fá</th>
+<th>Sol</th>
+<th>Lá</th>
+<th>Sí</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C</td>
+<td>D</td>
+<td>E</td>
+<td>F</td>
+<td>G</td>
+<td>A</td>
+<td>B</td>
+</tr>
+</tbody>
+</table>
+<p><a class="glightbox" href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Frequency_vs_name.svg/350px-Frequency_vs_name.svg.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Frequency_vs_name.svg/350px-Frequency_vs_name.svg.png" /></a></p>
+<blockquote>
+<p>Ref: <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Frequency_vs_name.svg/350px-Frequency_vs_name.svg.png">https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Frequency_vs_name.svg/350px-Frequency_vs_name.svg.png</a> Wikipidia </p>
+</blockquote>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Frequências</p>
+<p>Lembre que uma onda quadrada pode ser decomposta em infinitas senoides pela transformada de Fourier. </p>
+<p><a class="glightbox" href="https://mathworld.wolfram.com/images/eps-gif/FourierSeriesSquareWave_800.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://mathworld.wolfram.com/images/eps-gif/FourierSeriesSquareWave_800.gif" width="300" /></a></p>
+<p>Sendo a componente principal (de maior energia) centrada na frequência da onda quadrada (no nosso caso):</p>
+<p><a class="glightbox" href="https://mathworld.wolfram.com/images/equations/FourierSeriesSquareWave/NumberedEquation3.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://mathworld.wolfram.com/images/equations/FourierSeriesSquareWave/NumberedEquation3.gif" /></a></p>
+<p>Portanto o som que iremos escutar será composto da frequência principal mais as harmónicas.</p>
+<blockquote>
+<p>ref: <a href="https://mathworld.wolfram.com/images/eps-gif/FourierSeriesSquareWave_800.gif">https://mathworld.wolfram.com/images/eps-gif/FourierSeriesSquareWave_800.gif</a></p>
+</blockquote>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/3IAMpH4xF9Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+</div>
+<p>Existem diversas maneiras de gerarmos uma onda quadrada em um pino do microcontrolador, a que estamos sugerindo aqui não envolve nenhum periférico específico do microcontrolador, logo iremos fazer tudo por código.</p>
+<p>Por exemplo, para gerar uma onda quadrada de 1000 Hz:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+<span class="w">    </span><span class="n">pio_set</span><span class="p">(...);</span>
+<span class="w">    </span><span class="n">delay_us</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">    </span><span class="n">pio_clear</span><span class="p">(...);</span>
+<span class="w">    </span><span class="n">delay_us</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Tudo depende do microcontrolador, mas podemos gerar uma onda quadrada com os periféricos: PWM, TimerCounter. As vantagens de fazermos isso são:</p>
+<ul>
+<li>Não inutilizamos o CORE com as funcoes de delay</li>
+<li>Conseguimos facilmente ter mais de uma frequência gerada.</li>
+<li>Menor gasto energético</li>
+</ul>
+</div>
+<h2 id="musica">Música</h2>
+<p>Eu fiz por anos aula de sax alto e meu professor falava que para começar a tocar uma música bastava: <code>tocar a nota certa no momento certo e não tocar quando não for para tocar</code>, para quem tem prática é fácil, mas para mim não era. Trouxe este assunto para explicar um pouco como iremos reproduzir uma música. Cada música será formada por notas (frequências), pela duração da nota e por um silêncio entre notas (que também tem duração ). Toda essa informação está presente na partitura:</p>
+<p><a class="glightbox" href="https://cdn.statically.io/img/www.musicnotes.com/now/wp-content/uploads/2018/02/4.png?quality=80&amp;f=auto" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://cdn.statically.io/img/www.musicnotes.com/now/wp-content/uploads/2018/02/4.png?quality=80&amp;f=auto" /></a></p>
+<blockquote>
+<p>ref: <a href="https://www.musicnotes.com/now/tips/how-to-read-sheet-music/">https://www.musicnotes.com/now/tips/how-to-read-sheet-music/</a></p>
+</blockquote>
+<p>Portanto para reproduzirmos uma música teremos que para cada intervalo de tempo:</p>
+<ol>
+<li>Reproduzir uma nota (gerar a frequência da nota no pino do buzzer) ou não tocar nada (pausa)</li>
+<li>Manter a nota/pausa pelo tempo determinado</li>
+<li>Ir para o próximo intervalo de tempo</li>
+</ol>
+<h2 id="referencia">Referência</h2>
+<p>Nesta APS é para utilizarem as músicas fornecidas no repositório a seguir: </p>
+<ul>
+<li><a href="https://github.com/robsoncouto/arduino-songs">https://github.com/robsoncouto/arduino-songs</a></li>
+</ul>
+<blockquote>
+<p>Fornecido por:  Robson Couto, 2019</p>
+</blockquote>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Os exemplos deste repositório só funcionam em Arduino, não conseguimos usar de maneira direta no nosso kit de desenvolvimento.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Lembre de referenciar o repositório quando utilizar as músicas por ele fornecido. Como descrito no próprio README.</p>
+<blockquote>
+<p>Every sketch here has been written by myself, although based on scores I found online or books I own. These scores are linked in each file when possible. You can use the sketches for anything, I only kindly ask that you give credit if you use these codes on a tutorial, video, example, etc.</p>
+</blockquote>
+</div>
+<h2 id="analisando-firmware">Analisando firmware</h2>
+<p>O desenvolvedor disponibiliza diversas músicas de vários temas diferentes: Filmes, Jogos, Clássicas, ... . Vamos analisar como as músicas são disponibilizadas. Para isso iremos pegar como exemplo a música tema do Mário:</p>
+<ul>
+<li><a href="https://github.com/robsoncouto/arduino-songs/blob/master/supermariobros/supermariobros.ino">https://github.com/robsoncouto/arduino-songs/blob/master/supermariobros/supermariobros.ino</a></li>
+</ul>
+<h3 id="notas">Notas</h3>
+<p>No comece do arquivo temos as definições das notas:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define NOTE_B0  31</span>
+<span class="cp">#define NOTE_C1  33</span>
+<span class="cp">#define NOTE_CS1 35</span>
+<span class="cp">#define NOTE_D1  37</span>
+<span class="cp">#define NOTE_DS1 39</span>
+<span class="cp">#define NOTE_E1  41</span>
+<span class="cp">#define NOTE_F1  44</span>
+<span class="cp">#define NOTE_FS1 46</span>
+<span class="cp">#define NOTE_G1  49</span>
+<span class="cp">#define NOTE_GS1 52</span>
+<span class="cp">#define NOTE_A1  55</span>
+</code></pre></div>
+<h3 id="musica_1">Música</h3>
+<p>No arquivo disponível um vetor chamado <code>melody</code> que possui nos index pares (<code>0</code>, <code>2</code>, ...) as notas e nos index ímpares ( <code>1</code>, <code>3</code>, ... ) o tempo de furacão da nota (com base em uma referência).</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// notes of the moledy followed by the duration.</span>
+<span class="c1">// a 4 means a quarter note, 8 an eighteenth , 16 sixteenth, so on</span>
+<span class="c1">// !!negative numbers are used to represent dotted notes,</span>
+<span class="c1">// so -4 means a dotted quarter note, that is, a quarter plus an eighteenth!!</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">melody</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="c1">// Super Mario Bros theme</span>
+<span class="w">  </span><span class="c1">// Score available at https://musescore.com/user/2123/scores/2145</span>
+<span class="w">  </span><span class="c1">// Theme by Koji Kondo</span>
+
+
+<span class="w">  </span><span class="n">NOTE_E5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="n">NOTE_E5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="n">REST</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="n">NOTE_E5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="n">REST</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="n">NOTE_C5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="n">NOTE_E5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="c1">//1</span>
+<span class="w">  </span><span class="n">NOTE_G5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">REST</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">NOTE_G4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="n">REST</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">NOTE_C5</span><span class="p">,</span><span class="mi">-4</span><span class="p">,</span><span class="w"> </span><span class="n">NOTE_G4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="n">REST</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">NOTE_E4</span><span class="p">,</span><span class="mi">-4</span><span class="p">,</span><span class="w"> </span><span class="c1">// 3</span>
+<span class="w">  </span><span class="n">NOTE_A4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">NOTE_B4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">NOTE_AS4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="n">NOTE_A4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span>
+</code></pre></div>
+<h3 id="tempo">Tempo</h3>
+<p>Os tempos são definidos em partes de uma <strong>Semibreve/wholenote</strong><sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>  (que é a nota de maior duração), ou seja, o valor 4 refere-se a $&frac14;$ da semibreve, 8 a $&#8539;$ do tempo total... .</p>
+<p>O valor da semibreve/wholenote é definida no próprio código:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// change this to make the song slower or faster</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">tempo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span>
+
+<span class="c1">// hide code</span>
+<span class="c1">// ....</span>
+
+<span class="c1">// this calculates the duration of a whole note in ms</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">wholenote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">60000</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">tempo</span><span class="p">;</span>
+</code></pre></div>
+<p>Valores negativos de tempo (<strong>-4</strong>, <strong>-8</strong>, ... ) representam que a nota tem a duração dela mais meio tempo.  </p>
+<p>No código do repositório, ele implementa o cálculo da duracão da nota da seguinte maneira:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// calculates the duration of each note</span>
+<span class="n">divider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">melody</span><span class="p">[</span><span class="n">thisNote</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">divider</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// regular note, just proceed</span>
+<span class="w">    </span><span class="n">noteDuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">wholenote</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">divider</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">divider</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// dotted notes are represented with negative durations!!</span>
+<span class="w">    </span><span class="n">noteDuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">wholenote</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">divider</span><span class="p">);</span>
+<span class="w">    </span><span class="n">noteDuration</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">1.5</span><span class="p">;</span><span class="w"> </span><span class="c1">// increases the duration in half for dotted notes</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>thisNote</code> é o index da nota atual.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Eu reescreveria este trecho de código da seguinte maneira, com o objetivo
+de ficar mais simples e compacto:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// calculates the duration of each note</span>
+<span class="n">divider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">melody</span><span class="p">[</span><span class="n">thisNote</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="n">noteDuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">wholenote</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">divider</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">divider</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">noteDuration</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">1.5</span><span class="p">;</span><span class="w"> </span><span class="c1">// increases the duration in half for dotted notes</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h3 id="reproduzindo">Reproduzindo</h3>
+<p>Agora já temos tudo para reproduzir a música, precisamos varrer o vetor <code>melody</code> e para cada nota (index par) gerar a onda quadrada no pino pelo tempo determinado em: <code>noteDuration</code>, para isso definem o tamanho do vetor:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// sizeof gives the number of bytes, each int value is composed of two bytes (16 bits)</span>
+<span class="c1">// there are two values per note (pitch and duration), so for each note there are four bytes</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">melody</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">melody</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">C: tipos</p>
+<p>A linguagem C opera com tipos de dados multiplos de um byte (8 bits), e possui
+duas maneiras de indicar o tipo da variável:</p>
+<table>
+<thead>
+<tr>
+<th>byte</th>
+<th>half word</th>
+<th>word</th>
+<th>duble word</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>char</code></td>
+<td><code>short</code></td>
+<td><code>int</code></td>
+<td><code>long</code></td>
+</tr>
+<tr>
+<td><code>int8_t</code></td>
+<td><code>int16_t</code></td>
+<td><code>int32_t</code></td>
+<td><code>int64_t</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition info">
+<p class="admonition-title">C: sizeof</p>
+<p><code>sizeof(type)</code> recebe como parâmetro um tipo (pode ser uma variável, vetor ou struct) e retorna <strong>quantos bytes</strong> o tipo ocupa! Veja os exemplos a seguir: </p>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">foo</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Tamanho foo em bytes: %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">foo</span><span class="p">));</span>
+<span class="c1">// $ Tamanho foo em bytes: 4</span>
+
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">bar</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Tamanho bar em bytes: %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">bar</span><span class="p">))</span>
+<span class="c1">// $ Tamanho bar em bytes: 8</span>
+</code></pre></div>
+<p>Note que a variável <code>foo</code> ocupa <strong>4 bytes</strong> (pois é um inteiro: $32/8=4$) e o vetor
+<code>bar</code> ocupa <strong>8 bytes</strong>, pois aloca dois enderecos de memória do tipo int.</p>
+<p>O <code>sizeof</code> é executado em tempo de compilação, não podemos usar para memórias
+alocadas dinâmicamente:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// não podemos fazer isso!</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">32</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Tamanho bar em bytes: %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<p>E então interage no vetor e reproduz a nota usando a função <code>tone</code></p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1">// iterate over the notes of the melody.</span>
+<span class="w">  </span><span class="c1">// Remember, the array is twice the number of notes (notes + durations)</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">thisNote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">thisNote</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">notes</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">thisNote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thisNote</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// calculates the duration of each note</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="c1">// ... hide</span>
+
+<span class="w">    </span><span class="c1">// we only play the note for 90% of the duration, leaving 10% as a pause</span>
+<span class="w">    </span><span class="n">tone</span><span class="p">(</span><span class="n">buzzer</span><span class="p">,</span><span class="w"> </span><span class="n">melody</span><span class="p">[</span><span class="n">thisNote</span><span class="p">],</span><span class="w"> </span><span class="n">noteDuration</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.9</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Wait for the specief duration before playing the next note.</span>
+<span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="n">noteDuration</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// stop the waveform generation before the next note.</span>
+<span class="w">    </span><span class="n">noTone</span><span class="p">(</span><span class="n">buzzer</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div>
+<p>A função <code>tone</code> do Arduino gera uma onda quadrada em um pino (<code>buzzer</code>), de frequência <code>melody[thisNote]</code> e duração <code>noteDuration * 0.9</code>. </p>
+<div class="admonition tip">
+<p class="admonition-title">tone</p>
+<p>Vocês vão ter que implementar uma função  <code>tone</code> própria!</p>
+</div>
+<h3 id="tone"><code>tone</code></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Apenas uma sugestão de como implementar.</p>
+</div>
+<p>Sugerimos implementarem uma função que receba como parâmetro uma frequência e um tempo (em milissegundos) e que reproduza uma onda quadrada em um pino do microcontrolador, na frequência e tempo passado como argumento para a função.</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * freq: Frequecia em Hz</span>
+<span class="cm"> * time: Tempo em ms que o tom deve ser gerado</span>
+<span class="cm"> */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">tone</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">time</span><span class="p">){</span>
+<span class="w">    </span><span class="p">....</span>
+<span class="w">    </span><span class="p">....</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Como fazer? O melhor jeito é contar quantos pulsos (freq) existem dentro de um tempo (time) e então
+fazer um loop que gere a quantidade de pulsos (na frequência certa).</p>
+</div>
+
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://en.wikipedia.org/wiki/Monophony">https://en.wikipedia.org/wiki/Monophony</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://en.wikipedia.org/wiki/Loudspeaker">https://en.wikipedia.org/wiki/Loudspeaker</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://pt.wikipedia.org/wiki/Semibreve">https://pt.wikipedia.org/wiki/Semibreve</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../APS-1-Musical/"
+               class="ah-prev"
+               title="Descritivo">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Descritivo</span>
+            </a>
+          
+          
+            <a href="../APS-2-Bike/Descricao/"
+               class="ah-next"
+               title="Descricao">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Descricao</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

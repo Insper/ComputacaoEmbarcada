@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Erros comum - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Erros comum</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#usb-errada">USB errada</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#chip-errado">Chip Errado</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#jumpers">Jumpers</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#limpando-build">Limpando build</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#instalando-terminal-window-no-microchip-studio">Instalando Terminal Window no Microchip Studio</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#driver-edbg-usb-nao-esta-sendo-reconhecido">Driver EDBG (USB) não está sendo reconhecido</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#windows-nao-encontra-modulo-bluetooth">Windows não encontra módulo bluetooth</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Util</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="erros-comum">Erros comum</h1>
+<p>Aqui estão listados os erros mais frequentes que aparecem na hora de programar a placa SAME70-XPLD.</p>
+<h2 id="usb-errada">USB errada</h2>
+<p>Muitas das vezes que o AtmelStudio não reconhece a placa é porque foi ligada na
+porta USB errada. O Kit de desenvolvimento possui duas portas USB, uma para programar
+o microcontrolador e outra para conectar dispositivos no microcontrolador (host/device).</p>
+<p><mark>Este é o erro mais comum!</mark></p>
+<div class="admonition success">
+<p class="admonition-title">PORTA USB CERTA</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/9_editada.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/same70-xpld_erros/9_editada.jpg" /></a></p>
+</div>
+<div class="admonition error">
+<p class="admonition-title">PORTA USB ERRADA</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/12_editada.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/same70-xpld_erros/12_editada.jpg" /></a></p>
+</div>
+<h2 id="chip-errado">Chip Errado</h2>
+<details class="example">
+<summary>Configurando versão</summary>
+<p>Para alterar a versão do chip dentro do Atmel Studio basta realizar os seguintes passos:</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/FAQ_ATSAME70xpld.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="FAQ_ATSAME70xpld" src="../imgs/same70-xpld_erros/FAQ_ATSAME70xpld.gif" /></a></p>
+<p>1 - Clique no botão Device:</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/device.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="device" src="../imgs/same70-xpld_erros/device.PNG" /></a></p>
+<p>2 - Clique no botão Change Device:</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/ChangeDevice.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="ChangeDevice" src="../imgs/same70-xpld_erros/ChangeDevice.PNG" /></a></p>
+<p>3 - Selecione a versão correta do chip e clique em OK, agora seu gravador(EDBG) deverá ser reconhecido pela IDE:</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/selection.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="selection" src="../imgs/same70-xpld_erros/selection.PNG" /></a></p>
+<p>4 - Dentro da aba Tools, vá até o menu drop-down <strong>Select debugger/programmer</strong> e selecione o seu gravador, no caso desse gif:</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/SelectDebugger.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="SelectDebugger" src="../imgs/same70-xpld_erros/SelectDebugger.PNG" /></a></p>
+</details>
+<p>As placas SAME70-XPLD possuem o Microcontrolador ATSAME70Q21, contudo ele possui 2 versões, a ATSAME70Q21 (Rev. A) e a versão ATSAME70Q21**B** (Rev. B). Caso a versão não esteja correta na IDE Atmel Studio, o código a ser transferido para a placa pode não ser gravado corretamente e pode até nem ser reconhecida pela IDE.</p>
+<p>Os exemplos são todos configurados para a versão B da placa, se você possuir a A deve 
+fazer a configuração a seguir.</p>
+<p>Para saber a versão do seu chip, basta olhar o código impresso em cima do CI do Microcontrolador:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">REV. A</th>
+<th style="text-align: center;">REV B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><a class="glightbox" href="../imgs/same70-xpld_erros/0%20%28Editada%29.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="0 (Editada)" src="../imgs/same70-xpld_erros/0%20%28Editada%29.jpg" /></a></td>
+<td style="text-align: center;"><a class="glightbox" href="../imgs/same70-xpld_erros/2%20%28Editada%29.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/same70-xpld_erros/2%20%28Editada%29.jpg" /></a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>É bem difícil ver essas letras.</p>
+</div>
+<h2 id="jumpers">Jumpers</h2>
+<details class="example">
+<summary>Erase</summary>
+<p>Em algumas situações é necessário que a memória seja apagada (zerada), para isso siga os passos a seguir:</p>
+<ol>
+<li>Energize a placa</li>
+<li>Coloque o Jumper </li>
+<li>Retire o cabo USB</li>
+<li>Coloque o cabo USB</li>
+<li>Retire o jumper</li>
+<li>Retire e coloque o cabo USB novamente</li>
+</ol>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/jumper_erase.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="jumper_erase" src="../imgs/same70-xpld_erros/jumper_erase.gif" /></a></p>
+</details>
+<p>O Kit possui dois jumpers: <code>Current Measurement</code> e <code>Erase</code>. O primeiro deve estar conectado e o segundo não.</p>
+<ul>
+<li>
+<p>Current Measurement: Serve para medirmos a corrente que vai para o uC a fim de aferir a potência elétrica que está sendo consumida.</p>
+</li>
+<li>
+<p>Erase: Serve para apagar a memória de programa do uC.</p>
+</li>
+</ul>
+<h2 id="limpando-build">Limpando build</h2>
+<p>Dentro do AtmelStudio clique no menubar: <code>Build</code> <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> <code>Clean Solution</code>. Isso irá remover todos os arquivos da compilação anterior das pastas.</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/build_clean_solution.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image-20200330153918599" src="../imgs/same70-xpld_erros/build_clean_solution.png" /></a></p>
+<h2 id="instalando-terminal-window-no-microchip-studio">Instalando Terminal Window no Microchip Studio</h2>
+<details class="example">
+<summary>Instalando</summary>
+<ol>
+<li>
+<p>Clique em <code>Tools</code> <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> <code>Extensions and Update</code></p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/Terminal_2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Terminal_2" src="../imgs/same70-xpld_erros/Terminal_2.png" /></a></p>
+</li>
+<li>
+<p>Pesquise <strong>Terminal</strong> na caixa de busca a direita, depois clique em download.</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/Terminal_3.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Terminal_3" src="../imgs/same70-xpld_erros/Terminal_3.png" /></a></p>
+</li>
+<li>
+<p>Após a instalação o Atmel Studio deverá reiniciar.</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/Terminal_4.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Terminal_4" src="../imgs/same70-xpld_erros/Terminal_4.png" /></a></p>
+</li>
+<li>
+<p>Para verificar se o Terminal Windows foi instalado, clique em View &gt; Terminal Window </p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/Terminal_5.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Terminal_5" src="../imgs/same70-xpld_erros/Terminal_5.png" /></a></p>
+</li>
+</ol>
+</details>
+<p>Caso não encontre o terminal em <code>View</code> <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> <code>Terminal Window</code> (Imagem abaixo), você deve seguir os passos para instalação do mesmo.</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/Terminal_5.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/same70-xpld_erros/Terminal_5.png" /></a></p>
+<h2 id="driver-edbg-usb-nao-esta-sendo-reconhecido">Driver EDBG (USB) não está sendo reconhecido</h2>
+<details class="example">
+<summary>Downgrade do driver EDBG</summary>
+<p>Faça o download do software <a href="https://zadig.akeo.ie/">Zadig</a>:</p>
+<ul>
+<li>
+<p><a href="https://github-production-release-asset-2e65be.s3.amazonaws.com/4975854/3043b700-726c-11ea-8a31-cd87633d48df?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20200828%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20200828T201855Z&amp;X-Amz-Expires=300&amp;X-Amz-Signature=30b0f6a83ad62a9b7fc19e9d9b5237bc90eeda5c915007b4e69c910a6fc9b4e5&amp;X-Amz-SignedHeaders=host&amp;actor_id=40698780&amp;key_id=0&amp;repo_id=4975854&amp;response-content-disposition=attachment%3B%20filename%3Dzadig-2.5.exe&amp;response-content-type=application%2Foctet-stream">Versão 2.5</a></p>
+</li>
+<li>
+<p>Com a placa conectada, execute o software e selecione <strong>Options &gt; List All Devices</strong>, feito isso selecione a opção <strong>EDBG Data Gateway ** e em seguida clique em **Downgrade Driver</strong>:</p>
+</li>
+</ul>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/7_3.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="7_3" src="../imgs/same70-xpld_erros/7_3.png" /></a></p>
+<ol>
+<li>O driver deverá ser reconhecido pelo Atmel Studio, conforme a imagem abaixo:</li>
+</ol>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/7_4.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="7_4" src="../imgs/same70-xpld_erros/7_4.png" /></a></p>
+</details>
+<p>Abra qualquer um dos projetos da disciplina <strong>Computação Embarcada</strong> e conecte a placa, confira se o chip configurado na interface é o mesmo que você está utilizando, senão volte a sessão 2:</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/7_1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="7_1" src="../imgs/same70-xpld_erros/7_1.png" /></a></p>
+<p>Caso o driver EDGB (gravador) não tenha sido reconhecido (imagem abaixo) será necessário fazer o <strong>Downgrade</strong> do driver EDBG:</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/7_2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="7_2" src="../imgs/same70-xpld_erros/7_2.png" /></a></p>
+<h2 id="windows-nao-encontra-modulo-bluetooth">Windows não encontra módulo bluetooth</h2>
+<p>Tente a solução a seguir, também disponível <a href="https://support.microsoft.com/pt-br/windows/corrigir-problemas-de-bluetooth-no-windows-723e092f-03fa-858b-5c80-131ec3fba75c">nesse link</a>:</p>
+<p><a class="glightbox" href="../imgs/same70-xpld_erros/bluetoothSolucao.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="bluetooth" src="../imgs/same70-xpld_erros/bluetoothSolucao.png" /></a></p>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../Util-Startup/"
+               class="ah-prev"
+               title="Bring up">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Bring up</span>
+            </a>
+          
+          
+            <a href="../Util-Documentos/"
+               class="ah-next"
+               title="Manuais">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Manuais</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Index - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Labs/Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="21b-emb-av1">21b - EMB - AV1</h1>
+<ul>
+<li>Manter o proctorio aberto o tempo todo!</li>
+<li><strong>A cada 30 minutos você deverá fazer um commit no seu código!</strong><ul>
+<li>Códigos que não tiverem commit a cada 30min ou que mudarem drasticamente entre os commits podem ter a entrega anulada.</li>
+<li>Tente inserir mensagens condizentes nos commits!</li>
+</ul>
+</li>
+<li>Duração total: 3h</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Criar o repositório de entrega pelo link:</p>
+<ul>
+<li><a href="https://classroom.github.com/a/j8AgL-mu">https://classroom.github.com/a/j8AgL-mu</a></li>
+</ul>
+<p>Usem como base o código disponível neste repositório.</p>
+</div>
+<p>Vocês vão precisar:</p>
+<ul>
+<li>▶️ Conectar o OLED1 ao EXT-1</li>
+</ul>
+<h2 id="descricao">Descrição</h2>
+<p>Vocês irão desenvolver um sensor/ sistema embarcado para leitura da roda fônica de uma injeção eletrônica, esse sensor é um dos muitos existentes em um automóvel. </p>
+<p>A roda fônica é um disco com dentes atrelada ao rotor do motor, um sensor magnético faz a leitura dos dentes do disco e gera um sinal elétrico (pulso) conforme os dentes vão passando por ele. Essa informação é utilizada pela injeção eletrônica para:</p>
+<ul>
+<li>Saber a fase atual do motor (ciclo oto)</li>
+<li>Identificar a velocidade de rotação do motor</li>
+</ul>
+<p>A imagem a seguir ilustra uma roda fônica de um motor com 60 dentes e 2 faltando.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Notem que na figura a seguir existe um dente da roda "faltando", isso serve para identificar a posição <mark>ZERO</mark> do disco. </p>
+</div>
+<p><a class="glightbox" href="roda2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="roda2.png" width="450" /></a></p>
+<blockquote>
+<p>Imagem adaptada de <a href="https://www.canaldapeca.com.br/blog/qual-diferenca-entre-distribuidor-e-roda-fonica/">https://www.canaldapeca.com.br/blog/qual-diferenca-entre-distribuidor-e-roda-fonica/</a></p>
+</blockquote>
+<p>O período dos pulsos indica a velocidade angular do disco e por consequência a velocidade de rotação do motor. A imagem a seguir é um exemplo dos pulsos gerados pelo sensor atrelado a uma roda fônica com <mark>10-1 dentes</mark>, neste caso o motor está girando a uma rotação constante. <mark>Notem que existe um pulso faltando, isso é por conta do dente "faltando", esse pulso faltando que define o ponto zero.</mark></p>
+<p><a class="glightbox" href="pulsos.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="pulsos.svg" /></a></p>
+<p>Vocês terão que desenvolver um sistema embarcado que:</p>
+<ol>
+<li>Calcula a velocidade angula do motor e exibe no LCD.</li>
+<li>Identifica o ponto Zero da roda.</li>
+</ol>
+<h2 id="sistema-de-testes">Sistema de testes</h2>
+<p>Iremos utilizar uma técnica de simulação chamada de Hardware-in-the-loop Simulation (HIL), que de forma simplificada é um sistema que simula em tempo real uma planta/ sinal. No nosso caso, iremos simular a rotação da roda fônica (gerando os pulsos).</p>
+<p>Isso será feito no próprio uC que vocês estarão desenvolvendo o sensor, em um sistema mais completo talvez seja necessário uma eletrônica mais sofisticada. O projeto disponível no repositório gera os pulsos simulados de uma roda fônica no pino <mark>PD30</mark> do EXT2, para isso utilizamos o timer 2 (<mark>TC2</mark>), conforme imagem a seguir:</p>
+<div class="highlight"><pre><span></span><code>     /-----------\
+     |    | TC2  |  PD30
+     |    |      |-----&gt; | | | |  | | | | | | |  | | | | |
+     |    ------ |                  pulsos
+     |           |
+     | uc        |
+     \-----------/
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>Não usar nenhum canal do TC2!</li>
+<li>Não usar o botão da placa (serve para desacelerar o disco)!</li>
+<li>Não usar o LED da placa (pisco a cada pulso do Zero)!</li>
+<li>Não tirar a função <code>roda_fonica_init</code> do main</li>
+<li>Não modificar nada nos arquivos <code>abs.h</code> e <code>abs.c</code></li>
+</ul>
+</div>
+<p>Utilizar os seguintes parâmetros como referência:</p>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n total de dentes da roda</td>
+<td>10</td>
+</tr>
+<tr>
+<td>n de dentes faltando</td>
+<td>1</td>
+</tr>
+<tr>
+<td>velocidade de rotação nominal dado roda (passagem pelo zero)</td>
+<td>120 rpm</td>
+</tr>
+<tr>
+<td>velocidade máxima</td>
+<td>500 rpm</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>600 rpm = 600/60 = 10 rotações da roda por segundo</li>
+</ul>
+<p>Mas temos que lembrar que teremos 10 pulsos -1 da roda a cada 
+rotacão total, com isso iremos obter uma frequência de pulsos de aproximadamente:</p>
+<ul>
+<li>10*10 = 90 Hz </li>
+</ul>
+</div>
+<h2 id="avaliacao">Avaliacão</h2>
+<p>A seguir a rubrica da avaliação.</p>
+<h3 id="c">C</h3>
+<p>Para obterem o conceito C, vocês devem entregar um firmware que:</p>
+<div class="admonition info">
+<p class="admonition-title">Preencher o formulário</p>
+<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSd3oTNrgGqiqt2wiommtRfXj2Urx23XGpDZYRgxIxpJBVhi8g/viewform">https://docs.google.com/forms/d/e/1FAIpQLSd3oTNrgGqiqt2wiommtRfXj2Urx23XGpDZYRgxIxpJBVhi8g/viewform</a></p>
+</div>
+<ul>
+<li>Faz a leitura dos pulsos simulados da roda fônica</li>
+<li>Identifica quando a roda passa pela origem. </li>
+<li>Piscar o LED 3 da placa OLED a cada pulso da roda!</li>
+<li>Piscar os LED 1 e LED 2 da placa OLED a cada sinal de referência (Zero)!</li>
+<li>usar <code>pin_toggler</code>!</li>
+<li>Exibe no OLED a velocidade de rotação média da roda em <mark>rotações por minuto - rpm</mark> (atualizar valor após uma rotação completa)</li>
+</ul>
+<p>Vocês devem utilizar um periférico de tempo para calcular o dT entre os pulsos e interrupção no pino para a leitura do sinal gerado no PD30.</p>
+<h3 id="b-a">B/ A</h3>
+<p>Os pontos aqui valem apenas se o conceito C foi atingido (todos os itens!).</p>
+<ul>
+<li>(+1.0 conceito) Identifica quando a roda parou de girar e indicar velocidade de rotação: 0 rpm no LCD</li>
+<li>(+0.50 conceito) Organiza o código em funções:<ul>
+<li>Cálculo do rpm</li>
+<li>Função para exibir o valor no LCD</li>
+</ul>
+</li>
+<li>(+0.25 conceito) Só exibe a velocidade uma vez por rotação, quando encontrado </li>
+<li>(+0.50 conceito) Utiliza média móvel para o cálculo do rpm</li>
+<li>(+0.50 conceito) Exibe graficamente a velocidade no LCD.</li>
+</ul>
+<h2 id="dicas">Dicas</h2>
+<p>A seguir dicas para realizarem a entrega</p>
+<div class="admonition tip">
+<p class="admonition-title">Debug</p>
+<p>Depurar é importante e ajuda bastante, mas tomem cuidado que os relógios não param de contar quando o programa estiver em "pause".</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Terminal + printf</p>
+<p>Eu habilitei o terminal para vocês, podem usar <code>printf</code>!. Só cuidado com o uso pois ele é lento e as vezes não podemos perder tempo...</p>
+</div>
+<h3 id="c-osciloscopio">C - Osciloscópio</h3>
+<p>A imagem a seguir é referente aos pulsos que são gerados no HIL, o tempo entre os pulsos é de 50 ms.</p>
+<p><code>50ms = 20Hz / 10 dentes = 2 rps ou 120 rpm</code></p>
+<p><a class="glightbox" href="pulse2.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="pulse2.PNG" /></a></p>
+<h3 id="c-lendo-o-sinal">C - Lendo o sinal</h3>
+<p>Vocês devem escolher um pino qualquer do uC, configurar como entrada sem pull_up ou debounce (usar <code>PIO_DEFAULT</code>), configurar interrupção e atrelar uma função de callback.</p>
+<p>Pisque o LED3 da placa OLED a cada pulso recebido, com isso sabemos que a função está funcionando e é um dos itens da rubrica!</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Usar a função <code>pin_toggle</code> que já foi definida!</p>
+<ul>
+<li><mark>Não usar IT_EDGE</mark></li>
+<li><mark>Não usar debounce</mark></li>
+<li><mark>Não usar PULL_UP</mark></li>
+</ul>
+</div>
+<h3 id="c-calculando-dt">C - Calculando dT</h3>
+<p>Utilizem o RTT para calcular o tempo entre os pulsos, reiniciando o contador a cada novo pulso.</p>
+<ol>
+<li>Detecta pulso e inicializa contagem de tempo</li>
+<li>Lê o valor do tempo entre um pulso e outro</li>
+</ol>
+<p>Como indicado na figura a seguir:</p>
+<p><a class="glightbox" href="dicas-dt.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="dicas-dt.svg" width="300" /></a></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<ul>
+<li>A função RTT init fornecida não tem o IRQ de incremento! Apenas o alarme.</li>
+<li>Se quiser fazer com o TC também da, mas ai tem que manter um contador global dos pulsos.</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ol>
+<li>Utilize 1000 como prescale para o RTT, é um bom valor (eu testei aqui)!</li>
+<li>Imprima no terminal sempre que obtiver um novo valor de dT, lembre de fazer a impressão no main e não dentro do callback!</li>
+</ol>
+<p>Vocês devem obter algo como:</p>
+<p><a class="glightbox" href="terminal.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="terminal.svg" width="150" /></a></p>
+<p>Notem que temos um dT com valor 102 ms isso é referente ao pulso faltante, como ilustrado a seguir:</p>
+<div class="highlight"><pre><span></span><code>^     ^          ^     ^     ^ 
+|     |          |     |     |
+|     |          |     |     |
+  51     102       51    51    ms
+</code></pre></div>
+</div>
+<h3 id="c-velocidade-angular">C - Velocidade angular</h3>
+<p>Agora com o dT você é capaz de:</p>
+<ol>
+<li>Calcular a velocidade do disco em rps: $w = \frac{1}{dT}$</li>
+<li>Converta de rotações por segundo para rotações por minuto (*60)</li>
+<li>Exiba no LCD a velocidade</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Lembre de não atualizar o LCD dentro de interrupção / callback!</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>Lembre de converter dT para segundos!</li>
+<li>Cuidado com a conversão float/ int/ ...</li>
+</ul>
+</div>
+<h3 id="c-identificando-zero">C - Identificando Zero</h3>
+<p>Para identificar o dente faltante é necessário "prevermos" quando um pulso deveria acontecer, isso pode ser feito através do alarme do RTT que deve ser configurado utilizando como base o dT calculado do pulso anterior (ou de uma média).</p>
+<p><a class="glightbox" href="dicas-dente-faltando.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="dicas-dente-faltando.svg" width="500" /></a></p>
+<p>Um cuidado que vocês devem ter é com o valor usado no timeout do RTT, <mark>não usar o valor do dT com o dente estimado, usar o último valor válido</mark>.</p>
+<p><a class="glightbox" href="dicas-dente-faltando-2.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="dicas-dente-faltando-2.svg" width="500" /></a></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Definam uma tolerância para o pulso, eu experimentei aqui e 20% é um bom valor! Ou seja, o alarme para o pulso é <code>dT*1.2</code>. Podemos interpretar isso como: se passado 20% do tempo esperado para um pulso sem o recebimento do mesmo, esse slot é do dente faltante.</p>
+<p>Lembrem de zerar o RTT quando o pulso faltante for detectado.</p>
+<p>Vocês devem obter algo como:</p>
+<ul>
+<li>Eu estou imprimendo um <code>*</code> toda vez que o pulso zero é detectado.</li>
+</ul>
+<p><a class="glightbox" href="terminal2.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="terminal2.svg" width="150" /></a></p>
+</div>
+<hr />
+<h3 id="ab-media-movel">A/B - Média móvel</h3>
+<p>A média móvel é um dos filtros mais simples que existe, suavizando o sinal no tempo e removendo ruídos (n), sua ideia é bem simples e vou explicar com um exemplo (filtro de janela 5).</p>
+<div class="highlight"><pre><span></span><code><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">sinal</span><span class="w"> </span><span class="n">filtrado</span>
+<span class="w">      </span><span class="n">v</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="mi">5</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">           </span><span class="o">/</span><span class="w">                               </span>
+<span class="w">          </span><span class="o">/</span><span class="w">    </span><span class="o">---------------------&gt;</span><span class="w"> </span><span class="n">shift</span>
+<span class="w">        </span><span class="n">Novo</span><span class="w"> </span><span class="n">dado</span><span class="w">                          </span>
+</code></pre></div>
+<p>Implemente o filtro em C e use para exibir o valor.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Existe uma versão recursiva do filtro onde não é necessário armazenar o buffer e fazer o shift.</p>
+</div>
+<h3 id="ab-identifica-quando-a-roda-parou-de-girar-e-indicar-velocidade-de-rotacao-0-rpm-no-lcd">A/B - Identifica quando a roda parou de girar e indicar velocidade de rotação: 0 rpm no LCD</h3>
+<p>O botão da placa foi configurado para iniciar a frenagem do motor, uma vez apertado os pulsos vão se espaçando até parar. Se apertar novamente os pulsos voltam a velocidade padrão.</p>
+<p><a class="glightbox" href="frenagem.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="frenagem.svg" width="700" /></a></p>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

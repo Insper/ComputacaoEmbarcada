@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab RTOS UART - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Lab RTOS UART</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#lab">Lab</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#lab_1">Lab</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs extras</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="rtos-uart">RTOS - UART</h1>
+<p><a class="glightbox" href="../imgs/camelos.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Camelos" src="../imgs/camelos.png" width="100%" /></a></p>
+<p>Nesse lab iremos trabalhar com comunicação UART (aquela do terminal / printf). Praticando RTOS (queue)</p>
+<div class="admonition note">
+<p class="admonition-title">Preencher ao finalizar o lab</p>
+<p><iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfstM-nI2npzGDx6-QOH99b0NjYay3TxyVp9j8qHWifklvomA/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe></p>
+</div>
+<h2 id="lab">Lab</h2>
+<table>
+<thead>
+<tr>
+<th>LAB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Labs/8-RTOS-UART</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="inicio">Início</h3>
+<div class="admonition warning">
+<p class="admonition-title">Código exemplo</p>
+<ul>
+<li>
+<p>Vamos modificar <strong>o seu lab</strong> <a href="https://github.com/Insper/SAME70-examples/tree/master/RTOS/RTOS-LED">lab-RTOS</a> (aquele dos leds e botões), faça uma cópia do seu lab para a nova pasta no seu seu repositório <code>Labs/8-RTOS-UART</code></p>
+</li>
+<li>
+<p>O projeto já modificado do lab!</p>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Terminal</p>
+<p>Esse exemplo faz uso da comunicação UART para debug de código (via printf), para acessar o terminal no atmel estúdio clique em:  <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> View <img alt="➡️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/svg/27a1.svg" title=":arrow_right:" /> Terminal Window</p>
+<p>Configure o terminal para a porta que (COM) correta (verificar no windiows) e para operar com um BaudRate de <code>115200</code>.</p>
+</div>
+<p>Esse código exemplo já possui a comunicação UART configurada pela função (<code>configure_console</code>), essa função configura a utilização do periférico USART1 operando em modo de comunicação serial assíncrona. Os pinos <code>TX</code> e <code>RX</code> da comunicação serial são conectados ao EDGB, chip responsável pela gravação e debug do kit de desenvolvimento SAME70-XPLD.</p>
+<p>A comunicação UART é um protocolo de comunicação muito utilizado para comunicação entre dois dispositivos (<a href="https://en.wikipedia.org/wiki/Machine_to_machine m2m"><code>Machine-to-Machine</code></a>, é utilizado por exemplo no arduino para a gravação e debug (print), é utilizado por diversos equipamentos para comunicação e configuração (impressoras térmicas, máquinas de cartão de crédito, GPP, sensores de biometria, ...).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No nosso microcontrolador, temos dois periféricos capazes de realizar comunicação serial o <code>UART</code> e <code>USART</code>, nesse exemplo, utilizamos o <code>USART</code>.</p>
+</div>
+<p>Essa função configura o periférico <code>USART1</code> para operar como <code>stdio</code> do nosso código C, toda vez que invocamos a função <code>printf</code> a saída dos caracteres é enviada para o periférico e é serializado por ele.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Para mais detalhes de como o <code>stdio</code> faz o mapeamento para o periférico em questão, analise o include <a href="https://github.com/Insper/SAME70-examples/blob/master/RTOS/RTOS-LED/src/ASF/common/utils/stdio/stdio_serial/stdio_serial.h"><code>src/ASF/common/utils/stdio/stdio_serial/stdio_serial.h</code></a></p>
+</div>
+<p>Vamos adicionar uma nova função (<code>USART1_init</code>) que faz praticamente a mesma coisa, porém configura a interrupção desse periférico. A interrupção ativada é para o recebimento de dados pela serial (<code>US_IER_RXRDY</code>), toda vez que um novo dado é recebido pela serial, o handler <code>USART1_Handler</code> é chamado. </p>
+<details class="note">
+<summary>Outras interrupções do USART1</summary>
+<p>Outras interrupções suportadas pelo USART1:</p>
+<ul>
+<li>RXRDY: RXRDY Interrupt Enable</li>
+<li>TXRDY: TXRDY Interrupt Enable</li>
+<li>OVRE: Overrun Error Interrupt Enable</li>
+<li>FRAME: Framing Error Interrupt Enable</li>
+<li>PARE: Parity Error Interrupt Enable</li>
+<li>TIMEOUT: Time-out Interrupt Enable</li>
+<li>TXEMPTY: TXEMPTY Interrupt Enable</li>
+</ul>
+</details>
+<h3 id="preparando-exemplo">Preparando exemplo</h3>
+<p>Adicione as funções <code>USART1_init</code>, <code>usart1_puts</code> e o handler <code>USART1_Handler</code> ao exemplo.</p>
+<details class="example">
+<summary><code>USART1_init</code></summary>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">USART1_init</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="w">  </span><span class="cm">/* Configura USART1 Pinos */</span>
+<span class="w">  </span><span class="n">sysclk_enable_peripheral_clock</span><span class="p">(</span><span class="n">ID_PIOB</span><span class="p">);</span>
+<span class="w">  </span><span class="n">sysclk_enable_peripheral_clock</span><span class="p">(</span><span class="n">ID_PIOA</span><span class="p">);</span>
+<span class="w">  </span><span class="n">pio_set_peripheral</span><span class="p">(</span><span class="n">PIOB</span><span class="p">,</span><span class="w"> </span><span class="n">PIO_PERIPH_D</span><span class="p">,</span><span class="w"> </span><span class="n">PIO_PB4</span><span class="p">);</span><span class="w"> </span><span class="c1">// RX</span>
+<span class="w">  </span><span class="n">pio_set_peripheral</span><span class="p">(</span><span class="n">PIOA</span><span class="p">,</span><span class="w"> </span><span class="n">PIO_PERIPH_A</span><span class="p">,</span><span class="w"> </span><span class="n">PIO_PA21</span><span class="p">);</span><span class="w"> </span><span class="c1">// TX</span>
+<span class="w">  </span><span class="n">MATRIX</span><span class="o">-&gt;</span><span class="n">CCFG_SYSIO</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="n">CCFG_SYSIO_SYSIO4</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Configura opcoes USART */</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">sam_usart_opt_t</span><span class="w"> </span><span class="n">usart_settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="p">.</span><span class="n">baudrate</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">115200</span><span class="p">,</span>
+<span class="w">      </span><span class="p">.</span><span class="n">char_length</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">US_MR_CHRL_8_BIT</span><span class="p">,</span>
+<span class="w">      </span><span class="p">.</span><span class="n">parity_type</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">US_MR_PAR_NO</span><span class="p">,</span>
+<span class="w">      </span><span class="p">.</span><span class="n">stop_bits</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">US_MR_NBSTOP_1_BIT</span><span class="w">    </span><span class="p">,</span>
+<span class="w">      </span><span class="p">.</span><span class="n">channel_mode</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">US_MR_CHMODE_NORMAL</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="cm">/* Ativa Clock periferico USART0 */</span>
+<span class="w">  </span><span class="n">sysclk_enable_peripheral_clock</span><span class="p">(</span><span class="n">ID_USART1</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">stdio_serial_init</span><span class="p">(</span><span class="n">CONF_UART</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">usart_settings</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* Enable the receiver and transmitter. */</span>
+<span class="w">  </span><span class="n">usart_enable_tx</span><span class="p">(</span><span class="n">USART1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">usart_enable_rx</span><span class="p">(</span><span class="n">USART1</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* map printf to usart */</span>
+<span class="w">  </span><span class="n">ptr_put</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="k">volatile</span><span class="o">*</span><span class="p">,</span><span class="kt">char</span><span class="p">))</span><span class="o">&amp;</span><span class="n">usart_serial_putchar</span><span class="p">;</span>
+<span class="w">  </span><span class="n">ptr_get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="k">volatile</span><span class="o">*</span><span class="p">,</span><span class="kt">char</span><span class="o">*</span><span class="p">))</span><span class="o">&amp;</span><span class="n">usart_serial_getchar</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* ativando interrupcao */</span>
+<span class="w">  </span><span class="n">usart_enable_interrupt</span><span class="p">(</span><span class="n">USART1</span><span class="p">,</span><span class="w"> </span><span class="n">US_IER_RXRDY</span><span class="p">);</span>
+<span class="w">  </span><span class="n">NVIC_SetPriority</span><span class="p">(</span><span class="n">ID_USART1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+<span class="w">  </span><span class="n">NVIC_EnableIRQ</span><span class="p">(</span><span class="n">ID_USART1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<details class="example">
+<summary><code>USART1_Handler</code></summary>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">USART1_Handler</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usart_get_status</span><span class="p">(</span><span class="n">USART1</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">xHigherPriorityTaskWoken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Verifica por qual motivo entrou na interrupçcao?</span>
+<span class="w">  </span><span class="c1">// RXRDY ou TXRDY</span>
+
+<span class="w">  </span><span class="c1">//  Dados disponível para leitura</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">US_IER_RXRDY</span><span class="p">){</span>
+<span class="w">      </span><span class="n">usart_serial_getchar</span><span class="p">(</span><span class="n">USART1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%c&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// -  Transmissoa finalizada</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">US_IER_TXRDY</span><span class="p">){</span>
+
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<p>A função <code>usart1_puts</code> envia uma string para a serial pelo periférico USART1.</p>
+<details class="example">
+<summary><code>usart1_puts</code></summary>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">usart1_puts</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">pstring</span><span class="p">){</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">pstring</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">))</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">uart_is_tx_empty</span><span class="p">(</span><span class="n">USART1</span><span class="p">))</span>
+<span class="w">            </span><span class="n">usart_serial_putchar</span><span class="p">(</span><span class="n">USART1</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">pstring</span><span class="o">+</span><span class="n">i</span><span class="o">++</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<p>Edite o <code>main</code> para chamarmos a função <code>USART1_init</code> no lugar do <code>configure_console</code>:</p>
+<div class="highlight"><pre><span></span><code>int main(void)
+{
+<span class="w"> </span>   /* Initialize the SAM system */
+<span class="w"> </span>   sysclk_init();
+<span class="w"> </span>   board_init();
+
+<span class="w"> </span>   /* Initialize the console uart */
+<span class="gd">-   configure_console();</span>
+<span class="gi">+   USART1_init();</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Modifique</p>
+<ol>
+<li>Inclua <code>USART1_init</code></li>
+<li>Inclua <code>USART1_Handler</code></li>
+<li>Inclua <code>usart1_puts</code></li>
+<li>Substitua  <code>configure_console</code> por <code>USART1_init</code></li>
+</ol>
+</div>
+<h2 id="lab_1">Lab</h2>
+<p>Agora com o exemplo preparado vamos implementar o firmware que foi desenvolvido em aula.</p>
+<div class="admonition tip">
+<p>diagrama feito em sala, enviado no teams</p>
+</div>
+<p>O usuário pode modificar os LEDs (recurso) de duas maneiras diferentes: enviando uma mensagem pela UART (terminal) ou apertando os botões da placa. Os botões e a UART servem como 'produtores' de comandos que serão processados por uma tarefa específica. </p>
+<p>A vantagem desse formato é: </p>
+<ul>
+<li>a flexibilidade de criação de novos produtores (é fácil adicionar por exemplo uma segunda uart, ou uma outra comunicação), basta enviar os dados na fila de comandos; </li>
+<li>o isolamento entre diferentes partes do firmware.</li>
+</ul>
+<h3 id="dicas">Dicas</h3>
+<p>A seguir algumas dicas de como fazer o seu código. </p>
+<h4 id="xqueuechar">xQueueChar</h4>
+<p>Deve ser uma fila de caracteres, especificar um tamanho que caiba os comandos.</p>
+<details class="tip">
+<summary>Tip</summary>
+<p>Criar logo antes de chamar a função <code>usart1_init</code> no main!</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+<span class="cm">/* Initialize the SAM system */</span>
+<span class="n">sysclk_init</span><span class="p">();</span>
+<span class="n">board_init</span><span class="p">();</span>
+
+<span class="c1">// Criar a fila aqui!</span>
+<span class="c1">//    |</span>
+<span class="c1">//    v</span>
+
+<span class="n">USART1_init</span><span class="p">();</span>
+</code></pre></div>
+</details>
+<h4 id="usart1_handler">USART1_handler</h4>
+<p>Irá receber um caracter da uart e colocar ele na fila <code>xQueueChar</code></p>
+<details class="tip">
+<summary>Tip</summary>
+<p>No <code>USART1_Handler</code> a função <code>usart_serial_getchar</code> pega um char da serial e salva em <code>c</code>. </p>
+<ul>
+<li>Você deve enviar esse dado na dila <code>xQueueChar</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1">//  Dados disponível para leitura</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">US_IER_RXRDY</span><span class="p">){</span>
+<span class="w">      </span><span class="n">usart_serial_getchar</span><span class="p">(</span><span class="n">USART1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%c&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+</code></pre></div>
+</details>
+<h4 id="task_uartrx">task_uartRX</h4>
+<p>Ficará lendo a fila <code>xQueueChar</code> e montando uma string interna, quando detectado um <code>\n</code> envia a string para a fila <code>xQueueCommand</code>.</p>
+<details class="tip">
+<summary>Tip</summary>
+<ol>
+<li>Criar um buffer de chars</li>
+<li>Ficar fazendo a leitura da fila <code>xQueueChar</code> e alimentando esse buffer</li>
+<li>Encontrado <code>\n</code>? Coloca NULL e envia o buffer para a fila <code>xQueueCommand</code></li>
+<li>Começa tudo de novo</li>
+</ol>
+</details>
+<h4 id="xqueuecommand">xQueueCommand</h4>
+<p>Uma fila de strings que representam comandos, você deve criar o seu protocolo de comandos. O comando deve ser capaz de inverter o valor dos leds.</p>
+<ul>
+<li><code>led 3 toggle</code>: Inverte led 3  </li>
+<li><code>led 1 toggle</code>: Inverte led 1</li>
+</ul>
+<details class="tip">
+<summary>Tip</summary>
+<p>Criar na <code>task_execute</code></p>
+</details>
+<h4 id="task_execute">task_execute</h4>
+<p>Tarefa que fica lendo a fila de comandos <code>xQueueCommand</code> e realizando os comandos que são enviados por ela.</p>
+<h4 id="task_led1-task_led2">task_led1, task_led2</h4>
+<p>Tarefas que controlam individualmente cada LED da placa OLED</p>
+<div class="admonition tip">
+<p class="admonition-title">Como validar tudo?</p>
+<ul>
+<li>Envie um comando pela UART e veja o LED mudar de status</li>
+<li>Aperte o botão da placa OLED e veja o LED mudar de status</li>
+</ul>
+</div>
+<h3 id="b">B</h3>
+<p>Diagrama do firmware de como seria esse código caso a parte do LCD touch (<code>task_lcd</code> e <code>task_mxt</code>) fosse inserida nele, entrando como um novo produtor.</p>
+<h3 id="a">A</h3>
+<p>Comandos: <code>led x on</code> e <code>led x off</code></p>
+<ul>
+<li><code>led 1 on</code>: Acende led 1</li>
+<li><code>led 2 off</code>: Apaga led 2</li>
+</ul>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/"
+               class="ah-prev"
+               title="Lab ADC FIR">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Lab ADC FIR</span>
+            </a>
+          
+          
+            <a href="../../../Projeto/Projeto-1-Descricao/"
+               class="ah-next"
+               title="Descrição">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Descrição</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

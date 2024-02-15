@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '.';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    
+   <link href="assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Home</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#objetivos-da-materia">Objetivos da matéria</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#motivacao">Motivação</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#comecando">Começando</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#historico">Histórico</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="navigation/Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Labs/Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="navigation/CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="navigation/CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="bem-vindo-a-disciplina-de-computacao-embarcada">Bem vindo a disciplina de Computação Embarcada</h1>
+<div class="admonition example">
+<p class="admonition-title">Curso 2024 - rasp pico</p>
+<p>O curso mudou, o novo material está em:</p>
+<ul>
+<li><a href="https://insper-embarcados.github.io/site/">https://insper-embarcados.github.io/site/</a></li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Curso antigo, material depreciado. <mark>Disponível apenas para consulta.</mark></p>
+</div>
+<ul>
+<li><strong>Curso:</strong> Engenharia Da Computação - Quinto Semestre - <a href="https://www.insper.edu.br/">Insper</a></li>
+<li><strong>Disciplina:</strong> Computação Embarcada </li>
+<li><strong>Repositório:</strong> <a href="http:/github.com/Insper/ComputacaoEmbarcada">http:/github.com/Insper/ComputacaoEmbarcada</a></li>
+<li><strong>Local:</strong> Laboratórios de Arquitetura de Computadores e Laboratório de Informática</li>
+<li><strong>Equipe:</strong><ul>
+<li><strong>Prof. Rafael Corsi</strong>: <strong><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#97;&#102;&#97;&#101;&#108;&#46;&#99;&#111;&#114;&#115;&#105;&#64;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#114;&#97;&#102;&#97;&#101;&#108;&#46;&#99;&#111;&#114;&#115;&#105;&#64;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></strong></li>
+<li>Técnico Marco Mello: <strong><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#97;&#114;&#99;&#111;&#65;&#83;&#77;&#65;&#64;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#109;&#97;&#114;&#99;&#111;&#65;&#83;&#77;&#65;&#64;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></strong></li>
+<li>Prof. Aux. Arnaldo Jr (Tiozão): <strong><a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#114;&#110;&#97;&#108;&#100;&#111;&#97;&#118;&#106;&#64;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;">&#97;&#114;&#110;&#97;&#108;&#100;&#111;&#97;&#118;&#106;&#64;&#105;&#110;&#115;&#112;&#101;&#114;&#46;&#101;&#100;&#117;&#46;&#98;&#114;</a></strong></li>
+</ul>
+</li>
+<li><strong>Já passou por aqui:</strong><ul>
+<li>(2023b) Prof. Rodrigo Carareto </li>
+<li>(2022b) Ninja Ana Carolina Souza </li>
+<li>(2021-2021) Prof. Aux. <a href="https://www.linkedin.com/in/fl%C3%A1vio-batista-5846b674/">Flávio Batista</a></li>
+<li>(2016-2020) Prof. Aux. <a href="https://www.linkedin.com/in/eduardo-marossi/">Eduardo Marossi</a></li>
+</ul>
+</li>
+<li><strong>© Todos os direitos reservados</strong></li>
+</ul>
+<p><a class="glightbox" href="imgs/lab.jpeg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="imgs/lab.jpeg" width="300" /></a></p>
+<hr />
+<h2 id="objetivos-da-materia">Objetivos da matéria</h2>
+<p>Ao final da disciplina o estudante deve ser capaz de:</p>
+<ol>
+<li>Criar softwares para microcontroladores utilizando suas especificidades;</li>
+<li>Avaliar e melhorar soluções embarcadas integrando hardware/software levando em conta adequação a uma aplicação;</li>
+<li>Integrar em um protótipo hardware, software básico, sistema operacional de tempo real e módulos de interfaceamento com usuários, de comunicação e de alimentação.</li>
+<li>Compreender as limitações de microcontroladores e seus periféricos;</li>
+<li>Buscar e analisar documentação (datasheet) e extrair informações relevantes.</li>
+</ol>
+<h2 id="motivacao">Motivação</h2>
+<p>Sistemas embarcados movem o mundo!</p>
+<h2 id="comecando">Começando</h2>
+<p>Leia mais sobre o curso e a infra necessária em: <a href="Sobre-Curso/">Sobre</a></p>
+<h2 id="historico">Histórico</h2>
+<p>Pequeno histórico da evolução da disciplina:</p>
+<ul>
+<li>
+<p>2023-2:</p>
+<ul>
+<li>Adicionamos as ferramentas de code quality nas entregas      </li>
+</ul>
+</li>
+<li>
+<p>2023-1:</p>
+<ul>
+<li>Quem deu a disciplina foi o Carareto, adotamos a política de avaliação individual de ser 3 tentativas e apenas 1 pass necessário </li>
+</ul>
+</li>
+<li>
+<p>2022-2:</p>
+<ul>
+<li>Sequência dos laboratórios alterada, introduzi o RTOS antes dos timers (PIO, DRIVER, PIO-IRQ, RTOS, HCSR04 com RTT). As notas das prova práticas são binárias e não fazem mais parte da nota final.</li>
+</ul>
+</li>
+<li>
+<p>2022-1:</p>
+<ul>
+<li>Aulas 100% presenciais, criamos um grupo no whatsapp para comunicados rápidos com a turma, reformulamos os requisitos de alguns de labs e montamos um mini estúdio para gravação de vídeos onde o estudante demonstra o funcionamento dos projetos, a APS do IoT virou laboratório. Arnaldo começou como professor auxiliar.</li>
+</ul>
+</li>
+<li>
+<p>2021-2:</p>
+<ul>
+<li>Microchip parou de fabricar o módulo de LCD que usávamos, por conta disso migramos para um display da Adafruit, aproveitamos para inserir a biblioteca gráfica LVGL. A APS gráfica focou no desenvolvimento de um oxímetro. O Fabrício foi professor auxiliar.</li>
+</ul>
+</li>
+<li>
+<p>2021-1:</p>
+<ul>
+<li>Aulas de segunda online e labs no modelo híbrido. APS-1 musical/ Projeto 1 (controle) / APS-2 IHM oxímetro / APS-3 Wifi. A ideia da APS-2 virar o oxímetro é para trazer um tema atual para dentro da 
+disciplina.</li>
+</ul>
+</li>
+<li>
+<p>2020-2: </p>
+<ul>
+<li>Aula 100% online por conta da pandemia: sai APS-1 e entra projeto 1, mantém APS-2 e APS-3.</li>
+</ul>
+</li>
+<li>
+<p>2020-1: </p>
+<ul>
+<li>Devido ao pandemia do corona vírus o projeto foi cancelado, os alunos receberam um complemento do kit para trabalharem de casa. As APS foram: Musica, LCD bike e WIFI. As avaliações individuais foram aprimoradas. A parte de UX foi bem trabalhada nesse semestre.</li>
+</ul>
+</li>
+<li>
+<p>2019-2 (DP):</p>
+<ul>
+<li>Troquei a APS 2 da máquina de lavar para a Bike. Como só tinha um aluno, as APS viraram projetos.</li>
+</ul>
+</li>
+<li>
+<p>2019-1:</p>
+<ul>
+<li>Introduzi as APS: Musical; Máquina de Lavar e Wifi (tinha uma de sensores também), os alunos tiveram que entregar 2 projetos: controle/ vending machine e projeto livre. Primeira vez que aparece o projeto fechado do começo de semestre. <strong>Estreia do lab de Arquitetura</strong></li>
+</ul>
+</li>
+<li>
+<p>2018-1:</p>
+<ul>
+<li>Um projeto ao longo do semestre todo. Introduzi avaliação prática individual.</li>
+</ul>
+</li>
+<li>
+<p>2017-1 (primeira turma):</p>
+<ul>
+<li>Um único projeto ao longo do semestre todo.</li>
+</ul>
+</li>
+</ul>
+<h3 id="alguns-projetos-de-turmas-anteriores">Alguns Projetos de turmas anteriores</h3>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/xfCjqsRxOO0?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/fmUkZNA9ECc?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/tVuRww94FWc?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/eZfbONTxnS4?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/hSnb8Q8nyII?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/Xs_b3izY2hg?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/xfCjqsRxOO0?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/Rtngc9UBV-k?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/Xk86Dx85DUg?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/SbB6z_b_fc8?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/3MskQc6xw5s?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/nDGiS4ESHzE?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+<div>
+<iframe height="500" src="https://www.youtube.com/embed/cLzB3bGji-c?autoplay=0" type="text/html" width="100%"></iframe>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+          
+            <a href="Sobre-Curso/"
+               class="ah-next"
+               title="Sobre o curso">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Sobre o curso</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

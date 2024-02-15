@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>RTOS - ADC - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_IMU/Lab_RTOS_IMU/">Lab 6 - RTOS IMU</a>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">RTOS - ADC</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#lab">LAB</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#incorporando-afec-ao-rtos">Incorporando AFEC ao RTOS</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#melhorando">Melhorando</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#modificando-firmware">Modificando firmware</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#c-dado-direto-do-irq-afec-para-a-task_oled">C - Dado direto do IRQ AFEC para a task_oled</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#b-exibindo-graficamente">B - Exibindo graficamente</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#a-adicionando-mais-uma-entrada-analogica">A - Adicionando mais uma entrada analógica</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs extras</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-rtos-adc">LAB - RTOS - ADC</h1>
+<p>Neste laboratório iremos trabalhar com conversão analógica digital, vamos aprender como usar um recurso do rtos chamado de fila.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EnfjYwe2A0w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="lab">LAB</h2>
+<table>
+<thead>
+<tr>
+<th>Pasta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Lab6-RTOS-ADC</code></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Executar exemplo conversão analógica</li>
+<li>Incorporar exemplo ADC no RTOS com OLED</li>
+<li>Estruturar tasks</li>
+<li>Criar <code>queue</code> de comunicação entre IRQ e tasks</li>
+</ol>
+<h3 id="inicio">Início</h3>
+<div class="admonition info">
+<p class="admonition-title">Conexões</p>
+<ul>
+<li>EXT1: OLED</li>
+<li>Potenciômetro no PD30 conforme exemplo <a href="https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/AFEC-Pin"><code>SAME70-examples/Perifericos-uC/AFEC-Pin/</code></a></li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Código exemplo</p>
+<ol>
+<li><mark>Atualizem o repositório SAME70-Examples</mark> antes de continuar</li>
+<li>Vamos usar como base o código <a href="https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-OLED-Xplained-Pro">Screens/RTOS-OLED-Xplained-Pro</a>, copie para o seu repositório de entregas e renomeia para: <code>Lab6-RTOS-ADC</code></li>
+</ol>
+</div>
+<h3 id="exemplo-afec">Exemplo AFEC</h3>
+<p>Abra o exemplo do AFEC-Pin localizado em <a href="https://github.com/Insper/SAME70-examples/tree/master/Perifericos-uC/AFEC-Pin"><code>SAME70-examples/Perifericos-uC/AFEC-Pin/</code></a>, leia o <code>README</code> desse exemplo e o execute na sua placa. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note que será necessário conectar o potenciômetro ao kit, conforme indicação do README.</p>
+</div>
+<h2 id="incorporando-afec-ao-rtos">Incorporando AFEC ao RTOS</h2>
+<p>Vamos incorporar o exemplo do AFEC ao código do OLED com RTOS, para isso iremos criar uma tarefa que será responsável por ler o valor do AFEC.</p>
+<div class="admonition example">
+<p class="admonition-title">Modifique</p>
+<ol>
+<li>Adicione no ASF o driver do <code>AFEC</code></li>
+<li>Traga as funções, defines e variáveis globais do exemplo <code>AFEC-PIN</code><ul>
+<li>variáveis globais: <code>g_</code></li>
+<li><code>defines</code></li>
+<li><code>config_afec</code></li>
+<li><code>AFEC_pot_Callback()</code></li>
+</ul>
+</li>
+<li>Compile o código para ver se está ok</li>
+</ol>
+</div>
+<p>Agora vamos criar uma task no RTOS para lidar com a leitura do AFEC, a tarefa vai ter a implementação a seguir:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">task_adc</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+
+<span class="w">  </span><span class="cm">/* inicializa e configura adc */</span>
+<span class="w">  </span><span class="n">config_AFEC_pot</span><span class="p">(</span><span class="n">AFEC_POT</span><span class="p">,</span><span class="w"> </span><span class="n">AFEC_POT_ID</span><span class="p">,</span><span class="w"> </span><span class="n">AFEC_POT_CHANNEL</span><span class="p">,</span><span class="w"> </span><span class="n">AFEC_pot_Callback</span><span class="p">);</span>
+
+<span class="w">  </span><span class="cm">/* Selecina canal e inicializa conversão */</span>
+<span class="w">  </span><span class="n">afec_channel_enable</span><span class="p">(</span><span class="n">AFEC_POT</span><span class="p">,</span><span class="w"> </span><span class="n">AFEC_POT_CHANNEL</span><span class="p">);</span>
+<span class="w">  </span><span class="n">afec_start_software_conversion</span><span class="p">(</span><span class="n">AFEC_POT</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">g_is_conversion_done</span><span class="p">){</span>
+<span class="w">      </span><span class="n">g_is_conversion_done</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">g_ul_value</span><span class="p">);</span>
+<span class="w">      </span><span class="n">delay_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+
+<span class="w">      </span><span class="cm">/* Selecina canal e inicializa conversão */</span>
+<span class="w">      </span><span class="n">afec_channel_enable</span><span class="p">(</span><span class="n">AFEC_POT</span><span class="p">,</span><span class="w"> </span><span class="n">AFEC_POT_CHANNEL</span><span class="p">);</span>
+<span class="w">      </span><span class="n">afec_start_software_conversion</span><span class="p">(</span><span class="n">AFEC_POT</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Note que a task é praticamente igual ao <code>main()</code> do exemplo sem RTOS, isso está errado pois ainda usa <code>delay_ms</code> e fica verificando uma flag (<code>g_is_conversion_done</code>) no lugar de usar semáforo, mas serve como um bom começo.</p>
+<p>Agora é necessário modificar a função <code>main</code> para que o freeRTOS crie essa tareafa:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="cm">/* Create task to handler LCD */</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xTaskCreate</span><span class="p">(</span><span class="n">task_adc</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;adc&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">TASK_LCD_STACK_SIZE</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">TASK_LCD_STACK_PRIORITY</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">pdPASS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Failed to create test adc task</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Modifique</p>
+<ol>
+<li>Crie a task <code>task_adc</code> conforme exemplo</li>
+<li>Inicialize a task no <code>RTOS</code></li>
+<li>Abra o terminal e note que está funcionando!</li>
+</ol>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ol>
+<li>Essa task continua usando uma flag que é alterada do callback do AFEC para indicar quando o valor está pronto, isso não é bom e vamos mudar mais para frente!</li>
+<li>Usa <code>delay_ms</code> no lugar do vstaskDelay.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Diagrama</p>
+<p><a class="glightbox" href="../imgs/parte1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/parte1.png" /></a></p>
+</div>
+<h2 id="melhorando">Melhorando</h2>
+<p>Agora vamos melhorar isso, começando por trocar o delay pelo delay do freertos.</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Substitua o <code>delay_ms</code> pelo delay do freeRTOS</li>
+</ol>
+<p><mark>Por que isso é importante?</mark></p>
+</div>
+<h3 id="queue">queue</h3>
+<p>Mailbox/ <code>queue</code> é uma das maneiras de enviarmos dados entre tarefa em um sistema operacional, com ele podemos comunicar interrupção com tarefa e tarefa com tarefa, enviando valores (diferente do semáforo que só funciona de forma binária).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Queues are the primary form of intertask communications. They can be used to send messages between tasks, and between interrupts and tasks. In most cases they are used as thread safe FIFO (First In First Out) buffers with new data being sent to the back of the queue, although data can also be sent to the front. </p>
+<p>Writing to and reading from a queue. In this example the queue was created to hold 5 items, and the queue never becomes full.</p>
+<p><a class="glightbox" href="https://www.freertos.org/fr-content-src/uploads/2018/07/queue_animation.gif" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://www.freertos.org/fr-content-src/uploads/2018/07/queue_animation.gif" /></a> </p>
+<blockquote>
+<p>Material retirado do site: <a href="https://www.freertos.org/Embedded-RTOS-Queues.html">https://www.freertos.org/Embedded-RTOS-Queues.html</a></p>
+</blockquote>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Para mais informações ler o site do freeRTOS sobre filas:</p>
+<ul>
+<li><a href="https://www.freertos.org/Embedded-RTOS-Queues.html">https://www.freertos.org/Embedded-RTOS-Queues.html</a></li>
+<li><a href="https://freertos.org/a00018.html">https://freertos.org/a00018.html</a> </li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Temos uma secção na nossa página de dicas com exemplo de fila:</p>
+<p><a href="https://insper.github.io/ComputacaoEmbarcada/Util-freertos/#fila">https://insper.github.io/ComputacaoEmbarcada/Util-freertos/#fila</a></p>
+</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pHJ3lxOoWeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 id="modificando-firmware">Modificando firmware</h2>
+<p>Iremos agora começar a modificar o firmware criando um fila para comunicar a tarefa <code>task_adc</code> com a tarefa <code>task_oled</code>.</p>
+<h3 id="fila">Fila</h3>
+<p>Vamos criar um <code>queue</code> chamado de <code>xQueueADC</code> essa variável deve ser global (assim como fazíamos com o semáforo):</p>
+<div class="highlight"><pre><span></span><code>/************************************************************************/
+/* RTOS                                                                 */
+/************************************************************************/
+#define TASK_OLED_STACK_SIZE            (6*1024/sizeof(portSTACK_TYPE))
+#define TASK_OLED_STACK_PRIORITY        (tskIDLE_PRIORITY)
+
+<span class="gi">+typedef struct {</span>
+<span class="gi">+  uint value;</span>
+<span class="gi">+} adcData;</span>
+
+<span class="gi">+QueueHandle_t xQueueADC;</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Criei a struct <code>adcData</code> e a variável global <code>xQueueADC</code></li>
+<li>Compile para ver se possui erros.</li>
+</ol>
+</div>
+<h3 id="modificando-task_oled-e-main">Modificando task_oled e main</h3>
+<p>Agora modifique a tarefa <code>task_oled</code> para alocar uma fila nesse "endereço", vamos também criar uma variável local da task chamada de <code>adc</code> para recebimento de dados dessa fila, e imprimir na tela o resultado:</p>
+<div class="highlight"><pre><span></span><code>void task_oled(void){
+<span class="w"> </span>   gfx_mono_ssd1306_init();
+<span class="w"> </span> gfx_mono_draw_string(&quot;Exemplo RTOS&quot;, 0, 0, &amp;sysfont);
+
+<span class="gi">+ adcData adc;</span>
+
+<span class="w"> </span> for (;;) {
+
+<span class="gi">+   // Busca um novo valor na fila do ADC!</span>
+<span class="gi">+   // formata e imprime no LCD o dado</span>
+<span class="gi">+   if (xQueueReceive( xQueueADC, &amp;(adc), ( TickType_t )  100 / portTICK_PERIOD_MS)) {</span>
+<span class="gi">+     char b[512];</span>
+<span class="gi">+     sprintf(b, &quot;%04d&quot;, adc.value);</span>
+<span class="gi">+     gfx_mono_draw_string(b, 0, 20, &amp;sysfont);</span>
+<span class="gi">+   }</span>
+<span class="w"> </span> }
+}
+</code></pre></div>
+<p>Modifique a funcão main, criando a fila nela:</p>
+<div class="highlight"><pre><span></span><code>main(){ 
+
+....
+
+<span class="gi">+ xQueueADC = xQueueCreate( 5, sizeof( adcData ));</span>
+
+<span class="w"> </span> /* Create task to handler LCD */
+<span class="w"> </span> if (xTaskCreate(task_adc, &quot;adc&quot;, TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
+<span class="w"> </span>   printf(&quot;Failed to create test adc task\r\n&quot;);
+<span class="w"> </span> }
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Modifique a <code>task_oled</code><ol>
+<li>Compile para ver se possui erros.</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Diagrama</p>
+<p><a class="glightbox" href="../imgs/parte2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/parte2.png" /></a></p>
+</div>
+<h3 id="modificando-task_adc">Modificando task_adc</h3>
+<p>Agora precisamos modificar a <code>task_adc</code> para enviar o dado por essa fila:</p>
+<div class="highlight"><pre><span></span><code>void task_adc(void){
+
+<span class="w"> </span> /* inicializa e configura adc */
+<span class="w"> </span> config_AFEC_pot(AFEC_POT, AFEC_POT_ID, AFEC_POT_CHANNEL, AFEC_pot_Callback);
+
+<span class="w"> </span> /* Selecina canal e inicializa conversão */
+<span class="w"> </span> afec_channel_enable(AFEC_POT, AFEC_POT_CHANNEL);
+<span class="w"> </span> afec_start_software_conversion(AFEC_POT);
+
+<span class="gi">+  adcData adc;</span>
+
+<span class="w"> </span> while(1){
+<span class="w"> </span>   if(g_is_conversion_done){
+<span class="w"> </span>     printf(&quot;%d\n&quot;, g_ul_value);
+
+<span class="gi">+     adc.value = g_ul_value;</span>
+<span class="gi">+     xQueueSend(xQueueADC, &amp;adc, 0);</span>
+
+<span class="w"> </span>     vTaskDelay(500);
+
+<span class="w"> </span>     /* Selecina canal e inicializa conversão */
+<span class="w"> </span>     afec_channel_enable(AFEC_POT, AFEC_POT_CHANNEL);
+<span class="w"> </span>     afec_start_software_conversion(AFEC_POT);
+<span class="w"> </span>   }
+<span class="w"> </span> }
+}
+</code></pre></div>
+<div class="admonition task">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Modifique o código como indicado anteriormente</li>
+<li>Programe o uC </li>
+<li>Teste mudando o valor do potênciometro e verificando se o valor no oled muda.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Diagrama</p>
+<p><a class="glightbox" href="../imgs/parte3.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/parte3.png" /></a></p>
+</div>
+<h3 id="semaforo">semáforo</h3>
+<p>Agora vamos modificar o código para usar um semáforo para substituir a flag: <code>g_is_conversion_done</code>, esse semáforo precisa ser liberado na <code>AFEC_pot_Callback</code> e recebido na <code>task_adc</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Tarefa</p>
+<p>Substitua a flag <code>g_is_conversion_done</code> por um semáforo.</p>
+<p>Dica: Você deve criar um semáforo, inicializar e enviar.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Diagrama</p>
+<p><a class="glightbox" href="../imgs/parte4.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/parte4.png" /></a></p>
+</div>
+<h2 id="c-dado-direto-do-irq-afec-para-a-task_oled">C - Dado direto do IRQ AFEC para a task_oled</h2>
+<p>Podemos fazer o envio do dado direto do <code>AFEC_pot_Callback</code> para a <code>task_oled</code>, para isso teremos que usar a função <a href="https://freertos.org/a00119.html"><code>xQueueSendFromISR</code></a> no lugar da <code>xQueueSend</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Você sabia que pode alterar a fonte do OLED? De uma olhada no arquivo: <code>src/config/conf_sysfont</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//#define USE_FONT_BPMONO_10x16</span>
+<span class="cp">#define USE_FONT_BPMONO_10x14 </span>
+<span class="cm">/* #define USE_FONT_MONO_MMM_10x12 */</span>
+<span class="c1">//#define USE_FONT_BASIC_6x7</span>
+</code></pre></div>
+<p>Basta escolher entre <code>define</code> diferente.</p>
+</div>
+<div class="admonition task">
+<p class="admonition-title">Tarefa</p>
+<ol>
+<li>Faça o envio direto do callback do AFEC para a <code>task_oled</code></li>
+<li>Programe e teste.</li>
+<li>Teste mudando o valor do potênciometro e verificando se o valor no oled muda.</li>
+</ol>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Diagrama</p>
+<p><a class="glightbox" href="../imgs/parte5.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../imgs/parte5.png" /></a></p>
+</div>
+<h2 id="b-exibindo-graficamente">B - Exibindo graficamente</h2>
+<p>Faça a exibição do potenciômetro de forma gráfica no oled.</p>
+<h2 id="a-adicionando-mais-uma-entrada-analogica">A - Adicionando mais uma entrada analógica</h2>
+<p>No lugar de fazer apenas uma entrada analógica vamos fazer a leitura de dois valores,
+para isso vocês podem utilizar o joystick analógico que vocês possuem no kit.</p>
+<hr />
+<div class="admonition note">
+<p class="admonition-title">Preencher ao finalizar o lab</p>
+</div>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdOWrUMiGqg6JxYShuKKn6MfQ2sB9GJlf-ErqqWdXD_-TPHDQ/viewform?embedded=true" width="640" height="320" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/"
+               class="ah-prev"
+               title="Lab 10 - WIFI">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Lab 10 - WIFI</span>
+            </a>
+          
+          
+            <a href="../../Lab_ECG/Lab-ECG/"
+               class="ah-next"
+               title="ECG">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">ECG</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>

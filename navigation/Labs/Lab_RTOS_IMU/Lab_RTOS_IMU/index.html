@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+      
+        <title>Lab 6 - RTOS IMU - 5s - Computação Embarcada</title>
+      
+    
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:700|Oxygen+Mono|Source+Sans+Pro:700|Source+Serif+Pro&amp;display=swap">
+    <link rel="stylesheet" href="../../../../assets/css/main.css">
+    <script>
+      // SETUP GLOBAL CONSTANTS
+      var base_url = '../../../..';
+      
+      var telemetryEnabled = true;
+      var backendUrl = "http://localhost:8080/api/";
+      var courseSlug = "22b Embarcados";
+      
+      
+      var dashboardEnabled = false;
+      var tagTree = {};
+      
+
+      // SETUP PLUGIN
+      window.initialized = false;
+      if (!window.initializers) window.initializers = [];
+      window.registerInitializer = (initialize) => {
+        if (window.initialized) initialize();
+        else window.initializers.push(initialize);
+      };
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://unpkg.com/hyperscript.org"></script>
+    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="../../../../assets/js/main.js"></script>
+    
+    
+   <link href="../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }</style> <script src="../../../../assets/javascripts/glightbox.min.js"></script></head>
+  <body>
+    <div class="ah-main-container">
+      <header class="ah-header">
+        <button class="ah-menu-btn ah-button ah-button--borderless"
+                aria-label="toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+</svg>
+        </button>
+        <a href="../../../.."
+           title="5s - Computação Embarcada"
+           class="ah-logo"
+           aria-label="5s - Computação Embarcada">
+          5s - Computação Embarcada
+        </a>
+        <div class="ah-header--right">
+          
+          
+          
+          <button id="resetHandoutButton">
+            <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></span>
+          </button>
+          
+
+          
+          <div id="user-menu" hx-get="http://localhost:8080/api/user-menu" hx-trigger="load"> </div>
+          
+        </div>
+      </header>
+      <nav class="ah-navigation preload">
+        <div class="ah-nav-container">
+          <button class="ah-menu-btn ah-button ah-button--borderless close-menu"
+                  aria-label="close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+  <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+  <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+</svg>
+          </button>
+          <ul class="ah-nav-body">
+            
+              
+  
+    <li>
+      <a href="../../../..">Home</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../../Sobre-Curso/">Sobre o curso</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="https://github.com/Insper/SAME70-examples">SAME70-Examples</a>
+    </li>
+  
+
+            
+              
+  
+    <li>
+      <a href="../../../Videos/Util-Videos/">Vídeos</a>
+    </li>
+  
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Util</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Notas/">Notas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Sobre-Ferramental/">Ferramental</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Startup/">Bring up</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Erros/">Erros comum</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Util/Util-Documentos/">Manuais</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lcd/">LCD max Touch</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-freertos/">Freertos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-FloatPrint/">Float Point (SAM)</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Util-lvgl/">LVGL</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item opened">
+    <span class="ah-togglable-handle">Labs</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 1 - PIO </span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO/Lab-PIO/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Dicas/Lab-PIO-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 2 - PIO - Driver</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_DRIVER/Lab_PIO_DRIVER/">Lab</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 3 - PIO - IRQ</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-Teoria/">Teoria</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ/">Lab - Parte 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_PIO_IRQ/Lab-PIO-IRQ-pratica/">Lab - Parte 2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 4 - RTOS</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Lab-RTOS/">Lab</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS/Teoria/">Teoria</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/">Lab 5 - RTOS HC-SR04</a>
+    </li>
+  
+
+      
+        
+  
+
+    <li class="active ah-togglable-item opened">
+      <span class="ah-togglable-handle">Lab 6 - RTOS IMU</span>
+      <ul>
+        
+          
+            
+            
+              <li class="ah-toc-item">
+                <a href="#teoria">Teoria</a>
+              </li>
+            
+              <li class="ah-toc-item">
+                <a href="#lab">LAB</a>
+              </li>
+            
+        
+      </ul>
+    </li>
+  
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Lab 7 - RTOS - LCD - LVGL</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/">Lab RTOS LCD LVGL START</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB/">Lab RTOS LCD LVGL LAB</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-LAB2/">Lab RTOS LCD LVGL LAB2</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_TC_RTC_RTT/Lab-TC-RTC-RTT/">Lab 8 - TC - RTC - RTT</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_MUTEX/Lab_RTOS_MUTEX/">Lab 9 - RTOS - Mutex</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_WIFI/Lab-RTOS-WIFI/">Lab 10 - WIFI</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Labs extras</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_ADC/Lab-RTOS-ADC/">RTOS - ADC</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ECG/Lab-ECG/">ECG</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_ADC_FIR/Lab-ADC-FIR/">Lab ADC FIR</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../Lab_RTOS_UART/Lab-RTOS-UART/">Lab RTOS UART</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Projeto</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Descricao/">Descrição</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dispositivos/">Dispositivos</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega1/">Entrega 1</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Entrega3/">Entrega 2</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Dicas/">Dicas</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/vjoy/">Vjoy</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Projeto/Projeto-1-Lista/">Anteriores</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS</span>
+    <ul>
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 1 - Musical</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical/">Descritivo</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-1-Musical-software/">Firmware</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+        
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">APS 2 - Ciclocomputador</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Descricao/">Descricao</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Design/">Design</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Engenharia/">Engenharia</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../APS/APS-2-Bike/Rubrica/">Rubrica</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Avaliações e Simulados</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../Avaliacoes_e_Simulados/Avaliacoes/">Avaliação síncrona</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../Prova_assincrona/">Avaliação assíncrona</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+              
+  <li class="ah-togglable-item">
+    <span class="ah-togglable-handle">Code quality</span>
+    <ul>
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/topview/">Visão geral</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/rules/">Regras</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/cppcheck/">Cppcheck</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/variables/">Variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/head-file/">Head File</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-variables/">ISR - variáveis</a>
+    </li>
+  
+
+      
+        
+  
+    <li>
+      <a href="../../../CodeQuality/isr-handler/">ISR - handler</a>
+    </li>
+  
+
+      
+    </ul>
+  </li>
+
+            
+          </ul>
+        </div>
+      </nav>
+      <main class="ah-content ah-typeset">
+        
+          <div class="ah-title-box">
+            <ul class="ah-breadcrumbs">
+              
+                
+                  
+                    <li>Labs</li>
+                  
+                
+                <li></li>
+            </ul>
+            
+            
+          </div>
+          
+            <section class="progress-section show">
+<h1 id="lab-rtos-imu">LAB - RTOS - IMU</h1>
+<table>
+<thead>
+<tr>
+<th>Lab 6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Data limite para entrega</strong>: <mark>04/10/2023</mark></td>
+</tr>
+<tr>
+<td>Entregue o código pelo repositório do <mark><a href="https://classroom.github.com/a/SZy1p43k">Classroom</a></mark></td>
+</tr>
+<tr>
+<td>- Fechar issues pertinentes ao conceito atingido na entrega</td>
+</tr>
+</tbody>
+</table>
+<p>Neste laboratório iremos realizar uma comunicação I2C com um sensor inercial, e aplicar um processamento de fusão de dados para obtermos a localização no espaço do sensor.</p>
+<h2 id="teoria">Teoria</h2>
+<p><a class="glightbox" href="../i2c.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../i2c.png" /></a></p>
+<p>I2C (<em>eye-squared-C</em>) é um protocolo de comunicação do tipo machine-to-machine (m2m) muito utilizado para comunicação entre microcontrolador e um dispositivo (sensor ou atuador) externo, criado pela Philips Semiconductor em <strong>1982</strong> e liberado para uso sem licença em <strong>2006</strong>. O i2c é uma comunicação síncrona e utiliza duas vias: <strong>serial data line</strong> (SDA) e <strong>serial clock line</strong> (SCL), a comunicação é sempre inicializada pelo Controlador (o microcontrolador) e respondida pelo Target (componente).</p>
+<p>A imagem a seguir é um exemplo de como utilizar o i2c para conectar múltiplos dispositivos em um controlador:</p>
+<p><a class="glightbox" href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/I2C_controller-target.svg/440px-I2C_controller-target.svg.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/I2C_controller-target.svg/440px-I2C_controller-target.svg.png" /></a></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Cuidado, usaremos o termo periférico não só para referenciar os componentes do microcontrolador, da placa, mas agora também novos componentes plugados no kit.</p>
+<ul>
+<li>i2c é diferenre de SPI (outro protocolo muito popular)!</li>
+</ul>
+</div>
+<p>Existem no mercado vários sensores que possuem comunicação i2c, no lab temos vários:</p>
+<ul>
+<li>IMU</li>
+<li>Câmera</li>
+<li>temperatura</li>
+<li>pressão</li>
+<li>batimento cardíaco </li>
+<li>Dê uma olhada nos sensores da adafruit i2c: <a href="https://www.adafruit.com/?q=i2c+sensor&amp;sort=BestMatch">https://www.adafruit.com/?q=i2c+sensor&amp;sort=BestMatch</a></li>
+</ul>
+<h3 id="protocolo">Protocolo</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Apenas uma breve apresentação, o I2C é um protocolo mais complicado do que aparenta ser:</p>
+<ul>
+<li><a href="https://learn.sparkfun.com/tutorials/i2c/all">https://learn.sparkfun.com/tutorials/i2c/all</a></li>
+<li><a href="https://www.i2c-bus.org/i2c-primer/common-problems/">https://www.i2c-bus.org/i2c-primer/common-problems/</a></li>
+</ul>
+</div>
+<p>A comunicacão i2c faz uso de dois sinais: clk e data, o clock é sempre gerado pelo controlador, diferente da UART (a de camada física, e a que usamos para o módulo bluetooth) o i2c usa um tipo de sinal chamado de <strong>open drain</strong>, que significa que o sinal na linha é sempre positivo (<code>vcc</code>) e os dispositivos quando querem enviar o valor zero, apenas aterram a linha, notem que para isso é necessário um <strong>pull-up</strong> na linha. </p>
+<p><a class="glightbox" href="../open-drain.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img 200="200" alt="" src="../open-drain.png" /></a></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>A ideia do dreno aberto é permitir que mais de um dispositivo controle a linha, como o controle é apenas aterrando o sinal, não há risco de queimar o pino.</p>
+</div>
+<p>O protocolo do I2C é mais complexo que a da UART (o de camada física, e o usado para comunicação com o módulo bluetooth), no I2C cada dispositivo possui um endereço que deve ser enviado no começo da comunicação, a cada envio de dado pelo controlador, o dispositivo responde com um sinal de <strong>ACK</strong> (um bit no final do pacote). O controlador pode executar duas tarefas diferente:</p>
+<ul>
+<li>Requisitar um dado </li>
+<li>Enviar um dado</li>
+</ul>
+<p>As tarefas são definidas pelo último bit no pacote de endereço. </p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>O envio de dado pode ser utilizado para a configuração de um sensor, uma vez configurado, podemos requisitar dados.</p>
+</div>
+<p>Após o envio do endereço, o controlador começa enviar o pacote de dados, o envio só termina quando um <strong>STOP</strong> é enviado. A seguir uma visão geral bem simplificada da comunicação </p>
+<p><a class="glightbox" href="../protocolo.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../protocolo.png" /></a></p>
+<p>Informações importantes:</p>
+<ul>
+<li>O i2c pode operar com pacotes de 8 ou 10 bits</li>
+<li>O controlador deve enviar o endereço do periférico no início da comunicação</li>
+<li>O controlador deve definir se irá ler ou escrever no periférico (W/R)</li>
+<li>Tanto na leitura quanto na escrita quem gera o <strong>clock</strong> é o controlador</li>
+<li>Ao final de cada pacote um <strong>ACK</strong> deve ser gerado</li>
+<li>Uma comunicação pode transmitir um ou mais pacotes</li>
+<li>O fim de uma comunicação é definido pelo <strong>STOP</strong> bit</li>
+</ul>
+<h3 id="two-wire-interface-twihs">Two-wire Interface (TWIHS)</h3>
+<p>O nosso microcontrolador possui um periférico chamado de <strong>TWIHS</strong> que implementa a comunicação i2c, notem que o periférico precisa controlar os pinos do PIO (para gerar o clock, escrever no pino, ler um valor), o diagrama extraído do manual mostra como o periférico interfaceia com o PIO:</p>
+<p><a class="glightbox" href="../twihs.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../twihs.png" /></a></p>
+<p>No nosso uC possuímos um total de 3 <strong>TWIHS</strong> e cada um possui pino do PIO pré definido:</p>
+<p><a class="glightbox" href="../twihs-pins_2.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../twihs-pins_2.svg" /></a></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Na placa que utilizamos (SAME70-XPLD), nem todos os pinos do uC que tem acesso ao perífico TWIHS estão disponíveis. Na coluna <strong>XPLD-CONN</strong> da tabela acima está indicado quais e onde os pinos estão disponíveis.</p>
+</div>
+<div class="admonition exercise choice tag-choice-exercise" data-answer-idx="4" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/choice_1" id="choice_1_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Localize os pinos do TWIHS-2 na placa, para isso busque no manual do SAME70-XPLD. </p>
+<p><a class="glightbox" href="../twihs-pins-xpld.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../twihs-pins-xpld.png" width="300" /></a></p>
+<div class="form-elements">
+<div class="alternative-set">
+  
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="1" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    (2) EXT-2
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="0" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    (1) EXT-1
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="3" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    (4) J406 Header IOs
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="2" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    (3) J507 Header IOs
+  </div>
+</label>
+
+<label class="alternative">
+  <div class="content">
+    <input type="radio" name="data" value="4" _="   on click    set alternative to closest .alternative    if alternative matches <:not(.selected)/> then     set selected to false    else     set selected to true    end    remove .selected from .alternative in closest .alternative-set    if selected then     remove .selected from alternative     add @disabled to <input[type='submit']/> in closest .form-elements    else     add .selected to alternative     remove @disabled from <input[type='submit']/> in closest .form-elements    end   end   ">
+    (5) J400 - Camera Connector
+  </div>
+</label>
+
+</div>
+<input class="ah-button ah-button--primary" type="submit" name="sendButton" value="Submit" disabled />
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p>O TWIHS2 usa os pinos PD28 e PD27 que estão localizados no "Camera interface":</p>
+<p>Manual da placa, pg 27.</p>
+<ul>
+<li>PD27: PINO 26</li>
+<li>PD28: PINO 27</li>
+</ul>
+<p><a class="glightbox" href="../caminterface.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../caminterface.png" /></a></p>
+</div>
+</div>
+<h3 id="mpu-6050">MPU-6050</h3>
+<p>Antes de falar do chip que vamos usar, o MPU-6050, vamos entender o que é uma IMU. Um <strong>sensor IMU</strong>(Inercial Measurement Unit ou, em português, unidade de medida de inércia), trata-se de um sensor que pode ser composto por acelerômetro, giroscópio e magnetômetro. Esses sensores fazem parte do grupo de <strong>sensores inerciais</strong> com tecnologia <strong>MEMS</strong> (Micro Electro Mechanical Systems – sistemas microeletromecânicos) que basicamente são dispositivos com a capacidade de sentir de forma direta ou indireta as forças inerciais e converte em sinal eletrico que será microprocessado. O uso da tecnologia MEMS está inserida em nosso dia-a-dia em equipamentos embarcados como celulares, tablets, carros, drones, video game, Smart Watch, biomedicina e etc.</p>
+<p>Os <strong>acelerômetro</strong> são sensores com a capacidade de medir a acelaração linear, ou seja, capta a variação da velociade no tempo, nos eixos de translação, coordenadas X,Y e Z. </p>
+<p>O sensor <strong>giroscópio</strong> consegue medir a velocidade angular em torno dos eixos X, Y e Z.  </p>
+<p>Já o sensor <strong>magnetômetro</strong> é capaz de medir o sentido e a intensidade de campos magnéticos.</p>
+<p>Uma IMU com acelerômetro e giroscópio possui 6 eixos DOF (Degrees of Freedom – graus de liberdade) e uma IMU com acelerômetro, giroscópio e magnetometro possui 9 DOF.</p>
+<p>O MPU-6050 é uma IMU do tipo MEMS com 6DOF, realiza medições independentes com precisão de 16bits (ADC) por canal e prcessadas no proprio chip na DMP (Digital Motion Processor) responsável por e comunicação com protocolo I2C. A faixa do Acelerômetro é ±2, ±4, ±8, ±16g e a faixa do giroscópio é ±250, 500, 1000, 2000°/s;</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_1" id="exercise_1_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>As IMU não são todas iguais, cada sensor possui uma sensibilidade e precisão distintos. Pesquise o significado da faixa de operação do acelerômetro. O que significa ±2g e ±4g ?</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_2" id="exercise_2_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Pesquise o significado da faixa de operação do giroscópio. O que significa ±250 e 2000°/s ?</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h3 id="modulo-gy-521">Módulo GY-521</h3>
+<p><a class="glightbox" href="https://www.filipeflop.com/wp-content/uploads/2014/09/GY-521-MPU-6050-Pinos1.jpg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://www.filipeflop.com/wp-content/uploads/2014/09/GY-521-MPU-6050-Pinos1.jpg" width="300" /></a></p>
+<p>Para termos acesso ao <code>MPU6050</code> iremos usar um módulo GY-521, no Brasil é possível achar por <a href="https://www.filipeflop.com/produto/acelerometro-e-giroscopio-3-eixos-6-dof-mpu-6050/">R$25</a>. Um módulo com maior qualidade pode ser comprado e importado pela <a href="https://www.sparkfun.com/products/11028">sparkfun</a>:</p>
+<blockquote>
+<p>"Our breakout board for the MPU-6050 makes this tiny QFN package easy to work into your project. Every pin you need to get up and running is broken out to 0.1" headers, including the auxiliary master I2C bus which allows the MPU-6050 to access external magnetometers and other sensors."</p>
+</blockquote>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_3" id="exercise_3_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Conecte o módulo na placa (camera interface), considere os pinos do TWISH 2:</p>
+<ul>
+<li>PD27: SDA</li>
+<li>PD28: SCL</li>
+<li><mark>Alimente o módulo com 3v3 e GND</mark></li>
+</ul>
+<p>Lembre de conectar o <mark>OLED</mark>.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h2 id="lab">LAB</h2>
+<p>Agora que já vimos um pouco sobre o I2C e sobre o chip que iremos interagir, podemos começar o lab.</p>
+<div class="admonition tip">
+<p class="admonition-title">Manual</p>
+<p>Consultar o manual:</p>
+<ul>
+<li><a href="https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf">datasheet</a></li>
+<li><a href="http://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf">register map</a></li>
+</ul>
+</div>
+<h4 id="task_imu">task_imu</h4>
+<p>Vamos criar uma <code>task</code> para realizar a leitura da IMU.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_4" id="exercise_4_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Crie uma task chamada de <code>task_imu</code>, lembre de:</p>
+<ol>
+<li>Inicializar na main</li>
+<li>Task devem possuir while(1) e nunca retornar</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h4 id="twihs">TWIHS</h4>
+<p>Para fazermos uso periférico TWIHS será necessário adicionarmos ele no asf wizard:</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_5" id="exercise_5_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p><a class="glightbox" href="../ASFtwihs.png.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img align="right" alt="" src="../ASFtwihs.png.png" width="300" /></a>
+Adicione o TWIHS no ASF Wizard</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<p>Com a biblioteca adicionada agora devemos criar uma função para configurar o periférico:</p>
+<ol>
+<li>Ativar o clock do PMC</li>
+<li>Operar como controlador</li>
+<li>Definir a frequência de operação</li>
+<li>Permitir que o TWIHS controle os pinos do PIO</li>
+</ol>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_6" id="exercise_6_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Adicione a função a seguir no código:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">mcu6050_i2c_bus_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">twihs_options_t</span><span class="w"> </span><span class="n">mcu6050_option</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pmc_enable_periph_clk</span><span class="p">(</span><span class="n">ID_TWIHS2</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* Configure the options of TWI driver */</span>
+<span class="w">    </span><span class="n">mcu6050_option</span><span class="p">.</span><span class="n">master_clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sysclk_get_cpu_hz</span><span class="p">();</span>
+<span class="w">    </span><span class="n">mcu6050_option</span><span class="p">.</span><span class="n">speed</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">40000</span><span class="p">;</span>
+<span class="w">    </span><span class="n">twihs_master_init</span><span class="p">(</span><span class="n">TWIHS2</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mcu6050_option</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_7" id="exercise_7_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Agora temos que configurar para que o PIO permita que o TWIHS acesse os pinos, adicione as duas linhas de código a seguir na função <code>mcu6050_i2c_bus_init</code></p>
+<div class="highlight"><pre><span></span><code><span class="cm">/** Enable TWIHS port to control PIO pins */</span>
+<span class="n">pmc_enable_periph_clk</span><span class="p">(</span><span class="n">ID_PIOD</span><span class="p">);</span>
+<span class="n">pio_set_peripheral</span><span class="p">(</span><span class="n">PIOD</span><span class="p">,</span><span class="w"> </span><span class="n">PIO_TYPE_PIO_PERIPH_C</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">28</span><span class="p">);</span>
+<span class="n">pio_set_peripheral</span><span class="p">(</span><span class="n">PIOD</span><span class="p">,</span><span class="w"> </span><span class="n">PIO_TYPE_PIO_PERIPH_C</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">27</span><span class="p">);</span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_8" id="exercise_8_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Chame a função <code>mcu6050_i2c_bus_init</code> na <code>task_imu</code></p>
+<div class="highlight"><pre><span></span><code>task_imu ( void * pvParameters ) {
+<span class="w"> </span>   mcu6050_i2c_bus_init();
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h4 id="biblioteca-mcu6050">Biblioteca MCU6050</h4>
+<p>Para facilitar o controle da IMU iremos importar um arquivo <code>mcu6050.h</code> que possui dados extraídos do manual e que irá facilitar o acesso ao sensor:</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_9" id="exercise_9_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Inclua o arquivo <code>mcu6050.h</code> no projeto:</p>
+<ol>
+<li>Faça o <a href="https://gist.githubusercontent.com/rafaelcorsi/0a5cbb23db50a9828bee4a5781717d0e/raw/c2fed1e12a4b61561508d604a2228eba30f1fcbd/mcu6050.h">download</a> de <a href="https://gist.githubusercontent.com/rafaelcorsi/0a5cbb23db50a9828bee4a5781717d0e/raw/c2fed1e12a4b61561508d604a2228eba30f1fcbd/mcu6050.h">muc6050.h</a> para a pasta Downloads </li>
+<li>Arraste o arquivo para dentro do <code>src/</code> </li>
+<li>Abra e de uma olhada no arquivo</li>
+<li>Lembre de incluir no <code>main.c</code></li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="cp">#include mcu6050.h</span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h4 id="funcoes-auxiliares">Funções auxiliares</h4>
+<p>Iremos declarar duas funções que irão facilitar a escrita e leitura do I2C:</p>
+<ul>
+<li><code>int8_t mcu6050_i2c_bus_write(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t cnt)</code></li>
+<li><code>int8_t mcu6050_i2c_bus_read(uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint8_t cnt)</code></li>
+</ul>
+<p>Onde:</p>
+<ul>
+<li><code>dev_addr</code>: Endereço do dispositivo que pretendemos manipular</li>
+<li><code>reg_addr</code>: Endereço do registrador que pretendemos escrever/ler</li>
+<li><code>reg_data</code>: Vetor com os valores que serão escritos/lidos</li>
+<li><code>cnt</code>: Quantidade de dados que serão escritos/lidos</li>
+</ul>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_10" id="exercise_10_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Declare as funções a seguir no código, lembre
+de fazer os <strong>protótipos</strong> das funções para evitar erros de compilação.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int8_t</span><span class="w"> </span><span class="nf">mcu6050_i2c_bus_write</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">dev_addr</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">reg_addr</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">reg_data</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">cnt</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">ierror</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">twihs_packet_t</span><span class="w"> </span><span class="n">p_packet</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p_packet</span><span class="p">.</span><span class="n">chip</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="n">dev_addr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p_packet</span><span class="p">.</span><span class="n">addr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">reg_addr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p_packet</span><span class="p">.</span><span class="n">addr_length</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p_packet</span><span class="p">.</span><span class="n">buffer</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">reg_data</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p_packet</span><span class="p">.</span><span class="n">length</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">ierror</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">twihs_master_write</span><span class="p">(</span><span class="n">TWIHS2</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_packet</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">int8_t</span><span class="p">)</span><span class="n">ierror</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kt">int8_t</span><span class="w"> </span><span class="nf">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">dev_addr</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">reg_addr</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">reg_data</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">cnt</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">ierror</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">twihs_packet_t</span><span class="w"> </span><span class="n">p_packet</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p_packet</span><span class="p">.</span><span class="n">chip</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="n">dev_addr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p_packet</span><span class="p">.</span><span class="n">addr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">reg_addr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p_packet</span><span class="p">.</span><span class="n">addr_length</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p_packet</span><span class="p">.</span><span class="n">buffer</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">reg_data</span><span class="p">;</span>
+<span class="w">    </span><span class="n">p_packet</span><span class="p">.</span><span class="n">length</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span>
+
+<span class="c1">// TODO: Algum problema no SPI faz com que devemos ler duas vezes o registrador para</span>
+<span class="c1">//       conseguirmos pegar o valor correto.</span>
+<span class="w">    </span><span class="n">ierror</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">twihs_master_read</span><span class="p">(</span><span class="n">TWIHS2</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p_packet</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">int8_t</span><span class="p">)</span><span class="n">ierror</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<p>Para usar as funções será necessário utilizarmos dois buffers (um para recebimento e outro para envio de dados) além de uma variável para armazenarmos o valor do retorno da função, que informa se o comando no i2c foi bem sucedido ou não.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_11" id="exercise_11_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Declare os buffers a seguir na <code>task_imu</code></p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* buffer para recebimento de dados */</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">bufferRX</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">bufferTX</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+
+<span class="cm">/* resultado da função */</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">rtn</span><span class="p">;</span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h3 id="probe">Probe</h3>
+<p>Uma das formas de verificarmos se o sensor está conectado corretamente e se o básico do I2C funciona é realizarmos uma "verificaćão" na linha e verificar se o periférico responde com um ACK a um acesso. Isso é chamado de <strong>probe</strong>.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_12" id="exercise_12_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Antes do <code>while(1)</code> realize um <em>probe</em> na linha para certificarmos que a conexão i2c está ok:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">rtn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">twihs_probe</span><span class="p">(</span><span class="n">TWIHS2</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">rtn</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TWIHS_SUCCESS</span><span class="p">){</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[ERRO] [i2c] [probe] </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[DADO] [i2c] probe OK</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h3 id="lendo-id-sensor">Lendo ID sensor</h3>
+<p>A maioria dos módulos que operam por algum tipo de comunicação (uart, i2c, spi) possuem um registrador que tem um ID único que referencia o módulo, a ideia deste registrador é a de:</p>
+<ol>
+<li>Confirmar que a comunicação i2c está funcionando e que consegue ler do periférico</li>
+<li>Garantir que o controlador está acessando o periférico certo</li>
+</ol>
+<div class="admonition exercise short tag-short-text tag-text-exercise editable" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/short_1" id="short_1_0">
+<p class="admonition-title">Exercise<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>Acesse o <a href="http://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf">documento</a> que descreve os registradores do IMU e procure pelo endereço do registrador <strong>WHO_AM_I</strong>, e responda:</p>
+<ol>
+<li>Qual endereço deve ser lido</li>
+<li>Qual valor esperado da leitura</li>
+</ol>
+<div class="form-elements">
+<input type="text" value="" name="data"/>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<ul>
+<li>Endereço: x75</li>
+<li>Valor: <code>110 100</code> bits[6..1]</li>
+</ul>
+<p><a class="glightbox" href="../who_am_i.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../who_am_i.png" /></a></p>
+</div>
+</div>
+<p>Para facilitar a nossa vida, importamos o arquivo <code>mcu6050.h</code> no nosso projeto, se derem uma olhada nele vão encontrar as seguintes informações:</p>
+<div class="highlight"><pre><span></span><code>#define MPU6050_ADDRESS_AD0_LOW     0x68 // address pin low (GND), default for InvenSense evaluation board
+#define MPU6050_DEFAULT_ADDRESS     MPU6050_ADDRESS_AD0_LOW
+
+...
+
+#define MPU6050_RA_WHO_AM_I         0x75
+</code></pre></div>
+<p>Com isso conseguirmos usar a função que realiza uma leitura no I2C (<code>mcu6050_i2c_bus_read</code>) e validar a comunicação.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_13" id="exercise_13_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Na <code>task_imu</code> faça a leitura do registrador <code>WHO_AM_I</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Lê registrador WHO AM I</span>
+<span class="n">rtn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_WHO_AM_I</span><span class="p">,</span><span class="w"> </span><span class="n">bufferRX</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">rtn</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TWIHS_SUCCESS</span><span class="p">){</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[ERRO] [i2c] [read] </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[DADO] [i2c] %x:%x&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_WHO_AM_I</span><span class="p">,</span><span class="w"> </span><span class="n">bufferRX</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="p">}</span>
+
+
+<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<p>Vamos analisar os parâmetros do comando anterior:</p>
+<ul>
+<li><code>MPU6050_DEFAULT_ADDRESS</code>: Endereço do IMU no i2c</li>
+<li><code>MPU6050_RA_WHO_AM_I</code>: Endereço do registrador <code>WHO_AM_I</code></li>
+<li><code>bufferRX</code>: Buffer para armazenar o resultado da leitura</li>
+<li><code>1</code>: Quantidade de bytes a serem lido no I2C</li>
+</ul>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_14" id="exercise_14_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Execute o código e no terminal analise o resultado da leitura i2c.</p>
+<ul>
+<li><mark>Se obter a saída [ERRO], análise novamente a conexão da placa e o código</mark></li>
+</ul>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<p>Com a leitura realizada, agora temos que analisar o conteúdo do buffer RX e verificar se estamos lendo a coisa certa.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_15" id="exercise_15_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Escreva um código que verifica o conteúdo do <code>bufferRX</code> e verifica se o valor lido é o correto (dado extraído do manual).</p>
+<ul>
+<li>Se for incorreto, exiba uma msg de erro</li>
+<li>Se for correto, exiba uma msg de sucesso</li>
+</ul>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h4 id="configurando-imu-e-lendo-informacoes">Configurando IMU e lendo informações</h4>
+<p>Agora temos que configurar a IMU para fornecer as informações necessárias: <strong>Giroscópio</strong> e <strong>Acelerômetro</strong>, isso tudo está na documentação do sensor.</p>
+<p>O código configura o acelerômetro para operar com escala máxima de 2G (o que é ok para nossa aplicação, mas se estivessem desenvolvendo alguma aplicação para uma montanha russa, um carro ou um míssil poderia não funcionar.), mas também poderiamos escolher entre: <code>± 2G, ± 4G, ± 8G e ± 16G</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Ler a documentação pode ser muito difícil e trabalhoso, uma outra opção é a de ver como outras pessoas usam o sensor, e uma boa referencia são códigos de arduino ou bibliotecas de fabricantes de placa de desenvolvimento.</p>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_16" id="exercise_16_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Inclua o código a seguir na <code>task_imu</code> ainda fora do <code>while</code>, mas apenas depois de ter validado a comunicacão com o sensor:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Set Clock source</span>
+<span class="n">bufferTX</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPU6050_CLOCK_PLL_XGYRO</span><span class="p">;</span>
+<span class="n">rtn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mcu6050_i2c_bus_write</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_PWR_MGMT_1</span><span class="p">,</span><span class="w"> </span><span class="n">bufferTX</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">rtn</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TWIHS_SUCCESS</span><span class="p">)</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[ERRO] [i2c] [write] </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="c1">// Aceletromtro em 2G</span>
+<span class="n">bufferTX</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPU6050_ACCEL_FS_2</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">MPU6050_ACONFIG_AFS_SEL_BIT</span><span class="p">;</span><span class="w"> </span>
+<span class="n">rtn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mcu6050_i2c_bus_write</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_ACCEL_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="n">bufferTX</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">rtn</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TWIHS_SUCCESS</span><span class="p">)</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[ERRO] [i2c] [write] </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="c1">// Configura range giroscopio para operar com 250 °/s</span>
+<span class="n">bufferTX</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">;</span><span class="w"> </span><span class="c1">// 250 °/s</span>
+<span class="n">rtn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mcu6050_i2c_bus_write</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_GYRO_CONFIG</span><span class="p">,</span><span class="w"> </span><span class="n">bufferTX</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">rtn</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">TWIHS_SUCCESS</span><span class="p">)</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[ERRO] [i2c] [write] </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_17" id="exercise_17_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Execute o código e análise se os comandos foram executados com sucesso.</p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<p>Agora com tudo configurado podemos fazer a leitura do sensor (acelerômetro e imu):</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_18" id="exercise_18_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Declare as seguintes variáveis na <code>task_imu</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int16_t</span><span class="w">  </span><span class="n">raw_acc_x</span><span class="p">,</span><span class="w"> </span><span class="n">raw_acc_y</span><span class="p">,</span><span class="w"> </span><span class="n">raw_acc_z</span><span class="p">;</span>
+<span class="k">volatile</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">raw_acc_xHigh</span><span class="p">,</span><span class="w"> </span><span class="n">raw_acc_yHigh</span><span class="p">,</span><span class="w"> </span><span class="n">raw_acc_zHigh</span><span class="p">;</span>
+<span class="k">volatile</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">raw_acc_xLow</span><span class="p">,</span><span class="w">  </span><span class="n">raw_acc_yLow</span><span class="p">,</span><span class="w">  </span><span class="n">raw_acc_zLow</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">proc_acc_x</span><span class="p">,</span><span class="w"> </span><span class="n">proc_acc_y</span><span class="p">,</span><span class="w"> </span><span class="n">proc_acc_z</span><span class="p">;</span>
+
+<span class="kt">int16_t</span><span class="w">  </span><span class="n">raw_gyr_x</span><span class="p">,</span><span class="w"> </span><span class="n">raw_gyr_y</span><span class="p">,</span><span class="w"> </span><span class="n">raw_gyr_z</span><span class="p">;</span>
+<span class="k">volatile</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">raw_gyr_xHigh</span><span class="p">,</span><span class="w"> </span><span class="n">raw_gyr_yHigh</span><span class="p">,</span><span class="w"> </span><span class="n">raw_gyr_zHigh</span><span class="p">;</span>
+<span class="k">volatile</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">raw_gyr_xLow</span><span class="p">,</span><span class="w">  </span><span class="n">raw_gyr_yLow</span><span class="p">,</span><span class="w">  </span><span class="n">raw_gyr_zLow</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">proc_gyr_x</span><span class="p">,</span><span class="w"> </span><span class="n">proc_gyr_y</span><span class="p">,</span><span class="w"> </span><span class="n">proc_gyr_z</span><span class="p">;</span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_19" id="exercise_19_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Inclua o código a seguir no <code>while</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Le valor do acc X High e Low</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_ACCEL_XOUT_H</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_acc_xHigh</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_ACCEL_XOUT_L</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_acc_xLow</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Le valor do acc y High e  Low</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_ACCEL_YOUT_H</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_acc_yHigh</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_ACCEL_ZOUT_L</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_acc_yLow</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Le valor do acc z HIGH e Low</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_ACCEL_ZOUT_H</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_acc_zHigh</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_ACCEL_ZOUT_L</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_acc_zLow</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Dados são do tipo complemento de dois</span>
+<span class="w">    </span><span class="n">raw_acc_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">raw_acc_xHigh</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">raw_acc_xLow</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">raw_acc_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">raw_acc_yHigh</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">raw_acc_yLow</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">raw_acc_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">raw_acc_zHigh</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">raw_acc_zLow</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Le valor do gyr X High e Low</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_GYRO_XOUT_H</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_gyr_xHigh</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_GYRO_XOUT_L</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_gyr_xLow</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Le valor do gyr y High e  Low</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_GYRO_YOUT_H</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_gyr_yHigh</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_GYRO_ZOUT_L</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_gyr_yLow</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Le valor do gyr z HIGH e Low</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_GYRO_ZOUT_H</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_gyr_zHigh</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mcu6050_i2c_bus_read</span><span class="p">(</span><span class="n">MPU6050_DEFAULT_ADDRESS</span><span class="p">,</span><span class="w"> </span><span class="n">MPU6050_RA_GYRO_ZOUT_L</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">raw_gyr_zLow</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Dados são do tipo complemento de dois</span>
+<span class="w">    </span><span class="n">raw_gyr_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">raw_gyr_xHigh</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">raw_gyr_xLow</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">raw_gyr_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">raw_gyr_yHigh</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">raw_gyr_yLow</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">raw_gyr_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">raw_gyr_zHigh</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">raw_gyr_zLow</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Dados em escala real</span>
+<span class="w">    </span><span class="n">proc_acc_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">raw_acc_x</span><span class="o">/</span><span class="mi">16384</span><span class="p">;</span>
+<span class="w">    </span><span class="n">proc_acc_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">raw_acc_y</span><span class="o">/</span><span class="mi">16384</span><span class="p">;</span>
+<span class="w">    </span><span class="n">proc_acc_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">raw_acc_z</span><span class="o">/</span><span class="mi">16384</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">proc_gyr_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">raw_gyr_x</span><span class="o">/</span><span class="mi">131</span><span class="p">;</span>
+<span class="w">    </span><span class="n">proc_gyr_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">raw_gyr_y</span><span class="o">/</span><span class="mi">131</span><span class="p">;</span>
+<span class="w">    </span><span class="n">proc_gyr_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">raw_gyr_z</span><span class="o">/</span><span class="mi">131</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// uma amostra a cada 1ms</span>
+<span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_20" id="exercise_20_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Você sabia que no nosso terminal não conseguimos imprimir números formatados em floats por padrão? Mas da para habilitar:  </p>
+<ul>
+<li><a href="https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-FloatPrint/">https://insper.github.io/ComputacaoEmbarcada/navigation/Dicas/Util-FloatPrint/</a></li>
+</ul>
+<p><mark>HABILITE</mark></p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_21" id="exercise_21_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p><mark>Só funciona se habilitar a impressão de float</mark></p>
+<ol>
+<li>Imprima os valores da aceleração (<code>proc_acc_</code>) e giroscópio (<code>proc_gyr_</code>).</li>
+<li>Execute o código na placa</li>
+<li>Movimente a placa, os valores mudam?<ul>
+<li>da para entender alguma coisa?</li>
+</ul>
+</li>
+<li>Incline a placa, o valor do acc muda?</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h3 id="entrega-parte-1">Entrega parte 1</h3>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_22" id="exercise_22_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p><mark>Detectando batida</mark></p>
+<ul>
+<li>Crie uma tarefa <code>task_house_down</code> que possui um semáforo, e que quando liberado a task pisca o led da placa</li>
+<li>Utilizando os dados do acelerômetro, libere o semáforo quando uma batidada for detectada. </li>
+</ul>
+<p>Dica: </p>
+<ul>
+<li>Você pode calcular o módulo $\srqt{x,y,z}$ de todos os eixos e verificar a condição, só saiba que o acelerometro mede a gravidade, então vocês sempre vão possuir um resultado próximo de 9.0 quando a IMU estiver parada.</li>
+</ul>
+<p><a class="glightbox" href="../diagram-1.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../diagram-1.svg" /></a></p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h3 id="fusao-de-dados">Fusão de dados</h3>
+<p>Legal, teoricamente agora temos tudo pronto e funcionado. Mas como usar esses dados para fazer alguma coisa útil? Conseguimos estimar a orientação da placa no espaço? Para isso existem algorítimos de processamento de sinais, isso foi uma área muito fértil em meados de 2010, quando este tipo de sensor se popularizou, e agora tem ganhado mais estudos sendo utilizado com redes neurais.</p>
+<p>Agora vamos fazer algo mais valioso, que inclui realizarmos uma fusão de dados e obter a orientação no espaço 3D do acelerômetro, para isso iremos utilizar uma biblioteca em C desenvolvida pela <a href="https://x-io.co.uk/">https://x-io.co.uk/</a> chamada de <strong>FUSION</strong>:</p>
+<ul>
+<li><a href="https://github.com/xioTechnologies/Fusion">https://github.com/xioTechnologies/Fusion</a></li>
+</ul>
+<p>A biblioteca implementa o filtro de orientação chamado <a href="https://ahrs.readthedocs.io/en/latest/filters/madgwick.html">Madgwick</a>, notem que a nossa IMU não possui magnetômetro, isso atrapalha um pouco a correção do giroscópio que possui <em>drift</em> no tempo.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Existem diversos algoritmos diferentes que fazem isso, se quiserem se aprofundar eu indico a eletiva de Drones do Fábio Bobrow que trabalha mais a fundo com isso.</p>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_23" id="exercise_23_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<ol>
+<li>
+<p>Faça o download da última versão da biblioteca:</p>
+</li>
+<li>
+<p><a href="https://github.com/xioTechnologies/Fusion/tags">https://github.com/xioTechnologies/Fusion/tags</a></p>
+</li>
+<li>
+<p>Extraía a pasta </p>
+</li>
+<li>Inclua no projeto a pasta <code>Fusion-1.0.6/Fusion</code> (arrastando para dentro da solução <code>src/</code>)</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_24" id="exercise_24_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Inclua o <code>Fusion.h</code> no <code>main.c</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;Fusion/Fusion.h&quot;</span>
+</code></pre></div>
+<p>E na <code>task_imu</code> antes do loop inicialize a biblioteca de fusão:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* Inicializa Função de fusão */</span>
+<span class="n">FusionAhrs</span><span class="w"> </span><span class="n">ahrs</span><span class="p">;</span>
+<span class="n">FusionAhrsInitialise</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ahrs</span><span class="p">);</span><span class="w"> </span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<p>Agora que já temos a biblioteca no nosso projeto, temos que preparar o dados para utilizarmos nela.</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_25" id="exercise_25_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Adicione o código a seguir no final do <code>while</code> da task:</p>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="n">FusionVector</span><span class="w"> </span><span class="n">gyroscope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">proc_gyr_x</span><span class="p">,</span><span class="w"> </span><span class="n">proc_gyr_y</span><span class="p">,</span><span class="w"> </span><span class="n">proc_gyr_z</span><span class="p">};</span><span class="w"> </span>
+<span class="k">const</span><span class="w"> </span><span class="n">FusionVector</span><span class="w"> </span><span class="n">accelerometer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">proc_acc_x</span><span class="p">,</span><span class="w"> </span><span class="n">proc_acc_y</span><span class="p">,</span><span class="w"> </span><span class="n">proc_acc_z</span><span class="p">};</span><span class="w">    </span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_26" id="exercise_26_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Agora podemos realizar o processamento e obter a orientação:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Tempo entre amostras</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">dT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span>
+
+<span class="c1">// aplica o algoritmo</span>
+<span class="n">FusionAhrsUpdateNoMagnetometer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ahrs</span><span class="p">,</span><span class="w"> </span><span class="n">gyroscope</span><span class="p">,</span><span class="w"> </span><span class="n">accelerometer</span><span class="p">,</span><span class="w"> </span><span class="n">dT</span><span class="p">);</span>
+
+<span class="c1">// dados em pitch roll e yaw</span>
+<span class="k">const</span><span class="w"> </span><span class="n">FusionEuler</span><span class="w"> </span><span class="n">euler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FusionQuaternionToEuler</span><span class="p">(</span><span class="n">FusionAhrsGetQuaternion</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ahrs</span><span class="p">));</span>
+
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Roll %0.1f, Pitch %0.1f, Yaw %0.1f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">euler</span><span class="p">.</span><span class="n">angle</span><span class="p">.</span><span class="n">roll</span><span class="p">,</span><span class="w"> </span><span class="n">euler</span><span class="p">.</span><span class="n">angle</span><span class="p">.</span><span class="n">pitch</span><span class="p">,</span><span class="w"> </span><span class="n">euler</span><span class="p">.</span><span class="n">angle</span><span class="p">.</span><span class="n">yaw</span><span class="p">);</span><span class="w"> </span>
+</code></pre></div>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition exercise long tag-long-text tag-text-exercise editable" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/long_2" id="long_2_0">
+<p class="admonition-title">Exercise<button class="editable-button"></button></p>
+<form class="exercise-form">
+<p>O que é roll, pitch e yaw?</p>
+<div class="form-elements">
+<div class="grow-wrap"><textarea name="data"></textarea></div>
+
+<input class="ah-button ah-button--primary" type="submit" value="Submit"/>
+</div>
+</form>
+<div class="admonition answer no-indent">
+<p class="admonition-title">Answer</p>
+<p><a class="glightbox" href="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.sjOiPRnBjlUfVYiEv8K6PQAAAA%26pid%3DApi&amp;f=1&amp;ipt=cfd2c255ae7611e46eb90b01d7c1ae06b54cb1a36452437e19565b325cf50983&amp;ipo=images" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.sjOiPRnBjlUfVYiEv8K6PQAAAA%26pid%3DApi&amp;f=1&amp;ipt=cfd2c255ae7611e46eb90b01d7c1ae06b54cb1a36452437e19565b325cf50983&amp;ipo=images" /></a></p>
+</div>
+</div>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_27" id="exercise_27_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<ol>
+<li>Execute o código</li>
+<li>Abra o terminal e analise o resultado</li>
+</ol>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<h3 id="trabalhando-com-os-dados-parte-2">Trabalhando com os dados - parte 2</h3>
+<p>Vamos detectar para onde o sistema está apontando, a ideia é acender os LEDs da placa OLED da seguinte maneira:</p>
+<div class="admonition exercise self-progress" data-slug="navigation/Labs/Lab_RTOS_IMU/Lab_RTOS_IMU/exercise_28" id="exercise_28_0">
+<p class="admonition-title">Exercise</p>
+<form class="exercise-form">
+<p>Usando os LEDs da placa oled, o sistema deve:</p>
+<ul>
+<li>LED1: Apontando para esquerda</li>
+<li>LED2: Apontando para frente</li>
+<li>LED3: Apontando para direita</li>
+</ul>
+<p>Para isso:</p>
+<ol>
+<li>Crie um <code>enum</code> chamado <code>orientacao</code> com os seguintes itens: <code>ESQUERDA, FRENTE, DIREITA</code>
+printf("Roll %0.1f, Pitch %0.1f, Yaw %0.1f\n", euler.angle.roll, euler.angle.pitch, </li>
+<li>Crie uma task (<code>task_orientacao</code>) que possui uma fila e que recebe os dados  <code>euler.angle.yaw</code>. </li>
+<li>Lembre de enivar os dados que foram calculados na <code>task_imu</code>.</li>
+<li>Usando o dado calcule a <code>orientacao</code> acende o LED conforme descrição anterior.</li>
+<li>Na task da IMU, detecta a orientação e envie o dado para a fila.</li>
+</ol>
+<p><mark>A referência da orientação é a posição de quando a placa liga!</mark></p>
+<p><a class="glightbox" href="../diagram-2.svg" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../diagram-2.svg" /></a></p>
+<div class="form-elements">
+<input type="hidden" name="data" value="OK" />
+<input class="ah-button ah-button--primary" type="submit" name="Submit" value="Mark as done" />
+</div>
+</form>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Até aqui é C</p>
+</div>
+<h3 id="b-irq">B - IRQ</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>TBD</p>
+</div>
+<h3 id="a-rtt">A - RTT</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>TBD</p>
+</div>
+
+
+</section>
+          
+        
+      </main>
+      <footer class="ah-footer ah-typeset">
+        <div class="ah-footer-nav">
+          
+            <a href="../../Lab_RTOS_HCSR04/Lab_RTOS_HCSR04/"
+               class="ah-prev"
+               title="Lab 5 - RTOS HC-SR04">
+              <span class="nav-label">Previous</span>
+              <span class="nav-title">Lab 5 - RTOS HC-SR04</span>
+            </a>
+          
+          
+            <a href="../../Lab_RTOS_LCD_LVGL/Lab-RTOS-LCD-LVGL-START/"
+               class="ah-next"
+               title="Lab RTOS LCD LVGL START">
+              <span class="nav-label">Next</span>
+              <span class="nav-title">Lab RTOS LCD LVGL START</span>
+            </a>
+          
+        </div>
+      </footer>
+    </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+  <script>const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});</script></body>
+</html>
