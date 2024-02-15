@@ -1,5 +1,13 @@
 # Bem vindo a disciplina de Computação Embarcada
 
+!!! example "Curso 2024 - rasp pico"
+    O curso mudou, o novo material está em:
+    
+    - https://insper-embarcados.github.io/site/
+
+!!! warning
+    Curso antigo, material depreciado. ==Disponível apenas para consulta.==
+
 - **Curso:** Engenharia Da Computação - Quinto Semestre - [Insper](https://www.insper.edu.br/)
 - **Disciplina:** Computação Embarcada 
 - **Repositório:** [http:/github.com/Insper/ComputacaoEmbarcada](http:/github.com/Insper/ComputacaoEmbarcada)
@@ -40,6 +48,12 @@ Leia mais sobre o curso e a infra necessária em: [Sobre](Sobre-Curso.md)
 ## Histórico
 
 Pequeno histórico da evolução da disciplina:
+
+- 2023-2:
+    - Adicionamos as ferramentas de code quality nas entregas      
+
+- 2023-1:
+    - Quem deu a disciplina foi o Carareto, adotamos a política de avaliação individual de ser 3 tentativas e apenas 1 pass necessário 
 
 - 2022-2:
     - Sequência dos laboratórios alterada, introduzi o RTOS antes dos timers (PIO, DRIVER, PIO-IRQ, RTOS, HCSR04 com RTT). As notas das prova práticas são binárias e não fazem mais parte da nota final.
